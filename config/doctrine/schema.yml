@@ -1,0 +1,867 @@
+Usuario:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    login:                   { type: string(150), notnull: false }
+    crypted_password:        { type: string(150), notnull: false }
+    salt:                    { type: string(255) }
+    nombre:                  { type: string(150), notnull: true }
+    apellido:                { type: string(150), notnull: true }
+    email:                   { type: string(150), notnull: false }
+    activo:                  { type: boolean, values: 0 }
+    telefono:                { type: string(150) }
+    remember_token:          { type: string(150), notnull: false }
+    remember_token_expires:  { type: string(150), notnull: false }
+    mutua_id:                { type: integer, notnull: true }
+  relations:
+    Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
+    
+Rol:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(150), notnull: false }
+    detalle:                 { type: clob }
+    codigo:                  { type: string(32), notnull: true }
+  relations:
+    Usuarios:                { foreignAlias: Roles, class: Usuario, refClass: UsuarioRol }
+    
+Accion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    entidad_creadora:        { type: enum, values: ['Noticia', 'Evento', 'Asamblea'] }
+    entidad_creadora_id:     { type: integer }
+    entidad:                 { type: enum, values: ['Publico', 'GrupoTrabajo', 'ConsejoTerritorial', 'Organismo'] }
+    entidad_id:              { type: integer }
+    accion:                  { type: enum, values: ['ver']}
+    
+GrupoTrabajo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(150), notnull: false }
+    detalle:                 { type: clob }
+  relations:
+    Usuarios:                { foreignAlias: GruposTrabajo, class: Usuario, refClass: UsuarioGrupoTrabajo }
+    
+ConsejoTerritorial:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(150), notnull: false }
+    detalle:                 { type: clob }
+  relations:
+    Usuarios:                { foreignAlias: ConsejosTerritoriales, class: Usuario, refClass: UsuarioConsejoTerritorial }
+    
+Organismo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                    { type: string(150), notnull: false }
+    detalle:                   { type: clob }
+    grupo_trabajo_id:          { type: integer, notnull: true }
+    categoria_organismo_id:    { type: integer }
+    subcategoria_organismo_id: { type: integer }
+  relations:
+    GrupoTrabajo:            { local: grupo_trabajo_id, foreign: id, onDelete: CASCADE }
+    Usuarios:                { foreignAlias: Organismos, class: Usuario, refClass: UsuarioOrganismo }
+    CategoriaOrganismo:      { local: categoria_organismo_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaOrganismo:   { local: subcategoria_organismo_id, foreign: id, onDelete: CASCADE }
+    
+Mutua:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(150), notnull: false }
+    detalle:                   { type: clob }
+    
+Aplicacion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(150), notnull: false }
+    nombre_entidad:          { type: string(150), notnull: false }
+    nombre_modulo:           { type: string(150), notnull: false }
+    tipo:                    { type: enum, values: ['front', 'back'] }
+    titulo:                  { type: string(100) }
+    descripcion:             { type: clob }
+    
+AplicacionRol:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    accion_alta:             { type: boolean }
+    accion_baja:             { type: boolean }
+    accion_modificar:        { type: boolean }
+    accion_listar:           { type: boolean }
+    accion_publicar:         { type: boolean }
+    aplicacion_id:           { type: integer }
+    rol_id:                  { type: integer }
+  relations:
+    Aplicacion:              { local: aplicacion_id, foreign: id, onDelete: CASCADE }
+    Rol:                     { local: rol_id, foreign: id, onDelete: CASCADE }
+    
+AplicacionAccion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    accion:                  { type: enum, values: ['alta', 'baja', 'modificar', 'listar', 'publicar'] }
+    accion_del_modulo:       { type: string(128) }
+    aplicacion_id:           { type: integer }
+  relations:
+    Aplicacion:              { local: aplicacion_id, foreign: id, onDelete: CASCADE }
+    
+Evento:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100) }
+    descripcion:             { type: clob }
+    mas_info:                { type: clob }
+    fecha:                   { type: date }
+    fecha_caducidad:         { type: date }
+    imagen:                  { type: string(255), notnull: false }
+    documento:               { type: string(255), notnull: false }
+    organizador:             { type: string(255) }
+    estado:                  { type: enum, values: ['guardado', 'pendiente', 'publicado'] }
+    ambito:                  { type: enum, values: ['intranet', 'web', 'ambos'] }
+    owner_id:                { type: integer }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+  relations:
+    Usuarios:                { foreignAlias: Eventos, class: Usuario, refClass: UsuarioEvento }
+
+NormasDeFuncionamiento:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100) }
+    descripcion:             { type: clob }
+    grupo_trabajo_id:        { type: integer, notnull: true }
+  relations:
+    GrupoTrabajo:            { local: grupo_trabajo_id, foreign: id, onDelete: CASCADE }
+
+    
+Asamblea:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(255) }
+    direccion:               { type: string(255) }
+    fecha:                   { type: date }
+    fecha_caducidad:         { type: date }
+    horario:                 { type: string(255)}
+    contenido:               { type: clob }
+    estado:                  { type: enum, values: ['activa', 'anulada', 'pendiente', 'caducada'] }
+    entidad:                 { type: string(255) }
+    owner_id:                { type: integer }
+  relations:
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+
+UsuarioAsamblea:
+  actAs:
+    Timestampable: ~
+  columns:
+    usuario_id:              { type: integer, notnull: true }
+    asamblea_id:               { type: integer, notnull: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioEventos, onDelete: CASCADE }
+    Asamblea:                { foreignAlias: UsuarioEventos, onDelete: CASCADE }
+    
+Convocatoria:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+    detalle:                 { type: clob }
+    asamblea_id:             { type: integer }
+    owner_id:                { type: integer }
+    usuario_id:              { type: integer }
+    estado:                  { type: enum, values: ['pendiente', 'aceptada', 'rechazada'] }
+  relations:
+    Asamblea:                { local: asamblea_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: usuario_id, foreign: id, onDelete: CASCADE }
+    
+Acta:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+    detalle:                 { type: clob }
+    asamblea_id:             { type: integer }
+    owner_id:                { type: integer }
+  relations:
+    Asamblea:                { local: asamblea_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+    
+Noticia:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100), notnull: true }
+    autor:                   { type: string(100), notnull: true }
+    entradilla:              { type: clob, notnull: true }
+    contenido:               { type: clob, notnull: false }
+    imagen:                  { type: string(255), notnull: false }
+    documento:               { type: string(255), notnull: false }
+    fecha:                   { type: date, notnull: true }
+    fecha_publicacion:       { type: date, notnull: true }
+    fecha_caducidad:         { type: date, notnull: true }
+    ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
+    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    destacada:               { type: boolean }
+    mutua_id:                { type: integer }
+    owner_id:                { type: integer }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+  relations:
+    Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+    
+Novedad:
+  inheritance:
+    extends: Noticia
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+
+UsuarioRol:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    rol_id:                  { type: integer, primary: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioRoles }
+    Rol:                     { foreignAlias: UsuarioRoles }
+    
+UsuarioConsejoTerritorial:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    consejo_territorial_id:  { type: integer, primary: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioConsejosTerritoriales }
+    ConsejoTerritorial:      { foreignAlias: UsuarioConsejosTerritoriales }
+    
+UsuarioGrupoTrabajo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    grupo_trabajo_id:        { type: integer, primary: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioGruposTrabajo }
+    GrupoTrabajo:            { foreignAlias: UsuarioGruposTrabajo }
+
+UsuarioAplicacionExterna:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    aplicacion_externa_id:   { type: integer, primary: true }
+    login:                   { type: string(255), values: null }
+    salt:                    { type: string(255), values: null }
+    number_access:           { type: integer, values: null }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioAplicacionExternas }
+    AplicacionExterna:       { foreignAlias: UsuarioAplicacionExternas }
+    
+UsuarioOrganismo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    organismo_id:            { type: integer, primary: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioOrganismos }
+    Organismo:               { foreignAlias: UsuarioOrganismos }
+    
+Documentacion:
+  abstract:                  true
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob, notnull: false }
+    contenido:               { type: clob, notnull: false }
+    fecha:                   { type: date, notnull: true }
+    
+Normativa:
+  inheritance:
+    extends: Documentacion
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    categoria_normativa_id:        { type:integer }
+    subcategoria_normativa_uno_id: { type: integer }
+    subcategoria_normativa_dos_id: { type: integer }
+    documento:                     { type: string(255), notnull: false }
+  relations:
+    CategoriaNormativa:          { local: categoria_normativa_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaNormativaN1:     { local: subcategoria_normativa_uno_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaNormativaN2:     { local: subcategoria_normativa_dos_id, foreign: id, onDelete: CASCADE }
+
+CategoriaNormativa:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob }
+    contenido:               { type: clob, notnull: false }
+
+SubCategoriaNormativaN1:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob }
+    contenido:               { type: clob, notnull: false }
+    categoria_normativa_id:  { type:integer }
+  relations:
+    CategoriaNormativa:      { local: categoria_normativa_id, foreign: id, onDelete: CASCADE }
+
+SubCategoriaNormativaN2:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                    { type: clob }
+    contenido:                 { type: clob, notnull: false }
+    categoria_normativa_id:    { type:integer }
+    subcategoria_normativa_id: { type:integer }
+  relations:
+    CategoriaNormativa:        { local: categoria_normativa_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaNormativaN1:   { local: subcategoria_normativa_id, foreign: id, onDelete: CASCADE }
+    
+Circular:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                    { type: clob, notnull: false }
+    contenido:                 { type: clob, notnull: false }  
+    fecha:                     { type: date, notnull: true }
+    fecha_caducidad:           { type: date, notnull: false }
+    numero:                    { type: string(100), notnull: false }
+    documento:                 { type: string(255), notnull: false }
+    circular_sub_tema_id:      { type:integer }
+    subcategoria_organismo_id: { type: integer }
+  relations:
+    CircularSubTema:        { local: circular_sub_tema_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaOrganismo:  { local: subcategoria_organismo_id, foreign: id, onDelete: CASCADE }
+    
+Iniciativa:
+  inheritance:
+    extends: Documentacion
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    categoria_iniciativa_id:    { type:integer }
+    subcategoria_iniciativa_id: { type: integer }
+    documento:                  { type: string(255), notnull: false }
+  relations:
+    CategoriaIniciativa:        { local: categoria_iniciativa_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaIniciativa:     { local: subcategoria_iniciativa_id, foreign: id, onDelete: CASCADE }
+
+CategoriaIniciativa:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob }
+    contenido:               { type: clob, notnull: false }
+
+SubCategoriaIniciativa:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob }
+    contenido:               { type: clob, notnull: false }
+    categoria_iniciativa_id: { type:integer }
+  relations:
+    CategoriaIniciativa:        { local: categoria_iniciativa_id, foreign: id, onDelete: CASCADE }
+    
+DocumentacionGrupo:
+  inheritance:
+    extends: Documentacion
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    grupo_trabajo_id:        { type: integer, notnull: true }
+    categoria_d_g_id:        { type: integer, notnull: true }
+    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    owner_id:                { type: integer }
+    modificador_id:          { type: integer, notnull: false }
+    publicador_id:           { type: integer, notnull: false }
+    fecha_publicacion:       { type: date, notnull: false }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+
+  relations:
+    GrupoTrabajo:            { local: grupo_trabajo_id, foreign: id, onDelete: CASCADE }
+    CategoriaDG:             { local: categoria_d_g_id, foreign: id, onDelete: CASCADE }
+
+
+
+DocumentacionConsejo:
+  inheritance:
+    extends: Documentacion
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    consejo_territorial_id:  { type: integer, notnull: true }
+    categoria_c_t_id:        { type: integer, notnull: true }
+    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    owner_id:                { type: integer }
+    modificador_id:          { type: integer, notnull: false }
+    publicador_id:           { type: integer, notnull: false }
+    fecha_publicacion:       { type: date, notnull: false }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+  relations:
+    ConsejoTerritorial:      { local: consejo_territorial_id, foreign: id, onDelete: CASCADE }
+    CategoriaCT:             { local: categoria_c_t_id, foreign: id, onDelete: CASCADE }
+
+DocumentacionOrganismo:
+  inheritance:
+    extends: Documentacion
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    categoria_organismo_id:     { type: integer }
+    subcategoria_organismo_id:  { type: integer }
+    organismo_id:               { type: integer }
+    estado:                     { type: enum, values: ['pendiente', 'publicado'] }
+    owner_id:                   { type: integer }
+    modificador_id:             { type: integer, notnull: false }
+    publicador_id:              { type: integer, notnull: false }
+    fecha_publicacion:          { type: date, notnull: false }
+    user_id_creador:            { type: integer }
+    user_id_modificado:         { type: integer }
+    user_id_publicado:          { type: integer }   
+    fecha_publicado:            { type: timestamp }
+  relations:
+    Organismo:                  { local: organismo_id, foreign: id, onDelete: CASCADE }
+    CategoriaOrganismo:         { local: categoria_organismo_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaOrganismo:      { local: subcategoria_organismo_id, foreign: id, onDelete: CASCADE }
+
+Publicacion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100), notnull: false }
+    autor:                   { type: string(100), notnull: true }
+    contenido:               { type: clob, notnull: false }
+    imagen:                  { type: string(255), notnull: false }
+    documento:               { type: string(255), notnull: false }
+    fecha:                   { type: date, notnull: true }
+    fecha_publicacion:       { type: date, notnull: true }
+    fecha_caducidad:         { type: date, notnull: true }
+    ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
+    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    destacada:               { type: boolean }
+    mutua_id:                { type: integer }
+    owner_id:                { type: integer }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+  relations:
+    Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+    
+AplicacionExterna:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+    detalle:                 { type: clob }
+    imagen:                  { type: string(100) }
+    url:                     { type: string(255) }
+  relations:
+    Usuarios:                { foreignAlias: AplicacionExternas, class: Usuario, refClass: UsuarioAplicacionExterna }
+
+
+Actividad:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100), notnull: false }
+    autor:                   { type: string(100), notnull: true }
+    contenido:               { type: clob, notnull: false }
+    imagen:                  { type: string(255), notnull: false }
+    documento:               { type: string(255), notnull: false }
+    fecha:                   { type: date, notnull: true }
+    fecha_publicacion:       { type: date, notnull: true }
+    ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
+    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    destacada:               { type: boolean }
+    mutua_id:                { type: integer }
+    owner_id:                { type: integer }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+  relations:
+    Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+
+CifraDatoSeccion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100), notnull: false }
+    
+CifraDato:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100), notnull: true }
+    autor:                   { type: string(100), notnull: true }
+    contenido:               { type: clob, notnull: false }
+    imagen:                  { type: string(255), notnull: false }
+    documento:               { type: string(255), notnull: false }
+    link:                    { type: string(255), notnull: false }
+    fecha:                   { type: date, notnull: true }
+    fecha_publicacion:       { type: date, notnull: true }
+    ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
+    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    destacada:               { type: boolean }
+    mutua_id:                { type: integer }
+    owner_id:                { type: integer }
+    seccion_id:              { type: integer, notnull: false }
+    user_id_creador:         { type: integer }
+    user_id_modificado:      { type: integer }
+    user_id_publicado:       { type: integer }   
+    fecha_publicado:         { type: timestamp }
+  relations:
+    Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
+    CifraDatoSeccion:        { local: seccion_id, foreign: id, onDelete: CASCADE }
+    
+CategoriaAsunto:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+    email_1:                 { type: string(255) }
+    activo_1:                { type: integer }
+    email_2:                 { type: string(255) }
+    activo_2:                { type: integer }
+    
+Menu:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+    
+Contenido:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(100) }
+    contenido:               { type: clob }
+    permalink:               { type: string(255) }
+    
+ArchivoDG:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+    fecha:                   { type: date, notnull: true }
+    fecha_caducidad:         { type: date }
+    contenido:               { type: clob, notnull: false }
+    archivo:                 { type: string(255) }
+    owner_id:                { type: integer }
+    disponibilidad:          { type: enum, values: ['Solo Grupo', 'Todos'] }    
+    grupo_trabajo_id:        { type: integer }
+    documentacion_grupo_id:  { type: integer }
+  relations:
+    GrupoTrabajo:            { local: grupo_trabajo_id, foreign: id, onDelete: CASCADE }
+    DocumentacionGrupo:      { local: documentacion_grupo_id, foreign: id, onDelete: CASCADE }   
+
+ArchivoCT:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                   { type: string(255) }
+    fecha:                    { type: date, notnull: true }
+    fecha_caducidad:          { type: date }
+    contenido:                { type: clob, notnull: false }
+    archivo:                  { type: string(255) }
+    owner_id:                 { type: integer }
+    disponibilidad:           { type: enum, values: ['Solo Grupo', 'Todos'] }    
+    consejo_territorial_id:   { type: integer }:         { type: integer }
+    documentacion_consejo_id: { type: integer }
+  relations:
+    ConsejoTerritorial:         { local: consejo_territorial_id, foreign: id, onDelete: CASCADE }
+    DocumentacionConsejo:       { local: documentacion_consejo_id, foreign: id, onDelete: CASCADE }
+
+ArchivoDO:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                     { type: string(255) }
+    fecha:                      { type: date, notnull: true }
+    fecha_caducidad:            { type: date }
+    contenido:                  { type: clob, notnull: false }
+    archivo:                    { type: string(255) }
+    owner_id:                   { type: integer }
+    disponibilidad:             { type: enum, values: ['organismo', 'todos'] } 
+    categoria_organismo_id:     { type: integer }
+    subcategoria_organismo_id:  { type: integer }
+    organismo_id:               { type: integer }   
+    documentacion_organismo_id: { type: integer }
+  relations:
+    CategoriaOrganismo:         { local: categoria_organismo_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaOrganismo:      { local: subcategoria_organismo_id, foreign: id, onDelete: CASCADE }
+    Organismo:                  { local: organismo_id, foreign: id, onDelete: CASCADE }
+    DocumentacionOrganismo:     { local: documentacion_organismo_id, foreign: id, onDelete: CASCADE }     
+    
+CategoriaDG:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+
+CategoriaCT:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+
+CategoriaOrganismo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+
+SubCategoriaOrganismo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+    categoria_organismo_id:  { type: integer, notnull: true }
+  relations:
+    CategoriaOrganismo:      { local: categoria_organismo_id, foreign: id, onDelete: CASCADE }
+
+
+Comunicado:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+    detalle:                 { type: clob }
+    en_intranet:             { type: boolean }
+    enviado:                 { type: boolean, values: 0 }
+
+
+
+EnvioComunicado:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    comunicado_id:           { type: integer }
+    tipo_comunicado_id:      { type: integer }
+  relations:
+    Comunicado:              { local: comunicado_id, foreign: id, onDelete: CASCADE }
+    TipoComunicado:          { local: tipo_comunicado_id, foreign: id, onDelete: CASCADE }      
+    ListaComunicados:        { foreignAlias: EnviosComunicado, class: ListaComunicado, refClass: ListaComunicadoEnvio }
+
+
+ListaComunicadoEnvio:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    envio_comunicado_id:     { type: integer, primary: true }
+    lista_comunicado_id:     { type: integer, primary: true }
+  relations:
+    EnvioComunicado:         { foreignAlias: ListaComunicadoEnvios }
+    ListaComunicado:         { foreignAlias: ListaComunicadoEnvios }
+    
+
+TipoComunicado:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+    imagen:                  { type: string(255) }
+    
+ListaComunicado:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(255) }
+  relations:
+    Usuarios:                { foreignAlias: ListasComunicado, class: Usuario, refClass: UsuarioListaComunicado }
+
+UsuarioListaComunicado:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    lista_comunicado_id:     { type: integer, primary: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioListaComunicados }
+    ListaComunicado:         { foreignAlias: UsuarioListaComunicados }
+    
+UsuarioListaComunicado:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    usuario_id:              { type: integer, primary: true }
+    lista_comunicado_id:     { type: integer, primary: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioListasComunicado }
+    ListaComunicado:         { foreignAlias: UsuarioListasComunicado }
+
+Notificacion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    estado:                    { type: enum, values: ['leido', 'noleido'] }
+    url:                       { type: string(255) }
+    nombre:                    { type: string(255) }
+    contenido_notificacion_id: { type: integer }
+    usuario_id:                { type: integer }
+    entidad_id:                { type: integer }
+    visto:                     { type: integer }
+  relations:
+    ContenidoNotificacion:     { local: contenido_notificacion_id, foreign: id, onDelete: CASCADE }
+    Usuario:                   { local: usuario_id, foreign: id, onDelete: CASCADE }
+    
+ContenidoNotificacion:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    titulo:                  { type: string(255) }
+    mensaje:                 { type: string(255) }
+    accion:                  { type: enum, values: ['creacion', 'lectura', 'modificacion', 'eliminacion', 'invitacion'] }
+    entidad:                 { type: string(255) }
+
+CircularCatTema:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+
+CircularSubTema:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(100) }
+    circular_cat_tema_id:    { type: integer, notnull: true }
+  relations:
+    CircularCatTema:         { local: circular_cat_tema_id, foreign: id, onDelete: CASCADE }
+
+
+SolicitudClave:
+  actAs:
+    Timestampable: ~
+  columns:
+    usuario_id:              { type: integer, notnull: true }
+    codigo:                  { type: string(255) }
+  relations:
+    Usuario:                 { local: usuario_id, foreign: id, onDelete: CASCADE }
+
+UsuarioEvento:
+  actAs:
+    Timestampable: ~
+  columns:
+    usuario_id:              { type: integer, notnull: true }
+    evento_id:               { type: integer, notnull: true }
+  relations:
+    Usuario:                 { foreignAlias: UsuarioEventos }
+    Evento:                  { foreignAlias: UsuarioEventos }
+
+Menu:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    padre_id:                { type: integer }
+    nombre:                  { type: string(100) }  
+    descripcion:             { type: string(255) }
+    aplicacion_id:           { type: integer }
+    url_externa:             { type: string(255) } 
+    posicion:                { type: integer, values: 0}
+    habilitado:              { type: boolean }     
+  relations:
+    Aplicacion:              { local: aplicacion_id, foreign: id, onDelete: CASCADE }
+
+
+
+    
+
+
