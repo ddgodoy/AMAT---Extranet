@@ -1,0 +1,43 @@
+# default values
+
+all:
+  default_name_project: Extranet de Asociados AMAT
+  default_from_email: info@intranet.amat.es
+  
+  # thumbnail default por si no se define el tamanio abajo
+  thumbnail_normal_width_default:  400
+  thumbnail_normal_height_default: 400
+
+  # thumbnail cifras y datos
+  thumbnail_small_width_cifras_datos:   100
+  thumbnail_small_height_cifras_datos:  100
+  thumbnail_normal_width_cifras_datos:  400
+  thumbnail_normal_height_cifras_datos: 400
+
+  # thumbnail actividades
+  thumbnail_small_width_cifras_datos:   100
+  thumbnail_small_height_cifras_datos:  100
+  thumbnail_normal_width_cifras_datos:  400
+  thumbnail_normal_height_cifras_datos: 400
+
+  # thumbnail publicaciones
+  thumbnail_small_width_cifras_datos:   100
+  thumbnail_small_height_cifras_datos:  100
+  thumbnail_normal_width_cifras_datos:  400
+  thumbnail_normal_height_cifras_datos: 400
+  
+  # thumbnail noticias
+  thumbnail_normal_width_noticias:  200
+  thumbnail_normal_height_noticias: 200
+
+  # thumbnail eventos
+  thumbnail_normal_width_eventos:  200
+  thumbnail_normal_height_eventos: 200
+  thumbnail_small_width_eventos:   100
+  thumbnail_small_height_eventos:  100
+
+  # thumbnail Tipos Comunicados
+  thumbnail_small_width_tipo_comunicado:   300
+  thumbnail_small_height_tipo_comunicado:  26
+  thumbnail_normal_width_tipo_comunicado:  800
+  thumbnail_normal_height_tipo_comunicado: 80

@@ -1,0 +1,236 @@
+<?php
+
+/**
+ * documentacion_consejos actions.
+ *
+ * @package    extranet
+ * @subpackage documentacion_consejos
+ * @author     Pablo Peralta
+ * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class documentacion_consejosActions extends sfActions
+{
+  public function executeIndex(sfWebRequest $request)
+  {
+  	$this->Consejo = '';
+    $this->paginaActual = $this->getRequestParameter('page', 1);
+
+		if (is_numeric($this->paginaActual)) {
+			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
+		}
+		$this->pager = new sfDoctrinePager('DocumentacionConsejo', 20);
+		$this->pager->getQuery()->from('DocumentacionConsejo')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->setPage($this->paginaActual);
+		$this->pager->init();
+
+		$this->documentacion_consejo_list = $this->pager->getResults();
+		$this->cantidadRegistros = $this->pager->getNbResults();
+
+		if ($this->consejoBsq) {
+			$this->Consejo = ConsejoTerritorialTable::getConsejo($this->consejoBsq);
+		}
+  }
+
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($request->getParameter('id'));
+    $this->forward404Unless($this->documentacion_consejo);
+  }
+
+  public function executeNueva(sfWebRequest $request)
+  {
+    $this->form = new DocumentacionConsejoForm();
+  }
+
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod('post'));
+    $this->form = new DocumentacionConsejoForm();
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('nueva');
+  }
+
+  public function executeEditar(sfWebRequest $request)
+  {
+    $this->forward404Unless($documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($request->getParameter('id')), sprintf('Object documentacion_consejo does not exist (%s).', $request->getParameter('id')));
+    $this->form = new DocumentacionConsejoForm($documentacion_consejo);
+  }
+
+  public function executeUpdate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
+    $this->forward404Unless($documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($request->getParameter('id')), sprintf('Object documentacion_consejo does not exist (%s).', $request->getParameter('id')));
+    $this->form = new DocumentacionConsejoForm($documentacion_consejo);
+
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('editar');
+  }
+  
+  public function executePublicar(sfWebRequest $request)
+	{
+		$this->processSelectedRecords($request, 'publicar');
+	}
+	
+	public function executeDelete(sfWebRequest $request)
+  {
+    $this->processSelectedRecords($request, 'baja');
+  }
+  
+  protected function processSelectedRecords(sfWebRequest $request, $accion)
+  {
+  	$toProcess = $request->getParameter('id');
+  	
+  	if (!empty($toProcess)) {
+  		$request->checkCSRFProtection();
+  		
+  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+  		
+  		foreach ($IDs as $id) {
+  			$this->forward404Unless($documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($id), sprintf('Object documentacion_consejo does not exist (%s).', $id));
+  			
+  			sfLoader::loadHelpers('Security');
+				if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+
+				if ($accion == 'publicar') {
+					$documentacion_consejo->setEstado('publicado');
+					$documentacion_consejo->save();
+		
+					ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());	
+				} else {
+					$documentacion_consejo->delete();
+				}
+  		}
+  	}
+  	$this->redirect('documentacion_consejos/index');
+  }
+
+  protected function processForm(sfWebRequest $request, sfForm $form)
+  {
+    $form->bind($request->getParameter($form->getName()));
+
+    if ($form->isValid()) {
+      $documentacion_consejo = $form->save();
+
+			## Notificar y enviar email a los destinatarios 
+			if($documentacion_consejo->getEstado()) {
+				if ($documentacion_consejo->getConsejoTerritorialId()) {
+					$enviar = true;
+					$grupo  = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
+					$email  = UsuarioTable::getUsuariosByConsejoTerritorial($documentacion_consejo->getConsejoTerritorialId());
+					$tema   = 'Documento registrado para el Consejo Territorial: '.$grupo->getNombre();
+				}
+				if ($documentacion_consejo->getEstado()=='publicado') {
+				  ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());
+				}  
+			}
+
+			## envia el email tendria que haber echo un servicio pero bue es lo que salio 	
+			if ($enviar) {
+				foreach ($email AS $emailPublic) {
+					if($emailPublic->getEmail()) {
+				    $mailTema = $emailPublic->getEmail();
+	    		  $nombreEvento = $documentacion_consejo->getNombre();
+	    		  $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
+	    		  $descripcion  = $documentacion_consejo->getContenido();
+
+						$mailer = new Swift(new Swift_Connection_NativeMail());
+						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+						$mailContext = array('tema' => $tema,
+						                     'evento' => $nombreEvento,
+						                     'organizador' => $organizador,    
+																 'descripcio' => $descripcion,
+																);
+						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+		
+						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
+						$mailer->disconnect();		
+					}
+				}
+			}
+      $this->redirect('documentacion_consejos/show?id='.$documentacion_consejo->getId());
+    }
+  }
+
+  protected function setFiltroBusqueda()
+  {
+  	$parcial = '';
+  	$modulo  = $this->getModuleName();
+  	$this->modulo = $modulo;
+
+		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
+		$this->consejoBsq = $this->getRequestParameter('consejo');
+		$this->categoriaBsq = $this->getRequestParameter('categoria_buscar');
+		$this->estadoBsq = $this->getRequestParameter('estado_busqueda');
+		
+		if (!empty($this->cajaBsq)) {
+			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
+			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
+		}
+		if (!empty($this->consejoBsq)) {
+			$parcial .= " AND consejo_territorial_id = $this->consejoBsq ";
+			$this->getUser()->setAttribute($modulo.'_nowconsejo', $this->consejoBsq);
+		}
+		if (!empty($this->categoriaBsq)) {
+			$parcial .= " AND categoria_c_t_id = $this->categoriaBsq ";
+			$this->getUser()->setAttribute($modulo.'_nowcategoria', $this->categoriaBsq);
+		}
+		if (!empty($this->estadoBsq)) {
+			$parcial .= " AND estado = '$this->estadoBsq' ";
+			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
+		}
+		if (!empty($parcial)) {
+			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
+		} else {
+			if ($this->hasRequestParameter('btn_buscar')) {
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowconsejo');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcategoria');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowesatdo');
+			} else {
+				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
+				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
+				$this->categoriaBsq = $this->getUser()->getAttribute($modulo.'_nowconsejo');
+				$this->categoriaBsq = $this->getUser()->getAttribute($modulo.'_nowcategoria');
+				$this->categoriaBsq = $this->getUser()->getAttribute($modulo.'_nowesatdo');
+			}
+		}
+		if ($this->hasRequestParameter('btn_quitar')) {
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowconsejo');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcategoria');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowesatdo');
+			$parcial="";
+			$this->cajaBsq = "";
+			$this->consejoBsq = '';
+			$this->categoriaBsq = '';
+			$this->estadoBsq = '';
+		}
+		return 'deleted=0'.$parcial;
+  }
+  
+  protected function setOrdenamiento()
+  {
+		$this->orderBy = 'nombre';
+		$this->sortType = 'asc';
+
+		if ($this->hasRequestParameter('orden')) {
+			$this->orderBy = $this->getRequestParameter('sort');
+			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
+		}
+		return $this->orderBy . ' ' . $this->sortType;
+  }
+  
+  ## ajax listar por categoria
+  public function executeListByGrupoTrabajo()
+	{
+		$this->documentacion_selected = 0;
+		$this->arrayDocumentacion = DocumentacionGrupoTable::doSelectByGrupoTrabajo($this->getRequestParameter('id_grupo_trabajo'));
+
+		return $this->renderPartial('documentacion_grupos/selectByGrupoTrabajo');
+	}
+}

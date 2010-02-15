@@ -1,0 +1,207 @@
+<?php
+/**
+ * normativas actions.
+ *
+ * @package    extranet
+ * @subpackage normativas
+ * @author     pinika
+ * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
+ */
+class normativasActions extends sfActions
+{
+  public function executeIndex(sfWebRequest $request)
+  {
+  	$this->paginaActual = $this->getRequestParameter('page', 1);
+
+		if (is_numeric($this->paginaActual)) {
+			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
+		}
+  	$this->pager = new sfDoctrinePager('Normativa', 10);
+	$this->pager->getQuery()->from('Normativa')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->setPage($this->paginaActual);
+	$this->pager->init();
+
+	$this->normativa_list = $this->pager->getResults();
+	$this->cantidadRegistros = $this->pager->getNbResults();
+  }
+  
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->normativa = Doctrine::getTable('Normativa')->find($request->getParameter('id'));
+    $this->forward404Unless($this->normativa);
+  }
+
+  public function executeNueva(sfWebRequest $request)
+  {
+    $this->form = new NormativaForm();
+  }
+
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod('post'));
+
+    $this->form = new NormativaForm();
+    $this->processForm($request, $this->form, 'creado');
+
+    $this->setTemplate('nueva');
+  }
+
+  public function executeEditar(sfWebRequest $request)
+  {
+    $this->forward404Unless($normativa = Doctrine::getTable('Normativa')->find($request->getParameter('id')), sprintf('Object normativa does not exist (%s).', $request->getParameter('id')));
+    $this->form = new NormativaForm($normativa);
+  }
+
+  public function executeUpdate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
+    $this->forward404Unless($normativa = Doctrine::getTable('Normativa')->find($request->getParameter('id')), sprintf('Object normativa does not exist (%s).', $request->getParameter('id')));
+    $this->form = new NormativaForm($normativa);
+
+    $this->processForm($request, $this->form, 'actualizado');
+
+    $this->setTemplate('editar');
+  }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    $request->checkCSRFProtection();
+
+    $this->forward404Unless($normativa = Doctrine::getTable('Normativa')->find($request->getParameter('id')), sprintf('Object normativa does not exist (%s).', $request->getParameter('id')));
+    
+    sfLoader::loadHelpers('Security'); // para usar el helper
+	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+    
+    $normativa->delete();
+
+		$this->getUser()->setFlash('notice', "El registro ha sido eliminado del sistema");
+    $this->redirect('normativas/index');
+  }
+
+  protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
+  {      
+    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+
+    if ($form->isValid()) {
+    	$dato = Doctrine::getTable('Normativa')->find($request->getParameter('id'));
+
+			if ($form->getValue('documento_delete') && $dato->getDocumento()) {	$dato->eliminarDocumento();	}
+						
+      $normativa = $form->save();
+      $strPaginaVolver = $accion=='actualizado' ? '?page='.$this->getUser()->getAttribute($this->getModuleName().'_nowpage') : '';
+	  
+      $this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
+
+      $this->redirect('normativas/index'.$strPaginaVolver);
+    }
+  }
+
+  protected function setFiltroBusqueda()
+  {
+  	sfLoader::loadHelpers('Date');
+  	$parcial = '';
+  	$modulo  = $this->getModuleName();
+
+		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
+		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
+		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
+		$this->CatNormBsq = $this->getRequestParameter('select_cat_nor');
+		$this->SubNormBsq1 = $this->getRequestParameter('normativa[subcategoria_normativa_uno_id]');
+		$this->SubNormBsq2 = $this->getRequestParameter('normativa[subcategoria_normativa_dos_id]');
+		
+		if (!empty($this->cajaBsq)) {
+			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
+		}
+		if (!empty($this->desdeBsq)) {
+			$parcial .= " AND fecha >='".format_date($this->desdeBsq,'d')."'";
+			$this->getUser()->setAttribute($modulo.'_nowfechadesde', $this->desdeBsq);
+		}
+		if (!empty($this->hastaBsq)) {
+			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$this->getUser()->setAttribute($modulo.'_nowfechahasta', $this->hastaBsq);
+		}
+		if (!empty($this->CatNormBsq)) {
+			$parcial .= " AND categoria_normativa_id  = $this->CatNormBsq";
+			$this->getUser()->setAttribute($modulo.'_nowcatnormativa', $this->CatNormBsq);
+		}
+		if (!empty($this->SubNormBsq1)) {
+			$parcial .= " AND subcategoria_normativa_uno_id = $this->SubNormBsq1";
+			$this->getUser()->setAttribute($modulo.'_nowsubcatnormativa1', $this->SubNormBsq1);
+		}
+		if (!empty($this->SubNormBsq2)) {
+			$parcial .= " AND subcategoria_normativa_dos_id = $this->SubNormBsq2";
+			$this->getUser()->setAttribute($modulo.'_nowsubcatnormativa2', $this->SubNormBsq2);
+		}
+
+		if (!empty($parcial)) {
+			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
+		} else {
+			if ($this->hasRequestParameter('btn_buscar')) {
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfechadesde');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfechahasta');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatnormativa');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa1');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa2');
+			} else {
+				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
+				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
+				$this->desdeBsq = $this->getUser()->getAttribute($modulo.'_nowfechadesde');
+				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowfechahasta');
+				$this->CatNormBsq = $this->getUser()->getAttribute($modulo.'_nowcatnormativa');
+				$this->SubNormBsq1 = $this->getUser()->getAttribute($modulo.'_nowsubcatnormativa1');
+				$this->SubNormBsq2 = $this->getUser()->getAttribute($modulo.'_nowsubcatnormativa2');
+				
+			}
+		}
+		if ($this->hasRequestParameter('btn_quitar')){
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfechadesde');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfechahasta');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatnormativa');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa1');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa2');
+			$parcial="";
+			$this->cajaBsq = "";
+			$this->desdeBsq = '';
+			$this->hastaBsq = '';
+			$this->CatNormBsq = '';
+			$this->SubNormBsq1 = '';
+			$this->SubNormBsq2 = '';
+		}
+		return 'deleted=0'.$parcial;
+  }
+  
+  protected function setOrdenamiento()
+  {
+		$this->orderBy = 'fecha';
+		$this->sortType = 'desc';
+
+		if ($this->hasRequestParameter('orden')) {
+			$this->orderBy = $this->getRequestParameter('sort');
+			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
+		}
+		return $this->orderBy . ' ' . $this->sortType;
+  }
+  
+  public function executeSubcategoriasn1(sfWebRequest $request)
+  {
+  	return $this->renderComponent('normativas','subcategoriasn1');
+  }
+  
+  public function executeSubcategoriasn2(sfWebRequest $request)
+  {
+  	
+    $subcategoria = SubCategoriaNormativaN2::getArraySubCategoria($request->getParameter('id_subcategoria'));
+   
+    $witSub = new NormativaForm();
+	    
+	$witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria)));    	
+    	
+    return $this->renderPartial('subcategorias',array('witSub' => $witSub));
+    
+  } 
+}

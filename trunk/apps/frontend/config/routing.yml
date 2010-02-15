@@ -1,0 +1,37 @@
+# logueo
+seguridad_login:
+  url:   /login
+  param: { module: seguridad, action: login }
+  
+seguridad_logout:
+  url:   /logout
+  param: { module: seguridad, action: logout }
+  
+# agenda
+agenda_anio_mes_dia:
+  url:    agenda/:y/:m/:d
+  param:  { module: agenda, action: index }
+agenda_anio_mes:
+  url:    agenda/:y/:m
+  param:  { module: agenda, action: index }
+
+rol_rol:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Rol
+    module:               rol
+    prefix_path:          rol
+    column:               id
+    with_wildcard_routes: true
+
+# default rules
+homepage:
+  url:   /
+  param: { module: inicio, action: index }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

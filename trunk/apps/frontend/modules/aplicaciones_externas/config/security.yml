@@ -1,0 +1,14 @@
+all:
+  is_secure:   on
+
+delete:
+  is_secure:   on
+  credentials: [[ admin, superadmin ]]
+
+editar:
+  is_secure:   on
+  credentials: [[ admin, superadmin ]]
+
+nueva:
+  is_secure:   on
+  credentials: [[ admin, superadmin ]]
