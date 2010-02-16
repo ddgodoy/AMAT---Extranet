@@ -11,6 +11,7 @@ class subcategoria_organismosComponents extends sfComponents
 {
 	public function executeListasubcategoria(sfWebRequest $request)
 	{
+		$this->name;
 		$this->subcategoria_organismos_selected = 0;
 		$this->arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($this->getRequestParameter('id_categoria_organismo'));
 		

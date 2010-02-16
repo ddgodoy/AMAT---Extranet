@@ -23,6 +23,10 @@ class ArchivoDOForm extends BaseArchivoDOForm
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_caducidad'   => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'disponibilidad'    => new sfWidgetFormChoice(array('choices' => array('organismo' => 'organismo', 'todos' => 'todos'))),
+			'categoria_organismo_id'     => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => true)),
+	      	'subcategoria_organismo_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
+	      	'organismo_id'               => new sfWidgetFormDoctrineChoice(array('model' => 'Organismo', 'add_empty' => true)),
+	      	'documentacion_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionOrganismo', 'add_empty' => true)),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 		));
 
@@ -35,6 +39,10 @@ class ArchivoDOForm extends BaseArchivoDOForm
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_caducidad'   => new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
 			'disponibilidad'    => new sfValidatorChoice(array('choices' => array('organismo' => 'organismo', 'todos' => 'todos'), 'required' => true), array('required' => 'disp req', 'invalid' => 'disp inval' )),
+			'categoria_organismo_id'     => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo', 'required' => true),array('invalid'=>'La Categoria es obligatoria')),
+	      	'subcategoria_organismo_id'  => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true),array('invalid'=>'La SubCategoria es obligatoria')),
+	      	'organismo_id'               => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'required' => true),array('invalid'=>'El Organismo es obligatorio')),
+	      	'documentacion_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'DocumentacionOrganismo', 'required' => true),array('invalid'=>'La Documentacion es obligatoria')),
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 		));
 

@@ -16,10 +16,13 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
   		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
 			'nombre'            => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
-		  'contenido'         => new fckFormWidget(),			
+		  	'contenido'         => new fckFormWidget(),			
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'owner_id'          => new sfWidgetFormInputHidden(),
+			'categoria_organismo_id'    => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => true)),
+      		'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
+      		'organismo_id'              => new sfWidgetFormDoctrineChoice(array('model' => 'Organismo', 'add_empty' => true)),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));
 
@@ -30,6 +33,9 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_publicacion' => new sfValidatorDate(array('required' => false ), array('invalid' => 'La fecha de publicacion es incorrecta')),						
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
+			'categoria_organismo_id'     => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo', 'required' => true),array('invalid'=>'La Categoria es obligatoria')),
+	      	'subcategoria_organismo_id'  => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true),array('invalid'=>'La SubCategoria es obligatoria')),
+	      	'organismo_id'               => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'required' => true),array('invalid'=>'El Organismo es obligatorio')),
 			'estado'            => new sfValidatorString(),
 		));
 

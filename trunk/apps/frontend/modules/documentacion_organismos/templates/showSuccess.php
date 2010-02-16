@@ -20,7 +20,7 @@
 	  <?php
 		 if(ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count() >= 1){ 
 			if (validate_action('listar','archivos_d_o')) { 
-				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')), 'archivos_d_o/index?documentacion_organismo_id=' . $documentacion_organismo->getId(), array('method' => 'post'));
+				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[documentacion_organismo_id]=' . $documentacion_organismo->getId(), array('method' => 'post'));
 			}	
 		 }	
 	  ?>

@@ -133,9 +133,8 @@ else
 						<td>
 						<?php 
 							echo select_tag('consejo_territorial_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()), $sf_user->getAttribute('archivos_c_t_nowconsejo')),
-															array('style'=>'width:200px;','class'=>'form_input')
-														 );
+							options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()), $sf_user->getAttribute('archivos_c_t_nowconsejo')),
+							array('style'=>'width:200px;','class'=>'form_input'));
 							echo observe_field('consejo_territorial_id', array('update'=>'content_documentacion','url'=>'archivos_c_t/listDocumentacion','with'=>"'id_consejo='+value"));
 							
 			      ?>

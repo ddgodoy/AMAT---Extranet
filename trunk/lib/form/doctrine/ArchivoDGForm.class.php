@@ -42,20 +42,10 @@ class ArchivoDGForm extends BaseArchivoDGForm
 			'fecha'             => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_caducidad'   => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
 			'disponibilidad'    => new sfValidatorChoice(array('choices' => array('Solo Grupo' => 'Solo Grupo', 'Todos' => 'Todos'), 'required' => true), array('required' => 'La disponibilidad es obligatoria', 'invalid' => 'La disponibilidad no es válida' )),
-			'grupo_trabajo_id'  => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo', 'required' => false)),
-			'documentacion_grupo_id' => new sfValidatorDoctrineChoice(array('model' => 'DocumentacionGrupo', 'required' => false)),
+			'grupo_trabajo_id'  => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo', 'required' => true),array('invalid' => 'El Grupo de Trabajo es obligatorio')),
+			'documentacion_grupo_id' => new sfValidatorDoctrineChoice(array('model' => 'DocumentacionGrupo', 'required' => true),array('invalid' => 'La Documentacion es obligatoria')),
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 		));
-
-		/*
-		if ($ctxAction == 'create' || $ctxAction == 'update') {
-			$postParams = sfContext::getInstance()->getRequest()->getPostParameters();
-
-			if ($postParams['archivo_d_g']['disponibilidad'] == 'Solo Grupo') {
-				$this->setValidator('grupo_trabajo_id', new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo', 'required' => true), array('required'=>'El Grupo de Trabajo es obligatorio')));
-			}
-		}
-		*/
 
 		$this->setDefaults(array(
 			'owner_id' => $userId,					

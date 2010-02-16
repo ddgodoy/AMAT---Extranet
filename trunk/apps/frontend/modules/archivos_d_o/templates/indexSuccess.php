@@ -12,7 +12,7 @@
       
 			$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);
 			$arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria) : '';
-			$arrayDocumentacion = $organismo? ArchivoDOTable::doSelectArchivos($organismo) : ArchivoDOTable::getAll();
+			$arrayDocumentacion = $organismo ?DocumentacionOrganismoTable::doSelectByOrganismo($organismo) : DocumentacionOrganismoTable::getAlldocumentacion();
 			$subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
 			$organismos_selected = $sf_user->getAttribute($modulo.'_noworganismos');
 			$documentacion_selected = $sf_user->getAttribute($modulo.'_nowdocumentacion');
@@ -137,35 +137,33 @@
 							
 						</td>
 					</tr>
-					
-					<td><label> Categoría *</label></td>
-					<td valign="middle">
-					<?php
-					// llamo al componente del modulo  categoria _ organismos
-					   echo include_component('categoria_organismos','listacategoria');
-					?>
-					</td>
-				</tr>
 				<tr>
-					<td><label> Subcategoría *</label></td>
-					<td valign="middle">
-						<span id="content_subcategoria">
-								<?php 
-								// llamo al partial que se encuentra subcategoria _ organismos/selectByCategoriaOrganismo para que luego lo reescriba el componente del modulo  categoria _ organismos
-								include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected)); 
-								?>
-						</span>
-					
-					</td>
-				</tr>
+		<td><label> Categoría *</label></td>
+		<td valign="middle">
+		<?php
+		// llamo al componente del modulo  categoria _ organismos
+		   echo include_component('categoria_organismos','listacategoria',array('name'=>'archivo_d_o'));
+		?>
+		</td>
+		</tr>
+		<tr>
+			<td><label> Subcategoría *</label></td>
+			<td valign="middle">
+			<span id="content_subcategoria">
+			<?php 
+			// llamo al partial que se encuentra subcategoria _ organismos/selectByCategoriaOrganismo para que luego lo reescriba el componente del modulo  categoria _ organismos
+			include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected, 'name'=>'archivo_d_o')); 
+			?>
+			</span>
+			</td>
+		</tr>
         <tr>
           <td><label>Organismo *</label></td>
           <td valign="middle">
           <span id="content_organismos">              
           	<?php 
           	// llamo al partial que se encuentra organismos/listByOrganismos para que luego lo reescriba el componente del modulo  subcategoria _ organismos
-          	include_partial('organismos/listByOrganismos', array ('arrayOrganismo'=>$arrayOrganismo, 'organismos_selected'=>$organismos_selected))           	
-          	?>
+          	include_partial('organismos/listByOrganismos', array ('arrayOrganismo'=>$arrayOrganismo, 'organismos_selected'=>$organismos_selected, 'name'=>'archivo_d_o'))?>
           </span>    
           </td>
         </tr>
@@ -173,13 +171,12 @@
         <tr>
           <td><label>Documentacion *</label></td>
           <td valign="middle">
-          	<span id="content_documentacion">
-          	 
-							<?php include_partial('documentacion_organismos/selectByOrganismo', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$documentacion_selected)) ?>
+          	<span id="content_documentacion"> 
+			<?php include_partial('documentacion_organismos/selectByOrganismo', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$documentacion_selected, 'name'=>'archivo_d_o')) ?>
 			</span>       
           </td>
         </tr> 
-					 <tr>
+		 <tr>
 					<td width="29%"><label>Fecha Desde:</label></td>
 					<td width="71%" valign="middle">
 						<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:80px;" name="desde_busqueda" id="desde_busqueda" value="<?php echo $sf_user->getAttribute('archivos_d_o_nowdesde');?>" class="form_input"/>

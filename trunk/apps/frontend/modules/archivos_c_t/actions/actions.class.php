@@ -12,12 +12,6 @@ class archivos_c_tActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	$this->documentacion = '';
-  	if($request->getParameter('documentacion_consejo_id'))
-  	{
-  		$this->documentacion = DocumentacionConsejo::getRepository()->findOneById($request->getParameter('documentacion_consejo_id'));
-  	}
-  	
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
 	if (is_numeric($this->paginaActual)) {
@@ -29,6 +23,12 @@ class archivos_c_tActions extends sfActions
 	->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
+	
+	$this->documentacion = '';
+  	if($this->documentacionBsq != '')
+  	{
+  		$this->documentacion = DocumentacionConsejo::getRepository()->findOneById($this->documentacionBsq);
+  	}
 
 	$this->archivo_ct_list = $this->pager->getResults();
 	$this->cantidadRegistros = $this->pager->getNbResults();
@@ -122,10 +122,10 @@ class archivos_c_tActions extends sfActions
   	sfLoader::loadHelpers('Date');
   	$parcial = '';
   	$modulo  = $this->getModuleName();
-
+  	
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->grupoBsq = $this->getRequestParameter('consejo_territorial_id');
-		$this->documentacionBsq = $this->getRequestParameter('documentacion_consejo_id');
+		$this->documentacionBsq = $this->getRequestParameter('archivo_c_t[documentacion_consejo_id]');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		

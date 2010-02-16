@@ -22,6 +22,8 @@ class ArchivoCTForm extends BaseArchivoCTForm
 			'fecha_caducidad'   => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'disponibilidad'    => new sfWidgetFormChoice(array('choices' => array('Solo Grupo' => 'solo grupo', 'Todos' => 'todos'))),
 			'owner_id'          => new sfWidgetFormInputHidden(),
+			'consejo_territorial_id'   => new sfWidgetFormDoctrineChoice(array('model' => 'ConsejoTerritorial', 'add_empty' => true)),
+      		'documentacion_consejo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionConsejo', 'add_empty' => true)),
 		));
 
 		$this->setValidators(array(
@@ -34,6 +36,8 @@ class ArchivoCTForm extends BaseArchivoCTForm
 			'fecha_caducidad'   => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
 			'disponibilidad'    => new sfValidatorChoice(array('choices' => array('Solo Grupo' => 'Solo Grupo', 'Todos' => 'Todos'), 'required' => true), array('required' => 'disp req', 'invalid' => 'disp inval' )),
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
+			'consejo_territorial_id'   => new sfValidatorDoctrineChoice(array('model' => 'ConsejoTerritorial', 'required' => true),array('required'=>'El Consejo Territorial es obligatorio')),
+      		'documentacion_consejo_id' => new sfValidatorDoctrineChoice(array('model' => 'DocumentacionConsejo', 'required' => true),array('required'=>'La documentacion es obligatoria')),
 		));
 
 

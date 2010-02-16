@@ -182,9 +182,9 @@ class documentacion_organismosActions extends sfActions
   	$modulo  = $this->getModuleName();
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-		$this->categoriaBsq = $this->getRequestParameter('categoria_organismo_id');
-		$this->subcategoriaBsq = $this->getRequestParameter('subcategoria_organismo_id');
-		$this->organismoBsq = $this->getRequestParameter('organismo');
+		$this->categoriaBsq = $this->getRequestParameter('documentacion_organismo[categoria_organismo_id]');
+		$this->subcategoriaBsq = $this->getRequestParameter('documentacion_organismo[subcategoria_organismo_id]');
+		$this->organismoBsq = $this->getRequestParameter('documentacion_organismo[organismo_id]');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 
@@ -265,8 +265,8 @@ class documentacion_organismosActions extends sfActions
   }
   
   //accion que ejecuta el componente de categoria_organismo
-  public function executeListByCategoriaOrganismo()
+  public function executeListByCategoriaOrganismo(sfWebRequest $request)
   {
-    return $this->renderComponent('subcategoria_organismos','listasubcategoria');
+    return $this->renderComponent('subcategoria_organismos','listasubcategoria',array('name'=>$request->getParameter('name')));
   }
 }
