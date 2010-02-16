@@ -178,10 +178,10 @@ class organismosActions extends sfActions
   }
   
   // accion que ejecuta el componente subcategoria_organismo para el listado de organisamos 
-  public function executeListByOrganismoAct()
+  public function executeListByOrganismoAct(sfWebRequest $request)
   {
   	
-		return $this->renderComponent('organismos','listaorganismos');	
+		return $this->renderComponent('organismos','listaorganismos',array('name'=>$request->getParameter('name')));	
   	
   }
 }

@@ -107,7 +107,7 @@
 						<?php
 						 if(ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count() >= 1){ 
 							if (validate_action('listar','archivos_d_o')) { 
-								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_o/index?documentacion_organismo_id=' . $valor->getId(), array('method' => 'post'));
+								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_o/index?archivo_d_o[documentacion_organismo_id]=' . $valor->getId(), array('method' => 'post'));
 							}	
 						 }	
 						?>
@@ -172,33 +172,33 @@
 						</td>
 					</tr>
 					<tr>
-					<td><label> Categoría *</label></td>
-					<td valign="middle">
-					<?php
-					// llamo al componente del modulo  categoria _ organismos
-					   echo include_component('categoria_organismos','listacategoria');
-					?>
-					</td>
-				</tr>
-				<tr>
-					<td><label> Subcategoría *</label></td>
-					<td valign="middle">
-						<span id="content_subcategoria">
-								<?php 
-								// llamo al partial que se encuentra subcategoria _ organismos/selectByCategoriaOrganismo para que luego lo reescriba el componente del modulo  categoria _ organismos
-								include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected)); 
-								?>
-						</span>
-					
-					</td>
-				</tr>
+		<td><label> Categoría *</label></td>
+		<td valign="middle">
+		<?php
+		// llamo al componente del modulo  categoria _ organismos
+		   echo include_component('categoria_organismos','listacategoria',array('name'=>'documentacion_organismo'));
+		?>
+		</td>
+		</tr>
+		<tr>
+		<td><label> Subcategoría *</label></td>
+		<td valign="middle">
+		<span id="content_subcategoria">
+		<?php 
+		// llamo al partial que se encuentra subcategoria _ organismos/selectByCategoriaOrganismo para que luego lo reescriba el componente del modulo  categoria _ organismos
+		include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected,'name'=>'documentacion_organismo')); 
+		?>
+		</span>
+		
+		</td>
+		</tr>
         <tr>
           <td><label>Organismo *</label></td>
           <td valign="middle">
           <span id="content_organismos">              
           	<?php 
           	// llamo al partial que se encuentra organismos/listByOrganismos para que luego lo reescriba el componente del modulo  subcategoria _ organismos
-          	include_partial('organismos/listByOrganismos', array ('arrayOrganismo'=>$arrayOrganismo, 'organismos_selected'=>$organismos_selected))           	
+          	include_partial('organismos/listByOrganismos', array ('arrayOrganismo'=>$arrayOrganismo, 'organismos_selected'=>$organismos_selected,'name'=>'documentacion_organismo'))           	
           	?>
           </span>    
           </td>

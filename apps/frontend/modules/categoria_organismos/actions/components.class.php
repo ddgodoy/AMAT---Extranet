@@ -11,6 +11,9 @@ class categoria_organismosComponents extends sfComponents
 {
 	public function executeListacategoria(sfWebRequest $request)
 	{
+		$this->name; 
+		
+		
 		$modulo = $this->getContext()->getModuleName();
 		if(!$this->getUser()->getAttribute($modulo.'_nowcategoria') || $this->getContext()->getActionName() == 'nueva')
 		{

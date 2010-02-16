@@ -63,20 +63,19 @@
           <td><label>Grupo de Trabajo *</label></td>
           <td valign="middle">
           	<?php 
-							echo select_tag('grupo_trabajo_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayGruposTrabajo), $grupos_trabajo_selected),
-															array('style'=>'width:330px;','class'=>'form_input')
-														 );
-							echo observe_field('grupo_trabajo_id', array('update'=>'content_documentacion','url'=>'documentacion_grupos/listByGrupoTrabajo','with'=>"'id_grupo_trabajo='+value"));
-						?>
+			echo select_tag('archivo_d_g[grupo_trabajo_id]',
+			options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayGruposTrabajo), $grupos_trabajo_selected),
+			array('style'=>'width:330px;','class'=>'form_input'));
+			echo observe_field('archivo_d_g_grupo_trabajo_id', array('update'=>'content_documentacion','url'=>'documentacion_grupos/listByGrupoTrabajo','with'=>"'id_grupo_trabajo='+value"));
+			?>
           </td>
         </tr>
         <tr>
           <td><label>Documentacion *</label></td>
           <td valign="middle">
           	<span id="content_documentacion">
-							<?php include_partial('documentacion_grupos/selectByGrupoTrabajo', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$documentacion_selected)) ?>
-						</span>
+			<?php include_partial('documentacion_grupos/selectByGrupoTrabajo', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$documentacion_selected)) ?>
+			</span>
           </td>
         </tr>
         <tr>

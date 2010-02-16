@@ -58,11 +58,10 @@
            <td><label>Consejos Territoriales *</label></td>
           <td valign="middle">
           <?php 
-            echo select_tag('consejo_territorial_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayGruposTrabajo), $grupos_trabajo_selected),
-															array('style'=>'width:330px;','class'=>'form_input')
-														 );
-						echo observe_field('consejo_territorial_id', array('update'=>'content_documentacion','url'=>'archivos_c_t/listDocumentacion','with'=>"'id_consejo='+value"));								 
+            echo select_tag('archivo_c_t[consejo_territorial_id]',
+			options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayGruposTrabajo), $grupos_trabajo_selected),
+			array('style'=>'width:330px;','class'=>'form_input'));
+			echo observe_field('archivo_c_t_consejo_territorial_id', array('update'=>'content_documentacion','url'=>'archivos_c_t/listDocumentacion','with'=>"'id_consejo='+value"));								 
            ?>          
           </td>
         </tr>

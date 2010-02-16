@@ -12,9 +12,7 @@ class archivos_d_gActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	if ($request->getParameter('documentacion_grupo_id')) {
-  		$this->documentacion = DocumentacionGrupo::getRepository()->findOneById($request->getParameter('documentacion_grupo_id'));
-  	}
+  	
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
@@ -24,6 +22,10 @@ class archivos_d_gActions extends sfActions
 		$this->pager->getQuery()->from('ArchivoDG')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
+		
+		if ($this->documentacionBsq) {
+  		$this->documentacion = DocumentacionGrupo::getRepository()->findOneById($this->documentacionBsq);
+  		}	
 
 		$this->archivo_dg_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
@@ -122,7 +124,7 @@ class archivos_d_gActions extends sfActions
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->grupoBsq = $this->getRequestParameter('grupo_trabajo_id');
-		$this->documentacionBsq = $this->getRequestParameter('documentacion_grupo_id');
+		$this->documentacionBsq = $this->getRequestParameter('archivo_d_g[documentacion_grupo_id]');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		

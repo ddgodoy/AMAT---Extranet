@@ -13,12 +13,6 @@ class archivos_d_oActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	
-  	$this->documentacion = '';
-  	if($request->getParameter('documentacion_organismo_id'))
-  	{
-  		$this->documentacion = DocumentacionOrganismo::getRepository()->getrfindOneById($request->getParameter('documentacion_organismo_id'));
-  	}
-  	
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
 	if (is_numeric($this->paginaActual)) {
@@ -28,6 +22,12 @@ class archivos_d_oActions extends sfActions
 	$this->pager->getQuery()->from('ArchivoDO')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
+	
+	$this->documentacion = '';
+  	if($this->documentacionBsq)
+  	{
+  		$this->documentacion = DocumentacionOrganismo::getRepository()->findOneById($this->documentacionBsq);
+  	}
 
 	$this->archivo_do_list = $this->pager->getResults();
 	$this->cantidadRegistros = $this->pager->getNbResults();
@@ -142,10 +142,10 @@ class archivos_d_oActions extends sfActions
   	$modulo  = $this->getModuleName();
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-		$this->categoriaBsq = $this->getRequestParameter('categoria_organismo_id');
-		$this->subcategoriaBsq = $this->getRequestParameter('subcategoria_organismo_id');
-		$this->organismoBsq = $this->getRequestParameter('organismoidsub');
-		$this->documentacionBsq = $this->getRequestParameter('documentacion_organismo_id');
+		$this->categoriaBsq = $this->getRequestParameter('archivo_d_o[categoria_organismo_id]');
+		$this->subcategoriaBsq = $this->getRequestParameter('archivo_d_o[subcategoria_organismo_id]');
+		$this->organismoBsq = $this->getRequestParameter('archivo_d_o[organismo_id]');
+		$this->documentacionBsq = $this->getRequestParameter('archivo_d_o[documentacion_organismo_id]');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		
@@ -239,13 +239,15 @@ class archivos_d_oActions extends sfActions
 		return $this->orderBy . ' ' . $this->sortType;
   }
   
-  public function executeListDocumentacionAct()
+  public function executeListDocumentacionAct(sfWebRequest $request)
   {
   
   	$this->documentacion_selected = 0;
   	$this->arrayDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->getRequestParameter('documentacion_organismos'));
   	
-		return $this->renderPartial('documentacion_organismos/selectByOrganismo');	
+  	$this->name = $request->getParameter('name');
+  	
+	return $this->renderPartial('documentacion_organismos/selectByOrganismo');	
   	
   }
 }

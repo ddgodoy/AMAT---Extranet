@@ -99,7 +99,7 @@
 						<?php
 						if(ArchivoDG::getRepository()->getAllByDocumentacion($valor->getId())->count() >= 1){ 
 							if (validate_action('listar','archivos_d_g')) { 
-								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_g/index?documentacion_grupo_id=' . $valor->getId(), array('method' => 'post'));
+								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_g/index?archivo_d_g[documentacion_grupo_id]=' . $valor->getId(), array('method' => 'post'));
 							}
 						}		
 						?>
