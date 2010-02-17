@@ -15,7 +15,7 @@
 <?php echo $form['autor']->renderError() ?>
 <?php echo $form['ambito']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
-<?php echo $form['fecha_publicacion']->renderError() ?>
+<?php //echo $form['fecha_publicacion']->renderError() ?>
 
 <form action="<?php echo url_for('cifras_datos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
@@ -38,21 +38,38 @@
           <td width="7%"><label>Fecha*</label></td>
           <td width="93%" valign="middle">
             <?php echo $form['fecha'] ?>                        
-            <label style="margin-left: 4px;">Fecha de Publicación*</label> <?php echo $form['fecha_publicacion'] ?>                  
+           <!-- <label style="margin-left: 4px;">Fecha de Publicación*</label> <?php //echo $form['fecha_publicacion'] ?>   -->               
           </td>
         </tr>
+        <tr>
+          <td><label>Seccion</label></td>
+          <td valign="middle"><?php echo $form['seccion_id'] ?>          
+          </td>
+        </tr>     
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle"><?php echo $form['titulo'] ?>
-          <label style="margin-left: 4px;">Autor / Medio*: </label>
-          <?php echo $form['autor'] ?>
+          <!--<label style="margin-left: 4px;">Autor / Medio*: </label>
+          <?php // echo $form['autor'] ?>-->
           </td>
+        </tr>   
+        <!--<tr>
+          <td style="padding-top: 5px;"><label>Destacada</label></td>
+          <td><?php //echo $form['destacada'] ?></td>
+        </tr>-->
+        <tr>
+          <td style="padding-top: 5px;"><label>Ambito</label></td>
+          <td><?php echo $form['ambito'] ?></td>
         </tr>
         <tr>
-          <td><label>Seccion*</label></td>
-          <td valign="middle"><?php echo $form['seccion_id'] ?>          
+          <td valign="top" style="padding-top: 5px;"><label>Detalle</label></td>
+          <td style="padding-top: 5px;"><?php echo $form['contenido'] ?></td>
+        </tr>
+        <tr>
+          <td><label>Enlace</label></td>
+          <td valign="middle"><?php echo $form['link'] ?>
           </td>
-        </tr>        
+        </tr> 
         <tr>
           <td style="padding-top: 5px;"><label>Imagen</label></td>
           <td style="padding-top: 5px;"><label>
@@ -60,27 +77,10 @@
           </label></td>
         </tr>
         <tr>
-          <td style="padding-top: 5px;"><label>Documento</label></td>
+          <td style="padding-top: 5px;"><label>Archivo</label></td>
           <td style="padding-top: 5px;"><label>
             <?php echo $form['documento'] ?>
           </label></td>
-        </tr>
-        <tr>
-          <td><label>Link</label></td>
-          <td valign="middle"><?php echo $form['link'] ?>
-          </td>
-        </tr> 
-        <tr>
-          <td style="padding-top: 5px;"><label>Destacada</label></td>
-          <td><?php echo $form['destacada'] ?></td>
-        </tr>
-        <tr>
-          <td style="padding-top: 5px;"><label>Ambito</label></td>
-          <td><?php echo $form['ambito'] ?></td>
-        </tr>
-        <tr>
-          <td valign="top" style="padding-top: 5px;"><label>Más Información</label></td>
-          <td style="padding-top: 5px;"><?php echo $form['contenido'] ?></td>
         </tr>
       </tbody></table>
       

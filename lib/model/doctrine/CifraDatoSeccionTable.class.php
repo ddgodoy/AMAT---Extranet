@@ -14,6 +14,15 @@ class CifraDatoSeccionTable extends Doctrine_Table
    	 return $respuesat;
    }
 	
+	public static function getAll()
+   {
+   	 $r = Doctrine_Query::create()
+   	 ->from('CifraDatoSeccion')
+   	 ->where('deleted = 0');
+   	 $respuesat = $r->execute();
+   	 
+   	 return $respuesat;
+   }
 	
 	
 }

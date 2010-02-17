@@ -39,41 +39,46 @@
           <td width="7%"><label>Fecha*</label></td>
           <td width="93%" valign="middle">
             <?php echo $form['fecha'] ?>
-            <label style="margin-left: 4px;">Fecha de Publicación*</label><?php echo $form['fecha_publicacion'] ?>
-            <label style="margin-left: 4px;">Fecha de Caducidad*</label><?php echo $form['fecha_caducidad'] ?>
+            <!--<label style="margin-left: 4px;">Fecha de Publicación*</label><?php //echo $form['fecha_publicacion'] ?>
+            <label style="margin-left: 4px;">Fecha de Caducidad*</label><?php //echo $form['fecha_caducidad'] ?>-->
+          </td>
+        </tr>
+        <tr>
+          <td><label>Autor / Medio:</label></td>
+          <td valign="middle">
+          	<?php echo $form['autor'] ?>
           </td>
         </tr>
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle">
-          	<?php echo $form['titulo'] ?><label style="margin-left: 4px;">Autor / Medio*: </label><?php echo $form['autor'] ?>
+          	<?php echo $form['titulo'] ?> <label>Destacada</label> <?php echo $form['destacada'] ?>
           </td>
-        </tr>
-        <tr>
-          <td valign="top"><label>Entradilla*</label></td>
-          <td><?php echo $form['entradilla'] ?></td>
         </tr>
         <tr>
           <td valign="top"><label>Ambito</label></td>
           <td><?php echo $form['ambito'] ?></td>
         </tr>
         <tr>
-          <td style="padding-top: 5px;"><label>Imagen</label></td>
-          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
-        </tr>
-        <tr>
-          <td style="padding-top: 5px;"><label>Documento</label></td>
-          <td style="padding-top: 5px;"><label>
-            <?php echo $form['documento'] ?>
-          </label></td>
+          <td valign="top"><label>Entradilla</label></td>
+          <td><?php echo $form['entradilla'] ?></td>
         </tr>
         <tr>
           <td valign="top" style="padding-top: 5px;"><label>Más Información</label></td>
           <td style="padding-top: 5px;"><?php echo $form['contenido'] ?></td>
         </tr>
         <tr>
-          <td style="padding-top: 5px;"><label>Destacada</label></td>
-          <td><?php echo $form['destacada'] ?></td>
+          <td style="padding-top: 5px;"><label>Imagen</label></td>
+          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
+        </tr>
+        <tr>
+          <td style="padding-top: 5px;"><label>Archivow</label></td>
+          <td style="padding-top: 5px;"><label>
+            <?php echo $form['documento'] ?>
+          </label></td>
+        </tr>
+        <tr>
+          <td style="padding-top: 5px;" height="10%"></td>
         </tr>
       </tbody>
       </table>

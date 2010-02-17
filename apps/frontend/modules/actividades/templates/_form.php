@@ -38,28 +38,16 @@
           <td width="7%"><label>Fecha*</label></td>
           <td width="93%" valign="middle">
             <?php echo $form['fecha'] ?>                       
-            <label style="margin-left: 4px;">Fecha de Publicación*</label>
-              <?php echo $form['fecha_publicacion'] ?>
+           <!-- <label style="margin-left: 4px;">Fecha de Publicación*</label>
+              <?php // echo $form['fecha_publicacion'] ?>-->
             </td>
         </tr>
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle"><?php echo $form['titulo'] ?>
-          <label style="margin-left: 4px;">Autor / Medio*: </label>
-          <?php echo $form['autor'] ?>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding-top: 5px;"><label>Imagen</label></td>
-          <td style="padding-top: 5px;"><label>
-            <?php echo $form['imagen'] ?>
-          </label></td>
-        </tr>
-        <tr>
-          <td style="padding-top: 5px;"><label>Documento</label></td>
-          <td style="padding-top: 5px;"><label>
-            <?php echo $form['documento'] ?>
-          </label></td>
+          <!--<label style="margin-left: 4px;">Autor / Medio*: </label>
+          <?php // echo $form['autor'] ?>
+          </td>-->
         </tr>
         <!--<tr>
           <td style="padding-top: 5px;"><label>Destacada</label></td>
@@ -70,8 +58,20 @@
           <td><?php //echo $form['ambito'] ?></td>
         </tr>-->
         <tr>
-          <td valign="top" style="padding-top: 5px;"><label>Más Información</label></td>
+          <td valign="top" style="padding-top: 5px;"><label>Detalle</label></td>
           <td style="padding-top: 5px;"><?php echo $form['contenido'] ?></td>
+        </tr>
+         <tr>
+          <td style="padding-top: 5px;"><label>Imagen</label></td>
+          <td style="padding-top: 5px;"><label>
+            <?php echo $form['imagen'] ?>
+          </label></td>
+        </tr>
+        <tr>
+          <td style="padding-top: 5px;"><label>Archivo</label></td>
+          <td style="padding-top: 5px;"><label>
+            <?php echo $form['documento'] ?>
+          </label></td>
         </tr>
       </tbody></table>
       

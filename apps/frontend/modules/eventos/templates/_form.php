@@ -31,44 +31,44 @@
 	    <fieldset>
         <legend>Evento</legend>
           <table width="100%" border="0" cellpadding="0" cellspacing="4">
-            <tr>
-              <td width="7%"><label>Fecha*</label></td>
-              <td width="93%" valign="middle">
-                <?php echo $form['fecha'] ?>
-								<!-- <label style="margin-left: 4px;">Fecha de Caducidad</label> -->
-                <?php // echo $form['fecha_caducidad']; ?>
-              </td>
-              </tr>
-              <tr>
-               <td><label style="margin-left:4px;">T&iacute;tulo*</label></td>
-                <td><?php echo $form['titulo'] ?></td>
-               </tr>
+        <tr>
+          <td width="7%"><label>Fecha*</label></td>
+          <td width="93%" valign="middle">
+            <?php echo $form['fecha'] ?>
+							<!-- <label style="margin-left: 4px;">Fecha de Caducidad</label> -->
+            <?php // echo $form['fecha_caducidad']; ?>
+          </td>
+          </tr>
+          <tr>
+           <td><label style="margin-left:4px;">T&iacute;tulo*</label></td>
+            <td><?php echo $form['titulo'] ?></td>
+           </tr>
+           <tr>
+           <td style="padding-top: 5px;"><label>Ambito</label></td>
+           <td style="padding-top: 5px;"><?php echo $form['ambito'] ?></td>
+           <tr>
+             <td valign="top"><label>Descripci&oacute;n</label></td>
+             <td><?php echo $form['descripcion'] ?></td>
+           </tr>
+           <tr>
+             <td valign="top" style="padding-top: 5px;"><label>Detalle</label></td>
+             <td style="padding-top: 5px;"><?php echo $form['mas_info'] ?></td>
+           </tr>
+           </tr>
                <tr>
-               <td><label style="margin-left:4px;">Organizador*</label></td>
+               <td><label style="margin-left:4px;">Organizador</label></td>
                <td><?php echo $form['organizador'] ?></td>
            </tr>
-            <tr>
+           <tr>
 	          <td style="padding-top: 5px;"><label>Imagen</label></td>
 	          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
 	        </tr>
 	        <tr>
-	          <td style="padding-top: 5px;"><label>Documento</label></td>
+	          <td style="padding-top: 5px;"><label>Archivo</label></td>
 	          <td style="padding-top: 5px;"><label>
 	            <?php echo $form['documento'] ?>
 	          </label></td>
         </tr>
-           <tr>
-             <td valign="top"><label>Descripci&oacute;n*</label></td>
-             <td><?php echo $form['descripcion'] ?></td>
-           </tr>
-           <tr>
-             <td style="padding-top: 5px;"><label>Ambito</label></td>
-             <td style="padding-top: 5px;"><?php echo $form['ambito'] ?></td>
-           </tr>
-           <tr>
-             <td valign="top" style="padding-top: 5px;"><label>M&aacute;s Informaci&oacute;n</label></td>
-             <td style="padding-top: 5px;"><?php echo $form['mas_info'] ?></td>
-           </tr>
          </table>
          <div class="clear"></div>
 				<div class="clear"></div>

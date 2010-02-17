@@ -21,8 +21,8 @@ class NoticiaForm extends BaseNoticiaForm
 			'imagen'            => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/images'), array('class' => 'form_input')),
 			'documento'         => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs')),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-			'fecha_publicacion' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-			'fecha_caducidad'   => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
+			'fecha_publicacion' => new sfWidgetFormInputHidden(),
+			'fecha_caducidad'   => new sfWidgetFormInputHidden(),
 			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
 			'mutua_id'          => new sfWidgetFormInputHidden(),
@@ -33,8 +33,8 @@ class NoticiaForm extends BaseNoticiaForm
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'Noticia', 'column' => 'id', 'required' => false)),
 			'titulo'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
-			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El autor es obligatorio')),
-			'entradilla'        => new sfValidatorString(array(), array('required' => 'La entradilla es obligatoria')),
+			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => false), array('required' => 'El autor es obligatorio')),
+			'entradilla'        => new sfValidatorString(array('required' => false), array('required' => 'La entradilla es obligatoria')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'imagen'            => new sfValidatorFile(array('path' => 'uploads/noticias/images', 'required' =>false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
 			'imagen_delete'     => new sfValidatorBoolean(),
@@ -53,6 +53,8 @@ class NoticiaForm extends BaseNoticiaForm
 			'owner_id'          => sfContext::getInstance()->getUser()->getAttribute('userId'),
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => 'pendiente',
+			'fecha_publicacion' => '2007/01/01',
+			'fecha_caducidad'   => '2020/01/01',
 			'contenido'         => '<div class="noticias nuevodetalle" style="padding-top: 20px;"><img align="left" src="/uploads/image/noimage.jpg" alt="" style="margin-right: 10px; width: 124px; height: 138px;" nottit="" />Titulo<br />
 									<p class="notentrada" style="font-weight: bold;">Entradilla</p>
 									<p style="border-bottom: 1px dotted; margin: 10px 0px; color: rgb(204, 204, 204);">&nbsp;</p>

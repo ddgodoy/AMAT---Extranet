@@ -13,7 +13,7 @@
 	</div>	
 	
 	<div class="noticias">
-	  <img src="<?php if ($actividad->getimagen()): ?>/uploads/actividades/images/s_<?php echo $actividad->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $actividad->gettitulo() ?>" />
+	  <img src="<?php if ($actividad->getimagen()): ?>/uploads/actividades/images/<?php echo $actividad->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $actividad->gettitulo() ?>" />
 	  <a href="#" class="nottit"><?php echo  $actividad->gettitulo() ?></a><br />
 	  <?php echo $actividad->getcontenido() ?> 
 	   <?php if($actividad->getUserIdCreador()):?>

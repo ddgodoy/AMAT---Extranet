@@ -20,7 +20,6 @@ abstract class BaseNoticia extends sfDoctrineRecord
              ));
         $this->hasColumn('entradilla', 'clob', null, array(
              'type' => 'clob',
-             'notnull' => true,
              ));
         $this->hasColumn('contenido', 'clob', null, array(
              'type' => 'clob',
