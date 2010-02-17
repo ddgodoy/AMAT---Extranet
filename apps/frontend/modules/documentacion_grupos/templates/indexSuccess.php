@@ -67,10 +67,13 @@
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('documentacion_grupos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="70%">
+					<th width="35%">
 						<a href="<?php echo url_for('documentacion_grupos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
-					<th width="70%">
+					<th width="15%">
+						<a href="<?php echo url_for('documentacion_grupos/index?sort=grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Grupo de trabajo</a>
+					</th>
+					<th width="15%">
 						<a href="<?php echo url_for('documentacion_grupos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
 					</th>
 					<th width="5%"></th>
@@ -90,6 +93,10 @@
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
 					<?php endif;?>	
+					</td>
+					<td valign="center" align="left">
+					    <?php $Grupo = GrupoTrabajo::getRepository()->findOneById($valor->getGrupoTrabajoId())?>
+						<?php echo $Grupo->getNombre() ?>
 					</td>
 					<td valign="center" align="left">
 					    <?php $usuario = Usuario::getRepository()->findOneById($valor->getUserIdCreador())?>

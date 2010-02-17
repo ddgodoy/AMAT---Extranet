@@ -76,10 +76,13 @@
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('documentacion_organismos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="70%">
+					<th width="35%">
 						<a href="<?php echo url_for('documentacion_organismos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
-					<th width="70%">
+					<th width="15%">
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organismo</a>
+					</th>
+					<th width="15%">
 						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
@@ -98,6 +101,10 @@
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
 					<?php endif;?>	
+					</td>
+					<td valign="center" align="left">
+					    <?php $Organismo = Organismo::getRepository()->findOneById($valor->getOrganismoId())?>
+						<?php echo $Organismo->getNombre() ?>
 					</td>
 					<td valign="center" align="left">
 					    <?php $usuario = Usuario::getRepository()->findOneById($valor->getUserIdCreador())?>
