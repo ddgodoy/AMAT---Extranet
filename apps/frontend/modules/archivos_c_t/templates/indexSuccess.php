@@ -51,10 +51,13 @@ else
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('archivos_c_t/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="70%">
+					<th width="35%">
 						<a href="<?php echo url_for('archivos_c_t/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
-					<th width="70%">
+					<th width="15%">
+						<a href="<?php echo url_for('archivos_c_t/index?sort=consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Consejo territorial</a>
+					</th>
+					<th width="15%">
 						<a href="<?php echo url_for('archivos_c_t/index?sort=owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
@@ -71,6 +74,10 @@ else
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
 					<?php endif;?>	
+					</td>
+					<td valign="center" align="left">
+					    <?php $Consejo = ConsejoTerritorial::getRepository()->findOneById($valor->getConsejoTerritorialId())?>
+						<?php echo $Consejo->getNombre() ?>
 					</td>
 					<td valign="center" align="left">
 					    <?php if($valor->getOwnerId()):?>
