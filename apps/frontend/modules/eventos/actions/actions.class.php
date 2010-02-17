@@ -225,6 +225,8 @@ class eventosActions extends sfActions
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
+		$this->ambitoBQ = $this->getRequestParameter('ambito');
+		$this->estadoBq = $this->getRequestParameter('estado');
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND titulo LIKE '%$this->cajaBsq%'";
@@ -238,6 +240,14 @@ class eventosActions extends sfActions
 			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
+		if (!empty($this->ambitoBQ)) {
+			$parcial .= " AND ambito = '".$this->ambitoBQ."'";
+			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBQ);
+		}
+		if (!empty($this->estadoBq)) {
+			$parcial .= " AND estado = '".$this->estadoBq."'";
+			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBq);
+		}
 
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
@@ -247,11 +257,15 @@ class eventosActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdesde');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowhasta');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
 				$this->desdeBsq = $this->getUser()->getAttribute($modulo.'_nowdesde');
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowhasta');
+				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowambito');
+				$this->estadoBq = $this->getUser()->getAttribute($modulo.'_nowestado');
 			}
 		}
 		if ($this->hasRequestParameter('btn_quitar')){
@@ -259,10 +273,14 @@ class eventosActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdesde');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowhasta');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			$parcial="";
 			$this->cajaBsq = "";
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
+			$this->ambitoBQ = '';
+			$this->estadoBq = '';
 		}
 		return 'deleted=0'.$parcial;
   }
