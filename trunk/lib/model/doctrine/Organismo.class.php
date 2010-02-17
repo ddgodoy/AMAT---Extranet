@@ -9,6 +9,10 @@ class Organismo extends BaseOrganismo
 	{
 		return $this->nombre;
 	}
+	public static function getRepository()
+	{
+		return Doctrine::getTable(__CLASS__);
+	}
 	public function getUsusriosMiOrganismo($usuarioId)
 	{
 		$s = Doctrine_Query::create();
