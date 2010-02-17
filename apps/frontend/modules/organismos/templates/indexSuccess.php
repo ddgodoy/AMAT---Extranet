@@ -7,6 +7,8 @@ if ($sf_user->getAttribute('organismos_nowcategoria'))
 	{
 		$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($sf_user->getAttribute('organismos_nowcategoria'));
 	}
+	$modulo = $sf_context->getModuleName();
+	$subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
 ?>
 <div class="mapa"><strong>Organismos</strong> > Gestión de Organismos</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -97,43 +99,42 @@ if ($sf_user->getAttribute('organismos_nowcategoria'))
 				<tbody>
 					<tr>
 					<td>Titulo</td>
-						<td>
-							
-							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/>
-							
-						</td>
+					<td>
+						
+					<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/>
+						
+					</td>
 					</tr>
-						<tr>
+					<tr>
 					<td><label> Categoría </label></td>
 					<td valign="middle">
-					<?php 
-							echo select_tag('categoria_organismo_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(CategoriaOrganismoTable::getAllcategoriaorg()), $sf_user->getAttribute('organismos_nowcategoria')),
-															array('style'=>'width:200px;','class'=>'form_input')
-														 );
-							echo observe_field('categoria_organismo_id', array('update'=>'content_subcategoria','url'=>'subcategoria_organismos/listByCategoriaOrganismo','with'=>"'id_categoria_organismo='+value"));
+					<?php
+					// llamo al componente del modulo  categoria _ organismos
+					   echo include_component('categoria_organismos','listacategoria',array('name'=>'organismo'));
 					?>
-					
 					</td>
-				</tr>
-				<tr>
+					</tr>
+					<tr>
 					<td><label> Subcategoría </label></td>
 					<td valign="middle">
-						<span id="content_subcategoria">
-								<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$sf_user->getAttribute('organismos_nowsubcategoria'))) ?>
-						</span>     
-					<?php //echo $form['subcategoria_organismo_id'] ?>
+					<span id="content_subcategoria">
+					<?php 
+					// llamo al partial que se encuentra subcategoria _ organismos/selectByCategoriaOrganismo para que luego lo reescriba el componente del modulo  categoria _ organismos
+					include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected,'name'=>'organismo')); 
+					?>
+					</span>
+					
 					</td>
-				</tr>
+					</tr>
 					<tr>
-						<td style="padding-top:5px;">
-							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
-						</td>
-						<td>
-						<?php if ($cajaBsq ||  $categoriaBsq || $subcategoriaBsq ): ?>
-							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
-						<?php endif; ?>
-						</td>
+					<td style="padding-top:5px;">
+						<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
+					</td>
+					<td>
+					<?php if ($cajaBsq ||  $categoriaBsq || $subcategoriaBsq ): ?>
+						<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
+					<?php endif; ?>
+					</td>
 					</tr>
 				</tbody>
 			</table>
