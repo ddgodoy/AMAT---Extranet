@@ -62,25 +62,90 @@ class eventosActions extends sfActions
 		
 		$this->setTemplate('editar');
 	}
+	
+	public function executePublicar(sfWebRequest $request)
+	{
+		$this->processSelectedRecords($request, 'publicar');
+	}
+
 
 	public function executeDelete(sfWebRequest $request)
 	{
-		$request->checkCSRFProtection();
 		
-		$this->forward404Unless($evento = Doctrine::getTable('Evento')->find($request->getParameter('id')), sprintf('Object evento does not exist (%s).', $request->getParameter('id')));
-		
-		$aviso = NotificacionTable::getDeleteEntidad($evento->getId(),$evento->getTitulo ());
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-	    if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-	    $aviso->delete();
-		$evento->delete();
-		
-		$this->getUser()->setFlash('notice', "El registro ha sido eliminado del sistema");
-
-		$this->redirect('eventos/index');
+		$this->processSelectedRecords($request, 'baja');
 	}
 
+	protected function processSelectedRecords(sfWebRequest $request, $accion)
+	{
+		$toProcess = $request->getParameter('id');
+  	
+  		if (!empty($toProcess)) {
+  			
+  		 $IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+  		 
+  		 foreach ($IDs as $id) {
+  		 	 
+  		 	   $request->checkCSRFProtection();
+		
+         	   $this->forward404Unless($evento = Doctrine::getTable('Evento')->find($id), sprintf('Object evento does not exist (%s).', $id));
+         	   
+         	   
+  		      if($accion == 'publicar')
+  		      {		
+					sfLoader::loadHelpers('Security'); // para usar el helper
+					if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');	
+					
+					$evento->setEstado('publicado');
+					$evento->save();
+					## Notificar
+					ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+					
+					$email = UsuarioTable::getUsuarioByEventos($evento->getId());
+					
+					if($email)	
+						{
+							foreach ($email AS $emailPublic)
+							{
+									
+								if($emailPublic->getEmail())
+								{
+								    $mailTema = $emailPublic->getEmail();
+								    $temaTi ='Evento publicado'; ;
+					    		    $nombreEvento = $evento->getTitulo();
+					    		    $organizador = $evento->getOrganizador();
+					    		    $descripcion = $evento->getDescripcion();
+									$mailer = new Swift(new Swift_Connection_NativeMail());
+									$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+					
+									$mailContext = array(                   'tema' => $temaTi,
+									                                        'evento' => $nombreEvento,
+									                                        'organizador' => $organizador,    
+																			'descripcio' => $descripcion,
+																			);
+									$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+									$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+					
+									$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
+									$mailer->disconnect();		
+								}
+							}
+						 	
+						}
+  		      }
+  		      else  		
+  		      {
+  		      	$aviso = NotificacionTable::getDeleteEntidad($evento->getId(),$evento->getTitulo ());
+		
+				sfLoader::loadHelpers('Security'); // para usar el helper
+	    		if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+	    		$aviso->delete();
+				$evento->delete();
+  		      	
+  		      }
+  		  }	
+  	   }
+  	  $this->redirect('eventos/index');
+	}
 	protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
 	{
 		$enviar = false;
@@ -139,58 +204,7 @@ class eventosActions extends sfActions
 			$this->redirect('eventos/index'.$strPaginaVolver);
 		}
 	}
-	
-	public function executePublicar(sfWebRequest $request)
-	{
-		## Obtener el id del evento
-		if(!$this->eventoId = $this->getRequestParameter('id'))
-			$this->forward404('El evento solicitado no existe');
 		
-		$evento = Doctrine::getTable('Evento')->find($this->eventoId);
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');	
-		
-		$evento->setEstado('publicado');
-		$evento->save();
-		## Notificar
-		ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
-		
-		$email = UsuarioTable::getUsuarioByEventos($evento->getId());
-		
-		if($email)	
-			{
-				foreach ($email AS $emailPublic)
-				{
-						
-					if($emailPublic->getEmail())
-					{
-					    $mailTema = $emailPublic->getEmail();
-					    $temaTi ='Evento publicado'; ;
-		    		    $nombreEvento = $evento->getTitulo();
-		    		    $organizador = $evento->getOrganizador();
-		    		    $descripcion = $evento->getDescripcion();
-						$mailer = new Swift(new Swift_Connection_NativeMail());
-						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-						$mailContext = array(                   'tema' => $temaTi,
-						                                        'evento' => $nombreEvento,
-						                                        'organizador' => $organizador,    
-																'descripcio' => $descripcion,
-																);
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
-					}
-				}
-			 	
-			}
-		$this->getUser()->setFlash('notice', 'El evento ha sido publicado correctamente');
-		$this->redirect(str_replace('|', '/', $this->getRequestParameter('goto', 'eventos/index')));
-	}
-	
 	public function executeDelete_selected(sfWebRequest $request)
 	{
 		if($this->getRequestParameter('checks')){

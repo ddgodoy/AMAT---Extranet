@@ -3,6 +3,28 @@
 
 <link type="text/css" rel="stylesheet" href="/js/calendario/dhtml_calendar.css" media="screen"></link>
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+<script language="javascript" type="text/javascript">
+	function setActionFormList(accion)
+	{
+		var parcialMensaje = '';
+		var rutaToPub = '<?php echo url_for('eventos/publicar') ?>';
+		var rutaToDel = '<?php echo url_for('eventos/delete') ?>';
+		var objectFrm = $('frmListEventos');
+
+		if (accion == 'publicar') {
+			objectFrm.action = rutaToPub;
+			parcialMensaje = 'publicación';
+		} else {
+			objectFrm.action = rutaToDel;
+			parcialMensaje = 'eliminación';
+		}
+		if (confirm('Confirma la '+ parcialMensaje +' de los registros seleccionados?')) {
+			return true;
+		}
+		return false;
+	}
+</script>
 
 <div class="mapa"><strong>Canal Corporativo</strong> &gt Eventos</div>
 
@@ -38,9 +60,11 @@
 	</div>
 	
 	<?php if ($cantidadRegistros > 0) : ?>
+<form method="post" enctype="multipart/form-data" action="" id="frmListEventos">
 	<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 	<tbody>
 	<tr>
+		<th width="3%"></th>
 		<th width="8%"><a href="<?php echo url_for('eventos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
 		<th width="22%"><a href="<?php echo url_for('eventos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Título</a></th>
 		<th width="21%"><a href="<?php echo url_for('eventos/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organizador</a></th>
@@ -51,6 +75,7 @@
 	</tr>
 	<?php $i=0; foreach ($evento_list as $evento): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 	<tr class="<?php echo $odd ?>">
+		<td><input type="checkbox" name="id[]" value="<?php echo $evento->getId() ?>" /></td>
 		<td><?php echo date("d/m/Y", strtotime($evento->getFecha())) ?></td>
 		
 			<td><a href="<?php echo url_for('eventos/show?id=' . $evento->getId()) ?>"><strong><?php echo $evento->getTitulo() ?></strong></a></td>
@@ -81,8 +106,16 @@
 		</td>
 	</tr>
 	<?php endforeach; ?>
+	<tr>
+		<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+		<td colspan="5">
+			<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>
+			<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" style="margin-left:5px;"/>
+		</td>
+	</tr>
 	</tbody>
 </table>
+</form>
 <?php else : ?>
 	<?php if ($cajaBsq != '') : ?>
 		<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
