@@ -56,10 +56,13 @@
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('archivos_d_g/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="55%">
+					<th width="35%">
 						<a href="<?php echo url_for('archivos_d_g/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
-					<th width="20%">
+					<th width="15%">
+						<a href="<?php echo url_for('archivos_d_g/index?sort=grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Grupo de trabajo</a>
+					</th>
+					<th width="15%">
 						<a href="<?php echo url_for('archivos_d_g/index?sort=owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
@@ -77,6 +80,12 @@
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
 					<?php endif; ?>	
+					</td>
+					<td valign="center" align="left">
+					    <?php if ($valor->getGrupoTrabajoId()):?> 
+					    <?php $Grupo = GrupoTrabajo::getRepository()->findOneById($valor->getGrupoTrabajoId())?>
+						<?php echo $Grupo->getNombre() ?>
+						<?php endif;?>
 					</td>
 					<td valign="center" align="left">
 						<?php if($valor->getOwnerId()): ?>
