@@ -89,8 +89,8 @@ class organismosActions extends sfActions
       $organismo = $form->save();
       
       $bandera     = 0;
-      $xSelectSubcat = $this->getRequestParameter('subcategoria_organismo_id');
-      $xSelectCat = $this->getRequestParameter('categoria_organismo_id');
+      $xSelectSubcat = $this->getRequestParameter('organismo[subcategoria_organismo_id]');
+      $xSelectCat = $this->getRequestParameter('organismo[categoria_organismo_id]');
       
       if (!empty($xSelectSubcat)){ $organismo->setSubcategoriaOrganismoId($xSelectSubcat); $bandera = 1; }
       if (!empty($xSelectCat)){ $organismo->setCategoriaOrganismoId($xSelectCat); $bandera = 1; }
@@ -119,8 +119,8 @@ class organismosActions extends sfActions
   	
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-		$this->categoriaBsq = $this->getRequestParameter('categoria_organismo_id');
-		$this->subcategoriaBsq = $this->getRequestParameter('subcategoria_organismo_id');
+		$this->categoriaBsq = $this->getRequestParameter('organismo[categoria_organismo_id]');
+		$this->subcategoriaBsq = $this->getRequestParameter('organismo[subcategoria_organismo_id]');
 		
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";

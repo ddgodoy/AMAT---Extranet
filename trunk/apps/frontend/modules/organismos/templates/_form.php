@@ -46,11 +46,11 @@
 					<td><label> Categoría *</label></td>
 					<td valign="middle">
 					<?php 
-							echo select_tag('categoria_organismo_id',
+							echo select_tag('organismo[categoria_organismo_id]',
 															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoria), $categoria_organismos_selected),
 															array('style'=>'width:330px;','class'=>'form_input')
 														 );
-							echo observe_field('categoria_organismo_id', array('update'=>'content_subcategoria','url'=>'subcategoria_organismos/listByCategoriaOrganismo','with'=>"'id_categoria_organismo='+value"));
+							echo observe_field('organismo_categoria_organismo_id', array('update'=>'content_subcategoria','url'=>'subcategoria_organismos/listByCategoriaOrganismo','with'=>"'id_categoria_organismo='+value+'&name=organismo'"));
 					?>
 					
 					</td>
@@ -59,7 +59,7 @@
 					<td><label> Subcategoría *</label></td>
 					<td valign="middle">
 						<span id="content_subcategoria">
-								<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected)) ?>
+								<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected, 'name'=>'organismo')) ?>
 						</span>     
 					</td>
 				</tr>
