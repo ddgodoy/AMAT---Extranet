@@ -9,4 +9,9 @@ class CifraDatoSeccion extends BaseCifraDatoSeccion
 	{
 		return $this->nombre;
 	}
+	public static function getRepository()
+	{
+		return Doctrine::getTable(__CLASS__);
+	}
+
 }

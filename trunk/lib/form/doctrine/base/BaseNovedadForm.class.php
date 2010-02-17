@@ -40,7 +40,7 @@ class BaseNovedadForm extends BaseFormDoctrine
       'id'                 => new sfValidatorDoctrineChoice(array('model' => 'Novedad', 'column' => 'id', 'required' => false)),
       'titulo'             => new sfValidatorString(array('max_length' => 100)),
       'autor'              => new sfValidatorString(array('max_length' => 100)),
-      'entradilla'         => new sfValidatorString(),
+      'entradilla'         => new sfValidatorString(array('required' => false)),
       'contenido'          => new sfValidatorString(array('required' => false)),
       'imagen'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'documento'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),

@@ -220,7 +220,7 @@ Noticia:
   columns:
     titulo:                  { type: string(100), notnull: true }
     autor:                   { type: string(100), notnull: true }
-    entradilla:              { type: clob, notnull: true }
+    entradilla:              { type: clob, notnull: false }
     contenido:               { type: clob, notnull: false }
     imagen:                  { type: string(255), notnull: false }
     documento:               { type: string(255), notnull: false }
