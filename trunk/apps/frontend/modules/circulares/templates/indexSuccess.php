@@ -160,9 +160,8 @@
 					<td valign="middle">
 						<?php
 							echo select_tag('select_cat_tema',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoriasTema), $SelectCatTemaBsq),
-															array('style'=>'width:250px;','class'=>'form_input')
-														 );
+							options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoriasTema), $SelectCatTemaBsq),
+							array('style'=>'width:250px;','class'=>'form_input'));
 							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'circular_sub_tema/listByCategoria','with'=>"'id_categoria='+value"));
 						?>
 					</td>
@@ -180,9 +179,8 @@
 					<td valign="middle">
 						<?php
 							echo select_tag('categoria_organismo_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoria),
-															$SelectCatOrganismoBsq), array('style'=>'width:250px;','class'=>'form_input')
-														 );
+							options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoria),
+							$SelectCatOrganismoBsq), array('style'=>'width:250px;','class'=>'form_input'));
 							echo observe_field('categoria_organismo_id', array('update'=>'content_sub_org','url'=>'subcategoria_organismos/listByCategoriaOrganismo','with'=>"'id_categoria_organismo='+value"));
 						?>
 					</td>
@@ -191,7 +189,7 @@
 					<td valign="top"><label>Subcategor&iacute;a de Organismo</label></td>
 					<td valign="middle">
 						<span id="content_sub_org">
-							<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$SelectSubOrganismoBsq)) ?>
+							<?php  include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$SelectSubOrganismoBsq,'name'=>'organismos')) ?>
 						</span>
 					</td>
 				</tr>

@@ -94,7 +94,7 @@
 					<td valign="top"><label>Subcategor&iacute;a de Organismo</label></td>
 					<td valign="middle">
 						<span id="content_sub_org">
-							<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected)) ?>
+							<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected, 'name'=>'circular')) ?>
 							<?php /* include_partial('circular_sub_org/selectByCategoria', array ('arraySubcategoriasOrg'=>$arraySubcategoriasOrg, 'sub_org_selected'=>$sub_org_selected))  */?>
 						</span>
 					</td>

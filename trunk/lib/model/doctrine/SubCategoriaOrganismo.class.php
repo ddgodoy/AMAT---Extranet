@@ -9,4 +9,8 @@ class SubCategoriaOrganismo extends BaseSubCategoriaOrganismo
 	{
 		return $this->nombre;
 	}
+	public static function getRepository()
+	{
+		return Doctrine::getTable(__CLASS__);
+	}
 }
