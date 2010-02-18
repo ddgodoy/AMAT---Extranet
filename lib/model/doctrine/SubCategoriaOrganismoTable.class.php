@@ -6,13 +6,16 @@ class SubCategoriaOrganismoTable extends Doctrine_Table
 {
 	public static function doSelectByCategoria($categoria)
 	{
+//		echo $categoria;
+//		exit();
+		
 		if (empty($categoria)) {return false;}
 
 		$q = Doctrine_Query::create();
 
 		$q->from('SubCategoriaOrganismo');
 		$q->where('deleted = 0');
-		$q->addWhere('categoria_organismo_id = ' . $categoria);
+		$q->addWhere('categoria_organismo_id ='.$categoria);
 		$q->orderBy('nombre ASC');
 
 		$subcategoria = $q->execute();

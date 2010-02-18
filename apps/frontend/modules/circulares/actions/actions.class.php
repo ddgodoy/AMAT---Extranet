@@ -93,10 +93,11 @@ class circularesActions extends sfActions
 
     if ($form->isValid()) {
       $circular = $form->save();
+     
 
       $banderaSub     = 0;
-      $xSelectSubTema = $this->getRequestParameter('select_sub_tema');
-      $xSelectSubOrg  = $this->getRequestParameter('subcategoria_organismo_id');
+      $xSelectSubTema = $request->getParameter('select_sub_tema');
+      $xSelectSubOrg  = $request->getParameter('organismos[subcategoria_organismo_id]');
 
       if (!empty($xSelectSubTema)){ $circular->setCircularSubTemaId($xSelectSubTema); $banderaSub = 1; }
       if (!empty($xSelectSubOrg)) { $circular->setSubcategoriaOrganismoId($xSelectSubOrg); $banderaSub = 1; }
@@ -117,13 +118,12 @@ class circularesActions extends sfActions
   	sfLoader::loadHelpers('Date');
   	$parcial = '';
   	$modulo  = $this->getModuleName();
-    
-  	$this->arrayCategoriasTema = CircularTable::doSelectAllCategorias('CircularCatTema');
-  	$this->arraySubcategoriasTema = $this->getUser()->getAttribute($modulo.'_nowcattema')?CircularSubTemaTable::doSelectByCategoria($this->getUser()->getAttribute($modulo.'_nowcattema')):array();
-  	$this->arrayCategoria = OrganismoTable::doSelectAllCategorias('CategoriaOrganismo');
-  	$this->arraySubcategoria = $this->getUser()->getAttribute($modulo.'_nowcatorganismo')? SubCategoriaOrganismoTable::doSelectByCategoria($this->getUser()->getAttribute($modulo.'_nowcatorganismo')) :array();
   	
-  	
+//  	echo '<pre>';
+//  	print_r($this->arraySubcategoria);
+//  	echo '</pre>';
+//  	exit();
+//  	
 		$this->nBsq = $this->getRequestParameter('n_busqueda');
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
@@ -131,9 +131,8 @@ class circularesActions extends sfActions
 		$this->SelectCatTemaBsq = $this->getRequestParameter('select_cat_tema');
 		$this->SelectSubTemaBsq = $this->getRequestParameter('select_sub_tema');
 		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id');
-		$this->SelectSubOrganismoBsq = $this->getRequestParameter('subcategoria_organismo_id');
+		$this->SelectSubOrganismoBsq = $this->getRequestParameter('subcategoria_organismo_id')? $this->getRequestParameter('subcategoria_organismo_id'):$this->getRequestParameter('organismos[subcategoria_organismo_id]') ;
 		
-
 		if (!empty($this->nBsq)) {
 			$parcial .= " AND c.numero = $this->nBsq";
 			$this->getUser()->setAttribute($modulo.'_nownumero', $this->nBsq);
@@ -214,6 +213,15 @@ class circularesActions extends sfActions
 			$this->SelectCatOrganismoBsq = '';
 			$this->SelectSubOrganismoBsq = '';
 		}
+		
+		$this->arrayCategoriasTema = CircularTable::doSelectAllCategorias('CircularCatTema');
+	  	$this->arraySubcategoriasTema = $this->SelectCatTemaBsq?CircularSubTemaTable::doSelectByCategoria($this->SelectCatTemaBsq):array();
+	  	$this->arrayCategoria = OrganismoTable::doSelectAllCategorias('CategoriaOrganismo');
+	  	$this->arraySubcategoria = $this->SelectCatOrganismoBsq? SubCategoriaOrganismoTable::doSelectByCategoria($this->SelectCatOrganismoBsq) :array();
+		
+		
+		
+		
 		return 'deleted=0'.$parcial;
   }
   
