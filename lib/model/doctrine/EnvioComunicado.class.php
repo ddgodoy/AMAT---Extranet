@@ -16,7 +16,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 		{
 			if ($usuario->getEmail())
 			{ 				
-				if ($this->envioMail($usuario->getEmail(), $this->getTipoComunicado()->getImagen(), $this->getComunicado()->getDetalle(), $this->getTipoComunicado()->getNombre()))
+				if ($this->envioMail($usuario->getEmail(), $this->getTipoComunicado()->getImagen(), $this->getComunicado()->getDetalle(), $this->getComunicado()->getNombre()))
 				{  
 					//echo "<br />email enviado a: ".$usuario;
 				}
