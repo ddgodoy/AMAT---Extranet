@@ -8,9 +8,8 @@ abstract class BaseCifraDatoSeccion extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('cifra_dato_seccion');
-        $this->hasColumn('nombre', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
     }
 

@@ -18,7 +18,7 @@ class CategoriaAsuntoForm extends BaseCategoriaAsuntoForm
       'activo_2'   => new sfWidgetFormInputCheckbox(array(),array('onclick'=>'desmarcar2()','value'=>1)),    ));
 
     $this->setValidators(array(
-      'nombre'     => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required'=>'El Tema es obligatorio')),
+      'nombre'     => new sfValidatorString(array('required' => true), array('required'=>'El Tema es obligatorio')),
       'email_1'    => new sfValidatorEmail(array('required' => false)),
       'activo_1'   => new sfValidatorInteger(array('required' => false)),
       'email_2'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),

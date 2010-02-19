@@ -13,7 +13,7 @@ class BaseActaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'nombre'      => new sfWidgetFormInput(),
+      'nombre'      => new sfWidgetFormTextarea(),
       'detalle'     => new sfWidgetFormTextarea(),
       'asamblea_id' => new sfWidgetFormDoctrineChoice(array('model' => 'Asamblea', 'add_empty' => true)),
       'owner_id'    => new sfWidgetFormDoctrineChoice(array('model' => 'Usuario', 'add_empty' => true)),
@@ -24,7 +24,7 @@ class BaseActaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => 'Acta', 'column' => 'id', 'required' => false)),
-      'nombre'      => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'nombre'      => new sfValidatorString(array('required' => false)),
       'detalle'     => new sfValidatorString(array('required' => false)),
       'asamblea_id' => new sfValidatorDoctrineChoice(array('model' => 'Asamblea', 'required' => false)),
       'owner_id'    => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => false)),

@@ -65,7 +65,7 @@ class AsambleaForm extends BaseAsambleaForm
 		//=> new sfWidgetFormTime(),
 		$this->setValidators(array(
 			'id'              => new sfValidatorDoctrineChoice(array('model' => 'Asamblea', 'column' => 'id', 'required' => false)),
-			'titulo'          => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'El título es obligatorio')),
+			'titulo'          => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'direccion'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
 			'contenido'       => new sfValidatorString(array('required' => false)),
 			'fecha'           => new sfValidatorDate(array('required' => true), array('required' => 'La fecha es obligatoria')),

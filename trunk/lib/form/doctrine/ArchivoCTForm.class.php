@@ -28,7 +28,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
 
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'ArchivoCT', 'column' => 'id', 'required' => false), array('required' => 'id req', 'invalid' => 'id inval' )),
-			'nombre'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+			'nombre'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'archivo'           => new sfValidatorFile(array('path' => 'uploads/archivos_c_t/docs', 'required' => true), array('required' => 'Por favor ingrese un archivo', 'invalid' => 'Formato de archivo incorrecto' )),
 			'archivo_delete'    => new sfValidatorBoolean(),

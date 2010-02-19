@@ -8,9 +8,8 @@ abstract class BaseCircularSubTema extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('circular_sub_tema');
-        $this->hasColumn('nombre', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('circular_cat_tema_id', 'integer', null, array(
              'type' => 'integer',

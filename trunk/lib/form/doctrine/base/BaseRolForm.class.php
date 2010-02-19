@@ -13,7 +13,7 @@ class BaseRolForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'            => new sfWidgetFormInputHidden(),
-      'nombre'        => new sfWidgetFormInput(),
+      'nombre'        => new sfWidgetFormTextarea(),
       'detalle'       => new sfWidgetFormTextarea(),
       'codigo'        => new sfWidgetFormInput(),
       'created_at'    => new sfWidgetFormDateTime(),
@@ -24,7 +24,7 @@ class BaseRolForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'Rol', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('max_length' => 150, 'required' => false)),
+      'nombre'        => new sfValidatorString(array('required' => false)),
       'detalle'       => new sfValidatorString(array('required' => false)),
       'codigo'        => new sfValidatorString(array('max_length' => 32)),
       'created_at'    => new sfValidatorDateTime(array('required' => false)),

@@ -13,7 +13,7 @@ class BaseContenidoNotificacionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'titulo'     => new sfWidgetFormInput(),
+      'titulo'     => new sfWidgetFormTextarea(),
       'mensaje'    => new sfWidgetFormInput(),
       'accion'     => new sfWidgetFormChoice(array('choices' => array('creacion' => 'creacion', 'lectura' => 'lectura', 'modificacion' => 'modificacion', 'eliminacion' => 'eliminacion', 'invitacion' => 'invitacion'))),
       'entidad'    => new sfWidgetFormInput(),
@@ -24,7 +24,7 @@ class BaseContenidoNotificacionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => 'ContenidoNotificacion', 'column' => 'id', 'required' => false)),
-      'titulo'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'titulo'     => new sfValidatorString(array('required' => false)),
       'mensaje'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'accion'     => new sfValidatorChoice(array('choices' => array('creacion' => 'creacion', 'lectura' => 'lectura', 'modificacion' => 'modificacion', 'eliminacion' => 'eliminacion', 'invitacion' => 'invitacion'), 'required' => false)),
       'entidad'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),

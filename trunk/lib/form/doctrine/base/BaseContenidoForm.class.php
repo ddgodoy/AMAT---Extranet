@@ -13,7 +13,7 @@ class BaseContenidoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'titulo'     => new sfWidgetFormInput(),
+      'titulo'     => new sfWidgetFormTextarea(),
       'contenido'  => new sfWidgetFormTextarea(),
       'permalink'  => new sfWidgetFormInput(),
       'created_at' => new sfWidgetFormDateTime(),
@@ -23,7 +23,7 @@ class BaseContenidoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => 'Contenido', 'column' => 'id', 'required' => false)),
-      'titulo'     => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'titulo'     => new sfValidatorString(array('required' => false)),
       'contenido'  => new sfValidatorString(array('required' => false)),
       'permalink'  => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'created_at' => new sfValidatorDateTime(array('required' => false)),

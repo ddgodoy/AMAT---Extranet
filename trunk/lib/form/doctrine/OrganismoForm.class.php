@@ -37,7 +37,7 @@ class OrganismoForm extends BaseOrganismoForm
 		
 		$this->setValidators(array(
 			'id'                          => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'column' => 'id', 'required' => false)),			
-			'nombre'                      => new sfValidatorString(array('max_length' => 150, 'required' => true), array('required' => 'El nombre es obligatorio')),
+			'nombre'                      => new sfValidatorString(array('required' => true), array('required' => 'El nombre es obligatorio')),
 			'grupo_trabajo_id'            => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo')),
 			'categoria_organismo_id'            => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo')),
 			'subcategoria_organismo_id'            => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo')),

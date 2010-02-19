@@ -21,7 +21,7 @@ class AplicacionExternaForm extends BaseAplicacionExternaForm
     ));
 
     $this->setValidators(array(
-      'url'     => new sfValidatorUrl(array('max_length' => 255, 'required' => true), array('required'=>'La Url es obligatoria','invalid'=>'Formato de url incorrecto')),
+      'url'     => new sfValidatorUrl(array('required' => true), array('required'=>'La Url es obligatoria','invalid'=>'Formato de url incorrecto')),
       'nombre'  => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required'=>'El Nombre es obligatorio')),
       'detalle' => new sfValidatorString(array('required' => false)),
       'imagen'  => new sfValidatorFile(

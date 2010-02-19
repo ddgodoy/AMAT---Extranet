@@ -8,9 +8,8 @@ abstract class BaseAplicacion extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('aplicacion');
-        $this->hasColumn('nombre', 'string', 150, array(
-             'type' => 'string',
-             'length' => '150',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('nombre_entidad', 'string', 150, array(
              'type' => 'string',

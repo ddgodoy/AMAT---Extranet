@@ -22,7 +22,7 @@ Rol:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(150), notnull: false }
+    nombre:                  { type: clob, notnull: false }
     detalle:                 { type: clob }
     codigo:                  { type: string(32), notnull: true }
   relations:
@@ -44,7 +44,7 @@ GrupoTrabajo:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(150), notnull: false }
+    nombre:                  { type: clob, notnull: false }
     detalle:                 { type: clob }
   relations:
     Usuarios:                { foreignAlias: GruposTrabajo, class: Usuario, refClass: UsuarioGrupoTrabajo }
@@ -54,7 +54,7 @@ ConsejoTerritorial:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(150), notnull: false }
+    nombre:                  { type: clob, notnull: false }
     detalle:                 { type: clob }
   relations:
     Usuarios:                { foreignAlias: ConsejosTerritoriales, class: Usuario, refClass: UsuarioConsejoTerritorial }
@@ -64,7 +64,7 @@ Organismo:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                    { type: string(150), notnull: false }
+    nombre:                    { type: clob, notnull: false }
     detalle:                   { type: clob }
     grupo_trabajo_id:          { type: integer, notnull: true }
     categoria_organismo_id:    { type: integer }
@@ -80,15 +80,15 @@ Mutua:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(150), notnull: false }
-    detalle:                   { type: clob }
+    nombre:                  { type: clob, notnull: false }
+    detalle:                 { type: clob }
     
 Aplicacion:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(150), notnull: false }
+    nombre:                  { type: clob, notnull: false }
     nombre_entidad:          { type: string(150), notnull: false }
     nombre_modulo:           { type: string(150), notnull: false }
     tipo:                    { type: enum, values: ['front', 'back'] }
@@ -127,7 +127,7 @@ Evento:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100) }
+    titulo:                  { type: clob }
     descripcion:             { type: clob }
     mas_info:                { type: clob }
     fecha:                   { type: date }
@@ -150,7 +150,7 @@ NormasDeFuncionamiento:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100) }
+    titulo:                  { type: clob }
     descripcion:             { type: clob }
     grupo_trabajo_id:        { type: integer, notnull: true }
   relations:
@@ -162,7 +162,7 @@ Asamblea:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(255) }
+    titulo:                  { type: clob }
     direccion:               { type: string(255) }
     fecha:                   { type: date }
     fecha_caducidad:         { type: date }
@@ -179,7 +179,7 @@ UsuarioAsamblea:
     Timestampable: ~
   columns:
     usuario_id:              { type: integer, notnull: true }
-    asamblea_id:               { type: integer, notnull: true }
+    asamblea_id:             { type: integer, notnull: true }
   relations:
     Usuario:                 { foreignAlias: UsuarioEventos, onDelete: CASCADE }
     Asamblea:                { foreignAlias: UsuarioEventos, onDelete: CASCADE }
@@ -189,7 +189,7 @@ Convocatoria:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
     detalle:                 { type: clob }
     asamblea_id:             { type: integer }
     owner_id:                { type: integer }
@@ -205,7 +205,7 @@ Acta:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
     detalle:                 { type: clob }
     asamblea_id:             { type: integer }
     owner_id:                { type: integer }
@@ -218,7 +218,7 @@ Noticia:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100), notnull: true }
+    titulo:                  { type: clob, notnull: true }
     autor:                   { type: string(100), notnull: true }
     entradilla:              { type: clob, notnull: false }
     contenido:               { type: clob, notnull: false }
@@ -495,7 +495,7 @@ Publicacion:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(255), notnull: false }
+    titulo:                  { type: clob, notnull: false }
     autor:                   { type: string(100), notnull: true }
     contenido:               { type: clob, notnull: false }
     imagen:                  { type: string(255), notnull: false }
@@ -521,7 +521,7 @@ AplicacionExterna:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
     detalle:                 { type: clob }
     imagen:                  { type: string(100) }
     url:                     { type: string(255) }
@@ -534,7 +534,7 @@ Actividad:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100), notnull: false }
+    titulo:                  { type: clob, notnull: false }
     autor:                   { type: string(100), notnull: true }
     contenido:               { type: clob, notnull: false }
     imagen:                  { type: string(255), notnull: false }
@@ -559,14 +559,14 @@ CifraDatoSeccion:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100), notnull: false }
+    nombre:                  { type: clob, notnull: false }
     
 CifraDato:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100), notnull: true }
+    titulo:                  { type: clob, notnull: true }
     autor:                   { type: string(100), notnull: true }
     contenido:               { type: clob, notnull: false }
     imagen:                  { type: string(255), notnull: false }
@@ -594,7 +594,7 @@ CategoriaAsunto:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
     email_1:                 { type: string(255) }
     activo_1:                { type: integer }
     email_2:                 { type: string(255) }
@@ -605,14 +605,14 @@ Menu:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
     
 Contenido:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100) }
+    titulo:                  { type: clob }
     contenido:               { type: clob }
     permalink:               { type: string(255) }
     
@@ -621,7 +621,7 @@ ArchivoDG:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
     fecha:                   { type: date, notnull: true }
     fecha_caducidad:         { type: date }
     contenido:               { type: clob, notnull: false }
@@ -639,7 +639,7 @@ ArchivoCT:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                   { type: string(255) }
+    nombre:                   { type: clob }
     fecha:                    { type: date, notnull: true }
     fecha_caducidad:          { type: date }
     contenido:                { type: clob, notnull: false }
@@ -657,7 +657,7 @@ ArchivoDO:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                     { type: string(255) }
+    nombre:                     { type: clob }
     fecha:                      { type: date, notnull: true }
     fecha_caducidad:            { type: date }
     contenido:                  { type: clob, notnull: false }
@@ -679,28 +679,28 @@ CategoriaDG:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
 
 CategoriaCT:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
 
 CategoriaOrganismo:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
 
 SubCategoriaOrganismo:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
     categoria_organismo_id:  { type: integer, notnull: true }
   relations:
     CategoriaOrganismo:      { local: categoria_organismo_id, foreign: id, onDelete: CASCADE }
@@ -711,7 +711,7 @@ Comunicado:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
     detalle:                 { type: clob }
     en_intranet:             { type: boolean }
     enviado:                 { type: boolean, values: 0 }
@@ -748,7 +748,7 @@ TipoComunicado:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
     imagen:                  { type: string(255) }
     
 ListaComunicado:
@@ -756,7 +756,7 @@ ListaComunicado:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(255) }
+    nombre:                  { type: clob }
   relations:
     Usuarios:                { foreignAlias: ListasComunicado, class: Usuario, refClass: UsuarioListaComunicado }
 
@@ -789,7 +789,7 @@ Notificacion:
   columns:
     estado:                    { type: enum, values: ['leido', 'noleido'] }
     url:                       { type: string(255) }
-    nombre:                    { type: string(255) }
+    nombre:                    { type: clob }
     contenido_notificacion_id: { type: integer }
     usuario_id:                { type: integer }
     entidad_id:                { type: integer }
@@ -803,7 +803,7 @@ ContenidoNotificacion:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(255) }
+    titulo:                  { type: clob }
     mensaje:                 { type: string(255) }
     accion:                  { type: enum, values: ['creacion', 'lectura', 'modificacion', 'eliminacion', 'invitacion'] }
     entidad:                 { type: string(255) }
@@ -813,14 +813,14 @@ CircularCatTema:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
 
 CircularSubTema:
   actAs:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    nombre:                  { type: string(100) }
+    nombre:                  { type: clob }
     circular_cat_tema_id:    { type: integer, notnull: true }
   relations:
     CircularCatTema:         { local: circular_cat_tema_id, foreign: id, onDelete: CASCADE }

@@ -13,7 +13,7 @@ class BaseCifraDatoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
-      'titulo'             => new sfWidgetFormInput(),
+      'titulo'             => new sfWidgetFormTextarea(),
       'autor'              => new sfWidgetFormInput(),
       'contenido'          => new sfWidgetFormTextarea(),
       'imagen'             => new sfWidgetFormInput(),
@@ -38,7 +38,7 @@ class BaseCifraDatoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                 => new sfValidatorDoctrineChoice(array('model' => 'CifraDato', 'column' => 'id', 'required' => false)),
-      'titulo'             => new sfValidatorString(array('max_length' => 100)),
+      'titulo'             => new sfValidatorString(),
       'autor'              => new sfValidatorString(array('max_length' => 100)),
       'contenido'          => new sfValidatorString(array('required' => false)),
       'imagen'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),

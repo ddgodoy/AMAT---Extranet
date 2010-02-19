@@ -36,7 +36,7 @@ class AplicacionForm extends BaseAplicacionForm
 		
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'Actividad', 'column' => 'id', 'required' => false)),
-			'titulo'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+			'titulo'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El autor es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'imagen'            => new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )),

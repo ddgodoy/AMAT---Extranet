@@ -13,7 +13,7 @@ class BaseCircularSubTemaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                   => new sfWidgetFormInputHidden(),
-      'nombre'               => new sfWidgetFormInput(),
+      'nombre'               => new sfWidgetFormTextarea(),
       'circular_cat_tema_id' => new sfWidgetFormDoctrineChoice(array('model' => 'CircularCatTema', 'add_empty' => false)),
       'created_at'           => new sfWidgetFormDateTime(),
       'updated_at'           => new sfWidgetFormDateTime(),
@@ -22,7 +22,7 @@ class BaseCircularSubTemaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                   => new sfValidatorDoctrineChoice(array('model' => 'CircularSubTema', 'column' => 'id', 'required' => false)),
-      'nombre'               => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'nombre'               => new sfValidatorString(array('required' => false)),
       'circular_cat_tema_id' => new sfValidatorDoctrineChoice(array('model' => 'CircularCatTema')),
       'created_at'           => new sfValidatorDateTime(array('required' => false)),
       'updated_at'           => new sfValidatorDateTime(array('required' => false)),

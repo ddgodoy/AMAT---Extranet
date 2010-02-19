@@ -29,7 +29,7 @@ class ListaComunicadoForm extends BaseListaComunicadoForm
 
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'ListaComunicado', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'nombre'        => new sfValidatorString(array('required' => false)),
       'usuarios_list' => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'Acción inválida')),
       
     ));

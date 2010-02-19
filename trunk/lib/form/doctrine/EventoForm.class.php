@@ -45,7 +45,7 @@ class EventoForm extends BaseEventoForm
 		
 		$this->setValidators(array(
 			'id'              => new sfValidatorDoctrineChoice(array('model' => 'Evento', 'column' => 'id', 'required' => false)),
-			'titulo'          => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'El título es obligatorio')),
+			'titulo'          => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'organizador'     => new sfValidatorString(array('max_length' => 255, 'required' => false), array('required' => 'El organizador es obligatorio')),
 			'descripcion'     => new sfValidatorString(array('required' => false), array('required' => 'La descripción es obligatoria')),
 			'mas_info'        => new sfValidatorString(array('required' => false)),

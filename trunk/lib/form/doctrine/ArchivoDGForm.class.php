@@ -35,7 +35,7 @@ class ArchivoDGForm extends BaseArchivoDGForm
 
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'ArchivoDG', 'column' => 'id', 'required' => false), array('required' => 'id req', 'invalid' => 'id inval' )),
-			'nombre'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+			'nombre'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => true), array('required' => 'La descripción es obligatoria')),
 			'archivo'           => new sfValidatorFile(array('path' => 'uploads/archivos_d_g/docs', 'required' => $rqArchivo), $msArchivo),
 			'archivo_delete'    => new sfValidatorBoolean(),

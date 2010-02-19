@@ -27,7 +27,7 @@ class NormasDeFuncionamientoForm extends BaseNormasDeFuncionamientoForm
 
     $this->setValidators(array(
       'id'               => new sfValidatorDoctrineChoice(array('model' => 'NormasDeFuncionamiento', 'column' => 'id', 'required' => false)),
-      'titulo'           => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+      'titulo'           => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
       'descripcion'      => new sfValidatorString(array('required' => false)),
       'grupo_trabajo_id' => new sfValidatorChoice(array('choices' => array_keys($GruposUsuario),'required' => true),array('required' => 'El Grupo de trabajo es obligatorio')),
       'created_at'       => new sfValidatorDateTime(array('required' => false)),

@@ -32,7 +32,7 @@ class ArchivoDOForm extends BaseArchivoDOForm
 
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'ArchivoDO', 'column' => 'id', 'required' => false), array('required' => 'id req', 'invalid' => 'id inval' )),
-			'nombre'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+			'nombre'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'archivo'           => new sfValidatorFile(array('path' => $dir_upload, 'required' => true), array('required' => 'arch req', 'invalid' => 'arch inval' )),
 			'archivo_delete'    => new sfValidatorBoolean(),

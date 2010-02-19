@@ -13,7 +13,7 @@ class BaseNormasDeFuncionamientoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'               => new sfWidgetFormInputHidden(),
-      'titulo'           => new sfWidgetFormInput(),
+      'titulo'           => new sfWidgetFormTextarea(),
       'descripcion'      => new sfWidgetFormTextarea(),
       'grupo_trabajo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'GrupoTrabajo', 'add_empty' => false)),
       'created_at'       => new sfWidgetFormDateTime(),
@@ -23,7 +23,7 @@ class BaseNormasDeFuncionamientoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'               => new sfValidatorDoctrineChoice(array('model' => 'NormasDeFuncionamiento', 'column' => 'id', 'required' => false)),
-      'titulo'           => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'titulo'           => new sfValidatorString(array('required' => false)),
       'descripcion'      => new sfValidatorString(array('required' => false)),
       'grupo_trabajo_id' => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo')),
       'created_at'       => new sfValidatorDateTime(array('required' => false)),

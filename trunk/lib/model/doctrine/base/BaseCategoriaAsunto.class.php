@@ -8,9 +8,8 @@ abstract class BaseCategoriaAsunto extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('categoria_asunto');
-        $this->hasColumn('nombre', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('email_1', 'string', 255, array(
              'type' => 'string',

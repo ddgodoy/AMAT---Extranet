@@ -13,7 +13,7 @@ class BaseAplicacionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'             => new sfWidgetFormInputHidden(),
-      'nombre'         => new sfWidgetFormInput(),
+      'nombre'         => new sfWidgetFormTextarea(),
       'nombre_entidad' => new sfWidgetFormInput(),
       'nombre_modulo'  => new sfWidgetFormInput(),
       'tipo'           => new sfWidgetFormChoice(array('choices' => array('front' => 'front', 'back' => 'back'))),
@@ -26,7 +26,7 @@ class BaseAplicacionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'             => new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'column' => 'id', 'required' => false)),
-      'nombre'         => new sfValidatorString(array('max_length' => 150, 'required' => false)),
+      'nombre'         => new sfValidatorString(array('required' => false)),
       'nombre_entidad' => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'nombre_modulo'  => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'tipo'           => new sfValidatorChoice(array('choices' => array('front' => 'front', 'back' => 'back'), 'required' => false)),

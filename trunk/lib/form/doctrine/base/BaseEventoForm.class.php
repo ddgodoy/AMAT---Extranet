@@ -13,7 +13,7 @@ class BaseEventoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
-      'titulo'             => new sfWidgetFormInput(),
+      'titulo'             => new sfWidgetFormTextarea(),
       'descripcion'        => new sfWidgetFormTextarea(),
       'mas_info'           => new sfWidgetFormTextarea(),
       'fecha'              => new sfWidgetFormDate(),
@@ -36,7 +36,7 @@ class BaseEventoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                 => new sfValidatorDoctrineChoice(array('model' => 'Evento', 'column' => 'id', 'required' => false)),
-      'titulo'             => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'titulo'             => new sfValidatorString(array('required' => false)),
       'descripcion'        => new sfValidatorString(array('required' => false)),
       'mas_info'           => new sfValidatorString(array('required' => false)),
       'fecha'              => new sfValidatorDate(array('required' => false)),
