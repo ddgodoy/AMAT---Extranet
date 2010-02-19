@@ -37,7 +37,7 @@ class BasePublicacionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                 => new sfValidatorDoctrineChoice(array('model' => 'Publicacion', 'column' => 'id', 'required' => false)),
-      'titulo'             => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'titulo'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'autor'              => new sfValidatorString(array('max_length' => 100)),
       'contenido'          => new sfValidatorString(array('required' => false)),
       'imagen'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
