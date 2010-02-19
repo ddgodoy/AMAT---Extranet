@@ -13,7 +13,7 @@ class BaseGrupoTrabajoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'            => new sfWidgetFormInputHidden(),
-      'nombre'        => new sfWidgetFormInput(),
+      'nombre'        => new sfWidgetFormTextarea(),
       'detalle'       => new sfWidgetFormTextarea(),
       'created_at'    => new sfWidgetFormDateTime(),
       'updated_at'    => new sfWidgetFormDateTime(),
@@ -23,7 +23,7 @@ class BaseGrupoTrabajoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('max_length' => 150, 'required' => false)),
+      'nombre'        => new sfValidatorString(array('required' => false)),
       'detalle'       => new sfValidatorString(array('required' => false)),
       'created_at'    => new sfValidatorDateTime(array('required' => false)),
       'updated_at'    => new sfValidatorDateTime(array('required' => false)),

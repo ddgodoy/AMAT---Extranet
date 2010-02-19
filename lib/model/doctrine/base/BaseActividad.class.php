@@ -8,9 +8,8 @@ abstract class BaseActividad extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('actividad');
-        $this->hasColumn('titulo', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('titulo', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('autor', 'string', 100, array(
              'type' => 'string',

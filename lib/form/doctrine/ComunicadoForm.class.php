@@ -22,7 +22,7 @@ class ComunicadoForm extends BaseComunicadoForm
 
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'Comunicado', 'column' => 'id', 'required' => false)),
-			'nombre'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+			'nombre'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'detalle'           => new sfValidatorString(array('required' => true), array('required' => 'El contenido es obligatorio')),
 			'en_intranet'       => new sfValidatorBoolean(array('required' => false)),
 			'enviado'           => new sfValidatorBoolean(array('required' => false)),

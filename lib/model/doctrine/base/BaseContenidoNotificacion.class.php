@@ -8,9 +8,8 @@ abstract class BaseContenidoNotificacion extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('contenido_notificacion');
-        $this->hasColumn('titulo', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
+        $this->hasColumn('titulo', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('mensaje', 'string', 255, array(
              'type' => 'string',

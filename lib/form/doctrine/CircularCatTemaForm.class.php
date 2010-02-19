@@ -15,7 +15,7 @@ class CircularCatTemaForm extends BaseCircularCatTemaForm
     ));
 
     $this->setValidators(array(
-      'nombre'=> new sfValidatorString(array('max_length' => 100, 'required' => true), array('required'=>'El Nombre es obligatorio')),
+      'nombre'=> new sfValidatorString(array('required' => true), array('required'=>'El Nombre es obligatorio')),
     ));
 
     $this->widgetSchema->setNameFormat('circular_cat_tema[%s]');

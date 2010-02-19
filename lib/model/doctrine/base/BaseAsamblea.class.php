@@ -8,9 +8,8 @@ abstract class BaseAsamblea extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('asamblea');
-        $this->hasColumn('titulo', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
+        $this->hasColumn('titulo', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('direccion', 'string', 255, array(
              'type' => 'string',

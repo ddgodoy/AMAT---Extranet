@@ -13,7 +13,7 @@ class BaseSubCategoriaOrganismoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
-      'nombre'                 => new sfWidgetFormInput(),
+      'nombre'                 => new sfWidgetFormTextarea(),
       'categoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => false)),
       'created_at'             => new sfWidgetFormDateTime(),
       'updated_at'             => new sfWidgetFormDateTime(),
@@ -22,7 +22,7 @@ class BaseSubCategoriaOrganismoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'column' => 'id', 'required' => false)),
-      'nombre'                 => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'nombre'                 => new sfValidatorString(array('required' => false)),
       'categoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo')),
       'created_at'             => new sfValidatorDateTime(array('required' => false)),
       'updated_at'             => new sfValidatorDateTime(array('required' => false)),

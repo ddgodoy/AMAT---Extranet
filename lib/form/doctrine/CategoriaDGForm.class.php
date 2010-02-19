@@ -21,7 +21,7 @@ class CategoriaDGForm extends BaseCategoriaDGForm
 
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => 'CategoriaDG', 'column' => 'id', 'required' => false)),
-      'nombre'     => new sfValidatorString(array('max_length' => 150, 'required' => true),array('required' => 'Ingrese el Titulo')),
+      'nombre'     => new sfValidatorString(array('required' => true),array('required' => 'Ingrese el Titulo')),
       'created_at' => new sfValidatorDateTime(array('required' => false)),
       'updated_at' => new sfValidatorDateTime(array('required' => false)),
       'deleted'    => new sfValidatorBoolean(),

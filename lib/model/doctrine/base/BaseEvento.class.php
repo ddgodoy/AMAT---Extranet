@@ -8,9 +8,8 @@ abstract class BaseEvento extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('evento');
-        $this->hasColumn('titulo', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('titulo', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('descripcion', 'clob', null, array(
              'type' => 'clob',

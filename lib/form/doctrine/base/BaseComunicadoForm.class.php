@@ -13,7 +13,7 @@ class BaseComunicadoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
-      'nombre'      => new sfWidgetFormInput(),
+      'nombre'      => new sfWidgetFormTextarea(),
       'detalle'     => new sfWidgetFormTextarea(),
       'en_intranet' => new sfWidgetFormInputCheckbox(),
       'enviado'     => new sfWidgetFormInputCheckbox(),
@@ -24,7 +24,7 @@ class BaseComunicadoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'          => new sfValidatorDoctrineChoice(array('model' => 'Comunicado', 'column' => 'id', 'required' => false)),
-      'nombre'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'nombre'      => new sfValidatorString(array('required' => false)),
       'detalle'     => new sfValidatorString(array('required' => false)),
       'en_intranet' => new sfValidatorBoolean(array('required' => false)),
       'enviado'     => new sfValidatorBoolean(array('required' => false)),

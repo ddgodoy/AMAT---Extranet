@@ -8,9 +8,8 @@ abstract class BaseRol extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('rol');
-        $this->hasColumn('nombre', 'string', 150, array(
-             'type' => 'string',
-             'length' => '150',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('detalle', 'clob', null, array(
              'type' => 'clob',

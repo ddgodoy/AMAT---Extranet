@@ -13,7 +13,7 @@ class BaseAplicacionExternaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'            => new sfWidgetFormInputHidden(),
-      'nombre'        => new sfWidgetFormInput(),
+      'nombre'        => new sfWidgetFormTextarea(),
       'detalle'       => new sfWidgetFormTextarea(),
       'imagen'        => new sfWidgetFormInput(),
       'url'           => new sfWidgetFormInput(),
@@ -25,7 +25,7 @@ class BaseAplicacionExternaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'AplicacionExterna', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'nombre'        => new sfValidatorString(array('required' => false)),
       'detalle'       => new sfValidatorString(array('required' => false)),
       'imagen'        => new sfValidatorString(array('max_length' => 100, 'required' => false)),
       'url'           => new sfValidatorString(array('max_length' => 255, 'required' => false)),

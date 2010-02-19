@@ -35,7 +35,7 @@ class PublicacionForm extends BasePublicacionForm
 		
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'Publicacion', 'column' => 'id', 'required' => false)),
-			'titulo'            => new sfValidatorString(array('max_length' => 255, 'required' => true), array('required' => 'El título es obligatorio')),
+			'titulo'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => false), array('required' => 'El autor es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'imagen'            => new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )),

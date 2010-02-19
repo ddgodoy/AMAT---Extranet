@@ -8,9 +8,8 @@ abstract class BaseTipoComunicado extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('tipo_comunicado');
-        $this->hasColumn('nombre', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('imagen', 'string', 255, array(
              'type' => 'string',

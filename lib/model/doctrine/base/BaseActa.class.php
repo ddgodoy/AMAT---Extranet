@@ -8,9 +8,8 @@ abstract class BaseActa extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('acta');
-        $this->hasColumn('nombre', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('detalle', 'clob', null, array(
              'type' => 'clob',

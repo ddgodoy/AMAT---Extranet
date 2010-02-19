@@ -8,9 +8,8 @@ abstract class BaseSubCategoriaOrganismo extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('sub_categoria_organismo');
-        $this->hasColumn('nombre', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
+        $this->hasColumn('nombre', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('categoria_organismo_id', 'integer', null, array(
              'type' => 'integer',

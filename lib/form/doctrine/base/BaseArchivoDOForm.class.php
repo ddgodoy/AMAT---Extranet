@@ -13,7 +13,7 @@ class BaseArchivoDOForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                         => new sfWidgetFormInputHidden(),
-      'nombre'                     => new sfWidgetFormInput(),
+      'nombre'                     => new sfWidgetFormTextarea(),
       'fecha'                      => new sfWidgetFormDate(),
       'fecha_caducidad'            => new sfWidgetFormDate(),
       'contenido'                  => new sfWidgetFormTextarea(),
@@ -31,7 +31,7 @@ class BaseArchivoDOForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                         => new sfValidatorDoctrineChoice(array('model' => 'ArchivoDO', 'column' => 'id', 'required' => false)),
-      'nombre'                     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'nombre'                     => new sfValidatorString(array('required' => false)),
       'fecha'                      => new sfValidatorDate(),
       'fecha_caducidad'            => new sfValidatorDate(array('required' => false)),
       'contenido'                  => new sfValidatorString(array('required' => false)),

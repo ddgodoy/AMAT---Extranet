@@ -18,7 +18,7 @@ class TipoComunicadoForm extends BaseTipoComunicadoForm
 
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'TipoComunicado', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('max_length' => 255, 'required' => false))
+      'nombre'        => new sfValidatorString(array('required' => false))
       
     ));
     

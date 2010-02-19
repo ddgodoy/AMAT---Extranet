@@ -30,7 +30,7 @@ class MenuForm extends BaseMenuForm
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'Menu', 'column' => 'id', 'required' => false)),
       'padre_id'      => new sfValidatorInteger(array('required' => false)),
-      'nombre'        => new sfValidatorString(array('max_length' => 100, 'required' => true),array('required' => 'ingrese el nombre')),
+      'nombre'        => new sfValidatorString(array('required' => true),array('required' => 'ingrese el nombre')),
       'descripcion'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'aplicacion_id' => new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'required' => false),array('required' => 'selecciones una aplicación')),
       'url_externa'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),

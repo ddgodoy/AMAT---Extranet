@@ -13,7 +13,7 @@ class BaseOrganismoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                        => new sfWidgetFormInputHidden(),
-      'nombre'                    => new sfWidgetFormInput(),
+      'nombre'                    => new sfWidgetFormTextarea(),
       'detalle'                   => new sfWidgetFormTextarea(),
       'grupo_trabajo_id'          => new sfWidgetFormDoctrineChoice(array('model' => 'GrupoTrabajo', 'add_empty' => false)),
       'categoria_organismo_id'    => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => true)),
@@ -26,7 +26,7 @@ class BaseOrganismoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                        => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'column' => 'id', 'required' => false)),
-      'nombre'                    => new sfValidatorString(array('max_length' => 150, 'required' => false)),
+      'nombre'                    => new sfValidatorString(array('required' => false)),
       'detalle'                   => new sfValidatorString(array('required' => false)),
       'grupo_trabajo_id'          => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo')),
       'categoria_organismo_id'    => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo', 'required' => false)),

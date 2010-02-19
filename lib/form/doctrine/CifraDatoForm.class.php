@@ -42,7 +42,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'CifraDato', 'column' => 'id', 'required' => false)),
-			'titulo'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
+			'titulo'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => '')),
 			'seccion_id'        => new sfValidatorInteger(),
 			'contenido'         => new sfValidatorString(array('required' => false)),

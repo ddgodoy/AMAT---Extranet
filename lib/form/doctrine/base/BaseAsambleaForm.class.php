@@ -13,7 +13,7 @@ class BaseAsambleaForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'              => new sfWidgetFormInputHidden(),
-      'titulo'          => new sfWidgetFormInput(),
+      'titulo'          => new sfWidgetFormTextarea(),
       'direccion'       => new sfWidgetFormInput(),
       'fecha'           => new sfWidgetFormDate(),
       'fecha_caducidad' => new sfWidgetFormDate(),
@@ -29,7 +29,7 @@ class BaseAsambleaForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'              => new sfValidatorDoctrineChoice(array('model' => 'Asamblea', 'column' => 'id', 'required' => false)),
-      'titulo'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'titulo'          => new sfValidatorString(array('required' => false)),
       'direccion'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'fecha'           => new sfValidatorDate(array('required' => false)),
       'fecha_caducidad' => new sfValidatorDate(array('required' => false)),

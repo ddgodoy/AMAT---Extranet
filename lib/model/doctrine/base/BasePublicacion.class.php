@@ -8,9 +8,8 @@ abstract class BasePublicacion extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('publicacion');
-        $this->hasColumn('titulo', 'string', 255, array(
-             'type' => 'string',
-             'length' => '255',
+        $this->hasColumn('titulo', 'clob', null, array(
+             'type' => 'clob',
              ));
         $this->hasColumn('autor', 'string', 100, array(
              'type' => 'string',

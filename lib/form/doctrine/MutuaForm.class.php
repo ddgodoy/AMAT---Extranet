@@ -19,7 +19,7 @@ class MutuaForm extends BaseMutuaForm
   	
   	
   	$this->setValidators(array(
-  		'nombre'  => new sfValidatorString(array('max_length' => 150, 'required' => true), array('required' => 'El nombre es obligatorio')),
+  		'nombre'  => new sfValidatorString(array('required' => true), array('required' => 'El nombre es obligatorio')),
   		'detalle' => new sfValidatorString(array('required' => true), array('required'=>'El detalle es obligatorio')),
 	));
   	

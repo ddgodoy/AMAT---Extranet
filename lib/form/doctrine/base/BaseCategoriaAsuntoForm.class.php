@@ -13,7 +13,7 @@ class BaseCategoriaAsuntoForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
-      'nombre'     => new sfWidgetFormInput(),
+      'nombre'     => new sfWidgetFormTextarea(),
       'email_1'    => new sfWidgetFormInput(),
       'activo_1'   => new sfWidgetFormInput(),
       'email_2'    => new sfWidgetFormInput(),
@@ -25,7 +25,7 @@ class BaseCategoriaAsuntoForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => 'CategoriaAsunto', 'column' => 'id', 'required' => false)),
-      'nombre'     => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'nombre'     => new sfValidatorString(array('required' => false)),
       'email_1'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'activo_1'   => new sfValidatorInteger(array('required' => false)),
       'email_2'    => new sfValidatorString(array('max_length' => 255, 'required' => false)),

@@ -13,7 +13,7 @@ class BaseNovedadForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                 => new sfWidgetFormInputHidden(),
-      'titulo'             => new sfWidgetFormInput(),
+      'titulo'             => new sfWidgetFormTextarea(),
       'autor'              => new sfWidgetFormInput(),
       'entradilla'         => new sfWidgetFormTextarea(),
       'contenido'          => new sfWidgetFormTextarea(),
@@ -38,7 +38,7 @@ class BaseNovedadForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                 => new sfValidatorDoctrineChoice(array('model' => 'Novedad', 'column' => 'id', 'required' => false)),
-      'titulo'             => new sfValidatorString(array('max_length' => 100)),
+      'titulo'             => new sfValidatorString(),
       'autor'              => new sfValidatorString(array('max_length' => 100)),
       'entradilla'         => new sfValidatorString(array('required' => false)),
       'contenido'          => new sfValidatorString(array('required' => false)),
