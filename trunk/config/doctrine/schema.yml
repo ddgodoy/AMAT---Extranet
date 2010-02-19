@@ -495,7 +495,7 @@ Publicacion:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    titulo:                  { type: string(100), notnull: false }
+    titulo:                  { type: string(255), notnull: false }
     autor:                   { type: string(100), notnull: true }
     contenido:               { type: clob, notnull: false }
     imagen:                  { type: string(255), notnull: false }
