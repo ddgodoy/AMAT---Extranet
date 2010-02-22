@@ -18,7 +18,14 @@ class SubCategoriaIniciativa extends BaseSubCategoriaIniciativa
 
 	public static function getArraySubCategoria($id)
 	{
-		$subcategoria = SubCategoriaIniciativaTable::getSubcategiriaBycategoria($id);
+		if($id == 0)
+		{
+			$subcategoria = SubCategoriaIniciativaTable::getAll();
+		}
+		else 
+		{
+			$subcategoria = SubCategoriaIniciativaTable::getSubcategiriaBycategoria($id);
+		}	
 		
 		$arraysubcategoria = array('0'=>'--seleccionar--');
 		

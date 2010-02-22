@@ -16,6 +16,14 @@ class SubCategoriaIniciativaTable extends Doctrine_Table
 	   
 	}  
 	   
-	
+	public static function getAll()
+	{
+	   $q = Doctrine_Query::create()
+	   ->from('SubCategoriaIniciativa')
+	   ->Where('deleted = 0');
+	   
+	   return $q->execute();
+	   
+	}  
 	
 }
