@@ -157,12 +157,20 @@ class listas_comunicadosActions extends sfActions
   	}
   	if($request->getParameter('id_mutuas'))
   	{
-  		$arrayUSer = Doctrine_Query::create()->from('Usuario')->where('mutua_id ='.$request->getParameter('id_mutuas').' AND id NOT IN ('.$varResi.')')->execute();
+  		$filtro = '';
+  		if($varResi)
+  		{
+  			$filtro = ' AND id NOT IN ('.$varResi.')';
+  		}
+  		
+  		$arrayUSer = Doctrine_Query::create()->from('Usuario')->where('mutua_id ='.$request->getParameter('id_mutuas').$filtro)->execute();
   		
   		$arrUsuarios = array();
 	    foreach ($arrayUSer as $r) {
 		$arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
 	    }
+	    
+	    
   	}
   	
   	if($request->getParameter('id_grupos'))
@@ -181,9 +189,7 @@ class listas_comunicadosActions extends sfActions
 		$arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
 	    }
 	}
-  	
-//  	$w = new ListaComunicadoForm();
-//   	$w->setWidget('usuarios_list', new sfWidgetFormSelectDoubleList(array('choices' => $arrUsuarios, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	));
+	
   	return $this->renderPartial('listaUsuarios',array('arrUsuarios' => $arrUsuarios));
   }
   
