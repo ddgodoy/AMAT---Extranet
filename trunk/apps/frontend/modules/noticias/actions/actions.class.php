@@ -297,23 +297,23 @@ class noticiasActions extends sfActions
 		return $this->orderBy . ' ' . $this->sortType;
   }
   
-  public function executeLimpiar(sfWebRequest $request)
-	{
-		$noticia = Doctrine_Query::create()->from('Noticia')->execute();
-		
-		foreach ($noticia as $n)
-		{
-		  $limpio = strip_tags($n->getEntradilla()) ;
-		  
-		  $n->setEntradilla($limpio);
-		  $n->save();
-		  
-		}   
-		
-		
-		echo 'ok';	
-		exit();	
-		
-	}
+//  public function executeLimpiar(sfWebRequest $request)
+//	{
+//		$noticia = Doctrine_Query::create()->from('Noticia')->execute();
+//		
+//		foreach ($noticia as $n)
+//		{
+//		  $limpio = strip_tags($n->getEntradilla()) ;
+//		  
+//		  $n->setEntradilla($limpio);
+//		  $n->save();
+//		  
+//		}   
+//		
+//		
+//		echo 'ok';	
+//		exit();	
+//		
+//	}
   
 }
