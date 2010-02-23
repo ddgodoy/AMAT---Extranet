@@ -58,6 +58,7 @@ use_helper('Text');?>
 				    ?>
 					</td>
 					<td >
+						<br clear="all">
 						<a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a>
 						<br clear="all">
 						<br clear="all">
