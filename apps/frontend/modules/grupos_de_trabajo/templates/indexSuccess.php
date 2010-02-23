@@ -2,6 +2,7 @@
 	use_helper('TestPager');
 	use_helper('Security');
 	use_helper('Date');
+	
 ?>
 <div class="mapa"><strong>Administraci&oacute;n</strong> > Grupos de Trabajo</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
