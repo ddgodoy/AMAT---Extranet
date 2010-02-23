@@ -59,26 +59,34 @@ class seguridadActions extends sfActions
 				$credenciales = array();
 				$usuarioRoles = Doctrine::getTable('UsuarioRol')->findByUsuarioId($usuario->getId());
 
-				foreach ($usuarioRoles as $rol) {
-					$credenciales[] = $rol->getRol()->getCodigo();
+				if(count($usuarioRoles)>0)
+				{
+					foreach ($usuarioRoles as $rol) {
+						$credenciales[] = $rol->getRol()->getCodigo();
+					}
+					## Autenticado
+					$this->getUser()->setAuthenticated(true);
+	
+					## Datos del usuario
+					$this->getUser()->setAttribute('userId'  , $usuario->getId());
+					$this->getUser()->setAttribute('mutuaId' , $usuario->getMutuaId());
+					$this->getUser()->setAttribute('mutua'   , $usuario->Mutua->getNombre());
+					$this->getUser()->setAttribute('nombre'  , $usuario->getNombre());
+					$this->getUser()->setAttribute('apellido', $usuario->getApellido());				
+					$this->getUser()->setAttribute('permisos', $usuario->getPermisos());
+					$this->getUser()->setAttribute('menu'    , $usuario->getMenuUsuario());	
+	
+					## Crear credenciales
+					foreach ($credenciales as $credencial) {
+						$this->getUser()->addCredential($credencial);
+					}
+					$this->redirect('inicio/index');
 				}
-				## Autenticado
-				$this->getUser()->setAuthenticated(true);
-
-				## Datos del usuario
-				$this->getUser()->setAttribute('userId'  , $usuario->getId());
-				$this->getUser()->setAttribute('mutuaId' , $usuario->getMutuaId());
-				$this->getUser()->setAttribute('mutua'   , $usuario->Mutua->getNombre());
-				$this->getUser()->setAttribute('nombre'  , $usuario->getNombre());
-				$this->getUser()->setAttribute('apellido', $usuario->getApellido());				
-				$this->getUser()->setAttribute('permisos', $usuario->getPermisos());
-				$this->getUser()->setAttribute('menu'    , $usuario->getMenuUsuario());	
-
-				## Crear credenciales
-				foreach ($credenciales as $credencial) {
-					$this->getUser()->addCredential($credencial);
+				else 
+				{
+					$this->getUser()->setFlash('error', 'Usuario sin perfiles');
+					$this->redirect('seguridad/login');
 				}
-				$this->redirect('inicio/index');
 			} else if ($message = $usuario) {
 				$this->getUser()->setFlash('error', $message);
 			}
