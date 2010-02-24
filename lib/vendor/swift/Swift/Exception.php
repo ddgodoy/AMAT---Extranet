@@ -32,5 +32,6 @@ class Swift_Exception extends Exception
       $message .= "<pre>" . htmlentities($log->dump(true)) . "</pre>";
     }
     parent::__construct($message, $code);
+ 
   }
 }
