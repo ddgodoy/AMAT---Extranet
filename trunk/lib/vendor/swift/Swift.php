@@ -326,24 +326,44 @@ class Swift
    * @return int The number of successful recipients
    * @throws Swift_ConnectionException If sending fails for any reason.
    */
-  public function send(Swift_Message $message, $recipients, $from)
+  public function send(Swift_Message $message, $recipients, $from, $idenvio='',$idusuario='')
   {
+  	$arrayError = array();
     Swift_ClassLoader::load("Swift_Message_Encoder");
     if (is_string($recipients) && preg_match("/^" . Swift_Message_Encoder::CHEAP_ADDRESS_RE . "\$/", $recipients))
     {
       $recipients = new Swift_Address($recipients);
     }
     elseif (!($recipients instanceof Swift_AddressContainer))
-      throw new Exception("The recipients parameter must either be a valid string email address, ".
-      "an instance of Swift_RecipientList or an instance of Swift_Address.");
-      
+    {
+    	if($idusuario == '')
+    	{
+		     throw new Exception("The recipients parameter must either be a valid string email address, ".
+	    	 "an instance of Swift_RecipientList or an instance of Swift_Address.");
+    	}
+ 		else 
+ 		{  
+	     	EnvioError::saveEnvioerror($idenvio, $idusuario,"The recipients parameter must either be a valid string email address, ".
+	      	"an instance of Swift_RecipientList or an instance of Swift_Address."); 
+ 		}  	
+    } 
     if (is_string($from) && preg_match("/^" . Swift_Message_Encoder::CHEAP_ADDRESS_RE . "\$/", $from))
     {
       $from = new Swift_Address($from);
     }
     elseif (!($from instanceof Swift_Address))
-      throw new Exception("The sender parameter must either be a valid string email address or ".
-      "an instance of Swift_Address.");
+    {
+    	if($idusuario == '')
+    	{
+	      throw new Exception("The sender parameter must either be a valid string email address or ".
+	      "an instance of Swift_Address.");
+    	}
+    	else 
+    	{  
+    	  EnvioError::saveEnvioerror($idenvio, $idusuario,"The sender parameter must either be a valid string email address or ". 
+	      "an instance of Swift_Address.");	 
+    	} 
+    } 
     
     $log = Swift_LogContainer::getLog();
     
@@ -386,6 +406,10 @@ class Swift
         $this->command("RCPT TO: " . $address->build(true), 250);
         $tmp_sent++;
       } catch (Swift_BadResponseException $e) {
+      	if($idusuario)
+      	{
+      		EnvioError::saveEnvioerror($idenvio, $idusuario, Swift_BadResponseException);
+      	}	
         $failed++;
         $send_event->addFailedRecipient($address->getAddress());
         if ($log->hasLevel(Swift_Log::LOG_FAILURES)) $log->addfailedRecipient($address->getAddress());
@@ -401,6 +425,10 @@ class Swift
         $this->command("RCPT TO: " . $address->build(true), 250);
         $tmp_sent++;
       } catch (Swift_BadResponseException $e) {
+      	if($idusuario)
+      	{
+      		EnvioError::saveEnvioerror($idenvio, $idusuario, Swift_BadResponseException);
+      	}	
         $failed++;
         $send_event->addFailedRecipient($address->getAddress());
         if ($log->hasLevel(Swift_Log::LOG_FAILURES)) $log->addfailedRecipient($address->getAddress());
@@ -427,6 +455,10 @@ class Swift
       $this->command("\r\n.", 250);
       $sent += $tmp_sent;
     } catch (Swift_BadResponseException $e) {
+      if($idusuario)
+      	{
+      		EnvioError::saveEnvioerror($idenvio, $idusuario, Swift_BadResponseException);
+      	}	
       $failed += $tmp_sent;
     }
     
@@ -449,6 +481,10 @@ class Swift
         $this->command("\r\n.", 250);
         $sent++;
       } catch (Swift_BadResponseException $e) {
+      	if($idusuario)
+      	{
+      		EnvioError::saveEnvioerror($idenvio, $idusuario, Swift_BadResponseException);
+      	}	
         $failed++;
         $send_event->addFailedRecipient($address->getAddress());
         if ($log->hasLevel(Swift_Log::LOG_FAILURES)) $log->addfailedRecipient($address->getAddress());
@@ -470,6 +506,7 @@ class Swift
     if (!$has_message_id) $message->setId(null);
     
     if ($log->hasLevel(Swift_Log::LOG_NETWORK)) $log->add("Message sent to " . $sent . "/" . $total . " recipients", Swift_Log::NORMAL);
+    
     
     return $sent;
   }

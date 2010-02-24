@@ -90,6 +90,7 @@ class envio_comunicadosActions extends sfActions
       $envio_comunicado = $form->save();
       
       	$comunicado = $envio_comunicado->getComunicado();
+      	
 		if (!$comunicado->getEnviado()) 
 		{
 			$envio_comunicado->enviarMails();

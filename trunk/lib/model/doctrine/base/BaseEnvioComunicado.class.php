@@ -37,6 +37,10 @@ abstract class BaseEnvioComunicado extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'envio_comunicado_id'));
 
+        $this->hasMany('EnvioError', array(
+             'local' => 'id',
+             'foreign' => 'envio_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);

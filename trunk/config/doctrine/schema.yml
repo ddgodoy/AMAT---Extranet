@@ -760,6 +760,19 @@ ListaComunicado:
   relations:
     Usuarios:                { foreignAlias: ListasComunicado, class: Usuario, refClass: UsuarioListaComunicado }
 
+EnvioError:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    envio_id:                { type: integer }
+    usuario_id:              { type: integer }
+    error:                   { type: clob }
+    estado:                   { type: integer }
+  relations:
+    Usuario:                 { local: usuario_id, foreign: id, onDelete: CASCADE }
+    EnvioComunicado:         { local: envio_id, foreign: id, onDelete: CASCADE }   
+
 UsuarioListaComunicado:
   actAs:
     Timestampable: ~

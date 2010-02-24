@@ -10,13 +10,13 @@ class EnvioComunicado extends BaseEnvioComunicado
 	{
 		$usuarios = Doctrine::getTable('EnvioComunicado')->getUsuariosDeListas($this->getId());	
 		$contUsu = 0;
-		$ListEmails="";
+		$ListEmails="";	
 		
 		foreach ($usuarios as $usuario)
 		{
 			if ($usuario->getEmail())
 			{ 				
-				if ($this->envioMail($usuario->getEmail(), $this->getTipoComunicado()->getImagen(), $this->getComunicado()->getDetalle(), $this->getComunicado()->getNombre()))
+				if ($this->envioMail($usuario->getEmail(), $this->getTipoComunicado()->getImagen(), $this->getComunicado()->getDetalle(), $this->getComunicado()->getNombre(),$this->getId(),$usuario->getId()))
 				{  
 					//echo "<br />email enviado a: ".$usuario;
 				}
@@ -32,7 +32,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 		
 	}
 	
-	protected function envioMail($to, $header_image, $body, $titulo)
+	protected function envioMail($to, $header_image, $body, $titulo,$idenvio,$idusuario)
 	{
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
@@ -60,7 +60,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 		', 'text/html'));
 		
 			
-		if ($mailer->send($message, $to, sfConfig::get('app_default_from_email'))) {	
+		if ($mailer->send($message, $to, sfConfig::get('app_default_from_email'),$idenvio, $idusuario)) {	
 			$succes = true;
 		}
 		$mailer->disconnect();
