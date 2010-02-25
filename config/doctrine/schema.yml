@@ -768,7 +768,19 @@ EnvioError:
     envio_id:                { type: integer }
     usuario_id:              { type: integer }
     error:                   { type: clob }
-    estado:                   { type: integer }
+    estado:                  { type: integer }
+  relations:
+    Usuario:                 { local: usuario_id, foreign: id, onDelete: CASCADE }
+    EnvioComunicado:         { local: envio_id, foreign: id, onDelete: CASCADE }   
+
+Envios:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    envio_id:                { type: integer }
+    usuario_id:              { type: integer }
+    message_id:              { type: clob }
   relations:
     Usuario:                 { local: usuario_id, foreign: id, onDelete: CASCADE }
     EnvioComunicado:         { local: envio_id, foreign: id, onDelete: CASCADE }   

@@ -13,6 +13,7 @@ CREATE TABLE cifra_dato (id BIGINT AUTO_INCREMENT, titulo LONGTEXT NOT NULL, aut
 CREATE TABLE normas_de_funcionamiento (id BIGINT AUTO_INCREMENT, titulo LONGTEXT, descripcion LONGTEXT, grupo_trabajo_id BIGINT NOT NULL, created_at DATETIME, updated_at DATETIME, deleted TINYINT(1) DEFAULT '0' NOT NULL, INDEX grupo_trabajo_id_idx (grupo_trabajo_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE solicitud_clave (id BIGINT AUTO_INCREMENT, usuario_id BIGINT NOT NULL, codigo VARCHAR(255), created_at DATETIME, updated_at DATETIME, INDEX usuario_id_idx (usuario_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE menu (id BIGINT AUTO_INCREMENT, padre_id BIGINT, nombre VARCHAR(100), descripcion VARCHAR(255), aplicacion_id BIGINT, url_externa VARCHAR(255), posicion BIGINT, habilitado TINYINT(1), created_at DATETIME, updated_at DATETIME, deleted TINYINT(1) DEFAULT '0' NOT NULL, INDEX aplicacion_id_idx (aplicacion_id), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE envios (id BIGINT AUTO_INCREMENT, envio_id BIGINT, usuario_id BIGINT, message_id LONGTEXT, created_at DATETIME, updated_at DATETIME, deleted TINYINT(1) DEFAULT '0' NOT NULL, INDEX usuario_id_idx (usuario_id), INDEX envio_id_idx (envio_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE usuario_grupo_trabajo (usuario_id BIGINT, grupo_trabajo_id BIGINT, created_at DATETIME, updated_at DATETIME, deleted TINYINT(1) DEFAULT '0' NOT NULL, PRIMARY KEY(usuario_id, grupo_trabajo_id)) ENGINE = INNODB;
 CREATE TABLE notificacion (id BIGINT AUTO_INCREMENT, estado VARCHAR(255), url VARCHAR(255), nombre LONGTEXT, contenido_notificacion_id BIGINT, usuario_id BIGINT, entidad_id BIGINT, visto BIGINT, created_at DATETIME, updated_at DATETIME, deleted TINYINT(1) DEFAULT '0' NOT NULL, INDEX contenido_notificacion_id_idx (contenido_notificacion_id), INDEX usuario_id_idx (usuario_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE usuario_consejo_territorial (usuario_id BIGINT, consejo_territorial_id BIGINT, created_at DATETIME, updated_at DATETIME, deleted TINYINT(1) DEFAULT '0' NOT NULL, PRIMARY KEY(usuario_id, consejo_territorial_id)) ENGINE = INNODB;
@@ -83,6 +84,8 @@ ALTER TABLE cifra_dato ADD FOREIGN KEY (mutua_id) REFERENCES mutua(id) ON DELETE
 ALTER TABLE normas_de_funcionamiento ADD FOREIGN KEY (grupo_trabajo_id) REFERENCES grupo_trabajo(id) ON DELETE CASCADE;
 ALTER TABLE solicitud_clave ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE;
 ALTER TABLE menu ADD FOREIGN KEY (aplicacion_id) REFERENCES aplicacion(id) ON DELETE CASCADE;
+ALTER TABLE envios ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE;
+ALTER TABLE envios ADD FOREIGN KEY (envio_id) REFERENCES envio_comunicado(id) ON DELETE CASCADE;
 ALTER TABLE usuario_grupo_trabajo ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id);
 ALTER TABLE usuario_grupo_trabajo ADD FOREIGN KEY (grupo_trabajo_id) REFERENCES grupo_trabajo(id);
 ALTER TABLE notificacion ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE;
