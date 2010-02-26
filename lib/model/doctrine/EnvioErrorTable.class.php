@@ -5,4 +5,5 @@
 class EnvioErrorTable extends Doctrine_Table
 {
 
+	
 }

@@ -505,7 +505,7 @@ class Swift
 	    $send_event->setNumSent($sent);
 	    $this->notifyListeners($send_event, "SendListener");
 	    
-	    if($idusuario == '' && $message->getId())
+	    if($idusuario != '' && $message->getId())
 	    {
 	    	Envios::saveEnvios($idenvio,$idusuario,$message->getId());
 	    }

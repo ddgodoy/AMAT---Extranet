@@ -5,4 +5,13 @@
 class EnviosTable extends Doctrine_Table
 {
 
+	public static function getAll()
+	{
+		$q = Doctrine_Query::create()
+		->from('Envios');
+		
+		return $q->execute();
+	}
+	
+	
 }
