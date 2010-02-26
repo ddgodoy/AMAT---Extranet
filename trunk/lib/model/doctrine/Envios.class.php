@@ -11,12 +11,15 @@ class Envios extends BaseEnvios
 		return Doctrine::getTable(__CLASS__);
 	}
 
-	public function saveEnvios($idenvios, $idusuario, $idmessage)
+	public static function saveEnvios($idenvios, $idusuario, $idmessage)
 	{
-		$this->setEnvioId($idenvios);
-		$this->setUsuarioId($idusuario);
-		$this->setMessageId($idmessage);
-		$this->save();	
+		$envios = new Envios;
+		$envios->setEnvioId($idenvios);
+		$envios->setUsuarioId($idusuario);
+		$envios->setMessageId($idmessage);
+		$envios->save();	
+		
+		return true;
 	}
 	
 	
