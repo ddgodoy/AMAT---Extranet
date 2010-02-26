@@ -10,11 +10,11 @@
 
 class ServiceLeeremail
 {
-	
+   static protected $socket;
+   static protected $connect; 
+  	
  public static function saveLeeremails()
   {
-	  $socket = '';
-	  $connect = '';
 	  $arraEnvios = array();
 	  $arraEmailError = array();
 	  
@@ -30,19 +30,19 @@ class ServiceLeeremail
 		  }
 		  
 		  
-		  $pop = $this->pop3php('info.intranet.amat.es','Th6ds2b7');
+		  $pop = self::pop3php('info.intranet.amat.es','Th6ds2b7');
 		  
 		  if ($pop) 
 		  {
-			  	$totla_email = $this->get_total_msg();		  	
+			  	$totla_email = self::get_total_msg();		  	
 			  	if($totla_email > 0)
 			  	{	   
 				  	for ($i=1;$i<=$totla_email;$i++)
 				  	{
 				  		$arraEmailError[$i]['id'] =	$i;
 						//$arraEmailError[$i]['To'] =	$this->get_msg($i,'To');
-						$arraEmailError[$i]['Subject'] =	$this->get_msg($i,'Subject');
-						$arraEmailError[$i]['MessageID'] =	$this->get_msg($i,'Message-ID');  			
+						$arraEmailError[$i]['Subject']   =	self::get_msg($i,'Subject');
+						$arraEmailError[$i]['MessageID'] =	self::get_msg($i,'Message-ID');  			
 				  	}
 			  	}  	
 			  		 
@@ -62,7 +62,7 @@ class ServiceLeeremail
 		  						$delete = Envios::getRepository()->findOneByMessageId($ae['message_id']);
 		  						$delete->delete();
 		  						
-		  						$this->delete_msg($aer['id']);
+		  						self::delete_msg($aer['id']);
 		  						
 		  					}
 	
@@ -73,22 +73,22 @@ class ServiceLeeremail
 		  		} 		   	
 		   	
 		   }
-		 $this->pop3_quit();  		   
+		 self::pop3_quit();  		   
 	  }   
    }
 
- protected  function pop3php($username, $password)
+ protected static function pop3php($username, $password)
     {
-        $this->pop3_connect();
+        self::pop3_connect();
 
-        if($this->socket)
+        if(self::$socket)
         {    
             $username = $username;
-            if($this->validate_user($username))
+            if(self::validate_user($username))
             {
-                if($this->validate_pass($password))
+                if(self::validate_pass($password))
                 {
-                    $this->connect = 1;
+                    self::$connect = 1;
                     return true;
                 }
                 else
@@ -105,48 +105,48 @@ class ServiceLeeremail
         }
     }
 
- protected function pop3_connect()
+ protected static  function pop3_connect()
     {
         //$this->socket = fsockopen("10.100.101.119", "110");
-        $this->socket = fsockopen("217.116.20.132", "110");
+        self::$socket = fsockopen("217.116.20.132", "110");
             
-        if(!$this->socket)
+        if(!self::$socket)
         {
             echo "Socket connection fail<br/>";
             exit();
         }
         else
         {
-            $line = $this->pop3_reply();
-            $status = $this->is_ok($line);
+            $line = self::pop3_reply();
+            $status = self::is_ok($line);
 
             if(!$status)
             {
-                fclose($this->socket);
-                $this->socket = -1;
+                fclose(self::$socket);
+                self::$socket = -1;
                 echo "Socket connection fail<br/>";
                 exit();
             }
         }
     }
-
- protected function pop3_command($command)
+ 
+ protected static  function pop3_command($command)
     {
-        fputs($this->socket, $command);
+        fputs(self::$socket, $command);
 
-        $line = $this->pop3_reply();
+        $line = self::pop3_reply();
 
         return $line;
     }
 
- protected function pop3_reply()
+ protected static  function pop3_reply()
     {
-        $line = fgets($this->socket, 1024);
+        $line = fgets(self::$socket, 1024);
 
         return $line;
     }
 
- protected function is_ok($cmd)
+ protected static function is_ok($cmd)
     {	
         $status = substr($cmd, 0, 1);
 
@@ -158,57 +158,56 @@ class ServiceLeeremail
         return 1;
     }
 
- protected function validate_user($username)
+ protected static function validate_user($username)
     {
         $command = "USER ".$username."\r\n";
-        $reply = $this->pop3_command($command);
-        $rtn = $this->is_ok($reply);
+        $reply = self::pop3_command($command);
+        $rtn = self::is_ok($reply);
         
         if(!$rtn)
         {
-            fclose($this->socket);
-            $this->socket = -1;
+            fclose(self::$socket);
+            self::$socket = -1;
         }
         
         return $rtn;
     }
 
- protected function validate_pass($password)
+ protected static function validate_pass($password)
     {
         $command = "PASS ".$password."\r\n";
-        //    echo "$command<br/>";
-        $reply = $this->pop3_command($command);
-        $rcc = $this->is_ok($reply);
+        $reply = self::pop3_command($command);
+        $rcc = self::is_ok($reply);
         
         if(!$rcc)
         {
-            fclose($this->socket);
-            $this->socket = -1;
+            fclose(self::$socket);
+            self::$socket = -1;
         }
     
         return $rcc;
     }
 
- protected function is_connect()
+ protected static function is_connect()
     {
-        return $this->connect;
+        return self::$connect;
     }
 
- protected function get_total_msg()
+ protected static function get_total_msg()
     {
-        $reply = $this->pop3_command("STAT\r\n");
+        $reply = self::pop3_command("STAT\r\n");
 
         $mail = explode(" ", $reply);
-        $this->total = $mail[1];
+        $total = $mail[1];
 
-        return $this->total;
+        return $total;
     }
 
- protected function get_msg($msgNum,$etiqueta)
+ protected static function get_msg($msgNum,$etiqueta)
     {	
         $command = "RETR ".$msgNum."\r\n";
-        $reply = $this->pop3_command($command);
-        $rtn = $this->is_ok($reply);
+        $reply = self::pop3_command($command);
+        $rtn = self::is_ok($reply);
  
         if($rtn)
         {
@@ -217,7 +216,7 @@ class ServiceLeeremail
 
             while(!ereg("^\.\r\n", $reply))
             {
-                $reply = $this->pop3_reply();
+                $reply = self::pop3_reply();
                 $header[$count] = $reply;
                 $count++;
             }	
@@ -239,7 +238,7 @@ class ServiceLeeremail
         return $subject;
     }
     
- protected function delete_msg($msgNum)
+ protected static function delete_msg($msgNum)
     {
         if(empty($msgNum))
         {
@@ -250,13 +249,13 @@ class ServiceLeeremail
         else
         {
             $command = "DELE ".$msgNum."\r\n";
-            $reply = $this->pop3_command($command);
-            $status = $this->is_ok($reply);
+            $reply = self::pop3_command($command);
+            $status = self::is_ok($reply);
 
             if(!$status)
             {
-                fclose($this->socket);
-                $this->socket = -1;
+                fclose(self::$socket);
+                self::$socket = -1;
                 $sessid = session_id();
                 echo "$sessid";
                 exit();
@@ -264,15 +263,15 @@ class ServiceLeeremail
         }
     }
 
- protected function pop3_quit()
+ protected static function pop3_quit()
     {
-        $reply = $this->pop3_command("QUIT\r\n");
-        $rtn = $this->is_ok($reply);
+        $reply = self::pop3_command("QUIT\r\n");
+        $rtn = self::is_ok($reply);
 
         if($rtn)
         {
-            fclose($this->socket);
-            $this->socket = -1;
+            fclose(self::$socket);
+            self::$socket = -1;
         }
     } 
    	
