@@ -408,7 +408,7 @@ class asambleasActions extends sfActions
 		
 		$this->forward404Unless($asamblea = Doctrine::getTable('Asamblea')->find($request->getParameter('id')), sprintf('Object asamblea does not exist (%s).', $request->getParameter('id')));
 		
-		$aviso = NotificacionTable::getDeleteEntidad($asamblea->getId(),$asamblea->getTitulo ());
+		$aviso = NotificacionTable::getDeleteEntidad($asamblea->getId(),$asamblea->getTitulo());
 		
 		$aviso->delete();
 		$asamblea->delete();

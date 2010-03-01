@@ -763,7 +763,6 @@ ListaComunicado:
 EnvioError:
   actAs:
     Timestampable: ~
-    SoftDelete: ~
   columns:
     envio_id:                { type: integer }
     usuario_id:              { type: integer }

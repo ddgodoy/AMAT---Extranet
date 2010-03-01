@@ -35,8 +35,6 @@ abstract class BaseEnvioError extends sfDoctrineRecord
              'onDelete' => 'CASCADE'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);
-        $this->actAs($softdelete0);
     }
 }

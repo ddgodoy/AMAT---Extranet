@@ -2,10 +2,9 @@
 
 /**
  * Compara los email enviados con los email error *
- * @param string $accion
- * @param string $entidad
- * @param integer $id
- */
+ * Autor: Mauro garcia
+ * Fecha: 26/02/2010  
+ * */
 
 
 class ServiceLeeremail
@@ -24,6 +23,7 @@ class ServiceLeeremail
 		  foreach ($envios as $e)
 		  {
 		  	 $id = $e->getId();
+		     $arraEnvios[$id]['id'] = $e->getId();	
 		     $arraEnvios[$id]['envio_id'] = $e->getEnvioId();	
 		     $arraEnvios[$id]['usuario_id'] = $e->getUsuarioId();	
 		     $arraEnvios[$id]['message_id'] = $e->getMessageId();	
@@ -34,33 +34,34 @@ class ServiceLeeremail
 		  
 		  if ($pop) 
 		  {
-			  	$totla_email = self::get_total_msg();		  	
+			  	$totla_email = self::get_total_msg();
+			  			  	
 			  	if($totla_email > 0)
 			  	{	   
 				  	for ($i=1;$i<=$totla_email;$i++)
 				  	{
 				  		$arraEmailError[$i]['id'] =	$i;
-						//$arraEmailError[$i]['To'] =	$this->get_msg($i,'To');
 						$arraEmailError[$i]['Subject']   =	self::get_msg($i,'Subject');
 						$arraEmailError[$i]['MessageID'] =	self::get_msg($i,'Message-ID');  			
 				  	}
+				  	
 			  	}  	
-			  		 
-		   }
+		  }  		 
 		   
 		   if(count($arraEmailError)>0)
 		   {
+		   	
 		   	 foreach ($arraEnvios AS $ae )
 		  		{
 		  			
 		  			foreach ($arraEmailError as $aer)
-		  			{ 			
-		  				if($ae['message_id'] == $aer['MessageID'])
+		  			{		  					
+		  				if($ae['message_id'] === htmlspecialchars_decode($aer['MessageID']))
 		  				{
+		  					
 		  					if(EnvioError::saveEnvioerror($ae['envio_id'], $ae['usuario_id'], $aer['Subject']))
 		  					{
-		  						$delete = Envios::getRepository()->findOneByMessageId($ae['message_id']);
-		  						$delete->delete();
+		  						$delete = Envios::getRepository()->getDeleteById($ae['id']);
 		  						
 		  						self::delete_msg($aer['id']);
 		  						
@@ -68,11 +69,13 @@ class ServiceLeeremail
 	
 		  				}
 		 	
-		  			}   
+		  			}
+		  			
+		  			
 				  	
-		  		} 		   	
-		   	
-		   }
+		  		} 	
+		  	   		   	
+		     }
 		 self::pop3_quit();  		   
 	  }   
    }
@@ -211,6 +214,7 @@ class ServiceLeeremail
  
         if($rtn)
         {
+        	$subject = '';
             $count = 0;
             $header = array();
 
@@ -225,15 +229,24 @@ class ServiceLeeremail
             {	
                 if(eregi("^$etiqueta:(.*)", $line, $match))
                 {
-                    $subject = trim($match[1]);
-                    $subject = htmlspecialchars($subject);
+                    if($etiqueta=='Subject')
+                    {
+                    	$subject .=trim($match[1]).'  ';
+	                    $subject = htmlspecialchars($subject);        				
+                    }
+                	else 
+                	{
+	                    $subject = trim($match[1]);
+	                    $subject = htmlspecialchars($subject);
+                	}    
                 }
             }
-            if(empty($subject))
+            if($subject=='')
             {
                 $subject = "None";
             }
         }
+        
     
         return $subject;
     }

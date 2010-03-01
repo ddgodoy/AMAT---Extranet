@@ -13,5 +13,17 @@ class EnviosTable extends Doctrine_Table
 		return $q->execute();
 	}
 	
+	public static function getDeleteById($id)
+	{
+		$q = Doctrine_Query::create()
+		->from('Envios')
+		->where('id='.$id);
+		$query = $q->execute();
+		
+		$query->delete();
+		
+		return true;
+	}
+	
 	
 }
