@@ -132,7 +132,20 @@
 							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda_apellido" class="form_input" value="<?php echo $cajaApeBsq ?>"/>
 						</td>
 					</tr>
-          <tr>
+         		    <tr>
+         		    <tr>
+					<td width="20%">Activo</td>
+					<td width="80%">
+						<?php echo checkbox_tag('activoBsq','1',$activoBsq)?>
+						</td>
+					</tr>
+					 <tr>
+					<td width="20%">Perfil</td>
+					<td width="80%">
+						 <?php echo select_tag('cajaRolBsq',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(Rol::getRepository()->getAllRol()),$cajaRolBsq),array('style'=>'width:200px'));?>	
+						</td>
+					</tr>
+         		    <tr>
 					<td width="20%">Mutua</td>
 					<td width="80%">
 						 <?php echo select_tag('mutuas',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(MutuaTable::getAllMutuas()),$cajaMuBsq),array('style'=>'width:200px'));?>	
@@ -155,7 +168,7 @@
 							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
 						</td>
 						<td style="padding-top:5px;">
-						<?php if ($cajaNomBsq || $cajaApeBsq || $cajaMuBsq || $cajaGruBsq || $cajaConBsq): ?>
+						<?php if ($cajaNomBsq || $cajaApeBsq || $cajaMuBsq || $cajaGruBsq || $cajaConBsq || $activoBsq || $cajaRolBsq ): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif;  ?>
 						</td>

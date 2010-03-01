@@ -23,6 +23,7 @@ class usuariosActions extends sfActions
 	    ->from('Usuario u')
 	    ->leftJoin('u.UsuarioGrupoTrabajo ug') 
 	    ->leftJoin('u.UsuarioConsejoTerritorial uc') 
+	    ->leftJoin('u.UsuarioRol ur') 
 		->where('u.id>1')
 		->andWhere($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
@@ -166,7 +167,9 @@ class usuariosActions extends sfActions
 	
 		$this->cajaNomBsq = $this->getRequestParameter('caja_busqueda_nombre');
 		$this->cajaApeBsq = $this->getRequestParameter('caja_busqueda_apellido');
+		$this->activoBsq = $this->getRequestParameter('activoBsq');
 		$this->cajaMuBsq = $this->getRequestParameter('mutuas');
+		$this->cajaRolBsq = $this->getRequestParameter('cajaRolBsq');
 		$this->cajaGruBsq = $this->getRequestParameter('grupo');
 		$this->cajaConBsq = $this->getRequestParameter('consejo');
 		
@@ -178,9 +181,17 @@ class usuariosActions extends sfActions
 			$parcial .= " AND u.apellido LIKE '%$this->cajaApeBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja_ape', $this->cajaApeBsq);
 		}
+		if (!empty($this->activoBsq)) {
+			$parcial .= " AND u.activo = $this->activoBsq ";
+			$this->getUser()->setAttribute($modulo.'_nowactivoBsq', $this->activoBsq);
+		}
 		if (!empty($this->cajaMuBsq)) {
 			$parcial .= " AND u.mutua_id = $this->cajaMuBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcaja_mu', $this->cajaApeBsq);
+		}
+		if (!empty($this->cajaRolBsq)) {
+			$parcial .= " AND ur.rol_id = $this->cajaRolBsq";
+			$this->getUser()->setAttribute($modulo.'_nowcajaRolBsq', $this->cajaRolBsq);
 		}
 		if (!empty($this->cajaGruBsq)) {
 			$parcial .= " AND ug.grupo_trabajo_id = $this->cajaGruBsq";
@@ -197,14 +208,18 @@ class usuariosActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_nom');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_ape');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowactivoBsq');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_mu');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajaRolBsq');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_gru');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_con');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaNomBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_nom');
 				$this->cajaApeBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_ape');
+				$this->activoBsq = $this->getUser()->getAttribute($modulo.'_nowactivoBsq');
 				$this->cajaMuBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_mu');
+				$this->cajaRolBsq = $this->getUser()->getAttribute($modulo.'_nowcajaRolBsq');
 				$this->cajaGruBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_gru');
 				$this->cajaConBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_con');
 			}
@@ -213,16 +228,21 @@ class usuariosActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_nom');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_ape');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowactivoBsq');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_mu');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajaRolBsq');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_gru');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_con');
 			$parcial="";
 			$this->cajaNomBsq = "";
 			$this->cajaApeBsq = "";
+			$this->activoBsq = "";
 			$this->cajaMuBsq = "";
+			$this->cajaRolBsq = "";
 			$this->cajaGruBsq = "";
 			$this->cajaConBsq = "";
 		}
+			
 		return 'deleted=0'.$parcial;
 	}
 	
