@@ -105,7 +105,7 @@
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>
-					<td>Comunicado</td>
+					<td width="30%">Comunicado</td>
 						<td>
 						 <input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/>
 						</td>
@@ -115,7 +115,7 @@
 						<td style="padding-top:5px;">
 							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
 						</td>
-						<td>
+						<td style="padding-top:5px;">
 						<?php if ($cajaBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif;?>

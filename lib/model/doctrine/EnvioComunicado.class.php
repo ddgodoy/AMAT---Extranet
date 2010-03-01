@@ -39,7 +39,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 
 		if ($Usuario->getEmail())
 			{ 				
-				if ($this->envioMail($Usuario->getEmail(), $EnvioComunicado->getTipoComunicado()->getImagen(), $EnvioComunicado->getComunicado()->getDetalle(), $EnvioComunicado->getComunicado()->getNombre(),$EnvioComunicado->getId(),$Usuario->getId()))
+				if (self::envioMail($Usuario->getEmail(), $EnvioComunicado->getTipoComunicado()->getImagen(), $EnvioComunicado->getComunicado()->getDetalle(), $EnvioComunicado->getComunicado()->getNombre(),$EnvioComunicado->getId(),$Usuario->getId()))
 				{  
 					//echo "<br />email enviado a: ".$usuario;
 				}
