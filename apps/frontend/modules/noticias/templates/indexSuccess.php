@@ -30,7 +30,7 @@ use_helper('Text');?>
 		<?php endif; ?>
 	</div>
 		<?php if ($cantidadRegistros > 0) : ?>
-		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0"  class="listados">
 			<tbody>
 				<tr>
 					<th width="11%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
