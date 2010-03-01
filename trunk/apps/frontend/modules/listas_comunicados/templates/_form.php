@@ -82,7 +82,7 @@
 	      <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
 	    <?php endif;?>  
 	      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('listas_comunicados/index') ?>';"/>
-	      <input type="button"  class="boton" value="Cancelar3"  onclick="hola();"/>
+	
 	    </div>   
     </form>
       
