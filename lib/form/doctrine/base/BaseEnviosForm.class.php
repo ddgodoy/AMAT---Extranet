@@ -18,7 +18,6 @@ class BaseEnviosForm extends BaseFormDoctrine
       'message_id' => new sfWidgetFormTextarea(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
-      'deleted'    => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -28,7 +27,6 @@ class BaseEnviosForm extends BaseFormDoctrine
       'message_id' => new sfValidatorString(array('required' => false)),
       'created_at' => new sfValidatorDateTime(array('required' => false)),
       'updated_at' => new sfValidatorDateTime(array('required' => false)),
-      'deleted'    => new sfValidatorBoolean(),
     ));
 
     $this->widgetSchema->setNameFormat('envios[%s]');

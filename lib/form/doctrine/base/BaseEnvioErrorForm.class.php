@@ -19,6 +19,7 @@ class BaseEnvioErrorForm extends BaseFormDoctrine
       'estado'     => new sfWidgetFormInput(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
+      'deleted'    => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ class BaseEnvioErrorForm extends BaseFormDoctrine
       'estado'     => new sfValidatorInteger(array('required' => false)),
       'created_at' => new sfValidatorDateTime(array('required' => false)),
       'updated_at' => new sfValidatorDateTime(array('required' => false)),
+      'deleted'    => new sfValidatorBoolean(),
     ));
 
     $this->widgetSchema->setNameFormat('envio_error[%s]');
