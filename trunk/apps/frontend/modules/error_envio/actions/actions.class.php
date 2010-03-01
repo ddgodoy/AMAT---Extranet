@@ -12,6 +12,7 @@ class error_envioActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+  	ServiceLeeremail::saveLeeremails();
   	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 	if (is_numeric($this->paginaActual)) {
