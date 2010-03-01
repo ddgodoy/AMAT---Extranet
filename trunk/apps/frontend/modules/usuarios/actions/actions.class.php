@@ -167,12 +167,34 @@ class usuariosActions extends sfActions
 	
 		$this->cajaNomBsq = $this->getRequestParameter('caja_busqueda_nombre');
 		$this->cajaApeBsq = $this->getRequestParameter('caja_busqueda_apellido');
-		$this->activoBsq = $this->getRequestParameter('activoBsq');
-		$this->cajaMuBsq = $this->getRequestParameter('mutuas');
+		$this->cajaMuBsq  = $this->getRequestParameter('mutuas');
 		$this->cajaRolBsq = $this->getRequestParameter('cajaRolBsq');
 		$this->cajaGruBsq = $this->getRequestParameter('grupo');
 		$this->cajaConBsq = $this->getRequestParameter('consejo');
+		$this->activoBsq  = $this->getRequestParameter('activoBsq');
 		
+		
+		if ($this->hasRequestParameter('btn_buscar'))
+		{
+			$this->activoBsq = $this->getRequestParameter('activoBsq');
+
+			if (!empty($this->activoBsq)) 
+			{
+				$parcial .= " AND u.activo = $this->activoBsq ";
+				$this->getUser()->setAttribute($modulo.'_nowactivoBsq', $this->activoBsq);
+			}
+			else 
+			{
+				$parcial .= " AND u.activo = 0 ";
+				$this->getUser()->setAttribute($modulo.'_nowactivoBsq', $this->activoBsq);
+			}
+		} 
+		else 
+		{
+			$parcial .= " AND u.activo = 1 ";
+			$this->activoBsq = 1;
+		}
+	
 		if (!empty($this->cajaNomBsq)) {
 			$parcial .= " AND u.nombre LIKE '%$this->cajaNomBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja_nom', $this->cajaNomBsq);
@@ -180,10 +202,6 @@ class usuariosActions extends sfActions
 		if (!empty($this->cajaApeBsq)) {
 			$parcial .= " AND u.apellido LIKE '%$this->cajaApeBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja_ape', $this->cajaApeBsq);
-		}
-		if (!empty($this->activoBsq)) {
-			$parcial .= " AND u.activo = $this->activoBsq ";
-			$this->getUser()->setAttribute($modulo.'_nowactivoBsq', $this->activoBsq);
 		}
 		if (!empty($this->cajaMuBsq)) {
 			$parcial .= " AND u.mutua_id = $this->cajaMuBsq";

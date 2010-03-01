@@ -36,7 +36,7 @@
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
 		<form method="post" enctype="multipart/form-data" action="<?php echo url_for('usuarios/delete') ?>">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados" >
 			<tbody>
 				<tr>
 					<th>&nbsp;</th>
@@ -93,7 +93,7 @@
 		</table>
 		</form>
 		<?php else : ?>
-			<?php if ($cajaNomBsq || $cajaApeBsq || $cajaMuBsq || $cajaGruBsq || $cajaConBsq ) : ?>
+			<?php if ($cajaNomBsq || $cajaApeBsq || $cajaMuBsq || $cajaGruBsq || $cajaConBsq || $cajaRolBsq || $cajaRolBsq ) : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
 			<?php else : ?>
 				<div class="mensajeSistema comun">No hay Usuarios registrados</div>
@@ -134,10 +134,8 @@
 					</tr>
          		    <tr>
          		    <tr>
-					<td width="20%">Activo</td>
-					<td width="80%">
-						<?php echo checkbox_tag('activoBsq','1',$activoBsq)?>
-						</td>
+						<td width="20%">Activo</td>
+						<td width="80%"><?php echo checkbox_tag('activoBsq', '1', $activoBsq) ?></td>
 					</tr>
 					 <tr>
 					<td width="20%">Perfil</td>

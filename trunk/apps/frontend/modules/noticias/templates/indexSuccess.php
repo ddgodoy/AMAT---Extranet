@@ -30,8 +30,10 @@ use_helper('Text');?>
 		<?php endif; ?>
 	</div>
 		<?php if ($cantidadRegistros > 0) : ?>
-		<table width="100%" cellspacing="0" cellpadding="0" border="0"  class="listados">
+		<?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?><div style="border-bottom:5px solid #CCC; margin:10px 0px;"></div><?php endif;?>
+		<table width="100%" cellspacing="0" cellpadding="0" border="0"  class="listados" <?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?>style="border:none;"<?php endif;?>>
 			<tbody>
+			<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
 				<tr>
 					<th width="11%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
 					<th width="11%"></th>
@@ -40,6 +42,7 @@ use_helper('Text');?>
 					<th width="4%"><a href="#"/></th>
 					<th width="4%"></th>
 				</tr>
+			<?php endif;?>	
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
 					<td valign="middle" align="center">
