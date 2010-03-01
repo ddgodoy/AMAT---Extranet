@@ -44,6 +44,7 @@ use_helper('Text');?>
 				</tr>
 			<?php endif;?>	
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
+				<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
 				<tr class="<?php echo $odd ?>">
 					<td valign="middle" align="center">
 						<?php
@@ -88,6 +89,21 @@ use_helper('Text');?>
 				    <?php  endif;  ?>
 				    </td>
 				</tr>
+				<?php else: ?>
+				 <tr >
+		          <td width="11%" align="center"  style="border-bottom:1px dotted #999; padding:7px;"><div style="border-right:solid 1px #CCC"> <span style="color:#999"><?php	echo date("d/m/Y", strtotime($noticia->getFecha()));?></span><br />
+		              <?php		
+						if ($noticia->getImagen()) {
+							echo image_tag('/uploads/noticias/images/'.$noticia->getImagen(), array('height' => 40, 'width' => 80, 'alt' => $noticia->getTitulo()));
+						}
+						else {	
+							echo image_tag('noimage.jpg', array('height' => 50, 'width' => 50, 'alt' => $noticia->getTitulo()));
+						}
+				    ?></td>
+		          <td width="88%" valign="top"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a> <br clear="all">
+		            <?php if ($noticia->getEntradilla()): echo truncate_text($noticia->getEntradilla(),200); endif; ?></td>
+		        </tr>
+		        <?php endif;?>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
