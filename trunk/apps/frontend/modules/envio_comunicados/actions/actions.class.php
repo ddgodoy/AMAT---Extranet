@@ -19,7 +19,7 @@ class envio_comunicadosActions extends sfActions
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	
-  $this->pager = new sfDoctrinePager('EnvioComunicado', 20);
+  	$this->pager = new sfDoctrinePager('EnvioComunicado', 20);
 	$this->pager->getQuery()->from('EnvioComunicado ec')->leftJoin('ec.Comunicado c')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();

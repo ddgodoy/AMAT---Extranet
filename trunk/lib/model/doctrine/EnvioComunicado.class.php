@@ -32,6 +32,28 @@ class EnvioComunicado extends BaseEnvioComunicado
 		
 	}
 	
+	public static  function ReenviarMail($Id_Envio_comunicado, $Id_usuario)
+	{
+		$EnvioComunicado = Doctrine::getTable('EnvioComunicado')->find($Id_Envio_comunicado);	
+		$Usuario = Usuario::getRepository()->find($Id_usuario);	
+
+		if ($Usuario->getEmail())
+			{ 				
+				if ($this->envioMail($Usuario->getEmail(), $EnvioComunicado->getTipoComunicado()->getImagen(), $EnvioComunicado->getComunicado()->getDetalle(), $EnvioComunicado->getComunicado()->getNombre(),$EnvioComunicado->getId(),$Usuario->getId()))
+				{  
+					//echo "<br />email enviado a: ".$usuario;
+				}
+				else 
+				{
+					//echo "<br />ERROR email: ".$usuario;
+				}
+				
+				$ListEmails ="";
+				$contUsu = 0;
+			}			
+		
+	}
+	
 	protected function envioMail($to, $header_image, $body, $titulo,$idenvio,$idusuario)
 	{
 		$succes  = false;
