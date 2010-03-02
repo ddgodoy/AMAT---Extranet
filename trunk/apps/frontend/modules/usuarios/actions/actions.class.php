@@ -27,7 +27,8 @@ class usuariosActions extends sfActions
 		->where('u.id>1')
 		->andWhere($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
-
+		
+		
 		$this->pager->setPage($this->getRequestParameter('page', 1));
 		$this->pager->init();
 
