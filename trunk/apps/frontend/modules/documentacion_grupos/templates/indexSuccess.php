@@ -183,7 +183,7 @@
 					<tr>
 						<td style="padding-top: 5px;"><label>Estado:</label></td>
 						<td style="padding-top: 5px;">
-							<?php echo select_tag('categoria_busqueda',options_for_select(array('0'=>'--Seleccionar--','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
+							<?php echo select_tag('estado_busqueda',options_for_select(array('0'=>'--Seleccionar--','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
 				  	</td>
 					</tr>
 					<tr>

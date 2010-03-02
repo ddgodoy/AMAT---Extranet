@@ -19,7 +19,9 @@ class documentacion_gruposActions extends sfActions
 		}
 	  $this->pager = new sfDoctrinePager('DocumentacionGrupo', 20);
 
-		$this->pager->getQuery()->from('DocumentacionGrupo')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()->from('DocumentacionGrupo')
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -183,7 +185,7 @@ class documentacion_gruposActions extends sfActions
 			$this->getUser()->setAttribute($modulo.'_nowgrupo', $this->grupoBsq);
 		}
 		if (!empty($this->categoriaBsq)) {
-			$parcial .= " AND categoria_d_g_id = $this->categoriaBsq ";
+			$parcial .= " AND categoria_d_g_id = '$this->categoriaBsq' ";
 			$this->getUser()->setAttribute($modulo.'_nowcategoria', $this->categoriaBsq);
 		}
 		if (!empty($this->estadoBsq)) {
