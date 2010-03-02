@@ -49,8 +49,9 @@ class inicioActions extends sfActions
 			  ->from('Usuario u')
      	      ->leftJoin('u.UsuarioGrupoTrabajo ug') 
 		      ->leftJoin('u.UsuarioConsejoTerritorial uc') 
+		       ->leftJoin('u.UsuarioRol ur') 
 			  ->where('u.id>1')
-			  ->andWhere($filtro);
+			  ->addWhere($filtro);
 			  
 			  $resultadoObj = $usuarios->execute();
 			 
