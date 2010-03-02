@@ -21,7 +21,8 @@ class consejos_territorialesActions extends sfActions
 		->from('ConsejoTerritorial ct')
 		->leftJoin('ct.UsuarioConsejoTerritorial uct')
 	    ->where($this->setFiltroBusqueda());
-	    if($this->getUser()->getAttribute('userId')!= 1)
+	    
+	    if($this->getUser()->getAttribute('userId')!= 1 && !key_exists(1,UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1)))
 	    {
 	      $this->pager->getQuery()->andWhere('uct.usuario_id ='. $this->getUser()->getAttribute('userId'));
 	    }   

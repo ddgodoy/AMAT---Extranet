@@ -43,6 +43,16 @@ class inicioActions extends sfActions
 			  $resultadoObj = $usuario->UsuariosdeMisOrganismos();
 			  
 			}
+			if($tabla == 'Organismo')
+			{
+			  $organismos = Doctrine_Query::create()
+			  ->from('Organismo o')
+     	      ->leftJoin('o.UsuarioOrganismo uo')
+			  ->addWhere($filtro);
+
+			  $resultadoObj = $organismos->execute();
+			} 
+			
 			if($tabla == 'Usuario')
 			{
 			  $usuarios = Doctrine_Query::create()
@@ -74,7 +84,7 @@ class inicioActions extends sfActions
 			{
 				$resultadoObj = Doctrine::getTable('Notificacion')->getUltimasNotificaciones(sfContext::getInstance()->getUser()->getAttribute('userId'));
 			}
-			if($tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+			if( $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 			$c = Doctrine_Query::create();
 			$c->from($tabla)->where($filtro);

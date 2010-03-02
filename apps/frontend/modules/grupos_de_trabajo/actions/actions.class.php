@@ -25,7 +25,7 @@ class grupos_de_trabajoActions extends sfActions
 		->from('GrupoTrabajo gt')
 	    ->leftJoin('gt.UsuarioGrupoTrabajo ugt')
 	    ->where($this->setFiltroBusqueda());
-	    if($this->getUser()->getAttribute('userId')!= 1)
+	    if($this->getUser()->getAttribute('userId')!= 1 && !key_exists(1,UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1)))
 	    {
 	     $this->pager->getQuery()->andWhere('ugt.usuario_id ='. $this->getUser()->getAttribute('userId'));
 	    }   
