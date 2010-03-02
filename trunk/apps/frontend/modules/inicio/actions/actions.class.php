@@ -58,6 +58,8 @@ class inicioActions extends sfActions
 //			  exit();
 			  
 			  $resultadoObj = $usuarios->execute();
+			  
+			  die($resultadoObj->count());
 			 
 			} 
 			if($tabla == 'AsambleCombocadas')
