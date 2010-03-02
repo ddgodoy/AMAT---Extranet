@@ -146,12 +146,16 @@ class listas_comunicadosActions extends sfActions
   	
   	
   	if($request->getParameter('id_perfil'))
-  	{	
+  	{
+	
   		$arrayUSer = UsuarioRol::getRepository()->getUserByRol($request->getParameter('id_perfil'),$varResi);
   		
   		$arrUsuarios = array();
 	    foreach ($arrayUSer as $r) {
-		$arrUsuarios[$r->Usuario->getId()] = $r->Usuario->getApellido().", ".$r->Usuario->getNombre();
+	    if($r->Usuario->getId())
+	    {	
+			$arrUsuarios[$r->Usuario->getId()] = $r->Usuario->getApellido().", ".$r->Usuario->getNombre();
+	    }	
 	}
   		
   	}
