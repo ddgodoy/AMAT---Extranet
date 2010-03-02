@@ -4,7 +4,7 @@
  */
 class UsuarioRolTable extends Doctrine_Table
 {
-	public static function getRolesByUser( $user,$tipo='' )
+	public static function getRolesByUser($user,$tipo='' )
 	{
 		$q = Doctrine_Query::create();
 		$q->from('Rol r');

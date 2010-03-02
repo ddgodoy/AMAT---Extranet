@@ -18,7 +18,18 @@ class organismosActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   	$this->pager = new sfDoctrinePager('Organismo', 10);  	    
-	$this->pager->getQuery()->from('Organismo')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()
+	->from('Organismo o')
+	->leftJoin('o.UsuarioOrganismo uo')
+	->where($this->setFiltroBusqueda());
+	if($this->getUser()->getAttribute('userId')!= 1 && !key_exists(1,UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1)))
+	    {
+	     $this->pager->getQuery()->andWhere('uo.usuario_id ='. $this->getUser()->getAttribute('userId'));
+	    }   
+	$this->pager->getQuery()->orderBy($this->setOrdenamiento());
+	
+	
+	
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
@@ -123,15 +134,15 @@ class organismosActions extends sfActions
 		$this->subcategoriaBsq = $this->getRequestParameter('organismo[subcategoria_organismo_id]');
 		
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
+			$parcial .= " AND (o.nombre LIKE '%$this->cajaBsq%')";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->categoriaBsq)) {
-			$parcial .= " AND categoria_organismo_id = $this->categoriaBsq ";
+			$parcial .= " AND o.categoria_organismo_id = $this->categoriaBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowcategoria', $this->categoriaBsq);
 		}
 		if (!empty($this->subcategoriaBsq)) {
-			$parcial .= " AND subcategoria_organismo_id = $this->subcategoriaBsq ";
+			$parcial .= " AND o.subcategoria_organismo_id = $this->subcategoriaBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowsubcategoria', $this->subcategoriaBsq);
 		}
 
