@@ -51,6 +51,9 @@ class UsuarioRolTable extends Doctrine_Table
 			$q->addWhere('u.id NOT IN ('.$userEx.')');
 		}
 		
+
+		
+		
 		return $q->execute();
 	}
 	
