@@ -17,7 +17,7 @@
 	  <?php echo $documentacion_grupo->getcontenido() ?> 
 	  <span class="notfecha">
 	  <?php
-		if(ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo)->count() >= 1){ 
+		if(ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count() >= 1){ 
 			if (validate_action('listar','archivos_d_g')) { 
 				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count().' Archivo/s')), 'archivos_d_g/index?documentacion_grupo_id=' . $documentacion_grupo->getId(), array('method' => 'post'));
 			}
