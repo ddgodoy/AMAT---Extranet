@@ -50,17 +50,14 @@ class inicioActions extends sfActions
      	      ->leftJoin('u.UsuarioGrupoTrabajo ug') 
 		      ->leftJoin('u.UsuarioConsejoTerritorial uc') 
 		      ->leftJoin('u.UsuarioRol ur') 
+		      ->leftJoin('u.Mutua m') 
 			  ->where('u.id>1')
 			  ->addWhere($filtro)
 			  ->groupBy('u.id');
-			  
-//			  echo $usuarios->getQuery();
-//			  exit();
+			 
 			  
 			  $resultadoObj = $usuarios->execute();
 			  
-			  echo count($resultadoObj);
-			  exit();
 			 
 			} 
 			if($tabla == 'AsambleCombocadas')

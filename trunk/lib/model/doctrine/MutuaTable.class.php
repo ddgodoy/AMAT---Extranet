@@ -6,13 +6,17 @@ class MutuaTable extends Doctrine_Table
 {
    public static function Idmutua($id_mutua)
    {
+   	
    	 $r = Doctrine_Query::create()
+   	 ->select('nombre')
    	 ->from('Mutua')
    	 ->where('id = '.$id_mutua);
+   	 
    	 $respuesat = $r->fetchOne();
    	 
    	 return $respuesat;
-   }
+    }
+    
    public static function getAllMutuas()
    {
    	  $r=Doctrine_Query::create()

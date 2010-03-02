@@ -35,7 +35,12 @@ $f = 0;
 		 	   	  }
 		 	   	  if($hy == 'mutua_id')
 		 	   	  {
-		 	   	  	echo '<td>'.htmlspecialchars_decode(trim(MutuaTable::Idmutua($r))).'</td>';
+		 	   	  	if($r>= 1)
+		 	   	  	{
+		 	   	  	 echo '<td>'.htmlspecialchars_decode($reS->Mutua->getNombre()).'</td>';
+		 	   	  	}
+		 	   	  	echo '<td></td>';
+		 	   	  	 
 		 	   	  }
 		 	   	  if($hy == 'seccion_id')
 		 	   	  {
@@ -134,7 +139,7 @@ $f = 0;
 		 	   	  }
 		 	   	 if($hy == 'mutua_id')
 		 	   	  {
-		 	   	  	echo '"'.MutuaTable::Idmutua($r).'",';
+		 	   	  	echo '"'.$reS->Mutua->getNombre().'",';
 		 	   	  }
 		 	   	  if($hy == 'seccion_id')
 		 	   	  {
