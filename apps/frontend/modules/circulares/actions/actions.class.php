@@ -98,7 +98,7 @@ class circularesActions extends sfActions
 
       $banderaSub     = 0;
       $xSelectSubTema = $request->getParameter('select_sub_tema');
-      $xSelectSubOrg  = $request->getParameter('organismos[subcategoria_organismo_id]');
+      $xSelectSubOrg  = $request->getParameter('[subcategoria_organismo_id]');
 
       if (!empty($xSelectSubTema)){ $circular->setCircularSubTemaId($xSelectSubTema); $banderaSub = 1; }
       if (!empty($xSelectSubOrg)) { $circular->setSubcategoriaOrganismoId($xSelectSubOrg); $banderaSub = 1; }
@@ -132,7 +132,7 @@ class circularesActions extends sfActions
 		$this->SelectCatTemaBsq = $this->getRequestParameter('select_cat_tema');
 		$this->SelectSubTemaBsq = $this->getRequestParameter('select_sub_tema');
 		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id');
-		$this->SelectSubOrganismoBsq = $this->getRequestParameter('subcategoria_organismo_id')? $this->getRequestParameter('subcategoria_organismo_id'):$this->getRequestParameter('organismos[subcategoria_organismo_id]') ;
+		$this->SelectSubOrganismoBsq = $this->getRequestParameter('subcategoria_organismo_id')? $this->getRequestParameter('subcategoria_organismo_id'):$this->getRequestParameter('[subcategoria_organismo_id]') ;
 		
 		if (!empty($this->nBsq)) {
 			$parcial .= " AND c.numero = $this->nBsq";

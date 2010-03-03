@@ -93,22 +93,23 @@ class organismosActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+  	
     $form->bind($request->getParameter($form->getName()));
     if ($form->isValid())
     {
             
       $organismo = $form->save();
       
-      $bandera     = 0;
-      $xSelectSubcat = $this->getRequestParameter('organismo[subcategoria_organismo_id]');
-      $xSelectCat = $this->getRequestParameter('organismo[categoria_organismo_id]');
-      
-      if (!empty($xSelectSubcat)){ $organismo->setSubcategoriaOrganismoId($xSelectSubcat); $bandera = 1; }
-      if (!empty($xSelectCat)){ $organismo->setCategoriaOrganismoId($xSelectCat); $bandera = 1; }
-
-      if ($bandera == 1) {
-      	$organismo->save();
-      }
+//      $bandera     = 0;
+//      $xSelectSubcat = $this->getRequestParameter('organismo[subcategoria_organismo_id]');
+//      $xSelectCat = $this->getRequestParameter('organismo[categoria_organismo_id]');
+//      
+//      if (!empty($xSelectSubcat)){ $organismo->setSubcategoriaOrganismoId($xSelectSubcat); $bandera = 1; }
+//      if (!empty($xSelectCat)){ $organismo->setCategoriaOrganismoId($xSelectCat); $bandera = 1; }
+//
+//      if ($bandera == 1) {
+//      	$organismo->save();
+//      }
       
      if($this->actionName == 'create')
      {
