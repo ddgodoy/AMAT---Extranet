@@ -49,6 +49,8 @@ class documentacion_organismosActions extends sfActions
     $this->forward404Unless($request->isMethod('post'));
     $this->form = new DocumentacionOrganismoForm();
     $this->processForm($request, $this->form);
+    
+    $this->verLosOrganismos = OrganismoTable::getAllOrganismos()->count();
 
     $this->setTemplate('nueva');
   }
@@ -115,23 +117,24 @@ class documentacion_organismosActions extends sfActions
   {
     $form->bind($request->getParameter($form->getName()));
 
-    if ($form->isValid()) {
-      $documentacion_organismo = $form->save();
-    }
-   
-    $bandera = 0;
-    $xSelectCategoria = $this->getRequestParameter('categoria_organismo_id');
-    $xSelectSubcategoria = $this->getRequestParameter('subcategoria_organismo_id');
-    $xSelectOrganisamos = $this->getRequestParameter('organismoidsub');
+    if ($form->isValid()) 
+    {
+         $documentacion_organismo = $form->save();
     
-    if (!empty($xSelectCategoria)){ $documentacion_organismo->setCategoriaOrganismoId($xSelectCategoria); $bandera = 1; }
-    if (!empty($xSelectSubcategoria)){ $documentacion_organismo->setSubcategoriaOrganismoId($xSelectSubcategoria); $bandera = 1; }
-    if (!empty($xSelectOrganisamos)){ $documentacion_organismo->setOrganismoId($xSelectOrganisamos); $bandera = 1; }
+   
+//    $bandera = 0;
+//    $xSelectCategoria = $this->getRequestParameter('categoria_organismo_id');
+//    $xSelectSubcategoria = $this->getRequestParameter('subcategoria_organismo_id');
+//    $xSelectOrganisamos = $this->getRequestParameter('organismoidsub');
+//    
+//    if (!empty($xSelectCategoria)){ $documentacion_organismo->setCategoriaOrganismoId($xSelectCategoria); $bandera = 1; }
+//    if (!empty($xSelectSubcategoria)){ $documentacion_organismo->setSubcategoriaOrganismoId($xSelectSubcategoria); $bandera = 1; }
+//    if (!empty($xSelectOrganisamos)){ $documentacion_organismo->setOrganismoId($xSelectOrganisamos); $bandera = 1; }
+//
+//		if ($bandera == 1) {
+//			$documentacion_organismo->save();
 
-		if ($bandera == 1) {
-			$documentacion_organismo->save();
-      	
-			## Notificar y enviar email a los destinatarios 
+## Notificar y enviar email a los destinatarios 
 			if($documentacion_organismo->getEstado()) {
 				if ($documentacion_organismo->getOrganismoId()) {
 					$enviar = true;
@@ -149,12 +152,12 @@ class documentacion_organismosActions extends sfActions
 				foreach ($email AS $emailPublic) {
 					if($emailPublic->getEmail()) {
 				    $mailTema = $emailPublic->getEmail();
-    		    $nombreEvento = $documentacion_organismo->getNombre();
-    		    $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
-    		    $descripcion  = $documentacion_organismo->getContenido();
+	    		    $nombreEvento = $documentacion_organismo->getNombre();
+	    		    $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
+	    		    $descripcion  = $documentacion_organismo->getContenido();
 
-						$mailer = new Swift(new Swift_Connection_NativeMail());
-						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+					$mailer = new Swift(new Swift_Connection_NativeMail());
+					$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
 		
 						$mailContext = array('tema' => $tema,
 						                     'evento' => $nombreEvento,
@@ -169,8 +172,9 @@ class documentacion_organismosActions extends sfActions
 					}
 				}
 			}
-    }	
-		$this->redirect('documentacion_organismos/show?id='.$documentacion_organismo->getId());
+		$this->redirect('documentacion_organismos/show?id='.$documentacion_organismo->getId());	
+     }	
+		
   }
   
   /* Metodos para busqueda y ordenamiento */
