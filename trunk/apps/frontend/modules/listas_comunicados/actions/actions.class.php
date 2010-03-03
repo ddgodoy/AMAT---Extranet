@@ -138,64 +138,52 @@ class listas_comunicadosActions extends sfActions
   
   public function executeLista(sfWebRequest $request)
   {
-  	$varResi='';
+  	
+  	$filtro = '';
+  	
   	if($request->getParameter('excluir')!='')
   	{
-  	   $varResi = $request->getParameter('excluir');	
-  	}
-  	
-  	
-  	if($request->getParameter('id_perfil'))
+  	 	$filtro .=' AND id NOT IN ('.$request->getParameter('excluir').')';
+	}
+
+  	if($request->getParameter('id_perfil')!='')
   	{
+  		$filtro .=' AND ur.rol_id ='.$request->getParameter('id_perfil');	
+	}
+  		
+  	if($request->getParameter('id_mutuas')!='')
+  	{
+  		$filtro .=' AND u.mutua_id ='.$request->getParameter('id_mutuas');	
+  	}	
+  		  			
+  	if($request->getParameter('id_grupos')!='')
+  	{
+  		$filtro .=' AND ug.grupo_trabajo_id ='.$request->getParameter('id_grupos');	
+	}
+	if($request->getParameter('id_consejos')!='')
+  	{
+  		$filtro .=' AND uc.consejo_territorial_id ='.$request->getParameter('id_consejos');	
+	}
 	
-  		$arrayUSer = UsuarioRol::getRepository()->getUserByRol($request->getParameter('id_perfil'),$varResi);
-  		
-  		$arrUsuarios = array();
-	    foreach ($arrayUSer as $r) {
-	    if($r->Usuario->getId())
-	    {	
-			$arrUsuarios[$r->Usuario->getId()] = $r->Usuario->getApellido().", ".$r->Usuario->getNombre();
-	    }	
-	}
-  		
-  	}
-  	if($request->getParameter('id_mutuas'))
-  	{
-  		$filtro = '';
-  		if($varResi)
-  		{
-  			$filtro = ' AND id NOT IN ('.$varResi.')';
-  		}
-  		
-  		$arrayUSer = Doctrine_Query::create()->from('Usuario')->where('mutua_id ='.$request->getParameter('id_mutuas').$filtro)->execute();
-  		
-  		$arrUsuarios = array();
+	    $arrayUSer = Doctrine_Query::create()
+  		->from('Usuario u')
+	    ->leftJoin('u.UsuarioGrupoTrabajo ug') 
+	    ->leftJoin('u.UsuarioConsejoTerritorial uc') 
+	    ->leftJoin('u.UsuarioRol ur') 
+		->where('u.id>1'.$filtro)
+		->groupBy('u.id')
+		->execute();
+		
+		
+	
+	    $arrUsuarios = array();
 	    foreach ($arrayUSer as $r) {
 		$arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
+	
 	    }
-	    
-	    
-  	}
-  	
-  	if($request->getParameter('id_grupos'))
-  	{
-  		$arrayUSer = Usuario::getRepository()->getUsuariosByGrupoTrabajo($request->getParameter('id_grupos'),'',$varResi);
-  		$arrUsuarios = array();
-	    foreach ($arrayUSer as $r) {
-		$arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
-	    }
-	}
-	if($request->getParameter('id_consejos'))
-  	{
-  		$arrayUSer = Usuario::getRepository()->getUsuariosByConsejoTerritorial($request->getParameter('id_consejos'),'',$varResi);
-  		$arrUsuarios = array();
-	    foreach ($arrayUSer as $r) {
-		$arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
-	    }
-	}
 	
   	return $this->renderPartial('listaUsuarios',array('arrUsuarios' => $arrUsuarios));
+ 
   }
-  
   
 }
