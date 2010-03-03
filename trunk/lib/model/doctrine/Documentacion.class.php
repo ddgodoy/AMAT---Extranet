@@ -5,5 +5,8 @@
  */
 abstract class Documentacion extends BaseDocumentacion
 {
-
+	public function __toString()
+	{
+		return $this->nombre;
+	}
 }

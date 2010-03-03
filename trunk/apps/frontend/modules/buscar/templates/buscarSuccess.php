@@ -6,9 +6,11 @@
     <?php if(!empty($asambleas)): ?>
     <ul class="tema" style="display:block; width:100%;">
 	<h4><?php echo $labelCategoria ?>  </h4>
+	<div style="overflow:auto; height:200px;">
 	<?php foreach ($resCategoria as $res): ?>
 		<li><a href="<?php echo url_for($asambleas.'/ver?id=' . $res['id'].$tipo) ?>"><?php echo $res['titulo'] ?></a></li>
 	<?php endforeach;?>
+	</div>
 	<a class="vermas"><?php echo count($resCategoria) ?> resultados encontrados</a>
     </ul>
     <?php else : ?> 
@@ -16,9 +18,11 @@
 			<?php if (count($resCategoria)): ?>
 			<ul class="tema" style="display:block; width:100%;">
 				<h4><?php echo $labelCategoria ?>  </h4>
+				<div style="overflow:auto; height:200px;">
 				<?php foreach ($resCategoria as $res): ?>
 					<li><a href="<?php echo url_for($res['modulo'].'/show?id=' . $res['id']) ?>"><?php echo $res['nombre'] ?></a></li>
 				<?php endforeach;?>
+				</div>
 				<a class="vermas"><?php echo count($resCategoria) ?> resultados encontrados</a>
 			</ul>
 			<?php endif; ?> 				
@@ -27,9 +31,11 @@
 			<ul class="tema" style="display:block; width:100%;">
 				<a class="vermas"><?php echo count($resCategoria) ?> resultados encontrados</a>
 				<h4><?php echo $labelCategoria ?></h4>
+				<div style="overflow:auto; height:200px;">
 				<?php foreach ($resCategoria as $obj): ?>
 					<li><a href="<?php echo url_for( $path . $obj->getId() ) ?>"><?php echo $obj ?></a></li>		
 				<?php endforeach;?>
+				</div>
 				<a class="vermas"><?php echo count($resCategoria) ?> resultados encontrados</a>
 			</ul>
 			<?php endif; ?> 
@@ -43,14 +49,17 @@
 		<ul class="tema">
 			<h4>Agenda</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAgenda as $obj): ?>
 				<li><a href="<?php echo url_for('eventos/show?id=' . $obj->getId()) ?>"><?php echo $obj->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAgenda) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=agenda&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -60,14 +69,17 @@
 		<ul class="tema">
 			<h4>Noticias</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resNoticias as $obj): ?>
 				<li><a href="<?php echo url_for('noticias/show?id=' . $obj->getId()) ?>"><?php echo $obj->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+		
 			<?php if (count($resNoticias) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=noticias&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -76,14 +88,17 @@
 		<ul class="tema">
 			<h4>Aplicaciones</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAplicaciones as $obj): ?>
 				<li><a href="<?php echo url_for('aplicaciones_externas/editar?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAplicaciones) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=aplicaciones_externas&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -92,14 +107,17 @@
 		<ul class="tema">
 			<h4>Cifras y Datos</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resCifraDato as $obj): ?>
 				<li><a href="<?php echo url_for('cifras_datos/show?id=' . $obj->getId()) ?>"><?php echo $obj->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resCifraDato) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=cifras_datos&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -108,14 +126,17 @@
 		<ul class="tema">
 			<h4>actividades</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resActividades as $obj): ?>
 				<li><a href="<?php echo url_for('actividades/show?id=' . $obj->getId()) ?>"><?php echo $obj->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resActividades) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=actividades&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -124,14 +145,17 @@
 		<ul class="tema">
 			<h4>publicaciones</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resPublicacion as $obj): ?>
 				<li><a href="<?php echo url_for('publicaciones/show?id=' . $obj->getId()) ?>"><?php echo $obj->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resPublicacion) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=publicaciones&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -140,14 +164,17 @@
 		<ul class="tema">
 			<h4>normativas</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resNormativas as $obj): ?>
 				<li><a href="<?php echo url_for('normativas/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resNormativas) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=normativas&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -156,14 +183,17 @@
 		<ul class="tema">
 			<h4>iniciativas</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resIniciativas as $obj): ?>
 				<li><a href="<?php echo url_for('iniciativas/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resIniciativas) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=iniciativas&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?>
 		
@@ -172,14 +202,17 @@
 		<ul class="tema">
 			<h4>circulares</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resCirculares as $obj): ?>
 				<li><a href="<?php echo url_for('circulares/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resCirculares) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=circulares&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?>
 		
@@ -189,14 +222,17 @@
 		<ul class="tema">
 			<h4>Documentación</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resDocumentacion as $res): ?>
 				<li><a href="<?php echo url_for($res['modulo'].'/show?id=' . $res['id']) ?>"><?php echo $res['nombre'] ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>			
 			<?php endforeach;?>
+			
 			<?php if (count($resDocumentacion) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=documentacion&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 
@@ -205,14 +241,17 @@
 		<ul class="tema">
 			<h4>Directores Gerentes<span> (Asamblea)</span></h4>  
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAsambleaDirectores as $obj): ?>
 				<li><a href="<?php echo url_for('asambleas/ver?id='.$obj->Asamblea->getId().'&DirectoresGerente=1') ?>"><?php echo $obj->Asamblea->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+		
 			<?php if (count($resAsambleaDirectores) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=asambleas_director&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -222,14 +261,17 @@
 		<ul class="tema">
 			<h4>Grupos de trabajo <span> (Convocatoria)</span></h4>  
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAsambleaGrupoTrabajo as $obj): ?>
 				<li><a href="<?php echo url_for('asambleas/ver?id='.$obj->Asamblea->getId().'&GrupodeTrabajo=2') ?>"><?php echo $obj->Asamblea->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAsambleaGrupoTrabajo) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=asambleas_grupo&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -238,14 +280,17 @@
 		<ul class="tema">
 			<h4>Consejo Territorial <span> (Convocatoria)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAsambleaConsejoTerritorial as $obj): ?>
 				<li><a href="<?php echo url_for('asambleas/ver?id='.$obj->Asamblea->getId().'&ConsejoTerritorial=3') ?>"><?php echo $obj->Asamblea->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAsambleaConsejoTerritorial) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=asambleas_consejo&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -254,14 +299,17 @@
 		<ul class="tema">
 			<h4>Organismos <span> (Convocatoria)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAsambleaOrganismo as $obj): ?>
 				<li><a href="<?php echo url_for('asambleas/ver?id='.$obj->Asamblea->getId().'&Organismo=4') ?>"><?php echo $obj->Asamblea->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAsambleaOrganismo) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=asambleas_organismos&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -270,14 +318,17 @@
 		<ul class="tema">
 			<h4>Junta Directiva<span> (Convocatoria)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAsambleaJunta as $obj): ?>
 				<li><a href="<?php echo url_for('asambleas/ver?id='.$obj->Asamblea->getId().'&Junta_directiva=5') ?>"><?php echo $obj->Asamblea->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAsambleaJunta) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=asambleas_junta&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -286,14 +337,17 @@
 		<ul class="tema">
 			<h4>Otros<span> (Convocatoria)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAsambleaOtros as $obj): ?>
 				<li><a href="<?php echo url_for('asambleas/ver?id='.$obj->Asamblea->getId().'&Otros=6') ?>"><?php echo $obj->Asamblea->getTitulo() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAsambleaOtros) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=asambleas_otros&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -302,14 +356,17 @@
 		<ul class="tema">
 			<h4>Grupos de trabajo</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resGruposdetrabajo as $obj): ?>
 				<li><a href="<?php echo url_for('miembros_grupo/index?grupo='.$obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resGruposdetrabajo) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=grupos_de_trabajos&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -318,14 +375,17 @@
 		<ul class="tema">
 			<h4>Consejos Territoriales</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($ConsejosTerritoriales as $obj): ?>
 				<li><a href="<?php echo url_for('miembros_consejo/index?consejo='.$obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($ConsejosTerritoriales) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=consejos_territoriales&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -334,14 +394,17 @@
 		<ul class="tema">
 			<h4>Organismos</h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($Organismo as $obj): ?>
 				<li><a href="<?php echo url_for('miembros_organismo/index?organismo='.$obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($Organismo) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=organismos&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -350,14 +413,17 @@
 		<ul class="tema">
 			<h4>Aplicaciones </h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resAplicaciones1 as $obj): ?>
 				<li><a href="<?php echo url_for('aplicaciones/show?id='.$obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resAplicaciones1) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=aplicaciones&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -367,14 +433,17 @@
 		<ul class="tema">
 			<h4>Grupos de trabajo <span> (Documentaci&oacute;n)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resDocumentacionGrupoTrabajo as $obj): ?>
 				<li><a href="<?php echo url_for('documentacion_grupos/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+	
 			<?php if (count($resDocumentacionGrupoTrabajo) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=documentacion_grupo&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 		
@@ -383,6 +452,7 @@
 		<ul class="tema">
 			<h4>Area Territorial <span> (Documentaci&oacute;n)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resDocumentacionConsejoTerritorial as $obj): ?>
 				<li><a href="<?php echo url_for('documentacion_consejos/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
@@ -391,6 +461,7 @@
 			<?php if (count($resDocumentacionConsejoTerritorial) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=documentacion_consejo&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 
@@ -400,14 +471,17 @@
 		<ul class="tema">
 			<h4>Organismos <span> (Documentaci&oacute;n)</span></h4>
 			<?php $count = 0 ?>
+			<div style="overflow:auto; height:200px;">
 			<?php foreach ($resDocumentacionOrganismo as $obj): ?>
 				<li><a href="<?php echo url_for('documentacion_organismos/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
 				<?php $count ++ ?>
 				<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
 			<?php endforeach;?>
+			
 			<?php if (count($resDocumentacionOrganismo) > 5): ?>  
 			<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=documentacion_organismo&q='.$word) ?>">+ Ver Mas Resultados</a>
 			<?php endif;?>
+			</div>
 		</ul>
 		<?php endif; ?> 
 

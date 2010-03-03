@@ -14,6 +14,10 @@ class Actividad extends BaseActividad
 	public function eliminarDocumento(){
 		@unlink(sfConfig::get('sf_upload_dir').'/actividades/docs/'.$this->getDocumento());
 	}
+	public function __toString()
+	{
+		return $this->titulo;
+	}
 
 	public function save(Doctrine_Connection $conn = null)
   {        
