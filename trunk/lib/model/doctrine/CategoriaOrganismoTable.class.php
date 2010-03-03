@@ -19,7 +19,8 @@ class CategoriaOrganismoTable extends Doctrine_Table
 	{
 		
 		$s= Doctrine_Query::create()
-		->from('CategoriaOrganismo');
+		->from('CategoriaOrganismo')
+		->where('deleted = 0');
 		$respuesta = $s->execute();
 		
 		return $respuesta;

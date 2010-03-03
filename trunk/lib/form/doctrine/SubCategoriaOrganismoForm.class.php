@@ -11,10 +11,21 @@ class SubCategoriaOrganismoForm extends BaseSubCategoriaOrganismoForm
 {
   public function configure()
   {
+  	$categorias = CategoriaOrganismoTable::getAllcategoriaorg();
+  	$arraycategoria = array();
+  	foreach ($categorias AS $c)
+  	{
+  		$arraycategoria[0] = '--seleccionar--';
+  		$arraycategoria[$c->getId()] = $c->getNombre();
+  	}
+  	
+  	
+  	
+  	
   	$this->setWidgets(array(
       'id'                     => new sfWidgetFormInputHidden(),
       'nombre'                 => new sfWidgetFormInput(),
-      'categoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => false)),
+      'categoria_organismo_id' => new sfWidgetFormChoice(array('choices' => $arraycategoria)),
       'created_at'             => new sfWidgetFormDateTime(),
       'updated_at'             => new sfWidgetFormDateTime(),
       'deleted'                => new sfWidgetFormInputCheckbox(),
@@ -23,7 +34,7 @@ class SubCategoriaOrganismoForm extends BaseSubCategoriaOrganismoForm
     $this->setValidators(array(
       'id'                     => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'column' => 'id', 'required' => false)),
       'nombre'                 => new sfValidatorString(array('required' => false)),
-      'categoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo')),
+      'categoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo'),array('invalid' => 'Ingrese la categoria')),
       'created_at'             => new sfValidatorDateTime(array('required' => false)),
       'updated_at'             => new sfValidatorDateTime(array('required' => false)),
       'deleted'                => new sfValidatorBoolean(),
