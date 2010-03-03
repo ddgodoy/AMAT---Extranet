@@ -12,6 +12,9 @@
 
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
+<?php echo $form['categoria_organismo_id']->renderError() ?>
+<?php echo $form['subcategoria_organismo_id']->renderError() ?>
+<?php echo $form['organismo_id']->renderError() ?>
 <?php if ($verLosOrganismos == 0):?>
 <div class="mensajeSistema ok">Debe ingresar un organismo para poder cargar documentacion del organismos. <a href="<?php echo url_for('organismos/nueva') ?>">click aquí</a></div>
 <?php endif;?>
