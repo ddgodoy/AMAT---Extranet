@@ -73,7 +73,7 @@ class aplicacionesActions extends sfActions
     sfLoader::loadHelpers('Security'); // para usar el helper
 	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
     
-    $normativa->delete();
+    $aplicacion->delete();
 
     $this->getUser()->setFlash('notice', "El registro ha sido eliminado del sistema");
     $this->redirect('aplicaciones/index');
