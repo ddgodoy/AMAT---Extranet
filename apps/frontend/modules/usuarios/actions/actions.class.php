@@ -172,9 +172,32 @@ class usuariosActions extends sfActions
 		$this->cajaRolBsq = $this->getRequestParameter('cajaRolBsq');
 		$this->cajaGruBsq = $this->getRequestParameter('grupo');
 		$this->cajaConBsq = $this->getRequestParameter('consejo');
-		$this->activoBsq  = $this->getRequestParameter('activoBsq');
-		
-		
+	
+	
+		if (!empty($this->cajaNomBsq)) {
+			$parcial .= " AND u.nombre LIKE '%$this->cajaNomBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcaja_nom', $this->cajaNomBsq);
+		}
+		if (!empty($this->cajaApeBsq)) {
+			$parcial .= " AND u.apellido LIKE '%$this->cajaApeBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcaja_ape', $this->cajaApeBsq);
+		}
+		if (!empty($this->cajaMuBsq)) {
+			$parcial .= " AND u.mutua_id = $this->cajaMuBsq";
+			$this->getUser()->setAttribute($modulo.'_nowcaja_mu', $this->cajaMuBsq);
+		}
+		if (!empty($this->cajaRolBsq)) {
+			$parcial .= " AND ur.rol_id = $this->cajaRolBsq";
+			$this->getUser()->setAttribute($modulo.'_nowcajaRolBsq', $this->cajaRolBsq);
+		}
+		if (!empty($this->cajaGruBsq)) {
+			$parcial .= " AND ug.grupo_trabajo_id = $this->cajaGruBsq";
+			$this->getUser()->setAttribute($modulo.'_nowcaja_gru', $this->cajaGruBsq);
+		}
+		if (!empty($this->cajaConBsq)) {
+			$parcial .= " AND uc.consejo_territorial_id = $this->cajaConBsq";
+			$this->getUser()->setAttribute($modulo.'_nowcaja_con', $this->cajaConBsq);
+		}
 		if ($this->hasRequestParameter('btn_buscar'))
 		{
 			$this->activoBsq = $this->getRequestParameter('activoBsq');
@@ -190,36 +213,7 @@ class usuariosActions extends sfActions
 				$this->getUser()->setAttribute($modulo.'_nowactivoBsq', $this->activoBsq);
 			}
 		} 
-		else 
-		{
-			$parcial .= " AND u.activo = 1 ";
-			$this->activoBsq = 1;
-		}
-	
-		if (!empty($this->cajaNomBsq)) {
-			$parcial .= " AND u.nombre LIKE '%$this->cajaNomBsq%'";
-			$this->getUser()->setAttribute($modulo.'_nowcaja_nom', $this->cajaNomBsq);
-		}
-		if (!empty($this->cajaApeBsq)) {
-			$parcial .= " AND u.apellido LIKE '%$this->cajaApeBsq%'";
-			$this->getUser()->setAttribute($modulo.'_nowcaja_ape', $this->cajaApeBsq);
-		}
-		if (!empty($this->cajaMuBsq)) {
-			$parcial .= " AND u.mutua_id = $this->cajaMuBsq";
-			$this->getUser()->setAttribute($modulo.'_nowcaja_mu', $this->cajaApeBsq);
-		}
-		if (!empty($this->cajaRolBsq)) {
-			$parcial .= " AND ur.rol_id = $this->cajaRolBsq";
-			$this->getUser()->setAttribute($modulo.'_nowcajaRolBsq', $this->cajaRolBsq);
-		}
-		if (!empty($this->cajaGruBsq)) {
-			$parcial .= " AND ug.grupo_trabajo_id = $this->cajaGruBsq";
-			$this->getUser()->setAttribute($modulo.'_nowcaja_gru', $this->cajaGruBsq);
-		}
-		if (!empty($this->cajaConBsq)) {
-			$parcial .= " AND uc.consejo_territorial_id = $this->cajaConBsq";
-			$this->getUser()->setAttribute($modulo.'_nowcaja_con', $this->cajaConBsq);
-		}
+		
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
 		} else {
@@ -233,14 +227,23 @@ class usuariosActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_gru');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_con');
 			} else {
-				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
-				$this->cajaNomBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_nom');
-				$this->cajaApeBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_ape');
-				$this->activoBsq = $this->getUser()->getAttribute($modulo.'_nowactivoBsq');
-				$this->cajaMuBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_mu');
-				$this->cajaRolBsq = $this->getUser()->getAttribute($modulo.'_nowcajaRolBsq');
-				$this->cajaGruBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_gru');
-				$this->cajaConBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_con');
+				
+				if(strpos($this->getUser()->getAttribute($modulo.'_nowfilter'),'u.activo')!== false)
+				{
+					$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
+					$this->cajaNomBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_nom');
+					$this->cajaApeBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_ape');
+					$this->activoBsq = $this->getUser()->getAttribute($modulo.'_nowactivoBsq');
+					$this->cajaMuBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_mu');
+					$this->cajaRolBsq = $this->getUser()->getAttribute($modulo.'_nowcajaRolBsq');
+					$this->cajaGruBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_gru');
+					$this->cajaConBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_con');
+				}
+				else 
+				{
+					$parcial .= " AND u.activo = 1 ";
+					$this->activoBsq = 1;
+				}
 			}
 		}
 		if ($this->hasRequestParameter('btn_quitar')){
