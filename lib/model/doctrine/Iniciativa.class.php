@@ -6,4 +6,9 @@
 class Iniciativa extends BaseIniciativa
 {
 
+	public function __toString()
+	{
+		return $this->nombre;
+	}
+	
 }

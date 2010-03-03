@@ -4,6 +4,11 @@
  */
 class Circular extends BaseCircular
 {
+	public function __toString()
+	{
+		return $this->nombre;
+	}
+	
 	public static function getRanfoDEfechas($modulo = '')
 	{
 		if($modulo == 'circulares')

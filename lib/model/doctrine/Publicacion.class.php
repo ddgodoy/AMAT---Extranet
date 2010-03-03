@@ -14,6 +14,12 @@ class Publicacion extends BasePublicacion
 		@unlink(sfConfig::get('sf_upload_dir').'/publicaciones/docs/'.$this->getDocumento());
 	}
 	
+	
+	public function __toString()
+	{
+		return $this->titulo;
+	}
+	
 	public function save(Doctrine_Connection $conn = null)
   {        
   	

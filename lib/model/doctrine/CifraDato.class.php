@@ -14,6 +14,11 @@ class CifraDato extends BaseCifraDato
 		@unlink(sfConfig::get('sf_upload_dir').'/cifras_datos/docs/'.$this->getDocumento());
 	}
 	
+	public function __toString()
+	{
+		return $this->titulo;
+	}
+	
 	 public function save(Doctrine_Connection $conn = null)
   {        
   	
