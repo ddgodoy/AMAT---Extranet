@@ -951,7 +951,7 @@ noticias {
 	float: left;
 	height: 250px;
 	padding-bottom: 10px;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .content .resultadoBus ul {
