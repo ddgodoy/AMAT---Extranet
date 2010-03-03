@@ -8,4 +8,9 @@ class Normativa extends BaseNormativa
 	public function eliminarDocumento(){
 		@unlink(sfConfig::get('sf_upload_dir').'/normativas/docs/'.$this->getDocumento());
 	}
+	
+	public function __toString()
+	{
+		return $this->nombre;
+	}
 }
