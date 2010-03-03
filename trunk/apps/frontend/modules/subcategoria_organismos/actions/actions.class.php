@@ -152,7 +152,7 @@ class subcategoria_organismosActions extends sfActions
   public function executeListByCategoriaOrganismo()
 	{
 		
-		$this->name = 'organismos';
+		$this->name = $this->getRequestParameter('name');
 		$this->subcategoria_organismos_selected = 0;
 		$this->arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($this->getRequestParameter('id_categoria_organismo'));
 
