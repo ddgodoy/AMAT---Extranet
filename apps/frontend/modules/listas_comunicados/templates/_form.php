@@ -12,9 +12,17 @@
 <?php echo $form['nombre']->renderError() ?>
  <script language="javascript" type="text/javascript">
         var listaExcluir = '';
+        var SelecPerfiListado = ''
+        var SelecMutuaListado = ''
+        var SelecGrupoListado = ''
+        var SelecConsejoListado = ''
 
         function getIndicesFromSeleccionados()
         {
+        	    SelecPerfiListado = $('perfieles').value;
+		        SelecMutuaListado = $('mutuas').value;
+		        SelecGrupoListado = $('grupos_de_trabajo').value;
+		        SelecConsejoListado = $('conejo_territorial').value;
                 var auxVarlistaExcluir = '';
                 var listaSeleccionados = $('lista_comunicado_usuarios_list');
                 
@@ -56,16 +64,16 @@
 		   <ul class="campos">
             <li><label> Perfil </label>
             <?php echo select_tag('perfieles',options_for_select(array(''=>'--seleccionar--')+_get_options_from_objects(Rol::getRepository()->getAllRol())), array('onchange'=>'getIndicesFromSeleccionados();')) ?></li>
-            <?php echo observe_field('perfieles',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_perfil='+value+'&excluir='+listaExcluir",'script'=>true))?>
+            <?php echo observe_field('perfieles',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_perfil='+SelecPerfiListado+'&id_mutuas='+SelecMutuaListado+'&id_grupos='+SelecGrupoListado+'&id_consejos='+SelecConsejoListado+'&excluir='+listaExcluir",'script'=>true))?>
             <li><label> Mutua </label>
             <?php echo select_tag('mutuas',options_for_select(array(''=>'--seleccionar--')+_get_options_from_objects(Mutua::getRepository()->getAllMutuas())), array('onchange'=>'getIndicesFromSeleccionados();')) ?></li>
-            <?php echo observe_field('mutuas',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_mutuas='+value+'&excluir='+listaExcluir",'script'=>true))?>
+            <?php echo observe_field('mutuas',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_perfil='+SelecPerfiListado+'&id_mutuas='+SelecMutuaListado+'&id_grupos='+SelecGrupoListado+'&id_consejos='+SelecConsejoListado+'&excluir='+listaExcluir",'script'=>true))?>
             <li><label> Grupo de Trabajo </label>
             <?php echo select_tag('grupos_de_trabajo',options_for_select(array(''=>'--seleccionar--')+_get_options_from_objects(GrupoTrabajo::getRepository()->getAllGrupoTrabajo())), array('onchange'=>'getIndicesFromSeleccionados();')) ?></li>
-            <?php echo observe_field('grupos_de_trabajo',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_grupos='+value+'&excluir='+listaExcluir",'script'=>true))?>
+            <?php echo observe_field('grupos_de_trabajo',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_perfil='+SelecPerfiListado+'&id_mutuas='+SelecMutuaListado+'&id_grupos='+SelecGrupoListado+'&id_consejos='+SelecConsejoListado+'&excluir='+listaExcluir",'script'=>true))?>
             <li><label> Consejo Territorial</label>
             <?php echo select_tag('conejo_territorial',options_for_select(array(''=>'--seleccionar--')+_get_options_from_objects(ConsejoTerritorial::getRepository()->getAllconsejo())), array('onchange'=>'getIndicesFromSeleccionados();')) ?></li>
-            <?php echo observe_field('conejo_territorial',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_consejos='+value+'&excluir='+listaExcluir",'script'=>true))?>
+            <?php echo observe_field('conejo_territorial',array('update'=>'unassociated_lista_comunicado_usuarios_list','url'=>'listas_comunicados/lista','with'=>"'id_perfil='+SelecPerfiListado+'&id_mutuas='+SelecMutuaListado+'&id_grupos='+SelecGrupoListado+'&id_consejos='+SelecConsejoListado+'&excluir='+listaExcluir",'script'=>true))?>
            </ul>
 	</fieldset>
 	<fieldset id="usuarios_lista" style="float:left; margin-right:10px;width:445px; ">
