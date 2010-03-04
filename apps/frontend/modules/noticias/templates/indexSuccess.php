@@ -4,11 +4,11 @@ use_helper('Text');?>
 <link type="text/css" rel="stylesheet" href="/js/calendario/dhtml_calendar.css" media="screen"></link>
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
 
-<div class="mapa"><strong>Canal Corporativo</strong> > Novedades</div>
+<div class="mapa"><strong>Canal Corporativo</strong> > Noticia</div>
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tbody>
 		<tr>
-			<td width="70%"><h1>Novedades</h1></td>
+			<td width="70%"><h1>Noticia</h1></td>
 			<!--<td width="5%" align="center"><?php // echo link_to(image_tag('cerrar_sesion_over.jpg', array('title' => 'limpiar', 'alt' => 'limpiar', 'border' => '0')), 'noticias/limpiar'); ?></td>			-->
 			<td width="5%" align="center"><?php $nombretabla = 'Noticia'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 			<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
@@ -26,7 +26,7 @@ use_helper('Text');?>
 		<?php endif; ?>
 		<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Noticia/s</span>
 		<?php if(validate_action('alta')):?>
-		<input type="button" onclick="javascript:location.href='<?php echo url_for('noticias/nueva') ?>';" style="float: right;" value="Crear Nueva Novedad" name="newNews" class="boton"/>
+		<input type="button" onclick="javascript:location.href='<?php echo url_for('noticias/nueva') ?>';" style="float: right;" value="Crear Nueva Noticia" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
 		<?php if ($cantidadRegistros > 0) : ?>
@@ -130,7 +130,7 @@ use_helper('Text');?>
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Noticias/s</span>
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('noticias/nueva') ?>';" style="float:right;margin-top:10px;" value="Crear Nueva Novedad" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('noticias/nueva') ?>';" style="float:right;margin-top:10px;" value="Crear Nueva Noticia" name="newNews" class="boton"/>
 			<?php endif; ?>
 		</div>
 		<?php endif; ?>		

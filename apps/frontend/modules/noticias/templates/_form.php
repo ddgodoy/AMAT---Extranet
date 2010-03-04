@@ -33,7 +33,7 @@
     <div class="botonera">
     </div>
     <fieldset>
-      <legend>Novedades</legend>
+      <legend>Noticia</legend>
       <table width="100%" cellspacing="4" cellpadding="0" border="0">
         <tbody><tr>
           <td width="7%"><label>Fecha*</label></td>

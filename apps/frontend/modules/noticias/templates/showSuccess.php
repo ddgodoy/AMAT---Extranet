@@ -1,11 +1,11 @@
 <?php use_helper('Security') ?>
 <?php use_helper('Date');?>
 <div class="mapa">
-	  <strong>Administrador </strong>&gt; <a href="<?php echo url_for('noticias/index') ?>">Novedades</a> &gt; <?php echo  $noticia->gettitulo() ?>
+	  <strong>Administrador </strong>&gt; <a href="<?php echo url_for('noticias/index') ?>">Noticia</a> &gt; <?php echo  $noticia->gettitulo() ?>
 	</div>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr>
-	    <td width="95%"><h1>Novedades</h1></td>
+	    <td width="95%"><h1>Noticia</h1></td>
 	    <td width="5%" align="right">&nbsp;</td>
 	  </tr>
 	</table>
