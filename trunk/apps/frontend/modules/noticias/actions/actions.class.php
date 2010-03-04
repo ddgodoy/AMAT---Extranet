@@ -16,7 +16,7 @@ class noticiasActions extends sfActions
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-  	$this->pager = new sfDoctrinePager('Noticia', 10);  	    
+  		$this->pager = new sfDoctrinePager('Noticia', 10);  	    
 		$this->pager->getQuery()->from('Noticia')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
