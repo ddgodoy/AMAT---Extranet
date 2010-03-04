@@ -15,6 +15,9 @@
 <?php echo $form['autor']->renderError() ?>
 <?php echo $form['ambito']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
+<?php echo $form['fecha']->renderError() ?>
+<?php echo $form['imagen']->renderError() ?>
+<?php echo $form['documento']->renderError() ?>
 <?php //echo $form['fecha_publicacion']->renderError() ?>
 
 <form action="<?php echo url_for('cifras_datos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>

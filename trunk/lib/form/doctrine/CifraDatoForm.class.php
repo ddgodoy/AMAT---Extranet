@@ -10,6 +10,11 @@ class CifraDatoForm extends BaseCifraDatoForm
 {
   public function configure()
   {
+  	
+  	    $request = sfContext::getInstance();
+  	    
+  	    $accion = $request->getActionName(); 
+  	    
   	    $selecionar = CifraDatoSeccion::getRepository()->getAll();
   	    
   	    $arrayseccion = array('0'=>'--seleccionar--');
@@ -27,8 +32,6 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'autor'             => new sfWidgetFormInputHidden(),
 			'seccion_id'        => new sfWidgetFormChoice(array('choices' => $arrayseccion), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'contenido'         => new fckFormWidget(),
-			'imagen'            => new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')),
-			'documento'         => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')),
 			'link'              => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 		//	'fecha_publicacion' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
@@ -46,11 +49,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => '')),
 			'seccion_id'        => new sfValidatorInteger(),
 			'contenido'         => new sfValidatorString(array('required' => false)),
-			'imagen'            => new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )),
-			'imagen_delete'     => new sfValidatorBoolean(),
-			'documento'         => new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)),
-			'documento_delete'  => new sfValidatorBoolean(),
-			'link'              => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+			'link'              => new sfValidatorString(array('required' => false)),
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_publicacion' => new sfValidatorDate(array(), array('required' => '', 'invalid' => '')),
 			'ambito'            => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'), 'required' => false)),
@@ -60,12 +59,43 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'estado'            => new sfValidatorString(),
 		));
 
+		if($this->getObject()->getImagen())
+		{
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
+		}
+		else 
+		{
+		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+		}
+		
+		if($this->getObject()->getDocumento())
+		{
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)));
+		    $this->setValidator('documento_delete', new sfValidatorBoolean());
+		}
+		else 
+		{
+			
+		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)));
+
+		}
+		
+		
+		
+		
+		
 		$this->setDefaults(array(
 			'owner_id'          => sfContext::getInstance()->getUser()->getAttribute('userId'),
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'autor'             => sfContext::getInstance()->getUser()->getAttribute('apellido').','.sfContext::getInstance()->getUser()->getAttribute('nombre'),
 			'fecha_publicacion' => '2007/01/01',
 			'estado'            => 'pendiente',
+			'link'              => 'http//:',
 			'ambito'            => 'web',
 			'contenido'         => '<div class="noticias nuevodetalle" style="padding-top: 20px;"><img align="left" src="/uploads/image/noimage.jpg" alt="" style="margin-right: 10px; width: 124px; height: 138px;" nottit="" />Titulo<br />
 									<p class="notentrada" style="font-weight: bold;">Entradilla</p>

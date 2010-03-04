@@ -18,8 +18,6 @@ class NoticiaForm extends BaseNoticiaForm
 			'autor'             => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
 			'entradilla'        => new sfWidgetFormTextarea(array(), array('style' => 'width:755px;', 'rows' => 5, 'onfocus' => "this.style.background='#D5F7FF'", 'onblur' => "this.style.background='#E1F3F7'")),
 			'contenido'         => new fckFormWidget(),
-			'imagen'            => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/images'), array('class' => 'form_input')),
-			'documento'         => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs')),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'fecha_caducidad'   => new sfWidgetFormInputHidden(),
@@ -36,9 +34,6 @@ class NoticiaForm extends BaseNoticiaForm
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => false), array('required' => 'El autor es obligatorio')),
 			'entradilla'        => new sfValidatorString(array('required' => false), array('required' => 'La entradilla es obligatoria')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
-			'imagen'            => new sfValidatorFile(array('path' => 'uploads/noticias/images', 'required' =>false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
-			'imagen_delete'     => new sfValidatorBoolean(),
-			'documento'         => new sfValidatorFile(array('path' =>'uploads/noticias/docs','required' => false, 'mime_types'=>array('application/msword', 'application/pdf')), array('mime_types'=>'Formato de documento incorrecto, permitidos (.doc, .pdf )')),
 			'fecha'             => new sfValidatorDate(array('required' => true), array('required' => 'La fecha es obligatoria', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_publicacion' => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')),
 			'fecha_caducidad'   => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
@@ -48,6 +43,33 @@ class NoticiaForm extends BaseNoticiaForm
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 			'estado'            => new sfValidatorString(),
 		));
+		
+		if($this->getObject()->getImagen())
+		{
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/noticias/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
+		}
+		else 
+		{
+		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/noticias/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+		}
+		
+		if($this->getObject()->getDocumento())
+		{
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/noticias/docs', 'required' => false)));
+		    $this->setValidator('documento_delete', new sfValidatorBoolean());
+		}
+		else 
+		{
+			
+		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/noticias/docs', 'required' => false)));
+
+		}
+		
 		
 		$this->setDefaults(array(
 			'owner_id'          => sfContext::getInstance()->getUser()->getAttribute('userId'),
