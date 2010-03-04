@@ -5,36 +5,36 @@ all:
   default_from_email: info@intranet.amat.es
   
   # thumbnail default por si no se define el tamanio abajo
-  thumbnail_normal_width_default:  400
-  thumbnail_normal_height_default: 400
+  thumbnail_normal_width_default:  250
+  thumbnail_normal_height_default: 320
 
   # thumbnail cifras y datos
   thumbnail_small_width_cifras_datos:   100
   thumbnail_small_height_cifras_datos:  100
-  thumbnail_normal_width_cifras_datos:  400
-  thumbnail_normal_height_cifras_datos: 400
+  thumbnail_normal_width_cifras_datos:  250
+  thumbnail_normal_height_cifras_datos: 320
 
   # thumbnail actividades
   thumbnail_small_width_actividades:   100
   thumbnail_small_height_actividades:  100
-  thumbnail_normal_width_actividades:  400
-  thumbnail_normal_height_actividades: 400
+  thumbnail_normal_width_actividades:  250
+  thumbnail_normal_height_actividades: 320
 
   # thumbnail publicaciones
   thumbnail_small_width_publicaciones:   100
   thumbnail_small_height_publicaciones:  100
-  thumbnail_normal_width_publicaciones:  400
-  thumbnail_normal_height_publicaciones: 400
+  thumbnail_normal_width_publicaciones:  250
+  thumbnail_normal_height_publicaciones: 320
   
   # thumbnail noticias
   thumbnail_small_width_noticias:   80
-  thumbnail_small_height_noticias:  40
-  thumbnail_normal_width_noticias:  400
-  thumbnail_normal_height_noticias: 400
+  thumbnail_small_height_noticias:  60
+  thumbnail_normal_width_noticias:  250
+  thumbnail_normal_height_noticias: 320
 
   # thumbnail eventos
-  thumbnail_normal_width_eventos:  200
-  thumbnail_normal_height_eventos: 200
+  thumbnail_normal_width_eventos:  250
+  thumbnail_normal_height_eventos: 320
   thumbnail_small_width_eventos:   100
   thumbnail_small_height_eventos:  100
 
