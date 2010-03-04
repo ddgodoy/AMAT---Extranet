@@ -157,6 +157,8 @@ class circular_sub_temaActions extends sfActions
   ## ajax listar por categoria
   public function executeListByCategoria()
 	{
+	
+		$this->name = $this->getRequestParameter('name')? $this->getRequestParameter('name'):'';
 		$this->sub_tema_selected = 0;
 		$this->arraySubcategoriasTema = CircularSubTemaTable::doSelectByCategoria($this->getRequestParameter('id_categoria'));
 

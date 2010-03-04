@@ -16,7 +16,7 @@ class CircularSubTemaTable extends Doctrine_Table
 		$q->orderBy('nombre ASC');
 
 		$subcategorias = $q->execute();
-
+		
 		return $subcategorias;
 	}
 }

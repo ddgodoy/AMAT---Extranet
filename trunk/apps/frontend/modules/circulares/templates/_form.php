@@ -12,6 +12,8 @@
 	echo $form['fecha_caducidad']->renderError();
 	echo $form['numero']->renderError();
 	echo $form['documento']->renderError();
+	echo $form['circular_sub_tema_id']->renderError();
+	echo $form['subcategoria_organismo_id']->renderError();
 ?>
 <form action="<?php echo url_for('circulares/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 	<?php if (!$form->getObject()->isNew()): ?>
@@ -58,7 +60,7 @@
 															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoriasTema), $cat_tema_selected),
 															array('style'=>'width:330px;','class'=>'form_input')
 														 );
-							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'circular_sub_tema/listByCategoria','with'=>"'id_categoria='+value"));
+							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'circular_sub_tema/listByCategoria','with'=>"'id_categoria='+value+'&name=circular'",'script'=>true));
 						?>
 					</td>
 				</tr>
@@ -66,7 +68,7 @@
 					<td valign="top"><label>Subcategor&iacute;a de Tema</label></td>
 					<td valign="middle">
 						<span id="content_sub_tema">
-							<?php include_partial('circular_sub_tema/selectByCategoria', array ('arraySubcategoriasTema'=>$arraySubcategoriasTema, 'sub_tema_selected'=>$sub_tema_selected)) ?>
+							<?php include_partial('circular_sub_tema/selectByCategoria', array ('arraySubcategoriasTema'=>$arraySubcategoriasTema, 'sub_tema_selected'=>$sub_tema_selected, 'name'=>'circular')) ?>
 						</span>
 					</td>
 				</tr>
