@@ -32,35 +32,6 @@ class agendaActions extends sfActions
 			$this->fechaSeleccionada = "$xDia/$xMes/$xYear";
 		}
 		
-//		$this->paginaActual = $this->getRequestParameter('page', 1);
-//
-//		if (is_numeric($this->paginaActual)) {
-//			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
-//		}
-////		
-////		##### eventos ###### 
-////		if ($xFiltro != '') {
-////			$where = 'e.deleted = 0 AND ue.usuario_id = '.$usurID.' AND e.'.$xFiltro;
-////		} else {
-////			$where = 'e.deleted = 0 AND ue.usuario_id = '.$usurID;
-////		}
-////		
-////  		$this->pagerevntos = new sfDoctrinePager('Evento', 5);  
-////		$this->pagerevntos->getQuery()
-////				->from('Usuario u')
-////				->leftJoin('u.UsuarioEvento ue')
-////				->leftJoin('u.UsuarioEvento ue')
-////				->where($where)
-////				->orderBy('fecha DESC');
-////		$this->pagerevntos->setPage($this->paginaActual);
-////		$this->pagerevntos->init();		
-////				
-////		#######################################
-		
-		
-		
-		
-		
 		$this->Arrayevento = EventoTable::getEventoFecha($usurID, $xFiltro);
 		$this->Arraycombocatoria = ConvocatoriaTable::getConvocatoria($usurID, $xFiltro);
 

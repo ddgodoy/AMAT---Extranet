@@ -26,10 +26,10 @@ class CircularForm extends BaseCircularForm
       'fecha_caducidad'   	=> new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
       'nombre'    			=> new sfValidatorString(array('required' => true), array('required'=>'El Nombre es obligatorio')),      
       'contenido' 			=> new sfValidatorString(array('required' => true), array('required'=>'El Contenido es obligatorio')),
-      'numero'    			=> new sfValidatorString(array('max_length' => 100, 'required' => false) ),
-      'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => false) ),
-      'circular_sub_tema_id'      => new sfValidatorDoctrineChoice(array('model' => 'CircularSubTema', 'required' => false)),
-      'subcategoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => false)),
+      'numero'    			=> new sfValidatorString(array('max_length' => 100, 'required' => true),array('required'=>'El Numero es obligatorio') ),
+      'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => true),array('required'=>'El Documento es obligatorio') ),
+      'circular_sub_tema_id'=> new sfValidatorDoctrineChoice(array('model' => 'CircularSubTema', 'required' => true),array('required'=>'La Subcategoría de Tema es obligatorio','invalid'=>'La Subcategoría de Tema es obligatorio')),
+      'subcategoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true), array('required'=>'La Subcategoría Organismos es obligatorio','invalid'=>'La Subcategoría Organismos es obligatorio')),
     ));
 
     $this->widgetSchema->setLabels(array(
