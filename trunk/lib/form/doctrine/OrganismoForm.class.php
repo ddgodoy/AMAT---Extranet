@@ -32,7 +32,7 @@ class OrganismoForm extends BaseOrganismoForm
 			'categoria_organismo_id'      => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'subcategoria_organismo_id'   => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'usuarios_list'         	  => new sfWidgetFormSelectDoubleList(array('choices' => $arrUsuariosGrupo, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	),
-			'detalle'                     => new fckFormWidget(array('label'=>'Detalle'),array('style'=>'width:400px;height:200px;','class'=>'form_input')),
+			'detalle'                     => new sfWidgetFormTextarea(array('label'=>'Detalle'),array('style' => 'width:755px;', 'rows' => 5, 'onfocus' => "this.style.background='#D5F7FF'", 'onblur' => "this.style.background='#E1F3F7'")),
 		));
 		
 		$this->setValidators(array(

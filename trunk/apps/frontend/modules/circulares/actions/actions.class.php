@@ -134,7 +134,7 @@ class circularesActions extends sfActions
 		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id');
 		$this->SelectSubOrganismoBsq = $this->getRequestParameter('circular[subcategoria_organismo_id]') ;
 		
-		if (!empty($this->nBsq)) {
+		if (!empty($this->nBsq) && is_numeric($this->nBsq) ) {
 			$parcial .= " AND c.numero = $this->nBsq";
 			$this->getUser()->setAttribute($modulo.'_nownumero', $this->nBsq);
 		}
