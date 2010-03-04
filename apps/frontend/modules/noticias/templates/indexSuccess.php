@@ -54,7 +54,14 @@ use_helper('Text');?>
 					<td align="center">
 					<?php		
 						if ($noticia->getImagen()) {
-							echo image_tag('/uploads/noticias/images/'.$noticia->getImagen(), array('height' => 40, 'width' => 80, 'alt' => $noticia->getTitulo()));
+							if(file_exists(sfConfig::get('sf_upload_dir').'/noticias/images/s_'.$noticia->getImagen()))
+							{
+								echo image_tag('/uploads/noticias/images/s_'.$noticia->getImagen(), array('alt' => $noticia->getTitulo()));
+							}
+							else 
+							{
+								echo image_tag('/uploads/noticias/images/'.$noticia->getImagen(), array('height' => 40, 'width' => 80, 'alt' => $noticia->getTitulo()));
+							}
 						}
 						else {	
 							echo image_tag('noimage.jpg', array('height' => 50, 'width' => 50, 'alt' => $noticia->getTitulo()));
