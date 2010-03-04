@@ -72,7 +72,7 @@
           <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
         </tr>
         <tr>
-          <td style="padding-top: 5px;"><label>Archivow</label></td>
+          <td style="padding-top: 5px;"><label>Archivo</label></td>
           <td style="padding-top: 5px;"><label>
             <?php echo $form['documento'] ?>
           </label></td>

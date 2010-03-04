@@ -18,7 +18,7 @@
 	</div>	
 	
 	<div class="noticias">
-	  <img src="<?php if ($cifra_dato->getimagen()): ?>/uploads/cifras_datos/images/s_<?php echo $cifra_dato->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $cifra_dato->gettitulo() ?>" />
+	  <img src="<?php if ($cifra_dato->getimagen()): ?>/uploads/cifras_datos/images/<?php echo $cifra_dato->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $cifra_dato->gettitulo() ?>" />
 
 	  <a href="#" class="nottit"><?php echo  $cifra_dato->gettitulo() ?></a><br />
 	  <?php echo $cifra_dato->getcontenido() ?>   

@@ -21,8 +21,6 @@ class ActividadForm extends BaseActividadForm
 		//	'autor'             => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
 			'autor'             => new sfWidgetFormInputHidden(),
 			'contenido'         => new fckFormWidget(),
-			'imagen'            => new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/actividades/images/'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')),
-			'documento'         => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/actividades/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 		//  'fecha_publicacion' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 		    'fecha_publicacion' => new sfWidgetFormInputHidden(),
@@ -39,10 +37,6 @@ class ActividadForm extends BaseActividadForm
 		//	'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El autor es obligatorio')),
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => '')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
-			'imagen'            => new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )),
-			'imagen_delete'     => new sfValidatorBoolean(),
-			'documento'         => new sfValidatorFile(array('path' => 'uploads/actividades/docs', 'required' => false)),
-			'documento_delete'  => new sfValidatorBoolean(),
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 		//	'fecha_publicacion' => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')),
 		    'fecha_publicacion' => new sfValidatorDate(array(), array('required' => '', 'invalid' => '')),
@@ -52,6 +46,33 @@ class ActividadForm extends BaseActividadForm
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 			'estado'            => new sfValidatorString(),
 		));
+		
+		
+		if($this->getObject()->getImagen())
+		{
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/actividades/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
+		}
+		else 
+		{
+		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/actividades/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+		}
+		
+		if($this->getObject()->getDocumento())
+		{
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/actividades/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/actividades/docs', 'required' => false)));
+		    $this->setValidator('documento_delete', new sfValidatorBoolean());
+		}
+		else 
+		{
+			
+		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/actividades/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/actividades/docs', 'required' => false)));
+
+		}
 		
 		
 		$this->setDefaults(array(
