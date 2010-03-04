@@ -21,7 +21,7 @@ class NoticiaTable extends Doctrine_Table
 		$q->where('n.deleted = 0');
 		$q->andWhere("n.estado = 'publicado'");
 		$q->andWhere("n.destacada = 1");
-		$q->orderBy('n.created_at DESC');
+		$q->orderBy('n.id DESC');
 		if($limit) $q->limit($limit);
 		
 		$notificaciones = $q->execute();

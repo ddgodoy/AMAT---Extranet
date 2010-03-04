@@ -183,6 +183,11 @@ class iniciativasActions extends sfActions
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
 		}
+		else 
+		{
+			$this->orderBy = $this->getRequestParameter('sort');
+			$this->sortType = $this->getRequestParameter('type');
+		}
 		return $this->orderBy . ' ' . $this->sortType;
   	}
   	else 
