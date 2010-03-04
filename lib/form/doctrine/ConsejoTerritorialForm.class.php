@@ -13,7 +13,7 @@ class ConsejoTerritorialForm extends BaseConsejoTerritorialForm
   {
   	$this->setWidgets(array(
       'nombre'  => new sfWidgetFormInput(array('label'=>'Nombre *'),array('style'=>'width:400px;','class'=>'form_input')),
-      'detalle' => new fckFormWidget(array('label'=>'Descripción *'),array('style'=>'width:400px;height:200px;','class'=>'form_input')),
+      'detalle'                     => new sfWidgetFormTextarea(array('label'=>'Detalle'),array('style' => 'width:755px;', 'rows' => 5, 'onfocus' => "this.style.background='#D5F7FF'", 'onblur' => "this.style.background='#E1F3F7'")),
     ));
 
     $this->setValidators(array(
