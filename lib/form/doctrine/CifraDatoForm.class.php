@@ -96,14 +96,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'fecha_publicacion' => '2007/01/01',
 			'estado'            => 'pendiente',
 			'link'              => 'http//:',
-			'ambito'            => 'web',
-			'contenido'         => '<div class="noticias nuevodetalle" style="padding-top: 20px;"><img align="left" src="/uploads/image/noimage.jpg" alt="" style="margin-right: 10px; width: 124px; height: 138px;" nottit="" />Titulo<br />
-									<p class="notentrada" style="font-weight: bold;">Entradilla</p>
-									<p style="border-bottom: 1px dotted; margin: 10px 0px; color: rgb(204, 204, 204);">&nbsp;</p>
-									<p>Desccripcion</p>
-									<div class="clear">&nbsp;</div>
-									</div>'
-		));
+			'ambito'            => 'web',));
 
 		$this->widgetSchema->setNameFormat('cifra_dato[%s]');
   }

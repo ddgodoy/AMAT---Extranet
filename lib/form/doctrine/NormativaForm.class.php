@@ -77,11 +77,7 @@ class NormativaForm extends BaseNormativaForm
       		'subcategoria_normativa_dos_id' => 'SubCategoria (nivel 2)',
 			
 		));
-	$this->setDefaults(array('contenido' =>'<div style="padding-top: 20px;" class="noticias nuevodetalle"> <a class="nottit" >Titulo</a><br />
-                         					   <p style="font-weight: bold;" class="notentrada">Entradilla</p>
-                          					   <p style="border-bottom: 1px dotted; margin: 10px 0px; color: rgb(204, 204, 204);">&nbsp;</p>
-                          					   <p>Desccripcion</p>
-                          					   <div class="clear">&nbsp;</div></div>',));	
+	
 
     $this->widgetSchema->setNameFormat('normativa[%s]');
   }

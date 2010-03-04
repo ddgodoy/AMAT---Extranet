@@ -60,15 +60,8 @@ class EventoForm extends BaseEventoForm
 			'usuarios_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'Acción inválida')),
 		));
 		
-		$defaultInfo = '<div class="noticias nuevodetalle" style="padding-top: 20px;">'.
-									 '<img align="left" src="/uploads/image/noimage.jpg" alt="" style="margin-right: 10px; width: 124px; height: 138px;" nottit="" />'.
-									 'Titulo<br /><p class="notentrada" style="font-weight: bold;">Entradilla</p>'.
-									 '<p style="border-bottom: 1px dotted; margin: 10px 0px; color: rgb(204, 204, 204);">&nbsp;</p>'.
-									 '<p>Desccripcion</p><div class="clear">&nbsp;</div></div>';
-
 		$this->setDefaults(array( 'usuarios_list' => $userId,
-		                          'owner_id' => $userId, 
-		                          'mas_info' => $defaultInfo,));
+		                          'owner_id' => $userId, ));
 
 		$this->widgetSchema->setNameFormat('evento[%s]');
 	}
