@@ -16,8 +16,12 @@ class iniciativasActions extends sfActions
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-  	$this->pager = new sfDoctrinePager('Iniciativa', 10);
-		$this->pager->getQuery()->from('Iniciativa')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+  	$this->pager = new sfDoctrinePager('Iniciativa', 15);
+		$this->pager->getQuery()->from('Iniciativa')
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
+		
+	
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -173,14 +177,22 @@ class iniciativasActions extends sfActions
   
   protected function setOrdenamiento()
   {
-		$this->orderBy = 'nombre';
-		$this->sortType = 'asc';
-
+  	if($this->getRequestParameter('sort'))
+  	{
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
 		}
 		return $this->orderBy . ' ' . $this->sortType;
+  	}
+  	else 
+  	{
+  		$this->orderBy = '';
+		$this->sortType = 'asc';
+  		
+  		return 'fecha desc, nombre asc ';
+  	}
+  		
   }
   
   public function executeSubcategorias(sfWebRequest $request)

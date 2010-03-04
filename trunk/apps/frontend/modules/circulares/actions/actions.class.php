@@ -27,6 +27,7 @@ class circularesActions extends sfActions
 	    ->leftJoin('sco.CategoriaOrganismo co')
 		->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 		
+		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -227,15 +228,24 @@ class circularesActions extends sfActions
   
   protected function setOrdenamiento()
   {
-		$this->orderBy = 'c.fecha';
-		$this->sortType = $this->getRequestParameter('type')? $this->getRequestParameter('type'):'asc';
-        
+  	
+  	if($this->getRequestParameter('sort'))
+  	{
+	        
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc':'asc' ;
 		}
 		
 		return $this->orderBy . ' ' . $this->sortType;
+  	}
+  	else 
+  	{   
+  		$this->orderBy = '';
+		$this->sortType = 'asc';
+  		
+  		return 'c.fecha desc, c.numero desc';
+  	}	
   }
   
   public function executeListFechas(sfWebRequest $request)
