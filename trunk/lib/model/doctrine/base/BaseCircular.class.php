@@ -21,9 +21,8 @@ abstract class BaseCircular extends sfDoctrineRecord
         $this->hasColumn('fecha_caducidad', 'date', null, array(
              'type' => 'date',
              ));
-        $this->hasColumn('numero', 'string', 100, array(
-             'type' => 'string',
-             'length' => '100',
+        $this->hasColumn('numero', 'integer', null, array(
+             'type' => 'integer',
              ));
         $this->hasColumn('documento', 'string', 255, array(
              'type' => 'string',

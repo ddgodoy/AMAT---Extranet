@@ -32,7 +32,7 @@ class BaseCircularForm extends BaseFormDoctrine
       'contenido'                 => new sfValidatorString(array('required' => false)),
       'fecha'                     => new sfValidatorDate(),
       'fecha_caducidad'           => new sfValidatorDate(array('required' => false)),
-      'numero'                    => new sfValidatorString(array('max_length' => 100, 'required' => false)),
+      'numero'                    => new sfValidatorInteger(array('required' => false)),
       'documento'                 => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'circular_sub_tema_id'      => new sfValidatorDoctrineChoice(array('model' => 'CircularSubTema', 'required' => false)),
       'subcategoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => false)),

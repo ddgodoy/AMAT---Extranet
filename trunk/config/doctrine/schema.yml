@@ -374,7 +374,7 @@ Circular:
     contenido:                 { type: clob, notnull: false }  
     fecha:                     { type: date, notnull: true }
     fecha_caducidad:           { type: date, notnull: false }
-    numero:                    { type: string(100), notnull: false }
+    numero:                    { type: integer, notnull: false }
     documento:                 { type: string(255), notnull: false }
     circular_sub_tema_id:      { type:integer }
     subcategoria_organismo_id: { type: integer }
