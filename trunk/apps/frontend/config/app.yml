@@ -15,20 +15,22 @@ all:
   thumbnail_normal_height_cifras_datos: 400
 
   # thumbnail actividades
-  thumbnail_small_width_cifras_datos:   100
-  thumbnail_small_height_cifras_datos:  100
-  thumbnail_normal_width_cifras_datos:  400
-  thumbnail_normal_height_cifras_datos: 400
+  thumbnail_small_width_actividades:   100
+  thumbnail_small_height_actividades:  100
+  thumbnail_normal_width_actividades:  400
+  thumbnail_normal_height_actividades: 400
 
   # thumbnail publicaciones
-  thumbnail_small_width_cifras_datos:   100
-  thumbnail_small_height_cifras_datos:  100
-  thumbnail_normal_width_cifras_datos:  400
-  thumbnail_normal_height_cifras_datos: 400
+  thumbnail_small_width_publicaciones:   100
+  thumbnail_small_height_publicaciones:  100
+  thumbnail_normal_width_publicaciones:  400
+  thumbnail_normal_height_publicaciones: 400
   
   # thumbnail noticias
-  thumbnail_normal_width_noticias:  200
-  thumbnail_normal_height_noticias: 200
+  thumbnail_small_width_noticias:   80
+  thumbnail_small_height_noticias:  40
+  thumbnail_normal_width_noticias:  400
+  thumbnail_normal_height_noticias: 400
 
   # thumbnail eventos
   thumbnail_normal_width_eventos:  200

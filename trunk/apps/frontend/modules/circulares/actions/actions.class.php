@@ -125,7 +125,7 @@ class circularesActions extends sfActions
 //  	echo '</pre>';
 //  	exit();
 //  	
-		$this->nBsq = $this->getRequestParameter('n_busqueda');
+		$this->nBsq = is_numeric($this->getRequestParameter('n_busqueda'))?$this->getRequestParameter('n_busqueda'):'';
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
@@ -134,7 +134,7 @@ class circularesActions extends sfActions
 		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id');
 		$this->SelectSubOrganismoBsq = $this->getRequestParameter('circular[subcategoria_organismo_id]') ;
 		
-		if (!empty($this->nBsq) && is_numeric($this->nBsq) ) {
+		if ($this->nBsq!='') {
 			$parcial .= " AND c.numero = $this->nBsq";
 			$this->getUser()->setAttribute($modulo.'_nownumero', $this->nBsq);
 		}
