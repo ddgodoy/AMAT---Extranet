@@ -98,12 +98,14 @@ class sfResizedFile extends sfValidatedFile
 		// si encuentra el alto y ancho small en app.yml los define, sino no lo crea
 		if (sfConfig::get('app_thumbnail_small_width_'.$modulo) && sfConfig::get('app_thumbnail_small_height_'.$modulo))
 		{
-			
-			$arrayfile = explode('_',$file);
-			if(is_array($arrayfile) && !empty($arrayfile[1]))
+			if($modulo == 'noticia')
 			{
-				$smallFile = $this->path.DIRECTORY_SEPARATOR.'s_'.$arrayfile[1];
-			}
+				$arrayfile = explode('_',$file);
+				if(is_array($arrayfile) && !empty($arrayfile[1]))
+				{
+					$smallFile = $this->path.DIRECTORY_SEPARATOR.'s_'.$arrayfile[1];
+				}
+			}	
 			
 			$thumbnail_width  = sfConfig::get('app_thumbnail_small_width_'.$modulo);
 			$thumbnail_height = sfConfig::get('app_thumbnail_small_height_'.$modulo);
@@ -119,11 +121,15 @@ class sfResizedFile extends sfValidatedFile
 		// si encuentra el alto y ancho medium en app.yml los define, sino no lo crea
 		if (sfConfig::get('app_thumbnail_medium_width_'.$modulo) && sfConfig::get('app_thumbnail_medium_height_'.$modulo))
 		{
-			$arrayfile = explode('_',$file);
-			if(is_array($arrayfile) && !empty($arrayfile[1]))
+			
+			if($modulo == 'noticia')
 			{
-				$mediumFile = $this->path.DIRECTORY_SEPARATOR.'m_'.$arrayfile[1];
-			}
+				$arrayfile = explode('_',$file);
+				if(is_array($arrayfile) && !empty($arrayfile[1]))
+				{
+					$mediumFile = $this->path.DIRECTORY_SEPARATOR.'m_'.$arrayfile[1];
+				}
+			}	
 			
 			$thumbnail_width  = sfConfig::get('app_thumbnail_medium_width_'.$modulo);
 			$thumbnail_height = sfConfig::get('app_thumbnail_medium_height_'.$modulo);
