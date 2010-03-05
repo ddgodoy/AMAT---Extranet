@@ -182,13 +182,14 @@ class noticiasActions extends sfActions
 				ServiceNotificacion::send('creacion', 'Noticia', $noticia->getId(), $noticia->getTitulo());
 			}
             
-			if($estado['estado'] == 'pendiente')
-			{ 
-				$enviar = true;
-				$email = AplicacionRolTable::getEmailPublicar(1);
-				$tema = 'Novedad pendiente de publicar';
-			}	
+//			if($estado['estado'] == 'pendiente')
+//			{ 
+//				$enviar = true;
+//				$email = AplicacionRolTable::getEmailPublicar(1);
+//				$tema = 'Novedad pendiente de publicar';
+//			}	
 			##enviar email a los responsables 
+			
 			if($enviar)	
 			{
 				foreach ($email AS $emailPublic)
