@@ -4,6 +4,16 @@
  */
 class CircularSubTemaTable extends Doctrine_Table
 {
+	public static function getAll()
+	{
+	   $q=Doctrine_Query::create()
+	   ->from('CircularSubTema')
+	   ->where('deleted = 0');
+	   
+		return $q->execute();
+		
+	}
+	
 	public static function doSelectByCategoria($categoria)
 	{
 		if (empty($categoria)) {return false;}
