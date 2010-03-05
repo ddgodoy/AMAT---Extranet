@@ -62,21 +62,44 @@ class noticiasActions extends sfActions
 		$this->setTemplate('editar');
 	}
 
-	public function executeDelete(sfWebRequest $request)
+  public function executeDelete(sfWebRequest $request)
 	{
-		$request->checkCSRFProtection();
 		
-		$this->forward404Unless($noticia = Doctrine::getTable('Noticia')->find($request->getParameter('id')), sprintf('Object noticia does not exist (%s).', $request->getParameter('id')));
-		
-		$aviso = NotificacionTable::getDeleteEntidad($noticia->getId(),$noticia->getTitulo ());
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-	    if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-		$aviso->delete();
-		$noticia->delete();
-		
-		$this->redirect('noticias/index');
+		$this->processSelectedRecords($request, 'baja');
 	}
+	
+	protected function processSelectedRecords(sfWebRequest $request, $accion)
+	  {
+	  	$toProcess = $request->getParameter('id');
+	  	
+	  	if (!empty($toProcess)) {
+	  		$request->checkCSRFProtection();
+	  		
+	  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+	  		
+	  		foreach ($IDs as $id) {
+	  			    $this->forward404Unless($noticia = Doctrine::getTable('Noticia')->find($id), sprintf('Object documentacion_grupo does not exist (%s).', $id));
+	  			
+	  			    sfLoader::loadHelpers('Security');
+					if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+	
+					if ($accion == 'publicar') {
+//						$documentacion_grupo->setEstado('publicado');
+//						$documentacion_grupo->save();
+//			
+//						ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());	
+					} else {
+						$aviso = NotificacionTable::getDeleteEntidad($noticia->getId(),$noticia->getTitulo());
+						$aviso->delete();
+						$noticia->delete();
+					}		
+	  		}
+	  	}
+	  	$this->redirect('noticias/index');
+	  }
+	
+	
+	
 	
 	public function executePublicar(sfWebRequest $request)
 	{

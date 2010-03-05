@@ -46,7 +46,7 @@ class CircularForm extends BaseCircularForm
       'nombre'    			=> new sfValidatorString(array('required' => true), array('required'=>'El Nombre es obligatorio')),      
       'contenido' 			=> new sfValidatorString(array('required' => false), array('required'=>'El Contenido es obligatorio')),
       'numero'    			=> new sfValidatorString(array('max_length' => 100, 'required' => true),array('required'=>'El Numero es obligatorio') ),
-      'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => false),array('required'=>'El Documento es obligatorio') ),
+      'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => false)),
       'circular_sub_tema_id'=> new sfValidatorChoice(array('choices' => $arraysubtema , 'required' => false)),
       'subcategoria_organismo_id' => new sfValidatorChoice(array('choices' => $arraysubOrga, 'required' => false)),
     ));

@@ -1,6 +1,28 @@
 <?php use_helper('TestPager') ?>
 <?php use_helper('Security');
 use_helper('Text');?>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+<script language="javascript" type="text/javascript">
+	function setActionFormList(accion)
+	{
+		var parcialMensaje = '';
+		var rutaToPub = '<?php echo url_for('noticias/publicar') ?>';
+		var rutaToDel = '<?php echo url_for('noticias/delete') ?>';
+		var objectFrm = $('frmListDocOrganismos');
+
+		if (accion == 'publicar') {
+			objectFrm.action = rutaToPub;
+			parcialMensaje = 'publicación';
+		} else {
+			objectFrm.action = rutaToDel;
+			parcialMensaje = 'eliminación';
+		}
+		if (confirm('Confirma la '+ parcialMensaje +' de los registros seleccionados?')) {
+			return true;
+		}
+		return false;
+	}
+</script>
 <link type="text/css" rel="stylesheet" href="/js/calendario/dhtml_calendar.css" media="screen"></link>
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
 
@@ -31,13 +53,15 @@ use_helper('Text');?>
 	</div>
 		<?php if ($cantidadRegistros > 0) : ?>
 		<?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?><div style="border-bottom:5px solid #CCC; margin:10px 0px;"></div><?php endif;?>
+		<form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0"  class="listados" <?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?>style="border:none;"<?php endif;?>>
 			<tbody>
 			<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
 				<tr>
-					<th width="11%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
+					<th width="5%">&nbsp;</th>
+					<th width="7%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
 					<th width="11%"></th>
-					<th width="57%"><a href="<?php echo url_for('noticias/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
+					<th width="61%"><a href="<?php echo url_for('noticias/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
 					<th width="4%"><a href="#"/></th>
 					<th width="4%"><a href="#"/></th>
 					<th width="4%"></th>
@@ -46,7 +70,8 @@ use_helper('Text');?>
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
 				<tr class="<?php echo $odd ?>">
-					<td valign="middle" align="center">
+				<td><input type="checkbox" name="id[]" value="<?php echo $noticia->getId() ?>" /></td>
+					<td>
 						<?php
 							echo date("d/m/Y", strtotime($noticia->getFecha()));
 						?>
@@ -119,8 +144,18 @@ use_helper('Text');?>
 		        </tr>
 		        <?php endif;?>
 				<?php endforeach; ?>
+				<?php if(validate_action('baja')):?>
+				<tr>
+					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+					<td colspan="5">
+						<!--<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
+						<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+					</td>
+				</tr>
+				<?php endif; ?>
 			</tbody>
 		</table>
+		</form>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
