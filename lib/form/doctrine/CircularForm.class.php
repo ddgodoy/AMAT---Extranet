@@ -10,6 +10,25 @@ class CircularForm extends BaseCircularForm
 {
   public function configure()
   {
+  	$arraysubtema = array('0'=>'0');
+  	$subcategorias_temas = CircularSubTemaTable::getAll();
+  	
+  	foreach ($subcategorias_temas as $s)
+  	{
+  		$arraysubtema[$s->getId()] = $s->getId();
+  	}
+  	
+  	$arraysubOrga = array('0'=>'0');
+  	$subcategorias_organiosmos = SubCategoriaOrganismoTable::getAllsubcategoriaOrg();
+  	
+  	foreach ($subcategorias_organiosmos as $s)
+  	{
+  		$arraysubOrga[$s->getId()] = $s->getId();
+  	}
+
+  	
+  	
+  	
   	$this->setWidgets(array(
   	  'fecha'     => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
   	  'fecha_caducidad'  => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
@@ -25,11 +44,11 @@ class CircularForm extends BaseCircularForm
       'fecha'             	=> new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
       'fecha_caducidad'   	=> new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
       'nombre'    			=> new sfValidatorString(array('required' => true), array('required'=>'El Nombre es obligatorio')),      
-      'contenido' 			=> new sfValidatorString(array('required' => true), array('required'=>'El Contenido es obligatorio')),
+      'contenido' 			=> new sfValidatorString(array('required' => false), array('required'=>'El Contenido es obligatorio')),
       'numero'    			=> new sfValidatorString(array('max_length' => 100, 'required' => true),array('required'=>'El Numero es obligatorio') ),
-      'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => true),array('required'=>'El Documento es obligatorio') ),
-      'circular_sub_tema_id'=> new sfValidatorDoctrineChoice(array('model' => 'CircularSubTema', 'required' => true),array('required'=>'La Subcategoría de Tema es obligatorio','invalid'=>'La Subcategoría de Tema es obligatorio')),
-      'subcategoria_organismo_id' => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true), array('required'=>'La Subcategoría Organismos es obligatorio','invalid'=>'La Subcategoría Organismos es obligatorio')),
+      'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => false),array('required'=>'El Documento es obligatorio') ),
+      'circular_sub_tema_id'=> new sfValidatorChoice(array('choices' => $arraysubtema , 'required' => false)),
+      'subcategoria_organismo_id' => new sfValidatorChoice(array('choices' => $arraysubOrga, 'required' => false)),
     ));
 
     $this->widgetSchema->setLabels(array(
