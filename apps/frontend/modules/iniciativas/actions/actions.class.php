@@ -27,6 +27,27 @@ class iniciativasActions extends sfActions
 
 		$this->iniciativa_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
+		
+		############ navegacion giada años #################
+		$this->months = '';
+	  	$this->year = '';
+		
+		$this->modulo = $this->getModuleName();
+  	
+	  	$this->FEcha_circulares = Common::getListFechas($this->getModuleName());
+	  	
+	  	if($this->desdeBsq &&  $this->hastaBsq) 
+	  	{ 
+	  		$desdeBsq = explode('/',$this->desdeBsq);
+	  		$hastaBsq = explode('/',$this->hastaBsq);
+	  		if($desdeBsq[1] == $hastaBsq[1])
+	  		{
+	  			$this->months = $desdeBsq[1];
+	  		}	
+	  		$this->year = $desdeBsq[2];
+	  	}	
+	  	
+		
   }
   
   public function executeShow(sfWebRequest $request)
@@ -114,7 +135,7 @@ class iniciativasActions extends sfActions
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
-		$this->CatInicBsq = $this->getRequestParameter('select_cat_ini');
+		$this->CatInicBsq = $this->getRequestParameter('select_cat_tema');
 		$this->SubIniBsq = $this->getRequestParameter('iniciativa[subcategoria_iniciativa_id]');
 
 		if (!empty($this->cajaBsq)) {

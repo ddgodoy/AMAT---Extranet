@@ -12,8 +12,6 @@ class circularesActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	
-  	
-  	
   	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
@@ -33,6 +31,27 @@ class circularesActions extends sfActions
 
 		$this->circular_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
+		
+		############ navegacion giada años #################
+		$this->months = '';
+	  	$this->year = '';
+		
+		$this->modulo = $this->getModuleName();
+  	
+	  	$this->FEcha_circulares = Common::getListFechas($this->getModuleName());
+	  	
+	  	if($this->desdeBsq &&  $this->hastaBsq) 
+	  	{ 
+	  		$desdeBsq = explode('/',$this->desdeBsq);
+	  		$hastaBsq = explode('/',$this->hastaBsq);
+	  		if($desdeBsq[1] == $hastaBsq[1])
+	  		{
+	  			$this->months = $desdeBsq[1];
+	  		}	
+	  		$this->year = $desdeBsq[2];
+	  	}	
+	  	
+		
   }
 
   public function executeNueva(sfWebRequest $request)
@@ -115,6 +134,23 @@ class circularesActions extends sfActions
     }
   }
 
+   protected function getListFechas(sfWebRequest $request)
+  {    
+  	    $this->modulo = $request->getParameter('modulo');
+  	    $this->FEcha_circulares = Circular::getRanfoDEfechas($request->getParameter('modulo'));
+  	    
+  	    //return $this->renderPartial('circulares/LystFecha');
+  }
+  
+   protected function getListMes(sfWebRequest $request)
+  {
+  	    $this->modulo = $request->getParameter('modulo');
+  	    $this->year = $this->getRequestParameter('fecha');
+  	    
+  	    //return $this->renderPartial('circulares/LystMes');
+  }
+
+    
   protected function setFiltroBusqueda()
   {
   	sfLoader::loadHelpers('Date');
@@ -252,25 +288,6 @@ class circularesActions extends sfActions
   		
   		return 'c.fecha desc, c.numero desc';
   	}	
-  }
-  
-  public function executeListFechas(sfWebRequest $request)
-  {    
-  	    $this->modulo = $request->getParameter('modulo');
-  	    $this->FEcha_circulares = Circular::getRanfoDEfechas($request->getParameter('modulo'));
-  	    
-  	    return $this->renderPartial('circulares/LystFecha');
-  }
-  
-   public function executeListMes(sfWebRequest $request)
-  {
-  	    $this->modulo = $request->getParameter('modulo');
-  	    $this->year = $this->getRequestParameter('fecha');
-  	    
-  	    return $this->renderPartial('circulares/LystMes');
-  }
-  
-  
-  
+  } 
   
 }

@@ -43,5 +43,18 @@ class Common
 	    return false;
     }  
 		
+    public static function getListFechas($modulo)
+	  {    
+	  	    $FEcha_circulares = Circular::getRanfoDEfechas($modulo);
+	  	    
+	  	    return $FEcha_circulares;
+	  }   
+	  
+	public static function getListCategoria($tabla)
+	{
+		$arrayCategoriasTema = CircularTable::doSelectAllCategorias($tabla);
+
+		return $arrayCategoriasTema;
+	}  
 }
 ?>

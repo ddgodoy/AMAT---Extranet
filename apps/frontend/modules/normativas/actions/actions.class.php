@@ -23,6 +23,26 @@ class normativasActions extends sfActions
 
 	$this->normativa_list = $this->pager->getResults();
 	$this->cantidadRegistros = $this->pager->getNbResults();
+	
+	############ navegacion giada años #################
+		$this->months = '';
+	  	$this->year = '';
+		
+		$this->modulo = $this->getModuleName();
+  	
+	  	$this->FEcha_circulares = Common::getListFechas($this->getModuleName());
+	  	
+	  	if($this->desdeBsq &&  $this->hastaBsq) 
+	  	{ 
+	  		$desdeBsq = explode('/',$this->desdeBsq);
+	  		$hastaBsq = explode('/',$this->hastaBsq);
+	  		if($desdeBsq[1] == $hastaBsq[1])
+	  		{
+	  			$this->months = $desdeBsq[1];
+	  		}	
+	  		$this->year = $desdeBsq[2];
+	  	}	
+	
   }
   
   public function executeShow(sfWebRequest $request)
@@ -105,7 +125,7 @@ class normativasActions extends sfActions
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
-		$this->CatNormBsq = $this->getRequestParameter('select_cat_nor');
+		$this->CatNormBsq = $this->getRequestParameter('select_cat_tema');
 		$this->SubNormBsq1 = $this->getRequestParameter('normativa[subcategoria_normativa_uno_id]');
 		$this->SubNormBsq2 = $this->getRequestParameter('normativa[subcategoria_normativa_dos_id]');
 		

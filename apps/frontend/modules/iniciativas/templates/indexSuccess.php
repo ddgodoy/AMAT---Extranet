@@ -109,20 +109,18 @@
 	</div>
 <!-- * -->
 	<div class="rightside">
-	 <div class="paneles">
-        <h1>Navegación guiada</h1> <h4>Iniciativas</h4>
-			<div class="col1">
-			   <ul class="tema_11">
-			          <li><a id="años" style="cursor:pointer;"><?php echo link_to_remote('Años',array('update'=>'can_años','url'=>'circulares/listFechas?modulo='.$sf_context->getModuleName()));?></a></li>
-			          <div id="can_años"></div>
-			                
-			          <li ><a id="cta_tema" style="cursor:pointer;"><?php echo link_to_remote('Categor&iacute;a de Iniciativas',array('update'=>'lis_cat','url'=>'circular_cat_tema/listCategoria?tabla=CategoriaIniciativa&modulo='.$sf_context->getModuleName()));?></a></li>
-			          <div id="lis_cat"></div>     
-			          </li>     
-			          </li>
-			      </ul>
-			 </div>
-        </div>			      
+	<?php echo include_partial('inicio/NavegacionGuiada',
+        array('FEcha_circulares'=>$FEcha_circulares,
+	   'modulo'=>$modulo,
+	   'year'=>$year,
+	   'months'=>$months,
+	   'arrayCategoriasTema'=>CircularTable::doSelectAllCategorias('CategoriaIniciativa'), 
+	   'SelectCatTemaBsq'=>$CatInicBsq, 
+	   'SelectSubTemaBsq'=>$SubIniBsq, 
+	   'SelectSubTemaBsq2'=>'', 
+	   'arrayCategoria'=>'', 
+	   'SelectCatOrganismoBsq'=>'', 
+	   'SelectSubOrganismoBsq'=>''))?>    
 		<div class="paneles">
 			<h1>Buscar por Titulo</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('iniciativas/index') ?>">
@@ -155,10 +153,10 @@
 				    <tr>
 					<td valign="top"><label>Categor&iacute;a de Iniciativas</label></td>
 					<td valign="middle">
-						<?php echo select_tag('select_cat_ini',
+						<?php echo select_tag('select_cat_tema',
 							options_for_select(CategoriaIniciativa::getArrayCategoria(), $CatInicBsq),
 							array('style'=>'width:120px;','class'=>'form_input'));
-							echo observe_field('select_cat_ini', array('update'=>'content_sub_tema','url'=>'iniciativas/subcategorias','with'=>"'id_categoria='+value")) ?>
+							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'iniciativas/subcategorias','with'=>"'id_categoria='+value")) ?>
 					</td>
 				</tr>
 				<tr>
