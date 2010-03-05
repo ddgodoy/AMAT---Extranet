@@ -99,23 +99,18 @@
 	</div>
 <!-- * -->
 <div class="rightside">
-<div class="paneles">
-    <h1>Navegación guiada</h1> <h4>Circulares</h4>
-			<div class="col1">
-			   <ul class="tema_11">
-			          <li><a id="años" style="cursor:pointer;"><?php echo link_to_remote('Años',array('update'=>'can_años','url'=>'circulares/listFechas?modulo='.$sf_context->getModuleName()));?></a></li>
-			          <div id="can_años"></div>
-			                
-			          <li ><a id="cta_tema" style="cursor:pointer;"><?php echo link_to_remote('Categor&iacute;a de Tema',array('update'=>'lis_cat','url'=>'circular_cat_tema/listCategoria?tabla=CircularCatTema&modulo='.$sf_context->getModuleName()));?></a></li>
-			          <div id="lis_cat"></div>     
-			          </li>
-			          <li><a id="cta_organ" style="cursor:pointer;"><?php echo link_to_remote('Categor&iacute;a de Organismo',array('update'=>'lis_cat_organ','url'=>'categoria_organismos/listCategoriaOrg'));?></a></li>
-			          <div id="lis_cat_organ"></div> 
-			               
-			          </li>
-			        </ul>
-			      </div>
-</div>			      
+        <?php echo include_partial('inicio/NavegacionGuiada',
+        array('FEcha_circulares'=>$FEcha_circulares,
+	   'modulo'=>$modulo,
+	   'year'=>$year,
+	   'months'=>$months,
+	   'arrayCategoriasTema'=>$arrayCategoriasTema, 
+	   'SelectCatTemaBsq'=>$SelectCatTemaBsq, 
+	   'SelectSubTemaBsq'=>$SelectSubTemaBsq, 
+	   'SelectSubTemaBsq2'=>'', 
+	   'arrayCategoria'=>$arrayCategoria, 
+	   'SelectCatOrganismoBsq'=>$SelectCatOrganismoBsq, 
+	   'SelectSubOrganismoBsq'=>$SelectSubOrganismoBsq))?>
 		<div class="paneles">
 			<h1>Buscador de circulares</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('circulares/index') ?>">

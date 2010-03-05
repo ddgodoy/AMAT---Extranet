@@ -94,6 +94,19 @@
 	</div>
 <!-- * -->
 	<div class="rightside">
+	<?php echo  include_partial('inicio/NavegacionGuiada',
+        array('FEcha_circulares'=>$FEcha_circulares,
+	   'modulo'=>$modulo,
+	   'year'=>$year,
+	   'months'=>$months,
+	   'arrayCategoriasTema'=>CircularTable::doSelectAllCategorias('CategoriaNormativa'), 
+	   'SelectCatTemaBsq'=>$CatNormBsq, 
+	   'SelectSubTemaBsq'=>$SubNormBsq1, 
+	   'SelectSubTemaBsqDos'=>$SubNormBsq2, 
+	   'arrayCategoria'=>'', 
+	   'SelectCatOrganismoBsq'=>'', 
+	   'SelectSubOrganismoBsq'=>''))?>  
+	
 	 <div class="paneles">
         <h1>Navegación guiada</h1> <h4>Normativa</h4>
 			<div class="col1">
@@ -140,10 +153,10 @@
 				    <tr>
 					<td valign="top"><label>Categor&iacute;a</label></td>
 					<td valign="middle">
-						<?php echo select_tag('select_cat_nor',
+						<?php echo select_tag('select_cat_tem',
 							options_for_select(CategoriaNormativa::getArrayCategoria(), $CatNormBsq),
 							array('style'=>'width:120px;','class'=>'form_input'));
-							echo observe_field('select_cat_nor', array('update'=>'content_sub_tema','url'=>'normativas/subcategoriasn1','with'=>"'id_categoria='+value",'script'=> true)) ?>
+							echo observe_field('select_cat_tem', array('update'=>'content_sub_tema','url'=>'normativas/subcategoriasn1','with'=>"'id_categoria='+value",'script'=> true)) ?>
 					</td>
 					</tr>
 				    <tr>
