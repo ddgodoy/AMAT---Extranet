@@ -58,7 +58,9 @@ use_helper('Text');?>
 			<tbody>
 			<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
 				<tr>
-					<th width="5%">&nbsp;</th>
+					<?php if (validate_action('baja')): ?>
+					<th width="3%"></th>
+	      		    <?php endif;?>
 					<th width="7%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
 					<th width="11%"></th>
 					<th width="61%"><a href="<?php echo url_for('noticias/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
@@ -70,7 +72,9 @@ use_helper('Text');?>
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
 				<tr class="<?php echo $odd ?>">
+				<?php if (validate_action('baja')): ?>
 				<td><input type="checkbox" name="id[]" value="<?php echo $noticia->getId() ?>" /></td>
+				<?php endif; ?>
 					<td>
 						<?php
 							echo date("d/m/Y", strtotime($noticia->getFecha()));
