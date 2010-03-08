@@ -64,7 +64,9 @@
 	<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 	<tbody>
 	<tr>
+	   <?php if (validate_action('publicar') || validate_action('baja')): ?>
 		<th width="3%"></th>
+	   <?php endif;?>
 		<th width="8%"><a href="<?php echo url_for('eventos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
 		<th width="22%"><a href="<?php echo url_for('eventos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Título</a></th>
 		<th width="21%"><a href="<?php echo url_for('eventos/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organizador</a></th>
@@ -75,7 +77,9 @@
 	</tr>
 	<?php $i=0; foreach ($evento_list as $evento): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 	<tr class="<?php echo $odd ?>">
+	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?>
 		<td><input type="checkbox" name="id[]" value="<?php echo $evento->getId() ?>" /></td>
+	<?php endif;?>	
 		<td><?php echo date("d/m/Y", strtotime($evento->getFecha())) ?></td>
 		
 			<td><a href="<?php echo url_for('eventos/show?id=' . $evento->getId()) ?>"><strong><?php echo $evento->getTitulo() ?></strong></a></td>
@@ -91,7 +95,7 @@
 			</td>
 		<?php else: ?>
 			<td>
-				<a href="#" onclick="alert('El evento ya ha sido publicado anteriormente')"><?php echo image_tag('publicar.png', array('title' => 'Publicar', 'alt' => 'Publicar', 'border' => '0')) ?></a>
+				<a href="#" onclick="alert('El evento ya ha sido publicado anteriormente')"><?php echo image_tag('aceptada.png', array('title' => 'Publicar', 'alt' => 'Publicar', 'border' => '0')) ?></a>
 			</td>
 		<?php endif; ?>
 			<td>
@@ -106,6 +110,7 @@
 		</td>
 	</tr>
 	<?php endforeach; ?>
+	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?>
 	<tr>
 		<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 		<td colspan="5">
@@ -113,6 +118,7 @@
 			<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" style="margin-left:5px;"/>
 		</td>
 	</tr>
+	<?php endif?>
 	</tbody>
 </table>
 </form>
