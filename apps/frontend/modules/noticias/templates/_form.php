@@ -86,7 +86,7 @@
     </fieldset>
     <div class="botonera">
     <?php if(validate_action('alta')):?> 
-      <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
+      <input type="submit" id="boton_guardar_g" class="boton" value="Guardar" name="btn_action"/>
     <?php
      endif; if(validate_action('alta')):?> 
       <input type="submit" id="boton_guardar" class="boton" value="Guardar Pendiente" name="btn_action"/>
@@ -103,7 +103,7 @@
 </form>   
 <?php if(validate_action('alta')):?>
 <script language="javascript" type="text/javascript">
-	$('boton_guardar').observe('click', setPendiente);  function setPendiente(event) {$('noticia_estado').value = 'guardado';}	
+	$('boton_guardar_g').observe('click', setGuardar);  function setGuardar(event) {$('noticia_estado').value = 'guardado';}	
 </script>
 <?php 
 endif;

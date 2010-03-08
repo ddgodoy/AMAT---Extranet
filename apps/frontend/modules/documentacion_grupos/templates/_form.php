@@ -74,6 +74,9 @@
     </fieldset>
     <div class="botonera">
     <?php if(validate_action('alta')):?>
+      <input type="submit" id="boton_guardar_g" class="boton" value="Guardar" name="btn_action"/>
+    <?php endif;
+     if(validate_action('alta')):?>
       <input type="submit" id="boton_guardar" class="boton" value="Guardar Pendiente" name="btn_action"/>
     <?php endif;
     if(validate_action('publicar')):
@@ -82,8 +85,13 @@
      <?php endif; ?> 
       <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_grupos/index') ?>';"/>
     </div>
- </form>   
+ </form> 
 <?php if(validate_action('alta')):?>
+<script language="javascript" type="text/javascript">
+	$('boton_guardar_g').observe('click', setGuardar);  function setGuardar(event) {$('documentacion_grupo_estado').value = 'guardado';}	
+</script>
+<?php 
+endif; if(validate_action('alta')):?>
 	<script language="javascript" type="text/javascript">
 		$('boton_guardar').observe('click', setPendiente);
 

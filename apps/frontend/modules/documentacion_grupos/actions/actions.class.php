@@ -118,7 +118,7 @@ class documentacion_gruposActions extends sfActions
       $documentacion_grupo = $form->save();
       
       ## Notificar y enviar email a los destinatarios 
-			if($documentacion_grupo->getEstado()) {
+			if($documentacion_grupo->getEstado()=='publicado') {
 				if ($documentacion_grupo->getGrupoTrabajoId())
 				{
 					$enviar = true;

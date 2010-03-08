@@ -4,6 +4,28 @@
 	use_helper('Date');
 	
 ?>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+<script language="javascript" type="text/javascript">
+	function setActionFormList(accion)
+	{
+		var parcialMensaje = '';
+		var rutaToPub = '<?php echo url_for('grupos_de_trabajo/publicar') ?>';
+		var rutaToDel = '<?php echo url_for('grupos_de_trabajo/delete') ?>';
+		var objectFrm = $('frmListDocOrganismos');
+
+		if (accion == 'publicar') {
+			objectFrm.action = rutaToPub;
+			parcialMensaje = 'publicación';
+		} else {
+			objectFrm.action = rutaToDel;
+			parcialMensaje = 'eliminación';
+		}
+		if (confirm('Confirma la '+ parcialMensaje +' de los registros seleccionados?')) {
+			return true;
+		}
+		return false;
+	}
+</script>
 <div class="mapa"><strong>Administraci&oacute;n</strong> > Grupos de Trabajo</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
@@ -36,6 +58,7 @@
         <?php endif;?>
       </div>
       <br />
+      <form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
       <?php $i=0; foreach ($grupos_de_trabajo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 
       <a href="<?php echo url_for('miembros_grupo/index?grupo='.$valor->getId()) ?>" class="grupo-titulo">
@@ -43,8 +66,12 @@
       	<span>Creado el: <?php echo date('d/m/Y',strtotime($valor->getCreatedAt()))?></span>
       </a>
       <br />
-      <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo">      
+      <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo"> 
+           
         <tr class="gris">
+        <?php if(validate_action('baja')):?>
+        <td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
+        <?php endif;?>
         <?php if ($valor->getDetalle()):?>
           <td><?php echo $valor->getDetalle()?></td>
         <?php else: ?>
@@ -66,6 +93,19 @@
         </tr>
       </table><br />
       <?php endforeach;?>
+      <?php if(validate_action('baja')):?>
+      <div class="lineaListados">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo"> 
+      <tr class="gris">
+		<td width="3%"><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+		<td>
+		<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+		</td>
+     </tr>
+     </table>
+     </div>
+     <?php endif;?>
+      </form>
       <div class="lineaListados">
         <?php if($pager->haveToPaginate()): ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
