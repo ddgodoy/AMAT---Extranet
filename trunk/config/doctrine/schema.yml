@@ -228,7 +228,7 @@ Noticia:
     fecha_publicacion:       { type: date, notnull: true }
     fecha_caducidad:         { type: date, notnull: true }
     ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
-    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    estado:                  { type: enum, values: ['guardado','pendiente', 'publicado'] }
     destacada:               { type: boolean }
     mutua_id:                { type: integer }
     owner_id:                { type: integer }
@@ -443,7 +443,7 @@ DocumentacionGrupo:
   columns:
     grupo_trabajo_id:        { type: integer, notnull: true }
     categoria_d_g_id:        { type: integer, notnull: true }
-    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    estado:                  { type: enum, values: ['guardado','pendiente', 'publicado'] }
     owner_id:                { type: integer }
     modificador_id:          { type: integer, notnull: false }
     publicador_id:           { type: integer, notnull: false }
