@@ -86,6 +86,9 @@
     </fieldset>
     <div class="botonera">
     <?php if(validate_action('alta')):?> 
+      <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
+    <?php
+     endif; if(validate_action('alta')):?> 
       <input type="submit" id="boton_guardar" class="boton" value="Guardar Pendiente" name="btn_action"/>
     <?php
      endif;
@@ -98,7 +101,13 @@
       <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('noticias/index') ?>';"/>
     </div>
 </form>   
-<?php if(validate_action('publicar')):?>
+<?php if(validate_action('alta')):?>
+<script language="javascript" type="text/javascript">
+	$('boton_guardar').observe('click', setPendiente);  function setPendiente(event) {$('noticia_estado').value = 'guardado';}	
+</script>
+<?php 
+endif;
+if(validate_action('alta')):?>
 <script language="javascript" type="text/javascript">
 	$('boton_guardar').observe('click', setPendiente);  function setPendiente(event) {$('noticia_estado').value = 'pendiente';}	
 </script>
