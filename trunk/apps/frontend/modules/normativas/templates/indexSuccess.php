@@ -106,21 +106,6 @@
 	   'arrayCategoria'=>'', 
 	   'SelectCatOrganismoBsq'=>'', 
 	   'SelectSubOrganismoBsq'=>''))?>  
-	
-	 <div class="paneles">
-        <h1>Navegación guiada</h1> <h4>Normativa</h4>
-			<div class="col1">
-			   <ul class="tema_11">
-			          <li><a id="años" style="cursor:pointer;"><?php echo link_to_remote('Años',array('update'=>'can_años','url'=>'circulares/listFechas?modulo='.$sf_context->getModuleName()));?></a></li>
-			          <div id="can_años"></div>
-			                
-			          <li ><a id="cta_tema" style="cursor:pointer;"><?php echo link_to_remote('Categor&iacute;a de Normativa',array('update'=>'lis_cat','url'=>'circular_cat_tema/listCategoria?tabla=CategoriaNormativa&modulo='.$sf_context->getModuleName()));?></a></li>
-			          <div id="lis_cat"></div>     
-			          </li>     
-			          </li>
-			      </ul>
-			 </div>
-        </div>			
 		<div class="paneles">
 			<h1>Buscar por Titulo</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('normativas/index') ?>">
