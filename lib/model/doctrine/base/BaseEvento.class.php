@@ -77,6 +77,10 @@ abstract class BaseEvento extends sfDoctrineRecord
              'local' => 'evento_id',
              'foreign' => 'usuario_id'));
 
+        $this->hasMany('Agenda', array(
+             'local' => 'id',
+             'foreign' => 'evento_id'));
+
         $this->hasMany('UsuarioEvento as UsuarioEventos', array(
              'local' => 'id',
              'foreign' => 'evento_id'));

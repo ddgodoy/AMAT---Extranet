@@ -106,6 +106,7 @@ class eventosActions extends sfActions
 						{
 							foreach ($email AS $emailPublic)
 							{
+								ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(), 0,$emailPublic->getId());		
 									
 								if($emailPublic->getEmail())
 								{
@@ -158,11 +159,14 @@ class eventosActions extends sfActions
 			$strPaginaVolver = $accion=='actualizado' ? '?page='.$this->getUser()->getAttribute($this->getModuleName().'_nowpage') : '';
 
 			## Notificar y enviar email a los destinatarios 
-			if(!isset($_POST['sf_method']) && $evento->getEstado() == 'publicado') {
+			
+			if($evento->getEstado() == 'publicado') {
+				
 				if (!empty($estado['usuarios_list'])) {
 					$enviar = true;
 					$email = UsuarioTable::getEmailEvento($estado['usuarios_list']);
 					$tema = 'Evento publicado';
+					$publico = 'si';
 				}
 				ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
 			}
@@ -172,13 +176,18 @@ class eventosActions extends sfActions
 				$enviar = true;
 				$email = AplicacionRolTable::getEmailPublicar(2);
 				$tema = 'Evento pendiente de publicar';
+				$publico = '';
 			}	
 			## envia el email
 			if ($enviar) {
 				foreach ($email AS $emailPublic) {
-					if ($emailPublic->getEmail()) {
-				    $mailTema = $emailPublic->getEmail();
-				    $temaTi   = $tema;
+				if($publico != '')
+				{	
+					ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());			
+				}	
+			    if ($emailPublic->getEmail()) {
+				$mailTema = $emailPublic->getEmail();
+				$temaTi   = $tema;
     		    $nombreEvento = $estado['titulo'];
     		    $organizador  = $estado['organizador'];
     		    $descripcion  = $estado['descripcion'];

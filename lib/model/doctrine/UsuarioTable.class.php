@@ -135,15 +135,16 @@ class UsuarioTable extends Doctrine_Table
 
 		if ($d > 1) {
 			$d--;
-
-			foreach ($arrayIDusuario as $k =>$idUSE) {
+            $id .= '(';
+			foreach ($arrayIDusuario as $k =>$idUSE) {	
 		    if ($d > $k) {
-			    $id .= '('.$idUSE.',';
+			    $id .= $idUSE.',';
 		    } else {
 		    	$id .= $idUSE.')';
 		    }
 			}
 		}
+	
 		$r = Doctrine_Query::create()->from('Usuario');
 
 		if ($d == 1) {

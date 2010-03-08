@@ -12,7 +12,7 @@ class agendaActions extends sfActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		$usurID = sfContext::getInstance()->getUser()->getAttribute('userId');
-		$this->evento_list = array();
+		
 
 		$this->year  = $this->getRequestParameter('y', date('Y'));
 		$this->month = $this->getRequestParameter('m', date('m'));
@@ -28,16 +28,40 @@ class agendaActions extends sfActions
 		$xDia = $this->getRequestParameter('d');
 
 		if (!empty($xYear) && !empty($xMes) && !empty($xDia)) {
-			$xFiltro .= "fecha >= '"."$xYear-$xMes-$xDia"."'";
+			$xFiltro .= " AND fecha >= '"."$xYear-$xMes-$xDia"."'";
 			$this->fechaSeleccionada = "$xDia/$xMes/$xYear";
 		}
 		
-		$this->Arrayevento = EventoTable::getEventoFecha($usurID, $xFiltro);
-		$this->Arraycombocatoria = ConvocatoriaTable::getConvocatoria($usurID, $xFiltro);
+		$this->paginaActual = $this->getRequestParameter('page', 1);
 
-		$this->evento_list[1] = $this->Arrayevento;
-		$this->evento_list[2] = $this->Arraycombocatoria;
-
-		$this->cantidadRegistros = $this->Arrayevento->count() + $this->Arraycombocatoria->count() ;
+		if (is_numeric($this->paginaActual)) {
+			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
+		}
+		
+		$this->pager = new sfDoctrinePager('Agenda', 10);
+		$this->pager->getQuery()
+		->from('Agenda')
+		->where('deleted = 0'.$xFiltro)
+		->addWhere('usuario_id = '.$usurID)
+		->orderBy($this->setOrdenamiento());
+		
+		$this->pager->setPage($this->paginaActual);
+		$this->pager->init();
+	
+		$this->agenda_list = $this->pager->getResults();
+		$this->cantidadRegistros = $this->pager->getNbResults();
 	}
+	
+	protected function setOrdenamiento()
+  {
+		$this->orderBy = 'fecha';
+		$this->sortType = 'asc';
+
+		if ($this->hasRequestParameter('orden')) {
+			$this->orderBy = $this->getRequestParameter('sort');
+			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
+		}
+		return $this->orderBy . ' ' . $this->sortType;
+  }
+	
 }

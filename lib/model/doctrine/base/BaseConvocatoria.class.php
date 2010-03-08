@@ -46,6 +46,10 @@ abstract class BaseConvocatoria extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 
+        $this->hasMany('Agenda', array(
+             'local' => 'id',
+             'foreign' => 'convocatoria_id'));
+
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);
