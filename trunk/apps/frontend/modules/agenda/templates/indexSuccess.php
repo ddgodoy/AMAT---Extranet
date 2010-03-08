@@ -1,4 +1,5 @@
 <?php use_helper('Fecha') ?>
+<?php use_helper('TestPager') ?>
 
 <div class="mapa">
 	<strong>Canal Corporativo</strong> &gt; Agenda de Eventos
@@ -15,49 +16,31 @@
 		</tbody>
 	</table>
 	<div class="leftside">
+		<div class="lineaListados">
+			<?php if($pager->haveToPaginate()): ?>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
+			<?php endif; ?>
+
+			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> registro/s en La Agenda</span>
+		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" class="listados">
+			  <tbody>
 				<tr>
-					<th width="10%">Fecha</th>
-					<th width="30%">T&iacute;tulo</th>
-					<th width="30%">Organizador</th>
-					<th width="30%">Tipo</th>
+					<th width="10%"><a href="<?php echo url_for('agenda/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Fecha</a></th>
+					<th width="30%"><a href="<?php echo url_for('agenda/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">T&iacute;tulo</a></th>
+					<th width="30%"><a href="<?php echo url_for('agenda/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Organizador</a></th>
+					<th width="30%"><a href="<?php echo url_for('agenda/index?sort=evento_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Tipo</a></th>
 				</tr>
-				<?php $i=0; foreach ($evento_list as $k => $evento): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-					<?php foreach ($evento as $show): ?>
-						<?php
-							if ($k == 1) {
-								$url 	  = 'eventos/show?id='.$show->getId();
-								$fecha  = $show->getFecha();
-								$titulo = $show->getTitulo();
-								$organizador = $show->getOrganizador();
-								$tipo = 'Evento';
-							} else {
-								$TipoAsamblea = explode('_', $show->Asamblea->getEntidad());
-	
-								if ($TipoAsamblea[0] == 'DirectoresGerentes') {
-									$url = 'asambleas/ver?id='.$show->getAsambleaId().'&DirectoresGerente=1';
-								}
-								if ($TipoAsamblea[0] == 'GrupoTrabajo') {
-									$url = 'asambleas/ver?id='.$show->getAsambleaId().'&GrupodeTrabajo=2';
-								}
-								if ($TipoAsamblea[0] == 'ConsejoTerritorial') {
-									$url = 'asambleas/ver?id='.$show->getAsambleaId().'&ConsejoTerritorial=3';
-								}
-								$fecha  = $show->Asamblea->getFecha();
-								$titulo = $show->Asamblea->getTitulo();
-								$organizador = $show->Asamblea->Usuario->getNombre().','.$show->Asamblea->Usuario->getApellido();
-								$tipo = 'Asamblea';
-							}  
-						?>
+				<?php $i=0; foreach ($agenda_list as $agenda): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 						<tr class="<?php echo $odd ?>">
-							<td><?php echo date("d/m/Y", strtotime($fecha)) ?></td>
-							<td><a href="<?php echo url_for($url) ?>"><strong><?php echo $titulo ?></strong></a></td>
-							<td><?php echo $organizador ?></td>
-							<td><?php echo $tipo ?></td>
+							<td><?php echo date("d/m/Y", strtotime($agenda->getFecha())) ?></td>
+							<td><a href="<?php echo url_for($agenda->getUrl()) ?>"><strong><?php echo $agenda->getTitulo() ?></strong></a></td>
+							<td><?php echo $agenda->getOrganizador() ?></td>
+							<td><?php echo $agenda->getConvocatoriaId()!= 0? 'Convocatoria': 'Evento' ?></td>
 						</tr>
 					<?php endforeach; ?>
-				<?php endforeach; ?>
+			  </tbody>		
 			</table>
 		<?php else : ?>
 			<?php if ($fechaSeleccionada != '') : ?>
@@ -67,6 +50,9 @@
 			<?php endif; ?>
 		<?php endif; ?>
 		<div class="lineaListados">
+		<?php if($pager->haveToPaginate()): ?>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
+			<?php endif; ?>
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> registro/s en La Agenda</span>
 		</div>
 	</div>

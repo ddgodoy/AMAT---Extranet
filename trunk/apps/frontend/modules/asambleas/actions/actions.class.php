@@ -622,6 +622,8 @@ class asambleasActions extends sfActions
 			
 			$convocatoria->save();
 			
+			ServiceAgenda::AgendaSave($asamblea->getFecha(),$asamblea->getTitulo(),$this->getUser()->getAttribute('nombre').','.$this->getUser()->getAttribute('apellido'),'asambleas/ver?id='.$asamblea->getId().'&'.$this->DAtos['get'],'0',$asamblea->getId(),$usuario->Usuario->getId());
+			
 			if($usuario->Usuario->getEmail())	
 			{	
 			    $mailTema = str_replace('ñ','n',$usuario->Usuario->getEmail());

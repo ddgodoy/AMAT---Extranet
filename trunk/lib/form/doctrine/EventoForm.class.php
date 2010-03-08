@@ -35,8 +35,8 @@ class EventoForm extends BaseEventoForm
 			'fecha'           => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 //			'fecha_caducidad' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_caducidad' => new sfWidgetFormDate(),
-      		'imagen'          => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/images/s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')),
-			'documento'       => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs','template'  => '<div><br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label><br /></div>')),
+//     		'imagen'          => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/images/s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')),
+//			'documento'       => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs','template'  => '<div><br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label><br /></div>')),
 			'ambito'          => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos')), array('class' => 'form_input', 'style' => 'width:400px;')),
 			'estado'          => new sfWidgetFormInputHidden(),
 			'owner_id'        => new sfWidgetFormInputHidden(),
@@ -51,14 +51,41 @@ class EventoForm extends BaseEventoForm
 			'mas_info'        => new sfValidatorString(array('required' => false)),
 			'fecha'           => new sfValidatorDate(array('required' => true), array('required' => 'La fecha es obligatoria', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_caducidad' => new sfValidatorDate(array('required' => false)),
-			'imagen'          => new sfValidatorFile(array('path' => 'uploads/eventos/images', 'required' =>false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
-			'imagen_delete'   => new sfValidatorBoolean(),
-			'documento'       => new sfValidatorFile(array('path' =>'uploads/eventos/docs','required' => false, 'mime_types'=>array('application/msword', 'application/pdf')), array('mime_types'=>'Formato de documento incorrecto, permitidos (.doc, .pdf )')),
+//			'imagen'          => new sfValidatorFile(array('path' => 'uploads/eventos/images', 'required' =>false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
+//			'imagen_delete'   => new sfValidatorBoolean(),
+//			'documento'       => new sfValidatorFile(array('path' =>'uploads/eventos/docs','required' => false, 'mime_types'=>array('application/msword', 'application/pdf')), array('mime_types'=>'Formato de documento incorrecto, permitidos (.doc, .pdf )')),
 			'ambito'          => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos'), 'required' => false)),
 			'estado'          => new sfValidatorChoice(array('choices' => array('guardado' => 'guardado', 'pendiente' => 'pendiente', 'publicado' => 'publicado'), 'required' => true)),
 			'owner_id'        => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => false)),
 			'usuarios_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'Acción inválida')),
 		));
+		
+		if($this->getObject()->getImagen())
+		{
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
+		}
+		else 
+		{
+		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+		}
+		
+		if($this->getObject()->getDocumento())
+		{
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)));
+		    $this->setValidator('documento_delete', new sfValidatorBoolean());
+		}
+		else 
+		{
+			
+		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)));
+
+		}
+		
 		
 		$this->setDefaults(array( 'usuarios_list' => $userId,
 		                          'owner_id' => $userId, ));

@@ -17,10 +17,7 @@ class agendaComponents extends sfComponents
 		$this->evento_list_array = array();
 //		$this->all_evento_list = EventoTable::getByUsuarioId($this->getUser()->getAttribute('userId'), false); ****ET***
 		$usurID  = sfContext::getInstance()->getUser()->getAttribute('userId');	
-		$this->all_evento_list = EventoTable::getAll($usurID,1);
-		$this->all_convocatoria_list =ConvocatoriaTable::getConvocatoria($usurID);
-		$this->arrayShows[1] = $this->all_evento_list;
-		$this->arrayShows[2] = $this->all_convocatoria_list;
+		$agenda = Agenda::getRepository()->getEventoByUsuario(0,0,$usurID);
 		 
 		
 		$this->year = $this->getRequestParameter('y', date('Y'));
@@ -28,37 +25,22 @@ class agendaComponents extends sfComponents
 		
 		
 		
-	 foreach ($this->arrayShows as $g=>$shows)
+	 foreach ($agenda as $g)
 	  {	
-	  	
-		foreach ($shows as $k => $evento)
-		{
-			if($g == 1)
-			{
-				$FEchas = $evento->getFecha();
-				$Titulo = $evento->getTitulo();
-			}
-			else 
-			{
-				$FEchas = $evento->Asamblea->getFecha();
-				$Titulo = $evento->Asamblea->getTitulo();
-			}
-			
-			$year  = (int) date("Y", strtotime($FEchas));
-			$month = (int) date("m", strtotime($FEchas));
-			$day   = date("d", strtotime($FEchas));
+			$year  = (int) date("Y", strtotime($g->getFecha()));
+			$month = (int) date("m", strtotime($g->getFecha()));
+			$day   = date("d", strtotime($g->getFecha()));
 			
 			if ($year == $this->year && $month == $this->month) {
 				if (!isset($this->evento_list_array[$day])) 
 				{
-					$this->evento_list_array[$day] = $Titulo;
+					$this->evento_list_array[$day] = $g->getTitulo();
 				} 
 				else 
 				{
-					$this->evento_list_array[$day] = 	$Titulo . "<br />". $this->evento_list_array[$day];
+					$this->evento_list_array[$day] = 	$g->getTitulo() . "<br />". $this->evento_list_array[$day];
 				}
 			}
-		}
 	  }
 	  
 	}	 

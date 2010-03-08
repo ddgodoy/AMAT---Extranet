@@ -131,6 +131,10 @@ abstract class BaseUsuario extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'usuario_id'));
 
+        $this->hasMany('Agenda', array(
+             'local' => 'id',
+             'foreign' => 'usuario_id'));
+
         $this->hasMany('Publicacion', array(
              'local' => 'id',
              'foreign' => 'owner_id'));
