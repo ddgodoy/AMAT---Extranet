@@ -13,16 +13,19 @@ class documentacion_gruposActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'));
-  	$this->paginaActual = $this->getRequestParameter('page', 1);
+  	
+  	  	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
 	  $this->pager = new sfDoctrinePager('DocumentacionGrupo', 20);
 
-		$this->pager->getQuery()->from('DocumentacionGrupo')
+		$this->pager->getQuery()
+		->from('DocumentacionGrupo')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
+		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -143,7 +146,7 @@ class documentacion_gruposActions extends sfActions
 			##enviar email a los responsables 
 			
 			## envia el email  	
-			if($enviar)	
+			if(!empty($enviar))	
 			{
 				foreach ($email AS $emailPublic)
 				{
@@ -235,8 +238,15 @@ class documentacion_gruposActions extends sfActions
 			$this->categoriaBsq = '';
 			$this->estadoBsq = '';
 		}
-		
-		return 'deleted=0'.$parcial;
+		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
+		if($gruposdetrabajo)
+		{
+			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
+		}
+		else 
+		{
+			return 'deleted=0'.$parcial;
+		}	
   }
   
   protected function setOrdenamiento()
