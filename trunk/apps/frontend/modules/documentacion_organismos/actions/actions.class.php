@@ -105,9 +105,49 @@ class documentacion_organismosActions extends sfActions
 				if ($accion == 'publicar') {
 					$documentacion_organismo->setEstado('publicado');
 					$documentacion_organismo->save();
-				} else {
-					$documentacion_organismo->delete();
+				if($documentacion_organismo->getEstado()) {
+				if ($documentacion_organismo->getOrganismoId()) {
+					$enviar = true;
+					$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
+					$email  = UsuarioTable::getUsuarioByOrganismo($documentacion_organismo->getOrganismoId());
+					$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
 				}
+				if ($documentacion_organismo->getEstado()=='publicado') {
+				  ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
+				}  
+			}
+
+			## envia el email tendria que haber echo un servicio pero bue es lo que salio 	
+			if($enviar)	{
+				foreach ($email AS $emailPublic) {
+					if($emailPublic->getEmail()) {
+				    $mailTema = $emailPublic->getEmail();
+	    		    $nombreEvento = $documentacion_organismo->getNombre();
+	    		    $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
+	    		    $descripcion  = $documentacion_organismo->getContenido();
+
+					$mailer = new Swift(new Swift_Connection_NativeMail());
+					$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+		
+					$mailContext = array('tema' => $tema,
+					                     'evento' => $nombreEvento,
+					                     'organizador' => $organizador,    
+															'descripcio' => $descripcion,
+															);
+					$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+					$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+	
+					$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
+					$mailer->disconnect();		
+					}
+				}
+			}
+     	
+			}
+			else
+			{
+				$documentacion_organismo->delete();
+			}
   		}
   	}
   	$this->redirect('documentacion_organismos/index');
@@ -122,18 +162,6 @@ class documentacion_organismosActions extends sfActions
          $documentacion_organismo = $form->save();
     
    
-//    $bandera = 0;
-//    $xSelectCategoria = $this->getRequestParameter('categoria_organismo_id');
-//    $xSelectSubcategoria = $this->getRequestParameter('subcategoria_organismo_id');
-//    $xSelectOrganisamos = $this->getRequestParameter('organismoidsub');
-//    
-//    if (!empty($xSelectCategoria)){ $documentacion_organismo->setCategoriaOrganismoId($xSelectCategoria); $bandera = 1; }
-//    if (!empty($xSelectSubcategoria)){ $documentacion_organismo->setSubcategoriaOrganismoId($xSelectSubcategoria); $bandera = 1; }
-//    if (!empty($xSelectOrganisamos)){ $documentacion_organismo->setOrganismoId($xSelectOrganisamos); $bandera = 1; }
-//
-//		if ($bandera == 1) {
-//			$documentacion_organismo->save();
-
 ## Notificar y enviar email a los destinatarios 
 			if($documentacion_organismo->getEstado()) {
 				if ($documentacion_organismo->getOrganismoId()) {
@@ -146,6 +174,13 @@ class documentacion_organismosActions extends sfActions
 				  ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
 				}  
 			}
+			if($documentacion_organismo->getEstado() == 'pendiente')
+   			{ 
+				$enviar = true;
+				$grupo = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
+				$email = AplicacionRolTable::getEmailPublicar('33','','',$grupo->getId());
+				$tema = 'Documento registrado para el Organismos: '.$grupo->getNombre();
+			}	
 
 			## envia el email tendria que haber echo un servicio pero bue es lo que salio 	
 			if($enviar)	{
@@ -191,6 +226,7 @@ class documentacion_organismosActions extends sfActions
 		$this->organismoBsq = $this->getRequestParameter('documentacion_organismo[organismo_id]');
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
+		$this->estadoBsq = $this->getRequestParameter('estado_busqueda');
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
@@ -216,6 +252,10 @@ class documentacion_organismosActions extends sfActions
 			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
+		if (!empty($this->estadoBsq)) {
+			$parcial .= " AND estado = '$this->estadoBsq' ";
+			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
+		}
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
 		} else {
@@ -227,6 +267,7 @@ class documentacion_organismosActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcategoria');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcategoria');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_noworganismos');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
@@ -235,6 +276,7 @@ class documentacion_organismosActions extends sfActions
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowcategoria');
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowsubcategoria');
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_noworganismos');
+				$this->estadoBsq = $this->getUser()->getAttribute($modulo.'_nowestado');
 			}
 		}
 		if ($this->hasRequestParameter('btn_quitar')){
@@ -245,6 +287,7 @@ class documentacion_organismosActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcategoria');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcategoria');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_noworganismos');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			$parcial="";
 			$this->cajaBsq = "";
 			$this->categoriaBsq = '';
@@ -252,6 +295,7 @@ class documentacion_organismosActions extends sfActions
 			$this->organismoBsq = '';
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
+			$this->estadoBsq = '';
 		}
 		return 'deleted=0'.$parcial;
   }

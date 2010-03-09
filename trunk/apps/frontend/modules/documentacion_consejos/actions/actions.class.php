@@ -12,6 +12,7 @@ class documentacion_consejosActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+  	$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'));
   	$this->Consejo = '';
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
@@ -24,7 +25,7 @@ class documentacion_consejosActions extends sfActions
 		$this->pager->init();
 
 		$this->documentacion_consejo_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults();
+		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
 
 		if ($this->consejoBsq) {
 			$this->Consejo = ConsejoTerritorialTable::getConsejo($this->consejoBsq);
@@ -114,7 +115,7 @@ class documentacion_consejosActions extends sfActions
       $documentacion_consejo = $form->save();
 
 			## Notificar y enviar email a los destinatarios 
-			if($documentacion_consejo->getEstado()) {
+			if($documentacion_consejo->getEstado() == 'publicado') {
 				if ($documentacion_consejo->getConsejoTerritorialId()) {
 					$enviar = true;
 					$grupo  = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
@@ -125,10 +126,17 @@ class documentacion_consejosActions extends sfActions
 				  ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());
 				}  
 			}
-
-			## envia el email tendria que haber echo un servicio pero bue es lo que salio 	
+		   if($documentacion_consejo->getEstado() == 'pendiente')
+	   			{ 
+					$enviar = true;
+					$grupo = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
+					$email = AplicacionRolTable::getEmailPublicar('28','',$grupo->getId());
+					$tema = 'Documento pendiente de publicar para Consejo Territorial: '.$grupo->getNombre();
+				}	
+			## envia el email tendria que haber echo un servicio 
 			if ($enviar) {
 				foreach ($email AS $emailPublic) {
+						
 					if($emailPublic->getEmail()) {
 				    $mailTema = $emailPublic->getEmail();
 	    		  $nombreEvento = $documentacion_consejo->getNombre();

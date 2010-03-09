@@ -22,8 +22,9 @@ abstract class BaseDocumentacionOrganismo extends Documentacion
              'type' => 'enum',
              'values' => 
              array(
-              0 => 'pendiente',
-              1 => 'publicado',
+              0 => 'guardado',
+              1 => 'pendiente',
+              2 => 'publicado',
              ),
              ));
         $this->hasColumn('owner_id', 'integer', null, array(

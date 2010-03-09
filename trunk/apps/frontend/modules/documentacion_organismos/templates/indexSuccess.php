@@ -72,7 +72,9 @@
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
+					<?php if(validate_action('publicar') || validate_action('baja') ):?>
 					<th width="5%">&nbsp;</th>
+					<?php endif;?>
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('documentacion_organismos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
@@ -86,59 +88,33 @@
 						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
+					<th width="5%"><?php if ( validate_action('publicar')): ?>Publicar<?php endif;?></th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
 				</tr>
 				<?php $i=0; foreach ($documentacion_organismo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<tr class="<?php echo $odd ?>">
-					<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
-					<td valign="center" align="left">
-						<?php echo date("d/m/Y", strtotime($valor->getFecha())) ?>
-					</td>
-					<td valign="center">
-					<?php if(validate_action('listar')):?>
-						<a href="<?php echo url_for('documentacion_organismos/show?id=' . $valor->getId()) ?>">
-							<strong><?php echo $valor->getNombre() ?></strong>
-						</a>
-					<?php endif;?>	
-					</td>
-					<td valign="center" align="left">
-					    <?php $Organismo = Organismo::getRepository()->findOneById($valor->getOrganismoId())?>
-						<?php echo $Organismo->getNombre() ?>
-					</td>
-					<td valign="center" align="left">
-					    <?php $usuario = Usuario::getRepository()->findOneById($valor->getUserIdCreador())?>
-						<?php echo $usuario->getApellido().', '.$usuario->getNombre() ?>
-					</td>
-					<td valign="center" align="center">
-						<?php
-						 if(ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count() >= 1){ 
-							if (validate_action('listar','archivos_d_o')) { 
-								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_o/index?archivo_d_o[documentacion_organismo_id]=' . $valor->getId(), array('method' => 'post'));
-							}	
-						 }	
-						?>
-					</td>
-					<td valign="center" align="center">
-					<?php if(validate_action('modificar')):?>
-						<a href="<?php echo url_for('documentacion_organismos/editar?id=' . $valor->getId()) ?>">
-							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?>
-						</a>
-					<?php endif;?>	
-					</td>
-          <td valign="center" align="center">
-          <?php if(validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'documentacion_organismos/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          <?php endif;?>	
-          </td>
-				</tr>
+				<?php if($valor->getEstado() == 'guardado'):?>
+					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php endif; ?>
+					<?php else: ?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php endif; ?>
 				<?php endforeach; ?>
 				<tr>
-					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
-					<td colspan="5">
-						<!--<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
-						<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
-					</td>
+				<td>
+				<?php if(validate_action('publicar') || validate_action('baja') ):?>
+				<input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/>
+				<?php endif;?>
+				</td>
+				<td colspan="5">
+					<?php if(validate_action('publicar')):?>
+					<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>
+					<?php endif; ?>
+					<?php if(validate_action('baja')):?>
+					<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" style="margin-left:5px;"/>
+					<?php endif;?>
+				</td>
 				</tr>
 			</tbody>
 		</table>
@@ -211,33 +187,39 @@
           </td>
         </tr>
         <tr>
-					<td width="29%"><label>Fecha Desde:</label></td>
-					<td width="71%" valign="middle">
-						<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:80px;" name="desde_busqueda" id="desde_busqueda" value="<?php echo $sf_user->getAttribute('documentacion_organismos_nowdesde');?>" class="form_input"/>
-						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('desde_busqueda', this);"/>
+			<td style="padding-top: 5px;"><label>Estado:</label></td>
+			<td style="padding-top: 5px;">
+			<?php echo select_tag('estado_busqueda',options_for_select(array('0'=>'--seleccionar--','guardado'=>'Guardado','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
+	  		</td>
+		</tr>
+        <tr>
+		<td width="29%"><label>Fecha Desde:</label></td>
+		<td width="71%" valign="middle">
+			<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:80px;" name="desde_busqueda" id="desde_busqueda" value="<?php echo $sf_user->getAttribute('documentacion_organismos_nowdesde');?>" class="form_input"/>
+			<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('desde_busqueda', this);"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-top: 5px;"><label>Fecha Hasta:</label></td>
+			<td style="padding-top: 5px;">
+				<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:80px;" name="hasta_busqueda" id="hasta_busqueda" value="<?php echo $sf_user->getAttribute('documentacion_organismos_nowhasta');?>" class="form_input"/>
+				<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('hasta_busqueda', this);"/>
+			</td>
+		</tr>
+			<tr>
+				<td style="padding-top:5px;">
+					<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>
 					</td>
-				</tr>
-				<tr>
-					<td style="padding-top: 5px;"><label>Fecha Hasta:</label></td>
-					<td style="padding-top: 5px;">
-						<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:80px;" name="hasta_busqueda" id="hasta_busqueda" value="<?php echo $sf_user->getAttribute('documentacion_organismos_nowhasta');?>" class="form_input"/>
-						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('hasta_busqueda', this);"/>
-					</td>
-				</tr>
-					<tr>
-						<td style="padding-top:5px;">
-							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>
-							</td>
-							<td>	
-							<?php if ($cajaBsq || $categoriaBsq || $subcategoriaBsq || $organismoBsq || $desdeBsq || $hastaBsq): ?>
-							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
-							<?php endif; ?>						
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</form>
-		</div>
-	</div>
+					<td>	
+					<?php if ($cajaBsq || $categoriaBsq || $subcategoriaBsq || $organismoBsq || $desdeBsq || $hastaBsq): ?>
+					<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
+					<?php endif; ?>						
+				</td>
+		</tr>
+		</tbody>
+	</table>
+	</form>
+</div>
+</div>
 <!-- * -->
 <div class="clear"></div>

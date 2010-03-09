@@ -63,7 +63,9 @@
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
+				    <?php if(validate_action('publicar') || validate_action('baja') ):?>
 					<th width="5%">&nbsp;</th>
+					<?php endif; ?>
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('documentacion_grupos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
@@ -77,68 +79,34 @@
 						<a href="<?php echo url_for('documentacion_grupos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
 					</th>
 					<th width="5%"></th>
-					<th width="5%">Publicar</th>
+					<th width="5%"><?php if ( validate_action('publicar')): ?>Publicar<?php endif;?></th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
-				</tr>
-				<?php $i=0; foreach ($documentacion_grupo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<tr class="<?php echo $odd ?>">
-					<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
-					<td valign="center" align="left">
-						<?php echo date("d/m/Y", strtotime($valor->getFecha())) ?>
+					</tr>
+					<?php $i=0; foreach ($documentacion_grupo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
+					<?php if($valor->getEstado() == 'guardado'):?>
+					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
+					<?php include_partial('ListaByGrupoTrabajo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php endif; ?>
+					<?php else: ?>
+					<?php include_partial('ListaByGrupoTrabajo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php endif; ?>
+					<?php endforeach; ?>
+					<tr>
+					<td>
+					<?php if(validate_action('publicar') || validate_action('baja') ):?>
+					<input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/>
+					<?php endif;?>
 					</td>
-					<td valign="center">
-					<?php if(validate_action('listar')):?>
-						<a href="<?php echo url_for('documentacion_grupos/show?id=' . $valor->getId()) ?>">
-							<strong><?php echo $valor->getNombre() ?></strong>
-						</a>
-					<?php endif;?>	
-					</td>
-					<td valign="center" align="left">
-					    <?php $Grupo = GrupoTrabajo::getRepository()->findOneById($valor->getGrupoTrabajoId())?>
-						<?php echo $Grupo->getNombre() ?>
-					</td>
-					<td valign="center" align="left">
-					    <?php $usuario = Usuario::getRepository()->findOneById($valor->getUserIdCreador())?>
-						<?php echo $usuario->getApellido().', '.$usuario->getNombre() ?>
-					</td>
-					<td valign="center" align="center">
-						<?php
-						if(ArchivoDG::getRepository()->getAllByDocumentacion($valor->getId())->count() >= 1){ 
-							if (validate_action('listar','archivos_d_g')) { 
-								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_g/index?archivo_d_g[documentacion_grupo_id]=' . $valor->getId(), array('method' => 'post'));
-							}
-						}		
-						?>
-					</td>
-					<td valign="center" align="center">
-						<?php
-							if (validate_action('publicar') && $valor->getEstado() != 'publicado') { 
-								echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_grupos/publicar?id=' . $valor->getId(), array('method' => 'post', 'confirm' => 'Confirma la publicación del registro?'));
-							}	
-						?>
-					</td>
-					<td valign="center" align="center">
-					<?php if(validate_action('modificar')):?>
-						<a href="<?php echo url_for('documentacion_grupos/editar?id=' . $valor->getId()) ?>">
-							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?>
-						</a>
-					<?php endif; ?>	
-					</td>
-          <td valign="center" align="center">
-          <?php if(validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'documentacion_grupos/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          <?php endif;?>	
-          </td>
-				</tr>
-				<?php endforeach; ?>
-				<tr>
-					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5">
+						<?php if(validate_action('publicar')):?>
 						<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>
+						<?php endif; ?>
+						<?php if(validate_action('baja')):?>
 						<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" style="margin-left:5px;"/>
+						<?php endif;?>
 					</td>
-				</tr>
+					</tr>
 			</tbody>
 		</table>
 		</form>
@@ -183,7 +151,7 @@
 					<tr>
 						<td style="padding-top: 5px;"><label>Estado:</label></td>
 						<td style="padding-top: 5px;">
-							<?php echo select_tag('estado_busqueda',options_for_select(array('0'=>'--Seleccionar--','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
+							<?php echo select_tag('estado_busqueda',options_for_select(array('0'=>'--Seleccionar--','guardado'=>'Guardado','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
 				  	</td>
 					</tr>
 					<tr>

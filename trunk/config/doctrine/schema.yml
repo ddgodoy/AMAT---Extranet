@@ -469,7 +469,7 @@ DocumentacionConsejo:
   columns:
     consejo_territorial_id:  { type: integer, notnull: true }
     categoria_c_t_id:        { type: integer, notnull: true }
-    estado:                  { type: enum, values: ['pendiente', 'publicado'] }
+    estado:                  { type: enum, values: ['guardado','pendiente', 'publicado'] }
     owner_id:                { type: integer }
     modificador_id:          { type: integer, notnull: false }
     publicador_id:           { type: integer, notnull: false }
@@ -493,7 +493,7 @@ DocumentacionOrganismo:
     categoria_organismo_id:     { type: integer }
     subcategoria_organismo_id:  { type: integer }
     organismo_id:               { type: integer }
-    estado:                     { type: enum, values: ['pendiente', 'publicado'] }
+    estado:                     { type: enum, values: ['guardado','pendiente', 'publicado'] }
     owner_id:                   { type: integer }
     modificador_id:             { type: integer, notnull: false }
     publicador_id:              { type: integer, notnull: false }
