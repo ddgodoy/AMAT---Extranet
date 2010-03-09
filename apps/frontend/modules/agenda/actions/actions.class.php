@@ -70,11 +70,11 @@ class agendaActions extends sfActions
 				$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 			}
 			if (!empty($this->desdeBsq)) {
-				$parcial .= " AND fecha >= '".format_date($this->desdeBsq,'d')."'";
+				$parcial .= " AND fecha >= '".$this->FormatData($this->desdeBsq)."'";
 				$this->getUser()->setAttribute($modulo.'_nowdesde', $this->desdeBsq);
 			}
 			if (!empty($this->hastaBsq)) {
-				$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+				$parcial .= " AND fecha <= '".$this->FormatData($this->hastaBsq)."'";
 				$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 			}
 			if (!empty($this->estadoBq)) {
@@ -135,6 +135,14 @@ class agendaActions extends sfActions
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
 		}
 		return $this->orderBy . ' ' . $this->sortType;
+  }
+  
+  protected function FormatData($date)
+  {
+  	$Formadate = explode('/',$date);
+  	
+  	return $Formadate[2].'-'.$Formadate[1].'-'.$Formadate[0];
+
   }
 	
 }
