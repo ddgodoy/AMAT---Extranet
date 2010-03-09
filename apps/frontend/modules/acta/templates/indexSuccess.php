@@ -35,13 +35,13 @@
 			<tbody>
 				<tr>
 					<th width="20%" style="text-align:center;">
-						<a href="<?php echo url_for('acta/index?sort=created_at&type='.$sortType.'&page='.$paginaActual) ?>">Alta</a>
+						<a href="<?php echo url_for('acta/index?'.$DAtos['get'].'&sort=created_at&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Alta</a>
 					</th>
 					<th width="40%">
-						<a href="<?php echo url_for('acta/index?sort=nombre&type='.$sortType.'&page='.$paginaActual) ?>">Nombre</a>
+						<a href="<?php echo url_for('acta/index?'.$DAtos['get'].'&sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nombre</a>
 					</th>
 					<th width="40%">
-					<a href="<?php echo url_for('acta/index?sort=asamblea_id&type='.$sortType.'&page='.$paginaActual) ?>">Asamblea</a>
+					<a href="<?php echo url_for('acta/index?'.$DAtos['get'].'&sort=asamblea_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Asamblea</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 				</tr>
