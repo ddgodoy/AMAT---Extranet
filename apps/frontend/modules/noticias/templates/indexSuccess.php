@@ -71,92 +71,46 @@ use_helper('Text');?>
 			<?php endif;?>	
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
-				<tr class="<?php echo $odd ?>">
-				<?php if (validate_action('baja')): ?>
-				<td><input type="checkbox" name="id[]" value="<?php echo $noticia->getId() ?>" /></td>
+				<?php if($noticia->getEstado() == 'guardado'):?>
+				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
+				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia));?>
 				<?php endif; ?>
-					<td>
-						<?php
-							echo date("d/m/Y", strtotime($noticia->getFecha()));
-						?>
-					</td>
-					<td align="center">
-					<?php		
-						if ($noticia->getImagen()) {
-							if(file_exists(sfConfig::get('sf_upload_dir').'/noticias/images/s_'.$noticia->getImagen()))
-							{
-								echo image_tag('/uploads/noticias/images/s_'.$noticia->getImagen(), array('alt' => $noticia->getTitulo()));
-							}
-							else 
-							{
-								echo image_tag('/uploads/noticias/images/'.$noticia->getImagen(), array('height' => 40, 'width' => 80, 'alt' => $noticia->getTitulo()));
-							}
-						}
-						else {	
-							echo image_tag('noimage.jpg', array('height' => 50, 'width' => 50, 'alt' => $noticia->getTitulo()));
-						}
-				    ?>
-					</td>
-					<td >
-						<br clear="all">
-						<a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a>
-						<br clear="all">
-						<br clear="all">
-						<?php if ($noticia->getEntradilla()):?>
-          			    <?php echo truncate_text($noticia->getEntradilla(),200)?>
-        				<?php endif; ?>
-					</td>
-					<td valign="center" align="center">
-						<?php
-							if ( validate_action('publicar') && $noticia->getEstado() != 'publicado') { 
-								echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'noticias/publicar?id=' . $noticia->getId(), array('method' => 'post', 'confirm' => 'Est&aacute;s seguro que deseas publicar la noticia ' . $noticia->getTitulo() . '?'));
-							}
-							echo ($noticia->getEstado() == 'publicado')? image_tag('aceptada.png', array('border' => 0, 'title' => 'Publicado')): '';	
-						?>
-					</td>
-					<td valign="center" align="center">
-					<?php if (validate_action('modificar')):?>
-					<a href="<?php echo url_for('noticias/editar?id='.$noticia->getId()) ?>"><?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?></a>
-					<?php endif;?>
-					</td>
-					<td valign="center" align="center">
-					<?php if(validate_action('baja')):?>
-					<?php echo link_to(image_tag('borrar.png', array('title' => 'Borrar', 'alt' => 'Borrar', 'width' => '20', 'height' => '20', 'border' => '0')), 'noticias/delete?id='.$noticia->getId(), array('method' => 'delete', 'confirm' => 'Est&aacute;s seguro que deseas eliminar la noticia ' . $noticia->getTitulo() . '?')) ?>
-				    <?php  endif;  ?>
-				    </td>
-				</tr>
+				<?php else: ?>
+				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia));?>
+				<?php endif; ?>
 				<?php else: ?>
 				 <tr >
-		          <td width="11%" align="center"  style="border-bottom:1px dotted #999; padding:7px;"><div style="border-right:solid 1px #CCC"> <span style="color:#999"><?php	echo date("d/m/Y", strtotime($noticia->getFecha()));?></span><br />
-		              <?php		
-						if ($noticia->getImagen()) {
-							if(file_exists(sfConfig::get('sf_upload_dir').'/noticias/images/s_'.$noticia->getImagen()))
-							{
-								echo image_tag('/uploads/noticias/images/s_'.$noticia->getImagen(), array('alt' => $noticia->getTitulo()));
-							}
-							else 
-							{
-								echo image_tag('/uploads/noticias/images/'.$noticia->getImagen(), array('height' => 60, 'width' => 80, 'alt' => $noticia->getTitulo()));
-							}
+		         <td width="11%" align="center"  style="border-bottom:1px dotted #999; padding:7px;"><div style="border-right:solid 1px #CCC"> <span style="color:#999"><?php	echo date("d/m/Y", strtotime($noticia->getFecha()));?></span><br />
+                 <?php		
+					if ($noticia->getImagen()) {
+						if(file_exists(sfConfig::get('sf_upload_dir').'/noticias/images/s_'.$noticia->getImagen()))
+						{
+							echo image_tag('/uploads/noticias/images/s_'.$noticia->getImagen(), array('alt' => $noticia->getTitulo()));
 						}
-						else {	
-							echo image_tag('noimage.jpg', array('height' => 50, 'width' => 50, 'alt' => $noticia->getTitulo()));
+						else 
+						{
+							echo image_tag('/uploads/noticias/images/'.$noticia->getImagen(), array('height' => 60, 'width' => 80, 'alt' => $noticia->getTitulo()));
 						}
-				    ?></td>
-		          <td width="88%" valign="top"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a> <br clear="all">
-		            <?php if ($noticia->getEntradilla()): echo truncate_text($noticia->getEntradilla(),200); endif; ?></td>
-		        </tr>
-		        <?php endif;?>
-				<?php endforeach; ?>
-				<?php if(validate_action('baja')):?>
-				<tr>
+					}
+					else {	
+						echo image_tag('noimage.jpg', array('height' => 50, 'width' => 50, 'alt' => $noticia->getTitulo()));
+					}
+	       	    ?>
+			   </td>
+	           <td width="88%" valign="top"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a> <br clear="all">
+	           <?php if ($noticia->getEntradilla()): echo truncate_text($noticia->getEntradilla(),200); endif; ?></td>
+	           </tr>
+		       <?php endif;?>
+			   <?php endforeach; ?>
+			   <?php if(validate_action('baja')):?>
+			   <tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5">
 						<!--<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
 						<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
 					</td>
 				</tr>
-				<?php endif; ?>
+			   <?php endif; ?>
 			</tbody>
 		</table>
 		</form>
@@ -215,12 +169,14 @@ use_helper('Text');?>
 				<tr>
 				  <?php
 					$todose = '';
+					$guardao = '';
 					$pendiente = '';
 					$publicado = ''; 
 					$intranet = '';
 					$web = '';
 					$todosa = '';
 					if($sf_user->getAttribute('noticias_nowestado') == '') { $todose = 'selected'; }
+					elseif($sf_user->getAttribute('noticias_nowestado') == 'guardado') { $guardao = 'selected';} 
 					elseif($sf_user->getAttribute('noticias_nowestado') == 'pendiente') { $pendiente = 'selected';} 
 					elseif ($sf_user->getAttribute('noticias_nowestado') == 'publicado'){ $publicado = 'selected';} 
 					if($sf_user->getAttribute('noticias_nowambito') == '') { $todosa = 'selected'; }
@@ -239,8 +195,9 @@ use_helper('Text');?>
 					<td style="padding-top: 5px;"><label>Estado:</label></td>
 					<td style="padding-top: 5px;"><select name="estado_busqueda" id="estado_busqueda">
 																				<option value="" <?php echo $todose ?>>todos</option>
-																				<option value="pendiente" <?php echo $pendiente ?>  >pendiente</option>
-																				<option value="publicado" <?php echo $publicado ?> >publicado</option>
+																				<option value="guardado" <?php echo $guardao ?>>guardado</option>
+																				<option value="pendiente" <?php echo $pendiente ?>>pendiente</option>
+																				<option value="publicado" <?php echo $publicado ?>>publicado</option>
 																				</select>	
 				  </td>
 				</tr>
