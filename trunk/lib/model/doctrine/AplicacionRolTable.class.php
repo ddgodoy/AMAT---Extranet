@@ -53,8 +53,6 @@ class AplicacionRolTable extends Doctrine_Table
 	   	 }  
    	    $r->andWhere('u.deleted = 0');
    	  
-   	    echo $r->getQuery();
-   	    exit();
    	  return $r->execute();   
    }
    
