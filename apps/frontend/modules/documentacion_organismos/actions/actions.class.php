@@ -18,7 +18,9 @@ class documentacion_organismosActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
 		$this->pager = new sfDoctrinePager('DocumentacionOrganismo', 20);
-		$this->pager->getQuery()->from('DocumentacionOrganismo')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()->from('DocumentacionOrganismo')
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -297,7 +299,16 @@ class documentacion_organismosActions extends sfActions
 			$this->hastaBsq = '';
 			$this->estadoBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
+		if($organismos)
+		{
+		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
+		} 
+		else 
+		{
+			return 'deleted=0'.$parcial;	
+		}
+		
   }
   
   protected function setOrdenamiento()

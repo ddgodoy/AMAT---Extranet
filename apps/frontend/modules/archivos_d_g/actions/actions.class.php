@@ -182,7 +182,15 @@ class archivos_d_gActions extends sfActions
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
    	}
-		return 'deleted=0'.$parcial;
+		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
+		if($gruposdetrabajo)
+		{
+			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
+		}
+		else 
+		{
+			return 'deleted=0'.$parcial;
+		}	
   }
   
   protected function setOrdenamiento()
