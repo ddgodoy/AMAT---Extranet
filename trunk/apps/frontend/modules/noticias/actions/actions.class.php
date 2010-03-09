@@ -17,7 +17,9 @@ class noticiasActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   		$this->pager = new sfDoctrinePager('Noticia', 10);  	    
-		$this->pager->getQuery()->from('Noticia')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()->from('Noticia')
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -240,8 +242,8 @@ class noticiasActions extends sfActions
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		$this->destacadaBsq = $this->getRequestParameter('destacadas_busqueda');
-    $this->ambitoBsq = $this->getRequestParameter('ambito_busqueda');
-    $this->estadoBsq = $this->getRequestParameter('estado_busqueda');
+    	$this->ambitoBsq = $this->getRequestParameter('ambito_busqueda');
+    	$this->estadoBsq = $this->getRequestParameter('estado_busqueda');
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND titulo LIKE '%$this->cajaBsq%'";
@@ -264,7 +266,14 @@ class noticiasActions extends sfActions
 			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBsq);
 		}
 		if (!empty($this->estadoBsq)) {
-			$parcial .= " AND estado = '$this->estadoBsq'";
+			if($this->estadoBsq == 'pendiente' || $this->estadoBsq == 'publicado')
+			{
+				$parcial .= " AND estado = '$this->estadoBsq'";
+			}
+			else 
+			{
+			 	$parcial .= " AND estado = '$this->estadoBsq' AND user_id_creador = ".$this->getUser()->getAttribute('userId');
+			}
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
 		}
 
