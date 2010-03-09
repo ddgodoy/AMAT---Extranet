@@ -17,7 +17,7 @@ class archivos_c_tActions extends sfActions
 	if (is_numeric($this->paginaActual)) {
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
-	    $this->pager = new sfDoctrinePager('ArchivoCT', 20);
+	$this->pager = new sfDoctrinePager('ArchivoCT', 20);
 	$this->pager->getQuery()->from('ArchivoCT')
 	->where($this->setFiltroBusqueda())
 	->orderBy($this->setOrdenamiento());
@@ -184,9 +184,16 @@ class archivos_c_tActions extends sfActions
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
 		}
-		
-		return 'deleted=0'.$parcial;
-  }
+		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
+		if($consejosterritoriales)
+        { 
+		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+        }  
+		else 
+		{
+			return 'deleted=0'.$parcial;
+		}	
+ }
   
   protected function setOrdenamiento()
   {

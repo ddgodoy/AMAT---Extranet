@@ -224,7 +224,15 @@ class archivos_d_oActions extends sfActions
 			$this->hastaBsq = '';
 		}
 		
-		return 'deleted=0'.$parcial;
+		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
+		if($organismos)
+		{
+		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
+		} 
+		else 
+		{
+			return 'deleted=0'.$parcial;	
+		}
   }
   
   protected function setOrdenamiento()

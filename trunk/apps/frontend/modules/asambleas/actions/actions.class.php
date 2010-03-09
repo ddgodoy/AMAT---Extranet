@@ -106,11 +106,13 @@ class asambleasActions extends sfActions
 			->from('Convocatoria c')
 			->leftJoin('c.Asamblea a')
 			->where('c.deleted=0')
-			->addWhere('c.usuario_id=' . $this->getUser()->getAttribute('userId'))
+			//->addWhere('c.usuario_id=' . $this->getUser()->getAttribute('userId'))
 			->addWhere('c.estado=\'aceptada\' OR c.estado=\'rechazada\'')
 			->addWhere($aceptadas.' AND a.'.$this->DAtos['where'])
 			->andWhere('a.fecha_caducidad >= NOW()')
 			->orderBy('a.fecha desc');
+			
+			
 		$this->pager2->setPage($this->getRequestParameter('page', 1));
 		$this->pager2->init();
 		

@@ -20,7 +20,9 @@ class documentacion_consejosActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
 		$this->pager = new sfDoctrinePager('DocumentacionConsejo', 20);
-		$this->pager->getQuery()->from('DocumentacionConsejo')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()->from('DocumentacionConsejo')
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -218,7 +220,16 @@ class documentacion_consejosActions extends sfActions
 			$this->categoriaBsq = '';
 			$this->estadoBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+	
+		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
+		if($consejosterritoriales)
+        { 
+		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+        }  
+		else 
+		{
+			return 'deleted=0'.$parcial;
+		}	
   }
   
   protected function setOrdenamiento()
