@@ -56,5 +56,14 @@ class Common
 
 		return $arrayCategoriasTema;
 	}  
+	
+	public static  function getCantidaDEguardados($clase,$usuario)
+	{
+		$q = Doctrine_Query::create()
+		->from($clase)
+		->where("estado = 'guardado' AND user_id_creador != ".$usuario);
+		
+		return $q->execute();
+	}
 }
 ?>

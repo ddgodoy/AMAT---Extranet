@@ -12,6 +12,7 @@ class documentacion_gruposActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'));
   	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
@@ -26,7 +27,7 @@ class documentacion_gruposActions extends sfActions
 		$this->pager->init();
 
 		$this->documentacion_grupo_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults();
+		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
 
 		if ($this->grupoBsq) {
 		  $this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($this->grupoBsq);
@@ -118,7 +119,8 @@ class documentacion_gruposActions extends sfActions
       $documentacion_grupo = $form->save();
       
       ## Notificar y enviar email a los destinatarios 
-			if($documentacion_grupo->getEstado()=='publicado') {
+			if($documentacion_grupo->getEstado()=='publicado')
+			 {
 				if ($documentacion_grupo->getGrupoTrabajoId())
 				{
 					$enviar = true;
@@ -130,13 +132,22 @@ class documentacion_gruposActions extends sfActions
 				{
 				  ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
 				}  
-			}
+			 }
+			if($documentacion_grupo->getEstado() == 'pendiente')
+   			{ 
+				$enviar = true;
+				$grupo = GrupoTrabajoTable::getGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
+				$email = AplicacionRolTable::getEmailPublicar('24',$grupo->getId());
+				$tema = 'Documento pendiente de publicar para Grupo de Trabajo: '.$grupo->getNombre();
+			}	
+			##enviar email a los responsables 
 			
 			## envia el email  	
 			if($enviar)	
 			{
 				foreach ($email AS $emailPublic)
 				{
+					
 					if($emailPublic->getEmail())
 					{
 					    $mailTema = $emailPublic->getEmail();
@@ -158,6 +169,7 @@ class documentacion_gruposActions extends sfActions
 						$mailer->disconnect();		
 					}
 				}
+				
 			}
       $this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
     }

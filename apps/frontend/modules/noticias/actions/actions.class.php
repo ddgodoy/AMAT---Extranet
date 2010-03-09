@@ -11,6 +11,7 @@ class noticiasActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
+		$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'));
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
@@ -24,7 +25,7 @@ class noticiasActions extends sfActions
 		$this->pager->init();
 
 		$this->noticia_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults();
+		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count() ;
 	}
 	
 	public function executeShow(sfWebRequest $request)
@@ -184,12 +185,12 @@ class noticiasActions extends sfActions
 				ServiceNotificacion::send('creacion', 'Noticia', $noticia->getId(), $noticia->getTitulo());
 			}
             
-//			if($estado['estado'] == 'pendiente')
-//			{ 
-//				$enviar = true;
-//				$email = AplicacionRolTable::getEmailPublicar(1);
-//				$tema = 'Novedad pendiente de publicar';
-//			}	
+			if($estado['estado'] == 'pendiente')
+			{ 
+				$enviar = true;
+				$email = AplicacionRolTable::getEmailPublicar(1,'','','');
+				$tema = 'Novedad pendiente de publicar';
+			}	
 			##enviar email a los responsables 
 			
 			if($enviar)	
