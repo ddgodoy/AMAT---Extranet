@@ -11,16 +11,16 @@
 	</table>
 
 	<div class="noticias">
-	  <img src="<?php if ($noticia->getimagen()): ?>/uploads/noticias/images/<?php echo $noticia->getimagen()?><?php else: ?> /images/noimage.jpg<?php endif; ?>" class="notimg" alt="<?php echo  $noticia->gettitulo() ?>" />
+	  <img src="<?php if ($noticia->getImagen()): ?>/uploads/noticias/images/<?php echo $noticia->getImagen()?><?php else: ?> /images/noimage.jpg<?php endif; ?>" class="notimg" alt="<?php echo  $noticia->getTitulo() ?>" />
 	  <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($noticia->getFecha())) ?></span><br />
-	  <a class="nottit"><?php echo  $noticia->gettitulo() ?></a><br />
-	  <p class="notentrada"><?php echo $noticia->getentradilla() ?></p>
-	  <?php echo $noticia->getcontenido() ?>  
-	  <?php if($noticia->getdocumento()):?>   
-	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getdocumento())?>" class="notentrada">Documento +</a> 
+	  <a class="nottit"><?php echo  $noticia->getTitulo() ?></a><br />
+	  <p class="notentrada"><?php echo nl2br($noticia->getEntradilla()) ?></p>
+	  <?php echo $noticia->getContenido() ?>  
+	  <?php if($noticia->getDocumento()):?>   
+	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getDocumento())?>" class="notentrada">Documento +</a> 
 	  <?php endif;?>
 	  <br><br><span class="notfecha">Autor / Medio: <?php echo $noticia->getAutor() ?></span><br />     
-	  <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($noticia->getfecha_caducidad())) ?></span><br />     
+	  <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($noticia->getFechaCaducidad())) ?></span><br />     
 	   <?php if($noticia->getUserIdCreador()):?>
 	   <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($noticia->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($noticia->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
