@@ -61,32 +61,39 @@
 		<form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
 			<?php $i=0; foreach ($consejos_territoriales_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 			   <a href="<?php echo url_for('miembros_consejo/index?consejo='.$valor->getId()) ?>" class="grupo-titulo"> <strong><?php echo $valor->getNombre()?></strong><span>Creado el: <?php echo date('d/m/Y',strtotime($valor->getCreatedAt()))?></span> </a><br />
-
-			      <table width="100%"  cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo">      
-			        <tr class="gris">
-			        <?php if(validate_action('baja')):?>
-			        <td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
-			        <?php endif;?>
-			        <?php if($valor->getDetalle()):?>
-			          <td><?php echo $valor->getDetalle()?></td>
-			        <?php else: ?>
-			         <td valign="top" align="center" class="doc">  </td>
-			          <td width="95%">&nbsp;&nbsp;</td> 
-			         <?php endif; ?>  
-			         <td width="5%" valign="middle" align="center">
-					  <?php if(validate_action('modificar')):?>
-					   <a href="<?php echo url_for('consejos_territoriales/editar?id=' . $valor->getId()) ?>">
-						 <?php echo image_tag('edit.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Editar')) ?>
-					    </a>
-					     <?php endif;?>	
-					   </td>
-			           <td width="5%" valign="middle" align="center">
-			          <?php if(validate_action('baja')):?>
-			          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'consejos_territoriales/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-			          <?php endif;?>	
-			          </td>
-			        </tr>
-			    </table><br />
+					<table width="100%"  cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo">      
+						<tr class="gris">
+							<td width="5%">
+								<?php if(validate_action('baja')): ?>
+									<input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" />
+								<?php else: ?>
+									&nbsp;
+								<?php endif; ?>
+							</td>
+							<td width="85%">
+								<?php if ($valor->getDetalle()) { echo $valor->getDetalle(); } else { echo '&nbsp;'; } ?>
+							</td>
+							<td width="5%" align="center">
+								<?php if(validate_action('modificar')): ?>
+									<a href="<?php echo url_for('consejos_territoriales/editar?id=' . $valor->getId()) ?>">
+										<?php echo image_tag('edit.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Editar')) ?>
+									</a>
+								<?php else: ?>
+									&nbsp;
+								<?php endif; ?>
+							</td>
+							<td width="5%" align="center">
+								<?php
+									if (validate_action('baja')) {
+										echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'consejos_territoriales/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?'));
+									} else {
+										echo '&nbsp;';
+									}
+								?>
+							</td>
+						</tr>
+					</table>
+			    <br />
 		     <?php endforeach; ?>
 		     <?php if(validate_action('baja')):?>
 		      <div class="lineaListados">
