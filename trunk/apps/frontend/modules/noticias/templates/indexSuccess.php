@@ -56,9 +56,9 @@ use_helper('Text');?>
 		<form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0"  class="listados" <?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?>style="border:none;"<?php endif;?>>
 			<tbody>
-			<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
+			<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				<tr>
-					<?php if (validate_action('baja')): ?>
+					<?php if (validate_action('publicar') || validate_action('baja')): ?>
 					<th width="3%"></th>
 	      		    <?php endif;?>
 					<th width="7%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
@@ -70,13 +70,13 @@ use_helper('Text');?>
 				</tr>
 			<?php endif;?>	
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<?php if(validate_action('publicar') && validate_action('modificar') && validate_action('baja') ):?>
+				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				<?php if($noticia->getEstado() == 'guardado'):?>
 				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia));?>
+				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd));?>
 				<?php endif; ?>
 				<?php else: ?>
-				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia));?>
+				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd));?>
 				<?php endif; ?>
 				<?php else: ?>
 				 <tr >
@@ -102,7 +102,7 @@ use_helper('Text');?>
 	           </tr>
 		       <?php endif;?>
 			   <?php endforeach; ?>
-			   <?php if(validate_action('baja')):?>
+			   <?php if(validate_action('publicar') || validate_action('baja')):?>
 			   <tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5">

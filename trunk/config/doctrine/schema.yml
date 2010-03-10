@@ -225,11 +225,13 @@ Noticia:
     imagen:                  { type: string(255), notnull: false }
     documento:               { type: string(255), notnull: false }
     fecha:                   { type: date, notnull: true }
-    fecha_publicacion:       { type: date, notnull: true }
-    fecha_caducidad:         { type: date, notnull: true }
+    fecha_publicacion:       { type: date }
+    fecha_caducidad:         { type: date }
     ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
     estado:                  { type: enum, values: ['guardado','pendiente', 'publicado'] }
     destacada:               { type: boolean }
+    novedad:                 { type: boolean }   
+    mas_imagen:              { type: boolean }
     mutua_id:                { type: integer }
     owner_id:                { type: integer }
     user_id_creador:         { type: integer }

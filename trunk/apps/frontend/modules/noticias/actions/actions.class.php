@@ -21,6 +21,7 @@ class noticiasActions extends sfActions
 		$this->pager->getQuery()->from('Noticia')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
+		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -267,14 +268,7 @@ class noticiasActions extends sfActions
 			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBsq);
 		}
 		if (!empty($this->estadoBsq)) {
-			if($this->estadoBsq == 'pendiente' || $this->estadoBsq == 'publicado')
-			{
-				$parcial .= " AND estado = '$this->estadoBsq'";
-			}
-			else 
-			{
-			 	$parcial .= " AND estado = '$this->estadoBsq' AND user_id_creador = ".$this->getUser()->getAttribute('userId');
-			}
+			$parcial .= " AND estado = '$this->estadoBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
 		}
 
@@ -316,7 +310,16 @@ class noticiasActions extends sfActions
 			$this->ambitoBsq = '';
 			$this->estadoBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+		
+		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		else 
+		{
+			return 'deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW()'.$parcial;
+		}	
   }
 
   protected function setOrdenamiento()
