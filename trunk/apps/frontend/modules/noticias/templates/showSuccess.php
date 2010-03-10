@@ -12,7 +12,7 @@
 	<br clear="all" />
 	<br clear="all" />
 	<div class="noticias">
-	  <?php if($noticia->getMasImagen()):?>
+	  <?php if($noticia->getMasImagen() && $noticia->getImagen()):?>
 	  <img src="<?php if ($noticia->getImagen()): ?>/uploads/noticias/images/<?php echo $noticia->getImagen()?><?php else: ?> /images/noimage.jpg<?php endif; ?>" class="notimg" alt="<?php echo  $noticia->getTitulo() ?>" />
 	  <?php endif;?>
 	  <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($noticia->getFecha())) ?></span><br />
