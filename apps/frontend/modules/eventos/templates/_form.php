@@ -91,7 +91,7 @@
 		     <?php if(validate_action('publicar')): ?>
 		      	<input value="Publicar" class="boton" id="boton_publicar" type="submit" />
 		     <?php endif;?>
-		     <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('eventos/index') ?>';"/>
+		     <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('eventos/index') ?>';"/>
 		    </div>
 	</form>
 
