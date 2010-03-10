@@ -51,12 +51,12 @@ class NoticiaForm extends BaseNoticiaForm
 			$this->setWidget('fecha_publicacion', new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')));
 			$this->setValidator('fecha_publicacion',new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')));			
 			$this->setWidget('fecha_caducidad', new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')));
-			$this->setValidator('fecha_caducidad',new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')));			
+			$this->setValidator('fecha_caducidad',new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')));			
 		}
 		else 
 		{
 			$this->setWidget('fecha_publicacion', new sfWidgetFormInputHidden());
-			$this->setValidator('fecha_publicacion',new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')));			
+			$this->setValidator('fecha_publicacion',new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')));			
 			$this->setWidget('fecha_caducidad', new sfWidgetFormInputHidden());
 			$this->setValidator('fecha_caducidad',new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')));			
 		}
@@ -93,8 +93,8 @@ class NoticiaForm extends BaseNoticiaForm
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => 'pendiente',
 			'mas_imagen'        => 1,
-			'fecha_publicacion' => '2007/01/01',
-			'fecha_caducidad'   => '2015/12/31',
+//			'fecha_publicacion' => '2007/01/01',
+//			'fecha_caducidad'   => '2015/12/31',
 			
 		));
 		

@@ -22,6 +22,9 @@ class noticiasActions extends sfActions
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
+//		echo $this->pager->getQuery()->getSql();
+//		exit();
+		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -177,6 +180,17 @@ class noticiasActions extends sfActions
 				$file->save(sfConfig::get('sf_upload_dir').'/noticias/images/'.$filename.$extension);
 			}
 			$noticia = $form->save();
+			
+			if($noticia->getFechaPublicacion()=='')
+			{
+				$noticia->setFechaPublicacion(date( 'Y-m-d' ));
+				$noticia->save();
+			}
+			if($noticia->getFechaCaducidad()=='')
+			{
+				$noticia->setFechaCaducidad('2015-12-31');
+				$noticia->save();
+			}
 			
 			## Notificar
 			if($estado['estado'] == 'publicado') {
