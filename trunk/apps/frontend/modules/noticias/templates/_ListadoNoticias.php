@@ -36,7 +36,7 @@
 				</td>
 				<td valign="center" align="center">
 				<?php
-					if ( validate_action('publicar') && $noticia->getEstado() != 'publicado') { 
+					if ( validate_action('publicar') && $noticia->getEstado() != 'publicado' && $noticia->getEstado() != 'guardado') { 
 						echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'noticias/publicar?id=' . $noticia->getId(), array('method' => 'post', 'confirm' => 'Est&aacute;s seguro que deseas publicar la noticia ' . $noticia->getTitulo() . '?'));
 					}
 					echo ($noticia->getEstado() == 'publicado')? image_tag('aceptada.png', array('border' => 0, 'title' => 'Publicado')): '';	
