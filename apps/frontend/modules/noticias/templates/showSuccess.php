@@ -12,13 +12,15 @@
 
 	<div class="noticias">
 	  <img src="<?php if ($noticia->getimagen()): ?>/uploads/noticias/images/<?php echo $noticia->getimagen()?><?php else: ?> /images/noimage.jpg<?php endif; ?>" class="notimg" alt="<?php echo  $noticia->gettitulo() ?>" />
+	  <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($noticia->getFecha())) ?></span><br />
 	  <a href="#" class="nottit"><?php echo  $noticia->gettitulo() ?></a><br />
 	  <p class="notentrada"><?php echo $noticia->getentradilla() ?></p>
 	  <?php echo $noticia->getcontenido() ?>  
 	  <?php if($noticia->getdocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getdocumento())?>" class="notentrada">Documento +</a> 
 	  <?php endif;?>
-	  <br><br><span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($noticia->getfecha_caducidad())) ?></span><br />     
+	  <br><br><span class="notfecha">Autor / Medio: <?php echo $noticia->getAutor() ?></span><br />     
+	  <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($noticia->getfecha_caducidad())) ?></span><br />     
 	   <?php if($noticia->getUserIdCreador()):?>
 	   <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($noticia->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($noticia->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
