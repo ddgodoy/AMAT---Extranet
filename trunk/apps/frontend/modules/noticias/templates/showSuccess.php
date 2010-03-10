@@ -21,7 +21,12 @@
 	  <?php if($noticia->getDocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getDocumento())?>" class="notentrada">Documento +</a> 
 	  <?php endif;?>
-	  <br><br><span class="notfecha">Autor / Medio: <?php echo $noticia->getAutor() ?></span><br />     
+	  <br><br>
+	  <?php if($noticia->getAutor()):?> 
+	  <span class="notfecha">Autor / Medio: <?php echo $noticia->getAutor() ?></span><br />    
+	  <?php endif ?>
+	  <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
+	   if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):?> 
 	  <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($noticia->getFechaCaducidad())) ?></span><br />     
 	   <?php if($noticia->getUserIdCreador()):?>
 	   <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($noticia->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($noticia->getCreatedAt())?></span><br /> 
@@ -31,6 +36,7 @@
 	  <?php endif;?>
 	  <?php if($noticia->getUserIdPublicado()):?> 
 	   <span class="notfecha">Publicado por: <?php echo Usuario::datosUsuario($noticia->getUserIdPublicado()) ?> el d&iacute;a: <?php echo format_date($noticia->getFechaPublicado())?></span><br />     
+	  <?php endif;?> 
 	  <?php endif;?> 
 	   <div class="clear"></div>
 	</div>
