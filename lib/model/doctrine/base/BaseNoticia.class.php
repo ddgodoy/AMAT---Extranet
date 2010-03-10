@@ -37,11 +37,9 @@ abstract class BaseNoticia extends sfDoctrineRecord
              ));
         $this->hasColumn('fecha_publicacion', 'date', null, array(
              'type' => 'date',
-             'notnull' => true,
              ));
         $this->hasColumn('fecha_caducidad', 'date', null, array(
              'type' => 'date',
-             'notnull' => true,
              ));
         $this->hasColumn('ambito', 'enum', null, array(
              'type' => 'enum',
@@ -62,6 +60,12 @@ abstract class BaseNoticia extends sfDoctrineRecord
              ),
              ));
         $this->hasColumn('destacada', 'boolean', null, array(
+             'type' => 'boolean',
+             ));
+        $this->hasColumn('novedad', 'boolean', null, array(
+             'type' => 'boolean',
+             ));
+        $this->hasColumn('mas_imagen', 'boolean', null, array(
              'type' => 'boolean',
              ));
         $this->hasColumn('mutua_id', 'integer', null, array(

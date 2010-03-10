@@ -36,11 +36,13 @@
       <legend>Noticia</legend>
       <table width="100%" cellspacing="4" cellpadding="0" border="0">
         <tbody><tr>
-          <td width="7%"><label>Fecha*</label></td>
+          <td width="7%"><label>Fecha*: </label></td>
           <td width="93%" valign="middle">
             <?php echo $form['fecha'] ?>
-            <!--<label style="margin-left: 4px;">Fecha de Publicación*</label><?php //echo $form['fecha_publicacion'] ?>
-            <label style="margin-left: 4px;">Fecha de Caducidad*</label><?php //echo $form['fecha_caducidad'] ?>-->
+            <?php if(validate_action('publicar')):?>
+            <label style="margin-left: 4px;">Fecha de Publicación: </label><?php echo $form['fecha_publicacion'] ?>
+            <label style="margin-left: 4px;">Fecha de Caducidad:  </label><?php echo $form['fecha_caducidad'] ?>
+            <?php endif; ?>
           </td>
         </tr>
         <tr>
@@ -52,7 +54,7 @@
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle">
-          	<?php echo $form['titulo'] ?> <label>Destacada</label> <?php echo $form['destacada'] ?>
+          	<?php echo $form['titulo'] ?> <label>Destacada</label> <?php echo $form['destacada'] ?>&nbsp;&nbsp;<label>Novedad</label> <?php echo $form['novedad'] ?>
           </td>
         </tr>
         <tr>
@@ -69,7 +71,8 @@
         </tr>
         <tr>
           <td style="padding-top: 5px;"><label>Imagen</label></td>
-          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
+          <td style="padding-top: 5px;" width="93%"><label><?php echo $form['imagen'] ?></label><label><?php echo $form['mas_imagen'] ?></label><label>Mostrar la imagen en la ficha</label>
+          </td>
         </tr>
         <tr>
           <td style="padding-top: 5px;"><label>Archivo</label></td>
