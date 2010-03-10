@@ -5,11 +5,12 @@
 	</div>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr>
-	    <td width="95%"><h1>Noticia</h1></td>
-	    <td width="5%" align="right">&nbsp;</td>
+	    <td width="50%"><h1>Noticia</h1></td>
+	    <td width="50%" align="right">&nbsp;</td>
 	  </tr>
 	</table>
-
+	<br clear="all" />
+	<br clear="all" />
 	<div class="noticias">
 	  <img src="<?php if ($noticia->getImagen()): ?>/uploads/noticias/images/<?php echo $noticia->getImagen()?><?php else: ?> /images/noimage.jpg<?php endif; ?>" class="notimg" alt="<?php echo  $noticia->getTitulo() ?>" />
 	  <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($noticia->getFecha())) ?></span><br />
