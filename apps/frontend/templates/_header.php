@@ -1,12 +1,21 @@
 <?php use_helper('Security'); $banderaPadre = 0; ?>
 
+<script language="javascript" type="text/javascript">
+	function avoidNullSearch()
+	{
+		if ($('key_search_gral').value == '') {
+			alert('Ingrese una clave para la b\u00fasqueda'); $('key_search_gral').focus(); return false;
+		}
+		return true;
+	}
+</script>
 <div class="head">
     <div class="img1">
       <?php echo image_tag('logo.png', array('width' => 249, 'height' => 66, 'alt' => 'Amat')) ?>
       <div class="buscador">
         <form action="<?php echo url_for('buscar/buscar') ?>" method="get">
-          <input class="form_input" name="q" type="text" />
-          <input name="boton_buscar" type="submit" value="Buscar" class="boton" />
+          <input class="form_input" name="q" type="text" id="key_search_gral" />
+          <input name="boton_buscar" type="submit" value="Buscar" class="boton" onclick="return avoidNullSearch();"/>
         </form>
       </div>
       <h1>Extranet de Asociados AMAT</h1>
