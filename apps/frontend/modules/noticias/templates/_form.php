@@ -40,7 +40,7 @@
           <td width="93%" valign="middle">
             <?php echo $form['fecha'] ?>
             <?php if(validate_action('publicar')):?>
-            <label style="margin-left: 4px;">Fecha de Publicación: </label><?php echo $form['fecha_publicacion'] ?>
+            <label style="margin-left: 4px;">Fecha de Publicación*: </label><?php echo $form['fecha_publicacion'] ?>
             <label style="margin-left: 4px;">Fecha de Caducidad:  </label><?php echo $form['fecha_caducidad'] ?>
             <?php endif; ?>
           </td>
