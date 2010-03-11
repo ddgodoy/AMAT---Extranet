@@ -6,7 +6,7 @@
 	<tr class="<?php echo $odd ?>">
 		<td align="center" valign="top">
 			<?php if ($noticia->getImagen()): ?>
-				<img src="<?php echo '/uploads/noticias/images/s_'.$noticia->getImagen() ?>" width="50" height="50" alt="Noticias" />
+				<img src="<?php echo '/uploads/noticias/images/s_'.$noticia->getImagen() ?>" alt="Noticias" />
 			<?php endif; ?>
 		</td>
 		<td valign="top">
