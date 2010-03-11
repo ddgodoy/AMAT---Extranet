@@ -58,7 +58,7 @@ class CircularForm extends BaseCircularForm
       'fecha_caducidad'   	=> new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
       'nombre'    			=> new sfValidatorString(array('required' => true), array('required'=>'El Nombre es obligatorio')),      
       'contenido' 			=> new sfValidatorString(array('required' => false), array('required'=>'El Contenido es obligatorio')),
-      'numero'    			=> new sfValidatorString(array('max_length' => 100, 'required' => true),array('required'=>'El Numero es obligatorio') ),
+      'numero'              => new sfValidatorInteger(array('required' => false),array('required'=>'El Numero es obligatorio','invalid'=>'El numero tiene que ser un entero') ),
       'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => false)),
       'circular_tema_id'          => new sfValidatorChoice(array('choices' => array_keys(array('0'=>'0')+$arrayCategoTema) , 'required' => false),array('invalid'=>'hola')),
       'circular_sub_tema_id'      => new sfValidatorChoice(array('choices' => $arraysubtema , 'required' => false)),
