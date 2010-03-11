@@ -147,7 +147,7 @@ use_helper('Text');?>
 				</tr>
 				<tr>
 					<td style="padding-top: 5px;"><label>Destacadas:</label></td>
-					<td align="left">
+					<td style="padding-top: 5px;" align="left">
 						<input type="checkbox" value="1" <?php if($sf_user->getAttribute('noticias_nowdestacada')){ echo 'checked';}?>  style="width:80px;" name="destacadas_busqueda" id="destacadas_busqueda"  />
 					</td>
 				</tr>
