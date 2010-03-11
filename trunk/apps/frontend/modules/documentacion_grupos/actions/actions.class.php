@@ -19,7 +19,7 @@ class documentacion_gruposActions extends sfActions
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-	  $this->pager = new sfDoctrinePager('DocumentacionGrupo', 20);
+	  $this->pager = new sfDoctrinePager('DocumentacionGrupo', 10);
 
 		$this->pager->getQuery()
 		->from('DocumentacionGrupo')
