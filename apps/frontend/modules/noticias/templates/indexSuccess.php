@@ -148,7 +148,7 @@ use_helper('Text');?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Destacadas:</label></td>
 					<td style="padding-top: 5px;" align="left">
-						<input type="checkbox" value="1" <?php if($sf_user->getAttribute('noticias_nowdestacada')){ echo 'checked';}?>  style="width:80px;" name="destacadas_busqueda" id="destacadas_busqueda"  />
+						<input type="checkbox" value="1" <?php if($sf_user->getAttribute('noticias_nowdestacada')){ echo 'checked';}?> name="destacadas_busqueda" id="destacadas_busqueda"  />
 					</td>
 				</tr>
 				<?php
@@ -172,7 +172,7 @@ use_helper('Text');?>
 				<tr>
 				    <td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
 					<td style="padding-top: 5px;"><select name="ambito_busqueda" id="ambito_ambito">
-																				<option value="" <?php echo $todosa ?> >todos</option>
+																				<option value="" <?php echo $todosa ?> >Intranet y Web</option>
 																				<option value="web" <?php echo $web ?> >web</option>
 																				<option value="intranet" <?php echo $intranet ?> >intranet</option>
 																				</select>	

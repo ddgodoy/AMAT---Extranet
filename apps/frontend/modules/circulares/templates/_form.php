@@ -14,6 +14,9 @@
 	echo $form['documento']->renderError();
 	echo $form['circular_sub_tema_id']->renderError();
 	echo $form['subcategoria_organismo_id']->renderError();
+	echo $form['circular_tema_id']->renderError();
+	echo $form['categoria_organismo_id']->renderError();
+		
 ?>
 <form action="<?php echo url_for('circulares/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 	<?php if (!$form->getObject()->isNew()): ?>
@@ -56,11 +59,11 @@
 					<td valign="top"><label>Categor&iacute;a de Tema</label></td>
 					<td valign="middle">
 						<?php
-							echo select_tag('select_cat_tema',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoriasTema), $cat_tema_selected),
-															array('style'=>'width:330px;','class'=>'form_input')
-														 );
-							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'circular_sub_tema/listByCategoria','with'=>"'id_categoria='+value+'&name=circular'",'script'=>true));
+							echo $form['circular_tema_id'];
+							echo observe_field('circular_circular_tema_id', array('update'=>'content_sub_tema','url'=>'circular_sub_tema/listByCategoria','with'=>"'id_categoria='+value+'&name=circular'",'script'=>true));
+							if ($form['circular_tema_id']->getValue()) {
+						    $arraySubcategoriasTema = CircularSubTemaTable::doSelectByCategoria($form['circular_tema_id']->getValue());
+							}
 						?>
 					</td>
 				</tr>
@@ -76,20 +79,13 @@
 					<td valign="top"><label>Categor&iacute;a de Organismo</label></td>
 					<td valign="middle">
 						<?php
-							echo select_tag('categoria_organismo_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoria),
-															$subcategoria_organismos_selected), array('style'=>'width:330px;','class'=>'form_input')
-														 );
-							echo observe_field('categoria_organismo_id', array('update'=>'content_sub_org','url'=>'subcategoria_organismos/listByCategoriaOrganismo','with'=>"'id_categoria_organismo='+value+'&name=circular'"));
+							echo $form['categoria_organismo_id'] ;
+							echo observe_field('circular_categoria_organismo_id', array('update'=>'content_sub_org','url'=>'subcategoria_organismos/listByCategoriaOrganismo','with'=>"'id_categoria_organismo='+value+'&name=circular'"));
+							if ($form['categoria_organismo_id']->getValue()) {
+								$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($form['categoria_organismo_id']->getValue());
+						    }
 						?>
-						
-						<?php /*
-							echo select_tag('select_cat_org',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayCategoriasOrg),
-															$cat_org_selected), array('style'=>'width:330px;','class'=>'form_input')
-														 );
-							echo observe_field('select_cat_org', array('update'=>'content_sub_org','url'=>'circular_sub_org/listByCategoria','with'=>"'id_categoria='+value"));
-						*/ ?>
+
 					</td>
 				</tr>
 				<tr>

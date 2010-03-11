@@ -110,6 +110,7 @@ class circularesActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
   {
+  	
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
 
     if ($form->isValid()) {

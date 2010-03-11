@@ -20,7 +20,7 @@ class NoticiaForm extends BaseNoticiaForm
 			'entradilla'        => new sfWidgetFormTextarea(array(), array('style' => 'width:755px;', 'rows' => 5, 'onfocus' => "this.style.background='#D5F7FF'", 'onblur' => "this.style.background='#E1F3F7'")),
 			'contenido'         => new fckFormWidget(),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
+			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'Intranet y Web'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
 			'novedad'           => new sfWidgetFormInputCheckbox(),
 			'mas_imagen'        => new sfWidgetFormInputCheckbox(),

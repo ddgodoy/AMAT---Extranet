@@ -25,15 +25,6 @@
 	$arraySubcategoriasTema = array();
 	$arraySubcategoria  = array();
 
-	if (!empty($sub_tema_selected)) {
-		$cat_tema_selected = Doctrine::getTable('CircularSubTema')->find($sub_tema_selected)->getCircularCatTemaId();
-		$arraySubcategoriasTema = CircularSubTemaTable::doSelectByCategoria($cat_tema_selected);
-	}
-	if (!empty($subcategoria_organismos_selected)) {
-		$categoria_organismos_selected = Doctrine::getTable('SubCategoriaOrganismo')->find($subcategoria_organismos_selected)->getCategoriaOrganismoId();
-		$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria_organismos_selected);
-	}
-
 	include_partial
 	(
 		'form',
