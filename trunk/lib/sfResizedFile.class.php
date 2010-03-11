@@ -125,7 +125,6 @@ class sfResizedFile extends sfValidatedFile
 			$thumbnail->save($mediumFile, 'image/jpeg');
 		}
 		
-		//redimencion para la web de amat solo para el modulo noticias  
 		
 		// si encuentra el alto y ancho small en app.yml los define, sino no lo crea
 		if (sfConfig::get('app_thumbnail_web_small_width_'.$modulo) && sfConfig::get('app_thumbnail_web_small_height_'.$modulo))
