@@ -152,8 +152,7 @@ use_helper('Text');?>
 						<input type="checkbox" value="1" <?php if($sf_user->getAttribute('noticias_nowdestacada')){ echo 'checked';}?>  style="width:80px;" name="destacadas_busqueda" id="destacadas_busqueda"  />
 					</td>
 				</tr>
-				<tr>
-				  <?php
+				<?php
 					$todose = '';
 					$guardao = '';
 					$pendiente = '';
@@ -169,14 +168,18 @@ use_helper('Text');?>
 					elseif($sf_user->getAttribute('noticias_nowambito') == 'intranet') { $intranet = 'selected';} 
 					elseif ($sf_user->getAttribute('noticias_nowambito') == 'web'){ $web = 'selected';} 
 					?>  
-					<td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
+
+				<?php if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)): ?>
+				<tr>
+				    <td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
 					<td style="padding-top: 5px;"><select name="ambito_busqueda" id="ambito_ambito">
 																				<option value="" <?php echo $todosa ?> >todos</option>
-																				<option value="intranet" <?php echo $intranet ?> >intranet</option>
 																				<option value="web" <?php echo $web ?> >web</option>
+																				<option value="intranet" <?php echo $intranet ?> >intranet</option>
 																				</select>	
 				  </td>
 				</tr>
+				<?php endif; ?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Estado:</label></td>
 					<td style="padding-top: 5px;"><select name="estado_busqueda" id="estado_busqueda">

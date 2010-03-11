@@ -41,10 +41,15 @@ class sfResizedFile extends sfValidatedFile
 			{
 				throw new RuntimeException('You must give a "path" when you give a relative file name.');
 			}
-
+			
+			$smallWEbFile = $this->path.DIRECTORY_SEPARATOR.'web_s_'.$file;
+			$WEbFile = $this->path.DIRECTORY_SEPARATOR.'web_'.$file;
+			$OriginalWEbFile = $this->path.DIRECTORY_SEPARATOR.'web_original_'.$file;
+						
 			$smallFile = $this->path.DIRECTORY_SEPARATOR.'s_'.$file;
 			$mediumFile = $this->path.DIRECTORY_SEPARATOR.'m_'.$file;
 			$file = $this->path.DIRECTORY_SEPARATOR.$file;
+			
 		}
 		
 		// get our directory path from the destination filename
@@ -71,12 +76,10 @@ class sfResizedFile extends sfValidatedFile
 			throw new Exception(sprintf('File upload path "%s" is not writable.', $directory));
 		}
 
-		
-		
 		// obtengo el nombre del modulo segun el path
 		$nombre_path = explode("/",$this->path);
 		$modulo = sfContext::getInstance()->getRequest()->getParameter('module');
-		
+
 		
 		// si encuentra el alto y ancho normal en app.yml los define, sino define el default 
 		if (sfConfig::get('app_thumbnail_normal_width_'.$modulo) && sfConfig::get('app_thumbnail_normal_height_'.$modulo))
@@ -98,14 +101,6 @@ class sfResizedFile extends sfValidatedFile
 		// si encuentra el alto y ancho small en app.yml los define, sino no lo crea
 		if (sfConfig::get('app_thumbnail_small_width_'.$modulo) && sfConfig::get('app_thumbnail_small_height_'.$modulo))
 		{
-			if($modulo == 'noticia')
-			{
-				$arrayfile = explode('_',$file);
-				if(is_array($arrayfile) && !empty($arrayfile[1]))
-				{
-					$smallFile = $this->path.DIRECTORY_SEPARATOR.'s_'.$arrayfile[1];
-				}
-			}	
 			
 			$thumbnail_width  = sfConfig::get('app_thumbnail_small_width_'.$modulo);
 			$thumbnail_height = sfConfig::get('app_thumbnail_small_height_'.$modulo);
@@ -121,16 +116,7 @@ class sfResizedFile extends sfValidatedFile
 		// si encuentra el alto y ancho medium en app.yml los define, sino no lo crea
 		if (sfConfig::get('app_thumbnail_medium_width_'.$modulo) && sfConfig::get('app_thumbnail_medium_height_'.$modulo))
 		{
-			
-			if($modulo == 'noticia')
-			{
-				$arrayfile = explode('_',$file);
-				if(is_array($arrayfile) && !empty($arrayfile[1]))
-				{
-					$mediumFile = $this->path.DIRECTORY_SEPARATOR.'m_'.$arrayfile[1];
-				}
-			}	
-			
+						
 			$thumbnail_width  = sfConfig::get('app_thumbnail_medium_width_'.$modulo);
 			$thumbnail_height = sfConfig::get('app_thumbnail_medium_height_'.$modulo);
 			
@@ -139,8 +125,49 @@ class sfResizedFile extends sfValidatedFile
 			$thumbnail->save($mediumFile, 'image/jpeg');
 		}
 		
+		//redimencion para la web de amat solo para el modulo noticias  
 		
+		// si encuentra el alto y ancho small en app.yml los define, sino no lo crea
+		if (sfConfig::get('app_thumbnail_web_small_width_'.$modulo) && sfConfig::get('app_thumbnail_web_small_height_'.$modulo))
+		{				
+			$thumbnail_width  = sfConfig::get('app_thumbnail_web_small_width_'.$modulo);
+			$thumbnail_height = sfConfig::get('app_thumbnail_web_small_height_'.$modulo);
+			
+			$thumbnail = new sfThumbnail($thumbnail_width, $thumbnail_height, true, true, 85);
+			$thumbnail->loadFile($this->getTempName());
 
+			$thumbnail->save($smallWEbFile, 'image/jpeg');
+			
+		}
+		
+		if (sfConfig::get('app_thumbnail_web_width_'.$modulo) && sfConfig::get('app_thumbnail_web_height_'.$modulo))
+		{
+			
+			$thumbnail_width  = sfConfig::get('app_thumbnail_web_width_'.$modulo);
+			$thumbnail_height = sfConfig::get('app_thumbnail_web_height_'.$modulo);
+			
+			$thumbnail = new sfThumbnail($thumbnail_width, $thumbnail_height, true, true, 85);
+			$thumbnail->loadFile($this->getTempName());
+
+			$thumbnail->save($WEbFile, 'image/jpeg');
+			
+		}
+
+		if (sfConfig::get('app_thumbnail_web_original_width_'.$modulo) && sfConfig::get('app_thumbnail_web_original_height_'.$modulo))
+		{
+			
+			$thumbnail_width  = sfConfig::get('app_thumbnail_web_original_width_'.$modulo);
+			$thumbnail_height = sfConfig::get('app_thumbnail_web_original_height_'.$modulo);
+			
+			$thumbnail = new sfThumbnail($thumbnail_width, $thumbnail_height, true, true, 85);
+			$thumbnail->loadFile($this->getTempName());
+
+			$thumbnail->save($OriginalWEbFile, 'image/jpeg');
+			
+		}
+		
+		
+		
 		// chmod our file
 		if (!empty($smallFile)) { if (file_exists($smallFile)) { chmod($smallFile, $fileMode); }}
 		if (!empty($file)) {if (file_exists($file)) { chmod($file, $fileMode); } }
