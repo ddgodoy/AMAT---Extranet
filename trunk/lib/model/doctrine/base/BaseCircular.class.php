@@ -28,7 +28,13 @@ abstract class BaseCircular extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
+        $this->hasColumn('circular_tema_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
         $this->hasColumn('circular_sub_tema_id', 'integer', null, array(
+             'type' => 'integer',
+             ));
+        $this->hasColumn('categoria_organismo_id', 'integer', null, array(
              'type' => 'integer',
              ));
         $this->hasColumn('subcategoria_organismo_id', 'integer', null, array(
@@ -38,8 +44,18 @@ abstract class BaseCircular extends sfDoctrineRecord
 
     public function setUp()
     {
+        $this->hasOne('CircularCatTema', array(
+             'local' => 'circular_tema_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
         $this->hasOne('CircularSubTema', array(
              'local' => 'circular_sub_tema_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('CategoriaOrganismo', array(
+             'local' => 'categoria_organismo_id',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 

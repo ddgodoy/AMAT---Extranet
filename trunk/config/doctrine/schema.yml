@@ -395,10 +395,14 @@ Circular:
     fecha_caducidad:           { type: date, notnull: false }
     numero:                    { type: integer, notnull: false }
     documento:                 { type: string(255), notnull: false }
+    circular_tema_id:         { type: integer }
     circular_sub_tema_id:      { type:integer }
+    categoria_organismo_id:    { type: integer }
     subcategoria_organismo_id: { type: integer }
   relations:
+    CircularCatTema:        { local: circular_tema_id, foreign: id, onDelete: CASCADE }
     CircularSubTema:        { local: circular_sub_tema_id, foreign: id, onDelete: CASCADE }
+    CategoriaOrganismo:     { local: categoria_organismo_id, foreign: id, onDelete: CASCADE }
     SubCategoriaOrganismo:  { local: subcategoria_organismo_id, foreign: id, onDelete: CASCADE }
     
 Iniciativa:

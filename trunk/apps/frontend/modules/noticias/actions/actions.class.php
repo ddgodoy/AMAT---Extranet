@@ -324,7 +324,7 @@ class noticiasActions extends sfActions
 		}
 		else 
 		{
-			return "deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW() AND ambito = 'intranet' ".$parcial;
+			return "deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW() AND ambito != 'web' ".$parcial;
 		}	
   }
 

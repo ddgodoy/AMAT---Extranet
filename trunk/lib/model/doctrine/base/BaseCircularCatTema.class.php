@@ -15,6 +15,10 @@ abstract class BaseCircularCatTema extends sfDoctrineRecord
 
     public function setUp()
     {
+        $this->hasMany('Circular', array(
+             'local' => 'id',
+             'foreign' => 'circular_tema_id'));
+
         $this->hasMany('CircularSubTema', array(
              'local' => 'id',
              'foreign' => 'circular_cat_tema_id'));

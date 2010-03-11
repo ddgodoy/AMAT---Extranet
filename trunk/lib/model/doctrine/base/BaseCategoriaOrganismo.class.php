@@ -19,6 +19,10 @@ abstract class BaseCategoriaOrganismo extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'categoria_organismo_id'));
 
+        $this->hasMany('Circular', array(
+             'local' => 'id',
+             'foreign' => 'categoria_organismo_id'));
+
         $this->hasMany('DocumentacionOrganismo', array(
              'local' => 'id',
              'foreign' => 'categoria_organismo_id'));
