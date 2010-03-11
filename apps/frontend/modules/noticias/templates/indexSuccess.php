@@ -61,7 +61,7 @@ use_helper('Text');?>
 					<?php if (validate_action('publicar') || validate_action('baja')): ?>
 					<th width="3%"></th>
 	      		    <?php endif;?>
-					<th width="11%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="align:center;">Fecha</a></th>
+					<th width="11%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
 					<th width="60%"><a href="<?php echo url_for('noticias/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
 					<th width="3%"><a href="#"/></th>
 					<th width="3%"><a href="#"/></th>
