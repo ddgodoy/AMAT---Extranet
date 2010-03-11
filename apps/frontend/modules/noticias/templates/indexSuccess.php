@@ -151,6 +151,12 @@ use_helper('Text');?>
 						<input type="checkbox" value="1" <?php if($sf_user->getAttribute('noticias_nowdestacada')){ echo 'checked';}?> name="destacadas_busqueda" id="destacadas_busqueda"  />
 					</td>
 				</tr>
+				<tr>
+					<td style="padding-top: 5px;"><label>Novedad:</label></td>
+					<td style="padding-top: 5px;" align="left">
+						<input type="checkbox" value="1" <?php if($novedadBsq){ echo 'checked';}?> name="novedad_busqueda" id="novedad_busqueda"  />
+					</td>
+				</tr>
 				<?php
 					$todose = '';
 					$guardao = '';
@@ -194,7 +200,7 @@ use_helper('Text');?>
 						<span class="botonera"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></span>
 					</td>
 					<td>
-							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $destacadaBsq || $ambitoBsq || $estadoBsq): ?>
+							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $destacadaBsq || $ambitoBsq || $estadoBsq || $novedadBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif; ?>								
 						

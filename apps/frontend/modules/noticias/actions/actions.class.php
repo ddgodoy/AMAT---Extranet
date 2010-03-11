@@ -178,11 +178,6 @@ class noticiasActions extends sfActions
 				$noticia->setFechaPublicacion(date( 'Y-m-d' ));
 				$noticia->save();
 			}
-			if($noticia->getFechaCaducidad()=='')
-			{
-				$noticia->setFechaCaducidad('2015-12-31');
-				$noticia->save();
-			}
 			
 			## Notificar
 			if($estado['estado'] == 'publicado') {
@@ -250,6 +245,7 @@ class noticiasActions extends sfActions
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		$this->destacadaBsq = $this->getRequestParameter('destacadas_busqueda');
+		$this->novedadBsq = $this->getRequestParameter('novedad_busqueda');
     	$this->ambitoBsq = $this->getRequestParameter('ambito_busqueda');
     	$this->estadoBsq = $this->getRequestParameter('estado_busqueda');
 
@@ -269,6 +265,11 @@ class noticiasActions extends sfActions
 			$parcial .= " AND destacada = 1 ";
 			$this->getUser()->setAttribute($modulo.'_nowdestacada', $this->destacadaBsq);
 		}
+	    if (!empty($this->novedadBsq)) {
+			$parcial .= " AND novedad = 1 ";
+			$this->getUser()->setAttribute($modulo.'_nownovedad', $this->novedadBsq);
+		}
+
 		if (!empty($this->ambitoBsq)) {
 			$parcial .= " AND ambito = '$this->ambitoBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBsq);
@@ -288,6 +289,7 @@ class noticiasActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdesde');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowhasta');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdestacada');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nownovedad');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			} else {
@@ -296,6 +298,7 @@ class noticiasActions extends sfActions
 				$this->desdeBsq = $this->getUser()->getAttribute($modulo.'_nowdesde');
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowhasta');
 				$this->destacadaBsq = $this->getUser()->getAttribute($modulo.'_nowdestacada');
+				$this->novedadBsq = $this->getUser()->getAttribute($modulo.'destacada');
 				$this->ambitoBsq = $this->getUser()->getAttribute($modulo.'_nowambito');
 				$this->estadoBsq = $this->getUser()->getAttribute($modulo.'_nowestado');
 			}
@@ -306,6 +309,7 @@ class noticiasActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdesde');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowhasta');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdestacada');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'destacada');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			$parcial="";
@@ -313,6 +317,7 @@ class noticiasActions extends sfActions
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
 			$this->destacadaBsq = '';
+			$this->novedadBsq = '';
 			$this->ambitoBsq = '';
 			$this->estadoBsq = '';
 		}
@@ -324,7 +329,7 @@ class noticiasActions extends sfActions
 		}
 		else 
 		{
-			return "deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW() AND ambito != 'web' ".$parcial;
+			return "deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW()  AND ambito != 'web' ".$parcial;
 		}	
   }
 
