@@ -54,14 +54,18 @@ use_helper('Text');?>
 		<?php if ($cantidadRegistros > 0) : ?>
 		<?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?><div style="border-bottom:5px solid #CCC; margin:10px 0px;"></div><?php endif;?>
 		<form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0"  class="listados" <?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?>style="border:none;"<?php endif;?>>
+		<table width="100%" cellspacing="0" cellpadding="0" class="listados" <?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?>style="border:none;"<?php endif;?>>
 			<tbody>
 			<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				<tr>
 					<?php if (validate_action('publicar') || validate_action('baja')): ?>
 					<th width="3%"></th>
 	      		    <?php endif;?>
-					<th width="11%"><a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
+					<th width="11%">
+						<a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
+							Fecha
+						</a>
+					</th>
 					<th width="60%"><a href="<?php echo url_for('noticias/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
 					<th width="3%"><a href="#"/></th>
 					<th width="3%"><a href="#"/></th>
