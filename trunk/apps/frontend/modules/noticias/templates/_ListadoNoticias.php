@@ -26,7 +26,7 @@
 				<br clear="all">
 				<br clear="all">
 				<?php if ($noticia->getEntradilla()):?>
-  			    <?php echo truncate_text($noticia->getEntradilla(),200)?>
+  			    <?php echo nl2br($noticia->getEntradilla())?>
 				<?php endif; ?>
 				</td>
 				<td valign="center" align="center">
