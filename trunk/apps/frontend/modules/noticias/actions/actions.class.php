@@ -171,14 +171,6 @@ class noticiasActions extends sfActions
 		
 		if ($form->isValid())
 		{
-			## Files
-			if ($form->getValue('imagen')) {
-				$file     = $this->form->getValue('imagen');
-				$filename = 'uploaded_'.sha1($file->getOriginalName());
-				$extension= $file->getExtension($file->getOriginalExtension());
-
-				$file->save(sfConfig::get('sf_upload_dir').'/noticias/images/'.$filename.$extension);
-			}
 			$noticia = $form->save();
 			
 			if($noticia->getFechaPublicacion()=='')
@@ -325,14 +317,14 @@ class noticiasActions extends sfActions
 			$this->estadoBsq = '';
 		}
 		
-		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
 			return 'deleted=0'.$parcial;
 		}
 		else 
 		{
-			return 'deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW()'.$parcial;
+			return "deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW() AND ambito = 'intranet' ".$parcial;
 		}	
   }
 

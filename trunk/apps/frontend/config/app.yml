@@ -27,6 +27,12 @@ all:
   thumbnail_normal_height_publicaciones: 320
   
   # thumbnail noticias
+  thumbnail_web_small_width_noticias:   184
+  thumbnail_web_small_height_noticias:  56
+  thumbnail_web_width_noticias:   120
+  thumbnail_web_height_noticias:  120
+  thumbnail_web_original_width_noticias:   510
+  thumbnail_web_original_height_noticias:  600
   thumbnail_small_width_noticias:   80
   thumbnail_small_height_noticias:  60
   thumbnail_normal_width_noticias:  250
