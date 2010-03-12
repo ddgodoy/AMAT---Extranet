@@ -1,5 +1,5 @@
 <div class="paneles">
-    <h1>Navegación guiada</h1> <h4><?php echo ucfirst($modulo)?></h4>
+    <h1>Navegación guiada</h1> <h4><?php echo ucfirst($modulo)?></h4>	  
 			<div class="col1">
 			   <ul class="tema_11">
 				   <?php if(is_array($FEcha_circulares)):?>

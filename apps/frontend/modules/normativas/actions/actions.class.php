@@ -123,11 +123,11 @@ class normativasActions extends sfActions
   	$modulo  = $this->getModuleName();
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
-		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
-		$this->CatNormBsq = $this->getRequestParameter('select_cat_tema');
-		$this->SubNormBsq1 = $this->getRequestParameter('normativa[subcategoria_normativa_uno_id]');
-		$this->SubNormBsq2 = $this->getRequestParameter('normativa[subcategoria_normativa_dos_id]');
+		$this->desdeBsq = $this->getRequestParameter('desde_busqueda')?$this->getRequestParameter('desde_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechadesde');
+		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda')?$this->getRequestParameter('hasta_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechahasta');
+		$this->CatNormBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcatnormativa');;
+		$this->SubNormBsq1 = $this->getRequestParameter('normativa[subcategoria_normativa_uno_id]')?$this->getRequestParameter('normativa[subcategoria_normativa_uno_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatnormativa1');;
+		$this->SubNormBsq2 = $this->getRequestParameter('normativa[subcategoria_normativa_dos_id]')?$this->getRequestParameter('normativa[subcategoria_normativa_dos_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatnormativa2');;
 		
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";

@@ -161,13 +161,13 @@ class circularesActions extends sfActions
 //  	exit();
 //  	
 		$this->nBsq = is_numeric($this->getRequestParameter('n_busqueda'))?$this->getRequestParameter('n_busqueda'):'';
-		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
-		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
-		$this->SelectCatTemaBsq = $this->getRequestParameter('select_cat_tema');
-		$this->SelectSubTemaBsq = $this->getRequestParameter('select_sub_tema');
-		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id');
-		$this->SelectSubOrganismoBsq = $this->getRequestParameter('circular[subcategoria_organismo_id]') ;
+		$this->cajaBsq = $this->getRequestParameter('caja_busqueda')?$this->getRequestParameter('caja_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcaja');
+		$this->desdeBsq = $this->getRequestParameter('desde_busqueda')?$this->getRequestParameter('desde_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechadesde');
+		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda')?$this->getRequestParameter('hasta_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechahasta');
+		$this->SelectCatTemaBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcattema');
+		$this->SelectSubTemaBsq = $this->getRequestParameter('select_sub_tema')?$this->getRequestParameter('select_sub_tema'):$this->getUser()->getAttribute($modulo.'_nowsubtema');
+		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id')? $this->getRequestParameter('categoria_organismo_id'):$this->getUser()->getAttribute($modulo.'_nowcatorganismo');
+		$this->SelectSubOrganismoBsq = $this->getRequestParameter('circular[subcategoria_organismo_id]')?$this->getRequestParameter('circular[subcategoria_organismo_id]'):$this->getUser()->getAttribute($modulo.'_nowsuborganismo') ;
 		
 		if ($this->nBsq!='') {
 			$parcial .= " AND numero = $this->nBsq";
