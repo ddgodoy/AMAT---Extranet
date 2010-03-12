@@ -15,7 +15,7 @@
 <?php echo $form['autor']->renderError() ?>
 <?php echo $form['ambito']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
-<?php echo $form['fecha']->renderError() ?>
+<?php echo $form['mutua_id']->renderError() ?>
 <?php echo $form['imagen']->renderError() ?>
 <?php echo $form['documento']->renderError() ?>
 <?php //echo $form['fecha_publicacion']->renderError() ?>
@@ -52,14 +52,18 @@
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle"><?php echo $form['titulo'] ?>
-          <!--<label style="margin-left: 4px;">Autor / Medio*: </label>
-          <?php // echo $form['autor'] ?>-->
+          <label style="margin-left: 4px;">Habilitada</label>
+          <?php echo $form['destacada'] ?>
           </td>
         </tr>   
         <!--<tr>
           <td style="padding-top: 5px;"><label>Destacada</label></td>
           <td><?php //echo $form['destacada'] ?></td>
         </tr>-->
+        <tr>
+          <td style="padding-top: 5px;"><label>Mutua</label></td>
+          <td><?php echo $form['mutua_id'] ?></td>
+        </tr>
         <tr>
           <td style="padding-top: 5px;"><label>Ambito</label></td>
           <td><?php echo $form['ambito'] ?></td>
