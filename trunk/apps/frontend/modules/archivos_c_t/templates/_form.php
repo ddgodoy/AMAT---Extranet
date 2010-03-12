@@ -58,10 +58,12 @@
            <td><label>Consejos Territoriales *</label></td>
           <td valign="middle">
           <?php 
-            echo select_tag('archivo_c_t[consejo_territorial_id]',
-			options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayGruposTrabajo), $grupos_trabajo_selected),
-			array('style'=>'width:330px;','class'=>'form_input'));
+            echo $form['consejo_territorial_id'];
 			echo observe_field('archivo_c_t_consejo_territorial_id', array('update'=>'content_documentacion','url'=>'archivos_c_t/listDocumentacion','with'=>"'id_consejo='+value"));								 
+			if ($form['consejo_territorial_id']->getValue())
+			{
+				$arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($form['consejo_territorial_id']->getValue());
+			}
            ?>          
           </td>
         </tr>
@@ -69,12 +71,12 @@
           <td><label>Documentacion *</label></td>
           <td valign="middle">
           <div id="content_documentacion">
-          	<?php include_partial('archivos_c_t/listDocumentacion', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$documentacion_selected)) ?>
+          	<?php include_partial('archivos_c_t/listDocumentacion', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$form['documentacion_consejo_id']->getValue())) ?>
           </div>   
           </td>
         </tr> 
         <tr>
-          <td style="padding-top: 5px;"><label>Archivo </label></td>
+          <td style="padding-top: 5px;"><label>Archivo* </label></td>
           <td style="padding-top: 5px;"><label>
             <?php echo $form['archivo'] ?>
           </label></td>
