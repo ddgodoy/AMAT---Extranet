@@ -38,7 +38,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 		//	'fecha_publicacion' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
-			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
+			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'Intranet y Web'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
 			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'owner_id'          => new sfWidgetFormInputHidden(),
@@ -97,7 +97,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'autor'             => sfContext::getInstance()->getUser()->getAttribute('apellido').','.sfContext::getInstance()->getUser()->getAttribute('nombre'),
 			'fecha_publicacion' => '2007/01/01',
 			'estado'            => 'pendiente',
-			'link'              => 'http//:',
+			'link'              => 'http://',
 			'ambito'            => 'web',));
 
 		$this->widgetSchema->setNameFormat('cifra_dato[%s]');
