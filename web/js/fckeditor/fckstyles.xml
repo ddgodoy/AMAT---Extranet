@@ -60,7 +60,6 @@
 	<Style name="Subscript" element="sub" />
 	<Style name="Superscript" element="sup" />
 	-->
-
 	<Style name="Marker: Yellow" element="span">
 		<Style name="background-color" value="Yellow" />
 	</Style>

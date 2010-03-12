@@ -29,7 +29,9 @@
 	  <?php endif ?>
 	  <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
 	   if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):?> 
+	  <?php if($noticia->getFechaCaducidad()):?> 
 	  <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($noticia->getFechaCaducidad())) ?></span><br />     
+	  <?php endif; ?>
 	   <?php if($noticia->getUserIdCreador()):?>
 	   <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($noticia->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($noticia->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
