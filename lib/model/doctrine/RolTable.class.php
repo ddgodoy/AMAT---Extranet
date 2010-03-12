@@ -18,7 +18,8 @@ class RolTable extends Doctrine_Table
    {
    	 $r=Doctrine_Query::create()
    	 ->from('Rol')
-   	 ->where('deleted = 0');
+   	 ->where('deleted = 0')
+   	 ->orderBy('nombre');
    	 
    	 return $r->execute();
    	    	 
