@@ -133,10 +133,10 @@ class iniciativasActions extends sfActions
   	$modulo  = $this->getModuleName();
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
-		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
-		$this->CatInicBsq = $this->getRequestParameter('select_cat_tema');
-		$this->SubIniBsq = $this->getRequestParameter('iniciativa[subcategoria_iniciativa_id]');
+		$this->desdeBsq = $this->getRequestParameter('desde_busqueda')?$this->getRequestParameter('desde_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechadesde');
+		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda')?$this->getRequestParameter('hasta_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechahasta');
+		$this->CatInicBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcatiniciativa');
+		$this->SubIniBsq = $this->getRequestParameter('iniciativa[subcategoria_iniciativa_id]')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowsubcatiniciativa');
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
