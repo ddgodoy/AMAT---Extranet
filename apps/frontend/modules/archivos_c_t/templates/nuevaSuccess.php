@@ -22,10 +22,6 @@
 		(
 			'form' => $form,
 			'pageActual' => 1,
-			'arrayGruposTrabajo'   => ArchivoCTTable::doSelectAllCategorias('ConsejoTerritorial'),			
-			'arrayDocumentacion'=> array(),
-			'grupos_trabajo_selected' => 0,
-			'documentacion_selected'  => 0
 		)
   );
 ?>
