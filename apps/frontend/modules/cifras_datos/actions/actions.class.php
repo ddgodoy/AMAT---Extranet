@@ -169,8 +169,15 @@ class cifras_datosActions extends sfActions
 			$parcial="";
 			$this->cajaBsq = "";
 		}
-		
-		return 'deleted=0'.$parcial;
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		else 
+		{
+			return 'deleted=0 AND destacada = 1'.$parcial;
+		}
   }
   
   protected function setOrdenamiento()
