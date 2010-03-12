@@ -14,4 +14,19 @@ class Rol extends BaseRol
 	{
 		return Doctrine::getTable(__CLASS__);
 	}
+	
+	public static function getArrayRol()
+	{
+		$Arrayrol = array();
+		$Modelosrol = RolTable::getAllRol();
+		
+		foreach ($Modelosrol AS $m)
+		{
+			$Arrayrol[$m->getId()] = $m->getNombre();
+		}
+		
+		return $Arrayrol;
+	}
+	
+	
 }

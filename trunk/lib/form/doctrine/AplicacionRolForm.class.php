@@ -13,6 +13,8 @@ class AplicacionRolForm extends BaseAplicacionRolForm
 	{
 		$Aplicaciones = Aplicacion::getArrayAplicacion();
 		
+		$rol = Rol::getArrayRol();
+		
 		
 		
 		$this->setWidgets(array(
@@ -26,9 +28,9 @@ class AplicacionRolForm extends BaseAplicacionRolForm
 																array('label'=>'Aplicaci&oacute;n *', 'choices' => array('0'=>'-- seleccionar --')+$Aplicaciones),
 																array('style'=>'width:330px;','class'=>'form_input')
 															),
-			'rol_id' => new sfWidgetFormDoctrineChoice
+			'rol_id' => new sfWidgetFormChoice
 										(
-											array('label'=>'Rol/Perfil *','model' => 'Rol', 'add_empty' => '-- seleccionar --'),
+											array('label'=>'Rol/Perfil *','choices' => array('0'=>'-- seleccionar --')+$rol),
 											array('style'=>'width:330px;','class'=>'form_input')
 										),
 		));
@@ -40,7 +42,7 @@ class AplicacionRolForm extends BaseAplicacionRolForm
 			'accion_listar'    => new sfValidatorBoolean(array('required' => false)),
 			'accion_publicar'  => new sfValidatorBoolean(array('required' => false)),
 			'aplicacion_id'    => new sfValidatorChoice(array('choices' => array_keys($Aplicaciones), 'required' => true), array('required'=>'La Aplicaci&oacute;n es obligatoria')),
-			'rol_id'           => new sfValidatorDoctrineChoice(array('model' => 'Rol', 'required' => true), array('required'=>'El Rol/Perfil es obligatorio')),
+			'rol_id'           => new sfValidatorChoice(array('choices' => array_keys($rol), 'required' => true), array('required'=>'El Rol/Perfil es obligatorio')),
 		));
 		
 		$this->widgetSchema->setNameFormat('aplicacion_rol[%s]');
