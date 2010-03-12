@@ -60,6 +60,7 @@
           <?php 
             echo $form['consejo_territorial_id'];
 			echo observe_field('archivo_c_t_consejo_territorial_id', array('update'=>'content_documentacion','url'=>'archivos_c_t/listDocumentacion','with'=>"'id_consejo='+value"));								 
+			$arrayDocumentacion = array();
 			if ($form['consejo_territorial_id']->getValue())
 			{
 				$arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($form['consejo_territorial_id']->getValue());
