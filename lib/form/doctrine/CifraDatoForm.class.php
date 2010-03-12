@@ -11,6 +11,8 @@ class CifraDatoForm extends BaseCifraDatoForm
   public function configure()
   {
   	
+  	    $mutuas = Mutua::getArrayMutuas(); 
+  	
   	    $request = sfContext::getInstance();
   	    
   	    $accion = $request->getActionName(); 
@@ -38,7 +40,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
-			'mutua_id'          => new sfWidgetFormInputHidden(),
+			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));

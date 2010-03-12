@@ -21,7 +21,8 @@ class MutuaTable extends Doctrine_Table
    {
    	  $r=Doctrine_Query::create()
    	  ->from('Mutua')
-   	  ->where('deleted = 0');
+   	  ->where('deleted = 0')
+   	  ->orderBy('nombre');
    	  
    	  return $r->execute();
    }

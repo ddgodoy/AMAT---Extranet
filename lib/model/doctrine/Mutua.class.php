@@ -13,4 +13,17 @@ class Mutua extends BaseMutua
 	{
 		return Doctrine::getTable(__CLASS__);
 	}
+	
+	public static function getArrayMutuas()
+	{
+		$ArrayMutuas = array();
+		$ModelosMutuas = MutuaTable::getAllMutuas();
+		
+		foreach ($ModelosMutuas AS $m)
+		{
+			$ArrayMutuas[$m->getId()] = $m->getNombre();
+		}
+		
+		return $ArrayMutuas;
+	}
 }
