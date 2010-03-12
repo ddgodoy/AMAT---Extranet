@@ -195,6 +195,7 @@ FCKConfig.RemoveAttributes = 'class,style,lang,width,height,align,hspace,valign'
 FCKConfig.CustomStyles =
 {
 	'Red Title'	: { Element : 'h3', Styles : { 'color' : 'Red' } }
+	'Mauro'	: { Element : 'h2', Styles : { 'color' : 'Blue' } }
 };
 
 // Do not add, rename or remove styles here. Only apply definition changes.

@@ -179,6 +179,14 @@ class noticiasActions extends sfActions
 				$noticia->save();
 			}
 			
+			if($noticia->getFechaCaducidad()=='')
+			{
+				$noticia->setFechaCaducidad(null);
+				$noticia->save();
+			}
+			
+			
+			
 			## Notificar
 			if($estado['estado'] == 'publicado') {
 				$enviar = true;
@@ -329,7 +337,7 @@ class noticiasActions extends sfActions
 		}
 		else 
 		{
-			return "deleted=0 AND fecha_publicacion <= NOW() AND fecha_caducidad >= NOW()  AND ambito != 'web' ".$parcial;
+			return "deleted=0  AND ambito != 'web' AND fecha_publicacion <= NOW() AND (fecha_caducidad >= NOW() OR fecha_caducidad IS NULL ) ".$parcial;
 		}	
   }
 
