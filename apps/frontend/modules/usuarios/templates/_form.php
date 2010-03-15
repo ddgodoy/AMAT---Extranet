@@ -69,6 +69,7 @@
     <div class="botonera" style="padding-top:10px;">
     <?php if(validate_action('alta') || validate_action('modificar')):?>
 			<input type="submit" id="btn_action" class="boton" value="Guardar" name="btn_action"/>
+			<input type="submit" id="btn_enviar_email" class="boton" value="Guardar y Enviar Email" name="btn_enviar_email"/>
 	<?php endif; ?>		
 			<input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('usuarios/index?page='.$pageActual) ?>';"/>
 		</div>
