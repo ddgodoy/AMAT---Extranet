@@ -30,7 +30,7 @@
 	
 	<br />
 	<fieldset>
-		<legend>Email de Contacto</legend>
+		<legend>Aplicaciones por Rol</legend>
 		<table width="100%" cellspacing="4" cellpadding="0" border="0">
 			<tbody>
 				<tr>
