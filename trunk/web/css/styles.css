@@ -947,11 +947,11 @@ noticias {
 	clear: both;
 }
 .content .resultadoBus .tema {
-	width: 300px;
-	float: left;
-	height: 250px;
 	padding-bottom: 10px;
 	overflow: hidden;
+	position: relative;
+	display: block;
+	clear: both;
 }
 
 .content .resultadoBus ul {
@@ -1109,3 +1109,54 @@ h2.grupo {
 	margin-left: 10px;
 }
 .grupos-de-trabajo .listados.descrip-grupo td{ padding: 5px; }
+
+.resultadoBus .cat_de_busqueda {
+ background-color: #EAEAEA;
+ margin-left: 15px;
+ position: relative;
+ width: 32%;
+ padding-top: 40px;
+ padding-right: 15px;
+ padding-bottom: 15px;
+ padding-left: 15px;
+}
+
+.resultadoBus .cat_de_busqueda h2 {
+ color: #347285;
+ border-bottom-width: 1px;
+ border-bottom-style: solid;
+ border-bottom-color: #FFF;
+ display: block;
+ position: absolute;
+ font-size: 14px;
+ left: 0px;
+ top: 0px;
+ line-height: 30px;
+ height: 30px;
+ padding-left: 15px;
+ width: 97%;
+}
+
+.resultadoBus .cat_de_busqueda a {
+ display: block;
+ margin-left: -15px;
+ padding-left: 15px;
+ font-size: 14px;
+ font-weight: bold;
+ text-decoration: none;
+ color: #999;
+ line-height: 25px;
+}
+
+.resultadoBus .cat_de_busqueda a:hover {
+ background-color:#50AEC8;
+ color:#FFF;
+ text-decoration:none;
+ }
+ 
+ .resultadoBus div .tema h4 span {
+ float: right;
+ color: #999;
+ font-size: 11px;
+ margin-top: 7px;
+}
