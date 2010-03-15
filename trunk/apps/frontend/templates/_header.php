@@ -1,9 +1,14 @@
 <?php use_helper('Security'); $banderaPadre = 0; ?>
 
 <script language="javascript" type="text/javascript">
+    function trim(stringToTrim) {
+        return stringToTrim.replace(/^\s+|\s+$/g,"");
+	}
+    
 	function avoidNullSearch()
 	{
-		if ($('key_search_gral').value == '') {
+		var txtclave = trim($('key_search_gral').value);
+		if (txtclave == '') {
 			alert('Ingrese una clave para la b\u00fasqueda'); $('key_search_gral').focus(); return false;
 		}
 		return true;
