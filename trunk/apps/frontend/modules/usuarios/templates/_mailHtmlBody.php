@@ -13,7 +13,7 @@
 			<td><strong>Contraseña:</strong> <?php echo $password ?><br /></td>
 		</tr>
 		<tr>
-		<td><strong>Para acceder a la Extranet de Asociados AMAT <a href="<?php  echo 'http://'.$host ?>">Click Aqui</a></strong></td>
+		<td><strong>Para acceder a la Extranet de Asociados AMAT <a href="<?php  echo 'http://'.$host ?>">Click Aqu&iacute;</a></strong></td>
 		</tr>
 	</table>
 </html>
