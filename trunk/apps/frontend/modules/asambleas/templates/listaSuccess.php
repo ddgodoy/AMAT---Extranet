@@ -55,7 +55,7 @@
         <td><a href="#" onclick="alert('Esta asamblea ya no puede ser modificada')"><strong><?php echo $asamblea->getTitulo() ?></strong></a></td>
         <?php endif; ?>
    <?php endif; ?>
-        <td><?php echo date("H:i", strtotime($asamblea->getHorario())) ?></td>
+        <td><?php echo $asamblea->getHorario() ?></td>
         <td><?php echo $asamblea->getDireccion() ?></td>
         <td><?php echo ucwords($asamblea->getEstado()) ?></td>
         

@@ -40,7 +40,7 @@
       <tr class="<?php echo $odd ?>">
         <td><?php echo date("d/m/Y", strtotime($convocatoria->getAsamblea()->getFecha())) ?></td>  
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><strong><?php echo $convocatoria->getAsamblea()->getTitulo() ?></strong></a></td>
-         <td><?php echo date("H:i", strtotime($convocatoria->getAsamblea()->getHorario())) ?></td>      
+         <td><?php echo $convocatoria->getAsamblea()->getHorario() ?></td>      
         <td><?php echo $convocatoria->getAsamblea()->getDireccion() ?></td>
         <td><a class="confirmar" href="<?php echo url_for('asambleas/aceptar?id=' . $convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0','z-index'=>'100px'))?>Aceptar</a></td>
         <td><a class="confirmar" href="<?php echo url_for('asambleas/rechazar?id=' . $convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0'))?>Rechazar</a></td>
