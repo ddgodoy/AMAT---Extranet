@@ -12,30 +12,28 @@ class agendaActions extends sfActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		$usurID = sfContext::getInstance()->getUser()->getAttribute('userId');
-		
-		
+
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
-		}
-		
+		}		
 		$this->pager = new sfDoctrinePager('Agenda', 10);
 		$this->pager->getQuery()
-		->from('Agenda')
-		->where($this->setFiltroBusqueda())
-		->addWhere('usuario_id = '.$usurID)
-		->orderBy($this->setOrdenamiento());
-		
+				 ->from('Agenda')
+				 ->where($this->setFiltroBusqueda())
+				 ->addWhere('usuario_id = '.$usurID)
+				 ->orderBy($this->setOrdenamiento());
+
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
-	
+
 		$this->agenda_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
 	}
+
 	protected function setFiltroBusqueda()
-	{
-		
+	{		
 		$this->year  = $this->getRequestParameter('y', date('Y'));
 		$this->month = $this->getRequestParameter('m', date('m'));
 		$this->day   = $this->getRequestParameter('d', date('d'));

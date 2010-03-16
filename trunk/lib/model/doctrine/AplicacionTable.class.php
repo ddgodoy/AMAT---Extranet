@@ -4,28 +4,26 @@
  */
 class AplicacionTable extends Doctrine_Table
 {
-
 	static public  $excepcionesSeguridad = array(
 	'inicio_index', 
 	'usuarios_perfil',
 	'mapasitio_index', 
 	'buscar_index', 
 	'buscar_buscar');
-	
+
 	 public function getExcepcionesSeguridad()
    {
      return self::$excepcionesSeguridad;
    }
-	
+
 	public static function getAplicacion()
-   {
+  {
 	 	$r = Doctrine_Query::create()
 	   	 ->from('Aplicacion')
 	   	 ->where('id != 44 AND id != 46')
 	   	 ->orderBy('nombre');
 	   	 $respuesat = $r->execute();
-	   	 
+
 	   	 return $respuesat;
-   	
    }
 }

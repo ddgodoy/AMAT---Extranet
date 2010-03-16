@@ -1,5 +1,6 @@
 <?php use_helper('Fecha') ?>
 <?php use_helper('TestPager') ?>
+
 <link type="text/css" rel="stylesheet" href="/js/calendario/dhtml_calendar.css" media="screen"></link>
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
 <div class="mapa">

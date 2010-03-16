@@ -10,46 +10,34 @@
  */
 class actaActions extends sfActions
 {
-	
 	public function executeIndex(sfWebRequest $request)
 	{
-		
-
-		if($this->getRequestParameter('DirectoresGerente')==1)
-		{  
-	   		$this->DAtos = $this->setDirectoresGerente(); 
-		   	
+		if ($this->getRequestParameter('DirectoresGerente')==1) {
+			$this->DAtos = $this->setDirectoresGerente();
 		}
-		if($this->getRequestParameter('GrupodeTrabajo')==2)
-		{  
+		if ($this->getRequestParameter('GrupodeTrabajo')==2) {
 			$this->DAtos =$this->setGruposdeTrabajo();
 			$this->Grupo = '';
-			
 		}
-		if($this->getRequestParameter('ConsejoTerritorial')==3)
-		{  
+		if ($this->getRequestParameter('ConsejoTerritorial')==3) {
 			$this->DAtos = $this->setConsejosTerritoriales();
 			$this->Consejo = '';
 		}
-		if($this->getRequestParameter('Organismo')==4)
-		{  
+		if($this->getRequestParameter('Organismo')==4) {
 			$this->DAtos = $this->setOrganismo();
 			$this->Organismo = '';
 		}
-		
-		 
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-		
-		
-  	    $this->pager = new sfDoctrinePager('Acta', 10);  	    
+
+		$this->pager = new sfDoctrinePager('Acta', 10);
 		$this->pager->getQuery()
-		->from('Acta a')
-		->leftJoin('a.Asamblea am')
-		->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$this->DAtos['grupousuario'])->orderBy($this->setOrdenamiento());
+				->from('Acta a')
+				->leftJoin('a.Asamblea am')
+				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$this->DAtos['grupousuario'])->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -57,18 +45,15 @@ class actaActions extends sfActions
 		$this->cantidadRegistros = $this->pager->getNbResults();
 		$busqueda = explode('_',$this->grupodetrabajoBsq);
 		
-		if($busqueda[0] == 'GrupoTrabajo')
-			{
-			  $this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($busqueda[1]);
-			}
-		elseif($busqueda[0] == 'ConsejoTerritorial') 
-			{
-			  $this->Consejo = ConsejoTerritorialTable::getConsejo($busqueda[1]);
-			}
-		elseif($busqueda[0] == 'Organismo') 
-			{
-			  $this->Organismos = OrganismoTable::getOrganismo($busqueda[1]);
-			}
+		if ($busqueda[0] == 'GrupoTrabajo') {
+			$this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($busqueda[1]);
+		}
+		elseif($busqueda[0] == 'ConsejoTerritorial') {
+			$this->Consejo = ConsejoTerritorialTable::getConsejo($busqueda[1]);
+		}
+		elseif($busqueda[0] == 'Organismo') {
+			$this->Organismos = OrganismoTable::getOrganismo($busqueda[1]);
+		}
 	}
 	
 	public function executeEditar(sfWebRequest $request)
