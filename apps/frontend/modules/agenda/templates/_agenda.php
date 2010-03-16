@@ -17,9 +17,10 @@
       <tr>
         <?php foreach ($week as $kday => $day): ?>
         <?php
-          if ($day == 1 || $day < 10){ $day = '0'.$day; }
-      		$eventDay = false;
-      		(array_key_exists($day, $evento_list_array)) ? $eventDay = true : '';
+          if ($day == 1 || $day < 10) {
+          	$day = '0'.$day;
+          }
+          $eventDay = array_key_exists($day, $evento_list_array) ? true : false;
         ?>
         <?php
         	if ($eventDay) {
@@ -29,8 +30,15 @@
         	}
         ?>
         <td id="day_<?php echo $day ?>" class="<?php echo $classOnTheFly ?>">
-        	<?php $link_day = ($day) ? link_to($day, 'agenda/index?y=' . $year . '&m=' . $month . '&d=' . dos_digitos($day)) : '' ?>
-          <?php echo ($eventDay) ? link_to($day . '<span>'.$evento_list_array[$day].'</span>', 'agenda/index?y=' . $year . '&m=' . $month . '&d=' . $day, array('class' => 'info')) : $link_day ?>
+        	<?php
+        		$link_day = $day ? link_to($day, 'agenda/index?y='.$year.'&m='.$month.'&d='.dos_digitos($day)) : '';
+
+        		if ($eventDay) {
+        			echo link_to($day . '<span>'.$evento_list_array[$day].'</span>', 'agenda/index?y='.$year.'&m='.$month.'&d='.$day, array('class'=>'info'));
+        		} else {
+        			echo $link_day;
+        		}
+        	?>
         </td>
         <?php endforeach; ?>
       </tr>

@@ -45,11 +45,6 @@ class seguridadComponents extends sfComponents
 		$nowModuleAction = $this->module.'_'.$this->action;
 
 		if (!in_array($nowModuleAction, $arrExcepciones)) {
-			//check credenciales
-			
-			//var_dump($aplicaciones_rol);
-			//die();
-			
 			if ((empty($credenciales_array) || !$this->getUser()->hasCredential($credenciales_array, false)) && $this->module != 'seguridad') {
 				$this->getController()->redirect('seguridad/restringuido');
 			}

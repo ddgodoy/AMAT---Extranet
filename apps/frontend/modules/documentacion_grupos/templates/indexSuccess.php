@@ -26,12 +26,12 @@
 </script>
 
 <div class="mapa">
-	<strong>Grupos de Trabajo</strong> > Documentación
+	<strong>Grupos de Trabajo</strong> > Documentaci&oacute;n
 </div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
-				<td width="70%"><h1>Documentación de Grupos de Trabajo</h1></td>
+				<td width="70%"><h1>Documentaci&oacute;n de Grupos de Trabajo</h1></td>
 				<td width="5%" align="center"><?php $nombretabla = 'DocumentacionGrupo'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
@@ -84,26 +84,26 @@
 					<th width="5%">&nbsp;</th>
 					</tr>
 					<?php $i=0; foreach ($documentacion_grupo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-					<?php if($valor->getEstado() == 'guardado'):?>
-					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-					<?php include_partial('ListaByGrupoTrabajo', array('valor'=>$valor,'odd'=>$odd));?>
-					<?php endif; ?>
-					<?php else: ?>
-					<?php include_partial('ListaByGrupoTrabajo', array('valor'=>$valor,'odd'=>$odd));?>
-					<?php endif; ?>
+						<?php if($valor->getEstado() == 'guardado'):?>
+							<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
+								<?php include_partial('ListaByGrupoTrabajo', array('valor'=>$valor,'odd'=>$odd));?>
+							<?php endif; ?>
+						<?php else: ?>
+							<?php include_partial('ListaByGrupoTrabajo', array('valor'=>$valor,'odd'=>$odd));?>
+						<?php endif; ?>
 					<?php endforeach; ?>
 					<tr>
 					<td>
 					<?php if(validate_action('publicar') || validate_action('baja') ):?>
-					<input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/>
+						<input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/>
 					<?php endif;?>
 					</td>
 					<td colspan="5">
 						<?php if(validate_action('publicar')):?>
-						<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>
+							<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>
 						<?php endif; ?>
 						<?php if(validate_action('baja')):?>
-						<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" style="margin-left:5px;"/>
+							<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" style="margin-left:5px;"/>
 						<?php endif;?>
 					</td>
 					</tr>

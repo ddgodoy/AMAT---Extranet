@@ -1,12 +1,12 @@
-<?php use_helper('TestPager') ?>
-<?php use_helper('Security') ?>
-
+<?php
+	use_helper('TestPager');
+	use_helper('Security');
+?>
 <div class="mapa"><strong>Administraci&oacute;n</strong> > Actas- <?php echo $DAtos['busqueda']?></div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
 				<td width="70%"><h1>Actas</h1></td>
-				
 				<td width="5%" align="right">
 					<a href="#">
 						<?php echo image_tag('pregunta.gif', array('alt' => 'Ayuda', 'id' => 'sprytrigger1', 'width' => '29', 'height' => '30', 'border' => '0')) ?>
@@ -55,13 +55,12 @@
 						<a href="<?php echo url_for('acta/ver?id=' . $valor->getId().'&'.$DAtos['get']) ?>">
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
-					<?php endif; ?>	
+					<?php else: ?>
+						<strong><?php echo $valor->getNombre() ?></strong>
+					<?php endif; ?>
 					</td>
-					<td valign="top" >
-					<?php echo $valor->Asamblea->getTitulo() ?>
-					</td>
-          <td valign="top" align="center">
-          </td>
+					<td valign="top" ><?php echo $valor->Asamblea->getTitulo() ?></td>
+          <td valign="top" align="center"></td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>

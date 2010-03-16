@@ -46,19 +46,20 @@
 						<a href="#">Email</a>
 					</th>
 					<th width="15%">
-						<a href="#">Teléfono</a>
+						<a href="#">Tel&eacute;fono</a>
 					</th>
-	          </tr>
+	        </tr>
           <?php $i=0; foreach ($usuario_list as $usuario): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<tr class="<?php echo $odd ?>">
-					<td><a><strong><?php echo $usuario->Usuario->getApellido() ?></strong></a></td>					
-					<td><a><strong><?php echo $usuario->Usuario->getNombre() ?></strong></a></td>					
-					<td><?php echo $usuario->Usuario->getMutua() ?></td>
-					<td><?php echo $usuario->Usuario->getEmail() ?></td>
-					<td><?php echo $usuario->Usuario->getTelefono() ?></td>
-							        
-				</tr>
-		<?php endforeach; ?>
+          <?php if ($usuario->Usuario): ?>
+						<tr class="<?php echo $odd ?>">
+							<td><strong><?php echo $usuario->Usuario->getApellido() ?></strong></td>
+							<td><strong><?php echo $usuario->Usuario->getNombre() ?></strong></td>					
+							<td><?php echo $usuario->Usuario->getMutua() ?></td>
+							<td><?php echo $usuario->Usuario->getEmail() ?></td>
+							<td><?php echo $usuario->Usuario->getTelefono() ?></td>
+						</tr>
+					<?php endif; ?>
+					<?php endforeach; ?>
         </tbody>
       </table>
       <?php else : ?>

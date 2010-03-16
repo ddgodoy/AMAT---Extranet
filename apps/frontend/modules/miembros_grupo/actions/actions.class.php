@@ -12,49 +12,33 @@ class miembros_grupoActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-//		$this->forward404Unless( $usuario = Doctrine::getTable('Usuario')->find(sfContext::getInstance()->getUser()->getAttribute('userId')) , sprintf('Object usuario does not exist.'));
-//		
-//		$this->usuario_list = $miembros =$usuario->UsuariosdeMisGrupos();
-//
-//		$this->cantidadRegistros = count($miembros);
-//		$this->setFiltroBusqueda();
-     
-         $this->paginaActual = $this->getRequestParameter('page', 1);
-         if (is_numeric($this->paginaActual)) {
+		$this->paginaActual = $this->getRequestParameter('page', 1);
+
+		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
+		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1);
 
-		 
-            $gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
-         
-       
-	        $this->pager = new sfDoctrinePager('Usuario', 10);  	    
-			$this->pager->getQuery()
-			->from('UsuarioGrupoTrabajo ug')
-			->leftJoin('ug.Usuario u')
-     		->leftJoin('ug.GrupoTrabajo g')
-			->where('ug.usuario_id != '.$this->getUser()->getAttribute('userId'))
-			->andWhere($this->setFiltroBusqueda());
-			if($gruposdetrabajo)
-			{
-			 $this->pager->getQuery()->andWhere('ug.grupo_trabajo_id IN '.$gruposdetrabajo);
-			}  
-			$this->pager->getQuery()->orderBy($this->setOrdenamiento());
-			$this->pager->getQuery()->groupBy('ug.usuario_id');
-			$this->pager->setPage($this->paginaActual);
-			$this->pager->init();
-	
-			$this->usuario_list = $this->pager->getResults();
-			$this->cantidadRegistros = $this->pager->getNbResults();
-			if($this->grupoBsq )
-			{
-			  $this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($this->grupoBsq);
-			}
-			else 
-			{
-			  $this->Grupo = '';
-			}
-     }
+		$this->pager = new sfDoctrinePager('Usuario', 10);
+		$this->pager->getQuery()
+								->from('UsuarioGrupoTrabajo ug')
+								->leftJoin('ug.Usuario u')
+								->leftJoin('ug.GrupoTrabajo g')
+								->where('ug.usuario_id != '.$this->getUser()->getAttribute('userId'))
+								->andWhere($this->setFiltroBusqueda());
+
+		if ($gruposdetrabajo) {
+			$this->pager->getQuery()->andWhere('ug.grupo_trabajo_id IN '.$gruposdetrabajo);
+		}  
+		$this->pager->getQuery()->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()->groupBy('ug.usuario_id');
+		$this->pager->setPage($this->paginaActual);
+		$this->pager->init();
+		
+		$this->usuario_list = $this->pager->getResults();
+		$this->cantidadRegistros = $this->pager->getNbResults();
+		$this->Grupo = $this->grupoBsq ? GrupoTrabajoTable::getGrupoTrabajo($this->grupoBsq) : '';
+  }
 	
 	protected function setFiltroBusqueda()
 	{
