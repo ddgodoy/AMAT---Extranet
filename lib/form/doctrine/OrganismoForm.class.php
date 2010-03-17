@@ -36,7 +36,7 @@ class OrganismoForm extends BaseOrganismoForm
 			'id'                          => new sfWidgetFormInputHidden(),			
 			'nombre'                      => new sfWidgetFormInput(array(), array('class' => 'form_input', 'style' => 'width: 355px;')),
 			'grupo_trabajo_id'            => new sfWidgetFormChoice(array('choices' => array('0'=>'--seleccionar--')+_get_options_from_objects($gruposTrbajo)), array('class' => 'form_input', 'style' => 'width: 200px;')),
-			'categoria_organismo_id'      => new sfWidgetFormDoctrineChoice(array(array('model' => 'CategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
+			'categoria_organismo_id'      => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'subcategoria_organismo_id'   => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'usuarios_list'         	  => new sfWidgetFormSelectDoubleList(array('choices' => $arrUsuariosGrupo, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	),
 			'detalle'                     => new sfWidgetFormTextarea(array('label'=>'Detalle'),array('style' => 'width:755px;', 'rows' => 5, 'onfocus' => "this.style.background='#D5F7FF'", 'onblur' => "this.style.background='#E1F3F7'")),
