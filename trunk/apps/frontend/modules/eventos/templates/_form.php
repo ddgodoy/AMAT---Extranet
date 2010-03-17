@@ -11,6 +11,7 @@
 	
 <?php
 	echo $form['fecha']->renderError();
+	echo $form['fecha_caducidad']->renderError();
 	echo $form['titulo']->renderError();
 	echo $form['organizador']->renderError();
 	echo $form['descripcion']->renderError();
@@ -35,8 +36,8 @@
           <td width="7%"><label>Fecha*</label></td>
           <td width="93%" valign="middle">
             <?php echo $form['fecha'] ?>
-							<!-- <label style="margin-left: 4px;">Fecha de Caducidad</label> -->
-            <?php // echo $form['fecha_caducidad']; ?>
+			<label style="margin-left: 4px;">Fecha de Caducidad</label>
+            <?php echo $form['fecha_caducidad']; ?>
           </td>
           </tr>
           <tr>
