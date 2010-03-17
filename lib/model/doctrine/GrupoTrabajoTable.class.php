@@ -10,6 +10,7 @@ class GrupoTrabajoTable extends Doctrine_Table
 				->from('GrupoTrabajo gt')
 				->leftJoin('gt.UsuarioGrupoTrabajo ugt')
 				->where('ugt.usuario_id ='. $usuarioId)
+				->addWhere('gt.deleted = 0')
 				->orderBy('gt.nombre ASC');
 
 		$gruposTrabajo = $q->execute();

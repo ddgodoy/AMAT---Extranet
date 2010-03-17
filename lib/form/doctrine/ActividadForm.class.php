@@ -11,7 +11,7 @@ class ActividadForm extends BaseActividadForm
 {
   public function configure()
   {
-  	$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
+  	    $userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
 		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
 		$estado  = 'pendiente';
 		
