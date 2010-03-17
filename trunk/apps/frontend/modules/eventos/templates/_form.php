@@ -24,7 +24,7 @@
 	
 	    <table width="100%" cellspacing="0" cellpadding="0" border="0">
 	      <tbody><tr>
-	        <td width="48%"><label>Los Campos marcados con (*) son obligatorios</label></td>
+	        <td width="48%"><label>Los Campos marcados con (*) son obligatorios. Deben ser completados</label></td>
 	        <td width="52%" align="right"> </td>
 	      </tr>
 	    </tbody>
