@@ -11,7 +11,7 @@ class EventoForm extends BaseEventoForm
 {
 	public function configure()
 	{
-		$img_valids = array('image/jpeg','image/pjpeg','image/gif','image/png');
+		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
 		$request    = sfContext::getInstance()->getUser();    		
     $usurID     = $request->getAttribute('userId');	
     $nombreUser = $request->getAttribute('nombre');
