@@ -25,7 +25,7 @@
 	<div class="leftside">
 		<div class="lineaListados">
 			<?php if($pager->haveToPaginate()): ?>
-				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get'])?></div>
 			<?php endif; ?>
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Acta/s</span>
@@ -76,7 +76,7 @@
 		<?php if ($cantidadRegistros > 0) : ?>
 		<div class="lineaListados">
 		        <?php if($pager->haveToPaginate()): ?>
-				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
      			<?php endif; ?>
                  <span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Acta/s </span>
 		    </div>

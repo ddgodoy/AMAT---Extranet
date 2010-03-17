@@ -19,9 +19,7 @@
  <div class="leftside"><!-- abre div left-side	-->   
     <div class="lineaListados">
       <?php if($pager->haveToPaginate()): ?>
-      <div style="float: left;" class="paginado">
-        <?php echo pager_navigation($pager, '/asambleas/index/') ?>
-      </div>
+      <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
       <?php endif; ?>
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <?php if (validate_action('alta')):?>
@@ -99,9 +97,7 @@
     
     <div class="lineaListados">
       <?php if($pager->haveToPaginate()): ?>
-      <div style="float: left;" class="paginado">
-        <?php echo pager_navigation($pager, '/asambleas/index/') ?>
-      </div>
+      <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
       <?php endif; ?>
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea" class="boton"/>
