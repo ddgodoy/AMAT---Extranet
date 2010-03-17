@@ -12,7 +12,7 @@ class documentacion_gruposActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'));
+  	  $guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
   	
   	  	$this->paginaActual = $this->getRequestParameter('page', 1);
 
@@ -25,6 +25,7 @@ class documentacion_gruposActions extends sfActions
 		->from('DocumentacionGrupo')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
+		
 		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
