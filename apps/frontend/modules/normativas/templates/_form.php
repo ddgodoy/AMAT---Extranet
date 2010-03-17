@@ -33,7 +33,9 @@
 				<tr>
 					<td width="7%"><label><?php echo $form['fecha']->renderLabel() ?></label></td>
 			          <td width="93%" valign="middle">
-			            <?php echo $form['fecha'] ?>		            
+			            <?php echo $form['fecha'] ?>&nbsp;&nbsp;&nbsp;		            
+			            <label><?php echo $form['publicacion_boe']->renderLabel('Publicacion BOE') ?></label>&nbsp;
+			            <?php echo $form['publicacion_boe'] ?>		            
 			            </td>
 				</tr>
 				<tr>

@@ -9,6 +9,9 @@ abstract class BaseNormativa extends Documentacion
     {
         parent::setTableDefinition();
         $this->setTableName('normativa');
+        $this->hasColumn('publicacion_boe', 'date', null, array(
+             'type' => 'date',
+             ));
         $this->hasColumn('categoria_normativa_id', 'integer', null, array(
              'type' => 'integer',
              ));
