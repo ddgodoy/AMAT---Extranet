@@ -39,8 +39,11 @@
 					<th width="15%" style="text-align:center;">
 						<a href="<?php echo url_for('normativas/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="75%">
+					<th width="60%">
 						<a href="<?php echo url_for('normativas/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+					</th>
+					<th width="15%" style="text-align:center;">
+						<a href="<?php echo url_for('normativas/index?sort=publicacion_boe&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Publicacion BOE</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
@@ -54,6 +57,11 @@
 						<a href="<?php echo url_for('normativas/show?id=' . $valor->getId()) ?>">
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
+					</td>
+					<td valign="top" align="center">
+					<?php if($valor->getPublicacionBoe()):?>
+						<?php echo date("d/m/Y", strtotime($valor->getPublicacionBoe())) ?>
+					<?php endif; ?>	
 					</td>
 					<td valign="top" align="center">
 					<?php if(validate_action('modificar')):?>
@@ -136,6 +144,14 @@
 					</td>
 				    </tr>
 				    <tr>
+					<td><label>Publicacion BOE:</label></td>
+					<td valign="middle">
+						<?php echo  input_tag('publicacion_busqueda',
+					     $publicacionBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:30%;','class'=>"form_input"))?>
+						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('publicacion_busqueda', this);"/>
+					</td>
+				    </tr>
+				    <tr>
 					<td valign="top"><label>Categor&iacute;a</label></td>
 					<td valign="middle">
 						<?php echo select_tag('select_cat_tem',
@@ -165,7 +181,7 @@
 							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
 						</td>
 						<td>
-						<?php if ($cajaBsq || $desdeBsq || $hastaBsq || $CatNormBsq || $SubNormBsq1 || $SubNormBsq2): ?>
+						<?php if ($cajaBsq || $desdeBsq || $hastaBsq || $CatNormBsq || $SubNormBsq1 || $SubNormBsq2 || $publicacionBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif;  ?>
 						</td>
