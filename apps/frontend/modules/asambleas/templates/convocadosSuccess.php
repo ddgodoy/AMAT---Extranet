@@ -42,4 +42,5 @@ function SetAllCheckBoxes(formName, className, checkValue)
       </tr>
       <?php endforeach; ?>
     </tbody></table>
+ <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="javascript:window.history.back();"/>   
     

@@ -34,6 +34,7 @@
         <th width="10%">&nbsp;</th>
         <th width="10%">&nbsp;</th>
         <th width="10%">&nbsp;</th>
+        <th width="10%">&nbsp;</th>
       </tr>
       
       <?php $i=0; foreach ($convocatorias_pendientes as $convocatoria): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
@@ -45,6 +46,9 @@
         <td><a class="confirmar" href="<?php echo url_for('asambleas/aceptar?id=' . $convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0','z-index'=>'100px'))?>Aceptar</a></td>
         <td><a class="confirmar" href="<?php echo url_for('asambleas/rechazar?id=' . $convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0'))?>Rechazar</a></td>
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>">M&aacute;s Informaci&oacute;n</a></td>
+        <?php if (validate_action('publicar')):?>
+        <td><a href="<?php echo url_for('asambleas/convocados?id='.$convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><?php echo image_tag('convocados.png', array('border' => 0, 'alt' => 'Convocados', 'title' => 'Convocados')) ?></a></td>
+        <?php endif; ?>
       </tr>
       <?php endforeach; ?>
     </table>
@@ -62,6 +66,7 @@
         <th width="41%"><a href="#">Direcci&oacute;n</a></th>
         <th width="10%">&nbsp;</th>
         <th width="10%">&nbsp;</th>
+        <th width="10%">&nbsp;</th>
       </tr>
       <?php $i=0; foreach ($convocatorias as $convocatoria): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
       <tr class="<?php echo $odd ?>">
@@ -71,6 +76,9 @@
         <td><?php echo $convocatoria->getAsamblea()->getDireccion() ?></td>
         <td><span class="estatus <?php echo $convocatoria->getEstado() ?>" href="#"><?php echo ucwords($convocatoria->getEstado()) ?></span></td>
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>">M&aacute;s Informaci&oacute;n</a></td>
+         <?php if (validate_action('publicar')):?>
+        <td><a href="<?php echo url_for('asambleas/convocados?id='.$convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><?php echo image_tag('convocados.png', array('border' => 0, 'alt' => 'Convocados', 'title' => 'Convocados')) ?></a></td>
+        <?php endif; ?>
       </tr>
       <?php endforeach; ?>
     </table>
