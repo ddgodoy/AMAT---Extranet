@@ -80,15 +80,28 @@ class inicioActions extends sfActions
 			    $Convocatoria = $asambleas->execute();
 			    $this->Convocatoria = $Convocatoria;
 			}
+			
+			if($tabla == 'AplicacionRol')
+			{
+				$AplicacionRol = Doctrine_Query::create()
+				->from('AplicacionRol ar')
+				->leftJoin('ar.Rol r')
+			    ->leftJoin('ar.Aplicacion a')
+			    ->where($filtro)
+			    ->andWhere('a.id != 46 AND a.id != 44');
+			    
+			     $resultadoObj = $AplicacionRol->execute();
+			}
+			
 			if($tabla == 'Avisos')
 			{
 				$resultadoObj = Doctrine::getTable('Notificacion')->getUltimasNotificaciones(sfContext::getInstance()->getUser()->getAttribute('userId'));
 			}
-			if( $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+			if( $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
-			$c = Doctrine_Query::create();
-			$c->from($tabla)->where($filtro);
-			$resultadoObj = $c->execute();
+				$c = Doctrine_Query::create();
+				$c->from($tabla)->where($filtro);
+				$resultadoObj = $c->execute();
 			}
 			
 			$this->resultadoObj = $resultadoObj;
