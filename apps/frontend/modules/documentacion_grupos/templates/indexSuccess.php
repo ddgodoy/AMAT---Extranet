@@ -128,6 +128,7 @@
 				<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_grupos/nueva') ?>';" style="float: right;" value="Crear nueva documentaci&oacute;n" name="newNews" class="boton"/>
 			<?php endif; ?>
 		</div>
+	<div style="clear:both"></div>	
  </div>	
 </div>	
 <!-- * -->
