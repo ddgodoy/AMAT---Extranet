@@ -12,6 +12,8 @@
 
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['grupo_trabajo_id']->renderError() ?>
+<?php echo $form['categoria_organismo_id']->renderError() ?>
+<?php echo $form['subcategoria_organismo_id']->renderError() ?>
 <?php echo $form['usuarios_list']->renderError(); ?>
 <?php if (!SubCategoriaOrganismoTable::getAllsubcategoriaOrg()->count()):?>
 <div class="mensajeSistema ok">Debe ingresar una subcategoría para poder cargar un nuevo organismo. <a href="<?php echo url_for('subcategoria_organismos/nueva') ?>">click aquí</a></div>

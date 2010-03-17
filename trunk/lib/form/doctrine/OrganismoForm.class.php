@@ -11,6 +11,13 @@ class OrganismoForm extends BaseOrganismoForm
 {
   public function configure()
   {
+  	    
+  		sfLoader::loadHelpers('Object');  	
+  	
+  	    $userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
+  	
+  	    $gruposTrbajo = GrupoTrabajoTable::getGruposTrabajoByUsuario($userId);
+  	
   		$idGrupoTrabajo = 0;
   		## Obtengo todos los usuarios del grupo de trabajo
   		if (!$this->getObject()->isNew()) {
@@ -28,8 +35,8 @@ class OrganismoForm extends BaseOrganismoForm
 		$this->setWidgets(array(
 			'id'                          => new sfWidgetFormInputHidden(),			
 			'nombre'                      => new sfWidgetFormInput(array(), array('class' => 'form_input', 'style' => 'width: 355px;')),
-			'grupo_trabajo_id'            => new sfWidgetFormDoctrineChoice(array('model' => 'GrupoTrabajo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
-			'categoria_organismo_id'      => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
+			'grupo_trabajo_id'            => new sfWidgetFormChoice(array('choices' => array('0'=>'--seleccionar--')+_get_options_from_objects($gruposTrbajo)), array('class' => 'form_input', 'style' => 'width: 200px;')),
+			'categoria_organismo_id'      => new sfWidgetFormChoice(array('choices' => _get_options_from_objects($gruposTrbajo)), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'subcategoria_organismo_id'   => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'usuarios_list'         	  => new sfWidgetFormSelectDoubleList(array('choices' => $arrUsuariosGrupo, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	),
 			'detalle'                     => new sfWidgetFormTextarea(array('label'=>'Detalle'),array('style' => 'width:755px;', 'rows' => 5, 'onfocus' => "this.style.background='#D5F7FF'", 'onblur' => "this.style.background='#E1F3F7'")),
@@ -38,9 +45,9 @@ class OrganismoForm extends BaseOrganismoForm
 		$this->setValidators(array(
 			'id'                          => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'column' => 'id', 'required' => false)),			
 			'nombre'                      => new sfValidatorString(array('required' => true), array('required' => 'El nombre es obligatorio')),
-			'grupo_trabajo_id'            => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo')),
-			'categoria_organismo_id'      => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo')),
-			'subcategoria_organismo_id'   => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo')),
+			'grupo_trabajo_id'            => new sfValidatorDoctrineChoice(array('model' => 'GrupoTrabajo'),array('invalid'=>'El Grupo de Trabajo es obligatorio')),
+			'categoria_organismo_id'      => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo'),array('invalid'=>'La Categoria es obligatoria')),
+			'subcategoria_organismo_id'   => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo'),array('invalid'=>'La SubCategoria es obligatoria')),
 			'usuarios_list'         	  => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'Acción inválida')),
 			'detalle'                     => new sfValidatorString(array('required' => false)),
 		));
