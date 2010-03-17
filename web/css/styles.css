@@ -1160,3 +1160,10 @@ h2.grupo {
  font-size: 11px;
  margin-top: 7px;
 }
+
+.noticias .ul_noticias ul{
+ margin-left: 10px;
+}
+.noticias .ul_noticias ul li{
+ margin-left: 10px;
+}
