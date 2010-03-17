@@ -52,6 +52,22 @@ class EventoForm extends BaseEventoForm
 			'fecha'           => new sfValidatorDate(array('required' => true), array('required' => 'La fecha es obligatoria', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_caducidad' => new sfValidatorDate(array('required' => false)),
 //			'imagen'          => new sfValidatorFile(array('path' => 'uploads/eventos/images', 'required' =>false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
+//			'imagen'          => new sfValidatorFile(array('path' => 'uploads/eventos/images', 'required' =>false, 'mime_types'=> array('image/jpeg')),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
+			'imagen'          => new sfValidatorFile(array('mime_types'=> array('image/jpeg')),array('invalid'=>'Invalid File','mime_types'=>'No valido')),
+/*			'imagen'          => new sfValidatorFile ( 
+        							array ('mime_types' => array(
+        									'application/zip', 
+        									'image/jpeg',
+    										'image/pjpeg',
+    										'image/png',
+    										'image/x-png',
+   											'image/gif',
+											'application/x-zip',
+											'application/octet-stream',
+											'application/pdf') ), 
+											array ('invalid' => 'Invalid file.',
+											 'required' => 'Select a file to upload.', 
+											 'mime_types' => 'The file must be of JPEG, PNG , GIF, pdf and zip format.' ) ); */
 //			'imagen_delete'   => new sfValidatorBoolean(),
 //			'documento'       => new sfValidatorFile(array('path' =>'uploads/eventos/docs','required' => false, 'mime_types'=>array('application/msword', 'application/pdf')), array('mime_types'=>'Formato de documento incorrecto, permitidos (.doc, .pdf )')),
 			'ambito'          => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos'), 'required' => false)),
@@ -62,14 +78,17 @@ class EventoForm extends BaseEventoForm
 		
 		if($this->getObject()->getImagen())
 		{
+			//echo "hollaaaa ";
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
-			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+//			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
 		}
 		else 
 		{
 		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+//		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')));
 		}
 		
 		if($this->getObject()->getDocumento())
