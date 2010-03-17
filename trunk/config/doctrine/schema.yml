@@ -326,6 +326,7 @@ Normativa:
     Timestampable: ~
     SoftDelete: ~
   columns:
+    publicacion_boe:               { type: date }
     categoria_normativa_id:        { type:integer }
     subcategoria_normativa_uno_id: { type: integer }
     subcategoria_normativa_dos_id: { type: integer }
