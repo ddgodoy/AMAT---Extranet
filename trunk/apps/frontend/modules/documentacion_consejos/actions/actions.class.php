@@ -12,7 +12,7 @@ class documentacion_consejosActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'));
+  	$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
   	$this->Consejo = '';
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
