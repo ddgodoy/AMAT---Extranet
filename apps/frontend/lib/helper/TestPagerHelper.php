@@ -1,10 +1,16 @@
 <?php
-function test_pager($pager, $sort, $type)
+function test_pager($pager, $sort, $type, $DAtos='')
 {
 	$navigation = '';
 	$currentModule = sfContext::getInstance()->getModuleName();
-
-  $uri = url_for($currentModule."/index?sort=$sort&type=$type&page=");
+  if($DAtos)
+  {
+  	$uri = url_for($currentModule."/index?sort=$sort&type=$type&page=");
+  }
+  else 
+  {
+    $uri = url_for($currentModule."/index?".$DAtos['get']."&sort=$sort&type=$type&page=");  	
+  }
 
   // First and previous page
   if ($pager->getPage() != 1) {
