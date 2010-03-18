@@ -48,7 +48,6 @@
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 
 <div class="leftside">
-	<div class="lineaListados">
 		<div class="lineaListados">
 			<strong class="subtitulo" style="float:left; margin-right:10px;">Documentaci&oacute;n General</strong>
 			<?php if ($pager->haveToPaginate()): ?>
@@ -110,7 +109,6 @@
 			</tbody>
 		</table>
 		</form>
-		<div style="clear:both"></div>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
@@ -128,7 +126,6 @@
 				<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_grupos/nueva') ?>';" style="float: right;" value="Crear nueva documentaci&oacute;n" name="newNews" class="boton"/>
 			<?php endif; ?>
 		</div>
-	<div style="clear:both"></div>	
  </div>	
 </div>	
 <!-- * -->
@@ -170,5 +167,4 @@
 		</div>
 	</div>	
 <!-- * -->
-<div style="clear:both"></div>
 <div class="clear"></div>
