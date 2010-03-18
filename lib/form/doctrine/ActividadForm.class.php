@@ -11,11 +11,11 @@ class ActividadForm extends BaseActividadForm
 {
   public function configure()
   {
-  	$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
+   		$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
 		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
 		$estado  = 'pendiente';
 		$mutuas = Mutua::getArrayMutuas(); 
-		
+		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
 		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
 			'titulo'            => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
@@ -53,13 +53,15 @@ class ActividadForm extends BaseActividadForm
 		if($this->getObject()->getImagen())
 		{
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/actividades/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
-			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+//			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
 		}
 		else 
 		{
 		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/actividades/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+//		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/actividades/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')));
 		}
 		
 		if($this->getObject()->getDocumento())
