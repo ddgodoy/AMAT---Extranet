@@ -1,5 +1,5 @@
 <?php
-
+//Ahora
 /**
  * Actividad form.
  *
@@ -11,9 +11,10 @@ class ActividadForm extends BaseActividadForm
 {
   public function configure()
   {
-  	    $userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
+  	$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
 		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
 		$estado  = 'pendiente';
+		$mutuas = Mutua::getArrayMutuas(); 
 		
 		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
@@ -26,7 +27,8 @@ class ActividadForm extends BaseActividadForm
 		    'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
-			'mutua_id'          => new sfWidgetFormInputHidden(),
+			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
+//			'mutua_id'          => new sfWidgetFormInputHidden(),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));
@@ -77,7 +79,8 @@ class ActividadForm extends BaseActividadForm
 		
 		$this->setDefaults(array(
 			'owner_id'          => $userId,
-			'mutua_id'          => $mutuaId,
+//			'mutua_id'          => $mutuaId,
+			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => $estado,
 			'autor'             => sfContext::getInstance()->getUser()->getAttribute('apellido').','.sfContext::getInstance()->getUser()->getAttribute('nombre'),
 			'fecha_publicacion' => '2007/01/01',
