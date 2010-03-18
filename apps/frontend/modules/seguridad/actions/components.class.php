@@ -12,6 +12,9 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
+//		echo $this->module.'**<br>'. $this->action;
+//		exit();
+		
 		$credenciales_array = array();
 		$aplicacion_rol = Doctrine::getTable('AplicacionAccion');
 
