@@ -17,7 +17,19 @@ class eventosActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   	$this->pager = new sfDoctrinePager('Evento', 10);
-		$this->pager->getQuery()->from('Evento')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()
+		->from('Evento e')
+		->leftJoin('e.UsuarioEvento ue')
+		->where($this->setFiltroBusqueda());
+		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+	    if(!Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+	    { 
+			$this->pager->getQuery()->andWhere("ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'intranet' ");
+	    }	
+		$this->pager->getQuery()->orderBy($this->setOrdenamiento());
+		
+		
+		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -134,12 +146,12 @@ class eventosActions extends sfActions
 						}
   		      }
   		      else  		
-  		      {
-  		      	$aviso = NotificacionTable::getDeleteEntidad($evento->getId(),$evento->getTitulo ());
-		
+  		      {  		      	
 				sfLoader::loadHelpers('Security'); // para usar el helper
 	    		if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-	    		$aviso->delete();
+	    		$agenda = AgendaTable::getDeleteAgenda($evento->getId());
+	    		$aviso = NotificacionTable::getDeleteEntidad2($evento->getId());
+	    		$agenda->delete();
 				$evento->delete();
   		      	
   		      }
@@ -168,7 +180,7 @@ class eventosActions extends sfActions
 					$tema = 'Evento publicado';
 					$publico = 'si';
 				}
-				ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+				
 			}
 			##enviar email a los responsables 
 			if ($estado['estado'] == 'pendiente')
@@ -208,9 +220,22 @@ class eventosActions extends sfActions
 					}
 				}
 			}
+			
 			$this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
-
-			$this->redirect('eventos/index'.$strPaginaVolver);
+			
+			if($evento->getAmbito() == 'intranet' && empty($estado['usuarios_list']))
+			{
+				
+				$this->redirect('eventos/editar?id='.$evento->getId());
+			}
+			else 
+			{	
+				if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0)
+				{
+				   ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+				}   
+				$this->redirect('eventos/index'.$strPaginaVolver);
+			}	
 		}
 	}
 		
@@ -252,23 +277,23 @@ class eventosActions extends sfActions
 		$this->estadoBq = $this->getRequestParameter('estado');
 
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND titulo LIKE '%$this->cajaBsq%'";
+			$parcial .= " AND e.titulo LIKE '%$this->cajaBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >= '".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND e.fecha >= '".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowdesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND e.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
 		if (!empty($this->ambitoBQ)) {
-			$parcial .= " AND ambito = '".$this->ambitoBQ."'";
+			$parcial .= " AND e.ambito = '".$this->ambitoBQ."'";
 			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBQ);
 		}
 		if (!empty($this->estadoBq)) {
-			$parcial .= " AND estado = '".$this->estadoBq."'";
+			$parcial .= " AND e.estado = '".$this->estadoBq."'";
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBq);
 		}
 
@@ -305,7 +330,7 @@ class eventosActions extends sfActions
 			$this->ambitoBQ = '';
 			$this->estadoBq = '';
 		}
-		return 'deleted=0'.$parcial;
+		return 'e.deleted=0'.$parcial;
   }
   
   protected function setOrdenamiento()

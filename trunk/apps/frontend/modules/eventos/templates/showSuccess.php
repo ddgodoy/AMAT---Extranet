@@ -23,6 +23,8 @@
 	  <?php endif;?>
 	   <div class="clear"></div>
 	   <br clear="all">
+	   <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
+	   if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):?> 
 	  <?php if($evento->getUserIdCreador()):?>
 	   <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($evento->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($evento->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
@@ -31,6 +33,7 @@
 	  <?php endif;?>
 	  <?php if($evento->getUserIdPublicado()):?> 
 	   <span class="notfecha">Publicado por: <?php echo Usuario::datosUsuario($evento->getUserIdPublicado()) ?> el d&iacute;a: <?php echo format_date($evento->getFechaPublicado())?></span><br />     
+	  <?php endif;?> 
 	  <?php endif;?> 
 	</div>
 	   

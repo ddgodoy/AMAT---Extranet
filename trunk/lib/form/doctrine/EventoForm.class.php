@@ -34,7 +34,7 @@ class EventoForm extends BaseEventoForm
 			'mas_info'        => new fckFormWidget(),
 			'fecha'           => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 //			'fecha_caducidad' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-			'fecha_caducidad' => new sfWidgetFormDate(),
+			'fecha_caducidad' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 //     		'imagen'          => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/images/s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')),
 //			'documento'       => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs','template'  => '<div><br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label><br /></div>')),
 			'ambito'          => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos')), array('class' => 'form_input', 'style' => 'width:400px;')),
@@ -79,35 +79,36 @@ class EventoForm extends BaseEventoForm
 		if($this->getObject()->getImagen())
 		{
 			//echo "hollaaaa ";
-			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/eventos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
 //			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/eventos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
 		}
 		else 
 		{
-		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/cifras_datos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/eventos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
 //		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/eventos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
 		}
 		
 		if($this->getObject()->getDocumento())
 		{
-			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
-			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)));
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/eventos/docs', 'required' => false)));
 		    $this->setValidator('documento_delete', new sfValidatorBoolean());
 		}
 		else 
 		{
 			
-		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/cifras_datos/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/cifras_datos/docs', 'required' => false)));
+		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/eventos/docs', 'required' => false)));
 
 		}
 		
 		
 		$this->setDefaults(array( 'usuarios_list' => $userId,
-		                          'owner_id' => $userId, ));
+		                          'owner_id' => $userId, 
+		                          'ambito'=>'ambos'));
 
 		$this->widgetSchema->setNameFormat('evento[%s]');
 	}

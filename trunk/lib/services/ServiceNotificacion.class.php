@@ -75,8 +75,8 @@ class ServiceNotificacion
 	private static function entEvento($accion, $id)
 	{
 		$data = array();
-		$data['url'] = 'eventos/show?id=' . $id;
-		$data['usuarios'] = Doctrine::getTable('Usuario')->findAll();
+		$data['url'] = 'eventos/show?id='.$id;
+		$data['usuarios'] = UsuarioTable::getUsuarioByEventos($id);
 		
 		return $data;
 	}
