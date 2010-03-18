@@ -67,11 +67,11 @@
  
  
  <!--Fin Agregado por Ramin el 18/03/2010 -->
-        <!--<tr>
-          <td style="padding-top: 5px;"><label>Destacada</label></td>
-          <td><?php //echo $form['destacada'] ?></td>
-        </tr>
         <tr>
+          <td style="padding-top: 5px;"><label>Habilitada</label></td>
+          <td><?php echo $form['destacada'] ?></td>
+        </tr>
+        <!--<tr>
           <td style="padding-top: 5px;"><label>Ambito</label></td>
           <td><?php //echo $form['ambito'] ?></td>
         </tr>-->
