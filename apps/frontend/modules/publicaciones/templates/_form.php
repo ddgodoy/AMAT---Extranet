@@ -15,6 +15,7 @@
 	echo $form['titulo']->renderError();
 	echo $form['autor']->renderError();
 	echo $form['ambito']->renderError();
+	echo $form['mutua_id']->renderError();
 	echo $form['fecha']->renderError();
 	echo $form['fecha_publicacion']->renderError();
 	echo $form['fecha_caducidad']->renderError();
@@ -55,6 +56,16 @@
           <td valign="middle"><?php echo $form['titulo'] ?>
           </td>
         </tr>
+ <!--Agregado por Ramin el 18/03/2010 -->
+ 
+        <tr>
+          <td><label>Mutua</label></td>
+          <td valign="middle"><?php echo $form['mutua_id'] ?>
+          </td>
+        </tr>
+ 
+ 
+ <!--Fin Agregado por Ramin el 18/03/2010 -->
         <!--<tr>
           <td style="padding-top: 5px;"><label>Destacada</label></td>
           <td><?php //echo $form['destacada'] ?></td>
