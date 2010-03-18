@@ -19,6 +19,7 @@
 	echo $form['fecha']->renderError();
 	echo $form['fecha_publicacion']->renderError();
 	echo $form['fecha_caducidad']->renderError();
+	echo $form['imagen']->renderError();
 ?>
 <form action="<?php echo url_for('publicaciones/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
