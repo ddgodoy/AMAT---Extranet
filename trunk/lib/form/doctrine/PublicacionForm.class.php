@@ -52,14 +52,14 @@ class PublicacionForm extends BasePublicacionForm
 		{
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/publicaciones/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
 //			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
 		}
 		else 
 		{
 		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/publicaciones/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
 //		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')));
+		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
 		}
 		
 		if($this->getObject()->getDocumento())
