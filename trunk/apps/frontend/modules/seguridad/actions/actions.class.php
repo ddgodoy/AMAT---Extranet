@@ -76,6 +76,7 @@ class seguridadActions extends sfActions
 					$this->getUser()->setAttribute('permisos', $usuario->getPermisos());
 					$this->getUser()->setAttribute('menu'    , $usuario->getMenuUsuario());	
 	
+
 					## Crear credenciales
 					foreach ($credenciales as $credencial) {
 						$this->getUser()->addCredential($credencial);

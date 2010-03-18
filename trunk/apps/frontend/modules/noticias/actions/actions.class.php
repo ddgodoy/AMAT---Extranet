@@ -71,7 +71,6 @@ class noticiasActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
 	{
-		
 		$this->processSelectedRecords($request, 'baja');
 	}
 	
@@ -96,8 +95,8 @@ class noticiasActions extends sfActions
 //			
 //						ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());	
 					} else {
-						$aviso = NotificacionTable::getDeleteEntidad($noticia->getId(),$noticia->getTitulo());
-						$aviso->delete();
+						$aviso = NotificacionTable::getDeleteEntidad2($noticia->getId());
+						
 						$noticia->delete();
 					}		
 	  		}

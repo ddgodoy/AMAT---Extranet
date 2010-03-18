@@ -11,6 +11,7 @@ class agendaComponents extends sfComponents
 {
 	public function executeAgenda(sfWebRequest $request)
 	{
+		sfLoader::loadHelpers('Security');
 		## For calendar
 		$this->arrayShows = array();
 		$this->module = $request->getParameter('module').'/index?';
@@ -20,19 +21,21 @@ class agendaComponents extends sfComponents
 		$agenda  = Agenda::getRepository()->getEventoByUsuario(0,0,$usurID);		 
 		$this->year  = $this->getRequestParameter('y', date('Y'));
 		$this->month = $this->getRequestParameter('m', date('m'));
-
-	 foreach ($agenda as $g) {	
-			$year  = (int) date("Y", strtotime($g->getFecha()));
-			$month = (int) date("m", strtotime($g->getFecha()));
-			$day   = date("d", strtotime($g->getFecha()));
-			
-			if ($year == $this->year && $month == $this->month) {
-				if (!isset($this->evento_list_array[$day]))  {
-					$this->evento_list_array[$day] = $g->getTitulo();
-				} else {
-					$this->evento_list_array[$day] = 	$g->getTitulo() . "<br />". $this->evento_list_array[$day];
+	    if(validate_action('listar','agenda'))
+	    {
+		 foreach ($agenda as $g) {	
+				$year  = (int) date("Y", strtotime($g->getFecha()));
+				$month = (int) date("m", strtotime($g->getFecha()));
+				$day   = date("d", strtotime($g->getFecha()));
+				
+				if ($year == $this->year && $month == $this->month) {
+					if (!isset($this->evento_list_array[$day]))  {
+						$this->evento_list_array[$day] = $g->getTitulo();
+					} else {
+						$this->evento_list_array[$day] = 	$g->getTitulo() . "<br />". $this->evento_list_array[$day];
+					}
 				}
-			}
-	  }
+		  }
+	    } 
 	}
 }

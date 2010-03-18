@@ -1,4 +1,5 @@
 <?php use_helper('Fecha') ?>
+<?php use_helper('Security') ?>
 
 <h1>Calendario de Eventos</h1>
 <div id="contenedor_calendario">
@@ -31,7 +32,14 @@
         ?>
         <td id="day_<?php echo $day ?>" class="<?php echo $classOnTheFly ?>">
         	<?php
-        		$link_day = $day ? link_to($day, 'agenda/index?y='.$year.'&m='.$month.'&d='.dos_digitos($day)) : '';
+                if(validate_action('listar','agenda'))	
+                {
+        		  $link_day = $day ? link_to($day, 'agenda/index?y='.$year.'&m='.$month.'&d='.dos_digitos($day)) : '';
+                }
+                else 
+                {
+                   $link_day = $day ? $day: '';	
+                }
 
         		if ($eventDay) {
         			echo link_to($day . '<span>'.$evento_list_array[$day].'</span>', 'agenda/index?y='.$year.'&m='.$month.'&d='.$day, array('class'=>'info'));
