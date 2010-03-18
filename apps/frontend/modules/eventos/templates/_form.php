@@ -16,6 +16,8 @@
 	echo $form['organizador']->renderError();
 	echo $form['descripcion']->renderError();
 	echo $form['mas_info']->renderError();
+	echo $form['imagen']->renderError();
+
 ?>
 <form action="<?php echo url_for('eventos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" '?> id="evento" name="evento">
     <?php if (!$form->getObject()->isNew()): ?>
