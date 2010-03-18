@@ -76,7 +76,7 @@
          <div class="clear"></div>
 				<div class="clear"></div>
 				<!-- * -->
-				<?php if (!$form->getObject()->isNew()): ?>
+				<?php if (!$form->getObject()->isNew() && $form['ambito']->getValue() == 'intranet'): ?>
 				<fieldset style="float:left; margin-right:10px;width:445px; margin-left:90px; ">
 					<legend>Destinatarios del evento</legend>
 					<span style="float:left"><?php echo $form['usuarios_list'] ?></span>
