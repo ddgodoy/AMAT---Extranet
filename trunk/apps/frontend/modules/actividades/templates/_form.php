@@ -17,6 +17,8 @@
 	echo $form['ambito']->renderError();
 	echo $form['fecha']->renderError();
 	echo $form['fecha_publicacion']->renderError();
+	echo $form['mutua_id']->renderError();
+
 ?>
 <form action="<?php echo url_for('actividades/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
@@ -49,6 +51,14 @@
           <?php // echo $form['autor'] ?>
           </td>-->
         </tr>
+        <tr>
+          <td><label>Mutua*</label></td>
+          <td valign="middle"><?php echo $form['mutua_id'] ?>
+          <!--<label style="margin-left: 4px;">Autor / Medio*: </label>
+          <?php // echo $form['autor'] ?>
+          </td>-->
+        </tr>
+
         <!--<tr>
           <td style="padding-top: 5px;"><label>Destacada</label></td>
           <td><?php //echo $form['destacada'] ?></td>
