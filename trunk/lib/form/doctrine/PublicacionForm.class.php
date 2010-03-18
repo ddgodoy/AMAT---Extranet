@@ -14,6 +14,7 @@ class PublicacionForm extends BasePublicacionForm
 		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
 		$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
 		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
+		$mutuas = Mutua::getArrayMutuas(); 
 		$estado  = 'pendiente';
 
 		$this->setWidgets(array(
@@ -25,8 +26,9 @@ class PublicacionForm extends BasePublicacionForm
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'fecha_caducidad'   => new sfWidgetFormInputHidden(),
 			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
+			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
-			'mutua_id'          => new sfWidgetFormInputHidden(),
+//			'mutua_id'          => new sfWidgetFormInputHidden(),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));
@@ -80,7 +82,8 @@ class PublicacionForm extends BasePublicacionForm
 		
 		$this->setDefaults(array(
 			'owner_id'          => $userId,
-			'mutua_id'          => $mutuaId,
+			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
+//			'mutua_id'          => $mutuaId,
 			'estado'            => $estado,
 			'fecha_publicacion' => '2007-01-01',
 			'fecha_caducidad'   => '2020-01-01',
