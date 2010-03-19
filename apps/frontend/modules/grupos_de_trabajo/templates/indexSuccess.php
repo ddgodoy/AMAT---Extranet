@@ -58,6 +58,7 @@
         <?php endif;?>
       </div>
       <br />
+      <?php if ($cantidadRegistros > 0) : ?>
       <form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
       <?php $i=0; foreach ($grupos_de_trabajo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<a href="<?php echo url_for('miembros_grupo/index?grupo='.$valor->getId()) ?>" class="grupo-titulo">
@@ -99,6 +100,7 @@
 				</table>
 				<br />
       <?php endforeach;?>
+      
       <?php if(validate_action('baja')):?>
       <div class="lineaListados">
       <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo"> 
@@ -112,6 +114,9 @@
      </div>
      <?php endif;?>
       </form>
+     <?php endif; ?>
+
+	<?php if ($cantidadRegistros > 0) : ?>
       <div class="lineaListados">
         <?php if($pager->haveToPaginate()): ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
@@ -123,6 +128,8 @@
         <input type="button" class="boton" name="newNews" value="Crear Nuevo Grupo" style="float: right;" onclick="javascript:location.href='<?php echo url_for('grupos_de_trabajo/nueva') ?>';"/>
         <?php endif;?>
       </div>
+    <?php endif; ?>
+
     </div>
 <!-- * -->
 	<div class="rightside">
