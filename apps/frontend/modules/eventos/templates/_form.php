@@ -64,7 +64,8 @@
            </tr>
            <tr>
 	          <td style="padding-top: 5px;"><label>Imagen</label></td>
-	          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
+	          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label><label><?php echo $form['mas_imagen'] ?></label><label>Mostrar la imagen en la ficha</label>
+	          </td>
 	        </tr>
 	        <tr>
 	          <td style="padding-top: 5px;"><label>Archivo</label></td>

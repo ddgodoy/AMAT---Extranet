@@ -13,8 +13,10 @@
 	</div>	
 	
 	<div class="noticias">
-	 <img src="<?php if ($evento->getimagen()): ?>/uploads/eventos/images/<?php echo $evento->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $evento->gettitulo() ?>" />
-	 	<a  class="nottit"><?php echo  $evento->gettitulo() ?> </a><br />
+	  <?php if($evento->getMasImagen() && $evento->getImagen()):?>
+	  <img src="<?php if ($evento->getimagen()): ?>/uploads/eventos/images/<?php echo $evento->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $evento->gettitulo() ?>" />
+	  <?php endif;?>
+	  <a  class="nottit"><?php echo  $evento->gettitulo() ?> </a><br />
 	  <p class="notentrada"><?php echo $evento->getdescripcion() ?></p>
 	  <?php echo $evento->getmas_info() ?>      
 	  <div class="clear"></div>

@@ -35,8 +35,7 @@ class EventoForm extends BaseEventoForm
 			'fecha'           => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 //			'fecha_caducidad' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_caducidad' => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-//     		'imagen'          => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/images/s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')),
-//			'documento'       => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs','template'  => '<div><br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label><br /></div>')),
+			'mas_imagen'        => new sfWidgetFormInputCheckbox(),
 			'ambito'          => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos')), array('class' => 'form_input', 'style' => 'width:400px;')),
 			'estado'          => new sfWidgetFormInputHidden(),
 			'owner_id'        => new sfWidgetFormInputHidden(),
@@ -51,25 +50,7 @@ class EventoForm extends BaseEventoForm
 			'mas_info'        => new sfValidatorString(array('required' => false)),
 			'fecha'           => new sfValidatorDate(array('required' => true), array('required' => 'La fecha es obligatoria', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_caducidad' => new sfValidatorDate(array('required' => false)),
-//			'imagen'          => new sfValidatorFile(array('path' => 'uploads/eventos/images', 'required' =>false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
-//			'imagen'          => new sfValidatorFile(array('path' => 'uploads/eventos/images', 'required' =>false, 'mime_types'=> array('image/jpeg')),array('mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif, .png )')),
-//			'imagen'          => new sfValidatorFile(array('mime_types'=> array('image/jpeg')),array('invalid'=>'Invalid File','mime_types'=>'No valido')),
-/*			'imagen'          => new sfValidatorFile ( 
-        							array ('mime_types' => array(
-        									'application/zip', 
-        									'image/jpeg',
-    										'image/pjpeg',
-    										'image/png',
-    										'image/x-png',
-   											'image/gif',
-											'application/x-zip',
-											'application/octet-stream',
-											'application/pdf') ), 
-											array ('invalid' => 'Invalid file.',
-											 'required' => 'Select a file to upload.', 
-											 'mime_types' => 'The file must be of JPEG, PNG , GIF, pdf and zip format.' ) ); */
-//			'imagen_delete'   => new sfValidatorBoolean(),
-//			'documento'       => new sfValidatorFile(array('path' =>'uploads/eventos/docs','required' => false, 'mime_types'=>array('application/msword', 'application/pdf')), array('mime_types'=>'Formato de documento incorrecto, permitidos (.doc, .pdf )')),
+			'mas_imagen'        => new sfValidatorBoolean(array('required' => false)),
 			'ambito'          => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos'), 'required' => false)),
 			'estado'          => new sfValidatorChoice(array('choices' => array('guardado' => 'guardado', 'pendiente' => 'pendiente', 'publicado' => 'publicado'), 'required' => true)),
 			'owner_id'        => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => false)),
@@ -78,17 +59,15 @@ class EventoForm extends BaseEventoForm
 		
 		if($this->getObject()->getImagen())
 		{
-			//echo "hollaaaa ";
+
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/eventos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
-//			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
 			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/eventos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
 		}
 		else 
 		{
-		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/eventos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-//		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/cifras_datos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/eventos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/eventos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/eventos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
 		}
 		
 		if($this->getObject()->getDocumento())
@@ -100,14 +79,15 @@ class EventoForm extends BaseEventoForm
 		else 
 		{
 			
-		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/eventos/docs', 'required' => false)));
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/eventos/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/eventos/docs', 'required' => false)));
 
 		}
 		
 		
 		$this->setDefaults(array( 'usuarios_list' => $userId,
 		                          'owner_id' => $userId, 
+		                          'mas_imagen' => 1,
 		                          'ambito'=>'ambos'));
 
 		$this->widgetSchema->setNameFormat('evento[%s]');

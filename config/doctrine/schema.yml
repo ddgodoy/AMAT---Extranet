@@ -133,6 +133,7 @@ Evento:
     fecha:                   { type: date }
     fecha_caducidad:         { type: date }
     imagen:                  { type: string(255), notnull: false }
+    mas_imagen:              { type: boolean }
     documento:               { type: string(255), notnull: false }
     organizador:             { type: string(255) }
     estado:                  { type: enum, values: ['guardado', 'pendiente', 'publicado'] }
