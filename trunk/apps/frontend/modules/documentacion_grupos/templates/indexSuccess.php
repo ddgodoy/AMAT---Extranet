@@ -109,6 +109,7 @@
 			</tbody>
 		</table>
 		</form>
+		<div class="clear"></div>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
