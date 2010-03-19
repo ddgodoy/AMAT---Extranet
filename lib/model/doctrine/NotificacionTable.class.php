@@ -55,13 +55,18 @@ class NotificacionTable extends Doctrine_Table
 		 return $q->execute();    	
 	}
 	
-	public static function getDeleteEntidad2($idEntidad)
+	public static function getDeleteEntidad2($idEntidad,$nombre='')
 	{
+
 		$deleted = Doctrine_Query::create()
 				  ->delete()
 				  ->from('Notificacion')
-				  ->andWhere('entidad_id = '.$idEntidad)
-				  ->execute();	
+				  ->andWhere('entidad_id = '.$idEntidad);
+				   if($nombre != '') 
+					 {   
+					     $deleted->andWhere("nombre = '$nombre'");
+					 }   
+				  $deleted->execute();	
 		return true;		  
 	}	
 	

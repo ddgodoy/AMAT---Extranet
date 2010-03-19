@@ -76,7 +76,15 @@ class ServiceNotificacion
 	{
 		$data = array();
 		$data['url'] = 'eventos/show?id='.$id;
-		$data['usuarios'] = UsuarioTable::getUsuarioByEventos($id);
+		$usuer = UsuarioTable::getUsuarioByEventos($id);
+		if($usuer->count()==0)
+		{
+			$data['usuarios'] = UsuarioTable::getUsuariosActivos();
+		}
+		else 
+		{
+			$data['usuarios'] = $usuer;
+		}	
 		
 		return $data;
 	}

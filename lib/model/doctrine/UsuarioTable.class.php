@@ -57,7 +57,6 @@ class UsuarioTable extends Doctrine_Table
 		$q = Doctrine_Query::create();
 		$q->from('Usuario u');
 		$q->where('u.deleted = 0');
-		$q->andWhere('u.id != 1');
 		$q->orderBy('u.apellido ASC, u.nombre ASC');
 		$usuarios = $q->execute();
 		

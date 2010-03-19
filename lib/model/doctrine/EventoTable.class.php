@@ -82,4 +82,14 @@ class EventoTable extends Doctrine_Table
 
 		return $retorno;
 	}
+	
+	public static  function getEventosCaducos()
+	{
+		$q = Doctrine_Query::create()
+		->from('Evento e')
+		->where('e.fecha_caducidad <= NOW()');
+		
+		return  $q->execute();
+	}
+	
 }
