@@ -30,4 +30,13 @@ class NoticiaTable extends Doctrine_Table
 		
 		return $notificaciones;
 	}
+	
+	public static  function getNoticiasCaducas()
+	{
+		$q = Doctrine_Query::create()
+		->from('Noticia')
+		->where('deleted=0 AND (fecha_caducidad <= NOW())');
+		
+		return  $q->execute();
+	}
 }

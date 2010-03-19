@@ -11,6 +11,16 @@ class agendaComponents extends sfComponents
 {
 	public function executeAgenda(sfWebRequest $request)
 	{
+		$evento = EventoTable::getEventosCaducos();
+		if(isset($evento))
+		{
+			foreach ($evento AS $e)
+			{
+				$agenda = AgendaTable::getDeleteAgenda($e->getId());
+			    $agenda->delete();
+			}    
+		
+		}   
 		sfLoader::loadHelpers('Security');
 		## For calendar
 		$this->arrayShows = array();

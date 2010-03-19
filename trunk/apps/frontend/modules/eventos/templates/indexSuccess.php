@@ -76,39 +76,13 @@
 		<th width="3%"></th>
 	</tr>
 	<?php $i=0; foreach ($evento_list as $evento): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-	<tr class="<?php echo $odd ?>">
-	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?>
-		<td><input type="checkbox" name="id[]" value="<?php echo $evento->getId() ?>" /></td>
-	<?php endif;?>	
-		<td><?php echo date("d/m/Y", strtotime($evento->getFecha())) ?></td>
-		
-			<td><a href="<?php echo url_for('eventos/show?id=' . $evento->getId()) ?>"><strong><?php echo $evento->getTitulo() ?></strong></a></td>
-			<td><?php echo $evento->getOrganizador() ?></td>
-		<td><?php echo ucwords($evento->getEstado()) ?></td>
-		<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente'): ?>
-			<td>
-				<?php echo link_to(image_tag('publicar.png', array('title' => 'Publicar', 'alt' => 'Publicar', 'border' => '0')), 'eventos/publicar?id='.$evento->getId(), array('method' => 'post', 'confirm' => 'Est&aacute;s seguro que deseas publicar este evento?')) ?>
-			</td>
-		<?php elseif ($evento->getEstado() == 'guardado'): ?>
-			<td>
-				<a href="#" onclick="alert('Para publicar este evento es necesario que su estado esté en Pendiente')"><?php echo image_tag('publicar.png', array('title' => 'Publicar', 'alt' => 'Publicar', 'border' => '0')) ?></a>
-			</td>
-		<?php else: ?>
-			<td>
-				<a href="#" onclick="alert('El evento ya ha sido publicado anteriormente')"><?php echo image_tag('aceptada.png', array('title' => 'Publicar', 'alt' => 'Publicar', 'border' => '0')) ?></a>
-			</td>
-		<?php endif; ?>
-			<td>
-			<?php if(validate_action('modificar')):?> 
-				<a href="<?php echo url_for('eventos/editar?id=' . $evento->getId()) ?>"><?php echo image_tag('show.png', array('border' => 0, 'alt' => 'Editar', 'title' => 'Editar')) ?></a>
-			<?php endif; ?>	
-			</td>
-		 <td>
-		<?php if(validate_action('baja')):?>
-			<?php echo link_to(image_tag('borrar.png', array('title' => 'Borrar', 'alt' => 'Borrar', 'border' => '0')), 'eventos/delete?id='.$evento->getId(), array('method' => 'delete', 'confirm' => 'Est&aacute;s seguro que deseas eliminar el evento "' . $evento->getTitulo() . '"?')) ?>
-		<?php endif; ?>	
-		</td>
-	</tr>
+	<?php if($evento->getEstado() == 'guardado'):?>
+	<?php if($evento->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
+	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php endif; ?>
+	<?php else: ?>
+	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php endif; ?>
 	<?php endforeach; ?>
 	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?>
 	<tr>

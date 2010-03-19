@@ -95,8 +95,7 @@ class noticiasActions extends sfActions
 //			
 //						ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());	
 					} else {
-						$aviso = NotificacionTable::getDeleteEntidad2($noticia->getId());
-						
+						$aviso = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
 						$noticia->delete();
 					}		
 	  		}
@@ -199,6 +198,7 @@ class noticiasActions extends sfActions
 				$enviar = true;
 				$email = AplicacionRolTable::getEmailPublicar(1,'','','');
 				$tema = 'Novedad pendiente de publicar';
+				$aviso = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
 			}	
 			##enviar email a los responsables 
 			
