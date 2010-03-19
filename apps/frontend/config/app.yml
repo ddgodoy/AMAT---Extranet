@@ -57,10 +57,16 @@ all:
   thumbnail_normal_height_noticias: 320
 
   # thumbnail eventos
+  thumbnail_web_small_width_eventos:   120
+  thumbnail_web_small_height_eventos:  90
+  thumbnail_web_width_eventos:   315
+  thumbnail_web_height_eventos:  386
+  thumbnail_web_original_width_eventos:   510
+  thumbnail_web_original_height_eventos:  600
+  thumbnail_small_width_eventos:   80
+  thumbnail_small_height_eventos:  60
   thumbnail_normal_width_eventos:  250
   thumbnail_normal_height_eventos: 320
-  thumbnail_small_width_eventos:   100
-  thumbnail_small_height_eventos:  100
 
   # thumbnail Tipos Comunicados
   thumbnail_small_width_tipo_comunicado:   300
