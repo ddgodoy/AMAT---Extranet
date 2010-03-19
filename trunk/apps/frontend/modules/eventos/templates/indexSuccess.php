@@ -67,7 +67,11 @@
 	   <?php if (validate_action('publicar') || validate_action('baja')): ?>
 		<th width="3%"></th>
 	   <?php endif;?>
-		<th width="8%"><a href="<?php echo url_for('eventos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a></th>
+		<th width="11%">
+						<a href="<?php echo url_for('eventos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:45px;">
+							Fecha
+						</a>
+					</th>
 		<th width="22%"><a href="<?php echo url_for('eventos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Título</a></th>
 		<th width="21%"><a href="<?php echo url_for('eventos/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organizador</a></th>
 		<th width="13%"><?php if (validate_action('publicar')):?><a href="<?php echo url_for('eventos/index?sort=estado&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Estado</a><?php endif;?></th>
