@@ -27,6 +27,9 @@ abstract class BaseEvento extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
+        $this->hasColumn('mas_imagen', 'boolean', null, array(
+             'type' => 'boolean',
+             ));
         $this->hasColumn('documento', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
