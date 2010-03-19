@@ -114,14 +114,22 @@
      </div>
      <?php endif;?>
       </form>
-     <?php endif; ?>
+      <br ></br>
+     <?php else : ?>
+			<?php if ($cajaBsq != '') : ?>
+				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
+			<?php else : ?>
+				<div class="mensajeSistema comun">No hay Grupos registrados</div>
+			<?php endif; ?>
+	<?php endif; ?>
 
 	<?php if ($cantidadRegistros > 0) : ?>
+     
       <div class="lineaListados">
         <?php if($pager->haveToPaginate()): ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
 	   <?php endif; ?>
-
+       
         <h2 class="grupo" style="float:left; line-height:30px; width:auto; border:none;">&nbsp;</h2>
         <span style="float: left;" class="info">Hay <?php echo $cantidadRegistros ?> Grupo/s</span>
         <?php if(validate_action('alta')):?>

@@ -129,6 +129,7 @@ class normativasActions extends sfActions
 		$this->CatNormBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcatnormativa');;
 		$this->SubNormBsq1 = $this->getRequestParameter('normativa[subcategoria_normativa_uno_id]')?$this->getRequestParameter('normativa[subcategoria_normativa_uno_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatnormativa1');;
 		$this->SubNormBsq2 = $this->getRequestParameter('normativa[subcategoria_normativa_dos_id]')?$this->getRequestParameter('normativa[subcategoria_normativa_dos_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatnormativa2');;
+		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 		
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
@@ -158,6 +159,10 @@ class normativasActions extends sfActions
 			$parcial .= " AND subcategoria_normativa_dos_id = $this->SubNormBsq2";
 			$this->getUser()->setAttribute($modulo.'_nowsubcatnormativa2', $this->SubNormBsq2);
 		}
+		if (!empty($this->contenidoBsq)) {
+			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
+		}
 
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
@@ -171,6 +176,7 @@ class normativasActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatnormativa');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa1');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa2');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
@@ -180,6 +186,7 @@ class normativasActions extends sfActions
 				$this->CatNormBsq = $this->getUser()->getAttribute($modulo.'_nowcatnormativa');
 				$this->SubNormBsq1 = $this->getUser()->getAttribute($modulo.'_nowsubcatnormativa1');
 				$this->SubNormBsq2 = $this->getUser()->getAttribute($modulo.'_nowsubcatnormativa2');
+				$this->contenidoBsq = $this->getUser()->getAttribute($modulo.'_nowcontenido');
 				
 			}
 		}
@@ -192,6 +199,7 @@ class normativasActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatnormativa');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa1');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatnormativa2');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			$parcial="";
 			$this->cajaBsq = "";
 			$this->desdeBsq = '';
@@ -200,6 +208,7 @@ class normativasActions extends sfActions
 			$this->CatNormBsq = '';
 			$this->SubNormBsq1 = '';
 			$this->SubNormBsq2 = '';
+			$this->contenidoBsq = '';
 		}
 		return 'deleted=0'.$parcial;
   }
