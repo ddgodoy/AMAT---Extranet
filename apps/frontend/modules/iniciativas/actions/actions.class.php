@@ -137,6 +137,7 @@ class iniciativasActions extends sfActions
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda')?$this->getRequestParameter('hasta_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechahasta');
 		$this->CatInicBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcatiniciativa');
 		$this->SubIniBsq = $this->getRequestParameter('iniciativa[subcategoria_iniciativa_id]')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowsubcatiniciativa');
+		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
@@ -158,6 +159,10 @@ class iniciativasActions extends sfActions
 			$parcial .= " AND subcategoria_iniciativa_id = $this->SubIniBsq";
 			$this->getUser()->setAttribute($modulo.'_nowsubcatiniciativa', $this->SubIniBsq);
 		}	
+		if (!empty($this->contenidoBsq)) {
+			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
+		}
 
 			
 		if (!empty($parcial)) {
@@ -170,6 +175,7 @@ class iniciativasActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfechahasta');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatiniciativa');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatiniciativa');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
@@ -177,6 +183,7 @@ class iniciativasActions extends sfActions
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowfechahasta');
 				$this->CatInicBsq = $this->getUser()->getAttribute($modulo.'_nowcatiniciativa');
 				$this->SubIniBsq = $this->getUser()->getAttribute($modulo.'_nowsubcatiniciativa');
+				$this->contenidoBsq = $this->getUser()->getAttribute($modulo.'_nowcontenido');
 			}
 		}
 		if ($this->hasRequestParameter('btn_quitar')){
@@ -186,12 +193,14 @@ class iniciativasActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfechahasta');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatiniciativa');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubcatiniciativa');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			$parcial="";
 			$this->cajaBsq = "";
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
 			$this->CatInicBsq = '';
 			$this->SubIniBsq = '';
+			$this->contenidoBsq = '';
 		}
 		return 'deleted=0'.$parcial;
   }
