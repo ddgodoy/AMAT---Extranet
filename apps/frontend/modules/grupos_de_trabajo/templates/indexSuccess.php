@@ -125,12 +125,13 @@
 
 	<?php if ($cantidadRegistros > 0) : ?>
      
+
       <div class="lineaListados">
         <?php if($pager->haveToPaginate()): ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
 	   <?php endif; ?>
        
-        <h2 class="grupo" style="float:left; line-height:30px; width:auto; border:none;">&nbsp;</h2>
+        <h2 class="grupo" style="float:left; height:30px; line-height:30px; width:auto; border:none;">&nbsp;</h2>
         <span style="float: left;" class="info">Hay <?php echo $cantidadRegistros ?> Grupo/s</span>
         <?php if(validate_action('alta')):?>
         <input type="button" class="boton" name="newNews" value="Crear Nuevo Grupo" style="float: right;" onclick="javascript:location.href='<?php echo url_for('grupos_de_trabajo/nueva') ?>';"/>
