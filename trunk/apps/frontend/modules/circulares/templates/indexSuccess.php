@@ -135,6 +135,14 @@
 					</td>
 					</tr>					
 					<tr>
+					<td><label>Contenido:</label></td>
+					<td valign="middle">
+						<?php echo input_tag('contenido_busqueda',
+					     $contenidoBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:70%;','class'=>"form_input"))?>
+					</td>
+				    </tr>
+
+					<tr>
 					<td><label>Fecha Desde:</label></td>
 					<td valign="middle">
 						<?php echo input_tag('desde_busqueda',
