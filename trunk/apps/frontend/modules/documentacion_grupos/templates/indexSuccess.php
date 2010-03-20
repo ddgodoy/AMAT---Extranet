@@ -165,7 +165,7 @@
 					<tr>
 						<td style="padding-top:5px;"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></td>
 						<td>
-						  <?php if ($cajaBsq || $grupoBsq || $categoriaBsq || $estadoBsq): ?>
+						  <?php if ($cajaBsq || $grupoBsq || $categoriaBsq || $estadoBsq || $contenidoBsq): ?>
 								<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif; ?>
 						</td>
