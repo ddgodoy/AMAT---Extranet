@@ -168,6 +168,7 @@ class circularesActions extends sfActions
 		$this->SelectSubTemaBsq = $this->getRequestParameter('select_sub_tema')?$this->getRequestParameter('select_sub_tema'):$this->getUser()->getAttribute($modulo.'_nowsubtema');
 		$this->SelectCatOrganismoBsq = $this->getRequestParameter('categoria_organismo_id')? $this->getRequestParameter('categoria_organismo_id'):$this->getUser()->getAttribute($modulo.'_nowcatorganismo');
 		$this->SelectSubOrganismoBsq = $this->getRequestParameter('circular[subcategoria_organismo_id]')?$this->getRequestParameter('circular[subcategoria_organismo_id]'):$this->getUser()->getAttribute($modulo.'_nowsuborganismo') ;
+		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 		
 		if ($this->nBsq!='') {
 			$parcial .= " AND numero = $this->nBsq";
@@ -201,6 +202,12 @@ class circularesActions extends sfActions
 			$parcial .= " AND subcategoria_organismo_id = $this->SelectSubOrganismoBsq";
 			$this->getUser()->setAttribute($modulo.'_nowsuborganismo', $this->SelectSubOrganismoBsq);
 		}
+		if (!empty($this->contenidoBsq)) {
+			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
+		}
+
+
 		###### set atributos ########
 		
 		if (!empty($parcial)) {
@@ -216,6 +223,7 @@ class circularesActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubtema');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatorganismo');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsuborganismo');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->nBsq = $this->getUser()->getAttribute($modulo.'_nownumero');
@@ -226,6 +234,7 @@ class circularesActions extends sfActions
 				$this->SelectSubTemaBsq = $this->getUser()->getAttribute($modulo.'_nowsubtema');
 				$this->SelectCatOrganismoBsq = $this->getUser()->getAttribute($modulo.'_nowcatorganismo');
 				$this->SelectSubOrganismoBsq = $this->getUser()->getAttribute($modulo.'_nowsuborganismo');
+				$this->contenidoBsq = $this->getUser()->getAttribute($modulo.'_nowcontenido');
 				
 			}
 		}
@@ -239,6 +248,7 @@ class circularesActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsubtema');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcatorganismo');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowsuborganismo');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			$parcial="";
 			$this->nBsq = '';
 			$this->cajaBsq = '';
@@ -248,6 +258,7 @@ class circularesActions extends sfActions
 			$this->SelectSubTemaBsq = '';
 			$this->SelectCatOrganismoBsq = '';
 			$this->SelectSubOrganismoBsq = '';
+			$this->contenidoBsq = '';
 		}
 		
 		$this->arrayCategoriasTema = CircularTable::doSelectAllCategorias('CircularCatTema');
