@@ -145,6 +145,14 @@
 						</td>
 					</tr>
 					<tr>
+					<td><label>Contenido:</label></td>
+					<td valign="middle">
+						<?php echo input_tag('contenido_busqueda',
+					     $contenidoBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:70%;','class'=>"form_input"))?>
+					</td>
+				    </tr>
+
+					<tr>
 					<td width="29%"><label>Consejos Territoriales:</label></td>
 						<td>
 							  <?php  echo select_tag('consejo',
