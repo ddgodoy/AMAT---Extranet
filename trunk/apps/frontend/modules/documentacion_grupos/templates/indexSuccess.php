@@ -139,6 +139,15 @@
 					<td width="29%"><label>T&iacute;tulo:</label></td>
 						<td><input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/></td>
 					</tr>
+
+					<tr>
+					<td><label>Contenido:</label></td>
+					<td valign="middle">
+						<?php echo input_tag('contenido_busqueda',
+					     $contenidoBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:70%;','class'=>"form_input"))?>
+					</td>
+				    </tr>
+
 					<tr>
 						<td width="29%"><label>Grupo de trabajo:</label></td>
 						<td><?php echo select_tag('grupo', options_for_select(array('0'=>'--Seleccionar--')+ _get_options_from_objects(GrupoTrabajoTable::getGruposTrabajoByUsuario($sf_user->getAttribute('userId'))),$grupoBsq),array('style'=>"width:150px;"))?></td>
