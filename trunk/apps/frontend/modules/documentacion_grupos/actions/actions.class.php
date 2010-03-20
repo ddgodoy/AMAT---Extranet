@@ -12,7 +12,7 @@ class documentacion_gruposActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	  $guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
+  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'));
   	
   	  	$this->paginaActual = $this->getRequestParameter('page', 1);
 
@@ -25,7 +25,6 @@ class documentacion_gruposActions extends sfActions
 		->from('DocumentacionGrupo')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
-		
 		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
@@ -191,6 +190,7 @@ class documentacion_gruposActions extends sfActions
 		$this->grupoBsq = $this->getRequestParameter('grupo');
 		$this->categoriaBsq = $this->getRequestParameter('categoria_busqueda');
 		$this->estadoBsq = $this->getRequestParameter('estado_busqueda');
+		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 		
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
@@ -208,6 +208,10 @@ class documentacion_gruposActions extends sfActions
 			$parcial .= " AND estado = '$this->estadoBsq' ";
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
 		}
+		if (!empty($this->contenidoBsq)) {
+			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
+		}
 		
     if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
@@ -218,12 +222,14 @@ class documentacion_gruposActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowgrupo');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcategoria');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
 				$this->grupoBsq = $this->getUser()->getAttribute($modulo.'_nowgrupo');
 				$this->categoriaBsq = $this->getUser()->getAttribute($modulo.'_nowcategoria');
 				$this->estadoBsq = $this->getUser()->getAttribute($modulo.'_nowestado');
+				$this->contenidoBsq = $this->getUser()->getAttribute($modulo.'_nowcontenido');
 			}
 		} 
 		
@@ -233,11 +239,13 @@ class documentacion_gruposActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowgrupo');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcategoria');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			$parcial="";
 			$this->cajaBsq = "";
 			$this->grupoBsq = '';
 			$this->categoriaBsq = '';
 			$this->estadoBsq = '';
+			$this->contenidoBsq = '';
 		}
 		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
 		if($gruposdetrabajo)
