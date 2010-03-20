@@ -115,7 +115,7 @@
 				<div class="mensajeSistema comun">No hay Consejos registrados</div>
 			<?php endif; ?>
 		<?php endif; ?>
-
+<br>
 		<?php if ($cantidadRegistros > 0) : ?>
 		 <div class="lineaListados">
 	        <?php if($pager->haveToPaginate()): ?>
