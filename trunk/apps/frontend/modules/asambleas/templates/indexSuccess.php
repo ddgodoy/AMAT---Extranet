@@ -72,7 +72,7 @@
       <tr class="<?php echo $odd ?>">
         <td><?php echo date("d/m/Y", strtotime($convocatoria->getAsamblea()->getFecha())) ?></td>   
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><strong><?php echo $convocatoria->getAsamblea()->getTitulo() ?></strong></a></td>
-         <td><?php echo date("H:i", strtotime($convocatoria->getAsamblea()->getHorario())) ?></td>     
+         <td><?php echo $convocatoria->getAsamblea()->getHorario() ?></td>     
         <td><?php echo $convocatoria->getAsamblea()->getDireccion() ?></td>
         <td><span class="estatus <?php echo $convocatoria->getEstado() ?>" href="#"><?php echo ucwords($convocatoria->getEstado()) ?></span></td>
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>">M&aacute;s Informaci&oacute;n</a></td>
