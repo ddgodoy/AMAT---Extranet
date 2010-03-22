@@ -86,7 +86,7 @@ else
 						<?php endif;?>
 					</td>
 					<td valign="center" align="center">
-					<?php if(validate_action('listar')):?>
+					<?php if(validate_action('modificar') || $valor->getOwnerId() == $sf_user->getAttribute('userId') ):?>
 						<a href="<?php echo url_for('archivos_c_t/editar?id=' . $valor->getId()) ?>">
 							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?>
 						</a>
