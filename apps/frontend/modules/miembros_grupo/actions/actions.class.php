@@ -24,7 +24,9 @@ class miembros_grupoActions extends sfActions
 								->from('UsuarioGrupoTrabajo ug')
 								->leftJoin('ug.Usuario u')
 								->leftJoin('ug.GrupoTrabajo g')
+								->leftJoin('u.UsuarioRol ur')
 								->where('ug.usuario_id != '.$this->getUser()->getAttribute('userId'))
+								->addWhere('ur.rol_id = 4')
 								->andWhere($this->setFiltroBusqueda());
 
 		if ($gruposdetrabajo) {

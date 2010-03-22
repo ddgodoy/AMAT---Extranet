@@ -22,9 +22,6 @@ class noticiasActions extends sfActions
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
-//		echo $this->pager->getQuery()->getSql();
-//		exit();
-		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
