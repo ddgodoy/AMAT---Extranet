@@ -12,7 +12,7 @@ class documentacion_gruposActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'));
+  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
   	
   	  	$this->paginaActual = $this->getRequestParameter('page', 1);
 
