@@ -102,7 +102,7 @@
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea" class="boton"/>
     </div>
-    <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="javascript:window.history.back();"/>
+    <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('asambleas/index') ?>';"/>
  </div><!-- cierra div left-side	-->   
     
     
