@@ -20,3 +20,7 @@
   # no, so we redirect to our front web controller
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
+
+
+php_value magic_quotes_gpc 0
+php_value register_globals 0
