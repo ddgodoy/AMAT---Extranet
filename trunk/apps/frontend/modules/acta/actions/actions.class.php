@@ -217,7 +217,15 @@ protected function setFiltroBusqueda()
 			$this->cajaBsq = "";
 			$this->grupodetrabajoBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return "a.deleted=0 AND a.nombre != '' ".$parcial;
+		}
+		else 
+		{
+			return "a.deleted=0 AND am.fecha_caducidad >= NOW() AND a.nombre != '' ".$parcial;
+		}	
   }
   
   protected function setOrdenamiento()
