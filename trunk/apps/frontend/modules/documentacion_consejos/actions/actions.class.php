@@ -136,7 +136,7 @@ class documentacion_consejosActions extends sfActions
 					$email = AplicacionRolTable::getEmailPublicar('28','',$grupo->getId());
 					$tema = 'Documento pendiente de publicar para Consejo Territorial: '.$grupo->getNombre();
 				}	
-			## envia el email tendria que haber echo un servicio 
+			## envia el email
 			if ($enviar) {
 				foreach ($email AS $emailPublic) {
 						

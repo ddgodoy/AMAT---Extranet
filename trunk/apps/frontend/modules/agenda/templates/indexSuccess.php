@@ -5,6 +5,7 @@
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
 <div class="mapa">
 	<strong>Canal Corporativo</strong> &gt; Agenda de Eventos
+</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
@@ -105,8 +106,5 @@
 				</form>
 			</div>
 		</div>
-	</div>
-	<br clear="all" />
-</div>
+
 <br clear="all" />
-</div>

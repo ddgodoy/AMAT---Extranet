@@ -12,49 +12,36 @@ class miembros_consejoActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-//		$this->forward404Unless( $usuario = Doctrine::getTable('Usuario')->find(sfContext::getInstance()->getUser()->getAttribute('userId')) , sprintf('Object usuario does not exist.'));
-//		
-//		$this->usuario_list = $miembros =$usuario->UsuariosdeMisGrupos();
-//
-//		$this->cantidadRegistros = count($miembros);
-//		$this->setFiltroBusqueda();
-     
-         $this->paginaActual = $this->getRequestParameter('page', 1);
-         if (is_numeric($this->paginaActual)) {
+    $this->paginaActual = $this->getRequestParameter('page', 1);
+
+    if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
+		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'), 1);
 
-         $consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
-         
-            $this->pager = new sfDoctrinePager('Usuario', 10);  	    
-			$this->pager->getQuery()
-			->from('UsuarioConsejoTerritorial uc')
-			->leftJoin('uc.Usuario u')
-			->leftJoin('uc.ConsejoTerritorial c')
-			->where('uc.usuario_id != '.$this->getUser()->getAttribute('userId'));
-			if($consejosterritoriales)
-            { 
-			  $this->pager->getQuery()->andWhere('uc.consejo_territorial_id IN '.$consejosterritoriales);
-            }  
-			$this->pager->getQuery()->andWhere($this->setFiltroBusqueda())
-			->orderBy($this->setOrdenamiento())
-			->groupBy('uc.usuario_id');
-			$this->pager->setPage($this->paginaActual);
-			$this->pager->init();
-	
-			$this->usuario_list = $this->pager->getResults();
-			$this->cantidadRegistros = $this->pager->getNbResults();
-       
-            if($this->consejoBsq )
-			{
-			  $this->Consejo = ConsejoTerritorialTable::getConsejo($this->consejoBsq);
-			}
-			else 
-			{
-			  $this->Consejo = '';
-			}
+		$this->pager = new sfDoctrinePager('Usuario', 10);
+		$this->pager->getQuery()
+				 ->from('UsuarioConsejoTerritorial uc')
+				 ->leftJoin('uc.Usuario u')
+				 ->leftJoin('uc.ConsejoTerritorial c')
+				 ->leftJoin('u.UsuarioRol ur')
+				 ->where('uc.usuario_id != '.$this->getUser()->getAttribute('userId'))
+				 ->addWhere('ur.rol_id = 5');
+
+		if ($consejosterritoriales) {
+		  $this->pager->getQuery()->andWhere('uc.consejo_territorial_id IN '.$consejosterritoriales);
+		}
+		$this->pager->getQuery()->andWhere($this->setFiltroBusqueda())
+		 		 ->orderBy($this->setOrdenamiento())
+			 	 ->groupBy('uc.usuario_id');
+		$this->pager->setPage($this->paginaActual);
+		$this->pager->init();
+		
+		$this->usuario_list = $this->pager->getResults();
+		$this->cantidadRegistros = $this->pager->getNbResults();
+		$this->Consejo = $this->consejoBsq ? ConsejoTerritorialTable::getConsejo($this->consejoBsq) : '';
 	}
-	
+
 	protected function setFiltroBusqueda()
 	{
 		$parcial = '';
@@ -63,17 +50,15 @@ class miembros_consejoActions extends sfActions
 	
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->consejoBsq = $this->getRequestParameter('consejo');
-		
+
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND (u.nombre LIKE '%$this->cajaBsq%' OR u.apellido LIKE '%$this->cajaBsq%' OR u.login LIKE '%$this->cajaBsq%')";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
-	
 		if (!empty($this->consejoBsq)) {
 			$parcial .= " AND c.id = ".$this->consejoBsq ;
 			$this->getUser()->setAttribute($modulo.'_nowconsejo', $this->consejoBsq);
 		}
-
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
 		} else {
