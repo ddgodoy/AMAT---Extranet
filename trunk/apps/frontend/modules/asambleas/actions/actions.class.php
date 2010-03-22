@@ -615,14 +615,17 @@ class asambleasActions extends sfActions
 		
 		
 		foreach ($usuarios as $usuario) {
-			$convocatoria = new Convocatoria();
-			$convocatoria->setAsambleaId($this->asambleaId);
-			$convocatoria->setUsuarioId($usuario->Usuario->getId());
-			$convocatoria->setOwnerId($this->getUser()->getAttribute('userId'));
-			if ($this->getUser()->getAttribute('userId') == $usuario->Usuario->getId()) $convocatoria->setEstado('aceptada');
-			else $convocatoria->setEstado('pendiente');
-			
-			$convocatoria->save();
+			if($usuario->Usuario->getId() && $this->asambleaId)
+			{
+				$convocatoria = new Convocatoria();
+				$convocatoria->setAsambleaId($this->asambleaId);
+				$convocatoria->setUsuarioId($usuario->Usuario->getId());
+				$convocatoria->setOwnerId($this->getUser()->getAttribute('userId'));
+				if ($this->getUser()->getAttribute('userId') == $usuario->Usuario->getId()) $convocatoria->setEstado('aceptada');
+				else $convocatoria->setEstado('pendiente');
+				
+				$convocatoria->save();
+				
 			
 			ServiceAgenda::AgendaSave($asamblea->getFecha(),$asamblea->getTitulo(),$this->getUser()->getAttribute('nombre').','.$this->getUser()->getAttribute('apellido'),'asambleas/ver?id='.$asamblea->getId().'&'.$this->DAtos['get'],'0',$asamblea->getId(),$usuario->Usuario->getId());
 			
@@ -646,6 +649,8 @@ class asambleasActions extends sfActions
 				$mailer->disconnect();		
 					
 		   }
+		  
+		  }  
 					
 		}
 		
