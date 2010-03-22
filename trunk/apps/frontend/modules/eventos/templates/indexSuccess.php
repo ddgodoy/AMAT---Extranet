@@ -80,7 +80,7 @@
 		<th width="3%"></th>
 	</tr>
 	<?php $i=0; foreach ($evento_list as $evento): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-	<?php if($evento->getEstado() == 'guardado'):?>
+	<?php if($evento->getEstado() == 'guardado' || $evento->getEstado() == 'pendiente'):?>
 	<?php if($evento->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
 	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
 	<?php endif; ?>
