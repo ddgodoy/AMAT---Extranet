@@ -341,8 +341,9 @@ class Swift
 	    {
 	    	if($idusuario == '')
 	    	{
-			     throw new Exception("The recipients parameter must either be a valid string email address, ".
-		    	 "an instance of Swift_RecipientList or an instance of Swift_Address.");
+	    		 return true;
+//			     throw new Exception("The recipients parameter must either be a valid string email address, ".
+//		    	 "an instance of Swift_RecipientList or an instance of Swift_Address.");
 	    	}
 	 		else 
 	 		{  
@@ -359,8 +360,9 @@ class Swift
 	    {
 	    	if($idusuario == '')
 	    	{
-		      throw new Exception("The sender parameter must either be a valid string email address or ".
-		      "an instance of Swift_Address.");
+	    	  return true;		
+//		      throw new Exception("The sender parameter must either be a valid string email address or ".
+//		      "an instance of Swift_Address.");
 	    	}
 	    	else 
 	    	{  

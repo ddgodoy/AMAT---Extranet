@@ -17,8 +17,10 @@
 						<?php echo $Grupo->getNombre() ?>
 					</td>
 					<td valign="center" align="left">
+						<?php if($valor->getUserIdCreador()):?> 
 					    <?php $usuario = Usuario::getRepository()->findOneById($valor->getUserIdCreador())?>
 						<?php echo $usuario->getApellido().', '.$usuario->getNombre() ?>
+						<?php endif;?>
 					</td>
 					<td valign="center" align="center">
 						<?php
