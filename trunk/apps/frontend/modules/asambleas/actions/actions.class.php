@@ -615,11 +615,11 @@ class asambleasActions extends sfActions
 		
 		
 		foreach ($usuarios as $usuario) {
-			if($usuario->Usuario->getId() && $this->asambleaId)
+		if($usuario->getUsuario()->getId() && $this->asambleaId)
 			{
 				$convocatoria = new Convocatoria();
 				$convocatoria->setAsambleaId($this->asambleaId);
-				$convocatoria->setUsuarioId($usuario->Usuario->getId());
+				$convocatoria->setUsuarioId($usuario->getUsuario()->getId());
 				$convocatoria->setOwnerId($this->getUser()->getAttribute('userId'));
 				if ($this->getUser()->getAttribute('userId') == $usuario->Usuario->getId()) $convocatoria->setEstado('aceptada');
 				else $convocatoria->setEstado('pendiente');
@@ -627,11 +627,11 @@ class asambleasActions extends sfActions
 				$convocatoria->save();
 				
 			
-			ServiceAgenda::AgendaSave($asamblea->getFecha(),$asamblea->getTitulo(),$this->getUser()->getAttribute('nombre').','.$this->getUser()->getAttribute('apellido'),'asambleas/ver?id='.$asamblea->getId().'&'.$this->DAtos['get'],'0',$asamblea->getId(),$usuario->Usuario->getId());
+			ServiceAgenda::AgendaSave($asamblea->getFecha(),$asamblea->getTitulo(),$this->getUser()->getAttribute('nombre').','.$this->getUser()->getAttribute('apellido'),'asambleas/ver?id='.$asamblea->getId().'&'.$this->DAtos['get'],'0',$asamblea->getId(),$usuario->getUsuario()->getId());
 			
-			if($usuario->Usuario->getEmail())	
+			if($usuario->getUsuario()->getEmail())	
 			{	
-			    $mailTema = str_replace('ñ','n',$usuario->Usuario->getEmail());
+			    $mailTema = $usuario->getUsuario()->getEmail();
 			    $temaTi = 'Convocatoria a asamblea:'.$asamblea->getTitulo() ;
     		    $nombreEvento =  $asamblea->getTitulo() ;
     		    $descripcion = $asamblea->getContenido();
@@ -1083,7 +1083,7 @@ class asambleasActions extends sfActions
 			$arraDAtos['where']= "entidad = 'Junta_directiva_5'" ;
 			if($this->getRequestParameter('id'))
 			{
-			 $arraDAtos['usuarios'] =  UsuarioRolTable::getUserByRol(4);	
+			 $arraDAtos['usuarios'] =  UsuarioRolTable::getUserByRol(3);	
 			 $arraDAtos['Entidad']='';
 			}
 			
@@ -1100,7 +1100,7 @@ class asambleasActions extends sfActions
 			$arraDAtos['where']= "entidad = 'Otros_6'" ;
 			if($this->getRequestParameter('id'))
 			{
-			 $arraDAtos['usuarios'] =  UsuarioRolTable::getUserByRol(4);	
+			 $arraDAtos['usuarios'] =  UsuarioRolTable::getUserByRol(3);	
 			 $arraDAtos['Entidad']='';
 			}
 			
