@@ -58,8 +58,8 @@ FCKConfig.AutoGrowMax = 400 ;
 // FCKConfig.ProtectedSource.Add( /<\?[\s\S]*?\?>/g ) ;	// PHP style server side code
 // FCKConfig.ProtectedSource.Add( /(<asp:[^\>]+>[\s|\S]*?<\/asp:[^\>]+>)|(<asp:[^\>]+\/>)/gi ) ;	// ASP.Net style tags <asp:control>
 
-FCKConfig.AutoDetectLanguage	= true ;
-FCKConfig.DefaultLanguage		= 'en' ;
+FCKConfig.AutoDetectLanguage	= false ;
+FCKConfig.DefaultLanguage       = 'es' ;
 FCKConfig.ContentLangDirection	= 'ltr' ;
 
 FCKConfig.ProcessHTMLEntities	= true ;
@@ -99,12 +99,20 @@ FCKConfig.TemplateReplaceCheckbox = true ;
 FCKConfig.ToolbarLocation = 'In' ;
 
 FCKConfig.ToolbarSets["Default"] = [
-	['Source','Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
-	['OrderedList','UnorderedList'],
-	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-	//['Link','Unlink','Anchor','-','Image','Flash','Table'],
+	['Source','DocProps','-','Save','NewPage','Preview','-','Templates'],
+	['Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck'],
+	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+	['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField'],
 	'/',
-	['FontName','FontSize','-','TextColor','BGColor','Smiley']
+	['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
+	['OrderedList','UnorderedList','-','Outdent','Indent','Blockquote','CreateDiv'],
+	['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+	['Link','Unlink','Anchor'],
+	['Image','Flash','Table','Rule','Smiley','SpecialChar','PageBreak'],
+	'/',
+	['Style','FontFormat','FontName','FontSize'],
+	['TextColor','BGColor'],
+	['FitWindow','ShowBlocks','-','About']		// No comma for the last row.
 ] ;
 
 FCKConfig.ToolbarSets["Basic"] = [
@@ -145,9 +153,9 @@ FCKConfig.BrowserContextMenu = false ;
 FCKConfig.EnableMoreFontColors = true ;
 FCKConfig.FontColors = '000000,993300,333300,003300,003366,000080,333399,333333,800000,FF6600,808000,808080,008080,0000FF,666699,808080,FF0000,FF9900,99CC00,339966,33CCCC,3366FF,800080,999999,FF00FF,FFCC00,FFFF00,00FF00,00FFFF,00CCFF,993366,C0C0C0,FF99CC,FFCC99,FFFF99,CCFFCC,CCFFFF,99CCFF,CC99FF,FFFFFF' ;
 
-FCKConfig.FontFormats	= 'p;h1;h2;h3;h4;h5;h6;pre;address;div' ;
-FCKConfig.FontNames		= 'Arial;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana' ;
-FCKConfig.FontSizes		= 'smaller;larger;xx-small;x-small;small;medium;large;x-large;xx-large' ;
+FCKConfig.FontFormats	= 'h3' ;
+FCKConfig.FontNames		= 'Arial;Verdana' ;
+FCKConfig.FontSizes		= '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px' ;
 
 FCKConfig.StylesXmlPath		= FCKConfig.EditorPath + 'fckstyles.xml' ;
 FCKConfig.TemplatesXmlPath	= FCKConfig.EditorPath + 'fcktemplates.xml' ;
@@ -192,11 +200,10 @@ FCKConfig.RemoveFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,
 // Attributes that will be removed
 FCKConfig.RemoveAttributes = 'class,style,lang,width,height,align,hspace,valign' ;
 
-FCKConfig.CustomStyles =
-{
-	'Red Title'	: { Element : 'h3', Styles : { 'color' : 'Red' } }
-	'Mauro'	: { Element : 'h2', Styles : { 'color' : 'Blue' } }
-};
+//FCKConfig.CustomStyles =
+//{
+//	'Red Title'	: { Element : 'h3', Styles : { 'color' : 'Red' } }
+//};
 
 // Do not add, rename or remove styles here. Only apply definition changes.
 FCKConfig.CoreStyles =

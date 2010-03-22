@@ -26,7 +26,7 @@
       <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea" class="boton"/>
       <?php endif; ?>
     </div>
-    
+    <?php if(count($asamblea_list)>0):?>
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
       <tbody><tr>
         <th width="8%"><a href="<?php echo url_for('asambleas/lista?sort=a.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$DAtos['get']) ?>">Fecha</a></th>
@@ -94,7 +94,10 @@
       </tr>
       <?php endforeach; ?>
     </tbody></table>
-    
+    <?php else :?>
+				<div class="mensajeSistema comun">No hay registros cargados</div>
+	<?php endif; ?>
+    <?php if(count($asamblea_list)>0):?>
     <div class="lineaListados">
       <?php if($pager->haveToPaginate()): ?>
       <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
@@ -102,6 +105,7 @@
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea" class="boton"/>
     </div>
+    <?php endif; ?>
     <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('asambleas/index?'.$DAtos['get']) ?>';"/>
  </div><!-- cierra div left-side	-->   
     
