@@ -156,7 +156,7 @@
 					<td width="29%"><label>Consejos Territoriales:</label></td>
 						<td>
 							  <?php  echo select_tag('consejo',
-                options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()),$consejoBsq),
+                options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(ConsejoTerritorialTable::getConsejosTerritorialesByUsuario($sf_user->getAttribute('userId'))),$consejoBsq),
                 array('style'=>'width:200px;'));?>
 						</td>
 					</tr>
