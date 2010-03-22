@@ -23,7 +23,7 @@
       <?php endif; ?>
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <?php if (validate_action('alta')):?>
-      <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea" class="boton"/>
+      <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea para <?php echo $DAtos['titulo']?>" class="boton"/>
       <?php endif; ?>
     </div>
     <?php if(count($asamblea_list)>0):?>
@@ -103,7 +103,7 @@
       <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
       <?php endif; ?>
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
-      <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea" class="boton"/>
+      <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea para <?php echo $DAtos['titulo']?>" class="boton"/>
     </div>
     <?php endif; ?>
     <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('asambleas/index?'.$DAtos['get']) ?>';"/>
