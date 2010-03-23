@@ -60,8 +60,12 @@ class Common
 	public static  function getCantidaDEguardados($clase,$usuario, $filtro='')
 	{
 		$q = Doctrine_Query::create()
-		->from($clase)
-		->where("estado = 'guardado' AND user_id_creador != ".$usuario);
+		->from($clase);
+		if($clase == 'Evento e')
+		{
+			$q->leftJoin('e.UsuarioEvento ue');
+		}
+		$q->where("estado = 'guardado' AND user_id_creador != ".$usuario);
 		if($filtro != '')
 		{
 		 $q->andWhere($filtro);	

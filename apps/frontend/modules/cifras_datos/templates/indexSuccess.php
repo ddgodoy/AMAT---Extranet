@@ -5,6 +5,29 @@
 // funcion validate_action($accion, $modulo) 
 /* ejemplo <?php if (validate_action('baja')):?> ... <?php endif; ?> */	?>
 <?php use_helper('Security') ?>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+<script language="javascript" type="text/javascript">
+	function setActionFormList(accion)
+	{
+		var parcialMensaje = '';
+		var rutaToPub = '<?php echo url_for('cifras_datos/publicar') ?>';
+		var rutaToDel = '<?php echo url_for('cifras_datos/delete') ?>';
+		var objectFrm = $('frmListDocOrganismos');
+
+		if (accion == 'publicar') {
+			objectFrm.action = rutaToPub;
+			parcialMensaje = 'publicación';
+		} else {
+			objectFrm.action = rutaToDel;
+			parcialMensaje = 'eliminación';
+		}
+		if (confirm('Confirma la '+ parcialMensaje +' de los registros seleccionados?')) {
+			return true;
+		}
+		return false;
+	}
+</script>
+
 
 <div class="mapa"><strong>Canal Corporativo</strong> > Web Amat > Cifras y Datos</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -37,9 +60,13 @@
 			<?php endif; ?> 
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
+		<form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
+					<?php if (validate_action('publicar') || validate_action('baja')): ?>
+					<th width="3%"></th>
+	      		    <?php endif;?>
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('cifras_datos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
@@ -52,6 +79,9 @@
 				</tr>
 				<?php $i=0; foreach ($cifra_dato_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
+					<?php if (validate_action('publicar') || validate_action('baja')): ?>
+						<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
+					<?php endif; ?>
 					<td valign="center" align="left">
 						<?php echo date("d/m/Y", strtotime($valor->getFecha())) ?>
 					</td>
@@ -67,15 +97,25 @@
 						</a>
 					<?php endif; ?>
 					</td>
-          <td valign="center" align="center">
-          <?php if (validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'cifras_datos/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          <?php endif; ?>
-          </td>
-				</tr>
+		          <td valign="center" align="center">
+		          <?php if (validate_action('baja')):?>
+		          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'cifras_datos/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+		          <?php endif; ?>
+		          </td>
+				 </tr>
 				<?php endforeach; ?>
+				<?php if(validate_action('publicar') || validate_action('baja')):?>
+				   <tr>
+						<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+						<td colspan="5">
+							<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>
+							<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+						</td>
+					</tr>
+			   <?php endif; ?>
 			</tbody>
 		</table>
+		
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>

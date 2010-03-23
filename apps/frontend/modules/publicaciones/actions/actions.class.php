@@ -65,20 +65,44 @@ class publicacionesActions extends sfActions
     $this->setTemplate('editar');
   }
 
-  public function executeDelete(sfWebRequest $request)
+  public function executePublicar(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($publicacion = Doctrine::getTable('Publicacion')->find($request->getParameter('id')), sprintf('Object publicacion does not exist (%s).', $request->getParameter('id')));
-    
-    sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-	
-    $publicacion->delete();
-
-    $this->redirect('publicaciones/index');
+	$this->processSelectedRecords($request, 'publicar');	
   }
 
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->processSelectedRecords($request, 'baja');
+  }
+  
+  protected function processSelectedRecords(sfWebRequest $request, $accion)
+  {
+	  	$toProcess = $request->getParameter('id');
+	  	
+	  	if (!empty($toProcess)) {
+	  		$request->checkCSRFProtection();
+	  		
+	  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+	  		
+	  		foreach ($IDs as $id) {
+	  			    $this->forward404Unless($cifra_dato = Doctrine::getTable('Publicacion')->find($id), sprintf('Object documentacion_grupo does not exist (%s).', $id));
+	  			
+	  			    sfLoader::loadHelpers('Security');
+					if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+	
+					if ($accion == 'publicar') {
+						$cifra_dato->setEstado('publicado');
+						$cifra_dato->save();
+					} else {
+						
+    					$cifra_dato->delete();
+					}		
+	  		}
+	  	}
+	 $this->redirect('publicaciones/index');
+  }
+  
+  
   protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
@@ -101,28 +125,6 @@ class publicacionesActions extends sfActions
 		$this->redirect('publicaciones/index'.$strPaginaVolver);
 	}
   }
-
- public function executePublicar(sfWebRequest $request)
-	{
-		$request->checkCSRFProtection();
-		
-		$clase = 'Publicacion';
-		$modulo = 'publicaciones';
-		
-		$this->forward404Unless($objeto = Doctrine::getTable($clase)->find($request->getParameter('id')), sprintf('Object '.$clase.' does not exist (%s).', $request->getParameter('id')));
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');		
-		
-		$objeto->setEstado('publicado');
-		$objeto->save();
-		
-		$this->getUser()->setFlash('notice', "El registro ha sido publicado correctamente");
-		
-		$this->redirect($modulo.'/show?id='.$objeto->getId());
-	}
-  
-  
 
 /* Metodos para busqueda y ordenamiento */
   
