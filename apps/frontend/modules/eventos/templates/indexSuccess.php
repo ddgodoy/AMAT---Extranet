@@ -67,13 +67,14 @@
 	   <?php if (validate_action('publicar') || validate_action('baja')): ?>
 		<th width="3%"></th>
 	   <?php endif;?>
-		<th width="11%">
+		<th width="6%">
 						<a href="<?php echo url_for('eventos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:40px;">
 							Fecha
 						</a>
 					</th>
-		<th width="22%"><a href="<?php echo url_for('eventos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Título</a></th>
-		<th width="21%"><a href="<?php echo url_for('eventos/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organizador</a></th>
+		<th width="17%"><a href="<?php echo url_for('eventos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Título</a></th>
+		<th width="16%"><a href="<?php echo url_for('eventos/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organizador</a></th>
+		<th width="15%"><?php if (validate_action('publicar') || validate_action('modificar') || validate_action('alta') ):?><a href="<?php echo url_for('eventos/index?sort=ambito&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Ambito</a><?php endif;?></th>
 		<th width="13%"><?php if (validate_action('publicar')):?><a href="<?php echo url_for('eventos/index?sort=estado&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Estado</a><?php endif;?></th>
 		<th width="3%"></th>
 		<th width="3%"></th>
