@@ -150,7 +150,7 @@
 				<tr>
 					<td style="padding-top: 5px;"><label>Ambito</label></td>
 					<td style="padding-top: 5px;">
-					<?php echo select_tag('ambito',options_for_select(array('0'=>'--seleccionar--','intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos'),$ambitoBQ),array('class'=>"form_input"))?>	
+					<?php echo select_tag('ambito',options_for_select(array('0'=>'--seleccionar--','intranet' => 'Intranet', 'web' => 'Web', 'ambos' => 'Intranet/Web'),$ambitoBQ),array('class'=>"form_input"))?>	
 				</tr>
 				<tr>
 					<td style="padding-top: 5px;"><label>Estado</label></td>
