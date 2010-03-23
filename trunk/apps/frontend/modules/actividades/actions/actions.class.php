@@ -64,21 +64,44 @@ class actividadesActions extends sfActions
 
     $this->setTemplate('editar');
   }
+  
+  public function executePublicar(sfWebRequest $request)
+  {
+	$this->processSelectedRecords($request, 'publicar');	
+  }
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($actividad = Doctrine::getTable('Actividad')->find($request->getParameter('id')), sprintf('Object actividad does not exist (%s).', $request->getParameter('id')));
-    
-    sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    
-    $actividad->delete();
-
-    $this->redirect('actividades/index');
+    $this->processSelectedRecords($request, 'baja');
   }
-
+  
+  protected function processSelectedRecords(sfWebRequest $request, $accion)
+  {
+	  	$toProcess = $request->getParameter('id');
+	  	
+	  	if (!empty($toProcess)) {
+	  		$request->checkCSRFProtection();
+	  		
+	  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+	  		
+	  		foreach ($IDs as $id) {
+	  			    $this->forward404Unless($actividad = Doctrine::getTable('Actividad')->find($id), sprintf('Object documentacion_grupo does not exist (%s).', $id));
+	  			
+	  			    sfLoader::loadHelpers('Security');
+					if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+	
+					if ($accion == 'publicar') {
+						$actividad->setEstado('publicado');
+						$actividad->save();
+					} else {
+						
+    					$actividad->delete();
+					}		
+	  		}
+	  	}
+	 $this->redirect('actividades/index');
+  }
+  
   protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
@@ -102,26 +125,6 @@ class actividadesActions extends sfActions
 	}
   }
     
-   public function executePublicar(sfWebRequest $request)
-	{
-		$request->checkCSRFProtection();
-		
-		$clase = 'Actividad';
-		$modulo = 'actividades';
-		
-		$this->forward404Unless($objeto = Doctrine::getTable($clase)->find($request->getParameter('id')), sprintf('Object '.$clase.' does not exist (%s).', $request->getParameter('id')));
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');		
-		
-		$objeto->setEstado('publicado');
-		$objeto->save();
-		
-		$this->getUser()->setFlash('notice', "El registro ha sido publicado correctamente");
-		
-		$this->redirect($modulo.'/show?id='.$objeto->getId());
-	}
-  
   /* Metodos para busqueda y ordenamiento */
   
   protected function setFiltroBusqueda()

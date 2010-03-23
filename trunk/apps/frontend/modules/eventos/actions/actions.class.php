@@ -19,12 +19,15 @@ class eventosActions extends sfActions
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-  	$this->pager = new sfDoctrinePager('Evento', 10);
+  	    $this->pager = new sfDoctrinePager('Evento', 10);
 		$this->pager->getQuery()
 		->from('Evento e')
 		->leftJoin('e.UsuarioEvento ue')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
+		
+//		echo $this->pager->getQuery()->getSql();
+//		exit();
 		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
@@ -357,20 +360,14 @@ class eventosActions extends sfActions
 			$this->estadoBq = '';
 		}
 		
-		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-	    if(!Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
-	    { 
-			$this->pager->getQuery()->andWhere("");
-	    }	
-		
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return "deleted=0".$parcial." AND ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'intranet'";
+			return "e.deleted=0".$parcial;
 		}
 		else 
 		{
-			return 'e.deleted=0 AND (e.fecha_caducidad >= NOW() OR e.fecha_caducidad IS NULL )'.$parcial;
+			return "e.deleted=0 AND (e.fecha_caducidad >= NOW() OR e.fecha_caducidad IS NULL ) AND ( ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'intranet')".$parcial;
 		}	
   }
   

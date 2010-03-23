@@ -78,20 +78,45 @@ class cifras_datosActions extends sfActions
 
     $this->setTemplate('editar');
   }
+  
+  public function executePublicar(sfWebRequest $request)
+  {
+	$this->processSelectedRecords($request, 'publicar');	
+  }
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($cifra_dato = Doctrine::getTable('CifraDato')->find($request->getParameter('id')), sprintf('Object cifra_dato does not exist (%s).', $request->getParameter('id')));
-	
-    sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    
-    $cifra_dato->delete();
-
-    $this->redirect('cifras_datos/index');
+    $this->processSelectedRecords($request, 'baja');
   }
+  
+  protected function processSelectedRecords(sfWebRequest $request, $accion)
+  {
+	  	$toProcess = $request->getParameter('id');
+	  	
+	  	if (!empty($toProcess)) {
+	  		$request->checkCSRFProtection();
+	  		
+	  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+	  		
+	  		foreach ($IDs as $id) {
+	  			    $this->forward404Unless($cifra_dato = Doctrine::getTable('CifraDato')->find($id), sprintf('Object documentacion_grupo does not exist (%s).', $id));
+	  			
+	  			    sfLoader::loadHelpers('Security');
+					if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+	
+					if ($accion == 'publicar') {
+						$cifra_dato->setEstado('publicado');
+						$cifra_dato->save();
+					} else {
+						
+    					$cifra_dato->delete();
+					}		
+	  		}
+	  	}
+	 $this->redirect('cifras_datos/index');
+  }
+  
+  
 
   protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
   {
@@ -117,26 +142,6 @@ class cifras_datosActions extends sfActions
 	}
   }
   
-  
-  public function executePublicar(sfWebRequest $request)
-	{
-		$request->checkCSRFProtection();
-		
-		$this->forward404Unless($cifra_dato = Doctrine::getTable('CifraDato')->find($request->getParameter('id')), sprintf('Object cifra_dato does not exist (%s).', $request->getParameter('id')));
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');		
-		
-		$cifra_dato->setEstado('publicado');
-		$cifra_dato->save();
-		
-		$this->getUser()->setFlash('notice', "El registro ha sido publicado correctamente");
-		
-		$this->redirect('cifras_datos/show?id='.$cifra_dato->getId());
-	}
-  
-  
-
   /* Metodos para busqueda y ordenamiento */
   
   protected function setFiltroBusqueda()

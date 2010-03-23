@@ -22,7 +22,6 @@ class inicioActions extends sfActions
 			$resultadoObj = '';
 			$filtro = 'deleted = 0'.$this->getUser()->getAttribute($request->getParameter('filtro'));
 			
-			
 			if($tabla == 'UsuarioGrupo')
 			{
 			  $usuario = Doctrine::getTable('Usuario')->find(sfContext::getInstance()->getUser()->getAttribute('userId'));
@@ -93,11 +92,21 @@ class inicioActions extends sfActions
 			     $resultadoObj = $AplicacionRol->execute();
 			}
 			
+			if($tabla == 'Evento')
+			{
+				$AplicacionRol = Doctrine_Query::create()
+				->from('Evento e')
+				->leftJoin('e.UsuarioEvento ue')
+			    ->where($filtro);
+			    
+			     $resultadoObj = $AplicacionRol->execute();
+			}
+			
 			if($tabla == 'Avisos')
 			{
 				$resultadoObj = Doctrine::getTable('Notificacion')->getUltimasNotificaciones(sfContext::getInstance()->getUser()->getAttribute('userId'));
 			}
-			if( $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+			if( $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
 				$c->from($tabla)->where($filtro);
