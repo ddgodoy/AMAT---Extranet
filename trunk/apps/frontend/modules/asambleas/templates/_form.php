@@ -87,6 +87,8 @@
 	      <input name="btn_action" value="Guardar" class="boton" id="boton_guardar" type="submit" />
 	      <input name="btn_volver" value="Anular" class="boton" id="boton_anular" type="submit" />
 	      <input name="btn_volver2" value="Convocar" class="boton" id="boton_convocar" type="submit" />
+		  <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('asambleas/index?'.$DAtos['get']) ?>';"/>
+
 	    </div>
 	</form>
 	<script>
