@@ -9,8 +9,8 @@ all:
   thumbnail_normal_height_default: 320
 
   # thumbnail cifras y datos
-  thumbnail_web_original_width_cifras_datos:   800
-  thumbnail_web_original_height_cifras_datos:  800
+  thumbnail_web_original_width_cifras_datos:   500
+  thumbnail_web_original_height_cifras_datos:  500
   thumbnail_web_small_width_cifras_datos:   120
   thumbnail_web_small_height_cifras_datos:  90
   thumbnail_web_width_cifras_datos:   250
@@ -21,8 +21,8 @@ all:
   thumbnail_normal_height_cifras_datos: 320
 
   # thumbnail actividades
-  thumbnail_web_original_width_actividades:   800
-  thumbnail_web_original_height_actividades:  800
+  thumbnail_web_original_width_actividades:   500
+  thumbnail_web_original_height_actividades:  500
   thumbnail_web_small_width_actividades:   184
   thumbnail_web_small_height_actividades:  56
   thumbnail_web_width_actividades:   120
@@ -33,8 +33,8 @@ all:
   thumbnail_normal_height_actividades: 320
 
   # thumbnail publicaciones
-  thumbnail_web_original_width_publicaciones:   800
-  thumbnail_web_original_height_publicaciones:  800
+  thumbnail_web_original_width_publicaciones:   500
+  thumbnail_web_original_height_publicaciones:  500
   thumbnail_web_small_width_publicaciones:   184
   thumbnail_web_small_height_publicaciones:  56
   thumbnail_web_width_publicaciones:   120
@@ -45,8 +45,8 @@ all:
   thumbnail_normal_height_publicaciones: 320
   
   # thumbnail noticias
-  thumbnail_web_original_width_noticias:   450
-  thumbnail_web_original_height_noticias:  450
+  thumbnail_web_original_width_noticias:   500
+  thumbnail_web_original_height_noticias:  500
   thumbnail_web_small_width_noticias:   184
   thumbnail_web_small_height_noticias:  56
   thumbnail_web_width_noticias:   120
@@ -57,8 +57,8 @@ all:
   thumbnail_normal_height_noticias: 320
 
   # thumbnail eventos
-  thumbnail_web_original_width_eventos:   800
-  thumbnail_web_original_height_eventos:  800
+  thumbnail_web_original_width_eventos:   500
+  thumbnail_web_original_height_eventos:  500
   thumbnail_web_small_width_eventos:   184
   thumbnail_web_small_height_eventos:  56
   thumbnail_web_width_eventos:   120
