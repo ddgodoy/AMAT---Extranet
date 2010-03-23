@@ -2,7 +2,8 @@
 
 all:
   default_name_project: Extranet de Asociados AMAT
-  default_from_email: info@intranet.amat.es
+  default_from_email: alertas@extranet.amat.es
+  default_from_email_comunicados: comunicados@extranet.amat.es
   
   # thumbnail default por si no se define el tamanio abajo
   thumbnail_normal_width_default:  250
