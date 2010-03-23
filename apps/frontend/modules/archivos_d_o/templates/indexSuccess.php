@@ -131,8 +131,8 @@
 			
 		</div>
 		<?php endif; ?>
-		<?php if($documentacionBsq): ?>
-		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/index') ?>';" style="float: right;" value="Volver a la Documentacion" name="newNews" class="boton"/>
+		<?php if($documentacionBsq && validate_action('listar','documentacion_organismos')): ?>
+		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/index') ?>';"  value="Volver a la Documentacion" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
 <!-- * -->
