@@ -135,6 +135,9 @@
 			
 		</div>
 		<?php endif; ?>
+		<?php if($documentacionBsq): ?>
+		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_grupos/index') ?>';" style="float: right;" value="Volver a la Documentacion" name="newNews" class="boton"/>
+		<?php endif; ?>
 	</div>
 <!-- * -->
 	<div class="rightside">
