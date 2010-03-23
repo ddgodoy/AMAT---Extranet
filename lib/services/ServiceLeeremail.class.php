@@ -30,7 +30,7 @@ class ServiceLeeremail
 		  }
 		  
 		  
-		  $pop = self::pop3php('info.intranet.amat.es','Th6ds2b7');
+		  $pop = self::pop3php('comunicados.extranet.amat.es','fD)yLt6)w@Xi');
 		  
 		  if ($pop) 
 		  {

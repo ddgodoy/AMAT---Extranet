@@ -82,7 +82,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 		', 'text/html'));
 		
 			
-		if ($mailer->send($message, $to, sfConfig::get('app_default_from_email'),$idenvio, $idusuario)) {	
+		if ($mailer->send($message, $to, sfConfig::get('default_from_email_comunicados'),$idenvio, $idusuario)) {	
 			$succes = true;
 		}
 		$mailer->disconnect();
