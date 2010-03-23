@@ -97,7 +97,7 @@
     <div class="botonera">
       <?php if (validate_action('alta')):?> <input type="submit" id="boton_guardar" class="boton" value="Guardar Pendiente" name="btn_action"/> <?php endif; ?>      
       <?php if (validate_action('publicar')):?> <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/> <?php endif; ?>
-      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('cifras_datos/index') ?>';"/>
+      <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('cifras_datos/index') ?>';"/>
     </div>
 </form>
     <?php // SCRIPTS PARA ESTADO DE PUBLICACION ?>
