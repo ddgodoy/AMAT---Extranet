@@ -102,7 +102,7 @@
     <?php if (validate_action('publicar')):?>  
       <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
     <?php endif; ?>  
-      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('publicaciones/index') ?>';"/>
+      <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('publicaciones/index') ?>';"/>
     </div>
 </form>    
 <?php if(validate_action('alta')):?>
