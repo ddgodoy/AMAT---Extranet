@@ -151,11 +151,19 @@
 					</td>
 				    </tr>
 				    <tr>
-					<td><label>Publicacion BOE:</label></td>
+					<td><label>Publicacion BOE desde:</label></td>
 					<td valign="middle">
-						<?php echo  input_tag('publicacion_busqueda',
-					     $publicacionBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:30%;','class'=>"form_input"))?>
-						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('publicacion_busqueda', this);"/>
+						<?php echo  input_tag('publicacion_busqueda_desde',
+					     $publicacionDesdeBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:30%;','class'=>"form_input"))?>
+						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('publicacion_busqueda_desde', this);"/>
+					</td>
+				    </tr>
+				    <tr>
+					<td><label>Publicacion BOE hasta:</label></td>
+					<td valign="middle">
+						<?php echo  input_tag('publicacion_busqueda_hasta',
+					     $publicacionHastaBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:30%;','class'=>"form_input"))?>
+						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('publicacion_busqueda_hasta', this);"/>
 					</td>
 				    </tr>
 				    <tr>
@@ -188,7 +196,7 @@
 							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
 						</td>
 						<td>
-						<?php if ($cajaBsq || $desdeBsq || $hastaBsq || $CatNormBsq || $SubNormBsq1 || $SubNormBsq2 || $publicacionBsq || $contenidoBsq): ?>
+						<?php if ($cajaBsq || $desdeBsq || $hastaBsq || $CatNormBsq || $SubNormBsq1 || $SubNormBsq2 || $publicacionDesdeBsq || $publicacionHastaBsq || $contenidoBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif;  ?>
 						</td>
