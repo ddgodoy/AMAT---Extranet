@@ -23,15 +23,8 @@ class eventosActions extends sfActions
 		$this->pager->getQuery()
 		->from('Evento e')
 		->leftJoin('e.UsuarioEvento ue')
-		->where($this->setFiltroBusqueda());
-		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-	    if(!Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
-	    { 
-			$this->pager->getQuery()->andWhere("ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'intranet' ");
-	    }	
-		$this->pager->getQuery()->orderBy($this->setOrdenamiento());
-		
-		
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
 		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
@@ -364,10 +357,16 @@ class eventosActions extends sfActions
 			$this->estadoBq = '';
 		}
 		
+		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+	    if(!Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+	    { 
+			$this->pager->getQuery()->andWhere("");
+	    }	
+		
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'deleted=0'.$parcial;
+			return "deleted=0".$parcial." AND ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'intranet'";
 		}
 		else 
 		{
