@@ -56,7 +56,7 @@
 		<td valign="middle">
 		<?php
 		// llamo al componente del modulo  categoria _ organismos
-		   echo include_component('categoria_organismos','listacategoria',array('name'=>'archivo_d_o'));
+		   echo include_component('categoria_organismos','listacategoria',array('categoria'=>$form['categoria_organismo_id']->getValue() ,'name'=>'archivo_d_o'));
 		?>
 		</td>
 		</tr>
