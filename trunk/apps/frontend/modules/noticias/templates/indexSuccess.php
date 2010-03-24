@@ -74,7 +74,7 @@ use_helper('Text');?>
 			<?php endif;?>	
 				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
-				<?php if($noticia->getEstado() == 'guardado' || $noticia->getEstado() == 'pendiente'):?>
+				<?php if($noticia->getEstado() == 'guardado'):?>
 				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
 				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd));?>
 				<?php endif; ?>
