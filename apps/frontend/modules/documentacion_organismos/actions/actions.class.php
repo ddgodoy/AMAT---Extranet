@@ -12,6 +12,10 @@ class documentacion_organismosActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+  	$modulo  = $this->getModuleName();
+  	$guardados = Common::getCantidaDEguardados('DocumentacionOrganismo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
+
+  	
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
@@ -25,7 +29,7 @@ class documentacion_organismosActions extends sfActions
 		$this->pager->init();
 
 		$this->documentacion_organismo_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults();
+		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
 	
 	 	if ($this->organismoBsq ) {
 			$this->Organismos = OrganismoTable::getOrganismo($this->organismoBsq);
