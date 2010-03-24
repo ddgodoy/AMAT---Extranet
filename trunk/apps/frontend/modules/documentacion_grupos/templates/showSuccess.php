@@ -14,7 +14,7 @@
 	
 	<div class="noticias">	  
 	  <a href="#" class="nottit"><?php echo  $documentacion_grupo->getNombre() ?></a><br />
-	  <?php echo $documentacion_grupo->getcontenido() ?> 
+	  <?php echo nl2br($documentacion_grupo->getcontenido()) ?> 
 	  <span class="notfecha">
 	  <?php
 		if(ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count() >= 1){ 

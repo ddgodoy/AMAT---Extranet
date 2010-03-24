@@ -18,7 +18,7 @@
 	  <?php endif;?>
 	  <a  class="nottit"><?php echo  $evento->gettitulo() ?> </a><br />
 	  <p class="notentrada"><?php echo $evento->getdescripcion() ?></p>
-	  <?php echo $evento->getmas_info() ?>      
+	  <?php echo nl2br($evento->getmas_info()) ?>      
 	  <div class="clear"></div>
 	   <?php if($evento->getdocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/eventos/docs/".$evento->getdocumento())?>" class="descargar-documento">Documento +</a> 

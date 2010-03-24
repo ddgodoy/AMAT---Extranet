@@ -20,7 +20,7 @@
 	  <?php if($iniciativa->getSubcategoriaIniciativaId()):?>
 	  <span class="notfecha">Sub-categor&iacute;a: <?php echo SubCategoriaIniciativa::getRepository()->findOneById($iniciativa->getSubcategoriaIniciativaId())->getNombre()?></span> <br />   
 	  <?php endif;?>
-	  <?php echo $iniciativa->getcontenido() ?>      
+	  <?php echo nl2br($iniciativa->getcontenido()) ?>      
 	  <div class="clear"></div>
 	  <?php if ($iniciativa->getDocumento()): ?>
 	   <a href="<?php echo url_for("/uploads/iniciativas/docs/".$iniciativa->getDocumento())?>" target="_blank" class="notentrada">Documento +</a> 

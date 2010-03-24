@@ -12,7 +12,7 @@
 
 	<div class="noticias">
 	  <p class="notentrada"><?php echo  $circular->getNombre() ?></p><br />
-	  <?php echo $circular->getContenido() ?>  
+	  <?php echo nl2br($circular->getContenido()) ?>  
 	  <?php if($circular->getdocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/circulares/docs/".$circular->getDocumento())?>" class="descargar-documento">Documento +</a> 
 	  <?php endif;?>

@@ -17,7 +17,7 @@
 	<div class="noticias">
 	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($archivo_dg->getFecha())) ?></span> <span class="notfecha">- Fecha de caducidad: <?php echo date("d/m/Y", strtotime($archivo_dg->getfecha_caducidad())) ?></span><br />     
 	  <a href="#" class="nottit"><?php echo  $archivo_dg->getNombre() ?></a><br />
-	  <?php echo $archivo_dg->getcontenido() ?>      
+	  <?php echo nl2br($archivo_dg->getcontenido()) ?>      
 	  <div class="clear"></div>
 	  <?php if($archivo_dg->getArchivo()): ?>
 	  <span class="notfecha">
