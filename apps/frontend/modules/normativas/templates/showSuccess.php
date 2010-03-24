@@ -23,7 +23,7 @@
 	  <?php // if($normativa->getSubcategoriaNormativaDosId()):?>
 	  <span class="notfecha">Sub-categor&iacute;a (nivel 2): <?php //echo SubCategoriaNormativaN2::getRepository()->findOneById($normativa->getSubcategoriaNormativaDosId())->getNombre()?></span> <br />   
 	  <?php //endif;?>-->
-	  <?php echo $normativa->getcontenido() ?>      
+	  <?php echo nl2br($normativa->getcontenido()) ?>      
 	  <div class="clear"></div>
 	  <br clear="all">
 	   <?php if($normativa->getDocumento()):?>   

@@ -18,7 +18,7 @@
     <span class="subtitulo">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($asamblea->Asamblea->getFechaCaducidad())) ?></span><br />
     <div class="noticias">
     <strong class="subtitulo">Contenido:</strong><br />
-    <div><?php echo $asamblea->Asamblea->getContenido() ?>
+    <div><?php echo nl2br($asamblea->Asamblea->getContenido()) ?>
     <br /><br />
     <span class="notfecha">Convocado por: <?php echo $user->getNombre().','.$user->getApellido()?></span><br />
     <span class="notfecha">Fecha de asamblea: <?php echo date("d/m/Y", strtotime($asamblea->Asamblea->getFecha())) ?></span><br />

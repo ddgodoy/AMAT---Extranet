@@ -15,7 +15,7 @@
 	<div class="noticias">
 	  <img src="<?php if ($publicacion->getImagen()): ?>/uploads/publicaciones/images/<?php echo $publicacion->getImagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $publicacion->getTitulo() ?>" />
 	  <a href="#" class="nottit"><?php echo  $publicacion->getTitulo() ?></a><br />
-	  <?php echo $publicacion->getcontenido() ?>     
+	  <?php echo nl2br($publicacion->getcontenido()) ?>     
 	   <?php if($publicacion->getUserIdCreador()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($publicacion->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($publicacion->getCreatedAt())?></span><br /> 
 	  <?php endif;?>

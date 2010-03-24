@@ -14,7 +14,7 @@
 	
 	<div class="noticias">	  
 	  <a href="#" class="nottit"><?php echo  $documentacion_consejo->getNombre() ?></a><br />
-	  <?php echo $documentacion_consejo->getcontenido() ?>   
+	  <?php echo nl2br($documentacion_consejo->getcontenido()) ?>   
 	  <br />  
 	  <span class="notfecha">
 	  <?php
