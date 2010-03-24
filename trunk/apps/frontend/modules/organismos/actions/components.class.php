@@ -12,6 +12,6 @@ class organismosComponents extends sfComponents
 	public function executeListaorganismos(sfWebRequest $request)
 	{
 		$this->organismos_selected = 0;
-		$this->arrayOrganismo = OrganismoTable::doSelectByOrganismoa($this->getRequestParameter('subcategoria_organismos'));
+		$this->arrayOrganismo = OrganismoTable::doSelectByOrganismoa($this->getRequestParameter('subcategoria_organismos'),$this->getUser()->getAttribute('userId'));
 	}
 }

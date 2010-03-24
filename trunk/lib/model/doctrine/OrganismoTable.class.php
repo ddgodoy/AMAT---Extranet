@@ -17,12 +17,24 @@ class OrganismoTable extends Doctrine_Table
 		return $categorias;
 	}
 	
-	public static function doSelectByOrganismoa($id_subcategoria)
+	public static function doSelectByOrganismoa($id_subcategoria,$userId='')
 	{
-		$s=Doctrine_Query::create()
-		->from('Organismo')
-		->where('subcategoria_organismo_id = '.$id_subcategoria)
-		->andWhere('deleted = 0');
+		if($userId == '')
+		{
+			$s=Doctrine_Query::create()
+			->from('Organismo')
+			->where('subcategoria_organismo_id = '.$id_subcategoria)
+			->andWhere('deleted = 0');
+		}
+		else 
+		{
+			$s=Doctrine_Query::create()
+			->from('Organismo o')
+			->leftJoin('o.UsuarioOrganismo uo')
+			->where('o.subcategoria_organismo_id = '.$id_subcategoria)
+			->addWhere('uo.usuario_id = '.$userId)
+			->andWhere('o.deleted = 0');
+		}
 		
 		$subcategorias = $s->execute();
 		
