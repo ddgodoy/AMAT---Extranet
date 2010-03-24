@@ -238,7 +238,7 @@ class archivos_d_oActions extends sfActions
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
 		if($organismos)
 		{
-		   return 'deleted=0'.$parcial; //.' AND organismo_id IN '.$organismos;
+		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
 		} 
 		else 
 		{
