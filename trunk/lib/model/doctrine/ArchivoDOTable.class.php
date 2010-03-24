@@ -23,6 +23,7 @@ class ArchivoDOTable extends Doctrine_Table
 		$s = Doctrine_Query::create();
 		$s->from('ArchivoDO');
 		$s->where('organismo_id ='.$id_organismo );
+		
 		$retorno = $s->execute();
 		
 		return  $retorno;

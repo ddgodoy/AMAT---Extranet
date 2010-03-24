@@ -19,7 +19,7 @@ class categoria_organismosComponents extends sfComponents
 		{
 		  $this->categoria_organismos_selected = 0;
 		}
-		if($this->getContext()->getActionName() == 'editar') 
+		if($this->getContext()->getActionName() == 'editar' || $this->getContext()->getActionName() == 'create' || $this->getContext()->getActionName() == 'update' ) 
 		{
 			$this->categoria_organismos_selected = $this->categoria? $this->categoria:DocumentacionOrganismoTable::getDocumentacionOrganismo($request->getParameter('id'))->getCategoriaOrganismoId();
 		}
