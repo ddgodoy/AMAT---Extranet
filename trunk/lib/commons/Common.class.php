@@ -57,15 +57,29 @@ class Common
 		return $arrayCategoriasTema;
 	}  
 	
-	public static  function getCantidaDEguardados($clase,$usuario, $filtro='')
+	public static  function getCantidaDEguardados($clase,$usuario, $filtro='',$modulo)
 	{
 		$q = Doctrine_Query::create()
 		->from($clase);
 		if($clase == 'Evento e')
 		{
 			$q->leftJoin('e.UsuarioEvento ue');
+			$q->where("e.estado = 'guardado'");
+			if(validate_action('publicar',$modulo) || validate_action('modificar',$modulo) || validate_action('baja',$modulo))
+			{
+				$q->orWhere("e.estado = 'pendiente'");
+			}	
+			$q->andWhere("e.user_id_creador != ".$usuario);
 		}
-		$q->where("estado = 'guardado'  AND user_id_creador != ".$usuario);
+		else 
+		{
+			$q->where("estado = 'guardado'");
+			if(validate_action('publicar',$modulo) || validate_action('modificar',$modulo) || validate_action('baja',$modulo))
+			{
+				$q->orWhere("estado = 'pendiente'");
+			}	
+			$q->andWhere("user_id_creador != ".$usuario);
+		}	
 		if($filtro != '')
 		{
 		 $q->andWhere($filtro);	

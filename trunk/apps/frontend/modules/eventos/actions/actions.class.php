@@ -11,8 +11,8 @@ class eventosActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		
-		$guardados = Common::getCantidaDEguardados('Evento e',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
+		$modulo  = $this->getModuleName();
+		$guardados = Common::getCantidaDEguardados('Evento e',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
 		
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
