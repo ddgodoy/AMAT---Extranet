@@ -172,7 +172,7 @@ use_helper('Text');?>
 					elseif($sf_user->getAttribute('noticias_nowestado') == 'guardado') { $guardao = 'selected';} 
 					elseif($sf_user->getAttribute('noticias_nowestado') == 'pendiente') { $pendiente = 'selected';} 
 					elseif ($sf_user->getAttribute('noticias_nowestado') == 'publicado'){ $publicado = 'selected';} 
-					if($sf_user->getAttribute('noticias_nowambito') == '') { $todosa = 'selected'; }
+					if($sf_user->getAttribute('noticias_nowambito') == 'todos') { $todosa = 'selected'; }
 					elseif($sf_user->getAttribute('noticias_nowambito') == 'intranet') { $intranet = 'selected';} 
 					elseif ($sf_user->getAttribute('noticias_nowambito') == 'web'){ $web = 'selected';} 
 					?>  
@@ -181,23 +181,26 @@ use_helper('Text');?>
 				<tr>
 				    <td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
 					<td style="padding-top: 5px;"><select name="ambito_busqueda" id="ambito_ambito">
-																				<option value="" <?php echo $todosa ?> >Intranet y Web</option>
+																				<option value="" >--seleccionar--</option>
+																				<option value="todos" <?php echo $todosa ?> >Intranet y Web</option>
 																				<option value="web" <?php echo $web ?> >web</option>
 																				<option value="intranet" <?php echo $intranet ?> >intranet</option>
 																				</select>	
 				  </td>
 				</tr>
 				<?php endif; ?>
+				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Estado:</label></td>
 					<td style="padding-top: 5px;"><select name="estado_busqueda" id="estado_busqueda">
-																				<option value="" <?php echo $todose ?>>todos</option>
+																				<option value="" >--seleccionar--</option>
 																				<option value="guardado" <?php echo $guardao ?>>guardado</option>
 																				<option value="pendiente" <?php echo $pendiente ?>>pendiente</option>
 																				<option value="publicado" <?php echo $publicado ?>>publicado</option>
 																				</select>	
 				  </td>
 				</tr>
+				<?php endif; ?>
 				<tr>
 					<td style="padding-top:5px;" >
 						<span class="botonera"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></span>

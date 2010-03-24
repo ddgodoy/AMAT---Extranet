@@ -156,12 +156,14 @@
 						<td width="29%"><label>Categor&iacute;a:</label></td>
 						<td><?php echo select_tag('categoria_busqueda',options_for_select(array('0'=>'--Seleccionar--')+ _get_options_from_objects(CategoriaDGTable::getAllcategoria()),$categoriaBsq),array('style'=>"width:150px;"))?></td>
 					</tr>
+					<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 					<tr>
 						<td style="padding-top: 5px;"><label>Estado:</label></td>
 						<td style="padding-top: 5px;">
 							<?php echo select_tag('estado_busqueda',options_for_select(array('0'=>'--Seleccionar--','guardado'=>'Guardado','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
 				  	</td>
 					</tr>
+					<?php endif; ?> 
 					<tr>
 						<td style="padding-top:5px;"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></td>
 						<td>

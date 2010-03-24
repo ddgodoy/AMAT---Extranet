@@ -169,12 +169,14 @@
                 array('style'=>'width:200px;'));?>
 						</td>
 					</tr>
+					<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 					<tr>
 						<td style="padding-top: 5px;"><label>Estado:</label></td>
 						<td style="padding-top: 5px;">
 							<?php echo select_tag('estado_busqueda',options_for_select(array('0'=>'--Seleccionar--','guardado'=>'Guardado','pendiente'=>'Pendiente','publicado'=>'Publicado'),$estadoBsq),array('style'=>"width:150px;"))?>
 				  	</td>
 					</tr>
+					<?php endif; ?>
 				<tr><td height="5"></td></tr>
 				<tr>
 						<td>
