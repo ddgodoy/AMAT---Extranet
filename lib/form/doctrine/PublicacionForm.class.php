@@ -15,7 +15,7 @@ class PublicacionForm extends BasePublicacionForm
 		$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
 		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
 		$mutuas = Mutua::getArrayMutuas(); 
-		$estado  = 'pendiente';
+		$estado  = 'publicado';
 
 		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
