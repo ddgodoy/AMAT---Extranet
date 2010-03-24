@@ -15,19 +15,36 @@
 
 <?php 
 // datos que son utiles para los partial
+
+$verSubcategoria = '';
+$verOrganisamos = '';
+$verDocumentacion = '';
+$idSubcategoria = '';
+$idOrganismos = '';
+$idDocumentacion = '';
+
+
+if($sf_context->getActionName() == 'create'){
+    $verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($form['categoria_organismo_id']->getValue());
+    $idSubcategoria = $form['subcategoria_organismo_id']->getValue();
+    $verOrganisamos = OrganismoTable::doSelectByOrganismoa($form['subcategoria_organismo_id']->getValue());
+    $idOrganismos = $form['organismo_id']->getValue();
+    $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($form['organismo_id']->getValue());
+    $idDocumentacion = $form['documentacion_organismo_id']->getValue(); 
+}    
+
 include_partial(
 		'form',
 		array
 		(
 			'form' => $form,
-			'pageActual' => 1,	
-			'arraySubcategoria'=> array(),
-			'arrayOrganismo'=> array(),
-			'arrayDocumentacion' => array(),
-			'verSubcategoria'=> 0,
-			'subcategoria_organismos_selected'  => 0,
-			'organismos_selected'=> 0,
-			'documentacion_selected'=>0,
-			'verLadocumentacion' => $verLadocumentacion
+			'pageActual' => 1,		
+			'arraySubcategoria'=> $verSubcategoria?$verSubcategoria:array(),
+			'arrayOrganismo'=> $verOrganisamos?$verOrganisamos:array(),
+			'arrayDocumentacion'=> $verDocumentacion?$verDocumentacion:array(),
+			'subcategoria_organismos_selected'=> $idSubcategoria,
+			'organismos_selected'  => $idOrganismos,
+			'documentacion_selected' => $idDocumentacion,
+			'verLadocumentacion' => 1
 		));
 ?>

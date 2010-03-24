@@ -19,7 +19,9 @@ class archivos_d_oActions extends sfActions
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	    $this->pager = new sfDoctrinePager('ArchivoDO', 20);
-	$this->pager->getQuery()->from('ArchivoDO')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('ArchivoDO')
+	->where($this->setFiltroBusqueda())
+	->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 	
@@ -54,6 +56,7 @@ class archivos_d_oActions extends sfActions
 
     $this->processForm($request, $this->form);
 
+    
     $this->setTemplate('nueva');
   }
 
@@ -65,7 +68,7 @@ class archivos_d_oActions extends sfActions
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
     $this->idOrganismos = $archivo_do->getOrganismoId();
-    $this->verDocumentacion = ArchivoDOTable::doSelectArchivos($this->idOrganismos);
+    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos);
     $this->idDocumentacion = $archivo_do->getDocumentacionOrganismoId();
    
   }
@@ -75,6 +78,12 @@ class archivos_d_oActions extends sfActions
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($archivo_do = Doctrine::getTable('ArchivoDO')->find($request->getParameter('id')), sprintf('Object archivo_do does not exist (%s).', $request->getParameter('id')));
     $this->form = new ArchivoDOForm($archivo_do);
+    $this->verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($archivo_do->getCategoriaOrganismoID());
+    $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
+    $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
+    $this->idOrganismos = $archivo_do->getOrganismoId();
+    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos);
+    $this->idDocumentacion = $archivo_do->getDocumentacionOrganismoId();
 
     $this->processForm($request, $this->form);
 
@@ -102,11 +111,11 @@ class archivos_d_oActions extends sfActions
 	    if ($form->isValid())
 	    {	    	
 	    	
-	    	$dato=Doctrine::getTable('ArchivoDO')->find($request->getParameter('id'));
-		
-			if ($form->getValue('archivo_delete') && $dato->getArchivo()) {
-		    	$dato->eliminarDocumento();
-		    }
+//	    	$dato=Doctrine::getTable('ArchivoDO')->find($request->getParameter('id'));
+//		
+//			if ($form->getValue('archivo_delete') && $dato->getArchivo()) {
+//		    	$dato->eliminarDocumento();
+//		    }
 			    	
 	    	$archivo_do = $form->save();  
 	    	
@@ -128,7 +137,7 @@ class archivos_d_oActions extends sfActions
 	      	$archivo_do->save();
 	       }	
 	       
-	       $this->getUser()->setFlash('notice', 'ElArchivo ha sido actualizado correctamente');
+	       $this->getUser()->setFlash('notice', 'El Archivo ha sido actualizado correctamente');
 	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId());
 		    	
 		 }
@@ -229,7 +238,7 @@ class archivos_d_oActions extends sfActions
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
 		if($organismos)
 		{
-		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
+		   return 'deleted=0'.$parcial; //.' AND organismo_id IN '.$organismos;
 		} 
 		else 
 		{
