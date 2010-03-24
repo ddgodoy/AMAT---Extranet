@@ -98,7 +98,7 @@
     ?>  
       <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
      <?php endif; ?> 
-      <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_grupos/index') ?>';"/>
+      <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/index') ?>';"/>
     </div>
  </form> 
 <?php if(validate_action('alta')):?>

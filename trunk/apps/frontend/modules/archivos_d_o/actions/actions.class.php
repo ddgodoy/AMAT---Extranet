@@ -104,9 +104,9 @@ class archivos_d_oActions extends sfActions
 	    	
 	    	$dato=Doctrine::getTable('ArchivoDO')->find($request->getParameter('id'));
 		
-				if ($form->getValue('archivo_delete') && $dato->getArchivo()) {
-			    	$dato->eliminarDocumento();
-			    }
+			if ($form->getValue('archivo_delete') && $dato->getArchivo()) {
+		    	$dato->eliminarDocumento();
+		    }
 			    	
 	    	$archivo_do = $form->save();  
 	    	
@@ -127,9 +127,11 @@ class archivos_d_oActions extends sfActions
 	       {
 	      	$archivo_do->save();
 	       }	
+	       
+	       $this->getUser()->setFlash('notice', 'ElArchivo ha sido actualizado correctamente');
 	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId());
 		    	
-		     }
+		 }
 	       
   }
   
