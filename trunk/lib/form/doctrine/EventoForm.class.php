@@ -20,6 +20,7 @@ class EventoForm extends BaseEventoForm
 		$arrUsuarios = $usuario->UsuariosdeMisGrupos();
 		$arrUsuariosGrupo = array(); 
 		$arrUsuariosGrupo[$usurID] = $apellidoUser.", ".$nombreUser; 
+		$mutuas = Mutua::getArrayMutuas(); 
 
 		foreach ($arrUsuarios AS $usuario) {
 			$arrUsuariosGrupo [$usuario->getId()] = $usuario->getApellido().", ".$usuario->getNombre();
@@ -39,7 +40,9 @@ class EventoForm extends BaseEventoForm
 			'ambito'          => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'ambos' => 'ambos')), array('class' => 'form_input', 'style' => 'width:400px;')),
 			'estado'          => new sfWidgetFormInputHidden(),
 			'owner_id'        => new sfWidgetFormInputHidden(),
-			'usuarios_list'   => new sfWidgetFormSelectDoubleList(array('choices' => $arrUsuariosGrupo, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	)
+			'usuarios_list'   => new sfWidgetFormSelectDoubleList(array('choices' => $arrUsuariosGrupo, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	),
+			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
+			
 		));
 		
 		$this->setValidators(array(
@@ -55,6 +58,7 @@ class EventoForm extends BaseEventoForm
 			'estado'          => new sfValidatorChoice(array('choices' => array('guardado' => 'guardado', 'pendiente' => 'pendiente', 'publicado' => 'publicado'), 'required' => true)),
 			'owner_id'        => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => false)),
 			'usuarios_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'Acción inválida')),
+			'mutua_id'          => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true)),
 		));
 		
 		if($this->getObject()->getImagen())
