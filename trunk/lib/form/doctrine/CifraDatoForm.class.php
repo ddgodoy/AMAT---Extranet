@@ -100,7 +100,7 @@ class CifraDatoForm extends BaseCifraDatoForm
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'autor'             => sfContext::getInstance()->getUser()->getAttribute('apellido').','.sfContext::getInstance()->getUser()->getAttribute('nombre'),
 			'fecha_publicacion' => '2007/01/01',
-			'estado'            => 'pendiente',
+			'estado'            => 'publicado',
 			'link'              => 'http://',
 			'ambito'            => 'web',));
 

@@ -13,7 +13,7 @@ class ActividadForm extends BaseActividadForm
   {
    		$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
 		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
-		$estado  = 'pendiente';
+		$estado  = 'publicado';
 		$mutuas = Mutua::getArrayMutuas(); 
 		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
 		$this->setWidgets(array(

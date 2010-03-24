@@ -97,15 +97,15 @@
     </fieldset>
     <div class="botonera">
     <?php if (validate_action('alta')):?>
-      <input type="submit" id="boton_guardar" class="boton" value="Guardar Pendiente" name="btn_action"/>
+      <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
     <?php endif; ?>
     <?php if (validate_action('publicar')):?>  
-      <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
+<!--      <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>-->
     <?php endif; ?>  
       <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('publicaciones/index') ?>';"/>
     </div>
 </form>    
-<?php if(validate_action('alta')):?>
+<!--<?php if(validate_action('alta')):?>
 <script>
 $('boton_guardar').observe('click', setPendiente);
 function setPendiente(event) {
@@ -121,4 +121,4 @@ function setPublicado(event) {
 	$('publicacion_estado').value = 'publicado';
 }
 </script>
-<?php endif;?>
+<?php endif;?>-->
