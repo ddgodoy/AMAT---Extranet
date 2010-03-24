@@ -9,6 +9,7 @@
 	    <td width="5%" align="right">&nbsp;</td>
 	  </tr>
 	</table>
+	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 	<div class="lineaListados">  
 	</div>	
 	
