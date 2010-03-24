@@ -150,7 +150,7 @@
 						</td>
 					</tr>
 				<tr>
-		<td><label> Categoría *</label></td>
+		<td><label> Categoría </label></td>
 		<td valign="middle">
 		<?php
 		// llamo al componente del modulo  categoria _ organismos
@@ -159,7 +159,7 @@
 		</td>
 		</tr>
 		<tr>
-			<td><label> Subcategoría *</label></td>
+			<td><label> Subcategoría </label></td>
 			<td valign="middle">
 			<span id="content_subcategoria">
 			<?php 
@@ -170,7 +170,7 @@
 			</td>
 		</tr>
         <tr>
-          <td><label>Organismo *</label></td>
+          <td><label>Organismo </label></td>
           <td valign="middle">
           <span id="content_organismos">              
           	<?php 
@@ -181,7 +181,7 @@
         </tr>
 
         <tr>
-          <td><label>Documentacion *</label></td>
+          <td><label>Documentacion </label></td>
           <td valign="middle">
           	<span id="content_documentacion"> 
 			<?php include_partial('documentacion_organismos/selectByOrganismo', array ('arrayDocumentacion'=>$arrayDocumentacion, 'documentacion_selected'=>$documentacion_selected, 'name'=>'archivo_d_o')) ?>

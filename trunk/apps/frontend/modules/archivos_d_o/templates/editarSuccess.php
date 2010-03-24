@@ -26,6 +26,7 @@ include_partial(
 			'arrayDocumentacion'=> $verDocumentacion,
 			'subcategoria_organismos_selected'=> $idSubcategoria,
 			'organismos_selected'  => $idOrganismos,
-			'documentacion_selected' => $idDocumentacion
+			'documentacion_selected' => $idDocumentacion,
+			'verLadocumentacion' => 1
 		));
 ?>
