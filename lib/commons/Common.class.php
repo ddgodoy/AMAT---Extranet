@@ -59,6 +59,7 @@ class Common
 	
 	public static  function getCantidaDEguardados($clase,$usuario, $filtro='',$modulo)
 	{
+		sfLoader::loadHelpers('Security');
 		$q = Doctrine_Query::create()
 		->from($clase);
 		if($clase == 'Evento e')
