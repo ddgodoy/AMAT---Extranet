@@ -304,6 +304,7 @@ class eventosActions extends sfActions
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		$this->ambitoBQ = $this->getRequestParameter('ambito');
 		$this->estadoBq = $this->getRequestParameter('estado');
+		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda');
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND e.titulo LIKE '%$this->cajaBsq%'";
@@ -325,6 +326,10 @@ class eventosActions extends sfActions
 			$parcial .= " AND e.estado = '".$this->estadoBq."'";
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBq);
 		}
+		if (!empty($this->contenidoBsq)) {
+			$parcial .= " AND e.mas_info LIKE '%$this->contenidoBsq%'";
+			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
+		}
 
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
@@ -336,6 +341,7 @@ class eventosActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowhasta');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 				$this->cajaBsq = $this->getUser()->getAttribute($modulo.'_nowcaja');
@@ -343,6 +349,7 @@ class eventosActions extends sfActions
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowhasta');
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowambito');
 				$this->estadoBq = $this->getUser()->getAttribute($modulo.'_nowestado');
+				$this->contenidoBsq = $this->getUser()->getAttribute($modulo.'_nowcontenido');
 			}
 		}
 		if ($this->hasRequestParameter('btn_quitar')){
@@ -352,12 +359,14 @@ class eventosActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowhasta');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcontenido');
 			$parcial="";
 			$this->cajaBsq = "";
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
 			$this->ambitoBQ = '';
 			$this->estadoBq = '';
+			$this->contenidoBsq = '';
 		}
 		
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);

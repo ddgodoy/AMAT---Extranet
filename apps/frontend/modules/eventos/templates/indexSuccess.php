@@ -112,7 +112,7 @@
 </table>
 </form>
 <?php else : ?>
-	<?php if ($cajaBsq != '') : ?>
+	<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $ambitoBQ || $estadoBq || $contenidoBsq) : ?>
 		<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
 	<?php else : ?>
 		<div class="mensajeSistema comun">No hay Eventos registrados</div>
@@ -140,9 +140,16 @@
 		<table width="100%" cellspacing="4" cellpadding="0" border="0">
 			<tbody>
 				<tr>
-					<td><label>Por T&iacute;tulo:</label></td>
+					<td><label>T&iacute;tulo:</label></td>
 					<td><input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:89%;" name="caja_busqueda" value="<?php echo $cajaBsq ?>" class="form_input"/></td>
 				</tr>
+				<tr>
+					<td><label>Contenido:</label></td>
+					<td valign="middle">
+						<?php echo input_tag('contenido_busqueda',
+					     $contenidoBsq,array('onblur'=>"this.style.background='#E1F3F7'","onfocus"=>"this.style.background='#D5F7FF'",'style'=>'width:70%;','class'=>"form_input"))?>
+					</td>
+				    </tr>
 				<tr>
 					<td width="29%"><label>Fecha Desde:</label></td>
 					<td width="71%" valign="middle">
@@ -174,7 +181,7 @@
 							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>	
 						</td>
 						<td>
-							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $ambitoBQ || $estadoBq ): ?>
+							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $ambitoBQ || $estadoBq || $contenidoBsq ): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif; ?>								
 						
