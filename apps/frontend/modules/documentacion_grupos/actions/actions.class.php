@@ -12,7 +12,8 @@ class documentacion_gruposActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
+  	$modulo  = $this->getModuleName();
+  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
   	
   	  	$this->paginaActual = $this->getRequestParameter('page', 1);
 

@@ -11,7 +11,8 @@ class noticiasActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda());
+		$modulo  = $this->getModuleName();
+		$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
