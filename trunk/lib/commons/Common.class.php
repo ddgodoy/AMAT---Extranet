@@ -65,7 +65,7 @@ class Common
 		{
 			$q->leftJoin('e.UsuarioEvento ue');
 		}
-		$q->where("estado = 'guardado' AND user_id_creador != ".$usuario);
+		$q->where("estado = 'guardado'  AND user_id_creador != ".$usuario);
 		if($filtro != '')
 		{
 		 $q->andWhere($filtro);	
