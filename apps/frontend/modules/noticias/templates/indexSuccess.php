@@ -82,7 +82,7 @@ use_helper('Text');?>
 				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd));?>
 				<?php endif; ?>
 				<?php else: ?>
-				<?php if($noticia->getEstado() == 'guardado' && $noticia->getEstado() == 'pendiente'):?>
+				<?php if($noticia->getEstado() == 'guardado' || $noticia->getEstado() == 'pendiente'):?>
 				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
 				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd));?>
 				<?php endif; ?>

@@ -93,14 +93,24 @@
 					<th width="5%">&nbsp;</th>
 				</tr>
 				<?php $i=0; foreach ($documentacion_organismo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<?php if($valor->getEstado() == 'guardado'):?>
+					<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
+				    <?php if($valor->getEstado() == 'guardado'):?>
 					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
 					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
 					<?php endif; ?>
 					<?php else: ?>
 					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
 					<?php endif; ?>
-				<?php endforeach; ?>
+					<?php else: ?>
+					<?php if($valor->getEstado() == 'guardado' || $valor->getEstado() == 'pendiente'):?>
+					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php endif; ?>
+					<?php else: ?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php endif; ?>
+				    <?php endif;?>
+					<?php endforeach; ?>
 				<tr>
 				<td>
 				<?php if(validate_action('publicar') || validate_action('baja') ):?>
