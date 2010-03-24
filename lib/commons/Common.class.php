@@ -65,20 +65,27 @@ class Common
 		if($clase == 'Evento e')
 		{
 			$q->leftJoin('e.UsuarioEvento ue');
-			$q->where("e.estado = 'guardado'");
-			if(validate_action('publicar',$modulo) || validate_action('modificar',$modulo) || validate_action('baja',$modulo))
+			
+			if(!validate_action('publicar',$modulo) || !validate_action('modificar',$modulo) || !validate_action('baja',$modulo))
 			{
-				$q->orWhere("e.estado = 'pendiente'");
-			}	
+				$q->Where("e.estado != 'publicado'");
+			}
+			else 
+			{
+			    $q->where("e.estado = 'guardado'");	
+			}
 			$q->andWhere("e.user_id_creador != ".$usuario);
 		}
 		else 
 		{
-			$q->where("estado = 'guardado'");
-			if(validate_action('publicar',$modulo) || validate_action('modificar',$modulo) || validate_action('baja',$modulo))
+			if(!validate_action('publicar',$modulo) || !validate_action('modificar',$modulo) || !validate_action('baja',$modulo))
 			{
-				$q->orWhere("estado = 'pendiente'");
-			}	
+				$q->Where("estado != 'publicado'");
+			}
+			else 
+			{
+			    $q->where("estado = 'guardado'");	
+			}
 			$q->andWhere("user_id_creador != ".$usuario);
 		}	
 		if($filtro != '')

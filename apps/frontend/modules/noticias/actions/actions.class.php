@@ -27,6 +27,7 @@ class noticiasActions extends sfActions
 		$this->pager->init();
 
 		$this->noticia_list = $this->pager->getResults();
+		
 		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count() ;
 	}
 	
