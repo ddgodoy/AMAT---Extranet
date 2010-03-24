@@ -14,7 +14,7 @@
 				<strong><?php echo stripslashes($noticia->getTitulo()) ?></strong>
 			</a>
 			<?php echo date("d/m/Y", strtotime($noticia->getFecha())) ?><br />
-			<p><?php echo $noticia->getEntradilla() ?></p>
+			<p><?php echo nl2br($noticia->getEntradilla()) ?></p>
 		</td>
 	</tr>
 <?php endforeach; ?>
