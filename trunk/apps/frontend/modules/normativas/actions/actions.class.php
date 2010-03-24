@@ -131,7 +131,7 @@ class normativasActions extends sfActions
 		$this->CatNormBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcatnormativa');;
 		$this->SubNormBsq1 = $this->getRequestParameter('normativa[subcategoria_normativa_uno_id]')?$this->getRequestParameter('normativa[subcategoria_normativa_uno_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatnormativa1');;
 		$this->SubNormBsq2 = $this->getRequestParameter('normativa[subcategoria_normativa_dos_id]')?$this->getRequestParameter('normativa[subcategoria_normativa_dos_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatnormativa2');;
-		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
+		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');
 		
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
