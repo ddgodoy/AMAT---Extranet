@@ -102,9 +102,9 @@
 					   Organismos
 					   </td>
 						<td width="80%">
-						    <?php $roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+						    <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
 								  if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):
-						 			echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getAllOrganismos()),$organismosBsq));
+						 		  echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getAllOrganismos()),$organismosBsq));
 						 		  else :
 							      echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getOrganismoBysuer($sf_user->getAttribute('userId'))),$organismosBsq));
 							      endif;

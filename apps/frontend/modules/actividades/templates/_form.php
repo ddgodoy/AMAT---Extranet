@@ -13,10 +13,10 @@
 
 <?php
 	echo $form['titulo']->renderError();
-	echo $form['autor']->renderError();
+//	echo $form['autor']->renderError();
 	echo $form['ambito']->renderError();
 	echo $form['fecha']->renderError();
-	echo $form['fecha_publicacion']->renderError();
+//	echo $form['fecha_publicacion']->renderError();
 	echo $form['mutua_id']->renderError();
 
 ?>
