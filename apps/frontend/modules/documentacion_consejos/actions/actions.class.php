@@ -234,7 +234,12 @@ class documentacion_consejosActions extends sfActions
 		}
 	
 		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
-		if($consejosterritoriales)
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		elseif($consejosterritoriales)
         { 
 		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
         }  

@@ -303,8 +303,13 @@ class documentacion_organismosActions extends sfActions
 			$this->hastaBsq = '';
 			$this->estadoBsq = '';
 		}
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-		if($organismos)
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		elseif($organismos)
 		{
 		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
 		} 
