@@ -16,7 +16,6 @@ class documentacion_organismosActions extends sfActions
   	$guardados = Common::getCantidaDEguardados('DocumentacionOrganismo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
 
   	$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-  	$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
   	
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
@@ -24,7 +23,7 @@ class documentacion_organismosActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
 		
-	if($organismos && !Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))	
+	if($organismos)	
 	{
 		$this->pager = new sfDoctrinePager('DocumentacionOrganismo', 20);
 		$this->pager->getQuery()->from('DocumentacionOrganismo')

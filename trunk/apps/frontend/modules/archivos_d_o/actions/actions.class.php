@@ -13,14 +13,14 @@ class archivos_d_oActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-  	$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+  	
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
 	if (is_numeric($this->paginaActual)) {
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	
-	if($organismos && !Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+	if($organismos)
 	{ 
 		$this->pager = new sfDoctrinePager('ArchivoDO', 20);
 		$this->pager->getQuery()->from('ArchivoDO')
