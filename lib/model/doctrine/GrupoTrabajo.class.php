@@ -82,7 +82,7 @@ class GrupoTrabajo extends BaseGrupoTrabajo
 				}
 			}
 		} else  {
-			$armado = '';
+			$armado = '(0)';
 		}
 		return 	$armado;
 	}
