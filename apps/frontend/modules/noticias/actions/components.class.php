@@ -11,7 +11,7 @@ class noticiasComponents extends sfComponents
 {
 	public function executeUltimas_noticias(sfWebRequest $request)
 	{
-		$this->ultimas_noticias = NoticiaTable::getUltimasNoticias(5);
+		$this->ultimas_noticias = NoticiaTable::getUltimasNoticias(5,$this->getUser()->getAttribute('userId'));
 		
 	}
 }
