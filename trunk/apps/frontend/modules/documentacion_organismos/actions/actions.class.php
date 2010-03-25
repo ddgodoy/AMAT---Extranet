@@ -309,14 +309,11 @@ class documentacion_organismosActions extends sfActions
 		{
 			return 'deleted=0'.$parcial;
 		}
-		elseif($organismos)
+		else
 		{
 		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
 		} 
-		else 
-		{
-			return 'deleted=0'.$parcial;	
-		}
+		
 		
   }
   
