@@ -92,7 +92,7 @@ class ConsejoTerritorial extends BaseConsejoTerritorial
 		}
 		else 
 		{
-			$armado='';
+			$armado='(0)';
 		}
 		
 	   return 	$armado;

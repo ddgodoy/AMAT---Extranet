@@ -60,7 +60,7 @@ class Organismo extends BaseOrganismo
 		}
 		else 
 		{
-			$armado='';
+			$armado='(0)';
 		}
 		
 	   return 	$armado;
