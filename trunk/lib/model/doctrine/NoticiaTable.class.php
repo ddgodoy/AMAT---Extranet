@@ -14,13 +14,12 @@ class NoticiaTable extends Doctrine_Table
 		return $pager;
 	}
 	
-	public static function getUltimasNoticias($limit=null,$user ='')
+	public static function getUltimasNoticias($limit=null,$rol='')
 	{
 		$q = Doctrine_Query::create();
 		$q->from('Noticia n');
 		$q->Where("n.estado = 'publicado'");
-		$roles = UsuarioRol::getRepository()->getRolesByUser($user,1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+		if($rol !='')
 		{
 			$q->andWhere('n.deleted=0');
 		}
