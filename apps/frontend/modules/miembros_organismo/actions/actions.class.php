@@ -26,7 +26,8 @@ class miembros_organismoActions extends sfActions
 
 		 
          $organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-         if($organismos)
+         $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+         if($organismos && !Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
          {
          
 	        $this->pager = new sfDoctrinePager('Usuario', 10);  	    
@@ -105,7 +106,6 @@ class miembros_organismoActions extends sfActions
 		
 		
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
 			return 'o.deleted=0'.$parcial;
