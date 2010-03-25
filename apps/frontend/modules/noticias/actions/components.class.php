@@ -11,8 +11,8 @@ class noticiasComponents extends sfComponents
 {
 	public function executeUltimas_noticias(sfWebRequest $request)
 	{
-		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+		$rolTrue = UsuarioRol::getRepository()->getRoAndUsurio($this->getUser()->getAttribute('userId'), '(1,2)');
+		if( count($rolTrue) >= 1)
 		{
 			$rol = 1;
 		}
