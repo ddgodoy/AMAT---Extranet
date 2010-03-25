@@ -26,7 +26,8 @@ class miembros_organismoActions extends sfActions
 
 		 
          $organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-		 
+         if($organismos)
+         {
          
 	        $this->pager = new sfDoctrinePager('Usuario', 10);  	    
 			$this->pager->getQuery()
@@ -51,7 +52,13 @@ class miembros_organismoActions extends sfActions
 			{
 			  $this->Organismos = '';
 			}
-        
+         }
+         else 
+         {
+         	$this->usuario_list = '';
+			$this->cantidadRegistros = 0;
+        	
+         }
          
 	}
 	

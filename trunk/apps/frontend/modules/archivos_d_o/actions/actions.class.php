@@ -12,27 +12,36 @@ class archivos_d_oActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	
+  	$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
 	if (is_numeric($this->paginaActual)) {
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
-	    $this->pager = new sfDoctrinePager('ArchivoDO', 20);
-	$this->pager->getQuery()->from('ArchivoDO')
-	->where($this->setFiltroBusqueda())
-	->orderBy($this->setOrdenamiento());
-	$this->pager->setPage($this->paginaActual);
-	$this->pager->init();
 	
-	$this->documentacion = '';
-  	if($this->documentacionBsq)
-  	{
-  		$this->documentacion = DocumentacionOrganismo::getRepository()->findOneById($this->documentacionBsq);
-  	}
-
-	$this->archivo_do_list = $this->pager->getResults();
-	$this->cantidadRegistros = $this->pager->getNbResults();
+	if($organismos)
+	{ 
+		$this->pager = new sfDoctrinePager('ArchivoDO', 20);
+		$this->pager->getQuery()->from('ArchivoDO')
+		->where($this->setFiltroBusqueda())
+		->orderBy($this->setOrdenamiento());
+		$this->pager->setPage($this->paginaActual);
+		$this->pager->init();
+		
+		$this->documentacion = '';
+	  	if($this->documentacionBsq)
+	  	{
+	  		$this->documentacion = DocumentacionOrganismo::getRepository()->findOneById($this->documentacionBsq);
+	  	}
+	
+		$this->archivo_do_list = $this->pager->getResults();
+		$this->cantidadRegistros = $this->pager->getNbResults();
+	}
+	else 
+	{
+		$this->archivo_do_list = '';
+		$this->cantidadRegistros = 0;
+	}
   }
 
   public function executeShow(sfWebRequest $request)
