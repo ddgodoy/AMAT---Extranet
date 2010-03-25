@@ -58,4 +58,16 @@ class UsuarioRolTable extends Doctrine_Table
 		return $q->execute();
 	}
 	
+	public static function getRoAndUsurio($usu, $roles)
+	{
+		$q = Doctrine_Query::create()
+		->from('UsuarioRol ur')
+		->leftJoin('ur.Usuario u')
+		->where('ur.rol_id IN '.$roles)
+		->andWhere('u.id ='.$usu);
+		
+		return $q->execute();
+	}
+	
+	
 }
