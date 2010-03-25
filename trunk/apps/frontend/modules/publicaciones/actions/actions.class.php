@@ -18,7 +18,9 @@ class publicacionesActions extends sfActions
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	    $this->pager = new sfDoctrinePager('Publicacion', 10);
-	$this->pager->getQuery()->from('Publicacion')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('Publicacion')
+	->where($this->setFiltroBusqueda())
+	->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
@@ -178,7 +180,15 @@ class publicacionesActions extends sfActions
 			$this->hastaBsq = '';
 		}
 		
-		return 'deleted=0'.$parcial;
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		else
+		{
+		   return 'deleted=0'.$parcial.' AND destacada = 1';
+		} 
   }
   
   protected function setOrdenamiento()

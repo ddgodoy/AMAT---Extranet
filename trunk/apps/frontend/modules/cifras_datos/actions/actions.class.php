@@ -31,7 +31,9 @@ class cifras_datosActions extends sfActions
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	    $this->pager = new sfDoctrinePager('CifraDato', 10);
-	$this->pager->getQuery()->from('CifraDato')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('CifraDato')
+	->where($this->setFiltroBusqueda())
+	->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
