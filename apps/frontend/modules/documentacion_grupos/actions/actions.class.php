@@ -254,14 +254,11 @@ class documentacion_gruposActions extends sfActions
 		{
 			return 'deleted=0'.$parcial;
 		}
-		elseif($gruposdetrabajo)
+		else
 		{
 			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
 		}
-		else 
-		{
-			return 'deleted=0'.$parcial;
-		}	
+		
   }
   
   protected function setOrdenamiento()

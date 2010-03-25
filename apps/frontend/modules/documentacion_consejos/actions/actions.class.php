@@ -239,14 +239,11 @@ class documentacion_consejosActions extends sfActions
 		{
 			return 'deleted=0'.$parcial;
 		}
-		elseif($consejosterritoriales)
+		else
         { 
 		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
         }  
-		else 
-		{
-			return 'deleted=0'.$parcial;
-		}	
+		
   }
   
   protected function setOrdenamiento()

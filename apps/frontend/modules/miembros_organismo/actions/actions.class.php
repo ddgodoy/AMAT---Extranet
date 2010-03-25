@@ -33,13 +33,8 @@ class miembros_organismoActions extends sfActions
 			->from('UsuarioOrganismo uo')
 			->leftJoin('uo.Usuario u')
 			->leftJoin('uo.Organismo o')
-			->where('uo.usuario_id != '.$this->getUser()->getAttribute('userId'))
-			->andWhere($this->setFiltroBusqueda());
-			if($organismos)
-			{
-			   $this->pager->getQuery()->andWhere('uo.organismo_id IN '.$organismos);
-			}   
-			$this->pager->getQuery()->orderBy($this->setOrdenamiento())
+			->Where($this->setFiltroBusqueda())
+			->orderBy($this->setOrdenamiento())
 			->groupBy('uo.usuario_id');
 			$this->pager->setPage($this->paginaActual);
 			$this->pager->init();
@@ -100,7 +95,18 @@ class miembros_organismoActions extends sfActions
 			$this->cajaBsq = "";
 			$this->organismosBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+		
+		
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'o.deleted=0'.$parcial;
+		}
+		else
+		{
+		   return 'o.deleted=0'.$parcial.' AND uo.organismo_id IN '.$organismos;
+		} 
 	}
 	
 	protected function setOrdenamiento()
