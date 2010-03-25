@@ -11,7 +11,18 @@ class organismosComponents extends sfComponents
 {
 	public function executeListaorganismos(sfWebRequest $request)
 	{
+		
+		$roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+          if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+          {
+          	$user = '';
+          }
+          else 
+          {
+          	$user=$this->getUser()->getAttribute('userId');
+          }
+		
 		$this->organismos_selected = 0;
-		$this->arrayOrganismo = OrganismoTable::doSelectByOrganismoa($this->getRequestParameter('subcategoria_organismos'),$this->getUser()->getAttribute('userId'));
+		$this->arrayOrganismo = OrganismoTable::doSelectByOrganismoa($this->getRequestParameter('subcategoria_organismos'),$user);
 	}
 }

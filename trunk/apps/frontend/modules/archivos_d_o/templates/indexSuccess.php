@@ -5,14 +5,25 @@
 
 <?php 
 // datos  utiles para los partial
-      $modulo = $sf_context->getModuleName();
+
+          $modulo = $sf_context->getModuleName();
 		  $categoria = $sf_user->getAttribute($modulo.'_nowcategoria')? $sf_user->getAttribute($modulo.'_nowcategoria') : '' ;
 		  $subcategoria = $sf_user->getAttribute($modulo.'_nowsubcategoria')? $sf_user->getAttribute($modulo.'_nowsubcategoria') : '' ;
 		  $organismo = $sf_user->getAttribute($modulo.'_noworganismos')? $sf_user->getAttribute($modulo.'_noworganismos') : '';
       
+		  $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
+          if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles))
+          {
+          	$user = $sf_user->getAttribute('userId');
+          	$arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria, $user) : OrganismoTable::getAllOrganismos();
+          }
+          else 
+          {
+          	$user='';
+          	$arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria, $user) : '';
+          }
 			$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);
-			$arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria) : '';
-			$arrayDocumentacion = $organismo ?DocumentacionOrganismoTable::doSelectByOrganismo($organismo) : DocumentacionOrganismoTable::getAlldocumentacion();
+			$arrayDocumentacion = $organismo ?DocumentacionOrganismoTable::doSelectByOrganismo($organismo) : '';
 			$subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
 			$organismos_selected = $sf_user->getAttribute($modulo.'_noworganismos');
 			$documentacion_selected = $sf_user->getAttribute($modulo.'_nowdocumentacion');
