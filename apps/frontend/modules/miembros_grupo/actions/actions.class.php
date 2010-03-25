@@ -28,10 +28,7 @@ class miembros_grupoActions extends sfActions
 								->where('ug.usuario_id != '.$this->getUser()->getAttribute('userId'))
 								->addWhere('ur.rol_id = 4')
 								->andWhere($this->setFiltroBusqueda());
-
-		if ($gruposdetrabajo) {
-			$this->pager->getQuery()->andWhere('ug.grupo_trabajo_id IN '.$gruposdetrabajo);
-		}  
+ 
 		$this->pager->getQuery()->orderBy($this->setOrdenamiento());
 		$this->pager->getQuery()->groupBy('ug.usuario_id');
 		$this->pager->setPage($this->paginaActual);
@@ -82,7 +79,16 @@ class miembros_grupoActions extends sfActions
 			$this->cajaBsq = "";
 			$this->grupoBsq = "";
 		}
-		return 'deleted=0'.$parcial;
+		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		else
+		{
+			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
+		}
 	}
 	
 	protected function setOrdenamiento()
