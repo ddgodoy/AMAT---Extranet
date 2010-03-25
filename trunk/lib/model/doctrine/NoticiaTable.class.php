@@ -31,7 +31,7 @@ class NoticiaTable extends Doctrine_Table
 		$q->orderBy('n.id DESC');
 		if($limit) $q->limit($limit);
 		
-					
+				
 		$notificaciones = $q->execute();
 		
 		return $notificaciones;
