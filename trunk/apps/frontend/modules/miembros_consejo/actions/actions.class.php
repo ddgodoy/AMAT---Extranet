@@ -28,9 +28,7 @@ class miembros_consejoActions extends sfActions
 				 ->where('uc.usuario_id != '.$this->getUser()->getAttribute('userId'))
 				 ->addWhere('ur.rol_id = 5');
 
-		if ($consejosterritoriales) {
-		  $this->pager->getQuery()->andWhere('uc.consejo_territorial_id IN '.$consejosterritoriales);
-		}
+		
 		$this->pager->getQuery()->andWhere($this->setFiltroBusqueda())
 		 		 ->orderBy($this->setOrdenamiento())
 			 	 ->groupBy('uc.usuario_id');
@@ -80,7 +78,16 @@ class miembros_consejoActions extends sfActions
 			$this->cajaBsq = "";
 			$this->consejoBsq = "";
 		}
-		return 'deleted=0'.$parcial;
+		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			return 'deleted=0'.$parcial;
+		}
+		else
+        { 
+		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+        }  
 	}
 	
 	protected function setOrdenamiento()
