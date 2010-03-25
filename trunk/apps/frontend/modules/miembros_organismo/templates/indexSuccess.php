@@ -102,7 +102,7 @@
 					   Organismos
 					   </td>
 						<td width="80%">
-							<?php echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getAllOrganismos()),$organismosBsq))?> 
+							<?php echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getOrganismoBysuer($sf_user->getAttribute('userId'))),$organismosBsq))?> 
 						</td>
 					</tr>
 					<tr>
