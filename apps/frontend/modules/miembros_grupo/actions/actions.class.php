@@ -25,8 +25,7 @@ class miembros_grupoActions extends sfActions
 								->leftJoin('ug.Usuario u')
 								->leftJoin('ug.GrupoTrabajo g')
 								->leftJoin('u.UsuarioRol ur')
-								->where('ug.usuario_id != '.$this->getUser()->getAttribute('userId'))
-								->addWhere('ur.rol_id = 4')
+								->Where('ur.rol_id = 4')
 								->andWhere($this->setFiltroBusqueda());
  
 		$this->pager->getQuery()->orderBy($this->setOrdenamiento());

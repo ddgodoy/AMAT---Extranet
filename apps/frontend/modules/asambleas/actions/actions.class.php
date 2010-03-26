@@ -601,6 +601,7 @@ class asambleasActions extends sfActions
 	   		$this->DAtos = $this->setOtros(); 
 		   	
 		}
+		
 		## Obtener el id de la asamblea
 		if(!$this->asambleaId = $this->getRequestParameter('id'))
 			$this->forward404('La asamblea solicitada no existe');
@@ -609,6 +610,10 @@ class asambleasActions extends sfActions
 		$asamblea->setEstado('activa');
 		$asamblea->save();
 		
+//		echo '<pre>';
+//		print_r($this->DAtos['usuarios']);
+//		echo '</pre>';
+//		exit();
 		
 		## Obtener los usuarios de ese grupo
 		$usuarios = $this->DAtos['usuarios'];
@@ -692,6 +697,7 @@ class asambleasActions extends sfActions
 	   		$this->DAtos = $this->setOtros(); 
 		   	
 		}
+		
 		
 		## Obtener asamblea
 		if(!$this->asambleaId = $this->getRequestParameter('id'))
@@ -1023,7 +1029,8 @@ class asambleasActions extends sfActions
 			$arraDAtos['where']= "entidad LIKE '%GrupoTrabajo%'" ;
 			if($this->getRequestParameter('id'))
 			{  
-			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->asambleaId,$arraDAtos['where'])->getEntidad());
+			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->getRequestParameter('id'),$arraDAtos['where'])->getEntidad());
+			    
 				$arraDAtos['usuarios'] =  UsuarioGrupoTrabajoTable::getUsreByGrupo($idGrupo[1]);	
 
 				$arraDAtos['Entidad'] = GrupoTrabajoTable::getGrupoTrabajo($idGrupo[1])->getNombre();	
@@ -1043,7 +1050,7 @@ class asambleasActions extends sfActions
 			$arraDAtos['where']= "entidad LIKE '%ConsejoTerritorial%'";
 			if($this->getRequestParameter('id'))
 			{  
-			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->asambleaId,$arraDAtos['where'])->getEntidad());
+			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->getRequestParameter('id'),$arraDAtos['where'])->getEntidad());
 				$arraDAtos['usuarios'] =  UsuarioConsejoTerritorialTable::getUsreByConse($idGrupo[1]);	
 				$arraDAtos['Entidad'] = ConsejoTerritorialTable::getConsejo($idGrupo[1])->getNombre();		
 			}
@@ -1061,7 +1068,7 @@ class asambleasActions extends sfActions
 			$arraDAtos['where']= "entidad LIKE '%Organismo%'" ;
 			if($this->getRequestParameter('id'))
 			{  
-			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->asambleaId,$arraDAtos['where'])->getEntidad());
+			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->getRequestParameter('id'),$arraDAtos['where'])->getEntidad());
 			    
 				$arraDAtos['usuarios'] =  UsuarioTable::getUsuarioByOrganismoAsn($idGrupo[1]);	
 				
