@@ -43,7 +43,7 @@ class OrganismoTable extends Doctrine_Table
 	
 	public static function getAllOrganismos()
 	{
-		$r = Doctrine_Query::create()->from('Organismo')->where('deleted = 0');
+		$r = Doctrine_Query::create()->from('Organismo')->where('deleted = 0')->orderBy('nombre');
 		$organismos = $r->execute();
 		
 		return $organismos; 
@@ -64,7 +64,8 @@ class OrganismoTable extends Doctrine_Table
    	 ->from('Organismo o')
    	 ->leftJoin('o.UsuarioOrganismo uo')
    	 ->where('uo.usuario_id = '.$idUser)
-   	 ->addwhere('o.deleted = 0');
+   	 ->addwhere('o.deleted = 0')
+   	 ->orderBy('o.nombre');
    	 
    	 $respuesat = $r->execute();
    	 
