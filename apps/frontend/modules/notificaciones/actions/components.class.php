@@ -13,7 +13,7 @@ class notificacionesComponents extends sfComponents
 	public function executeUltimos_avisos(sfWebRequest $request)
 	{   
 		$evento = EventoTable::getEventosCaducos();
-		
+		echo "count".(count ($evento)); die();
 		if(isset($evento))
 		{
 			foreach ($evento AS $e)
