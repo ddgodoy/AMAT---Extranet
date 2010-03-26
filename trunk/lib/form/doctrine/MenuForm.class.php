@@ -32,7 +32,7 @@ class MenuForm extends BaseMenuForm
       'padre_id'      => new sfValidatorInteger(array('required' => false)),
       'nombre'        => new sfValidatorString(array('required' => true),array('required' => 'ingrese el nombre')),
       'descripcion'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'aplicacion_id' => new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'required' => false),array('required' => 'selecciones una aplicación')),
+      'aplicacion_id' => new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'required' => false),array('required' => 'Seleccione una aplicación')),
       'url_externa'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'habilitado'    => new sfValidatorBoolean(array('required' => false)),
       'created_at'    => new sfValidatorDateTime(array('required' => false)),
@@ -40,6 +40,8 @@ class MenuForm extends BaseMenuForm
       'deleted'       => new sfValidatorBoolean(),
     ));
 
+    $this->widgetSchema['aplicacion_id']->addOption('order_by', array('nombre','asc'));
+    
     if (empty($idpadre))
     { 
       	  $arrayElementos = array();

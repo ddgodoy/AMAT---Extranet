@@ -90,25 +90,23 @@
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>
-					   <td width="20%">
-					    Nombre &oacute; Usuario
-					   </td>
+					   <td width="20%">Nombre &oacute; Usuario</td>
 						<td width="80%">
 							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/>
 						</td>
 					</tr>
 					<tr>
-					   <td width="20%">
-					   Organismos
-					   </td>
+					   <td width="20%">Organismos</td>
 						<td width="80%">
-						    <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
-								  if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):
-						 		  echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getAllOrganismos()),$organismosBsq));
-						 		  else :
-							      echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getOrganismoBysuer($sf_user->getAttribute('userId'))),$organismosBsq));
-							      endif;
-							      ?> 
+					    <?php
+					    	$roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'), 1);
+
+							  if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)) {
+							  	echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getAllOrganismos()),$organismosBsq));
+							  } else {
+							  	echo select_tag('organismo',options_for_select(array('0'=>'--Seleccionar--')+_get_options_from_objects(OrganismoTable::getOrganismoBysuer($sf_user->getAttribute('userId'))),$organismosBsq));
+							  }
+						  ?>
 						</td>
 					</tr>
 					<tr>
