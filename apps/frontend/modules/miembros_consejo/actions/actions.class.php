@@ -25,8 +25,7 @@ class miembros_consejoActions extends sfActions
 				 ->leftJoin('uc.Usuario u')
 				 ->leftJoin('uc.ConsejoTerritorial c')
 				 ->leftJoin('u.UsuarioRol ur')
-				 ->where('uc.usuario_id != '.$this->getUser()->getAttribute('userId'))
-				 ->addWhere('ur.rol_id = 5');
+				 ->where('uc.usuario_id != '.$this->getUser()->getAttribute('userId'));
 
 		
 		$this->pager->getQuery()->andWhere($this->setFiltroBusqueda())
