@@ -102,17 +102,25 @@ class archivos_d_oActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+    
+    $toDelete = $request->getParameter('id');
 
-    $this->forward404Unless($archivo_do = Doctrine::getTable('ArchivoDO')->find($request->getParameter('id')), sprintf('Object archivo_do does not exist (%s).', $request->getParameter('id')));
-    
-    
-    sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    
-    $archivo_do->delete();
+  	if (!empty($toDelete)) {
+  		$request->checkCSRFProtection();
 
-    $this->redirect('archivos_d_o/index');
+  		$IDs = is_array($toDelete) ? $toDelete : array($toDelete);
+
+  		foreach ($IDs as $id) {
+  			$this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDO')->find($id), sprintf('Object archivo_dg does not exist (%s).', $id));
+
+		    sfLoader::loadHelpers('Security');
+				if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+
+		    $archivo_dg->delete();
+  		}
+  	}
+    $this->redirect('archivos_d_o/index'); 
+    
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)

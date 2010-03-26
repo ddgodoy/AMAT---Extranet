@@ -30,6 +30,8 @@
 ?>
 <link type="text/css" rel="stylesheet" href="/js/calendario/dhtml_calendar.css" media="screen"></link>
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+
 <div class="mapa"><strong>Organismos</strong><?php if($documentacion !=''):?> > Documentacion: <?php echo $documentacion->getNombre(); endif;?> > Archivos</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
@@ -61,9 +63,13 @@
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
+		<form method="post" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/delete') ?>">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
+					<?php if(validate_action('baja')):?>
+					<th width="5%">&nbsp;</th>
+					<?php endif;?>
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('archivos_d_o/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'orden=1') ?>">Fecha</a>
 					</th>
@@ -81,6 +87,9 @@
 				</tr>
 				<?php $i=0; foreach ($archivo_do_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
+					<?php if(validate_action('baja')):?>
+					<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
+					<?php endif;?>
 					<td valign="center" align="left">
 						<?php echo date("d/m/Y", strtotime($valor->getFecha())) ?>
 					</td>
@@ -117,8 +126,15 @@
 		          </td>
 				</tr>
 				<?php endforeach; ?>
+				<?php if(validate_action('baja')):?>
+				<tr>
+					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+					<td colspan="5"><input type="submit" class="boton" value="Borrar seleccionados" onclick="return confirm('Confirma la eliminaci&oacute;n de los registros seleccionados?');"/></td>
+				</tr>
+				<?php endif;?>
 			</tbody>
 		</table>
+		</form>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
