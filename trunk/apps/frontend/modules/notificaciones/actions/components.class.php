@@ -18,13 +18,12 @@ class notificacionesComponents extends sfComponents
 		{
 			foreach ($evento AS $e)
 			{
-				// $avisos = NotificacionTable::getDeleteEntidad2($e->getId(),$e->getTitulo());
+				 $avisos = NotificacionTable::getDeleteEntidad2($e->getId(),$e->getTitulo());
 			}
 		}	
 		
 		$noticias = NoticiaTable::getNoticiasCaducas();
-    echo "count".(count ($noticias)); die();
-		if(isset($noticias))
+    if(isset($noticias))
 		{
 			foreach ($noticias AS $n)
 			{

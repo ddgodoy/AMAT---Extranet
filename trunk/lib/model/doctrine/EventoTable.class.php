@@ -87,8 +87,8 @@ class EventoTable extends Doctrine_Table
 	{
 		$q = Doctrine_Query::create()
 		->from('Evento e')
-		->where('e.fecha_caducidad <= NOW()');
-		
+		//->where('e.fecha_caducidad <= NOW()');
+		->where('deleted=0 AND (fecha_caducidad <= NOW())');
 		return  $q->execute();
 	}
 	
