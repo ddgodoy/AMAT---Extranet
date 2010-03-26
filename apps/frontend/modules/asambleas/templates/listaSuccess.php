@@ -1,4 +1,5 @@
 <?php use_helper('Security') ?> 
+<?php use_helper('TestPager') ?> 
     <div class="mapa">
       <strong><?php echo $DAtos['tipo']; ?></strong> > Convocatoria - <?php if($DAtos['titulo'] != 'Convocatoria'){ echo 'Asamblea';}?>
     </div>
