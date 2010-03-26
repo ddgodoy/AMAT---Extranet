@@ -18,14 +18,11 @@
 	echo $form['mas_info']->renderError();
 	echo $form['imagen']->renderError();
 	echo $form['mutua_id']->renderError();
-
-
 ?>
 <form action="<?php echo url_for('eventos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" '?> id="evento" name="evento">
     <?php if (!$form->getObject()->isNew()): ?>
-    <input type="hidden" name="sf_method" value="put" />
+    	<input type="hidden" name="sf_method" value="put" />
     <?php endif; ?>
-	
 	    <table width="100%" cellspacing="0" cellpadding="0" border="0">
 	      <tbody><tr>
 	        <td width="48%"><label>Los Campos marcados con (*) son obligatorios. Deben ser completados</label></td>
@@ -51,12 +48,7 @@
         <tr>
           <td><label>Mutua*</label></td>
           <td valign="middle"><?php echo $form['mutua_id'] ?>
-          <!--<label style="margin-left: 4px;">Autor / Medio*: </label>
-          <?php // echo $form['autor'] ?>
-          </td>-->
         </tr>
-
-
            <tr>
            <td style="padding-top: 5px;"><label>Ambito</label></td>
            <td style="padding-top: 5px;"><?php echo $form['ambito'] ?></td>
@@ -75,7 +67,10 @@
            </tr>
            <tr>
 	          <td style="padding-top: 5px;"><label>Imagen</label></td>
-	          <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label><label><?php echo $form['mas_imagen'] ?></label><label>Mostrar la imagen en la ficha</label>
+	          <td style="padding-top: 5px;">
+	          	<label><?php echo $form['imagen'] ?></label>
+	          	<label><?php echo $form['mas_imagen'] ?></label>
+	          	<label>&nbsp;Mostrar la imagen en la ficha</label>
 	          </td>
 	        </tr>
 	        <tr>
