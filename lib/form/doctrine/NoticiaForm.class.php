@@ -9,10 +9,10 @@
 class NoticiaForm extends BaseNoticiaForm
 {
 	public function configure()
-	{   
+	{
 		sfLoader::loadHelpers('Security');
 		
-		$img_valids = array('image/jpeg','image/pjpeg','image/gif','image/png');
+		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
 		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
 			'titulo'            => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
@@ -44,8 +44,7 @@ class NoticiaForm extends BaseNoticiaForm
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 			'estado'            => new sfValidatorString(),
 		));
-		
-		
+
 		if(validate_action('publicar'))
 		{
 			$this->setWidget('fecha_publicacion', new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')));
@@ -64,40 +63,32 @@ class NoticiaForm extends BaseNoticiaForm
 		if($this->getObject()->getImagen())
 		{
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/noticias/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
-//			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids, 'max_size'=>2048000),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)', 'max_size'=>'Máximo tamaño de imagen: 2 MB')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
 		}
 		else 
 		{
-		$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/noticias/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-//		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', )));
-		$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)')));
+			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/noticias/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/noticias/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids, 'max_size'=>2048000),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)', 'max_size'=>'Máximo tamaño de imagen: 2 MB')));
 		}
 		
 		if($this->getObject()->getDocumento())
 		{
 			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
 			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/noticias/docs', 'required' => false)));
-		    $this->setValidator('documento_delete', new sfValidatorBoolean());
+		  $this->setValidator('documento_delete', new sfValidatorBoolean());
 		}
 		else 
 		{
-			
-		$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-		$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/noticias/docs', 'required' => false)));
-
+			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/noticias/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/noticias/docs', 'required' => false)));
 		}
-		
-		
+
 		$this->setDefaults(array(
 			'owner_id'          => sfContext::getInstance()->getUser()->getAttribute('userId'),
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => 'pendiente',
 			'mas_imagen'        => 1,
-//			'fecha_publicacion' => '2007/01/01',
-//			'fecha_caducidad'   => '2015/12/31',
-			
 		));
 		
 		$this->widgetSchema->setNameFormat('noticia[%s]');
