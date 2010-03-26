@@ -24,12 +24,15 @@ class AsambleaTable extends Doctrine_Table
 		return $q->fetchOne();
 	}
 	
-	public static function getAsambleaId($id,$dato)
-	{
+	public static function getAsambleaId($id,$dato ='')
+	{	
 		$q = Doctrine_Query::create()
 		->from('Asamblea')
-		->where('id ='.$id)
-		->andWhere($dato);
+		->where('id ='.$id);
+		if($dato)
+		{
+		 $q->andWhere($dato);
+		} 
 		
 		return $q->fetchOne();
 		
