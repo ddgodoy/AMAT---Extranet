@@ -749,7 +749,7 @@ class asambleasActions extends sfActions
 		}
 		
 		## Obtener el id de la asamblea
-		if(!$this->convocatoriaId = $this->getRequestParameter('id'))
+		if(!$this->convocatoriaId = $this->getRequestParameter('convocatoria'))
 			$this->forward404('La convocatoria solicitada no existe');
 		
 		$convocatoria = Doctrine::getTable('Convocatoria')->find($this->convocatoriaId);
@@ -814,7 +814,7 @@ class asambleasActions extends sfActions
 		}
 		
 		## Obtener el id de la asamblea
-		if(!$this->convocatoriaId = $this->getRequestParameter('id'))
+		if(!$this->convocatoriaId = $this->getRequestParameter('convocatoria'))
 			$this->forward404('La convocatoria solicitada no existe');
 		
 		$convocatoria = Doctrine::getTable('Convocatoria')->find($this->convocatoriaId);
