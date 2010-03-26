@@ -33,8 +33,10 @@ class miembros_organismoActions extends sfActions
 			$this->pager->getQuery()
 			->from('UsuarioOrganismo uo')
 			->leftJoin('uo.Usuario u')
+			->leftJoin('u.UsuarioRol ur')
 			->leftJoin('uo.Organismo o')
-			->Where($this->setFiltroBusqueda())
+			->where($this->setFiltroBusqueda())
+			->andWhere('ur.rol_id IN (4,6)')
 			->orderBy($this->setOrdenamiento())
 			->groupBy('uo.usuario_id');
 			$this->pager->setPage($this->paginaActual);
