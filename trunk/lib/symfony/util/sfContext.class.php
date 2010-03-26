@@ -57,7 +57,6 @@ class sfContext
     }
 
     self::$instances[$name]->initialize($configuration);
-    echo "test =".$instances[$name]." *"; die();
     return self::$instances[$name];
   }
 
