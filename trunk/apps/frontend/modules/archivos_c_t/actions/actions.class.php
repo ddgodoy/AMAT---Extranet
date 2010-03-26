@@ -77,15 +77,23 @@ class archivos_c_tActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($archivo_ct = Doctrine::getTable('ArchivoCT')->find($request->getParameter('id')), sprintf('Object archivo_ct does not exist (%s).', $request->getParameter('id')));
     
-    sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    
-    $archivo_ct->delete();
+    $toDelete = $request->getParameter('id');
 
+  	if (!empty($toDelete)) {
+  		$request->checkCSRFProtection();
+
+  		$IDs = is_array($toDelete) ? $toDelete : array($toDelete);
+
+  		foreach ($IDs as $id) {
+  			$this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoCT')->find($id), sprintf('Object archivo_dg does not exist (%s).', $id));
+
+		    sfLoader::loadHelpers('Security');
+				if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+
+		    $archivo_dg->delete();
+  		}
+  	}
     $this->redirect('archivos_c_t/index');
   }
 
