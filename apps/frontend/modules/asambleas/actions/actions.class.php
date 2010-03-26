@@ -196,10 +196,11 @@ class asambleasActions extends sfActions
 		$this->pager = new sfDoctrinePager('Asamblea', 10);
 		$this->pager->getQuery()
 			->from('Asamblea a')
-			->where('a.deleted=0');
+			->where('a.deleted=0')
+			->andWhere($this->setFiltroBusqueda());
 			if( count($rolTrue) == 0)
 			{
-				$this->pager->getQuery()->andWhere('a.owner_id='.$this->getUser()->getAttribute('userId').' '.$this->setFiltroBusqueda().' AND a.'.$this->DAtos['where']);
+				$this->pager->getQuery()->andWhere('a.owner_id='.$this->getUser()->getAttribute('userId').' AND a.'.$this->DAtos['where']);
 			}	
 			$this->pager->getQuery()->orderBy($this->setOrdenamiento());
 	
