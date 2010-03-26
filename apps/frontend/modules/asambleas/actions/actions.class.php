@@ -90,6 +90,7 @@ class asambleasActions extends sfActions
 			->from('Convocatoria c')
 			->leftJoin('c.Asamblea a')
 			->where('c.deleted = 0')
+			->where('a.deleted = 0')
 			->addWhere('c.usuario_id=' . $this->getUser()->getAttribute('userId'))
 			->addWhere('c.estado=\'pendiente\'')
 			->andWhere('a.fecha_caducidad >= NOW()')
@@ -110,6 +111,7 @@ class asambleasActions extends sfActions
 			->addWhere('c.estado=\'aceptada\' OR c.estado=\'rechazada\'')
 			->addWhere($aceptadas.' AND a.'.$this->DAtos['where'])
 			->andWhere('a.fecha_caducidad >= NOW()')
+			->andWhere('a.deleted = 0')
 			->orderBy('a.fecha desc');
 			
 			
@@ -196,7 +198,7 @@ class asambleasActions extends sfActions
 		$this->pager = new sfDoctrinePager('Asamblea', 10);
 		$this->pager->getQuery()
 			->from('Asamblea a')
-			->where('a.deleted=0'.$this->setFiltroBusqueda())
+			->where('a.deleted=0'.$this->setFiltroBusqueda());
 			if( count($rolTrue) == 0)
 			{
 				$this->pager->getQuery()->andWhere('a.owner_id='.$this->getUser()->getAttribute('userId').' AND a.'.$this->DAtos['where']);
