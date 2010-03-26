@@ -18,7 +18,7 @@ class notificacionesComponents extends sfComponents
 		{
 			foreach ($evento AS $e)
 			{
-				// $avisos = NotificacionTable::getDeleteEntidad2($e->getId(),$e->getTitulo());
+				 $avisos = NotificacionTable::getDeleteEntidad2($e->getId(),$e->getTitulo());
 			}
 		}	
 		
