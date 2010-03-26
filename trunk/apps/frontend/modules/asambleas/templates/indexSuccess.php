@@ -43,8 +43,8 @@
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><strong><?php echo $convocatoria->getAsamblea()->getTitulo() ?></strong></a></td>
          <td><?php echo $convocatoria->getAsamblea()->getHorario() ?></td>      
         <td><?php echo $convocatoria->getAsamblea()->getDireccion() ?></td>
-        <td><a class="confirmar" href="<?php echo url_for('asambleas/aceptar?id=' . $convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0','z-index'=>'100px'))?>Aceptar</a></td>
-        <td><a class="confirmar" href="<?php echo url_for('asambleas/rechazar?id=' . $convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0'))?>Rechazar</a></td>
+        <td><a class="confirmar" href="<?php echo url_for('asambleas/aceptar?id='.$convocatoria->getAsambleaId().'&convocatoria='.$convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0','z-index'=>'100px'))?>Aceptar</a></td>
+        <td><a class="confirmar" href="<?php echo url_for('asambleas/rechazar?id='.$convocatoria->getAsambleaId().'&convocatoria='.$convocatoria->getId().'&'.$DAtos['get']) ?>"><?php echo image_tag('confirma.png',array('width'=>'14', 'height'=>'11', 'border'=>'0'))?>Rechazar</a></td>
         <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>">M&aacute;s Informaci&oacute;n</a></td>
         <?php if (validate_action('publicar')):?>
         <td><a href="<?php echo url_for('asambleas/convocados?id='.$convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><?php echo image_tag('convocados.png', array('border' => 0, 'alt' => 'Convocados', 'title' => 'Convocados')) ?></a></td>
