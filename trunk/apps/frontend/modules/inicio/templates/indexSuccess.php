@@ -13,6 +13,7 @@
 					<img src="<?php echo '/uploads/aplicaciones_externas/'.$valor->getImagen() ?>" title="<?php echo $valor->getNombre() ?>" border="0"/>
 				</a>
 			<?php endforeach; ?>
+
 			<!--			
 			<a href="#"><img src="/images/ban_sanresina.jpg" width="151" height="52" alt="Sam Resina" border="0"/></a>
 			<a href="#"><img src="/images/ban_estadistica.jpg" width="151" height="52" alt="Estadísticas" border="0"/></a>
