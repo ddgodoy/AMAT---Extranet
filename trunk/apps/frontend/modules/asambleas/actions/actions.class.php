@@ -190,12 +190,13 @@ class asambleasActions extends sfActions
 		
 //		echo 'a.owner_id='.$this->getUser()->getAttribute('userId').' '.$this->setFiltroBusqueda().' AND '.$this->DAtos['where'];
 //		exit();
-		
+        $rolTrue = UsuarioRol::getRepository()->getRoAndUsurio($this->getUser()->getAttribute('userId'), '(1,2)');		
+
+
 		$this->pager = new sfDoctrinePager('Asamblea', 10);
 		$this->pager->getQuery()
 			->from('Asamblea a')
 			->where('a.deleted=0');
-			$rolTrue = UsuarioRol::getRepository()->getRoAndUsurio($this->getUser()->getAttribute('userId'), '(1,2)');
 			if( count($rolTrue) == 0)
 			{
 				$this->pager->getQuery()->andWhere('a.owner_id='.$this->getUser()->getAttribute('userId').' '.$this->setFiltroBusqueda().' AND a.'.$this->DAtos['where']);
