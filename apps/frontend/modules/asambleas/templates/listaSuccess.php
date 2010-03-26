@@ -41,7 +41,9 @@
         <th width="3%"> </th>
         <?php endif; ?>
         <th width="3%"> </th>
+        <?php if (validate_action('baja')):?>
         <th width="3%"> </th>
+        <?php endif; ?>
       </tr>
       <?php $i=0; foreach ($asamblea_list as $asamblea): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
       <tr class="<?php echo $odd ?>">
