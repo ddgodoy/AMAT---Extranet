@@ -34,5 +34,33 @@ class Evento extends BaseEvento
                                 
                 return parent::save($conn);
     }
+    
+    public static function getEventoCaducados()
+    {
+    	$arrayEventos = EventoTable::getEventosCaducos();
+    	
+    	$armado = '(';
+    	
+    	$rt = 0;
+
+    	if (count($arrayEventos)) {
+			foreach ( $arrayEventos AS $eventos ) {
+				$rt++;
+				if($rt != count($arrayEventos)) {
+				  $armado .= "'".$eventos->getId()."',";
+				} else {
+				  $armado .= "'".$eventos->getId()."')";
+				}
+			}
+    	}	
+    	else
+    	{
+    		$armado = '';
+    	}
+    	 	
+    	
+    	return $armado;
+    }
+    
 	
 }
