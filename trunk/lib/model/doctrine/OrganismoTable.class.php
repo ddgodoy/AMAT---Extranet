@@ -24,7 +24,8 @@ class OrganismoTable extends Doctrine_Table
 			$s=Doctrine_Query::create()
 			->from('Organismo')
 			->where('subcategoria_organismo_id = '.$id_subcategoria)
-			->andWhere('deleted = 0');
+			->andWhere('deleted = 0')
+			->orderBy('nombre');
 		}
 		else 
 		{
@@ -33,7 +34,8 @@ class OrganismoTable extends Doctrine_Table
 			->leftJoin('o.UsuarioOrganismo uo')
 			->where('o.subcategoria_organismo_id = '.$id_subcategoria)
 			->addWhere('uo.usuario_id = '.$userId)
-			->andWhere('o.deleted = 0');
+			->andWhere('o.deleted = 0')
+			->orderBy('o.nombre');
 		}
 		
 		$subcategorias = $s->execute();

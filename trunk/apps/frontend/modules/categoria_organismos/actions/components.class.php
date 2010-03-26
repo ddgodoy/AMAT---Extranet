@@ -12,22 +12,23 @@ class categoria_organismosComponents extends sfComponents
 	public function executeListacategoria(sfWebRequest $request)
 	{
 		$this->name; 
-		
-		
 		$modulo = $this->getContext()->getModuleName();
-		if(!$this->getUser()->getAttribute($modulo.'_nowcategoria') || $this->getContext()->getActionName() == 'nueva')
+
+		if (!$this->getUser()->getAttribute($modulo.'_nowcategoria') || $this->getContext()->getActionName() == 'nueva')
 		{
 		  $this->categoria_organismos_selected = 0;
 		}
+
 		if($this->getContext()->getActionName() == 'editar' || $this->getContext()->getActionName() == 'create' || $this->getContext()->getActionName() == 'update' ) 
 		{
-			$this->categoria_organismos_selected = $this->categoria? $this->categoria:DocumentacionOrganismoTable::getDocumentacionOrganismo($request->getParameter('id'))->getCategoriaOrganismoId();
+			$this->categoria_organismos_selected = $this->categoria ? $this->categoria : DocumentacionOrganismoTable::getDocumentacionOrganismo($request->getParameter('id'))->getCategoriaOrganismoId();
 		}
+
 		if($this->getUser()->getAttribute($modulo.'_nowcategoria') && $this->getContext()->getActionName() != 'editar' && $this->getContext()->getActionName() != 'nueva' )
 		{
 			$this->categoria_organismos_selected = $this->getUser()->getAttribute($modulo.'_nowcategoria');
 		}
-		$this->arrayCategoria = OrganismoTable::doSelectAllCategorias('CategoriaOrganismo');
-		
+
+		$this->arrayCategoria = OrganismoTable::doSelectAllCategorias('CategoriaOrganismo');		
 	}
 }
