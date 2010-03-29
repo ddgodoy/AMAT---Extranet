@@ -617,10 +617,6 @@ class asambleasActions extends sfActions
 		$asamblea->setEstado('activa');
 		$asamblea->save();
 		
-//		echo '<pre>';
-//		print_r($this->DAtos['usuarios']);
-//		echo '</pre>';
-//		exit();
 		
 		## Obtener los usuarios de ese grupo
 		$usuarios = $this->DAtos['usuarios'];
