@@ -140,13 +140,15 @@ class seguridadActions extends sfActions
 	
 	protected function envioMailSolicitud($to, $login, $key)
 	{
-		sfLoader::loadHelpers('Url');
+		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+
 		$url = url_for('seguridad/establecer_clave', true).'?key='.$key;
+		$iPh = image_path('/images/mail_head.jpg', true);
 
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
 		$message = new Swift_Message(sfConfig::get('app_default_name_project').' - Solicitud de Nueva Clave');
-		$mailContext = array('login' => $login,'url' => $url);
+		$mailContext = array('login' => $login, 'url' => $url, 'head_image'=>$iPh);
 
 		$message->attach(new Swift_Message_Part($this->getPartial('seguridad/mailHtmlBody', $mailContext), 'text/html'));
 		$message->attach(new Swift_Message_Part($this->getPartial('seguridad/mailTextBody', $mailContext), 'text/plain'));

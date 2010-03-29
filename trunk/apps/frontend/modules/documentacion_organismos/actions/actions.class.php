@@ -105,81 +105,77 @@ class documentacion_organismosActions extends sfActions
   
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
-  	$toProcess = $request->getParameter('id');
-  	
-  	if (!empty($toProcess)) {
-  		$request->checkCSRFProtection();
-  		
-  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
-  		
-  		foreach ($IDs as $id) {
-  			$this->forward404Unless($documentacion_organismo = Doctrine::getTable('DocumentacionOrganismo')->find($id), sprintf('Object documentacion_organismo does not exist (%s).', $id));
-  			
-  			sfLoader::loadHelpers('Security');
+		$toProcess = $request->getParameter('id');
+
+		if (!empty($toProcess)) {
+			$request->checkCSRFProtection();
+			$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+			$enviar = false;
+
+			sfLoader::loadHelpers(array('Security', 'Url', 'Tag', 'Asset'));
+			$iPh = image_path('/images/mail_head.jpg', true);
+
+			foreach ($IDs as $id) {
+				$this->forward404Unless($documentacion_organismo = Doctrine::getTable('DocumentacionOrganismo')->find($id), sprintf('Object documentacion_organismo does not exist (%s).', $id));
+
 				if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
 
 				if ($accion == 'publicar') {
 					$documentacion_organismo->setEstado('publicado');
 					$documentacion_organismo->save();
-				if($documentacion_organismo->getEstado()) {
-				if ($documentacion_organismo->getOrganismoId()) {
-					$enviar = true;
-					$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
-					$email  = UsuarioTable::getUsuarioByOrganismo($documentacion_organismo->getOrganismoId());
-					$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
-				}
-				if ($documentacion_organismo->getEstado()=='publicado') {
-				  ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
-				}  
-			}
 
-			## envia el email tendria que haber echo un servicio pero bue es lo que salio 	
-			if($enviar)	{
-				foreach ($email AS $emailPublic) {
-					if($emailPublic->getEmail()) {
-				    $mailTema = $emailPublic->getEmail();
-	    		    $nombreEvento = $documentacion_organismo->getNombre();
-	    		    $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
-	    		    $descripcion  = $documentacion_organismo->getContenido();
-
-					$mailer = new Swift(new Swift_Connection_NativeMail());
-					$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-					$mailContext = array('tema' => $tema,
-					                     'evento' => $nombreEvento,
-					                     'organizador' => $organizador,    
-															'descripcio' => $descripcion,
-															);
-					$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-					$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-	
-					$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-					$mailer->disconnect();		
+					if ($documentacion_organismo->getEstado()) {
+						if ($documentacion_organismo->getOrganismoId()) {
+							$enviar = true;
+							$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
+							$email  = UsuarioTable::getUsuarioByOrganismo($documentacion_organismo->getOrganismoId());
+							$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
+						}
+						if ($documentacion_organismo->getEstado()=='publicado') {
+							ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
+						}
 					}
-				}
+					## envia el email
+					if ($enviar) {
+						$url = url_for('documentacion_organismos/show?id='.$documentacion_organismo->getId(), true);
+
+						foreach ($email AS $emailPublic) {
+							if ($emailPublic->getEmail()) {
+								$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre') ;
+
+								$mailer = new Swift(new Swift_Connection_NativeMail());
+								$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+
+								$mailContext = array('tema'   => $tema,
+																	   'evento' => $documentacion_organismo->getNombre(),
+																	   'url'    => $url,
+						                     		 'head_image'  => $iPh,
+																	   'organizador' => $organizador,
+																	   'descripcio'  => $documentacion_organismo->getContenido()
+								);
+								$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+								$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+
+								$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+								$mailer->disconnect();
+							}
+						}
+					}
+				} else { $documentacion_organismo->delete(); }
 			}
-     	
-			}
-			else
-			{
-				$documentacion_organismo->delete();
-			}
-  		}
-  	}
-  	$this->redirect('documentacion_organismos/index');
+		}
+		$this->redirect('documentacion_organismos/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-    $form->bind($request->getParameter($form->getName()));
+		$form->bind($request->getParameter($form->getName()));
+		
+		if ($form->isValid()) {
+			$documentacion_organismo = $form->save();
 
-    if ($form->isValid()) 
-    {
-         $documentacion_organismo = $form->save();
-    
-   
-## Notificar y enviar email a los destinatarios 
-			if($documentacion_organismo->getEstado()) {
+			## Notificar y enviar email a los destinatarios 
+			if ($documentacion_organismo->getEstado()) {
 				if ($documentacion_organismo->getOrganismoId()) {
 					$enviar = true;
 					$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
@@ -187,45 +183,45 @@ class documentacion_organismosActions extends sfActions
 					$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
 				}
 				if ($documentacion_organismo->getEstado()=='publicado') {
-				  ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
-				}  
+					ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
+				}
 			}
-			if($documentacion_organismo->getEstado() == 'pendiente')
-   			{ 
+			if ($documentacion_organismo->getEstado() == 'pendiente') {
 				$enviar = true;
-				$grupo = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
-				$email = AplicacionRolTable::getEmailPublicar('33','','',$grupo->getId());
-				$tema = 'Documento registrado para el Organismos: '.$grupo->getNombre();
-			}	
+				$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
+				$email  = AplicacionRolTable::getEmailPublicar('33','','',$grupo->getId());
+				$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
+			}
+			## envia el email
+			if ($enviar) {
+				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
 
-			## envia el email tendria que haber echo un servicio pero bue es lo que salio 	
-			if($enviar)	{
+				$iPh = image_path('/images/mail_head.jpg', true);
+				$url = url_for('documentacion_organismos/show?id='.$documentacion_organismo->getId(), true);
+				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
+
 				foreach ($email AS $emailPublic) {
-					if($emailPublic->getEmail()) {
-				    $mailTema = $emailPublic->getEmail();
-	    		    $nombreEvento = $documentacion_organismo->getNombre();
-	    		    $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
-	    		    $descripcion  = $documentacion_organismo->getContenido();
+					if ($emailPublic->getEmail()) {
+						$mailer = new Swift(new Swift_Connection_NativeMail());
+						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
 
-					$mailer = new Swift(new Swift_Connection_NativeMail());
-					$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-						$mailContext = array('tema' => $tema,
-						                     'evento' => $nombreEvento,
-						                     'organizador' => $organizador,    
-																'descripcio' => $descripcion,
-																);
+						$mailContext = array('tema'   => $tema,
+																 'evento' => $documentacion_organismo->getNombre(),
+																 'url'    => $url,
+						                     'head_image'  => $iPh,
+																 'organizador' => $organizador,    
+																 'descripcio'  => $documentacion_organismo->getContenido(),
+						);
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
+
+						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+						$mailer->disconnect();
 					}
 				}
 			}
-		$this->redirect('documentacion_organismos/show?id='.$documentacion_organismo->getId());	
-     }	
-		
+			$this->redirect('documentacion_organismos/show?id='.$documentacion_organismo->getId());	
+		}
   }
   
   /* Metodos para busqueda y ordenamiento */
@@ -315,16 +311,12 @@ class documentacion_organismosActions extends sfActions
 		}
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
-		{
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return 'deleted=0'.$parcial;
+		} else {
+		  return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
 		}
-		else
-		{
-		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
-		} 
-		
-		
   }
   
   protected function setOrdenamiento()

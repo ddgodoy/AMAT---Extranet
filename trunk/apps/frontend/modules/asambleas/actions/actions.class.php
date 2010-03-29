@@ -716,70 +716,56 @@ class asambleasActions extends sfActions
 		
 		## Grupos y Consejos
 		$this->convocados = Doctrine::getTable('Convocatoria')->getConvocadosByAsamblea($this->asambleaId);
-		
 	}
 	
 	public function executeAceptar(sfWebRequest $request)
 	{
-		if($this->getRequestParameter('DirectoresGerente')==1)
-		{  
-	   		$this->DAtos = $this->setDirectoresGerente(); 
-		   	
+		if ($this->getRequestParameter('DirectoresGerente')==1) {
+			$this->DAtos = $this->setDirectoresGerente();
 		}
-		if($this->getRequestParameter('GrupodeTrabajo')==2)
-		{  
+		if ($this->getRequestParameter('GrupodeTrabajo')==2) {
 			$this->DAtos =$this->setGruposdeTrabajo();
-			
 		}
-		if($this->getRequestParameter('ConsejoTerritorial')==3)
-		{  
+		if ($this->getRequestParameter('ConsejoTerritorial')==3) {
 			$this->DAtos = $this->setConsejosTerritoriales();
 		}
-		if($this->getRequestParameter('Organismo')==4)
-		{  
+		if ($this->getRequestParameter('Organismo')==4) {
 			$this->DAtos = $this->setOrganismo();
 		}
-		if($this->getRequestParameter('Junta_directiva')==5)
-		{  
-	   		$this->DAtos = $this->setJuntadirectiva(); 
-		   	
+		if($this->getRequestParameter('Junta_directiva')==5) { 
+			$this->DAtos = $this->setJuntadirectiva();
 		}
-		if($this->getRequestParameter('Otros')==6)
-		{  
-	   		$this->DAtos = $this->setOtros(); 
-		   	
+		if($this->getRequestParameter('Otros')==6) {
+			$this->DAtos = $this->setOtros();
 		}
-		
 		## Obtener el id de la asamblea
-		if(!$this->convocatoriaId = $this->getRequestParameter('convocatoria'))
+		if (!$this->convocatoriaId = $this->getRequestParameter('convocatoria')) {
 			$this->forward404('La convocatoria solicitada no existe');
-		
+		}
 		$convocatoria = Doctrine::getTable('Convocatoria')->find($this->convocatoriaId);
 		$convocatoria->setEstado('aceptada');
 		$convocatoria->save();
 		$userConvocador = UsuarioTable::getUsuarioByid($convocatoria->getOwnerId());
-		
-		if($userConvocador->getEmail())	
-			{	
-					    $mailTema = $userConvocador->getEmail();
-					    $temaTi = 'Convocatoria a asamblea aceptada por parte de '.$convocatoria->Usuario->getNombre().','.$convocatoria->Usuario->getApellido();
-		    		    $nombreEvento =  $convocatoria->Asamblea->getTitulo() ;
-		    		    $descripcion = $convocatoria->Asamblea->getContenido();
-						$mailer = new Swift(new Swift_Connection_NativeMail());
-						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-						$mailContext = array(                   'tema' => $temaTi,
-						                                        'evento' => $nombreEvento,  
-																'descripcio' => $descripcion,
-																);
-						$message->attach(new Swift_Message_Part($this->getPartial('asambleas/mailHtmlBody', $mailContext), 'text/html'));
-						$message->attach(new Swift_Message_Part($this->getPartial('asambleas/mailTextBody', $mailContext), 'text/plain'));
-		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
-					
-				}
-		
+
+		if ($userConvocador->getEmail()) {
+			sfLoader::loadHelpers(array('Tag', 'Asset'));
+			$iPh = image_path('/images/mail_head.jpg', true);
+
+			$temaTi  = 'Convocatoria a asamblea aceptada por parte de '.$convocatoria->Usuario->getNombre().', '.$convocatoria->Usuario->getApellido();
+			$mailer  = new Swift(new Swift_Connection_NativeMail());
+			$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+
+			$mailContext = array('tema'  => $temaTi,
+			                    'evento' => $convocatoria->Asamblea->getTitulo(),
+													'descripcio' => $convocatoria->Asamblea->getContenido(),
+													'head_image' => $iPh
+			);
+			$message->attach(new Swift_Message_Part($this->getPartial('asambleas/mailHtmlBody', $mailContext), 'text/html'));
+			$message->attach(new Swift_Message_Part($this->getPartial('asambleas/mailTextBody', $mailContext), 'text/plain'));
+
+			$mailer->send($message, $userConvocador->getEmail(), sfConfig::get('app_default_from_email'));
+			$mailer->disconnect();
+		}
 		$this->getUser()->setFlash('notice', 'La convocatoria ha sido aceptada');
 		$this->redirect('asambleas/index?'.$this->DAtos['get']);
 	}

@@ -93,17 +93,15 @@ class usuariosActions extends sfActions
 	protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
 	{
 		$form->bind($request->getParameter($form->getName()));
-
-		if ($form->isValid())
-		{
+		
+		if ($form->isValid()) {
 			## Verificar que el login del usuario no se repita
 			$postValues = $request->getPostParameters();
 			$exceptUser = $accion=='creado' ? '' : 'AND u.id != '.$request->getParameter('id');
 			$rVerificar = Doctrine_Query::create()->select('u.id AS u_id')->from('usuario u')->where("u.deleted = 0 AND u.login = '".$postValues['usuario']['login']."' $exceptUser");
 			$aVerificar = $rVerificar->fetchArray();
 
-			if (empty($aVerificar))
-			{
+			if (empty($aVerificar)) {
 				## Si existe el usuario... Obtengo el usuario actual
 				if ($form->getValue('id')) {
 					$usuario = Doctrine::getTable('Usuario')->find($form->getValue('id'));
@@ -111,44 +109,35 @@ class usuariosActions extends sfActions
 				}
 				## Sobreescribo el usuario actual en la db
 				$usuarioForm = $form->save();
-	
-						
-				
+
 				## Si insertó un password...
 				if ($form['password']->getValue()) {
 					$usuario = ServiceSecurity::modifyCredentials($usuarioForm->getLogin(), $form['password']->getValue());
 				} else {
 					$usuario->save();
 				}
-				
-				if($usuarioForm->getEmail() && $this->hasRequestParameter('btn_enviar_email')) 
-				{
-				    $mailTema = $usuarioForm->getEmail();
-	    		    $nombre = $usuarioForm->getNombre();
-	    		    $apellido = $usuarioForm->getApellido();
-	    		    $login = $usuarioForm->getLogin();
-	    		    $password = $form['password']->getValue();
-	    		    $host = $_SERVER["SERVER_NAME"];
-	    		    
-	    		    
-	    		    
+				if ($usuarioForm->getEmail() && $this->hasRequestParameter('btn_enviar_email')) {
+					sfLoader::loadHelpers(array('Tag', 'Asset'));
+					$iPh = image_path('/images/mail_head.jpg', true);
+
 					$mailer = new Swift(new Swift_Connection_NativeMail());
 					$message = new Swift_Message('Datos de accesos a Extranet de Asociados AMAT');
-		
-					$mailContext = array('nombre' => $nombre,
-					                     'apellido' => $apellido,
-					                     'login' => $login,
-					                     'password' => $password,
-					                     'host' => $host,);
+
+					$mailContext = array('nombre'    => $usuarioForm->getNombre(),
+															 'apellido'  => $usuarioForm->getApellido(),
+															 'login'     => $usuarioForm->getLogin(),
+															 'password'  => $form['password']->getValue(),
+															 'host'      => $_SERVER["SERVER_NAME"],
+															 'head_image'=> $iPh
+					);
 					$message->attach(new Swift_Message_Part($this->getPartial('usuarios/mailHtmlBody', $mailContext), 'text/html'));
 					$message->attach(new Swift_Message_Part($this->getPartial('usuarios/mailTextBody', $mailContext), 'text/plain'));
-	
-					$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-					$mailer->disconnect();		
+
+					$mailer->send($message, $usuarioForm->getEmail(), sfConfig::get('app_default_from_email'));
+					$mailer->disconnect();
 				}
-				
 				$strPaginaVolver = $accion=='actualizado' ? '?page='.$this->getUser()->getAttribute($this->getModuleName().'_nowpage') : '';
-	
+
 				$this->getUser()->setFlash('notice', "El usuario ha sido $accion correctamente");
 				$this->redirect('usuarios/index'.$strPaginaVolver);
 			} else {
