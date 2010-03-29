@@ -46,7 +46,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 	
 	public  static function envioMail($to, $header_image, $body, $titulo, $idenvio, $idusuario)
 	{
-		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 		$iPh = image_path('/images/mail_head.jpg', true);
 		$cPh = public_path('uploads/tipo_comunicado/images/'.$header_image, true);
 
