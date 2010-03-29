@@ -142,7 +142,7 @@ class documentacion_gruposActions extends sfActions
 			}				
 			## envia el email  	
 			if (!empty($enviar)) {
-				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
 				$iPh = image_path('/images/mail_head.jpg', true);
 				$url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
@@ -160,8 +160,8 @@ class documentacion_gruposActions extends sfActions
 						                     'organizador' => $organizador,    
 																 'descripcio'  => $documentacion_grupo->getContenido()
 						);
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+						$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+						$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
 						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
 						$mailer->disconnect();
