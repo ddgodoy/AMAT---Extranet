@@ -5,5 +5,16 @@
 class EnvioErrorTable extends Doctrine_Table
 {
 
-	
+	public static function getEmailError($id)
+	{
+		$q=Doctrine_Query::create()
+		->from('EnvioError er')
+		->leftJoin('er.EnvioComunicado ec')
+		->leftJoin('ec.Comunicado c')
+		->leftJoin('er.Usuario u')
+		->where('er.id = '.$id);
+		
+		return $q->fetchOne();
+		
+	}
 }

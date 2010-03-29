@@ -59,7 +59,7 @@
 						<a href="<?php echo url_for('usuarios/editar?id='.$valor->getUsuarioId()) ?>"><?php echo $valor->Usuario->getEmail() ?></a>					
 					</td>
 					<td valign="center">					
-						<a><?php echo truncate_text($valor->getError(),50,'...') ?></a>					
+						<a href="<?php echo url_for('error_envio/show?id='.$valor->getId()) ?>" ><?php echo truncate_text($valor->getError(),50,'...') ?></a>					
 					</td>
 					<td valign="center" align="center">
 					<?php if(validate_action('modificar')):?>
