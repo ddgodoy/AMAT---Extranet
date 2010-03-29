@@ -32,6 +32,10 @@ abstract class BaseNotificacion extends sfDoctrineRecord
         $this->hasColumn('entidad_id', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('tipo', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
         $this->hasColumn('visto', 'integer', null, array(
              'type' => 'integer',
              ));

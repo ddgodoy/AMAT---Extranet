@@ -3,17 +3,7 @@
 /**
  * notificaciones components.
  *
- *  DELETE
-	FROM notificacion
-	WHERE id IN 
-	(
-        SELECT  notificacion.id 
-        FROM   notificacion,noticia
-        where `noticia`.deleted = 0 
-                 AND (  `noticia`.fecha_caducidad <= NOW()  )
-                 AND `noticia`.id=notificacion.entidad_id
-                 AND `noticia`.titulo=notificacion.nombre    
-	)
+ *  
  * 
  * 
  * @package    extranet
@@ -25,6 +15,13 @@ class notificacionesComponents extends sfComponents
 {
 	public function executeUltimos_avisos(sfWebRequest $request)
 	{   
+		
+     // $evento = NotificacionTable::DeletedByEntidad('Evento','evento');
+      $noticias = NotificacionTable::DeletedByEntidad('Noticia','noticia');
+		
+		
+		
+		
 //		$evento = EventoTable::getEventosCaducos();
 //		
 //		if(isset($evento))

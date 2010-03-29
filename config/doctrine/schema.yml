@@ -842,6 +842,7 @@ Notificacion:
     contenido_notificacion_id: { type: integer }
     usuario_id:                { type: integer }
     entidad_id:                { type: integer }
+    tipo:                      { type: string(255) }
     visto:                     { type: integer }
   relations:
     ContenidoNotificacion:     { local: contenido_notificacion_id, foreign: id, onDelete: CASCADE }

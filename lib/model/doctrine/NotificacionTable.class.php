@@ -70,4 +70,21 @@ class NotificacionTable extends Doctrine_Table
 		return true;		  
 	}	
 	
+	public static function DeletedByEntidad($tipo, $tabla)
+	{
+		
+		$q=Doctrine_Query::create()
+		->delete()
+		->from('Notificacion') 
+		->where("tipo = '$tipo'")
+		->andWhere('entidad_id IN 
+		  ( SELECT id 
+	        FROM   '.$tabla.'
+	        where deleted = 0 
+	        AND fecha_caducidad <= NOW())') ;
+		
+		return $q->execute();
+	}
+	
+	
 }
