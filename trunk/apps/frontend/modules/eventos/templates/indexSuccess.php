@@ -164,12 +164,12 @@
 						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('hasta_busqueda', this);"/>
 					</td>
 				</tr>
+				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Ambito</label></td>
 					<td style="padding-top: 5px;">
 					<?php echo select_tag('ambito',options_for_select(array('0'=>'--seleccionar--','intranet' => 'Intranet', 'web' => 'Web', 'ambos' => 'Intranet/Web'),$ambitoBQ),array('class'=>"form_input"))?>	
 				</tr>
-				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Estado</label></td>
 					<td style="padding-top: 5px;">
