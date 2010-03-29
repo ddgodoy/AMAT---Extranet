@@ -41,10 +41,6 @@ class ServiceLeeremail
 				  	for ($i=1;$i<=$totla_email;$i++)
 				  	{
 				  		
-//				  		echo self::get_msgCuer($i);
-//				  		exit();
-				  		
-				  		
 				  		$arraEmailError[$i]['id'] =	$i;
 						$arraEmailError[$i]['Subject']   =	self::get_msg($i,'Subject').'<br>'.self::get_msgCuer($i);
 						$arraEmailError[$i]['MessageID'] =	self::get_msg($i,'Message-ID');  			
@@ -267,13 +263,17 @@ class ServiceLeeremail
         {
             $count = 0;
             $msg = array();
-            $temp = array();
+            $temp = '';
 
             while(!ereg("^\.\r\n", $reply))
             {
                 $reply = self::pop3_reply();
-                $temp[$count] = $reply;
-                $count++;
+                if($count >= 39 && $count <= 49 )
+                {
+	                $temp .= $reply.'<br>';
+                }    
+	             $count++;
+	                
             }
         }
         return $temp;
