@@ -28,30 +28,25 @@ class contactoActions extends sfActions
 	{
 		$form->bind($request->getParameter($form->getName()));
 
-    if ($form->isValid()) {
-    	try {
-    		$objCatAsunto = Doctrine::getTable('CategoriaAsunto')->find($form->getValue('tema'));
+		if ($form->isValid()) {
+			try {
+				sfLoader::loadHelpers(array('Tag', 'Asset'));
+				$iPh = image_path('/images/mail_head.jpg', true);
 
-    		if($objCatAsunto->getActivo_1() == 1)
-    		{
-    		   $mailTema = $objCatAsunto->getEmail_1();
-    		}
-    		else 
-    		{
-                $mailTema = $objCatAsunto->getEmail_2();    		   	
-    		}   
-    		$nombreTema = $objCatAsunto->getNombre();
-    		$usuario = $this->getUser()->getAttribute('nombre').' '.$this->getUser()->getAttribute('apellido');
-    		$organismos = $this->getUser()->getAttribute('mutua');
-    		 
+				$objCatAsunto = Doctrine::getTable('CategoriaAsunto')->find($form->getValue('tema'));
+				$mailTema   = $objCatAsunto->getActivo_1() == 1 ? $objCatAsunto->getEmail_1() : $objCatAsunto->getEmail_2();
+				$usuario    = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
+				$organismos = $this->getUser()->getAttribute('mutua');
+
 				$mailer = new Swift(new Swift_Connection_NativeMail());
 				$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-
-				$mailContext = array(                   'usuario' => $usuario,
-				                                        'organización' => $organismos,    
-														'tema' => $nombreTema,
-														'asunto' => $form->getValue('asunto')
-														);
+				
+				$mailContext = array('usuario' => $usuario,
+														 'tema'    => $objCatAsunto->getNombre(),
+														 'asunto'  => $form->getValue('asunto'),
+														 'organizacion' => $organismos,
+														 'head_image' => $iPh,
+				);
 				$message->attach(new Swift_Message_Part($this->getPartial('contacto/mailHtmlBody', $mailContext), 'text/html'));
 				$message->attach(new Swift_Message_Part($this->getPartial('contacto/mailTextBody', $mailContext), 'text/plain'));
 
@@ -61,11 +56,10 @@ class contactoActions extends sfActions
 				$this->getUser()->setFlash('notice', "El email ha sido enviado correctamente.<br />Nos comunicaremos con Ud. a la brevedad.");
 
 				$this->redirect('contacto/index');
-			}
-			catch (Exception $e) {
+			} catch (Exception $e) {
 				$mailer->disconnect();
 				$this->mensajeError = 'No fue posible enviar su mensaje.<br />Por favor, intente m&aacute;s tarde.';
 			}
-    }
+		}
 	}
 }

@@ -108,128 +108,110 @@ class noticiasActions extends sfActions
 	public function executePublicar(sfWebRequest $request)
 	{
 		$request->checkCSRFProtection();
-		
+
 		$clase = 'Noticia';
 		$modulo = 'noticias';
-		
+
 		$this->forward404Unless($objeto = Doctrine::getTable($clase)->find($request->getParameter('id')), sprintf('Object '.$clase.' does not exist (%s).', $request->getParameter('id')));
-		
-		sfLoader::loadHelpers('Security'); // para usar el helper
-		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');		
-		
+
+		sfLoader::loadHelpers(array('Security', 'Url', 'Tag', 'Asset'));
+		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');
+
 		$objeto->setEstado('publicado');
 		$objeto->save();
-		
+
 		## Notificar
 		ServiceNotificacion::send('creacion', 'Noticia', $objeto->getId(), $objeto->getTitulo());
 		
 		## envio el email por eso digo que tendria que haber echo un servicio
-	    $email = UsuarioTable::getEmailEvento($objeto->getOwnerId());
-		$tema = 'Novedad publicada';
+		$email = UsuarioTable::getEmailEvento($objeto->getOwnerId());
+		$iPh = image_path('/images/mail_head.jpg', true);
+		$url = url_for($modulo.'/show?id='.$objeto->getId(), true);
 		
-		foreach ($email AS $emailPublic)
-				{
-					if($emailPublic->getEmail())
-					{
-					    $mailTema = $emailPublic->getEmail();
-					    $temaTi = $tema ;
-		    		    $nombreEvento = $objeto->getTitulo();
-		    		    $organizador = $objeto->getAutor();
-		    		    $descripcion = $objeto->getEntradilla();
-						$mailer = new Swift(new Swift_Connection_NativeMail());
-						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-						$mailContext = array(                   'tema' => $temaTi,
-						                                        'evento' => $nombreEvento,
-						                                        'organizador' => $organizador,    
-																'descripcio' => $descripcion,
-																);
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
-					}
-				}
-		
-		
+		foreach ($email AS $emailPublic) {
+			if ($emailPublic->getEmail()) {
+				$mailer = new Swift(new Swift_Connection_NativeMail());
+				$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+				$mailContext = array('tema'   => 'Novedad publicada',
+				                  	 'evento' => $objeto->getTitulo(),
+				                  	 'url'    => $url,
+						                 'head_image'  => $iPh,
+				                  	 'organizador' => $objeto->getAutor(),
+														 'descripcio'  => $objeto->getEntradilla()
+				);
+				$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+				$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+
+				$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+				$mailer->disconnect();
+			}
+		}
 		$this->getUser()->setFlash('notice', "El registro ha sido publicado correctamente");
-		
+
 		$this->redirect($modulo.'/show?id='.$objeto->getId());
 	}
-	
 
 	protected function processForm(sfWebRequest $request, sfForm $form)
 	{
 		$enviar = false;
 		$estado = $request->getParameter($form->getName());
-		
+
 		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-		
-		if ($form->isValid())
-		{
+
+		if ($form->isValid()) {
 			$noticia = $form->save();
-			
-			if($noticia->getFechaPublicacion()=='')
-			{
-				$noticia->setFechaPublicacion(date( 'Y-m-d' ));
+			$tema = 'Novedad ';
+
+			if ($noticia->getFechaPublicacion()=='') {
+				$noticia->setFechaPublicacion(date('Y-m-d'));
 				$noticia->save();
 			}
-			
-			if($noticia->getFechaCaducidad()=='')
-			{
+			if ($noticia->getFechaCaducidad()=='') {
 				$noticia->setFechaCaducidad(null);
 				$noticia->save();
 			}
-			
-			
-			
 			## Notificar
-			if($estado['estado'] == 'publicado') {
+			if ($estado['estado'] == 'publicado') {
 				$enviar = true;
-				$email = UsuarioTable::getEmailEvento($noticia->getOwnerId());
-				$tema = 'Novedad publicada';
+				$email  = UsuarioTable::getEmailEvento($noticia->getOwnerId());
+				$tema  .= 'publicada';
 				ServiceNotificacion::send('creacion', 'Noticia', $noticia->getId(), $noticia->getTitulo());
 			}
-            
-			if($estado['estado'] == 'pendiente')
-			{ 
+			if ($estado['estado'] == 'pendiente') { 
 				$enviar = true;
-				$email = AplicacionRolTable::getEmailPublicar(1,'','','');
-				$tema = 'Novedad pendiente de publicar';
-				$aviso = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
-			}	
-			##enviar email a los responsables 
-			
-			if($enviar)	
-			{
-				foreach ($email AS $emailPublic)
-				{
-					if($emailPublic->getEmail())
-					{
-					    $mailTema = $emailPublic->getEmail();
-					    $temaTi = $tema ;
-		    		    $nombreEvento = $estado['titulo'];
-		    		    $organizador = $estado['autor'];
-		    		    $descripcion = $estado['entradilla'];
+				$email  = AplicacionRolTable::getEmailPublicar(1,'','','');
+				$tema  .= 'pendiente de publicar';
+				$aviso  = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
+			}
+			##enviar email a los responsables
+			if ($enviar) {
+				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+
+				$iPh = image_path('/images/mail_head.jpg', true);
+				$url = url_for('noticias/show?id='.$noticia->getId(), true);
+
+				foreach ($email AS $emailPublic) {
+					if ($emailPublic->getEmail()) {
 						$mailer = new Swift(new Swift_Connection_NativeMail());
 						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-						$mailContext = array(                   'tema' => $temaTi,
-						                                        'evento' => $nombreEvento,
-						                                        'organizador' => $organizador,    
-																'descripcio' => $descripcion,
-																);
+
+						$mailContext = array('tema'  => $tema,
+						                    'evento' => $estado['titulo'],
+						                    'url'    => $url,
+						                    'head_image'  => $iPh,
+						                    'organizador' => $estado['autor'],
+																'descripcio'  => $estado['entradilla']
+						);
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
+
+						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+						$mailer->disconnect();
 					}
 				}
 			}
-		
 			$this->getUser()->setFlash('notice', 'La noticia ha sido actualizada correctamente');
+
 			$this->redirect('noticias/show?id='.$noticia->getId());
 		}
 	}
@@ -329,12 +311,10 @@ class noticiasActions extends sfActions
 		}
 		
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
-		{
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return 'deleted=0'.$parcial;
-		}
-		else 
-		{
+		} else {
 			return "deleted=0  AND ambito != 'web' AND fecha_publicacion <= NOW() AND (fecha_caducidad >= NOW() OR fecha_caducidad IS NULL ) ".$parcial;
 		}	
   }
@@ -350,24 +330,4 @@ class noticiasActions extends sfActions
 		}
 		return $this->orderBy . ' ' . $this->sortType;
   }
-  
-//  public function executeLimpiar(sfWebRequest $request)
-//	{
-//		$noticia = Doctrine_Query::create()->from('Noticia')->execute();
-//		
-//		foreach ($noticia as $n)
-//		{
-//		  $limpio = strip_tags($n->getEntradilla()) ;
-//		  
-//		  $n->setEntradilla($limpio);
-//		  $n->save();
-//		  
-//		}   
-//		
-//		
-//		echo 'ok';	
-//		exit();	
-//		
-//	}
-  
 }

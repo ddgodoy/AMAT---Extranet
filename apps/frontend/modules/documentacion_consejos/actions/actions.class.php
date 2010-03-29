@@ -116,49 +116,58 @@ class documentacion_consejosActions extends sfActions
     $form->bind($request->getParameter($form->getName()));
 
     if ($form->isValid()) {
+    	$tema = 'Documento ';
       $documentacion_consejo = $form->save();
 
 			## Notificar y enviar email a los destinatarios 
-			if($documentacion_consejo->getEstado() == 'publicado') {
+			if ($documentacion_consejo->getEstado() == 'publicado') {
 				if ($documentacion_consejo->getConsejoTerritorialId()) {
 					$enviar = true;
 					$grupo  = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
 					$email  = UsuarioTable::getUsuariosByConsejoTerritorial($documentacion_consejo->getConsejoTerritorialId());
-					$tema   = 'Documento registrado para el Consejo Territorial: '.$grupo->getNombre();
+					$tema  .= 'registrado ';
 				}
 				if ($documentacion_consejo->getEstado()=='publicado') {
 				  ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());
 				}  
 			}
-		   if($documentacion_consejo->getEstado() == 'pendiente')
-	   			{ 
-					$enviar = true;
-					$grupo = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
-					$email = AplicacionRolTable::getEmailPublicar('28','',$grupo->getId());
-					$tema = 'Documento pendiente de publicar para Consejo Territorial: '.$grupo->getNombre();
-				}	
+	    if ($documentacion_consejo->getEstado() == 'pendiente') {
+				$enviar = true;
+				$grupo  = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
+				$email  = AplicacionRolTable::getEmailPublicar('28','',$grupo->getId());
+				$tema  .= 'pendiente de publicar ';
+			}
+			$tema .= 'para el Consejo Territorial: '.$grupo->getNombre();
+
 			## envia el email
 			if ($enviar) {
-				foreach ($email AS $emailPublic) {
-						
-					if($emailPublic->getEmail()) {
-				    $mailTema = $emailPublic->getEmail();
-	    		  $nombreEvento = $documentacion_consejo->getNombre();
-	    		  $organizador  = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
-	    		  $descripcion  = $documentacion_consejo->getContenido();
+				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
 
+				$url = url_for('documentacion_consejos/show?id='.$documentacion_consejo->getId(), true);
+				$iPh = image_path('/images/mail_head.jpg', true);
+
+				$nombreDocCj = $documentacion_consejo->getNombre();
+				$descripcion = $documentacion_consejo->getContenido();
+  		  $organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre') ;
+
+				foreach ($email AS $emailPublic)
+				{
+					if ($emailPublic->getEmail())
+					{
 						$mailer = new Swift(new Swift_Connection_NativeMail());
 						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-						$mailContext = array('tema' => $tema,
-						                     'evento' => $nombreEvento,
+						$mailContext = array('tema'   => $tema,
+						                     'evento' => $nombreDocCj,
+						                     'url'    => $url,
+						                     'head_image'  => $iPh,
 						                     'organizador' => $organizador,    
-																 'descripcio' => $descripcion,
+																 'descripcio'  => $descripcion,
 																);
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
+						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+						$mailer->disconnect();
 					}
 				}
 			}

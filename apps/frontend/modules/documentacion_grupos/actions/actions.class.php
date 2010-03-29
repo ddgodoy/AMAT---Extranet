@@ -117,66 +117,59 @@ class documentacion_gruposActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-    $form->bind($request->getParameter($form->getName()));
-    if ($form->isValid())
-    { 
-      $documentacion_grupo = $form->save();
-      
-      ## Notificar y enviar email a los destinatarios 
-			if($documentacion_grupo->getEstado()=='publicado')
-			 {
-				if ($documentacion_grupo->getGrupoTrabajoId())
-				{
-					$enviar = true;
+		$form->bind($request->getParameter($form->getName()));
+
+		if ($form->isValid()) {
+			$documentacion_grupo = $form->save();
+
+			## Notificar y enviar email a los destinatarios 
+			if ($documentacion_grupo->getEstado()=='publicado') {
+				if ($documentacion_grupo->getGrupoTrabajoId()) {
+					$enviar= true;
 					$grupo = GrupoTrabajoTable::getGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
 					$email = UsuarioTable::getUsuariosByGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
-					$tema = 'Documento registrado para Grupo de Trabajo: '.$grupo->getNombre();
+					$tema  = 'Documento registrado para Grupo de Trabajo: '.$grupo->getNombre();
 				}
-				if($documentacion_grupo->getEstado()=='publicado')
-				{
-				  ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
-				}  
-			 }
-			if($documentacion_grupo->getEstado() == 'pendiente')
-   			{ 
-				$enviar = true;
+				if($documentacion_grupo->getEstado()=='publicado') {
+					ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
+				}
+			}
+			if ($documentacion_grupo->getEstado() == 'pendiente') {
+				$enviar= true;
 				$grupo = GrupoTrabajoTable::getGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
 				$email = AplicacionRolTable::getEmailPublicar('24',$grupo->getId());
-				$tema = 'Documento pendiente de publicar para Grupo de Trabajo: '.$grupo->getNombre();
-			}	
-			##enviar email a los responsables 
-			
+				$tema  = 'Documento pendiente de publicar para Grupo de Trabajo: '.$grupo->getNombre();
+			}				
 			## envia el email  	
-			if(!empty($enviar))	
-			{
-				foreach ($email AS $emailPublic)
-				{
-					
-					if($emailPublic->getEmail())
-					{
-					    $mailTema = $emailPublic->getEmail();
-		    		    $nombreEvento = $documentacion_grupo->getNombre();
-		    		    $organizador = $this->getUser()->getAttribute('apellido').','.$this->getUser()->getAttribute('nombre') ;
-		    		    $descripcion = $documentacion_grupo->getContenido();
+			if (!empty($enviar)) {
+				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+
+				$iPh = image_path('/images/mail_head.jpg', true);
+				$url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
+				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
+
+				foreach ($email AS $emailPublic) {
+					if ($emailPublic->getEmail()) {
 						$mailer = new Swift(new Swift_Connection_NativeMail());
 						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-		
-						$mailContext = array(                   'tema' => $tema,
-						                                        'evento' => $nombreEvento,
-						                                        'organizador' => $organizador,    
-																'descripcio' => $descripcion,
-																);
+
+						$mailContext = array('tema'   => $tema,
+						                     'evento' => $documentacion_grupo->getNombre(),
+						                     'url'    => $url,
+						                     'head_image'  => $iPh,
+						                     'organizador' => $organizador,    
+																 'descripcio'  => $documentacion_grupo->getContenido()
+						);
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-		
-						$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();		
+
+						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+						$mailer->disconnect();
 					}
 				}
-				
 			}
-      $this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
-    }
+			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
+		}
   }
   
 	/* Metodos para busqueda y ordenamiento */
@@ -250,15 +243,12 @@ class documentacion_gruposActions extends sfActions
 		}
 		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
-		{
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return 'deleted=0'.$parcial;
-		}
-		else
-		{
+		} else {
 			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
 		}
-		
   }
   
   protected function setOrdenamiento()
@@ -273,7 +263,7 @@ class documentacion_gruposActions extends sfActions
 		return $this->orderBy . ' ' . $this->sortType;
   }
   
-    ## ajax listar por categoria
+  ## ajax listar por categoria
   public function executeListByGrupoTrabajo()
 	{
 		$this->documentacion_selected = 0;
