@@ -10,13 +10,13 @@
 class seguridadActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
-	{
+	{		
 		$this->forward('seguridad','login');
 	}
 
 	public function executeLogin(sfWebRequest $request)
 	{
-		if($this->getUser()->getAttribute('userId')) {
+		if ($this->getUser()->getAttribute('userId')) {
 			$this->redirect('inicio/index');
 		}
 		$this->form = new SeguridadForm();

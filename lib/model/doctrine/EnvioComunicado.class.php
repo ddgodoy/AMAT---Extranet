@@ -39,21 +39,27 @@ class EnvioComunicado extends BaseEnvioComunicado
 			} else {
 				//echo "<br />ERROR email: ".$usuario;
 			}
-			$ListEmails ="";
+			$ListEmails = "";
 			$contUsu = 0;
 		}
 	}
 	
-	protected function envioMail($to, $header_image, $body, $titulo,$idenvio,$idusuario)
+	protected function envioMail($to, $header_image, $body, $titulo, $idenvio, $idusuario)
 	{
+		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+		$iPh = image_path('/images/mail_head.jpg', true);
+		$cPh = public_path('uploads/tipo_comunicado/images/'.$header_image, true);
+
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
 		$message = new Swift_Message(sfConfig::get('app_default_name_project').' - '.$titulo);
-		$htmlBdy = '<html><head><title>Comunicado</title></head><table>'.
-							 '<tr><td><img src="http://www.intranet.amat.es/uploads/tipo_comunicado/images/'.$header_image.'">'.
-							 '</td></tr><tr><td>'.$body.'</td></tr></table></html>';
 
-		$message->attach(new Swift_Message_Part($htmlBdy, 'text/html'));
+		$mailContext = array('imagen' => $cPh,
+												 'cuerpo' => $body,
+										 		 'head_image' => $iPh
+		);
+		$message->attach(new Swift_Message_Part($this->getPartial('comunicados/mailHtmlBody', $mailContext), 'text/html'));
+		$message->attach(new Swift_Message_Part($this->getPartial('comunicados/mailTextBody', $mailContext), 'text/plain'));
 
 		if ($mailer->send($message, $to, sfConfig::get('app_default_from_email_comunicados'), $idenvio, $idusuario)) {	
 			$succes = true;
