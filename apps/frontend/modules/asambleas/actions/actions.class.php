@@ -616,18 +616,14 @@ class asambleasActions extends sfActions
 		$asamblea = AsambleaTable::getAsambleaId($this->asambleaId,$this->DAtos['where']);
 		$asamblea->setEstado('activa');
 		$asamblea->save();
-		
-		
+
 		## Obtener los usuarios de ese grupo
 		$usuarios = $this->DAtos['usuarios'];
-			
+
+		sfLoader::loadHelpers(array('Tag', 'Asset'));
+		$iPh = image_path('/images/mail_head.jpg', true);
 		
 		foreach ($usuarios as $usuario) {
-			
-//		echo '<pre>';
-//		print_r($usuario->getUsuario());
-//		echo '</pre>';
-//		exit();	
 			
 		if($usuario->getUsuario()->getId() && $this->asambleaId)
 			{
@@ -645,29 +641,26 @@ class asambleasActions extends sfActions
 			
 			if($usuario->getUsuario()->getEmail())	
 			{	
-			    $mailTema = $usuario->getUsuario()->getEmail();
-			    $temaTi = 'Convocatoria a asamblea:'.$asamblea->getTitulo() ;
-    		    $nombreEvento =  $asamblea->getTitulo() ;
-    		    $descripcion = $asamblea->getContenido();
+    		$nombreEvento =  $asamblea->getTitulo() ;
+    		$descripcion = $asamblea->getContenido();
+
 				$mailer = new Swift(new Swift_Connection_NativeMail());
 				$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
 
-				$mailContext = array(                   'tema' => $temaTi,
-				                                        'evento' => $nombreEvento,  
-														'descripcio' => $descripcion,
+				$mailContext = array('tema'   => 'Convocatoria a asamblea:'.$asamblea->getTitulo(),
+				                     'evento' => $nombreEvento,  
+														 'descripcio' => $descripcion,
+														 'head_image' => $iPh
 														);
 				$message->attach(new Swift_Message_Part($this->getPartial('asambleas/mailHtmlBody', $mailContext), 'text/html'));
 				$message->attach(new Swift_Message_Part($this->getPartial('asambleas/mailTextBody', $mailContext), 'text/plain'));
 
-				$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
+				$mailer->send($message, $usuario->getUsuario()->getEmail(), sfConfig::get('app_default_from_email'));
 				$mailer->disconnect();		
-					
 		   }
-		  
 		  }  
-					
 		}
-		
+
 		## Notificar
 		if(!isset($_POST['sf_method']) && $asamblea->getEstado() == 'activa') {
 			ServiceNotificacion::send('lectura', 'Asamblea', $asamblea->getId(), $asamblea->getTitulo(),$this->DAtos);

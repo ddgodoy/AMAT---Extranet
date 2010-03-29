@@ -114,7 +114,7 @@ class noticiasActions extends sfActions
 
 		$this->forward404Unless($objeto = Doctrine::getTable($clase)->find($request->getParameter('id')), sprintf('Object '.$clase.' does not exist (%s).', $request->getParameter('id')));
 
-		sfLoader::loadHelpers(array('Security', 'Url', 'Tag', 'Asset'));
+		sfLoader::loadHelpers(array('Security', 'Url', 'Tag', 'Asset', 'Partial'));
 		if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');
 
 		$objeto->setEstado('publicado');
@@ -139,8 +139,8 @@ class noticiasActions extends sfActions
 				                  	 'organizador' => $objeto->getAutor(),
 														 'descripcio'  => $objeto->getEntradilla()
 				);
-				$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-				$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+				$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+				$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
 				$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
 				$mailer->disconnect();
@@ -185,7 +185,7 @@ class noticiasActions extends sfActions
 			}
 			##enviar email a los responsables
 			if ($enviar) {
-				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
 				$iPh = image_path('/images/mail_head.jpg', true);
 				$url = url_for('noticias/show?id='.$noticia->getId(), true);
@@ -202,8 +202,8 @@ class noticiasActions extends sfActions
 						                    'organizador' => $estado['autor'],
 																'descripcio'  => $estado['entradilla']
 						);
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-						$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+						$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+						$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
 						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
 						$mailer->disconnect();
