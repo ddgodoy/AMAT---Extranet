@@ -19,7 +19,6 @@
 	  <br clear="all" /> 
 	   <div class="clear"></div>
 	</div>
-	<br clear="all" />
 	<div class="botonera"> 
 	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('error_envio/index') ?>';"/>
 	</div>
