@@ -44,7 +44,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 		}
 	}
 	
-	protected static function envioMail($to, $header_image, $body, $titulo, $idenvio, $idusuario)
+	public  static function envioMail($to, $header_image, $body, $titulo, $idenvio, $idusuario)
 	{
 		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
 		$iPh = image_path('/images/mail_head.jpg', true);
@@ -58,8 +58,8 @@ class EnvioComunicado extends BaseEnvioComunicado
 												 'cuerpo' => $body,
 										 		 'head_image' => $iPh
 		);
-		$message->attach(new Swift_Message_Part(self::getPartial('comunicados/mailHtmlBody', $mailContext), 'text/html'));
-		$message->attach(new Swift_Message_Part(self::getPartial('comunicados/mailTextBody', $mailContext), 'text/plain'));
+		$message->attach(new Swift_Message_Part(include_partial('comunicados/mailHtmlBody', $mailContext), 'text/html'));
+		$message->attach(new Swift_Message_Part(include_partial('comunicados/mailTextBody', $mailContext), 'text/plain'));
 
 		if ($mailer->send($message, $to, sfConfig::get('app_default_from_email_comunicados'), $idenvio, $idusuario)) {	
 			$succes = true;
