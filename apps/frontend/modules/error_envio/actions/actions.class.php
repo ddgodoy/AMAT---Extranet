@@ -33,6 +33,14 @@ class error_envioActions extends sfActions
 	$this->cantidadRegistros = $this->pager->getNbResults();
 
   }
+  
+  public function executeShow(sfWebRequest $request)
+	{
+		$this->error_envio = EnvioErrorTable::getEmailError($request->getParameter('id'));
+		
+		$this->forward404Unless($this->error_envio);
+	}
+
 
   public function executeDelete(sfWebRequest $request)
   {

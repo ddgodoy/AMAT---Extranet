@@ -40,8 +40,13 @@ class ServiceLeeremail
 			  	{	   
 				  	for ($i=1;$i<=$totla_email;$i++)
 				  	{
+				  		
+//				  		echo self::get_msgCuer($i);
+//				  		exit();
+				  		
+				  		
 				  		$arraEmailError[$i]['id'] =	$i;
-						$arraEmailError[$i]['Subject']   =	self::get_msg($i,'Subject');
+						$arraEmailError[$i]['Subject']   =	self::get_msg($i,'Subject').'<br>'.self::get_msgCuer($i);
 						$arraEmailError[$i]['MessageID'] =	self::get_msg($i,'Message-ID');  			
 				  	}
 				  	
@@ -250,6 +255,30 @@ class ServiceLeeremail
     
         return $subject;
     }
+    
+  protected  static  function get_msgCuer($msgNum)
+    {
+    	$temp = '';
+        $command = "RETR ".$msgNum."\r\n";
+        $reply = self::pop3_command($command);
+        $rtn = self::is_ok($reply);
+
+        if($rtn)
+        {
+            $count = 0;
+            $msg = array();
+            $temp = array();
+
+            while(!ereg("^\.\r\n", $reply))
+            {
+                $reply = self::pop3_reply();
+                $temp[$count] = $reply;
+                $count++;
+            }
+        }
+        return $temp;
+    }      
+    
     
  protected static function delete_msg($msgNum)
     {
