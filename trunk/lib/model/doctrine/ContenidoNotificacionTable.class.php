@@ -25,4 +25,5 @@ class ContenidoNotificacionTable extends Doctrine_Table
 		return $contenidoNofiticacion;
 	}
 	
+	
 }

@@ -33,6 +33,7 @@ class ServiceNotificacion
                 $notificacion->setUsuarioId($usuario->Usuario->getId());	
                 }
 				$notificacion->setEntidadId($id);
+				$notificacion->setTipo($data['tipo']);
 				$notificacion->setUrl($data['url']);
 				$notificacion->setNombre($titulo);
 				$notificacion->setContenidoNotificacionId($contenidoNotificacion->getId());
@@ -76,6 +77,7 @@ class ServiceNotificacion
 	{
 		$data = array();
 		$data['url'] = 'eventos/show?id='.$id;
+		$data['tipo'] = 'Evento';
 		$usuer = UsuarioTable::getUsuarioByEventos($id);
 		if($usuer->count()==0)
 		{
@@ -101,6 +103,7 @@ class ServiceNotificacion
 	{
 		$data = array();
 		$data['url'] = 'noticias/show?id=' . $id;
+		$data['tipo'] = 'Noticia';
 		$data['usuarios'] = Doctrine::getTable('Usuario')->findAll();
 		
 		return $data;
@@ -120,6 +123,7 @@ class ServiceNotificacion
 		
 		$data = array();
 		$data['url'] = 'asambleas/ver?id='.$id.'&'.$DAtos['get'];
+		$data['tipo'] = 'Asamblea';
 		$data['usuarios'] = $DAtos['usuarios'];
 		
 		return $data;
@@ -138,6 +142,7 @@ class ServiceNotificacion
 				
 		$data = array();
 		$data['url'] = 'documentacion_grupos/show?id='.$id;
+		$data['tipo'] = 'Documentacion';
 		$data['usuarios'] = UsuarioTable::getUsuariosByGrupoTrabajo($grupo);
 		
 		return $data;
@@ -155,6 +160,7 @@ class ServiceNotificacion
 				
 		$data = array();
 		$data['url'] = 'documentacion_consejos/show?id='.$id;
+		$data['tipo'] = 'DocumentacionCon';
 		$data['usuarios'] = UsuarioTable::getUsuariosByConsejoTerritorial($grupo);
 		
 		return $data;
@@ -172,6 +178,7 @@ class ServiceNotificacion
 				
 		$data = array();
 		$data['url'] = 'documentacion_organismos/show?id='.$id;
+		$data['tipo'] = 'DocumentacionOrg';
 		$data['usuarios'] = UsuarioTable::getUsuarioByOrganismo($grupo);
 		
 		return $data;

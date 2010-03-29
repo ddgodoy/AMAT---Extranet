@@ -620,9 +620,15 @@ class asambleasActions extends sfActions
 		
 		## Obtener los usuarios de ese grupo
 		$usuarios = $this->DAtos['usuarios'];
-		
+			
 		
 		foreach ($usuarios as $usuario) {
+			
+//		echo '<pre>';
+//		print_r($usuario->getUsuario());
+//		echo '</pre>';
+//		exit();	
+			
 		if($usuario->getUsuario()->getId() && $this->asambleaId)
 			{
 				$convocatoria = new Convocatoria();
