@@ -11,12 +11,23 @@ class DocumentacionConsejoForm extends BaseDocumentacionConsejoForm
 {
   public function configure()
   {
+  		sfLoader::loadHelpers('Object');
   		$userId = sfContext::getInstance()->getUser()->getAttribute('userId');
+  		
+  		$this->roles = UsuarioRol::getRepository()->getRolesByUser($userId,1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+			$consejos = ConsejoTerritorialTable::getAllconsejo();
+		}
+		else 
+		{
+  			$consejos = ConsejoTerritorialTable::getConsejosTerritorialesByUsuario($userId);
+		}	
 		
   		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
 			'nombre'            => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
-			'consejo_territorial_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'ConsejoTerritorial', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
+			'consejo_territorial_id'  => new sfWidgetFormChoice(array('choices' =>array('0'=>'--seleccionar--')+_get_options_from_objects($consejos)), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'categoria_c_t_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaCT', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'contenido'         => new fckFormWidget(),			
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
@@ -28,7 +39,7 @@ class DocumentacionConsejoForm extends BaseDocumentacionConsejoForm
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'DocumentacionConsejo', 'column' => 'id', 'required' => false)),
 			'nombre'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => 'El título es obligatorio')),
-			'consejo_territorial_id'  => new sfValidatorDoctrineChoice(array('model' => 'ConsejoTerritorial')),
+			'consejo_territorial_id'  => new sfValidatorDoctrineChoice(array('model' => 'ConsejoTerritorial'),array('invalid'=>'El consejo territorial es obligatorio')),
 			'categoria_c_t_id'  => new sfValidatorDoctrineChoice(array('model' => 'CategoriaCT')),
 			'contenido'         => new sfValidatorString(array('required' => false)),						
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),

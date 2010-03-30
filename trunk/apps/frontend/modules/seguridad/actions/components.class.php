@@ -47,10 +47,19 @@ class seguridadComponents extends sfComponents
 		$arrExcepciones = Doctrine::getTable('Aplicacion')->getExcepcionesSeguridad();
 		$nowModuleAction = $this->module.'_'.$this->action;
 
-		if (!in_array($nowModuleAction, $arrExcepciones)) {
-			if ((empty($credenciales_array) || !$this->getUser()->hasCredential($credenciales_array, false)) && $this->module != 'seguridad') {
-				$this->getController()->redirect('seguridad/restringuido');
+		if($this->getUser()->getAttribute('userId'))
+		{
+			if (!in_array($nowModuleAction, $arrExcepciones)) {
+				if ((empty($credenciales_array) || !$this->getUser()->hasCredential($credenciales_array, false)) && $this->module != 'seguridad') {
+					$this->getController()->redirect('seguridad/restringuido');
+				}
 			}
+		}
+		else 
+		{
+			 $this->getUser()->setFlash('error', 'Sesión caducada');
+			 $this->getController()->redirect('seguridad/login') ;
+			
 		}
 	}
 }
