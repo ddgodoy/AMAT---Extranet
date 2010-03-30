@@ -99,6 +99,22 @@ class organismosActions extends sfActions
     {
             
       $organismo = $form->save();
+        
+        if($this->getActionName() == 'create')
+        {
+	        $usuariosGrupo = UsuarioTable::getUsuariosByGrupoTrabajo($organismo->getGrupoTrabajoId());		
+			foreach ($usuariosGrupo as $r) {
+				 $roles = UsuarioRol::getRepository()->getRolesByUser($r->getId(),1); 
+				if(Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $roles))
+				{
+					$usuarioOrganismo = new UsuarioOrganismo();
+					$usuarioOrganismo->setUsuarioId($r->getId()); 	
+					$usuarioOrganismo->setOrganismoId($organismo->getId()); 	
+					$usuarioOrganismo->save();
+				}
+	
+			}
+        }	        
       
 //      $bandera     = 0;
 //      $xSelectSubcat = $this->getRequestParameter('organismo[subcategoria_organismo_id]');

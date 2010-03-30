@@ -13,6 +13,8 @@ class OrganismoForm extends BaseOrganismoForm
   {
   	    
   		sfLoader::loadHelpers('Object');  	
+  		
+  		$action =sfContext::getInstance()->getActionName();
   	
   	    $userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
   	
@@ -28,7 +30,9 @@ class OrganismoForm extends BaseOrganismoForm
 		$usuariosGrupo = Doctrine::getTable('Usuario')->getUsuariosByGrupoTrabajo($idGrupoTrabajo);		
 		
 		$arrUsuariosGrupo = array();
+		$rolREsponsable = array();
 		foreach ($usuariosGrupo as $r) {
+			
 			$arrUsuariosGrupo[$r->getId()] = $r->getApellido().", ".$r->getNombre();
 		}
 		
@@ -60,7 +64,6 @@ class OrganismoForm extends BaseOrganismoForm
 			'usuarios_list' 			=> 'Usuarios',
 		));
 		
-		 
 		
 		$this->widgetSchema->setNameFormat('organismo[%s]');
   }

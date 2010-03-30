@@ -146,6 +146,7 @@ blockquote {
 	position: relative;
 	width: 100%;
 	background-image: url(../images/gran_cabecera.jpg);
+	z-index: 900;
 }
 .head .img1 img {
 	margin-top: 10px;
