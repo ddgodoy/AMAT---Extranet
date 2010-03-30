@@ -43,13 +43,22 @@ class error_envioActions extends sfActions
 
 
   public function executeDelete(sfWebRequest $request)
-  {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($envio_error = Doctrine::getTable('EnvioError')->find($request->getParameter('id')), sprintf('Object envio_error does not exist (%s).', $request->getParameter('id')));
-    $envio_error->delete();
-
-    $this->redirect('error_envio/index');
+  {$id = $request->getParameter('id');
+  	
+  	if($id)
+  	{
+	  	foreach ($id AS $i)
+	  	{
+	    	$envio_error = Doctrine::getTable('EnvioError')->find($i);
+	    	
+	        $envio_error->delete();
+	  	}   
+	  $this->getUser()->setFlash('notice', 'Los registro se Eliminaron');	
+      $this->redirect('error_envio/index');  	
+  	}
+  	 	
+  	$this->getUser()->setFlash('notice', 'Selecciona un registro para Eliminar');
+    $this->redirect('error_envio/index');  	
   }
   
   public function  executeEnviar(sfWebRequest $request)
@@ -66,6 +75,7 @@ class error_envioActions extends sfActions
 	    	
 	        $envio_error->delete();
 	  	}   
+	    $this->getUser()->setFlash('notice', 'Los registro se Enviaron');	 	
       $this->redirect('error_envio/index');  	
   	}
   	 	
