@@ -54,10 +54,8 @@
 						<?php echo $valor->getNumero() ?>
 					</td>
 					<td valign="top">
-					<?php if(validate_action('modificar')):?>
-						<a href="<?php echo url_for('circulares/show?id=' . $valor->getId()) ?>">
-							<strong><?php echo $valor->getNombre() ?></strong>
-					<?php endif;?>		
+						<a <?php if(validate_action('modificar')):?> href="<?php echo url_for('circulares/show?id=' . $valor->getId()) ?>" <?php endif;?>>
+							<strong><?php echo $valor->getNombre() ?></strong>		
 						</a>
 					</td>
 					<td valign="top" align="center">
