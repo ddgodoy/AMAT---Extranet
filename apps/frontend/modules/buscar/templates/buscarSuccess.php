@@ -507,7 +507,7 @@
 						
       <!--////////////////////////////////////////////////////////////////-->
       <?php if(isset($resultadoBusqueda)):?>
-		      <div style="float: left;" class="cat_de_busqueda">
+		      <div style="float: left; z-index:10;"" class="cat_de_busqueda">
 		      		<h2>Categorías de Esta Búsqueda</h2>
 		      		<?php foreach ($resultadoBusqueda AS $K=>$ResBU):?>
 		      		<?php if (validate_action('listar',$K)): ?>
