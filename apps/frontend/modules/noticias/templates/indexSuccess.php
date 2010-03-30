@@ -184,7 +184,7 @@ use_helper('Text');?>
 																				<option value="" >--seleccionar--</option>
 																				<option value="todos" <?php echo $todosa ?> >Intranet y Web</option>
 																				<option value="web" <?php echo $web ?> >web</option>
-																				<option value="intranet" <?php echo $intranet ?> >intranet</option>
+																				<option value="intranet" <?php echo $intranet ?> >Extranet</option>
 																				</select>	
 				  </td>
 				</tr>

@@ -38,7 +38,7 @@ class ActividadForm extends BaseActividadForm
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 		  'fecha_publicacion' => new sfValidatorDate(array(), array('required' => '', 'invalid' => '')),
-			'ambito'            => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'), 'required' => false)),
+			'ambito'            => new sfValidatorChoice(array('choices' => array('intranet' => 'extranet', 'web' => 'web', 'todos' => 'todos'), 'required' => false)),
 			'destacada'         => new sfValidatorBoolean(array('required' => false)),
 			'mutua_id'          => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true)),
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
