@@ -58,7 +58,7 @@ class seguridadComponents extends sfComponents
 		else 
 		{
 			 $this->getUser()->setFlash('error', 'Sesión caducada');
-			 $this->getController()->redirect('seguridad/login') ;
+			 $this->getController()->redirect('seguridad/Seguridad') ;
 			
 		}
 	}

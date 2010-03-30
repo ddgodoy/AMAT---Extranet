@@ -22,6 +22,18 @@ class seguridadActions extends sfActions
 		$this->form = new SeguridadForm();
 	}
 	
+	public function executeSegurida(sfWebRequest $request)
+	{
+		if ($this->getUser()->getAttribute('userId')) {
+			$this->redirect('inicio/index');
+		}
+		$this->form = new SeguridadForm();
+		
+		$this->setTemplate('login');
+		
+		
+	}
+	
 	public function executeLogout(sfWebRequest $request)
 	{
 		$this->getUser()->setAuthenticated(false);
@@ -198,4 +210,5 @@ class seguridadActions extends sfActions
 		$this->setTemplate('establecer_clave');
 	}
 	## Fin acciones recordar clave
+	
 }
