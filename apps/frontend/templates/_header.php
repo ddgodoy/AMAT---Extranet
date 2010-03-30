@@ -24,49 +24,50 @@
         </form>
       </div>
       <h1>Extranet de Asociados AMAT</h1>
-      <?php $arrMenu = sfContext::getInstance()->getUser()->getAttribute('menu') ?>
-
+      <?php $arrMenu = sfContext::getInstance()->getUser()->getAttribute('menu');
+       		$banderaPadre = 0;?>
+       		
+       <!--<pre>
+       <?php // print_r($arrMenu) ?>
+       </pre>		
+       <?php //exit(); ?>	-->	
+      
       <div class="menu" style="z-index:1000;">
         <ul class="sf-menu"> 
-        <?php foreach ($arrMenu as $item) : ?>
+        <?php foreach ($arrMenu as $item) : if( $banderaPadre == 1){$banderaPadre = 0;} ?>
         	<li id="primerNivel" class="current" style="cursor:pointer;"> <a><?php echo $item['nombre'] ?></a>
-        	<?php if ($item['hijos']) :?>
+        	<?php if (count($item['hijos']) >=1) :?>
         	  <?php foreach ($item['hijos'] as $verelmoduloPadre) : ?>
 			          				<?php if(validate_action('listar',$verelmoduloPadre['modulo'])|| validate_action('publicar',$verelmoduloPadre['modulo']) ):
 			          				  $banderaPadre = 1;
-			          				  else:
-			          				  $banderaPadre = 0;
 			          				  endif;?>
-			  
+			   <?php endforeach; ?>       				  
 			  <?php if($banderaPadre == 1):?>
 	        	<ul>
 	        	<?php foreach ($item['hijos'] as $hijo) : ?>
 	        	  <?php if(validate_action('listar',$hijo['modulo']) || validate_action('publicar',$hijo['modulo']) ):?>
-		              <li style="z-index:200;"><a <?php if($hijo['hijos']):?> class="current" <?php endif; ?>  <?php if($hijo['aplicacion']):?> href="<?php echo url_for($hijo['aplicacion'])?>" <?php else: ?> style="cursor:default;" <?php endif; ?>><?php echo $hijo['nombre'] ?></a>
-		              <?php if($hijo['hijos']):?>
+		              <li ><a <?php if($hijo['hijos']):?> class="current" <?php endif; ?>  <?php if($hijo['aplicacion']):?> href="<?php echo url_for($hijo['aplicacion'])?>" <?php else: ?> href="<?php echo url_for($hijo['url'])?>" <?php endif; ?>><?php echo $hijo['nombre'] ?></a>
+		              <?php if(count($hijo['hijos'])>= 1): $banderahijo= 0; ?>
 		              <?php foreach ($hijo['hijos'] as $verelmodulo) : ?>
 			          				<?php if(validate_action('listar',$verelmodulo['modulo'])|| validate_action('publicar',$verelmodulo['modulo']) ):
-			          				  $bandera = 1;
-			          				  else:
-			          				  $bandera = 0;
+			          				  $banderahijo = 1;
 			          				  endif;?>
-			          <?php if( $bandera == 1) : ?>
+			          <?php endforeach; ?>				  
+			          <?php if( $banderahijo == 1) : ?>
 		          			<ul>		          				
 		          				<?php foreach ($hijo['hijos'] as $nieto) : ?>
 			          				<?php if(validate_action('listar',$nieto['modulo']) || validate_action('publicar',$nieto['modulo']) ):?>
-			                  			<li style="z-index:300;"><a href="<?php echo url_for($nieto['aplicacion']) ?>"><?php echo $nieto['nombre'] ?></a></li>	 
+			                  			<li ><a <?php if($nieto['aplicacion']):?> href="<?php echo url_for($nieto['aplicacion'])?>" <?php else: ?> href="<?php echo url_for($nieto['url'])?>" <?php endif; ?>><?php echo $nieto['nombre'] ?></a></li>	 
 			          		  		<?php endif; ?>
 			      		  		<?php endforeach; ?>
 		          			</ul>
 		          	  <?php endif; ?>
-		          	  <?php endforeach; ?>
 		          	  <?php endif; ?>
 		          	  </li>
 		            <?php endif; ?>
 	        	<?php endforeach; ?>
 	            </ul>
 	        <?php endif; ?>	
-	        <?php endforeach; ?>
 	        <?php endif; ?>	
             </li> 
         <?php endforeach; ?>         

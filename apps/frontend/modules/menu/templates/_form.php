@@ -10,6 +10,8 @@
 
 <?php echo $form->renderGlobalErrors() ?>
 <?php echo $form['nombre']->renderError() ?>
+<?php echo $form['aplicacion_id']->renderError() ?>
+<?php echo $form['url_externa']->renderError() ?>
 <form action="<?php echo url_for('menu/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
@@ -61,7 +63,7 @@
         </td>
       </tr>
       <tr>
-      <td><?php echo $form['habilitado']->renderLabel() ?></td>
+      <td><?php echo $form['habilitado']->renderLabel() ?> </td>
         <td>
           <?php echo $form['habilitado'] ?>
         </td>
@@ -76,3 +78,9 @@
           <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('menu/index') ?>';">
     </div>
  </form>   
+<script language="javascript" type="text/javascript">
+$('menu_aplicacion_id').observe('change', function(){
+		$('menu_url_externa').value = '';});
+$('menu_url_externa').observe('change', function(){
+		$('menu_aplicacion_id').value = '';});
+</script>	

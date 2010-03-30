@@ -32,21 +32,35 @@ class MenuForm extends BaseMenuForm
       'padre_id'      => new sfValidatorInteger(array('required' => false)),
       'nombre'        => new sfValidatorString(array('required' => true),array('required' => 'ingrese el nombre')),
       'descripcion'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'aplicacion_id' => new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'required' => false),array('required' => 'Seleccione una aplicación')),
-      'url_externa'   => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'habilitado'    => new sfValidatorBoolean(array('required' => false)),
       'created_at'    => new sfValidatorDateTime(array('required' => false)),
       'updated_at'    => new sfValidatorDateTime(array('required' => false)),
       'deleted'       => new sfValidatorBoolean(),
     ));
 
+       
+    if(!$this->getObject('aplicacion_id') && !$this->getObject('url_externa') )
+    {
+    
+      $this->setValidator('aplicacion_id', new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'required' => true),array('required' => 'Seleccione una aplicación o Ingrese una Url')));
+      $this->setValidator('url_externa',  new sfValidatorString(array('max_length' => 255, 'required' => false),array('required' => 'Seleccione una aplicación o Ingrese una Url')));
+      
+    }
+    else   
+    {
+      $this->setValidator('aplicacion_id', new sfValidatorDoctrineChoice(array('model' => 'Aplicacion', 'required' => false),array('required' => 'Seleccione una aplicación o Ingrese una Url')));
+      $this->setValidator('url_externa',  new sfValidatorString(array('max_length' => 255, 'required' => false),array('required' => 'Seleccione una aplicación o Ingrese una Url')));
+    }
+    
+    
+    
     $this->widgetSchema['aplicacion_id']->addOption('order_by', array('nombre','asc'));
     
     if (empty($idpadre))
     { 
       	  $arrayElementos = array();
-       	  $cantidadElementos = $request->getParameter('action') == 'nueva' || $request->getParameter('action') == 'create' ? 6 : Menu::Cantidadelemetos($request->getParameter('id'));
-       	  //aca  estoy 
+       	  $cantidadElementos = $request->getParameter('action') == 'create' ? 6 : Menu::Cantidadelemetos($request->getParameter('id'));
+     
        	  for($i=1;$i<=$cantidadElementos;$i++)
        	  {
        	  	$arrayElementos[$i] = $i; 

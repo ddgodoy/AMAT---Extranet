@@ -22,7 +22,7 @@ class seguridadActions extends sfActions
 		$this->form = new SeguridadForm();
 	}
 	
-	public function executeSegurida(sfWebRequest $request)
+	public function executeSeguridad(sfWebRequest $request)
 	{
 		if ($this->getUser()->getAttribute('userId')) {
 			$this->redirect('inicio/index');
