@@ -1,5 +1,5 @@
 <?php if(!$sf_user->getAttribute('userId') && $sf_context->getModuleName() != 'seguridad'): ?>
-	<?php $sf_context->getController()->redirect('seguridad/login') ?>
+	<?php $sf_context->getController()->redirect('seguridad/index') ?>
 <?php endif; ?>
 
 <?php //echo 'module =>'.$sf_context->getModuleName().'<br> action =>'.$sf_context->getActionName(); exit();?>
