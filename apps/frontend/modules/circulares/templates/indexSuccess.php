@@ -34,13 +34,13 @@
 			<tbody>
 				<tr>
 				    <th width="15%" style="text-align:center;">
-						<a href="<?php echo url_for('circulares/index?sort=c.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('circulares/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
 					<th width="5%" style="text-align:center;">
-					    <a href="<?php echo url_for('circulares/index?sort=c.numero&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nº</a>
+					    <a href="<?php echo url_for('circulares/index?sort=numero&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nº</a>
 					</th>
 					<th width="85%">
-						<a href="<?php echo url_for('circulares/index?sort=c.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('circulares/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>

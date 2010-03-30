@@ -16,7 +16,7 @@ class Mutua extends BaseMutua
 	
 	public static function getArrayMutuas()
 	{
-		$ArrayMutuas = array();
+		$ArrayMutuas = array('0'=>'Sin Mutua');
 		$ModelosMutuas = MutuaTable::getAllMutuas();
 		
 		foreach ($ModelosMutuas AS $m)
