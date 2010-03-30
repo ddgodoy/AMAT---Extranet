@@ -56,8 +56,8 @@ class EventoForm extends BaseEventoForm
 			'ambito'          => new sfValidatorChoice(array('choices' => array('intranet' => 'extranet', 'web' => 'web', 'ambos' => 'ambos'), 'required' => false)),
 			'estado'          => new sfValidatorChoice(array('choices' => array('guardado' => 'guardado', 'pendiente' => 'pendiente', 'publicado' => 'publicado'), 'required' => true)),
 			'owner_id'        => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => false)),
-			'usuarios_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'Acción inválida')),
-			'mutua_id'        => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true)),
+			'usuarios_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'El usuario ingresado es incorrecto')),
+			'mutua_id'        => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true),array('invalid'=>'La mutua es obliagtoria')),
 		));
 
 		if ($this->getObject()->getImagen())
@@ -87,7 +87,8 @@ class EventoForm extends BaseEventoForm
 		$this->setDefaults(array( 'usuarios_list' => $userId,
 		                          'owner_id' => $userId, 
 		                          'mas_imagen' => 1,
-		                          'ambito'=>'ambos'));
+		                          'ambito'=>'ambos',
+		                          'mutua_id'=>'0'));
 
 		$this->widgetSchema->setNameFormat('evento[%s]');
 	}
