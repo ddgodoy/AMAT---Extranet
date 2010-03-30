@@ -11,7 +11,7 @@
       <tr>
         <td width="70%"><h1><?php echo $DAtos['titulo']?></h1></td>
       </tr>
-    </table><br />
+    </table>
     
      <?php if(!empty($Grupo)): include_partial('miembros_grupo/MenuGrupo',array('Grupo' => $Grupo, 'modulo'=>$modulo)); endif;?>
      <?php if(!empty($Consejo)): include_partial('miembros_consejo/MenuConsejo',array('Consejo' => $Consejo, 'modulo'=>$modulo)); endif;?>
