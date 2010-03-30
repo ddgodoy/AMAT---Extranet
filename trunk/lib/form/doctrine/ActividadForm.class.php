@@ -24,7 +24,7 @@ class ActividadForm extends BaseActividadForm
 			'contenido'         => new fckFormWidget(),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 		  'fecha_publicacion' => new sfWidgetFormInputHidden(),
-			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'))),
+			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'extranet', 'web' => 'web', 'todos' => 'todos'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
 			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'owner_id'          => new sfWidgetFormInputHidden(),

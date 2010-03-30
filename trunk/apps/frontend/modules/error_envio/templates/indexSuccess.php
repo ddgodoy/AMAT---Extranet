@@ -1,6 +1,29 @@
 <?php use_helper('Text') ?>
 <?php use_helper('TestPager') ?>
 <?php use_helper('Security') ?>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+<script language="javascript" type="text/javascript">
+	function setActionFormList(accion)
+	{
+		var parcialMensaje = '';
+		var rutaToPub = '<?php echo url_for('error_envio/enviar') ?>';
+		var rutaToDel = '<?php echo url_for('error_envio/delete') ?>';
+		var objectFrm = $('frmListDocOrganismos');
+
+		if (accion == 'enviar') {
+			objectFrm.action = rutaToPub;
+			parcialMensaje = 'envio';
+		} else {
+			objectFrm.action = rutaToDel;
+			parcialMensaje = 'eliminación';
+		}
+		if (confirm('Confirma la '+ parcialMensaje +' de los registros seleccionados?')) {
+			return true;
+		}
+		return false;
+	}
+</script>
+
 
 <div class="mapa"><strong>Comunicados</strong> > Error Envio de Comunicados</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -27,10 +50,14 @@
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s <?php if ($cajaBsq) echo " con la palabra '".$cajaBsq."'" ?> </span> 
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
-		<form action="error_envio/enviar" method="POST" id="envios" enctype="multipart/form-data" >
+		<form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
+				    <?php if(validate_action('baja') || validate_action('modificar')): ?>
+				    <th width="5%">
+					</th>
+					<?php endif; ?>
 					<th width="10%" style="text-align:left;">
 						<a href="<?php echo url_for('error_envio/index?sort=er.created_at&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
@@ -49,6 +76,11 @@
 				
 				<?php  $i=0; foreach ($envio_error_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
+				    <?php if(validate_action('baja') || validate_action('modificar')): ?>
+				    <td width="5%">
+					<input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" />
+					</td>
+					<?php endif; ?>
 					<td valign="center" align="left">
 						<?php echo date("d/m/Y", strtotime($valor->getCreatedAt())) ?>
 					</td>
@@ -61,11 +93,6 @@
 					<td valign="center">					
 						<a href="<?php echo url_for('error_envio/show?id='.$valor->getId()) ?>" ><?php echo truncate_text($valor->getError(),50,'...') ?></a>					
 					</td>
-					<td valign="center" align="center">
-					<?php if(validate_action('modificar')):?>
-					<input type="checkbox" value="<?php echo $valor->getId()?>" id="id" name="id[]" class="" > 	
-					<?php endif; ?>	
-					</td>
 		          	<td valign="center" align="center">
 		          	<?php if(validate_action('baja')):?>
 		          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'error_envio/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
@@ -73,11 +100,19 @@
 		          	</td>
 				</tr>
 				<?php endforeach; ?>
+				<?php if(validate_action('baja') || validate_action('modificar')):?>
+				<tr class="gris">
+				<td width="3%"><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+				<td>
+				<input type="submit" class="boton" value="Enviar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('enviar');" />
+				</td>
+				<td>
+				<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+				</td>
+		        </tr>
+		       <?php endif;?>		     
 			</tbody>
 		</table>
-		<?php if(validate_action('modificar')):?>
-			<input type="submit" style="float: right;" value="Enviar seleccionados" name="newNews" class="boton"/>
-		<?php endif;?>
 		</form>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
