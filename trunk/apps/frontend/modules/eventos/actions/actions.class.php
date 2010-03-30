@@ -25,6 +25,9 @@ class eventosActions extends sfActions
 		->leftJoin('e.UsuarioEvento ue')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
+		
+//		echo $this->pager->getQuery()->getSql();
+//		exit();
 
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
@@ -348,7 +351,7 @@ class eventosActions extends sfActions
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return "e.deleted=0".$parcial;
 		} else {
-			return "e.deleted=0 AND (e.fecha_caducidad >= NOW() OR e.fecha_caducidad IS NULL ) AND ( ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'intranet')".$parcial;
+			return "e.deleted=0 AND (e.fecha_caducidad >= NOW() OR e.fecha_caducidad IS NULL ) AND ( ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'web' OR e.estado = 'guardado')".$parcial;
 		}	
   }
 
