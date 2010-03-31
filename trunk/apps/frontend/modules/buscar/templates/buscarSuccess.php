@@ -502,6 +502,68 @@
 							$resultadoBusqueda['documentacion_organismos']['url']='buscar/buscar?categoria=documentacion_organismo&q='.$word; 
 							$resultadoBusqueda['documentacion_organismos']['cantidad']=count($resDocumentacionOrganismo); 
 							endif; ?>
+							
+							<?php // ArchivoCT       ************************************************************ ?>			
+							<?php if (count($resArchivoCT) && validate_action('listar','archivos_c_t')): ?>
+							<ul class="tema">
+								<h4><span><?php if (count($resArchivoCT) > 5): ?> 5 <?php else : echo count($resArchivoCT); endif;?> de <?php echo count($resArchivoCT)?> resultados</span>Archivos Consejo Territorial</h4>
+								<?php $count = 0 ?>
+								<?php foreach ($resArchivoCT as $obj): ?>
+									<li><a href="<?php echo url_for('archivos_c_t/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
+									<?php $count ++ ?>
+									<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
+								<?php endforeach;?>
+								<?php if (count($resArchivoCT) > 5): ?>  
+								<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=archivos_c_t&q='.$word) ?>">+ Ver Mas Resultados</a>
+								<?php endif;?>
+							</ul>
+							<?php 
+							$resultadoBusqueda['archivos_c_t']['Nombre']='Archivos Consejo Territorial'; 
+							$resultadoBusqueda['archivos_c_t']['url']='buscar/buscar?categoria=archivos_c_t&q='.$word; 
+							$resultadoBusqueda['archivos_c_t']['cantidad']=count($resArchivoCT); 
+							endif; ?>
+							
+							<?php // ArchivoDG       ************************************************************ ?>			
+							<?php if (count($resArchivoDG) && validate_action('listar','archivos_d_g')): ?>
+							<ul class="tema">
+								<h4><span><?php if (count($resArchivoDG) > 5): ?> 5 <?php else : echo count($resArchivoDG); endif;?> de <?php echo count($resArchivoDG)?> resultados</span>Archivos Grupo de Trabajo</h4>
+								<?php $count = 0 ?>
+								<?php foreach ($resArchivoDG as $obj): ?>
+									<li><a href="<?php echo url_for('archivos_d_g/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
+									<?php $count ++ ?>
+									<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
+								<?php endforeach;?>
+								<?php if (count($resArchivoDG) > 5): ?>  
+								<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=archivos_d_g&q='.$word) ?>">+ Ver Mas Resultados</a>
+								<?php endif;?>
+							</ul>
+							<?php 
+							$resultadoBusqueda['archivos_d_g']['Nombre']='Archivos Grupo de Trabajo'; 
+							$resultadoBusqueda['archivos_d_g']['url']='buscar/buscar?categoria=archivos_d_g&q='.$word; 
+							$resultadoBusqueda['archivos_d_g']['cantidad']=count($resArchivoDG); 
+							endif; ?>
+							
+							<?php // ArchivoDO       ************************************************************ ?>			
+							<?php if (count($resArchivoDO) && validate_action('listar','archivos_d_o')): ?>
+							<ul class="tema">
+								<h4><span><?php if (count($resArchivoDO) > 5): ?> 5 <?php else : echo count($resArchivoDO); endif;?> de <?php echo count($resArchivoDO)?> resultados</span>Archivos de Organismos</h4>
+								<?php $count = 0 ?>
+								<?php foreach ($resArchivoDO as $obj): ?>
+									<li><a href="<?php echo url_for('archivos_d_o/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
+									<?php $count ++ ?>
+									<?php if ($count == 5): ?> <?php break ?> <?php endif;?>				
+								<?php endforeach;?>
+								<?php if (count($resArchivoDO) > 5): ?>  
+								<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=archivos_d_o&q='.$word) ?>">+ Ver Mas Resultados</a>
+								<?php endif;?>
+							</ul>
+							<?php 
+							$resultadoBusqueda['archivos_d_g']['Nombre']='Archivos de Organismos'; 
+							$resultadoBusqueda['archivos_d_g']['url']='buscar/buscar?categoria=archivos_d_o&q='.$word; 
+							$resultadoBusqueda['archivos_d_g']['cantidad']=count($resArchivoDO); 
+							endif; ?>
+							
+							
 						   </div>
 						<?php endif; //cierro el if de categoria ?> 	
 						
