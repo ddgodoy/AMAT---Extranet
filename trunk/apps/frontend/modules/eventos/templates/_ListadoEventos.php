@@ -21,7 +21,7 @@
 	</td>
 		<td><a href="<?php echo url_for('eventos/show?id=' . $evento->getId()) ?>"><strong><?php echo $evento->getTitulo() ?></strong></a></td>
 		<td><?php echo $evento->getOrganizador() ?></td>
-		<td><?php if (validate_action('publicar') || validate_action('modificar') || validate_action('alta') ){ echo $evento->getAmbito()=='ambos'? 'Intranet/Web': ucfirst($evento->getAmbito()); } ?></td>
+		<td><?php if (validate_action('publicar') || validate_action('modificar') || validate_action('alta') ){ echo $evento->getAmbito()=='ambos'? 'Extranet/Web': ucfirst($evento->getAmbito()); } ?></td>
 	<td><?php if (validate_action('publicar')):?><?php echo ucwords($evento->getEstado()) ?><?endif;?></td>
 	<td>
 	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente'): ?>
