@@ -58,7 +58,7 @@ use_helper('Text');?>
 			<tbody>
 			<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				<tr>
-					<?php if (validate_action('publicar') || validate_action('baja')): ?>
+					<?php if (validate_action('baja')): ?>
 					<th width="3%"></th>
 	      		    <?php endif;?>
 					<th width="11%">

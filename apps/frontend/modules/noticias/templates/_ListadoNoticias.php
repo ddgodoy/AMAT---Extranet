@@ -2,7 +2,6 @@
 				<?php if (validate_action('baja')): ?>
 				<td><input type="checkbox" name="id[]" value="<?php echo $noticia->getId() ?>" /></td>
 				<?php endif; ?>
-			    </td>
 				<td  width="11%" align="center"><span style="color:#999"><?php	echo date("d/m/Y", strtotime($noticia->getFecha()));?></span><br />
 				<?php		
 					if ($noticia->getImagen()) {

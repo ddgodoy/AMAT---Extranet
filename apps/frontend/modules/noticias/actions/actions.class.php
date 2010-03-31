@@ -23,6 +23,11 @@ class noticiasActions extends sfActions
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
+//		echo $this->pager->getQuery()->getSql();
+//		exit();
+		
+		
+		
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
@@ -315,7 +320,7 @@ class noticiasActions extends sfActions
 		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return 'deleted=0'.$parcial;
 		} else {
-			return "deleted=0  AND ambito != 'web' AND fecha_publicacion <= NOW() AND (fecha_caducidad >= NOW() OR fecha_caducidad IS NULL ) ".$parcial;
+			return "deleted=0 AND (fecha_caducidad >= NOW() OR fecha_caducidad IS NULL ) AND ( user_id_creador = ".$this->getUser()->getAttribute('userId')." OR ambito != 'web' OR estado = 'guardado')".$parcial;
 		}	
   }
 
