@@ -39,9 +39,15 @@ class miembros_organismoActions extends sfActions
 			->andWhere('ur.rol_id IN (4,6)')
 			->orderBy($this->setOrdenamiento())
 			->groupBy('uo.usuario_id');
+			
+//			echo $this->pager->getQuery()->getSql();
+//			exit();
+			
+			
 			$this->pager->setPage($this->paginaActual);
 			$this->pager->init();
-	
+			
+			
 			$this->usuario_list = $this->pager->getResults();
 			$this->cantidadRegistros = $this->pager->getNbResults();
        

@@ -36,19 +36,20 @@
 						<a href="<?php echo url_for('miembros_organismo/index?sort=u.apellido&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Apellidos</a>
 					</th>
 					<th width="15%" style="text-align:left;">
-						<a href="#">Nombre</a>
+						<a href="<?php echo url_for('miembros_organismo/index?sort=u.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nombre</a>
 					</th>					
 					<th width="10%">
-						<a href="#">Mutua</a>
+						<a href="<?php echo url_for('miembros_organismo/index?sort=u.mutua_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Mutua</a>
 					</th>
 					<th width="30%">
-						<a href="#">Email</a>
+						<a href="<?php echo url_for('miembros_organismo/index?sort=u.email&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Email</a>
 					</th>
 					<th width="15%">
-						<a href="#">Teléfono</a>
+						<a href="<?php echo url_for('miembros_organismo/index?sort=u.telefono&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Tel&eacute;fono</a>
 					</th>
+
 					<th width="30%">
-						<a href="#">Grupo de trabajo</a>
+						<a href="<?php echo url_for('miembros_organismo/index?sort=o.grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Grupo de trabajo</a>
 					</th>
 				</tr>
 				

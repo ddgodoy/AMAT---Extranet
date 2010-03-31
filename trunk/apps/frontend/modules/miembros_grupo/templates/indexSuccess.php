@@ -43,10 +43,10 @@
 						<a href="<?php echo url_for('miembros_grupo/index?sort=u.mutua_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Mutua</a>
 					</th>
 					<th width="30%">
-						<a href="#">Email</a>
+						<a href="<?php echo url_for('miembros_grupo/index?sort=u.email&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Email</a>
 					</th>
 					<th width="15%">
-						<a href="#">Tel&eacute;fono</a>
+						<a href="<?php echo url_for('miembros_grupo/index?sort=u.telefono&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Tel&eacute;fono</a>
 					</th>
 	        </tr>
           <?php $i=0; foreach ($usuario_list as $usuario): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
