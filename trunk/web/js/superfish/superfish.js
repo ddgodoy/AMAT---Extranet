@@ -119,7 +119,7 @@
 			//&& $ul.attr("id") == "ultimo"
 			if ($ul.offset().left + 100 > $(window).width() )
 			{
-				$ul.css("left", "-10.0em");
+				$ul.css("left", "-12.0em");
 			}
 			
 			return this;
