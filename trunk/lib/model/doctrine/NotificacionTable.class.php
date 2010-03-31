@@ -35,6 +35,7 @@ class NotificacionTable extends Doctrine_Table
 		$q->addWhere('n.usuario_id=' . $usuarioId. '');
 		$q->addWhere('n.visto != 1');
 		$q->orderBy('n.created_at DESC');
+		$q->groupBy('entidad_id');
 		if($limit) $q->limit($limit);
 		
 		$notificaciones = $q->execute();
