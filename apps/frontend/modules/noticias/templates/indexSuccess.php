@@ -182,7 +182,7 @@ use_helper('Text');?>
 				    <td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
 					<td style="padding-top: 5px;"><select name="ambito_busqueda" id="ambito_ambito">
 																				<option value="" >--seleccionar--</option>
-																				<option value="todos" <?php echo $todosa ?> >Intranet y Web</option>
+																				<option value="todos" <?php echo $todosa ?> > Extranet y Web</option>
 																				<option value="web" <?php echo $web ?> >web</option>
 																				<option value="intranet" <?php echo $intranet ?> >Extranet</option>
 																				</select>	
