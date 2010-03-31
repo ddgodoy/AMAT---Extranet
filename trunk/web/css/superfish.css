@@ -8,7 +8,7 @@
 .sf-menu ul {
 	position:absolute;
 	top:-1200em;
-	width:10em;
+	width:12em;
 }
 .sf-menu ul li {width:100%; }
 .sf-menu #primerNivel  {
@@ -39,17 +39,17 @@
 }
 .sf-menu li:hover ul, .sf-menu li.sfHover ul {
 	left:0;
-	top:2.5em; /* match top ul list item height */
+	top:3.6em; /* match top ul list item height */
 	/*z-index:99;*/
 }
 ul.sf-menu li:hover li ul, ul.sf-menu li.sfHover li ul { top:-999em; }
 ul.sf-menu li li:hover ul, ul.sf-menu li li.sfHover ul {
-	left:10em; /* match ul width */
+	left:12em; /* match ul width */
 	top:0;
 }
 ul.sf-menu li li:hover li ul, ul.sf-menu li li.sfHover li ul { top:	-999em; }
 ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
-	left:10em; /* match ul width */
+	left:12em; /* match ul width */
 	top:0;
 }
 /*** DEMO SKIN ***/

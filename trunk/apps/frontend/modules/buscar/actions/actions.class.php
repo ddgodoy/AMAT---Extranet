@@ -43,10 +43,13 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "noticias") {
 			$q->from('Noticia');
 			$q->where('deleted = 0');
-			$q->andWhere("titulo like '%".$word."%'");
-			$q->orWhere("entradilla like '%".$word."%' OR contenido like '%".$word."%'");
+			$q->andWhere("titulo like '%".$word."%' OR entradilla like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('titulo ASC');
+			
+			
 			$resNoticias = $q->execute();
+			
+			
 
 			$this->resNoticias = $resNoticias;
 			$this->resCategoria = $resNoticias;
@@ -57,8 +60,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "aplicaciones_externas") {
 			$q->from('AplicacionExterna');
 			$q->where('deleted = 0');
-			$q->andWhere("nombre like '%".$word."%'");
-			$q->orWhere("detalle like '%".$word."%'");
+			$q->andWhere("nombre like '%".$word."%' OR detalle like '%".$word."%'");
 			$q->orderBy('nombre ASC');
 			$resAplicaciones = $q->execute();
 
@@ -71,8 +73,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "cifras_datos") {
 			$q->from('CifraDato');
 			$q->where('deleted = 0');
-			$q->andWhere("titulo like '%".$word."%'");
-			$q->orWhere("contenido like '%".$word."%'");
+			$q->andWhere("titulo like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('titulo ASC');
 			$resCifraDato = $q->execute();
 
@@ -85,8 +86,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "actividades") {
 			$q->from('Actividad');
 			$q->where('deleted = 0');
-			$q->andWhere("titulo like '%".$word."%'");
-			$q->orWhere("contenido like '%".$word."%'");
+			$q->andWhere("titulo like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('titulo ASC');
 			$resActividades = $q->execute();
 
@@ -99,8 +99,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "publicaciones") {
 			$q->from('Publicacion');
 			$q->where('deleted = 0');
-			$q->andWhere("titulo like '%".$word."%'");
-			$q->orWhere("contenido like '%".$word."%'");
+			$q->andWhere("titulo like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('titulo ASC');
 			$resPublicacion = $q->execute();
 
@@ -113,8 +112,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "normativas") {
 			$q->from('Normativa');
 			$q->where('deleted = 0');
-			$q->andWhere("nombre like '%".$word."%'");
-			$q->orWhere("contenido like '%".$word."%'");
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('nombre ASC');
 			$resNormativas = $q->execute();
 
@@ -127,8 +125,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "iniciativas") {
 			$q->from('Iniciativa');
 			$q->where('deleted = 0');
-			$q->andWhere("nombre like '%".$word."%'");
-			$q->orWhere("contenido like '%".$word."%'");
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('nombre ASC');
 			$resIniciativas = $q->execute();
 
@@ -141,8 +138,7 @@ class buscarActions extends sfActions
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "circulares") {
 			$q->from('Circular');
 			$q->where('deleted = 0');
-			$q->andWhere("nombre like '%".$word."%'");
-			$q->orWhere("contenido like '%".$word."%'");
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
 			$q->orderBy('nombre ASC');
 			$resCirculares = $q->execute();
 
