@@ -362,6 +362,7 @@ class buscarActions extends sfActions
 			$this->path='documentacion_organismos/show?id=';
 			$this->labelCategoria='Organismos <span> (Documentaci&oacute;n)</span>';
 		}
+		
 		/*Aplicaciones*/
 		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "aplicaciones") {
 			$q->from('Aplicacion');
@@ -375,5 +376,50 @@ class buscarActions extends sfActions
 			$this->path='aplicaciones/show?id=';
 			$this->labelCategoria='Aplicaciones';
 		}
+		
+		/*ArchivoCT*/
+		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "archivos_c_t") {
+			$q->from('ArchivoCT');
+			$q->where('deleted = 0');
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
+			$q->orderBy('nombre ASC');	
+			$ArchivoCT = $q->execute();
+
+			$this->resArchivoCT = $ArchivoCT; 
+			$this->resCategoria =$ArchivoCT;
+			$this->path='archivos_c_t/show?id=';
+			$this->labelCategoria='<span>Archivos Consejo Territorial</span>';
+		}
+		
+		/*ArchivoDG*/
+		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "archivos_d_g") {
+			$q->from('ArchivoDG');
+			$q->where('deleted = 0');
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
+			$q->orderBy('nombre ASC');	
+			$ArchivoDG = $q->execute();
+
+			$this->resArchivoDG = $ArchivoDG;
+			$this->resCategoria = $ArchivoDG;
+			$this->path='archivos_d_g/show?id=';
+			$this->labelCategoria='<span>Archivos Grupo de Trabajo</span>';
+		}
+		
+		/*ArchivoDO*/
+		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "archivos_d_o") {
+			$q->from('ArchivoDO');
+			$q->where('deleted = 0');
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
+			$q->orderBy('nombre ASC');	
+			$ArchivoDO = $q->execute();
+
+			$this->resArchivoDO = $ArchivoDO;
+			$this->resCategoria = $ArchivoDO;
+			$this->path='archivos_d_o/show?id=';
+			$this->labelCategoria='<span>Archivos de Organismos</span>';
+		}
+		
+		
+		
 	}
 }
