@@ -31,7 +31,8 @@ class contactoActions extends sfActions
 		if ($form->isValid()) {
 			try {
 				sfLoader::loadHelpers(array('Tag', 'Asset'));
-				$iPh = image_path('/images/mail_head.jpg', true);
+//				$iPh = image_path('/images/mail_head.jpg', true);
+				$iPh = image_path('/images/logo_email.jpg', true);
 
 				$objCatAsunto = Doctrine::getTable('CategoriaAsunto')->find($form->getValue('tema'));
 				$mailTema   = $objCatAsunto->getActivo_1() == 1 ? $objCatAsunto->getEmail_1() : $objCatAsunto->getEmail_2();
