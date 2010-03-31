@@ -41,7 +41,7 @@ class contactoActions extends sfActions
 
 				$mailer = new Swift(new Swift_Connection_NativeMail());
 				$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-				
+
 				$mailContext = array('usuario' => $usuario,
 														 'tema'    => $objCatAsunto->getNombre(),
 														 'asunto'  => $form->getValue('asunto'),
