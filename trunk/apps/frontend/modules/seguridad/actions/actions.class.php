@@ -27,11 +27,11 @@ class seguridadActions extends sfActions
 		if ($this->getUser()->getAttribute('userId')) {
 			$this->redirect('inicio/index');
 		}
+		$this->getUser()->setFlash('error', NULL); // fix sesion caducada init message
+
 		$this->form = new SeguridadForm();
-		
+
 		$this->setTemplate('login');
-		
-		
 	}
 	
 	public function executeLogout(sfWebRequest $request)
@@ -61,6 +61,7 @@ class seguridadActions extends sfActions
 	protected function processForm(sfWebRequest $request, sfForm $form)
 	{
 		$this->form->bind($request->getParameter($this->form->getName()));
+
 		if ($this->form->isValid()) {
 
 			$usuario = ServiceSecurity::authenticate($this->form->getValue('login'), $this->form->getValue('password'), false);
@@ -71,7 +72,7 @@ class seguridadActions extends sfActions
 				$credenciales = array();
 				$usuarioRoles = Doctrine::getTable('UsuarioRol')->findByUsuarioId($usuario->getId());
 
-				if(count($usuarioRoles)>0)
+				if (count($usuarioRoles)>0)
 				{
 					foreach ($usuarioRoles as $rol) {
 						$credenciales[] = $rol->getRol()->getCodigo();
