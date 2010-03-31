@@ -334,5 +334,7 @@ class noticiasActions extends sfActions
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
 		}
 		return $this->orderBy . ' ' . $this->sortType;
-  }
+  }  
+ 
+  
 }

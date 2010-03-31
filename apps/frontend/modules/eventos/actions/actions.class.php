@@ -366,4 +366,22 @@ class eventosActions extends sfActions
 		}
 		return $this->orderBy . ' ' . $this->sortType;
   }
+  
+ /* public function executeLimpiar(sfWebRequest $request)
+	{
+	   $evento =  Doctrine::getTable('Evento')->findAll();
+	   
+	   foreach ($evento as $e)
+	   {
+	   	  $entardilla = $e->getDescripcion(); 
+                  $entradillaLimpia = strip_tags($entardilla);
+                  $e->setDescripcion($entradillaLimpia);
+                  $e->save();
+
+	   }
+		
+	  echo 'listo';
+          exit();
+		
+	}*/
 }
