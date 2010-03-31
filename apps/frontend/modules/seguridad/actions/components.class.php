@@ -12,9 +12,6 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
-//		echo $this->module.'**<br>'. $this->action;
-//		exit();
-		
 		$credenciales_array = array();
 		$aplicacion_rol = Doctrine::getTable('AplicacionAccion');
 
@@ -47,19 +44,16 @@ class seguridadComponents extends sfComponents
 		$arrExcepciones = Doctrine::getTable('Aplicacion')->getExcepcionesSeguridad();
 		$nowModuleAction = $this->module.'_'.$this->action;
 
-		if($this->getUser()->getAttribute('userId'))
+		if ($this->getUser()->getAttribute('userId'))
 		{
 			if (!in_array($nowModuleAction, $arrExcepciones)) {
 				if ((empty($credenciales_array) || !$this->getUser()->hasCredential($credenciales_array, false)) && $this->module != 'seguridad') {
 					$this->getController()->redirect('seguridad/restringuido');
 				}
 			}
-		}
-		else 
-		{
-			 $this->getUser()->setFlash('error', 'Sesión caducada');
-			 $this->getController()->redirect('seguridad/Seguridad') ;
-			
+		} else {
+		 	$this->getUser()->setFlash('error', 'Sesión caducada');
+		 	$this->getController()->redirect('seguridad/Seguridad') ;
 		}
 	}
 }

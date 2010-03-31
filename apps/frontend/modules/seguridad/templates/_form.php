@@ -1,17 +1,23 @@
-<?php use_helper('Javascript') ?>
-<?php include_stylesheets_for_form($form) ?>
-<?php include_javascripts_for_form($form) ?>
-
+<?php
+	use_helper('Javascript');
+	
+	include_stylesheets_for_form($form);
+	include_javascripts_for_form($form);
+?>
 <div class="logueo">
 	<div style="width:420px;margin-right:auto;margin-left:auto;">
-		<?php echo $form['login']->renderError() ?>
-		<?php echo $form['password']->renderError() ?>
-		<?php if ($sf_user->hasFlash('error')): ?><div class="mensajeSistema error"><?php echo $sf_user->getFlash('error') ?></div><?php endif; ?>
+		<?php
+			echo $form['login']->renderError();
+			echo $form['password']->renderError();
+		?>
+		<?php if ($sf_user->getFlash('error')): ?>
+			<div class="mensajeSistema error"><?php echo $sf_user->getFlash('error') ?></div>
+		<?php endif; ?>
 	</div>
 	<h2>Bienvenido a la Extranet de Asociados</h2>
 	<div class="logbox">
 		<h1>
-			Introduzca su Usuario y Contraseña <!--<img src="/images/cabndado.jpg" width="30" height="29" style="vertical-align:middle;">-->
+			Introduzca su Usuario y Contrase&ntilde;a
 		</h1>
 		<form action="<?php echo url_for('seguridad/process') ?>" method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="0" cellspacing="5">
