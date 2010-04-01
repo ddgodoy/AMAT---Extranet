@@ -1,5 +1,19 @@
 <?php use_helper('Security') ?>
 <?php use_helper('Date');?>
+
+<script type="text/javascript">
+<!--
+function confirmation(link) {
+	var answer = confirm("Desea borrar este registro?")
+	if (answer){
+	//	alert("Bye bye!")
+		window.location = link;
+	}
+}
+//-->
+</script>
+
+
    <div class="mapa">
 	  <strong>Canal Corporativo</strong> &gt; Web Amat &gt; <a href="<?php echo url_for('publicaciones/index') ?>">Publicaciones</a> &gt; <?php echo  $publicacion->gettitulo() ?>
 	</div>
@@ -34,5 +48,9 @@
 	 <?php if (validate_action('modificar')):?> 
 	  <input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('publicaciones/editar?id='.$publicacion->getId()) ?>';"/>
 	 <?php endif; ?> 
+	 <?php if (validate_action('baja')):?> 
+	  <input type="button" id="boton_cancel" class="boton" value="Borrar" name="boton_cancel" onclick="confirmation('<?php echo url_for('publicaciones/delete?id='.$publicacion->getId()) ?>');"/>
+	  <?php endif;?>
+
 	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('publicaciones/index') ?>';"/>
 	</div>
