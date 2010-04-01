@@ -9,9 +9,6 @@ function confirmation(link) {
 	//	alert("Bye bye!")
 		window.location = link;
 	}
-	else{
-		alert("Thanks for sticking around!")
-	}
 }
 //-->
 </script>
