@@ -22,7 +22,7 @@
 	  <?php if($archivo_dg->getArchivo()): ?>
 	  <span class="notfecha">
 	  	<a href="<?php echo url_for('/uploads/archivos_d_g/docs/'.$archivo_dg->getArchivo());?>" class="descargar-documento" target="_blank">
-	  		Descargar <img src="/images/descargar-documento.jpg" border="0" style="vertical-align:middle;" />
+	  		Documento +
 	  	</a>
 	  </span><br />
 	  <?php endif; ?>
