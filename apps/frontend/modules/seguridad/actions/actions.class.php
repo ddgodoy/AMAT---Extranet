@@ -38,12 +38,12 @@ class seguridadActions extends sfActions
 	{
 		$this->getUser()->setAuthenticated(false);
 		$this->getUser()->clearCredentials();
-		$this->getUser()->setAttribute('userId', false);
-		$this->getUser()->setAttribute('mutuaId', false);
-		$this->getUser()->setAttribute('nombre', false);
-		$this->getUser()->setAttribute('apellido', false);
-		$this->getUser()->setAttribute('permisos', false);
-		$this->getUser()->setAttribute('menu', false);
+		$this->getUser()->getAttributeHolder()->remove('userId');
+		$this->getUser()->getAttributeHolder()->remove('mutuaId');
+		$this->getUser()->getAttributeHolder()->remove('nombre');
+		$this->getUser()->getAttributeHolder()->remove('apellido');
+		$this->getUser()->getAttributeHolder()->remove('permisos');
+		$this->getUser()->getAttributeHolder()->remove('menu');
 		
 		$this->redirect('seguridad/login');
 	}
