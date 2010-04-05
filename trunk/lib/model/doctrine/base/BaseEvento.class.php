@@ -71,10 +71,19 @@ abstract class BaseEvento extends sfDoctrineRecord
         $this->hasColumn('fecha_publicado', 'timestamp', null, array(
              'type' => 'timestamp',
              ));
+        $this->hasColumn('mutua_id', 'integer', null, array(
+             'type' => 'integer',
+             'notnull' => true,
+             ));
     }
 
     public function setUp()
     {
+        $this->hasOne('Mutua', array(
+             'local' => 'mutua_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
         $this->hasMany('Usuario as Usuarios', array(
              'refClass' => 'UsuarioEvento',
              'local' => 'evento_id',

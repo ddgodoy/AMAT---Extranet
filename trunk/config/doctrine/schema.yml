@@ -143,7 +143,9 @@ Evento:
     user_id_modificado:      { type: integer }
     user_id_publicado:       { type: integer }   
     fecha_publicado:         { type: timestamp }
+    mutua_id:                { type: integer, notnull: true }
   relations:
+    Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
     Usuarios:                { foreignAlias: Eventos, class: Usuario, refClass: UsuarioEvento }
 
 NormasDeFuncionamiento:

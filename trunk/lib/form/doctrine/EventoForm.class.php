@@ -88,8 +88,7 @@ class EventoForm extends BaseEventoForm
 		$this->setDefaults(array( 'usuarios_list' => $userId,
 		                          'owner_id' => $userId, 
 		                          'mas_imagen' => 1,
-		                          'ambito'=>'ambos',
-		                          'mutua_id'=>'0'));
+		                          'ambito'=>'ambos'));
 
 		$this->widgetSchema->setNameFormat('evento[%s]');
 	}
