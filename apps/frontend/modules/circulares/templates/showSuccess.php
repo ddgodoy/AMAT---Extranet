@@ -14,7 +14,7 @@
 	  <p class="notentrada"><?php echo  $circular->getNombre() ?></p><br />
 	  <?php echo nl2br($circular->getContenido()) ?>  
 	  <?php if($circular->getdocumento()):?>   
-	  <a href="<?php echo url_for("/uploads/circulares/docs/".$circular->getDocumento())?>" class="descargar-documento">Documento +</a> 
+	  <a href="<?php echo url_for("/uploads/circulares/docs/".$circular->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>
 	  <br><br>     
 	   <span class="notfecha">Creado el d&iacute;a: <?php echo format_date($circular->getCreatedAt())?></span><br /> 
