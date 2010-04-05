@@ -101,11 +101,11 @@
 				<?php endforeach; ?>
 				<?php if(validate_action('baja') || validate_action('modificar')):?>
 				<tr class="gris">
-				<td width="3%"><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+                                    <td width="3%"><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 				<td>
 				<input type="submit" class="boton" value="Enviar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('enviar');" />
 				</td>
-				<td>
+				<td colspan="4">
 				<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
 				</td>
 		        </tr>
