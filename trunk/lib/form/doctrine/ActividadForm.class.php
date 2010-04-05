@@ -34,7 +34,7 @@ class ActividadForm extends BaseActividadForm
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'Actividad', 'column' => 'id', 'required' => false)),
 			'titulo'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
-			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required' => '')),
+			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => false), array('required' => '')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 		  'fecha_publicacion' => new sfValidatorDate(array(), array('required' => '', 'invalid' => '')),
