@@ -70,7 +70,6 @@
 					<th width="20%">
 						<a href="<?php echo url_for('error_envio/index?sort=er.error&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Error</a>
 					</th>
-					<th width="5%">Enviar</th>
 					<th width="5%">&nbsp;</th>
 				</tr>
 				
