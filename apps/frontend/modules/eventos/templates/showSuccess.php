@@ -19,7 +19,7 @@
 	  <a  class="nottit"><?php echo  $evento->gettitulo() ?> </a><br />
 	  <p class="notentrada"><?php echo $evento->getdescripcion() ?></p>
 	  <?php echo nl2br($evento->getmas_info()) ?>      
-	  <div class="clear"></div>
+	  <br clear="all" />
 	   <?php if($evento->getdocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/eventos/docs/".$evento->getdocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>
