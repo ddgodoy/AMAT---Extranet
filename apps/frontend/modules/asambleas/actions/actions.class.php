@@ -207,6 +207,7 @@ class asambleasActions extends sfActions
 	
 		$this->pager->setPage($this->getRequestParameter('page', 1));
 		$this->pager->init();
+
 		
 		$this->asamblea_list = $this->pager->getResults();
 		 
