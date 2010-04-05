@@ -27,7 +27,7 @@
 	  <div class="clear"></div>
 	  <br clear="all">
 	   <?php if($normativa->getDocumento()):?>   
-	  <a href="<?php echo url_for("/uploads/normativas/docs/".$normativa->getDocumento())?>" target="_blank" class="notentrada">Documento +</a> 
+	  <a href="<?php echo url_for("/uploads/normativas/docs/".$normativa->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>
 	</div>
 	   
