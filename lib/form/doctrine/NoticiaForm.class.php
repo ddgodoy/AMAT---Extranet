@@ -89,6 +89,7 @@ class NoticiaForm extends BaseNoticiaForm
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => 'pendiente',
 			'mas_imagen'        => 1,
+                        'ambito'            => 'todos'
 		));
 		
 		$this->widgetSchema->setNameFormat('noticia[%s]');
