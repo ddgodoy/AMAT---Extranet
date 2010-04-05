@@ -20,7 +20,7 @@
  <div class="leftside"><!-- abre div left-side	-->   
     <div class="lineaListados">
       <?php if($pager->haveToPaginate()): ?>
-      <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
+        <div style="float:left;" class="paginado"><?php echo  test_pager($pager, $orderBy, $sortType, $DAtos['get'],$sf_context->getActionName()) ?></div>
       <?php endif; ?>
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <?php if (validate_action('alta')):?>
@@ -103,7 +103,7 @@
     <?php if(count($asamblea_list)>0):?>
     <div class="lineaListados">
       <?php if($pager->haveToPaginate()): ?>
-      <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get']) ?></div>
+      <div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $DAtos['get'],$sf_context->getActionName()) ?></div>
       <?php endif; ?>
       <span class="info" style="float: left;"><!--Hay 50 Evento/s--></span>
       <input type="button" onclick="javascript:location.href='<?php echo url_for('asambleas/nueva?'.$DAtos['get']) ?>';" style="float: right;" value="Crear Asamblea para <?php echo $DAtos['tipo']?>" class="boton"/>
