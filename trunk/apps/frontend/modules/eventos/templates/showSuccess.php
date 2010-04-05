@@ -21,7 +21,7 @@
 	  <?php echo nl2br($evento->getmas_info()) ?>      
 	  <div class="clear"></div>
 	   <?php if($evento->getdocumento()):?>   
-	  <a href="<?php echo url_for("/uploads/eventos/docs/".$evento->getdocumento())?>" class="descargar-documento">Documento +</a> 
+	  <a href="<?php echo url_for("/uploads/eventos/docs/".$evento->getdocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>
 	   <div class="clear"></div>
 	   <br clear="all">
