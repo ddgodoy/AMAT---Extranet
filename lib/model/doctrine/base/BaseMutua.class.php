@@ -22,6 +22,10 @@ abstract class BaseMutua extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'mutua_id'));
 
+        $this->hasMany('Evento', array(
+             'local' => 'id',
+             'foreign' => 'mutua_id'));
+
         $this->hasMany('Noticia', array(
              'local' => 'id',
              'foreign' => 'mutua_id'));
