@@ -21,7 +21,7 @@
 	  <div class="ul_noticias"><?php echo nl2br($noticia->getContenido()) ?></div> 
 	  <br clear="all" /> 
 	  <?php if($noticia->getDocumento()):?>   
-	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getDocumento())?>" class="notentrada">Documento +</a> 
+	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>
 	  <br><br>
 	  <?php if($noticia->getAutor()):?> 
