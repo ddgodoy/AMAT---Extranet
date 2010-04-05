@@ -75,7 +75,7 @@ class error_envioActions extends sfActions
 	    	
 	        $envio_error->delete();
 	  	}   
-	    $this->getUser()->setFlash('notice', 'Los registro se Enviaron');	 	
+	    $this->getUser()->setFlash('notice', 'Los registros se Enviaron');
       $this->redirect('error_envio/index');  	
   	}
   	 	
