@@ -21,7 +21,7 @@
 	  <span class="notfecha">Sub-categor&iacute;a: <?php echo SubCategoriaIniciativa::getRepository()->findOneById($iniciativa->getSubcategoriaIniciativaId())->getNombre()?></span> <br />   
 	  <?php endif;?>
 	  <?php echo nl2br($iniciativa->getcontenido()) ?>      
-	  <div class="clear"></div>
+	 <br clear="all" />
 	  <?php if ($iniciativa->getDocumento()): ?>
 	   <a href="<?php echo url_for("/uploads/iniciativas/docs/".$iniciativa->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif; ?>
