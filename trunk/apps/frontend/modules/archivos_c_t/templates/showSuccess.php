@@ -17,7 +17,7 @@
 	  <a href="#" class="nottit"><?php echo  $archivo_ct->getNombre() ?></a><br />
 	  <?php echo nl2br($archivo_ct->getcontenido()) ?> 
 	  <?php if($archivo_ct->getArchivo()): ?>
-	  <span class="notfecha"><a href="<?php echo url_for('/uploads/archivos_c_t/docs/'.$archivo_ct->getArchivo());?>">Documento +</a></span><br />          
+          <span class="notfecha"><a href="<?php echo url_for('/uploads/archivos_c_t/docs/'.$archivo_ct->getArchivo());?>" class="descargar-documento" target="_blank">Documento +</a></span><br />
 	  <?php endif; ?>
 	  <?php if($archivo_ct->getOwnerId()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($archivo_ct->getOwnerId()) ?> el d&iacute;a: <?php echo format_date($archivo_ct->getCreatedAt())?></span><br /> 
