@@ -245,14 +245,6 @@ Noticia:
     Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
     Usuario:                 { local: owner_id, foreign: id, onDelete: CASCADE }
     
-Novedad:
-  inheritance:
-    extends: Noticia
-    type: concrete
-  actAs:
-    Timestampable: ~
-    SoftDelete: ~
-
 UsuarioRol:
   actAs:
     Timestampable: ~
