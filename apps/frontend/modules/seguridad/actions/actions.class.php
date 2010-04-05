@@ -10,7 +10,7 @@
 class seguridadActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
-	{		
+	{
 		$this->forward('seguridad','login');
 	}
 
@@ -36,6 +36,10 @@ class seguridadActions extends sfActions
 	
 	public function executeLogout(sfWebRequest $request)
 	{
+
+                
+                //$this->getContext()->getViewCacheManager()->remove('inicio/index');
+                
 		$this->getUser()->setAuthenticated(false);
 		$this->getUser()->clearCredentials();
 		$this->getUser()->getAttributeHolder()->remove('userId');
@@ -44,7 +48,8 @@ class seguridadActions extends sfActions
 		$this->getUser()->getAttributeHolder()->remove('apellido');
 		$this->getUser()->getAttributeHolder()->remove('permisos');
 		$this->getUser()->getAttributeHolder()->remove('menu');
-		
+
+
 		$this->redirect('seguridad/login');
 	}
 	
