@@ -12,12 +12,13 @@ class EventoForm extends BaseEventoForm
 	public function configure()
 	{
 		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
-		$request    = sfContext::getInstance()->getUser();    		
-    $usurID     = $request->getAttribute('userId');	
-    $nombreUser = $request->getAttribute('nombre');
-    $apellidoUser = $request->getAttribute('apellido');
+                $request    = sfContext::getInstance()->getUser();
+                $usurID     = $request->getAttribute('userId');
+                $nombreUser = $request->getAttribute('nombre');
+                $apellidoUser = $request->getAttribute('apellido');
 
-    $usuario = Doctrine::getTable('Usuario')->find($usurID);
+
+                $usuario = Doctrine::getTable('Usuario')->find($usurID);
 		$arrUsuarios = $usuario->UsuariosdeMisGrupos();
 		$arrUsuariosGrupo = array(); 
 		$arrUsuariosGrupo[$usurID] = $apellidoUser.", ".$nombreUser; 
@@ -57,7 +58,7 @@ class EventoForm extends BaseEventoForm
 			'estado'          => new sfValidatorChoice(array('choices' => array('guardado' => 'guardado', 'pendiente' => 'pendiente', 'publicado' => 'publicado'), 'required' => true)),
 			'owner_id'        => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => false)),
 			'usuarios_list'   => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false), array('invalid' => 'El usuario ingresado es incorrecto')),
-			'mutua_id'        => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true),array('invalid'=>'La mutua es obliagtoria')),
+			'mutua_id'        => new sfValidatorChoice(array('choices' => array_keys($mutuas), 'required' => false),array()),
 		));
 
 		if ($this->getObject()->getImagen())
