@@ -35,7 +35,7 @@ function confirmation(link) {
 	  <a href="#" class="nottit"><?php echo  $cifra_dato->gettitulo() ?></a><br />
 	  <?php echo $cifra_dato->getcontenido() ?>   
 	   <?php if($cifra_dato->getdocumento()):?>   
-	  <a href="<?php echo url_for("/uploads/cifras_datos/docs/".$cifra_dato->getdocumento())?>" class="notfecha">Documento +</a> 
+	  <a href="<?php echo url_for("/uploads/cifras_datos/docs/".$cifra_dato->getdocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>   
 	  <?php if($cifra_dato->getUserIdCreador()):?>
 	  <br> <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($cifra_dato->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($cifra_dato->getCreatedAt())?></span><br /> 
