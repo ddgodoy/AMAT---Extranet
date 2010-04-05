@@ -71,10 +71,10 @@
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
-						<a href="<?php echo url_for('archivos_d_o/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('archivos_d_o/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
 					<th width="35%">
-						<a href="<?php echo url_for('archivos_d_o/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('archivos_d_o/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="15%">
 						<a href="<?php echo url_for('archivos_d_o/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organismo</a>
