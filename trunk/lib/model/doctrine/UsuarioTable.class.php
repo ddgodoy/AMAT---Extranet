@@ -74,8 +74,7 @@ class UsuarioTable extends Doctrine_Table
 		$q->orderBy('ae.nombre ASC');
 		$aplicaciones = $q->execute();
 
-                echo $q->getQuery();
-                exit ();
+                
 		
 		return $aplicaciones;
 	}
