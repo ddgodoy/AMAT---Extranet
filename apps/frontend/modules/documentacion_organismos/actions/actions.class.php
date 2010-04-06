@@ -113,7 +113,7 @@ class documentacion_organismosActions extends sfActions
 			$enviar = false;
 
 			sfLoader::loadHelpers(array('Security', 'Url', 'Tag', 'Asset', 'Partial'));
-			$iPh = image_path('/images/mail_head.jpg', true);
+			$iPh = image_path('/images/logo_email.jpg', true);
 
 			foreach ($IDs as $id) {
 				$this->forward404Unless($documentacion_organismo = Doctrine::getTable('DocumentacionOrganismo')->find($id), sprintf('Object documentacion_organismo does not exist (%s).', $id));
@@ -196,7 +196,7 @@ class documentacion_organismosActions extends sfActions
 			if ($enviar) {
 				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
-				$iPh = image_path('/images/mail_head.jpg', true);
+				$iPh = image_path('/images/logo_email.jpg', true);
 				$url = url_for('documentacion_organismos/show?id='.$documentacion_organismo->getId(), true);
 				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
 

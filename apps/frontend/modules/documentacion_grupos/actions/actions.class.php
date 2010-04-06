@@ -144,7 +144,7 @@ class documentacion_gruposActions extends sfActions
 			if (!empty($enviar)) {
 				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
-				$iPh = image_path('/images/mail_head.jpg', true);
+				$iPh = image_path('/images/logo_email.jpg', true);
 				$url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
 				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
 

@@ -118,7 +118,7 @@ class usuariosActions extends sfActions
 				}
 				if ($usuarioForm->getEmail() && $this->hasRequestParameter('btn_enviar_email')) {
 					sfLoader::loadHelpers(array('Tag', 'Asset'));
-					$iPh = image_path('/images/mail_head.jpg', true);
+					$iPh = image_path('/images/logo_email.jpg', true);
 
 					$mailer = new Swift(new Swift_Connection_NativeMail());
 					$message = new Swift_Message('Datos de accesos a Extranet de Asociados AMAT');

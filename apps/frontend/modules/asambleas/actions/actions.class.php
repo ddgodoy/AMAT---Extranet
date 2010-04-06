@@ -622,7 +622,7 @@ class asambleasActions extends sfActions
 		$usuarios = $this->DAtos['usuarios'];
 
 		sfLoader::loadHelpers(array('Tag', 'Asset'));
-		$iPh = image_path('/images/mail_head.jpg', true);
+		$iPh = image_path('/images/logo_email.jpg', true);
 		
 		foreach ($usuarios as $usuario) {
 			
@@ -743,7 +743,7 @@ class asambleasActions extends sfActions
 
 		if ($userConvocador->getEmail()) {
 			sfLoader::loadHelpers(array('Tag', 'Asset'));
-			$iPh = image_path('/images/mail_head.jpg', true);
+			$iPh = image_path('/images/logo_email.jpg', true);
 
 			$temaTi  = 'Convocatoria a asamblea aceptada por parte de '.$convocatoria->Usuario->getNombre().', '.$convocatoria->Usuario->getApellido();
 			$mailer  = new Swift(new Swift_Connection_NativeMail());
