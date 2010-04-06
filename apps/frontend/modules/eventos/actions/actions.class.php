@@ -109,7 +109,7 @@ class eventosActions extends sfActions
 					
 					if ($email) {
 						$url = url_for('eventos/show?id='.$evento->getId(), true);
-						$iPh = image_path('/images/logo_email.jpg', true);
+						$iPh = image_path('/images/logo_email.jpg',true);
 
 						$agenda = AgendaTable::getDeleteAgenda($evento->getId());	    						
 						$agenda->delete();
