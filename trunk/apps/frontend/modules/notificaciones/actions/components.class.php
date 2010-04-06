@@ -17,7 +17,7 @@ class notificacionesComponents extends sfComponents
 	{   
 		
      // $evento = NotificacionTable::DeletedByEntidad('Evento','evento');
-      $noticias = NotificacionTable::DeletedByEntidad('Noticia','noticia');
+      //$noticias = NotificacionTable::DeletedByEntidad('Noticia','noticia');
 		
 		
 		
