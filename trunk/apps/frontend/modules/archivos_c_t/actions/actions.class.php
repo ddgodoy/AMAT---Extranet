@@ -209,8 +209,8 @@ class archivos_c_tActions extends sfActions
   
   protected function setOrdenamiento()
   {
-		$this->orderBy = 'nombre';
-		$this->sortType = 'asc';
+		$this->orderBy = 'fecha';
+		$this->sortType = 'desc';
 
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
