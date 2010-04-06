@@ -57,9 +57,7 @@ class Evento extends BaseEvento
     	{
     		$armado = '';
     	}
-    	 	
-    	echo $armado;
-        exit ();
+        
     	return $armado;
     }
     
