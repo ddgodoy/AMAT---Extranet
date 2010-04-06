@@ -206,7 +206,7 @@ class eventosActions extends sfActions
 					sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
 
 					$url = url_for('eventos/show?id='.$evento->getId(), true);
-					$iPh = image_path('/images/mail_head.jpg', true);
+					$iPh = image_path('/images/logo_email.jpg', true);
 					
 					foreach ($email AS $emailPublic) {
 						if ($publico != '') {
