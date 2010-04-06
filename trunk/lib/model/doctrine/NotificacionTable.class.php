@@ -38,8 +38,6 @@ class NotificacionTable extends Doctrine_Table
 		$q->groupBy('entidad_id');
 		if($limit) $q->limit($limit);
 
-                echo $q->getQuery();
-                exit ();
 
 		$notificaciones = $q->execute();
 		
