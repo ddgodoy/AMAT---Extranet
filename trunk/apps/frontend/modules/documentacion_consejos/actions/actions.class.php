@@ -144,7 +144,7 @@ class documentacion_consejosActions extends sfActions
 				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
 				$url = url_for('documentacion_consejos/show?id='.$documentacion_consejo->getId(), true);
-				$iPh = image_path('/images/mail_head.jpg', true);
+				$iPh = image_path('/images/logo_email.jpg', true);
 
 				$nombreDocCj = $documentacion_consejo->getNombre();
 				$descripcion = $documentacion_consejo->getContenido();

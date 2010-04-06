@@ -130,7 +130,7 @@ class noticiasActions extends sfActions
 		
 		## envio el email por eso digo que tendria que haber echo un servicio
 		$email = UsuarioTable::getEmailEvento($objeto->getOwnerId());
-		$iPh = image_path('/images/mail_head.jpg', true);
+		$iPh = image_path('/images/logo_email.jpg', true);
 		$url = url_for($modulo.'/show?id='.$objeto->getId(), true);
 		
 		foreach ($email AS $emailPublic) {
@@ -140,7 +140,7 @@ class noticiasActions extends sfActions
 				$mailContext = array('tema'   => 'Novedad publicada',
 				                  	 'evento' => $objeto->getTitulo(),
 				                  	 'url'    => $url,
-						                 'head_image'  => $iPh,
+						         'head_image'  => $iPh,
 				                  	 'organizador' => $objeto->getAutor(),
 														 'descripcio'  => $objeto->getEntradilla()
 				);
@@ -192,7 +192,7 @@ class noticiasActions extends sfActions
 			if ($enviar) {
 				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
-				$iPh = image_path('/images/mail_head.jpg', true);
+				$iPh = image_path('/images/logo_email.jpg', true);
 				$url = url_for('noticias/show?id='.$noticia->getId(), true);
 
 				foreach ($email AS $emailPublic) {

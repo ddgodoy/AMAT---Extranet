@@ -161,7 +161,7 @@ class seguridadActions extends sfActions
 		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
 
 		$url = url_for('seguridad/establecer_clave', true).'?key='.$key;
-		$iPh = image_path('/images/mail_head.jpg', true);
+		$iPh = image_path('/images/logo_email.jpg', true);
 
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
