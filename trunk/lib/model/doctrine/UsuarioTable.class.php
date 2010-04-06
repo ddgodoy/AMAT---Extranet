@@ -73,6 +73,9 @@ class UsuarioTable extends Doctrine_Table
 		$q->andWhere('ae.deleted = 0');
 		$q->orderBy('ae.nombre ASC');
 		$aplicaciones = $q->execute();
+
+                echo $q->getQuery();
+                exit ();
 		
 		return $aplicaciones;
 	}
