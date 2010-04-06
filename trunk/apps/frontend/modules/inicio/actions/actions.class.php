@@ -12,7 +12,7 @@ class inicioActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->aplicacionesExternas = UsuarioTable::getAplicacionesExternasByUsuario(sfContext::getInstance()->getUser()->getAttribute("userId"));
+		//$this->aplicacionesExternas = UsuarioTable::getAplicacionesExternasByUsuario(sfContext::getInstance()->getUser()->getAttribute("userId"));
 	}
 	
 	public function executeExportar(sfWebRequest $request)
