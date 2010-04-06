@@ -29,7 +29,7 @@
 	<!--</style>-->
 	</head>
 	<body>
-            <div class="head" style="height: 76px; margin-bottom: 5px;"><img src="<?php echo $head_image ?>" alt=""></div>
+            <div style="height: 76px; margin-bottom: 5px;"><img src="<?php echo $head_image ?>" alt=""></div>
 		<table width="100%" border="0" cellpadding="0" cellspacing="5" style="font-family: Verdana, Geneva, sans-serif; color: #333; font-size: 12px;">
 			<tr>
 				<th colspan="2" align="left"><h1 style="font-size: 16px; line-height: 30px; color: #006699; margin-left: 5px;"><?php echo $tema;?></h1></th>
