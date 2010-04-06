@@ -29,25 +29,24 @@ class NotificacionTable extends Doctrine_Table
 	public static function getUltimasNotificaciones($usuarioId, $limit=null)
 	{
 		$q = Doctrine_Query::create();
-                $q->select('n.id AS n__id,
-                            n.estado AS n__estado,
-                            n.url AS n__url,
-                            n.contenido_notificacion_id AS n__contenido_notificacion_id,
-                            n.usuario_id AS n__usuario_id,
-                            n.entidad_id AS n__entidad_id,
-                            n.tipo AS n__tipo,
-                            n.visto AS n__visto,
-                            n.created_at AS n__created_at,
-                            n.updated_at AS n__updated_at,
-                            n.deleted AS n__deleted,
-                            c.id AS c__id,
-                            c.mensaje AS c__mensaje,
-                            c.accion AS c__accion,
-                            c.entidad AS c__entidad,
-                            c.created_at AS c__created_at,
-                            c.updated_at AS c__updated_at,
-                            c.deleted AS c__deleted
-                            ');
+                $q->select('n.id ,
+                            n.estado ,
+                            n.url ,
+                            n.contenido_notificacion_id ,
+                            n.usuario_id ,
+                            n.entidad_id ,
+                            n.tipo ,
+                            n.visto ,
+                            n.created_at ,
+                            n.updated_at ,
+                            n.deleted ,
+                            c.id ,
+                            c.mensaje ,
+                            c.accion ,
+                            c.entidad ,
+                            c.created_at ,
+                            c.updated_at ,
+                            c.deleted ');
 		$q->from('Notificacion n');
 		$q->leftJoin('n.ContenidoNotificacion cn');
 		$q->where('n.deleted = 0');
