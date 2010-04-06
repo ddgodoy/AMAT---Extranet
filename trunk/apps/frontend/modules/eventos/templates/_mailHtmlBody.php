@@ -21,7 +21,7 @@
 			margin-left: 5px;
 		}
 		.head {
-			background-image: url(<?php echo $head_image ?>);
+			background-image: url();
 			height: 76px;
 			margin-bottom: 5px;
 		}
