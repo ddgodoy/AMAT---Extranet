@@ -37,7 +37,10 @@ class NotificacionTable extends Doctrine_Table
 		$q->orderBy('n.created_at DESC');
 		$q->groupBy('entidad_id');
 		if($limit) $q->limit($limit);
-		
+
+                echo $q->getQuery();
+                exit ();
+
 		$notificaciones = $q->execute();
 		
 		return $notificaciones;
