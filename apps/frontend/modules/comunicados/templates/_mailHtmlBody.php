@@ -28,11 +28,7 @@
 	</style>
 	</head>
 	<body>
-		<div class="head"><img src="<?php echo $head_image ?>" alt=""></div>
 		<table width="100%" border="0" cellpadding="0" cellspacing="5">
-			<tr>
-				<th colspan="2" align="left"><h1>Comunicado</h1></th>
-			</tr>
 			<tr><td><?php echo $imagen ?></td></tr>
 			<tr><td><?php echo $cuerpo ?></td></tr>
 		</table>
