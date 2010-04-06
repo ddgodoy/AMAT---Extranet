@@ -83,6 +83,9 @@ class NotificacionTable extends Doctrine_Table
 	        FROM   '.$tabla.'
 	        where deleted = 0 
 	        AND fecha_caducidad <= NOW())') ;
+
+                echo $q->getQuery();
+                exit ();
 		
 		return $q->execute();
 	}
