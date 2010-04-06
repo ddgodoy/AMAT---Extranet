@@ -17,7 +17,7 @@ class notificacionesComponents extends sfComponents
 	{   
 		
      // $evento = NotificacionTable::DeletedByEntidad('Evento','evento');
-      //$noticias = NotificacionTable::DeletedByEntidad('Noticia','noticia');
+      $noticias = NotificacionTable::DeletedByEntidad('Noticia','noticia');
 		
 		
 		
@@ -41,6 +41,6 @@ class notificacionesComponents extends sfComponents
 //			}
 //		}
 		
-		$this->ultimos_avisos = Doctrine::getTable('Notificacion')->getUltimasNotificaciones($this->getUser()->getAttribute('userId'), 5);
+		//$this->ultimos_avisos = Doctrine::getTable('Notificacion')->getUltimasNotificaciones($this->getUser()->getAttribute('userId'), 5);
 	}
 }
