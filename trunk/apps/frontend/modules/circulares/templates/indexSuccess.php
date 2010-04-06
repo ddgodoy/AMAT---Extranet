@@ -50,11 +50,11 @@
 				    <td valign="top" align="center">
 						<?php echo date("d/m/Y", strtotime($valor->getfecha())) ?>
 					</td>
-				    <td valign="top" align="center">
+                                        <td valign="top" align="center">
 						<?php echo $valor->getNumero() ?>
 					</td>
 					<td valign="top">
-						<a <?php if(validate_action('modificar')):?> href="<?php echo url_for('circulares/show?id=' . $valor->getId()) ?>" <?php endif;?>>
+						<a <?php if(validate_action('listar')):?> href="<?php echo url_for('circulares/show?id=' . $valor->getId()) ?>" <?php endif;?>>
 							<strong><?php echo $valor->getNombre() ?></strong>		
 						</a>
 					</td>
@@ -65,11 +65,11 @@
 					<?php endif;?>		
 						</a>
 					</td>
-          <td valign="top" align="center">
-            <?php if(validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'circulares/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          	<?php endif; ?>
-          </td>
+                                        <td valign="top" align="center">
+                                            <?php if(validate_action('baja')):?>
+                                            <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'circulares/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                            <?php endif; ?>
+                                        </td>
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
