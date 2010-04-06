@@ -21,7 +21,6 @@
 			margin-left: 5px;
 		}
 		.head {
-			background-image: url(<?php echo $head_image ?>);
 			height: 76px;
 			margin-bottom: 5px;
 		}
@@ -29,7 +28,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="head"></div>
+		<div class="head"><img src="<?php echo $head_image ?>" alt=""></div>
 		<table width="100%" border="0" cellpadding="0" cellspacing="5">
 			<tr>
 				<th align="left"><h1>Solicitud de Nueva Clave</h1></th>
