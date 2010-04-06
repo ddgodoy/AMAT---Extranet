@@ -1,7 +1,7 @@
 <html>
 	<head>
 	<title><?php echo $evento ?></title>
-	<!--<style type="text/css">
+	<style type="text/css">
 		<!--
 		table {
 			font-family: Verdana, Geneva, sans-serif;
@@ -20,27 +20,26 @@
 			color: #006699;
 			margin-left: 5px;
 		}
-		.heads {
-			background-image: url(<?php echo $head_image ?>);
+		.head {
 			height: 76px;
 			margin-bottom: 5px;
 		}
 		-->
-	<!--</style>-->
+	</style>
 	</head>
-        <body >
-		<div class="heads" style="background-image: url(<?php echo $head_image ?>); height: 76px; margin-bottom: 5px;"></div>
-                <table width="100%" border="0" cellpadding="0" cellspacing="5" style="font-family: Verdana, Geneva, sans-serif; color: #333; font-size: 12px;">
+	<body>
+		<div class="head"><img src="<?php echo $head_image ?>" alt=""></div>
+		<table width="100%" border="0" cellpadding="0" cellspacing="5">
 			<tr>
-                            <th colspan="2" align="left"><h1 style="font-size: 16px; line-height: 30px; color: #006699; margin-left: 5px;"><?php echo $tema;?></h1></th>
+				<th colspan="2" align="left"><h1><?php echo $tema;?></h1></th>
 			</tr>
 			<tr>
-                            <td width="7%" style="border-top-width: 1px; border-top-style: dotted; border-top-color: #E1E1E1;padding: 5px;"><strong>T&iacute;tulo:</strong>&nbsp;</td>
-				<td width="93%" style="border-top-width: 1px; border-top-style: dotted; border-top-color: #E1E1E1;padding: 5px;"><a href="<?php echo $url ?>" style="color:#006699;font-weight:bold;" target="_blank"><?php echo $evento ?></a></td>
+				<td width="7%"><strong>T&iacute;tulo:</strong>&nbsp;</td>
+				<td width="93%"><a href="<?php echo $url ?>" style="color:#006699;font-weight:bold;" target="_blank"><?php echo $evento ?></a></td>
 			</tr>
 			<tr>
-				<td valign="top" style="border-top-width: 1px; border-top-style: dotted; border-top-color: #E1E1E1;padding: 5px;"><strong>Descripci&oacute;n:</strong>&nbsp;</td>
-				<td style="border-top-width: 1px; border-top-style: dotted; border-top-color: #E1E1E1;padding: 5px;"><?php echo nl2br($descripcio) ?></td>
+				<td valign="top"><strong>Descripci&oacute;n:</strong>&nbsp;</td>
+				<td><?php echo nl2br($descripcio) ?></td>
 			</tr>
 		</table>
 	</body>
