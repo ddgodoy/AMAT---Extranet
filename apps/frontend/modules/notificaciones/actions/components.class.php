@@ -41,6 +41,6 @@ class notificacionesComponents extends sfComponents
 //			}
 //		}
 		
-		//$this->ultimos_avisos = Doctrine::getTable('Notificacion')->getUltimasNotificaciones($this->getUser()->getAttribute('userId'), 5);
+		$this->ultimos_avisos = Doctrine::getTable('Notificacion')->getUltimasNotificaciones($this->getUser()->getAttribute('userId'), 5);
 	}
 }
