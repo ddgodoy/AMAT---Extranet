@@ -1,7 +1,7 @@
 <html>
 	<head>
 	<title><?php echo $evento ?></title>
-	<style type="text/css">
+	<!--<style type="text/css">
 		<!--
 		table {
 			font-family: Verdana, Geneva, sans-serif;
@@ -26,7 +26,7 @@
 			margin-bottom: 5px;
 		}
 		-->
-	</style>
+	<!--</style>-->
 	</head>
 	<body>
             <div class="head" style="height: 76px; margin-bottom: 5px;"><img src="<?php echo $head_image ?>" alt=""></div>
