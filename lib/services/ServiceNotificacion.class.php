@@ -20,26 +20,25 @@ class ServiceNotificacion
 		
 		## Si la data es verdadera recorre los usuarios y les envía una notificación por la acción
 		if($data) {
-				
-			foreach ($data['usuarios'] as $usuario) {
-				   
-				$notificacion = new Notificacion();
-                if($DAtos=='')
-                {
-				$notificacion->setUsuarioId($usuario->getId());
-                }
-                else 
-                {
-                $notificacion->setUsuarioId($usuario->Usuario->getId());	
-                }
-				$notificacion->setEntidadId($id);
-				$notificacion->setTipo($data['tipo']);
-				$notificacion->setUrl($data['url']);
-				$notificacion->setNombre($titulo);
-				$notificacion->setContenidoNotificacionId($contenidoNotificacion->getId());
-				$notificacion->setEstado('noleido');
-				$notificacion->setVisto('0');
 
+			foreach ($data['usuarios'] as $usuario) {
+			$notificacion = new Notificacion();
+        	
+        if($DAtos=='')
+        {
+          $notificacion->setUsuarioId($usuario->getId());
+        }
+        else 
+           {
+                $notificacion->setUsuarioId($usuario->Usuario->getId());  
+            }
+        $notificacion->setEntidadId($id);
+        $notificacion->setTipo($data['tipo']);
+        $notificacion->setUrl($data['url']);
+        $notificacion->setNombre($titulo);
+        $notificacion->setContenidoNotificacionId($contenidoNotificacion->getId());
+        $notificacion->setEstado('noleido');
+        $notificacion->setVisto('0');
 				$notificacion->save();
 			}
 		}
