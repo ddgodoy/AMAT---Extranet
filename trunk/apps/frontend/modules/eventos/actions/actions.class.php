@@ -241,7 +241,8 @@ echo "3<br>";
 					$this->redirect('eventos/editar?id='.$evento->getId());
 				} else {
 					if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0 && $evento->getEstado() != 'pendiente') {
-						ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+echo "4<br>";  						
+            ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
 					}
 					$this->redirect('eventos/index'.$strPaginaVolver);
 				}
