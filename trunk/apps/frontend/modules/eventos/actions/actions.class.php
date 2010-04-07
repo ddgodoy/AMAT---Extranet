@@ -204,8 +204,6 @@ class eventosActions extends sfActions
 
 					$url = url_for('eventos/show?id='.$evento->getId(), true);
 					$iPh = image_path('/images/logo_email.jpg', true);
-echo "count ".count($email).'<br>';
-$i=0; 			
           
           $mailer  = new Swift(new Swift_Connection_NativeMail());
           $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
@@ -222,8 +220,6 @@ $i=0;
 
 		
 					foreach ($email AS $emailPublic) {
-echo $i."<br>";
-$i++;		  
             if ($publico != '') {
             //  ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());     
             } 
@@ -233,7 +229,6 @@ $i++;
 						}
 					}
           $mailer->disconnect();
-echo "3<br>";           
 				}
 				$this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
 				
@@ -241,8 +236,7 @@ echo "3<br>";
 					$this->redirect('eventos/editar?id='.$evento->getId());
 				} else {
 					if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0 && $evento->getEstado() != 'pendiente') {
-echo "4<br>";  						
-            ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+           // ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
 					}
 					$this->redirect('eventos/index'.$strPaginaVolver);
 				}
