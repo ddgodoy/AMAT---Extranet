@@ -204,9 +204,12 @@ class eventosActions extends sfActions
 
 					$url = url_for('eventos/show?id='.$evento->getId(), true);
 					$iPh = image_path('/images/logo_email.jpg', true);
-echo "1<br>"; 					
+echo "1<br>";
+echo "count ".count($email).'<br>';
+$i=0; 					
 					foreach ($email AS $emailPublic) {
-echo "2<br>";					  
+echo $i."<br>";
+$i++;		  
 						if ($publico != '') {
 							ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());			
 						}	
@@ -221,9 +224,10 @@ echo "2<br>";
 																	 'organizador' => $estado['organizador'],    
 																	 'descripcio'  => $estado['descripcion'],
 							);
+echo "antes<br>";              
 							$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 							$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-
+echo "despues<br>";
 							$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
 							$mailer->disconnect();
 						}
