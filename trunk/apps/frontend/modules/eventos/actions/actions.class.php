@@ -204,7 +204,6 @@ class eventosActions extends sfActions
 
 					$url = url_for('eventos/show?id='.$evento->getId(), true);
 					$iPh = image_path('/images/logo_email.jpg', true);
-echo "1<br>";
 echo "count ".count($email).'<br>';
 $i=0; 			
           
@@ -218,16 +217,15 @@ $i=0;
                                'organizador' => $estado['organizador'],    
                                'descripcio'  => $estado['descripcion'],
            );
-echo "antes<br>";              
           $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
           $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-echo "despues<br>";
+
 		
 					foreach ($email AS $emailPublic) {
 echo $i."<br>";
 $i++;		  
             if ($publico != '') {
-              ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());     
+            //  ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());     
             } 
 
             if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
