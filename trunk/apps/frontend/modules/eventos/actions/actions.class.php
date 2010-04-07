@@ -228,6 +228,7 @@ echo "2<br>";
 							$mailer->disconnect();
 						}
 					}
+echo "3<br>";           
 				}
 				$this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
 				
