@@ -94,8 +94,9 @@ class eventosActions extends sfActions
 			foreach ($IDs as $id) {
 				$request->checkCSRFProtection();
 				$this->forward404Unless($evento = Doctrine::getTable('Evento')->find($id), sprintf('Object evento does not exist (%s).', $id));
-
+echo "1<br>";
 				if ($accion == 'publicar') {
+echo "2<br>";				  
 					sfLoader::loadHelpers(array('Security', 'Url', 'Tag', 'Asset'));
 					if (!validate_action('publicar')) $this->redirect('seguridad/restringuido');	
 					
@@ -108,6 +109,7 @@ class eventosActions extends sfActions
 					ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
 					
 					if ($email) {
+echo "3<br>";					  
 						$url = url_for('eventos/show?id='.$evento->getId(), true);
 						$iPh = image_path('/images/logo_email.jpg',true);
 
@@ -117,7 +119,7 @@ class eventosActions extends sfActions
 						$nombreEvento = $evento->getTitulo();
 						$organizador  = $evento->getOrganizador();
 						$descripcion  = $evento->getDescripcion();
-
+echo "4<br>"; 
 						foreach ($email AS $emailPublic) {
 							ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(), 0,$emailPublic->getId());		
 							
@@ -157,6 +159,7 @@ class eventosActions extends sfActions
 
 	protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
 	{
+echo "5<br>"; 	  
 		$enviar = false;
 		$estado = $request->getParameter($form->getName());
 
@@ -168,6 +171,7 @@ class eventosActions extends sfActions
 
 			if($evento->getEstado() != 'guardado')
 			{
+echo "6<br>"; 			  
 				## Notificar y enviar email a los destinatarios
 				if($evento->getEstado() == 'publicado') {
 					$enviar  = true;
@@ -198,8 +202,9 @@ class eventosActions extends sfActions
 				}
 				## envia el email
 				if ($enviar) {
+echo "7<br>"; 				  
 					$agenda = AgendaTable::getDeleteAgenda($evento->getId());
-
+echo "8<br>"; 
 					if (isset($agenda)) {
 						$agenda->delete();
 					}
@@ -207,7 +212,7 @@ class eventosActions extends sfActions
 
 					$url = url_for('eventos/show?id='.$evento->getId(), true);
 					$iPh = image_path('/images/logo_email.jpg', true);
-					
+echo "9<br>"; 					
 					foreach ($email AS $emailPublic) {
 						if ($publico != '') {
 							ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());			
