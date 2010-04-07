@@ -42,7 +42,7 @@
                 }
 
         		if ($eventDay) {
-        			echo link_to($day . '<span>'.$evento_list_array[$day].'</span>', 'agenda/index?y='.$year.'&m='.$month.'&d='.$day, array('class'=>'info'));
+        			echo link_to($day . "<span><div align='left'>".$evento_list_array[$day].'</div></span>', 'agenda/index?y='.$year.'&m='.$month.'&d='.$day, array('class'=>'info'));
         		} else {
         			echo $link_day;
         		}
