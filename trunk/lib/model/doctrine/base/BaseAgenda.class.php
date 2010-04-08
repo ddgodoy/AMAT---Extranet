@@ -29,6 +29,9 @@ abstract class BaseAgenda extends sfDoctrineRecord
         $this->hasColumn('usuario_id', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('publico', 'integer', null, array(
+             'type' => 'integer',
+             ));
     }
 
     public function setUp()

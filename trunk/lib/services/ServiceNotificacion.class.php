@@ -19,30 +19,48 @@ class ServiceNotificacion
 		$data = self::getData($accion, $entidad, $id, $DAtos ,$grupo);
 		
 		## Si la data es verdadera recorre los usuarios y les envía una notificación por la acción
-		if($data) {
+                if($data) {
+                    if($data['usuarios']!='')
+                        {
+                            foreach ($data['usuarios'] as $usuario) {
+                            $notificacion = new Notificacion();
 
-			foreach ($data['usuarios'] as $usuario) {
-			$notificacion = new Notificacion();
-        	
-        if($DAtos=='')
-        {
-          $notificacion->setUsuarioId($usuario->getId());
-        }
-        else 
-           {
-                $notificacion->setUsuarioId($usuario->Usuario->getId());  
-            }
-        $notificacion->setEntidadId($id);
-        $notificacion->setTipo($data['tipo']);
-        $notificacion->setUrl($data['url']);
-        $notificacion->setNombre($titulo);
-        $notificacion->setContenidoNotificacionId($contenidoNotificacion->getId());
-        $notificacion->setEstado('noleido');
-        $notificacion->setVisto('0');
-				$notificacion->save();
-			}
-		}
-	}
+                            if($DAtos=='')
+                            {
+                              $notificacion->setUsuarioId($usuario->getId());
+                            }
+                            else
+                            {
+                             $notificacion->setUsuarioId($usuario->Usuario->getId());
+                            }
+                            $notificacion->setEntidadId($id);
+                            $notificacion->setTipo($data['tipo']);
+                            $notificacion->setUrl($data['url']);
+                            $notificacion->setNombre($titulo);
+                            $notificacion->setContenidoNotificacionId($contenidoNotificacion->getId());
+                            $notificacion->setPublico('0');
+                            $notificacion->setVisto('0');
+                            $notificacion->save();
+                            }
+                        }
+                      else
+                        {
+                            $notificacion = new Notificacion();
+                            $notificacion->setUsuarioId('0');
+                            $notificacion->setEntidadId($id);
+                            $notificacion->setTipo($data['tipo']);
+                            $notificacion->setUrl($data['url']);
+                            $notificacion->setNombre($titulo);
+                            $notificacion->setContenidoNotificacionId($contenidoNotificacion->getId());
+                            $notificacion->setPublico($data['publico']);
+                            $notificacion->setVisto('0');
+                            $notificacion->save();
+
+
+
+                        }
+                      }
+               }
 	
 	/**
 	 * Método intermedio entre la data y el envío
@@ -80,7 +98,8 @@ class ServiceNotificacion
 		$usuer = UsuarioTable::getUsuarioByEventos($id);
 		if($usuer->count()==0)
 		{
-			$data['usuarios'] = UsuarioTable::getUsuariosActivos();
+			$data['publico'] = '1';
+                        $data['usuarios'] = '';
 		}
 		else 
 		{
@@ -103,7 +122,8 @@ class ServiceNotificacion
 		$data = array();
 		$data['url'] = 'noticias/show?id=' . $id;
 		$data['tipo'] = 'Noticia';
-		$data['usuarios'] = Doctrine::getTable('Usuario')->findAll();
+		$data['publico'] = '1';
+                $data['usuarios'] = '';
 		
 		return $data;
 	}

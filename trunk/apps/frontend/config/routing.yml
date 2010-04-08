@@ -27,8 +27,8 @@ rol_rol:
 # default rules
 homepage:
   url:   /
-  param: { module: inicio, action: index }
-# param: { module: seguridad, action: index }
+  #param: { module: inicio, action: index }
+  param: { module: seguridad, action: index }
 
 default_index:
   url:   /:module

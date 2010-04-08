@@ -13,7 +13,6 @@ class BaseNotificacionForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'                        => new sfWidgetFormInputHidden(),
-      'estado'                    => new sfWidgetFormChoice(array('choices' => array('leido' => 'leido', 'noleido' => 'noleido'))),
       'url'                       => new sfWidgetFormInput(),
       'nombre'                    => new sfWidgetFormTextarea(),
       'contenido_notificacion_id' => new sfWidgetFormDoctrineChoice(array('model' => 'ContenidoNotificacion', 'add_empty' => true)),
@@ -21,6 +20,7 @@ class BaseNotificacionForm extends BaseFormDoctrine
       'entidad_id'                => new sfWidgetFormInput(),
       'tipo'                      => new sfWidgetFormInput(),
       'visto'                     => new sfWidgetFormInput(),
+      'publico'                   => new sfWidgetFormInput(),
       'created_at'                => new sfWidgetFormDateTime(),
       'updated_at'                => new sfWidgetFormDateTime(),
       'deleted'                   => new sfWidgetFormInputCheckbox(),
@@ -28,7 +28,6 @@ class BaseNotificacionForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'                        => new sfValidatorDoctrineChoice(array('model' => 'Notificacion', 'column' => 'id', 'required' => false)),
-      'estado'                    => new sfValidatorChoice(array('choices' => array('leido' => 'leido', 'noleido' => 'noleido'), 'required' => false)),
       'url'                       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'nombre'                    => new sfValidatorString(array('required' => false)),
       'contenido_notificacion_id' => new sfValidatorDoctrineChoice(array('model' => 'ContenidoNotificacion', 'required' => false)),
@@ -36,6 +35,7 @@ class BaseNotificacionForm extends BaseFormDoctrine
       'entidad_id'                => new sfValidatorInteger(array('required' => false)),
       'tipo'                      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'visto'                     => new sfValidatorInteger(array('required' => false)),
+      'publico'                   => new sfValidatorInteger(array('required' => false)),
       'created_at'                => new sfValidatorDateTime(array('required' => false)),
       'updated_at'                => new sfValidatorDateTime(array('required' => false)),
       'deleted'                   => new sfValidatorBoolean(),

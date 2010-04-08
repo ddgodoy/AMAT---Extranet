@@ -32,7 +32,7 @@ class agendaComponents extends sfComponents
 		$this->evento_list_array = array();
 
 		$usurID  = sfContext::getInstance()->getUser()->getAttribute('userId');	
-		$agenda  = Agenda::getRepository()->getEventoByUsuario(0,0,$usurID);		 
+		$agenda  = Agenda::getRepository()->getEventoByUsuario('','',$usurID);
 		$this->year  = $this->getRequestParameter('y', date('Y'));
 		$this->month = $this->getRequestParameter('m', date('m'));
 	    if(validate_action('listar','agenda'))
