@@ -107,7 +107,7 @@ class eventosActions extends sfActions
 					ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
                                         if($evento->getAmbito() != 'intranet')
                                         {
-                                         ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
+                                         ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,0,1);
                                         }
 					
 					if ($email) {
@@ -225,7 +225,7 @@ class eventosActions extends sfActions
 
              if ($publico != ''){
                 if($evento->getAmbito() != 'intranet' || empty($estado['usuarios_list'])) {
-                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
+                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,0,1);
                 }
             }
 		
