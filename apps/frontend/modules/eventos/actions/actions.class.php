@@ -105,6 +105,10 @@ class eventosActions extends sfActions
 					
 					## Notificar
 					ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+                                        if($evento->getAmbito() != 'intranet')
+                                        {
+                                         ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
+                                        }
 					
 					if ($email) {
 						$url = url_for('eventos/show?id='.$evento->getId(), true);
@@ -117,14 +121,9 @@ class eventosActions extends sfActions
 						$organizador  = $evento->getOrganizador();
 						$descripcion  = $evento->getDescripcion();
 						foreach ($email AS $emailPublic) {
-							 if($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
+							 if($evento->getAmbito() == 'intranet') {
                                                              ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
                                                             }
-                                                            else
-                                                            {
-                                                             ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
-                                                            }
-							
 							if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
 								$mailer = new Swift(new Swift_Connection_NativeMail());
 								$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
@@ -224,15 +223,16 @@ class eventosActions extends sfActions
                                       $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                       $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
+             if ($publico != ''){
+                if($evento->getAmbito() != 'intranet' || empty($estado['usuarios_list'])) {
+                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
+                }
+            }
 		
 	  foreach ($email AS $emailPublic) {
             if ($publico != ''){
                 if($evento->getAmbito() == 'intranet' || !empty($estado['usuarios_list'])) {
                  ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
-                }
-                else
-                {
-                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
                 }
             }
 
