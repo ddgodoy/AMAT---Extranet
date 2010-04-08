@@ -8,14 +8,6 @@ abstract class BaseNotificacion extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('notificacion');
-        $this->hasColumn('estado', 'enum', null, array(
-             'type' => 'enum',
-             'values' => 
-             array(
-              0 => 'leido',
-              1 => 'noleido',
-             ),
-             ));
         $this->hasColumn('url', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
@@ -37,6 +29,9 @@ abstract class BaseNotificacion extends sfDoctrineRecord
              'length' => '255',
              ));
         $this->hasColumn('visto', 'integer', null, array(
+             'type' => 'integer',
+             ));
+        $this->hasColumn('publico', 'integer', null, array(
              'type' => 'integer',
              ));
     }

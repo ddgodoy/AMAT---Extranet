@@ -22,7 +22,7 @@ class agendaActions extends sfActions
 		$this->pager->getQuery()
 				 ->from('Agenda')
 				 ->where($this->setFiltroBusqueda())
-				 ->addWhere('usuario_id = '.$usurID)
+				 ->addWhere('usuario_id = '.$usurID.' OR publico = 1')
 				 ->orderBy($this->setOrdenamiento());
 
 		$this->pager->setPage($this->paginaActual);

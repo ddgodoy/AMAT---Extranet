@@ -117,7 +117,13 @@ class eventosActions extends sfActions
 						$organizador  = $evento->getOrganizador();
 						$descripcion  = $evento->getDescripcion();
 						foreach ($email AS $emailPublic) {
-							ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(), 0,$emailPublic->getId());		
+							 if($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
+                                                             ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
+                                                            }
+                                                            else
+                                                            {
+                                                             ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
+                                                            }
 							
 							if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
 								$mailer = new Swift(new Swift_Connection_NativeMail());
@@ -171,7 +177,7 @@ class eventosActions extends sfActions
 					$enviar  = true;
 					$tema    = 'Evento publicado';
 					$publico = 'si';
-
+                                           
 					NotificacionTable::getDeleteEntidad2($evento->getId(),$evento->getTitulo());
 
 					if ($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
@@ -205,24 +211,30 @@ class eventosActions extends sfActions
 					$url = url_for('eventos/show?id='.$evento->getId(), true);
 					$iPh = image_path('/images/logo_email.jpg', true);
           
-          $mailer  = new Swift(new Swift_Connection_NativeMail());
-          $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-              
-          $mailContext = array('tema'   => $tema,
-                               'evento' => $estado['titulo'],
-                               'url'    => $url,
-                               'head_image'  => $iPh,
-                               'organizador' => $estado['organizador'],    
-                               'descripcio'  => $estado['descripcion'],
-           );
-          $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-          $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+                                      $mailer  = new Swift(new Swift_Connection_NativeMail());
+                                      $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+
+                                      $mailContext = array('tema'   => $tema,
+                                                           'evento' => $estado['titulo'],
+                                                           'url'    => $url,
+                                                           'head_image'  => $iPh,
+                                                           'organizador' => $estado['organizador'],
+                                                           'descripcio'  => $estado['descripcion'],
+                                       );
+                                      $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                                      $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
 		
-					foreach ($email AS $emailPublic) {
-            if ($publico != '') {
-            //  ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId());     
-            } 
+	  foreach ($email AS $emailPublic) {
+            if ($publico != ''){
+                if($evento->getAmbito() == 'intranet' || !empty($estado['usuarios_list'])) {
+                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
+                }
+                else
+                {
+                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),1);
+                }
+            }
 
             if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
 							$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
@@ -236,7 +248,7 @@ class eventosActions extends sfActions
 					$this->redirect('eventos/editar?id='.$evento->getId());
 				} else {
 					if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0 && $evento->getEstado() != 'pendiente') {
-           // ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+                                            ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
 					}
 					$this->redirect('eventos/index'.$strPaginaVolver);
 				}
@@ -350,7 +362,7 @@ class eventosActions extends sfActions
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return "e.deleted=0".$parcial;
 		} else {
-			return "e.deleted=0 AND (e.fecha_caducidad >= NOW() OR e.fecha_caducidad IS NULL ) AND ( ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito != 'web' OR e.estado = 'guardado')".$parcial;
+			return "e.deleted=0 AND (e.fecha_caducidad >= NOW() OR e.fecha_caducidad IS NULL ) AND ( ue.usuario_id = ".$this->getUser()->getAttribute('userId')." OR e.ambito = 'ambos' OR e.estado = 'guardado')".$parcial;
 		}	
   }
 

@@ -5,12 +5,12 @@
 class AgendaTable extends Doctrine_Table
 {
 
-	public static function getEventoByUsuario($evento='',$convocatoria='',$usuario)
+	public static function getEventoByUsuario($evento='',$convocatoria='',$usuario='')
 	{
 		$q = Doctrine_Query::create()
 		->from('Agenda')
-		->where('deleted = 0')
-		->addWhere('usuario_id = '.$usuario);
+		->where('deleted = 0');
+                $q->addWhere('usuario_id = '.$usuario.' OR publico = 1');
 		if($evento!='')
 		{
 		 $q->addWhere('evento_id = '.$evento);
@@ -18,8 +18,8 @@ class AgendaTable extends Doctrine_Table
 		if($convocatoria!='')
 		{
 		 $q->addWhere('convocatoria_id  = '.$convocatoria);
-		} 
-		
+		}
+		$q->groupBy('url');
 		return $q->execute();
 	}
 	

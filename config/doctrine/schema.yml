@@ -351,6 +351,7 @@ Agenda:
     evento_id:              { type:integer }
     convocatoria_id:        { type:integer }
     usuario_id:             { type:integer }
+    publico:                { type:integer }
   relations:
     Convocatoria:           { local: convocatoria_id, foreign: id, onDelete: CASCADE } 
     Evento:                 { local: evento_id, foreign: id, onDelete: CASCADE }
@@ -830,7 +831,6 @@ Notificacion:
     Timestampable: ~
     SoftDelete: ~
   columns:
-    estado:                    { type: enum, values: ['leido', 'noleido'] }
     url:                       { type: string(255) }
     nombre:                    { type: clob }
     contenido_notificacion_id: { type: integer }
@@ -838,6 +838,7 @@ Notificacion:
     entidad_id:                { type: integer }
     tipo:                      { type: string(255) }
     visto:                     { type: integer }
+    publico:                   { type:integer }
   relations:
     ContenidoNotificacion:     { local: contenido_notificacion_id, foreign: id, onDelete: CASCADE }
     Usuario:                   { local: usuario_id, foreign: id, onDelete: CASCADE }

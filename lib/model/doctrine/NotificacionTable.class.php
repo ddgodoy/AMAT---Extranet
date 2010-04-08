@@ -30,7 +30,7 @@ class NotificacionTable extends Doctrine_Table
 	{
 		$q = Doctrine_Query::create();
                 $q->select('n.id ,
-                            n.estado ,
+                            n.nombre,
                             n.url ,
                             n.contenido_notificacion_id ,
                             n.usuario_id ,
@@ -50,7 +50,7 @@ class NotificacionTable extends Doctrine_Table
 		$q->from('Notificacion n');
 		$q->leftJoin('n.ContenidoNotificacion cn');
 		$q->where('n.deleted = 0');
-		$q->addWhere('n.usuario_id=' . $usuarioId. '');
+		$q->addWhere('n.usuario_id=' . $usuarioId. ' OR  n.publico = 1');
 		$q->addWhere('n.visto != 1');
 		$q->orderBy('n.created_at DESC');
 		$q->groupBy('entidad_id');
