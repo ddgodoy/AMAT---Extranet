@@ -182,7 +182,7 @@ class noticiasActions extends sfActions
 				$tema  .= 'publicada';
 				ServiceNotificacion::send('creacion', 'Noticia', $noticia->getId(), $noticia->getTitulo());
 			}
-			if ($estado['estado'] == 'pendiente') { 
+			if ($estado['estado'] == 'pendiente') {
 				$enviar = true;
 				$email  = AplicacionRolTable::getEmailPublicar(1);
 				$tema  .= 'pendiente de publicar';
