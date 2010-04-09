@@ -181,9 +181,14 @@ class eventosActions extends sfActions
 
 					if ($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
 						$email = UsuarioTable::getEmailEvento($estado['usuarios_list']);
-					} else  {
+					}
+                                        elseif($evento->getAmbito() == 'ambos'){
 						$email = UsuarioTable::getUsuariosActivos();			    	
 					}
+                                        else
+                                        {
+                                                $email = '';
+                                        }
 				}
 				## enviar email a los responsables 
 				if ($evento->getEstado() == 'pendiente')
@@ -200,7 +205,7 @@ class eventosActions extends sfActions
 					NotificacionTable::getDeleteEntidad2($evento->getId(),$evento->getTitulo());
 				}
 				## envia el email
-				if ($enviar) {
+				if ($enviar && $email!='') {
 					$agenda = AgendaTable::getDeleteAgenda($evento->getId());
 					if (isset($agenda)) {
 						$agenda->delete();
@@ -223,25 +228,25 @@ class eventosActions extends sfActions
                                       $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                       $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
-             if ($publico != ''){
-                if($evento->getAmbito() != 'intranet' || empty($estado['usuarios_list'])) {
-                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,0,1);
-                }
-            }
-		
-	  foreach ($email AS $emailPublic) {
-            if ($publico != ''){
-                if($evento->getAmbito() == 'intranet' || !empty($estado['usuarios_list'])) {
-                 ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
-                }
-            }
+                                     if ($publico != ''){
+                                        if($evento->getAmbito() != 'intranet' || empty($estado['usuarios_list'])) {
+                                         ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,0,1);
+                                        }
+                                     }
 
-            if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
-							$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-						}
-					}
-          $mailer->disconnect();
-				}
+                                      foreach ($email AS $emailPublic) {
+                                        if ($publico != ''){
+                                            if($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
+                                             ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
+                                            }
+                                        }
+
+                                        if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
+                                                                                    $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+                                                                            }
+                                                                    }
+                                      $mailer->disconnect();
+                                                            }
 				$this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
 				
 				if($evento->getAmbito() == 'intranet' && empty($estado['usuarios_list'])) {
