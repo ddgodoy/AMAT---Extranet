@@ -106,9 +106,9 @@
 	   'SelectCatTemaBsq'=>$SelectCatTemaBsq, 
 	   'SelectSubTemaBsq'=>$SelectSubTemaBsq, 
 	   'SelectSubTemaBsq2'=>'', 
-	   'arrayCategoria'=>$arrayCategoria, 
-	   'SelectCatOrganismoBsq'=>$SelectCatOrganismoBsq, 
-	   'SelectSubOrganismoBsq'=>$SelectSubOrganismoBsq))?>
+	   'arrayCategoria'=>'',
+	   'SelectCatOrganismoBsq'=>'',
+	   'SelectSubOrganismoBsq'=>''))?>
 		<div class="paneles">
 			<h1>Buscador de circulares</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('circulares/index') ?>">
