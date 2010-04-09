@@ -25,8 +25,9 @@
       </div>
       <h1>Extranet de Asociados AMAT</h1>
       <?php $arrMenu = sfContext::getInstance()->getUser()->getAttribute('menu');
-       		$banderaPadre = 0;?>
-       		
+       		$banderaPadre = 0;
+                $banderaInicio = 0;
+      ?>
        <!--<pre>
        <?php // print_r($arrMenu) ?>
        </pre>		
@@ -34,7 +35,14 @@
       
       <div class="menu" style="z-index:1000;">
         <ul class="sf-menu"> 
-        <?php foreach ($arrMenu as $item) : if( $banderaPadre == 1){$banderaPadre = 0;} ?>
+        <?php foreach ($arrMenu as $item) : if( $banderaInicio == 1){$banderaInicio = 0;} ?>
+            <?php if (count($item['hijos']) >=1) :?>
+                 <?php foreach ($item['hijos'] as $verelmoduloInicial) : ?>
+                        <?php if(validate_action('listar',$verelmoduloInicial['modulo'])|| validate_action('publicar',$verelmoduloInicial['modulo']) ):
+			          $banderaInicio = 1;
+			endif;?>
+	         <?php endforeach; ?>
+	        <?php if($banderaInicio == 1): if( $banderaPadre == 1){$banderaPadre = 0;}?>
         	<li id="primerNivel" class="current" style="cursor:pointer;"> <a><?php echo $item['nombre'] ?></a>
         	<?php if (count($item['hijos']) >=1) :?>
         	  <?php foreach ($item['hijos'] as $verelmoduloPadre) : ?>
@@ -69,8 +77,10 @@
 	            </ul>
 	        <?php endif; ?>	
 	        <?php endif; ?>	
-            </li> 
-        <?php endforeach; ?>         
+            </li>
+          <?php endif;?>
+         <?php endif;?>
+       <?php endforeach; ?>         
         </ul>
       </div>
     </div>
