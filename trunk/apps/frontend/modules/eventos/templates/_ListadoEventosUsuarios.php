@@ -2,7 +2,7 @@
 <td width="11%" align="center"  style="border-bottom:1px dotted #999; padding:7px;"><div style="border-right:solid 1px #CCC"> <span style="color:#999"><?php	echo date("d/m/Y", strtotime($evento->getFecha()));?></span><br />
 <?php		
 	if ($evento->getImagen()) {
-		if(file_exists(sfConfig::get('sf_upload_dir').'/noticias/images/s_'.$evento->getImagen()))
+		if(file_exists(sfConfig::get('sf_upload_dir').'/eventos/images/s_'.$evento->getImagen()))
 		{
 			echo image_tag('/uploads/eventos/images/s_'.$evento->getImagen(), array('alt' => $evento->getTitulo()));
 		}
