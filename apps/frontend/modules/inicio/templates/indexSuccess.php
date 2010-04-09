@@ -1,4 +1,4 @@
-	<h1 class="especial">Bienvenido a la Extranet de Asociados Amat</h1>
+	<h1 class="especial">Bienvenido a la Extranet Sectorial Amat</h1>
 	<div class="left_pan"><div class="paneles"><?php include_component('agenda', 'agenda') ?></div></div>
 	<div class="right_pan"><div class="paneles"><?php include_component('notificaciones', 'ultimos_avisos') ?></div></div>
 	<div class="middle_pan"><div class="paneles"><?php  include_component('noticias', 'ultimas_noticias') ?></div></div>

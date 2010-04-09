@@ -14,7 +14,7 @@
 			<div class="mensajeSistema error"><?php echo $sf_user->getFlash('error') ?></div>
 		<?php endif; ?>
 	</div>
-	<h2>Bienvenido a la Extranet de Asociados</h2>
+	<h2>Bienvenido a la Extranet Sectorial</h2>
 	<div class="logbox">
 		<h1>
 			Introduzca su Usuario y Contrase&ntilde;a

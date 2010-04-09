@@ -23,7 +23,7 @@
           <input name="boton_buscar" type="submit" value="Buscar" class="boton" onclick="return avoidNullSearch();"/>
         </form>
       </div>
-      <h1>Extranet de Asociados AMAT</h1>
+      <h1>Extranet Sectorial AMAT</h1>
       <?php $arrMenu = sfContext::getInstance()->getUser()->getAttribute('menu');
        		$banderaPadre = 0;
                 $banderaInicio = 0;
