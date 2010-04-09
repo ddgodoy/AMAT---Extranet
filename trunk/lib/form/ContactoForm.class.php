@@ -23,7 +23,7 @@ class ContactoForm extends sfForm
 											array('style'=>'width:300px;','class'=>'form_input')
 											
 										 ),
-			'asunto' => new fckFormWidget(),
+			'asunto' => new sfWidgetFormTextarea(array(), array('style'=>'width:730px;height:300px;','class'=>'form_input')),
 		));
 
 		$this->setValidators(array(
