@@ -185,6 +185,10 @@ class noticiasActions extends sfActions
 			if ($estado['estado'] == 'pendiente') {
 				$enviar = true;
 				$email  = AplicacionRolTable::getEmailPublicar(1);
+                                echo '<pre>';
+                                print_r($email);
+                                echo '</pre>';
+                                exit ();
 				$tema  .= 'pendiente de publicar';
 				$aviso  = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
 			}
