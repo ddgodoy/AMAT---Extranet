@@ -217,4 +217,7 @@ class seguridadActions extends sfActions
 	}
 	## Fin acciones recordar clave
 	
+	public function executeError(sfWebRequest $request)
+  {
+  }  
 }
