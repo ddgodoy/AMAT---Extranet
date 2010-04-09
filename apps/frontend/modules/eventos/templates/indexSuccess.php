@@ -60,9 +60,11 @@
 	</div>
 	
 	<?php if ($cantidadRegistros > 0) : ?>
-<form method="post" enctype="multipart/form-data" action="" id="frmListEventos">
+    <?php if( !validate_action('publicar') && !validate_action('modificar') && !validate_action('baja') ):?><div style="border-bottom:5px solid #CCC; margin:10px 0px;"></div><?php endif;?>
+    <form method="post" enctype="multipart/form-data" action="" id="frmListEventos">
 	<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 	<tbody>
+        <?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 	<tr>
 	   <?php if (validate_action('publicar') || validate_action('baja')): ?>
 		<th width="3%"></th>
@@ -80,6 +82,7 @@
 		<th width="3%"></th>
 		<th width="3%"></th>
 	</tr>
+        <?php endif;?>
 	<?php $i=0; foreach ($evento_list as $evento): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 	<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 	<?php if($evento->getEstado() == 'guardado'):?>
@@ -92,10 +95,10 @@
 	<?php else: ?>
 	<?php if($evento->getEstado() == 'guardado' || $evento->getEstado() == 'pendiente'):?>
 	<?php if($evento->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php include_partial('ListadoEventosUsuarios', array('evento'=>$evento, 'odd'=>$odd));?>
 	<?php endif; ?>
 	<?php else: ?>
-	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php include_partial('ListadoEventosUsuarios', array('evento'=>$evento, 'odd'=>$odd));?>
 	<?php endif; ?>
     <?php endif;?>
 	<?php endforeach; ?>
