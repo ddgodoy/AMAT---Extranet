@@ -229,7 +229,7 @@ class eventosActions extends sfActions
                                       $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
                                      if ($publico != ''){
-                                        if($evento->getAmbito() != 'intranet' || empty($estado['usuarios_list'])) {
+                                        if($evento->getAmbito() != 'intranet' && empty($estado['usuarios_list'])) {
                                          ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,0,1);
                                         }
                                      }
