@@ -4,7 +4,7 @@
 	if ($evento->getImagen()) {
 		if(file_exists(sfConfig::get('sf_upload_dir').'/noticias/images/s_'.$evento->getImagen()))
 		{
-			echo image_tag('/uploads/noticias/images/s_'.$evento->getImagen(), array('alt' => $evento->getTitulo()));
+			echo image_tag('/uploads/eventos/images/s_'.$evento->getImagen(), array('alt' => $evento->getTitulo()));
 		}
 		else 
 		{
