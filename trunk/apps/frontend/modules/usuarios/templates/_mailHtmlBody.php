@@ -1,6 +1,6 @@
 <html>
 	<head>
-	<title>Datos de accesos a Extranet de Asociados AMAT</title>
+	<title>Datos de accesos a Extranet Sectorial AMAT</title>
 	<style type="text/css">
 		<!--
 		table {
