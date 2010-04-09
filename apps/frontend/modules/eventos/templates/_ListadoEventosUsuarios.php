@@ -8,7 +8,7 @@
 		}
 		else 
 		{
-			echo image_tag('/uploads/noticias/images/'.$evento->getImagen(), array('height' => 60, 'width' => 80, 'alt' => $evento->getTitulo()));
+			echo image_tag('/uploads/eventos/images/'.$evento->getImagen(), array('height' => 60, 'width' => 80, 'alt' => $evento->getTitulo()));
 		}
 	}
 	else {	
