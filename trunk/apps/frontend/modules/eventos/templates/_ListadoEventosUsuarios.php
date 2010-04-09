@@ -8,7 +8,15 @@
 		}
 		else 
 		{
-			echo image_tag('/uploads/eventos/images/'.$evento->getImagen(), array('height' => 60, 'width' => 80, 'alt' => $evento->getTitulo()));
+                    if(file_exists(sfConfig::get('sf_upload_dir').'/eventos/images/s_'.$evento->getImagen()))
+                       {
+                        echo image_tag('/uploads/eventos/images/'.$evento->getImagen(), array('height' => 60, 'width' => 80, 'alt' => $evento->getTitulo()));
+                       }
+                     else
+                       {
+                         echo image_tag('noimage.jpg', array('height' => 50, 'width' => 50, 'alt' => $evento->getTitulo()));
+                       }
+
 		}
 	}
 	else {	
