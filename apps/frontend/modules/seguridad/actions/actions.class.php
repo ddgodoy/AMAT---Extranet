@@ -219,6 +219,6 @@ class seguridadActions extends sfActions
 	
 	public function executeError(sfWebRequest $request)
   {
-    $this->setTemplate('layout');
+    $this->setLayout("layout");
   }  
 }
