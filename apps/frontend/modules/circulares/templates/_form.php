@@ -14,8 +14,8 @@
 	echo $form['documento']->renderError();
 	echo $form['circular_sub_tema_id']->renderError();
 	echo $form['subcategoria_organismo_id']->renderError();
-	echo $form['circular_tema_id']->renderError();
-	echo $form['categoria_organismo_id']->renderError();
+	//echo $form['circular_tema_id']->renderError();
+	//echo $form['categoria_organismo_id']->renderError();
 		
 ?>
 <form action="<?php echo url_for('circulares/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
