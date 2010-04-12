@@ -5,7 +5,8 @@
         
 
 	<div class="clear"></div>
-	
+
+        <?php if(count($aplicacionesExternas) >= 1): ?>
 	<div class="paneles">
 		<h1>Accesos a las aplicaciones Externas</h1>
 		<div class="enlaces">
@@ -23,5 +24,6 @@
 			<div class="clear"></div>
 		</div>
 	</div>
+        <?php endif;?>
 
 	<div class="clear"></div>
