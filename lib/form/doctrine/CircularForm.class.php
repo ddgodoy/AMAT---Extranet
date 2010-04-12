@@ -49,8 +49,8 @@ class CircularForm extends BaseCircularForm
       'documento' => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/circulares/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')),
       'circular_tema_id'          => new sfWidgetFormChoice(array('choices' => array('0'=>'--sellecionar--')+$arrayCategoTema)),
       'circular_sub_tema_id'      => new sfWidgetFormDoctrineChoice(array('model' => 'CircularSubTema', 'add_empty' => true)),
-      'categoria_organismo_id'    => new sfWidgetFormChoice(array('choices' => $arrayCategoOrg)),
-      'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
+      //'categoria_organismo_id'    => new sfWidgetFormChoice(array('choices' => $arrayCategoOrg)),
+      //'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -60,10 +60,10 @@ class CircularForm extends BaseCircularForm
       'contenido' 			=> new sfValidatorString(array('required' => false), array('required'=>'El Contenido es obligatorio')),
       'numero'              => new sfValidatorInteger(array('required' => false),array('required'=>'El Numero es obligatorio','invalid'=>'El numero tiene que ser un entero') ),
       'documento'         	=> new sfValidatorFile(array('path' => 'uploads/circulares/docs', 'required' => false)),
-      'circular_tema_id'          => new sfValidatorChoice(array('choices' => array_keys(array('0'=>'0')+$arrayCategoTema) , 'required' => false),array('invalid'=>'hola')),
+      'circular_tema_id'          => new sfValidatorChoice(array('choices' => array_keys(array('0'=>'0')+$arrayCategoTema) , 'required' => false)),
       'circular_sub_tema_id'      => new sfValidatorChoice(array('choices' => $arraysubtema , 'required' => false)),
-      'categoria_organismo_id'    => new sfValidatorChoice(array('choices' => array_keys($arrayCategoOrg) , 'required' => false),array('invalid'=>'chau')),
-      'subcategoria_organismo_id' => new sfValidatorChoice(array('choices' => $arraysubOrga, 'required' => false)),
+      //'categoria_organismo_id'    => new sfValidatorChoice(array('choices' => array_keys($arrayCategoOrg) , 'required' => false)),
+      //'subcategoria_organismo_id' => new sfValidatorChoice(array('choices' => $arraysubOrga, 'required' => false)),
     ));
 
     $this->widgetSchema->setLabels(array(
