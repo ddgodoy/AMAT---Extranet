@@ -4,7 +4,9 @@ if(!$sf_user->getAttribute('userId') && $sf_context->getModuleName() != 'segurid
 <?php endif; ?>
 
 <?php //echo 'module =>'.$sf_context->getModuleName().'<br> action =>'.$sf_context->getActionName(); exit();?>
-<?php include_component('seguridad', 'verificar', array('module' => $sf_context->getModuleName(), 'action' => $sf_context->getActionName())) ?>
+<?php if($sf_context->getModuleName() == 'contacto'):?>
+<?php include_component('seguridad', 'verificar', array('module' => $sf_context->getModuleName(), 'action' => $sf_context->getActionName())); ?>
+<?php endif;?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
