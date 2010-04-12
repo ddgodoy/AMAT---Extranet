@@ -4,7 +4,7 @@ if(!$sf_user->getAttribute('userId') && $sf_context->getModuleName() != 'segurid
 <?php endif; ?>
 
 <?php //echo 'module =>'.$sf_context->getModuleName().'<br> action =>'.$sf_context->getActionName(); exit();?>
-<?php if($sf_context->getModuleName() == 'contacto'):?>
+<?php if($sf_context->getModuleName() != 'contacto'):?>
 <?php include_component('seguridad', 'verificar', array('module' => $sf_context->getModuleName(), 'action' => $sf_context->getActionName())); ?>
 <?php endif;?>
 
