@@ -12,9 +12,11 @@
 	echo $form['fecha_caducidad']->renderError();
 	echo $form['numero']->renderError();
 	echo $form['documento']->renderError();
+        echo $form['circular_tema_id']->renderError();
 	echo $form['circular_sub_tema_id']->renderError();
-	echo $form['subcategoria_organismo_id']->renderError();
-	//echo $form['circular_tema_id']->renderError();
+
+	//echo $form['subcategoria_organismo_id']->renderError();
+	
 	//echo $form['categoria_organismo_id']->renderError();
 		
 ?>
