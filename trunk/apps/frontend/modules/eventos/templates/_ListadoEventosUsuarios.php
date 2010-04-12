@@ -25,6 +25,6 @@
  ?>
 </div> 
 </td>
-<td width="88%" valign="top"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('noticias/show?id=' . $evento->getId()) ?>"><strong><?php echo $evento->getTitulo() ?></strong></a> <br clear="all">
+<td width="88%" valign="top"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('eventos/show?id=' . $evento->getId()) ?>"><strong><?php echo $evento->getTitulo() ?></strong></a> <br clear="all">
 <?php if ($evento->getDescripcion()): echo nl2br($evento->getDescripcion()); endif; ?></td>
 </tr>
