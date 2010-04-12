@@ -175,7 +175,8 @@
 						</span>
 					</td>
 				</tr>
-				<tr>
+				<?php /*
+                                <tr>
 					<td valign="top"><label>Categor&iacute;a de Organismo</label></td>
 					<td valign="middle">
 						<?php
@@ -194,6 +195,7 @@
 						</span>
 					</td>
 				</tr>
+                                */ ?>
 					<tr>
 						<td style="padding-top:5px;">
 							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							

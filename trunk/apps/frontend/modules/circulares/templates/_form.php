@@ -75,6 +75,7 @@
 						</span>
 					</td>
 				</tr>
+                                <?php /*
 				<tr>
 					<td valign="top"><label>Categor&iacute;a de Organismo</label></td>
 					<td valign="middle">
@@ -93,10 +94,11 @@
 					<td valign="middle">
 						<span id="content_sub_org">
 							<?php include_partial('subcategoria_organismos/selectByCategoriaOrganismo', array ('arraySubcategoria'=>$arraySubcategoria, 'subcategoria_organismos_selected'=>$subcategoria_organismos_selected, 'name'=>'circular')) ?>
-							<?php /* include_partial('circular_sub_org/selectByCategoria', array ('arraySubcategoriasOrg'=>$arraySubcategoriasOrg, 'sub_org_selected'=>$sub_org_selected))  */?>
+							<?php /* include_partial('circular_sub_org/selectByCategoria', array ('arraySubcategoriasOrg'=>$arraySubcategoriasOrg, 'sub_org_selected'=>$sub_org_selected))  ?>
 						</span>
 					</td>
 				</tr>
+                                */?>
 				<tr>
 					<td valign="top"><label><?php echo $form['contenido']->renderLabel() ?></label></td>
 					<td valign="middle"><?php echo $form['contenido'] ?></td>
