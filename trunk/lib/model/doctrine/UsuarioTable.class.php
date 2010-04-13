@@ -149,7 +149,7 @@ class UsuarioTable extends Doctrine_Table
 		$r = Doctrine_Query::create()->from('Usuario');
 
 		if ($d == 1) {
-		 $r->where('id ='.$arrayIDusuario[0]);
+		 $r->where('id ='.$arrayIDusuario);
 		} else {
 		  $r->where('id IN '.$id);	
 		}

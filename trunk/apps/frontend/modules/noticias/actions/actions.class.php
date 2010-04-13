@@ -128,7 +128,7 @@ class noticiasActions extends sfActions
 		## Notificar
 		ServiceNotificacion::send('creacion', 'Noticia', $objeto->getId(), $objeto->getTitulo());
 		
-		## envio el email por eso digo que tendria que haber echo un servicio
+		## envio el email 
 		$email = UsuarioTable::getEmailEvento($objeto->getOwnerId());
 		$iPh = image_path('/images/logo_email.jpg', true);
 		$url = url_for($modulo.'/show?id='.$objeto->getId(), true);
