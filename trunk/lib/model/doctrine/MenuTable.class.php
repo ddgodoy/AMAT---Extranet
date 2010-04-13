@@ -116,7 +116,7 @@ class MenuTable extends Doctrine_Table
 			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/show?id='.$item->getAplicacion()->getId();
 			      	
 			      }
-                              if($item->getNombre()== 'Gestion de Aplicaciones' && validate_action('alta', $item->getAplicacion()->getNombreModulo()))
+                              if($item->getAplicacion()->getId() == '51' && validate_action('alta', $item->getAplicacion()->getNombreModulo()))
                               {
                                   $arrItems [  ] = array (
 					'id' 		=> $item->getId(),
