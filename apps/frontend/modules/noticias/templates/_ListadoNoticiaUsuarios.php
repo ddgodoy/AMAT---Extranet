@@ -17,7 +17,7 @@
  ?>
 </div> 
 </td>
-<td width="88%" valign="top"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a> <br clear="all">
+<td width="88%" valign="top" colspan="3"  style="border-bottom:1px dotted #999; padding:7px;"><a href="<?php echo url_for('noticias/show?id=' . $noticia->getId()) ?>"><strong><?php echo $noticia->getTitulo() ?></strong></a> <br clear="all">
 <?php if ($noticia->getEntradilla()): echo nl2br($noticia->getEntradilla()); endif; ?></td>
 <td valign="center" align="center">
 <?php if (validate_action('modificar') || $creador == 1):?>
