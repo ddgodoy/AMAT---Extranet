@@ -12,12 +12,12 @@ class CircularForm extends BaseCircularForm
   {
   	$arrayCategoTema = CircularCatTema::ArrayCirculares();
   	
-  	$arrayCategoOrg = array('0'=>'--seleccionar--');
+  /*	$arrayCategoOrg = array('0'=>'--seleccionar--');
   	$CategoOrg = CategoriaOrganismoTable::getAllcategoriaorg();
   	foreach ($CategoOrg as $s)
   	{
   		$arrayCategoOrg[$s->getId()] = $s->getNombre();
-  	}
+  	}*/
 
   	
   	
@@ -29,13 +29,13 @@ class CircularForm extends BaseCircularForm
   		$arraysubtema[$s->getId()] = $s->getId();
   	}
   	
-  	$arraysubOrga = array('0'=>'0');
+  	/*$arraysubOrga = array('0'=>'0');
   	$subcategorias_organiosmos = SubCategoriaOrganismoTable::getAllsubcategoriaOrg();
   	
   	foreach ($subcategorias_organiosmos as $s)
   	{
   		$arraysubOrga[$s->getId()] = $s->getId();
-  	}
+  	}*/
 
   	
   	
@@ -43,14 +43,14 @@ class CircularForm extends BaseCircularForm
   	$this->setWidgets(array(
   	  'fecha'     => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
   	  'fecha_caducidad'  => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-      'nombre'    => new sfWidgetFormTextarea(array(), array('style'=>'width:730px;','class'=>'form_input')),
-      'contenido' => new fckFormWidget(),
-      'numero'    => new sfWidgetFormInput(array(), array('style'=>'width:130px;','class'=>'form_input')),
-      'documento' => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/circulares/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')),
-      'circular_tema_id'          => new sfWidgetFormChoice(array('choices' => array('0'=>'--sellecionar--')+$arrayCategoTema)),
-      'circular_sub_tema_id'      => new sfWidgetFormDoctrineChoice(array('model' => 'CircularSubTema', 'add_empty' => true)),
-      //'categoria_organismo_id'    => new sfWidgetFormChoice(array('choices' => $arrayCategoOrg)),
-      //'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
+          'nombre'    => new sfWidgetFormTextarea(array(), array('style'=>'width:730px;','class'=>'form_input')),
+          'contenido' => new fckFormWidget(),
+          'numero'    => new sfWidgetFormInput(array(), array('style'=>'width:130px;','class'=>'form_input')),
+          'documento' => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/circulares/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')),
+          'circular_tema_id'          => new sfWidgetFormChoice(array('choices' => array('0'=>'--sellecionar--')+$arrayCategoTema)),
+          'circular_sub_tema_id'      => new sfWidgetFormDoctrineChoice(array('model' => 'CircularSubTema', 'add_empty' => true)),
+          //'categoria_organismo_id'    => new sfWidgetFormChoice(array('choices' => $arrayCategoOrg)),
+          //'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
