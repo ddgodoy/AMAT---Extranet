@@ -208,13 +208,16 @@ class noticiasActions extends sfActions
 						                    'organizador' => $estado['autor'],
 								    'descripcio'  => $estado['entradilla']
 						);
+
+                                                 echo  $message.'<br>'.$emailPublic->getEmail().'<br>'.sfConfig::get('app_default_from_email');
+
 						$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 						$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
-                                                //if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
+                                                if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
                                                   echo  $message.'<br>'.$emailPublic->getEmail().'<br>'.sfConfig::get('app_default_from_email');
                                                 //$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-                                                //}
+                                                }
 						$mailer->disconnect();
 					}
 				}
