@@ -132,27 +132,27 @@ class noticiasActions extends sfActions
 		$email = UsuarioTable::getEmailEvento($objeto->getOwnerId());
 		$iPh = image_path('/images/logo_email.jpg', true);
 		$url = url_for($modulo.'/show?id='.$objeto->getId(), true);
+                $mailer = new Swift(new Swift_Connection_NativeMail());
+                $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
+                $mailContext = array(    'tema'   => 'Novedad publicada',
+                                         'evento' => $objeto->getTitulo(),
+                                         'url'    => $url,
+                                         'head_image'  => $iPh,
+                                         'organizador' => $objeto->getAutor(),
+                                                                                                 'descripcio'  => $objeto->getEntradilla()
+                );
+                $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 		
 		foreach ($email AS $emailPublic) {
-			if ($emailPublic->getEmail()) {
-				$mailer = new Swift(new Swift_Connection_NativeMail());
-				$message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
-				$mailContext = array(    'tema'   => 'Novedad publicada',
-				                  	 'evento' => $objeto->getTitulo(),
-				                  	 'url'    => $url,
-						         'head_image'  => $iPh,
-				                  	 'organizador' => $objeto->getAutor(),
-														 'descripcio'  => $objeto->getEntradilla()
-				);
-				$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-				$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
+                        if ($emailPublic->getEmail()) {
+                                if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
+                                  $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+                                }
 
-                                echo $message.'<br>'. $emailPublic->getEmail().'<br>'. sfConfig::get('app_default_from_email').'<br>';
-
-				//$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-				$mailer->disconnect();
-			}
-		}
+                        }
+                }
+                $mailer->disconnect();
 		$this->getUser()->setFlash('notice', "El registro ha sido publicado correctamente");
 
 		$this->redirect($modulo.'/show?id='.$objeto->getId());
@@ -216,9 +216,10 @@ class noticiasActions extends sfActions
                                                 if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
                                                   $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
                                                 }
-						$mailer->disconnect();
+						
 					}
 				}
+                              $mailer->disconnect();
 
 			}
 			$this->getUser()->setFlash('notice', 'La noticia ha sido actualizada correctamente');
