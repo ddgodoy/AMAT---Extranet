@@ -75,7 +75,8 @@ class MenuTable extends Doctrine_Table
 	}
 	
 	public static function getArrayMenuHijo($idPadre, $nivel)
-	{   
+	{
+                sfLoader::loadHelpers('Security');
 		$items = MenuTable::getMenuPadre($idPadre,1);
 		$arrItems = array();
 		
@@ -115,8 +116,22 @@ class MenuTable extends Doctrine_Table
 			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/show?id='.$item->getAplicacion()->getId();
 			      	
 			      }
-				
-				$arrItems [  ] = array ( 
+                              if($item->getAplicacion()->getTitulo() == '' && $item->getAplicacion()->getDescripcion() == '' && $item->getId() == 51 && validate_action('alta', $item->getAplicacion()->getNombreModulo()))
+                              {
+                                  $arrItems [  ] = array (
+					'id' 		=> $item->getId(),
+					'nombre' 	=> $item->getNombre(),
+					'modulo' 	=> $item->getAplicacion()->getNombreModulo(),
+					'url' 		=> $item->getUrlExterna(),
+					'asambleas' => $asambleas,
+					'aplicacion'=> $aplicacion,
+					'hijos'		=> MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1),
+					);
+
+                              }
+			      else 
+                              {
+                                  $arrItems [  ] = array ( 
 					'id' 		=> $item->getId(), 
 					'nombre' 	=> $item->getNombre(), 
 					'modulo' 	=> $item->getAplicacion()->getNombreModulo(), 
@@ -125,6 +140,9 @@ class MenuTable extends Doctrine_Table
 					'aplicacion'=> $aplicacion,
 					'hijos'		=> MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1), 
 					);
+                                  
+                              }
+				
 			}						
 		}
 	 
