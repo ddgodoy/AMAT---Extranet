@@ -219,7 +219,6 @@ class noticiasActions extends sfActions
 						$mailer->disconnect();
 					}
 				}
-                           exit();
 
 			}
 			$this->getUser()->setFlash('notice', 'La noticia ha sido actualizada correctamente');
