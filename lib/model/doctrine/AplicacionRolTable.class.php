@@ -27,7 +27,7 @@ class AplicacionRolTable extends Doctrine_Table
    	 { 
    	   $r->leftJoin('u.UsuarioConsejoTerritorial uct');
    	 }
-   	 if($org ='')
+   	 if($org !='')
    	 {   
    	   $r->leftJoin('u.UsuarioOrganismo uo');
    	 }  
