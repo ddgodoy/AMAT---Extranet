@@ -181,13 +181,13 @@ class noticiasActions extends sfActions
 			if ($estado['estado'] == 'publicado') {
 				$enviar = true;
 				$email  = UsuarioTable::getEmailEvento($noticia->getOwnerId());
-				$tema  .= 'publicada';
+				$tema   = 'publicada';
 				ServiceNotificacion::send('creacion', 'Noticia', $noticia->getId(), $noticia->getTitulo());
 			}
 			if ($estado['estado'] == 'pendiente') {
 				$enviar = true;
 				$email  = AplicacionRolTable::getEmailPublicar(1);
-				$tema  .= 'pendiente de publicar';
+				$tema   = 'pendiente de publicar';
 				$aviso  = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
 			}
 			##enviar email a los responsables
@@ -213,8 +213,8 @@ class noticiasActions extends sfActions
 						$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
                                                 if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
-                                                                                    $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-                                                                            }
+                                                $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+                                                }
 						$mailer->disconnect();
 					}
 				}
