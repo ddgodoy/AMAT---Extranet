@@ -136,8 +136,8 @@ class noticiasActions extends sfActions
 		foreach ($email AS $emailPublic) {
 			if ($emailPublic->getEmail()) {
 				$mailer = new Swift(new Swift_Connection_NativeMail());
-				$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-				$mailContext = array('tema'   => 'Novedad publicada',
+				$message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
+				$mailContext = array(    'tema'   => 'Novedad publicada',
 				                  	 'evento' => $objeto->getTitulo(),
 				                  	 'url'    => $url,
 						         'head_image'  => $iPh,
@@ -147,7 +147,9 @@ class noticiasActions extends sfActions
 				$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
 				$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
-				$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+                                echo $message.'<br>'. $emailPublic->getEmail().'<br>'. sfConfig::get('app_default_from_email').'<br>';
+
+				//$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
 				$mailer->disconnect();
 			}
 		}
@@ -185,10 +187,6 @@ class noticiasActions extends sfActions
 			if ($estado['estado'] == 'pendiente') {
 				$enviar = true;
 				$email  = AplicacionRolTable::getEmailPublicar(1);
-                                echo '<pre>';
-                                print_r($email);
-                                echo '</pre>';
-                                exit ();
 				$tema  .= 'pendiente de publicar';
 				$aviso  = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
 			}
@@ -202,7 +200,7 @@ class noticiasActions extends sfActions
 				foreach ($email AS $emailPublic) {
 					if ($emailPublic->getEmail()) {
 						$mailer = new Swift(new Swift_Connection_NativeMail());
-						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+						$message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
 
 						$mailContext = array('tema'  => $tema,
 						                    'evento' => $estado['titulo'],
