@@ -139,7 +139,7 @@ class noticiasActions extends sfActions
                                          'url'    => $url,
                                          'head_image'  => $iPh,
                                          'organizador' => $objeto->getAutor(),
-                                                                                                 'descripcio'  => $objeto->getEntradilla()
+                                         'descripcio'  => $objeto->getEntradilla()
                 );
                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
