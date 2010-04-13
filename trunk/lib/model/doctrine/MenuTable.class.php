@@ -116,32 +116,16 @@ class MenuTable extends Doctrine_Table
 			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/show?id='.$item->getAplicacion()->getId();
 			      	
 			      }
-                              if($item->getAplicacion()->getId() != 51 && !validate_action('alta', $item->getAplicacion()->getNombreModulo()))
-                              {
-                                  $arrItems [  ] = array (
+                              
+			      $arrItems [  ] = array (
 					'id' 		=> $item->getId(),
 					'nombre' 	=> $item->getNombre(),
 					'modulo' 	=> $item->getAplicacion()->getNombreModulo(),
 					'url' 		=> $item->getUrlExterna(),
 					'asambleas' => $asambleas,
 					'aplicacion'=> $aplicacion,
-					'hijos'		=> MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1),
+					'hijos'	=> MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1),
 					);
-
-                              }
-			      else 
-                              {
-                                  $arrItems [  ] = array ( 
-					'id' 		=> $item->getId(), 
-					'nombre' 	=> $item->getNombre(), 
-					'modulo' 	=> $item->getAplicacion()->getNombreModulo(), 
-					'url' 		=> $item->getUrlExterna(),
-					'asambleas' => $asambleas,
-					'aplicacion'=> $aplicacion,
-					'hijos'		=> MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1), 
-					);
-                                  
-                              }
 				
 			}						
 		}
