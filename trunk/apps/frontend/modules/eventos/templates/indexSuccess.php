@@ -87,18 +87,18 @@
 	<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 	<?php if($evento->getEstado() == 'guardado'):?>
 	<?php if($evento->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd, 'creador'=>'1'));?>
 	<?php endif; ?>
 	<?php else: ?>
-	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php include_partial('ListadoEventos', array('evento'=>$evento, 'odd'=>$odd, 'creador'=>''));?>
 	<?php endif; ?>
 	<?php else: ?>
 	<?php if($evento->getEstado() == 'guardado' || $evento->getEstado() == 'pendiente'):?>
 	<?php if($evento->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-	<?php include_partial('ListadoEventosUsuarios', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php include_partial('ListadoEventosUsuarios', array('evento'=>$evento, 'odd'=>$odd, 'creador'=>'1'));?>
 	<?php endif; ?>
 	<?php else: ?>
-	<?php include_partial('ListadoEventosUsuarios', array('evento'=>$evento, 'odd'=>$odd));?>
+	<?php include_partial('ListadoEventosUsuarios', array('evento'=>$evento, 'odd'=>$odd, 'creador'=>''));?>
 	<?php endif; ?>
     <?php endif;?>
 	<?php endforeach; ?>

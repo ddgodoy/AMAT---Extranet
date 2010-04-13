@@ -76,18 +76,18 @@ use_helper('Text');?>
 				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				<?php if($noticia->getEstado() == 'guardado'):?>
 				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd));?>
+				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>'1'));?>
 				<?php endif; ?>
 				<?php else: ?>
-				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd));?>
+				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>''));?>
 				<?php endif; ?>
 				<?php else: ?>
 				<?php if($noticia->getEstado() == 'guardado' || $noticia->getEstado() == 'pendiente'):?>
 				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd));?>
+				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>'1'));?>
 				<?php endif; ?>
 				<?php else: ?>
-				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd));?>
+				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>''));?>
 				<?php endif; ?>
    		        <?php endif;?>
 			    <?php endforeach; ?>

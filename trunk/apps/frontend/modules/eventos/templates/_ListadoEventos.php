@@ -45,12 +45,12 @@
 	<?php endif; ?>
 	 </td> 
 		<td>
-		<?php if(validate_action('modificar')):?> 
+		<?php if(validate_action('modificar') || $creador == 1):?>
 			<a href="<?php echo url_for('eventos/editar?id=' . $evento->getId()) ?>"><?php echo image_tag('show.png', array('border' => 0, 'alt' => 'Editar', 'title' => 'Editar')) ?></a>
 		<?php endif; ?>	
 		</td>
 	 <td>
-	<?php if(validate_action('baja')):?>
+	<?php if(validate_action('baja') || $creador == 1):?>
 		<?php echo link_to(image_tag('borrar.png', array('title' => 'Borrar', 'alt' => 'Borrar', 'border' => '0')), 'eventos/delete?id='.$evento->getId(), array('method' => 'delete', 'confirm' => 'Est&aacute;s seguro que deseas eliminar el evento "' . $evento->getTitulo() . '"?')) ?>
 	<?php endif; ?>	
 	</td>

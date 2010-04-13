@@ -666,7 +666,7 @@ ArchivoCT:
     archivo:                  { type: string(255) }
     owner_id:                 { type: integer }
     disponibilidad:           { type: enum, values: ['Solo Grupo', 'Todos'] }    
-    consejo_territorial_id:   { type: integer }:         { type: integer }
+    consejo_territorial_id:   { type: integer }
     documentacion_consejo_id: { type: integer }
   relations:
     ConsejoTerritorial:         { local: consejo_territorial_id, foreign: id, onDelete: CASCADE }
@@ -838,7 +838,7 @@ Notificacion:
     entidad_id:                { type: integer }
     tipo:                      { type: string(255) }
     visto:                     { type: integer }
-    publico:                   { type:integer }
+    publico:                   { type: integer }
   relations:
     ContenidoNotificacion:     { local: contenido_notificacion_id, foreign: id, onDelete: CASCADE }
     Usuario:                   { local: usuario_id, foreign: id, onDelete: CASCADE }
