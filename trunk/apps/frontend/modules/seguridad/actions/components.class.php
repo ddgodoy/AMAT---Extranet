@@ -12,6 +12,23 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
+            if($this->id != '')
+              {
+                $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
+
+                $q = Doctrine_Query::create();
+                $q->from($arraytablas[$this->module]);
+                $q->where('id = '. $this->id );
+
+                $resultado = $q->fetchOne();
+
+                if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
+                {
+                    return true;
+                }        
+              }
+              else
+              {
 		$credenciales_array = array();
 		$aplicacion_rol = Doctrine::getTable('AplicacionAccion');
 
@@ -55,5 +72,6 @@ class seguridadComponents extends sfComponents
 		 	$this->getUser()->setFlash('error', 'Sesión caducada');
 		 	$this->getController()->redirect('seguridad/Seguridad') ;
 		}
-	}
+            }
+        }
 }
