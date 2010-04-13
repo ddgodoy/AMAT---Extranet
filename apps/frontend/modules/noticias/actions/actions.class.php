@@ -167,7 +167,6 @@ class noticiasActions extends sfActions
 
 		if ($form->isValid()) {
 			$noticia = $form->save();
-			$tema = 'Novedad ';
 
 			if ($noticia->getFechaPublicacion()=='') {
 				$noticia->setFechaPublicacion(date('Y-m-d'));
@@ -181,13 +180,17 @@ class noticiasActions extends sfActions
 			if ($estado['estado'] == 'publicado') {
 				$enviar = true;
 				$email  = UsuarioTable::getEmailEvento($noticia->getOwnerId());
-				$tema   = 'publicada';
+				$tema   = 'Noticia publicada';
 				ServiceNotificacion::send('creacion', 'Noticia', $noticia->getId(), $noticia->getTitulo());
 			}
 			if ($estado['estado'] == 'pendiente') {
 				$enviar = true;
 				$email  = AplicacionRolTable::getEmailPublicar(1);
-				$tema   = 'pendiente de publicar';
+                                echo '<pre>';
+                                print_r($email);
+                                echo '</pre>';
+                                exit ();
+				$tema   = 'Noticia pendiente de publicar';
 				$aviso  = NotificacionTable::getDeleteEntidad2($noticia->getId(),$noticia->getTitulo());
 			}
 			##enviar email a los responsables
