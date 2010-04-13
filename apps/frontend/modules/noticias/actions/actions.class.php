@@ -198,6 +198,7 @@ class noticiasActions extends sfActions
 
 				foreach ($email AS $emailPublic) {
 					if ($emailPublic->getEmail()) {
+                                                echo 'hola';
 						$mailer = new Swift(new Swift_Connection_NativeMail());
 						$message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
 
