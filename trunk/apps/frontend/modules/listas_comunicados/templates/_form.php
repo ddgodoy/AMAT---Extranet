@@ -11,6 +11,7 @@
 
 <?php echo $form['nombre']->renderError() ?>
  <script language="javascript" type="text/javascript">
+
         var listaExcluir = '';
         var SelecPerfiListado = ''
         var SelecMutuaListado = ''
@@ -35,6 +36,7 @@
                 listaExcluir = auxVarlistaExcluir;
         }
 </script>
+<?php echo 'llego aca'; exit () ; ?>
 <form action="<?php echo url_for('listas_comunicados/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
