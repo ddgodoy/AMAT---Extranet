@@ -171,25 +171,33 @@ echo "entra 0<br>";
 
 			if($evento->getEstado() != 'guardado')
 			{
+echo "entra 0.1<br>"; 			  
 				## Notificar y enviar email a los destinatarios
 				if($evento->getEstado() == 'publicado') {
 					$enviar  = true;
 					$tema    = 'Evento publicado';
 					$publico = 'si';
-                                           
+
+echo "entra 0.1<br>";                                           
 					NotificacionTable::getDeleteEntidad2($evento->getId(),$evento->getTitulo());
+echo "entra 0.2<br>";     
 
 					if ($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
+echo "entra 0.3<br>";     					  
 						$email = UsuarioTable::getEmailEvento($estado['usuarios_list']);
+echo "entra 0.4<br>";                 
 					}
-                                        elseif($evento->getAmbito() == 'ambos'){
-						$email = UsuarioTable::getEmailEvento($evento->getOwnerId());;
+          elseif($evento->getAmbito() == 'ambos'){
+echo "entra 0.5<br>";                 
+						$email = UsuarioTable::getEmailEvento($evento->getOwnerId());
+echo "entra 0.6<br>";                 
 					}
                                         else
                                         {
                                                 $email = '';
                                         }
 				}
+echo "entra 0.3<br>";             
 				## enviar email a los responsables 
 				if ($evento->getEstado() == 'pendiente')
 				{
