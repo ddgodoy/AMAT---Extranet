@@ -118,4 +118,17 @@ class Usuario extends BaseUsuario
 		
 		return $arrayDirector;
 	}
+
+        public static function getArrayUsuario ()
+        {
+            $usuariosActivos= Usuario::getRepository()->getUsuariosActivos();
+
+            $arrUsuarios = array();
+	    foreach ($usuariosActivos as $r) {
+	    $arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
+	    }
+
+            return $arrUsuarios;
+        }
+
 }
