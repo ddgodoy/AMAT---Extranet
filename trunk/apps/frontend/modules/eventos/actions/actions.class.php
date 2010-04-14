@@ -159,7 +159,8 @@ class eventosActions extends sfActions
 
 	protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
 	{
-		$enviar = false;
+echo "entra 0<br>";		
+    $enviar = false;
 		$estado = $request->getParameter($form->getName());
 
 		$form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
