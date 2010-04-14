@@ -184,12 +184,12 @@ echo "entra 0.2<br>";
 
 					if ($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
 echo "entra 0.3<br>";     					  
-						$email = UsuarioTable::getEmailEvento($estado['usuarios_list']);
+						$email = UsuarioTable::getEmailEvento2($estado['usuarios_list']);
 echo "entra 0.4<br>";                 
 					}
           elseif($evento->getAmbito() == 'ambos'){
 echo "entra 0.5<br>";                 
-						$email = UsuarioTable::getEmailEvento($evento->getOwnerId());
+						$email = UsuarioTable::getEmailEvento2($evento->getOwnerId());
 echo "entra 0.6<br>";                 
 					}
                                         else
