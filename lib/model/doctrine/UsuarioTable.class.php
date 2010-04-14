@@ -156,6 +156,35 @@ class UsuarioTable extends Doctrine_Table
 		return $r->execute();	
 	}
 
+        public static function getEmailEvento2($arrayIDusuario)
+        {
+            	$id = '';
+		$d = count($arrayIDusuario);
+
+		if ($d > 1) {
+			$d--;
+            $id .= '(';
+			foreach ($arrayIDusuario as $k =>$idUSE) {
+		    if ($d > $k) {
+			    $id .= $idUSE.',';
+		    } else {
+		    	$id .= $idUSE.')';
+		    }
+			}
+		}
+
+		$r = Doctrine_Query::create()->from('Usuario');
+
+		if ($d == 1) {
+		 $r->where('id ='.$arrayIDusuario);
+		} else {
+		  $r->where('id IN '.$id);
+		}
+		return $r->fetchArray();
+
+        }
+
+
 	public static function getUsuarioByEventos($idEvento)
 	{
 		$e=Doctrine_Query::create()
