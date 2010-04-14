@@ -15,7 +15,7 @@ class ListaComunicadoForm extends BaseListaComunicadoForm
   		$idGrupoTrabajo = 0;
   		## Obtengo todos los usuarios del grupo de trabajo
 
-		$usuariosActivos= Usuario::getArrayUsuario();
+		//$usuariosActivos= Usuario::getArrayUsuario();
 		
 	/*	$arrUsuarios = array();
 		foreach ($usuariosActivos as $r) {
