@@ -11,11 +11,11 @@ class ListaComunicadoForm extends BaseListaComunicadoForm
 {
   public function configure()
   {
-                sfLoader::loadHelpers('Object');
+               
   		$idGrupoTrabajo = 0;
   		## Obtengo todos los usuarios del grupo de trabajo
 
-		$usuariosActivos= Doctrine::getTable('Usuario')->getUsuariosActivos();		
+		$usuariosActivos= Usuario::getArrayUsuario();
 		
 	/*	$arrUsuarios = array();
 		foreach ($usuariosActivos as $r) {
@@ -25,7 +25,7 @@ class ListaComunicadoForm extends BaseListaComunicadoForm
   	$this->setWidgets(array(
       'id'            => new sfWidgetFormInputHidden(),
       'nombre'        => new sfWidgetFormInput(),
-      'usuarios_list' => new sfWidgetFormSelectDoubleList(array('choices' =>_get_options_from_objects($usuariosActivos), 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	)
+      'usuarios_list' => new sfWidgetFormSelectDoubleList(array('choices' => $usuariosActivos, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones'))
     ));
 
     $this->setValidators(array(
