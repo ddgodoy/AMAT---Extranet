@@ -52,7 +52,9 @@ class AplicacionRolTable extends Doctrine_Table
 	   	   $r->andWhere('uo.organismo_id = '.$org);
 	   	 }  
    	    $r->andWhere('u.deleted = 0');
-   	  
+
+            echo $r->getQuery();
+            exit ();
    	  return $r->execute();   
    }
    
