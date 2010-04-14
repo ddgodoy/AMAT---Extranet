@@ -156,22 +156,6 @@ class UsuarioTable extends Doctrine_Table
 		return $r->execute();	
 	}
 
-        public static function getEmaileventoPublicar($id_aplicacion)
-        {
-            $r = Doctrine_Query::create()
-            ->from('Usuario u, UsuarioRol ur, Rol r, AplicacionRol a')
-            ->where('a.accion_publicar =1
-                    AND a.aplicacion_id = '.$id_aplicacion.'
-                    AND u.deleted =0
-                    AND u.id = ur.usuario_id
-                    AND ur.rol_id = r.id
-                    AND r.id = a.rol_id');
-
-            return $r->execute();
-        }
-
-
-
 	public static function getUsuarioByEventos($idEvento)
 	{
 		$e=Doctrine_Query::create()

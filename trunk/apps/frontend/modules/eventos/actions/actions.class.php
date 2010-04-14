@@ -202,7 +202,7 @@ echo "entra 0.3<br>";
 				if ($evento->getEstado() == 'pendiente')
 				{
 					$enviar = true;
-					$email  = UsuarioTable::getEmaileventoPublicar(2);
+					$email  = AplicacionRolTable::getEmailEventoPublicar(2);
 					$tema   = 'Evento pendiente de publicar';
 					$publico= '';
 echo "entra 1<br>";

@@ -53,10 +53,24 @@ class AplicacionRolTable extends Doctrine_Table
 	   	 }  
    	    $r->andWhere('u.deleted = 0');
 
-            echo $r->getQuery();
-            //exit ();
    	  return $r->execute();   
    }
+
+   public static function getEmailEventoPublicar($IDaplic)
+   {
+   	 $r=Doctrine_Query::create()
+   	 ->from('Usuario u')
+   	 ->leftJoin('u.UsuarioRol ur')
+   	 ->leftJoin('ur.Rol r')
+   	 ->leftJoin('r.AplicacionRol ar')
+   	 ->where('ar.accion_publicar = 1')
+   	 ->andWhere('ar.aplicacion_id = '.$IDaplic)
+   	 ->andWhere('u.deleted = 0');
+
+   	  return $r->fetchArray(); 
+   }
+
+
    
    public static function getAplicacionByRol($idrol)
    {
