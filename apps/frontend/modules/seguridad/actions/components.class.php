@@ -28,13 +28,8 @@ class seguridadComponents extends sfComponents
                 {
                     return true;
                 }
-                else
-                {
-                    $this->getController()->redirect('seguridad/restringuido');
-                }
+                
               }
-              else
-              {
 		$credenciales_array = array();
 		$aplicacion_rol = Doctrine::getTable('AplicacionAccion');
 
@@ -79,5 +74,4 @@ class seguridadComponents extends sfComponents
 		 	$this->getController()->redirect('seguridad/Seguridad') ;
 		}
             }
-        }
 }
