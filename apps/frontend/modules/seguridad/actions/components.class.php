@@ -12,10 +12,9 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
-            if($this->id != '')
+            $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
+            if($this->id != '' && in_array($this->module, $arraytablas))
               {
-                $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
-
                 $q = Doctrine_Query::create();
                 $q->from($arraytablas[$this->module]);
                 $q->where('id = '. $this->id );
@@ -25,7 +24,11 @@ class seguridadComponents extends sfComponents
                 if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
                 {
                     return true;
-                }        
+                }
+                else
+                {
+                    $this->getController()->redirect('seguridad/restringuido');
+                }
               }
               else
               {
