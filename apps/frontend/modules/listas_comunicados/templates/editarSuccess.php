@@ -12,5 +12,6 @@
 			</tr>
 		</tbody>
 	</table>
-	
+
+<?php echo 'ver si llego'; exit(); ?>
 <?php include_partial('form', array('form' => $form)) ?>
