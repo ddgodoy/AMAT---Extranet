@@ -196,27 +196,37 @@ class eventosActions extends sfActions
 					$email  = AplicacionRolTable::getEmailPublicar(2);
 					$tema   = 'Evento pendiente de publicar';
 					$publico= '';
+echo "entra 1<br>";
 					$agenda = AgendaTable::getDeleteAgenda($evento->getId());
-
+echo "entra 2<br>";
+          
 					if (isset($agenda)) {
+echo "entra 3<br>";  
 					$agenda->delete();
-					}	
+echo "entra 4<br>";
+					}
+echo "entra 5<br>";          	
 					NotificacionTable::getDeleteEntidad2($evento->getId(),$evento->getTitulo());
+echo "entra 6<br>";          
 				}
 				## envia el email
 				if ($enviar && $email!='') {
+echo "entra 7<br>";				  
                                         $agenda = AgendaTable::getDeleteAgenda($evento->getId());
                                         if (isset($agenda)) {
+echo "entra 8<br>";
                                                 $agenda->delete();
+echo "entra 9<br>";                                                
                                         }
+             
                                         sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
-
+echo "entra 10<br>";
                                         $url = url_for('eventos/show?id='.$evento->getId(), true);
                                         $iPh = image_path('/images/logo_email.jpg', true);
           
                                         $mailer  = new Swift(new Swift_Connection_NativeMail());
                                         $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
-
+echo "entra 11<br>";
                                         $mailContext = array('tema'   => $tema,
                                                            'evento' => $estado['titulo'],
                                                            'url'    => $url,
@@ -226,33 +236,41 @@ class eventosActions extends sfActions
                                          );
                                         $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                         $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-
+echo "entra 12<br>";
                                      if ($publico != ''){
                                         if($evento->getAmbito() != 'intranet' && empty($estado['usuarios_list'])) {
                                          ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,0,1);
                                         }
                                      }
 
+echo "entra 13<br>";
                                       foreach ($email AS $emailPublic) {
                                         if ($publico != ''){
+echo "entra 14<br>";                                          
                                             if($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
                                              ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
+echo "entra 15<br>";                                             
                                             }
                                         }
 
+
                                         if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
+echo "entra 16<br>";
                                         $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+echo "entra 17<br>";                                        
                                          }
                                         }
                                       $mailer->disconnect();
-                                                            }
+echo "entra 18<br>";                                                            }
                                       $this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
 
                                       if($evento->getAmbito() == 'intranet' && empty($estado['usuarios_list'])) {
                                             $this->redirect('eventos/editar?id='.$evento->getId());
                                       } else {
                                             if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0 && $evento->getEstado() != 'pendiente') {
+echo "entra 19<br>";
                                                 ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+echo "entra 20<br>";                                                
                                             }
                                             $this->redirect('eventos/index'.$strPaginaVolver);
                                       }
