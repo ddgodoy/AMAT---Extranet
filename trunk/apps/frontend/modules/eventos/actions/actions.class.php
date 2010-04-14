@@ -194,8 +194,6 @@ class eventosActions extends sfActions
 				{
 					$enviar = true;
 					$email  = AplicacionRolTable::getEmailPublicar(2);
-                                        echo $email->count();
-                                        exit ();
 					$tema   = 'Evento pendiente de publicar';
 					$publico= '';
 					$agenda = AgendaTable::getDeleteAgenda($evento->getId());
