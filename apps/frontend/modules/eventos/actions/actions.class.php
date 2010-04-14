@@ -101,7 +101,7 @@ class eventosActions extends sfActions
 					$evento->setEstado('publicado');
 					$evento->save();
 					
-					$email = $evento->getAmbito() == 'intranet' ? UsuarioTable::getUsuarioByEventos($evento->getId()) : UsuarioTable::getUsuariosActivos();
+					$email = $evento->getAmbito() == 'intranet' ? UsuarioTable::getUsuarioByEventos($evento->getId()) : UsuarioTable::getEmailEvento($evento->getOwnerId());
 					
 					## Notificar
 					ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
@@ -120,28 +120,27 @@ class eventosActions extends sfActions
 						$nombreEvento = $evento->getTitulo();
 						$organizador  = $evento->getOrganizador();
 						$descripcion  = $evento->getDescripcion();
+                                                $mailer = new Swift(new Swift_Connection_NativeMail());
+                                                $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
+
+                                                $mailContext = array('tema'   => 'Evento publicado',
+                                                                 'evento' => $nombreEvento,
+                                                                 'url'    => $url,
+                                                                 'head_image'  => $iPh,
+                                                                 'organizador' => $organizador,
+                                                                 'descripcio'  => $descripcion,
+                                                );
+                                                $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                                                $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 						foreach ($email AS $emailPublic) {
 							 if($evento->getAmbito() == 'intranet') {
                                                              ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
                                                             }
 							if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
-								$mailer = new Swift(new Swift_Connection_NativeMail());
-								$message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
-
-								$mailContext = array('tema'   => 'Evento publicado',
-										 'evento' => $nombreEvento,
-										 'url'    => $url,
-								 		 'head_image'  => $iPh,
-										 'organizador' => $organizador,    
-										 'descripcio'  => $descripcion,
-								);
-								$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-								$message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
-								
 								$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-								$mailer->disconnect();
 							}
 						}
+                                                $mailer->disconnect();
 					}
 				} else {
 					sfLoader::loadHelpers('Security'); // para usar el helper
@@ -183,7 +182,7 @@ class eventosActions extends sfActions
 						$email = UsuarioTable::getEmailEvento($estado['usuarios_list']);
 					}
                                         elseif($evento->getAmbito() == 'ambos'){
-						$email = UsuarioTable::getUsuariosActivos();			    	
+						$email = UsuarioTable::getEmailEvento($evento->getOwnerId());;
 					}
                                         else
                                         {
@@ -206,27 +205,27 @@ class eventosActions extends sfActions
 				}
 				## envia el email
 				if ($enviar && $email!='') {
-					$agenda = AgendaTable::getDeleteAgenda($evento->getId());
-					if (isset($agenda)) {
-						$agenda->delete();
-					}
-					sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
+                                        $agenda = AgendaTable::getDeleteAgenda($evento->getId());
+                                        if (isset($agenda)) {
+                                                $agenda->delete();
+                                        }
+                                        sfLoader::loadHelpers(array('Url', 'Tag', 'Asset'));
 
-					$url = url_for('eventos/show?id='.$evento->getId(), true);
-					$iPh = image_path('/images/logo_email.jpg', true);
+                                        $url = url_for('eventos/show?id='.$evento->getId(), true);
+                                        $iPh = image_path('/images/logo_email.jpg', true);
           
-                                      $mailer  = new Swift(new Swift_Connection_NativeMail());
-                                      $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
+                                        $mailer  = new Swift(new Swift_Connection_NativeMail());
+                                        $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
 
-                                      $mailContext = array('tema'   => $tema,
+                                        $mailContext = array('tema'   => $tema,
                                                            'evento' => $estado['titulo'],
                                                            'url'    => $url,
                                                            'head_image'  => $iPh,
                                                            'organizador' => $estado['organizador'],
                                                            'descripcio'  => $estado['descripcion'],
-                                       );
-                                      $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-                                      $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
+                                         );
+                                        $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                                        $message->attach(new Swift_Message_Part($this->getPartial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
                                      if ($publico != ''){
                                         if($evento->getAmbito() != 'intranet' && empty($estado['usuarios_list'])) {
@@ -242,23 +241,23 @@ class eventosActions extends sfActions
                                         }
 
                                         if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
-                                                                                    $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-                                                                            }
-                                                                    }
+                                        $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+                                         }
+                                        }
                                       $mailer->disconnect();
                                                             }
-				$this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
-				
-				if($evento->getAmbito() == 'intranet' && empty($estado['usuarios_list'])) {
-					$this->redirect('eventos/editar?id='.$evento->getId());
-				} else {
-					if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0 && $evento->getEstado() != 'pendiente') {
-                                            ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
-					}
-					$this->redirect('eventos/index'.$strPaginaVolver);
-				}
-			}
-			$this->redirect('eventos/index'.$strPaginaVolver);
+                                      $this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
+
+                                      if($evento->getAmbito() == 'intranet' && empty($estado['usuarios_list'])) {
+                                            $this->redirect('eventos/editar?id='.$evento->getId());
+                                      } else {
+                                            if(NotificacionTable::getDeleteEntidad($evento->getId())->count() == 0 && $evento->getEstado() != 'pendiente') {
+                                                ServiceNotificacion::send('creacion', 'Evento', $evento->getId(), $evento->getTitulo());
+                                            }
+                                            $this->redirect('eventos/index'.$strPaginaVolver);
+                                      }
+                              }
+                            $this->redirect('eventos/index'.$strPaginaVolver);
 		}
 	}
 		
