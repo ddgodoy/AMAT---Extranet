@@ -13,9 +13,7 @@ class seguridadComponents extends sfComponents
 	public function executeVerificar(sfWebRequest $request)
 	{
             $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
-            echo in_array($this->module, $arraytablas);
-            exit();
-            if($this->id != '' && in_array($this->module, $arraytablas))
+            if($this->id != '' && key_exists($this->module, $arraytablas))
               {
                 $q = Doctrine_Query::create();
                 $q->from($arraytablas[$this->module]);
