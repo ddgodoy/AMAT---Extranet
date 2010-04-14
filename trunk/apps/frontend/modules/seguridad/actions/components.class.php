@@ -19,6 +19,9 @@ class seguridadComponents extends sfComponents
                 $q->from($arraytablas[$this->module]);
                 $q->where('id = '. $this->id );
 
+                echo $q->getQuery();
+                exit();
+
                 $resultado = $q->fetchOne();
 
                 if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
