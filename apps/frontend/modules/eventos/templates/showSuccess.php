@@ -25,8 +25,14 @@
 	  <?php endif;?>
 	   <div class="clear"></div>
 	   <br clear="all">
-	   <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
-	   if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):?> 
+            <br><br>
+	  <?php if($evento->getOrganizador()):?>
+	  <span class="notfecha">Organizador: <?php echo $evento->getOrganizador() ?></span><br />
+	  <?php endif ?>
+	  <?php $roles = UsuarioRol::getRepository()->getRolesByUser($sf_user->getAttribute('userId'),1);
+	   if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):?>
+	  <?php if($evento->getFechaCaducidad()):?>
+	  <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($evento->getFechaCaducidad())) ?></span><br />
 	  <?php if($evento->getUserIdCreador()):?>
 	   <span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($evento->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($evento->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
