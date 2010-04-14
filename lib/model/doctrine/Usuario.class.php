@@ -121,11 +121,11 @@ class Usuario extends BaseUsuario
 
         public static function getArrayUsuario ()
         {
-            $usuariosActivos= Usuario::getRepository()->getUsuariosActivos();
+            $usuariosActivos= Usuario::getRepository()->getUsuariosActivosArray();
 
             $arrUsuarios = array();
 	    foreach ($usuariosActivos as $r) {
-	    $arrUsuarios[$r->getId()] = $r->getApellido().", ".$r->getNombre();
+	    $arrUsuarios[$r['id']] = $r['apellido'].", ".$r['nombre'];
 	    }
 
             return $arrUsuarios;
