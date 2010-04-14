@@ -261,7 +261,7 @@ echo "entra 13<br>";
                                         if ($publico != ''){
 echo "entra 14<br>";                                          
                                             if($evento->getAmbito() == 'intranet' && !empty($estado['usuarios_list'])) {
-                                             ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic->getId(),0);
+                                             ServiceAgenda::AgendaSave($evento->getFecha(),$evento->getTitulo(),$evento->getOrganizador(),'eventos/show?id='.$evento->getId(),$evento->getId(),0,$emailPublic['id'],0);
 echo "entra 15<br>";                                             
                                             }
                                         }
@@ -269,7 +269,7 @@ echo "entra 15<br>";
 
                                         if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
 echo "entra 16<br>";
-                                        $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+                                        $mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
 echo "entra 17<br>";                                        
                                          }
                                         }
