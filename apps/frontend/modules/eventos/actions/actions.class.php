@@ -261,7 +261,8 @@ echo "entra 17<br>";
                                          }
                                         }
                                       $mailer->disconnect();
-echo "entra 18<br>";                                                            }
+echo "entra 18<br>";
+die();                                                            }
                                       $this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
 
                                       if($evento->getAmbito() == 'intranet' && empty($estado['usuarios_list'])) {
