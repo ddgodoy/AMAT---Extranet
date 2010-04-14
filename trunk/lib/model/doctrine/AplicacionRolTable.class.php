@@ -59,6 +59,7 @@ class AplicacionRolTable extends Doctrine_Table
    public static function getEmailEventoPublicar($IDaplic)
    {
    	 $r=Doctrine_Query::create()
+         ->select('u.id, u.email')
    	 ->from('Usuario u')
    	 ->leftJoin('u.UsuarioRol ur')
    	 ->leftJoin('ur.Rol r')
