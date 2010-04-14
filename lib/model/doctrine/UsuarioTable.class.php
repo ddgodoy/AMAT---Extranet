@@ -62,6 +62,18 @@ class UsuarioTable extends Doctrine_Table
 		
 		return $usuarios;
 	}
+
+        public static function getUsuariosActivosArray()
+	{
+		$q = Doctrine_Query::create();
+                $q->select('u.id, u.nombre, u.apellido');
+		$q->from('Usuario u');
+		$q->where('u.deleted = 0');
+		$q->orderBy('u.apellido ASC, u.nombre ASC');
+		$usuarios = $q->fetchArray();
+
+		return $usuarios;
+	}
 	
 	public static function getAplicacionesExternasByUsuario($userId)
 	{
