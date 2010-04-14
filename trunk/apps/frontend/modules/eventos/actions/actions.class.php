@@ -203,10 +203,10 @@ echo "entra 0.3<br>";
 				{
 					$enviar = true;
 					$email  = AplicacionRolTable::getEmailEventoPublicar(2);
-                                        echo '<pre>';
+                                       /* echo '<pre>';
                                         print_r($email);
-                                        echo '</pre>';
-                                        exit ();
+                                        echo '</pre>';*/
+                                        
 					$tema   = 'Evento pendiente de publicar';
 					$publico= '';
 echo "entra 1<br>";
