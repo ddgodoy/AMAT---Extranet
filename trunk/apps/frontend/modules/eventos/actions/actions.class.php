@@ -267,7 +267,7 @@ echo "entra 15<br>";
                                         }
 
 
-                                        if ($emailPublic->getEmail() && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic->getEmail())) {
+                                        if ($emailPublic['email'] && preg_match('#^(((([a-z\d][\.\-\+_]?)*)[a-z0-9])+)\@(((([a-z\d][\.\-_]?){0,62})[a-z\d])+)\.([a-z\d]{2,6})$#i', $emailPublic['email'])) {
 echo "entra 16<br>";
                                         $mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
 echo "entra 17<br>";                                        
