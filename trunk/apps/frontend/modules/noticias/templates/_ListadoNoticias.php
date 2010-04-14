@@ -37,12 +37,12 @@
 				?>
 				</td>
 				<td valign="center" align="center">
-				<?php if (validate_action('modificar') || $creador == 1):?>
+				<?php if (validate_action('modificar') || $creador == 1 && $noticia->getEstado() == 'guardado'):?>
 				<a href="<?php echo url_for('noticias/editar?id='.$noticia->getId()) ?>"><?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?></a>
 				<?php endif;?>
 				</td>
 				<td valign="center" align="center">
-				<?php if(validate_action('baja') || $creador == 1):?>
+				<?php if(validate_action('baja') || $creador == 1 && $noticia->getEstado() == 'guardado'):?>
 				<?php echo link_to(image_tag('borrar.png', array('title' => 'Borrar', 'alt' => 'Borrar', 'width' => '20', 'height' => '20', 'border' => '0')), 'noticias/delete?id='.$noticia->getId(), array('method' => 'delete', 'confirm' => 'Est&aacute;s seguro que deseas eliminar la noticia ' . $noticia->getTitulo() . '?')) ?>
 			    <?php  endif;  ?>
 			    </td>
