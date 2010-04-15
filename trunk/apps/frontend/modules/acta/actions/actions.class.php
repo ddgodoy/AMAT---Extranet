@@ -38,11 +38,12 @@ class actaActions extends sfActions
 				->from('Acta a')
 				->leftJoin('a.Asamblea am')
 				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$this->DAtos['grupousuario'])->orderBy($this->setOrdenamiento());
+                echo $this->pager->getQuery()->getSql();
+                exit ();
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
-                echo $this->pager->getQuery()->getSql();
-                exit ();
+                
 
 		$this->acta_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
