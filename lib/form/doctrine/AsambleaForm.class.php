@@ -23,7 +23,7 @@ class AsambleaForm extends BaseAsambleaForm
 		
 		$directoer = Usuario::getArrayUsuarioDir();
 
-                $roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+                $roles = UsuarioRol::getRepository()->getRolesByUser($userId,1);
 
 		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)) {
 		$gruposTrabajo = GrupoTrabajoTable::getAllGrupoTrabajo();
