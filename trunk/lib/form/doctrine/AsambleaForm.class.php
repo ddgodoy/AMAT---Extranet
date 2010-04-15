@@ -22,9 +22,21 @@ class AsambleaForm extends BaseAsambleaForm
 //		exit();
 		
 		$directoer = Usuario::getArrayUsuarioDir();
-		$gruposTrabajo = Doctrine::getTable('GrupoTrabajo')->getGruposTrabajoByUsuario($userId);
+
+                $roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)) {
+		$gruposTrabajo = GrupoTrabajoTable::getAllGrupoTrabajo();
+		$consejosTerritoriales = ConsejoTerritorialTable::getAllconsejo();
+		$organismos = OrganismoTable::getAllOrganismos();
+                }
+                else {
+                $gruposTrabajo = Doctrine::getTable('GrupoTrabajo')->getGruposTrabajoByUsuario($userId);
 		$consejosTerritoriales = Doctrine::getTable('ConsejoTerritorial')->getConsejosTerritorialesByUsuario($userId);
 		$organismos = Doctrine::getTable('Organismo')->getOrganismoBysuer($userId);
+
+                }
+
         if($request->getRequest()->getParameter('GrupodeTrabajo')==2)
         {
 		if ($gruposTrabajo) {
