@@ -14,7 +14,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 
 		foreach ($usuarios as $usuario)
 		{
-			if ($usuario->getEmail())
+			if ($usuario['email'])
 			{ 				
 				if ($this->envioMail($usuario['email'], $this->getTipoComunicado()->getImagen(), $this->getComunicado()->getDetalle(), $this->getComunicado()->getNombre(),$this->getId(),$usuario['id'])) {
 					//echo "<br />email enviado a: ".$usuario;
