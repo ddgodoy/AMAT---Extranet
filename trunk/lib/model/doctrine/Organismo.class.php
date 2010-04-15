@@ -26,9 +26,16 @@ class Organismo extends BaseOrganismo
 		
 		return $usuarios;
 	}
-	public static  function IdDeOrganismo($id_usuario,$misuser='')
+	public static  function IdDeOrganismo($id_usuario='',$misuser='')
 	{
-		$consejos = OrganismoTable::getOrganismoBysuer($id_usuario);
+                if($id_usuario)
+                {
+                    $consejos = OrganismoTable::getOrganismoBysuer($id_usuario);
+                }
+                else
+                {
+                    $consejos = OrganismoTable::getOrganismoBysuer();
+                }
 		
 		if(count($consejos)>0)
 		{
