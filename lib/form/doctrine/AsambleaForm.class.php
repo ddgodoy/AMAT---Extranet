@@ -79,17 +79,19 @@ class AsambleaForm extends BaseAsambleaForm
 		
 		
 		
-		if ($request->getRequest()->getParameter('ConsejoTerritorial')==3 || $request->getRequest()->getParameter('GrupodeTrabajo')==2 || $request->getRequest()->getParameter('Organismo')==4 ) {
-    	$this->setWidget('entidad', new sfWidgetFormChoice(array('choices' => $grupos)));
-    	$this->setValidator('entidad', new sfValidatorChoice(array('choices' => array_keys($grupos), 'required' => false)));
-       }
+	if ($request->getRequest()->getParameter('ConsejoTerritorial')==3 || $request->getRequest()->getParameter('GrupodeTrabajo')==2 || $request->getRequest()->getParameter('Organismo')==4 )
+        {
+            $this->setWidget('entidad', new sfWidgetFormChoice(array('choices' => $grupos)));
+            $this->setValidator('entidad', new sfValidatorChoice(array('choices' => array_keys($grupos), 'required' => false)));
+        }
+
+        $this->setDefaults(array(
+        'owner_id' => $userId,
+        'estado' => $estado,
+        'entidad' => $request->getUser()->getAttribute('asambleas_nowentidad')? $request->getUser()->getAttribute('asambleas_nowentidad'): '',
+        ));
 		
-	    $this->setDefaults(array(
-			'owner_id' => $userId,
-			'estado' => $estado,
-		));
-		
-		if($request->getRequest()->getParameter('DirectoresGerente')==1)
+        if($request->getRequest()->getParameter('DirectoresGerente')==1)
         {
            $this->setWidget('entidad',new sfWidgetFormInputHidden());
            $this->setValidator('entidad', new sfValidatorString(array('max_length' => 255, 'required' => false)));
@@ -110,14 +112,14 @@ class AsambleaForm extends BaseAsambleaForm
         {
            $this->setWidget('entidad', new sfWidgetFormInputHidden());
     	   $this->setValidator('entidad', new sfValidatorString(array('max_length' => 255, 'required' => false))); 	
-		   $this->setDefault('entidad','Junta_directiva_5');		
+           $this->setDefault('entidad','Junta_directiva_5');
         }
         
         if($request->getRequest()->getParameter('Otros')==6)
         {
            $this->setWidget('entidad', new sfWidgetFormInputHidden());
     	   $this->setValidator('entidad', new sfValidatorString(array('max_length' => 255, 'required' => false))); 	
-		   $this->setDefault('entidad','Otros_6');		
+           $this->setDefault('entidad','Otros_6');
         }
 	
         $this->validatorSchema->setOption('allow_extra_fields', true);
