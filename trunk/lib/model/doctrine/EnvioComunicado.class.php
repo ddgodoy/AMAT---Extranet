@@ -6,7 +6,7 @@
 class EnvioComunicado extends BaseEnvioComunicado
 {
   	
-	public function enviarMails()
+	public static function enviarMails()
 	{
 		$usuarios = EnvioComunicadoTable::getUsuariosDeListasArray($this->getId());
 		$contUsu = 0;
