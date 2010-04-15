@@ -20,7 +20,7 @@ class EnvioComunicadoTable extends Doctrine_Table
 		return $usuarios;
 	}
 
-        public function getUsuariosDeListas($idEnvio)
+        public function getUsuariosDeListasArray($idEnvio)
 	{
 		$q = Doctrine_Query::create();
                 $q->select('u.id, u.email');
