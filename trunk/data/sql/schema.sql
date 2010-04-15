@@ -136,7 +136,7 @@ ALTER TABLE acta ADD FOREIGN KEY (owner_id) REFERENCES usuario(id) ON DELETE CAS
 ALTER TABLE acta ADD FOREIGN KEY (asamblea_id) REFERENCES asamblea(id) ON DELETE CASCADE;
 ALTER TABLE sub_categoria_normativa_n1 ADD FOREIGN KEY (categoria_normativa_id) REFERENCES categoria_normativa(id) ON DELETE CASCADE;
 ALTER TABLE usuario_lista_comunicado ADD FOREIGN KEY (usuario_id) REFERENCES usuario(id);
-ALTER TABLE usuario_lista_comunicado ADD FOREIGN KEY (lista_comunicado_id) REFERENCES lista_comunicado(id);
+ALTER TABLE usuario_lista_comunicado ADD FOREIGN KEY (lista_comunicado_id) REFERENCES lista_comunicado(id) ON DELETE CASCADE;
 ALTER TABLE circular_sub_tema ADD FOREIGN KEY (circular_cat_tema_id) REFERENCES circular_cat_tema(id) ON DELETE CASCADE;
 ALTER TABLE publicacion ADD FOREIGN KEY (owner_id) REFERENCES usuario(id) ON DELETE CASCADE;
 ALTER TABLE publicacion ADD FOREIGN KEY (mutua_id) REFERENCES mutua(id) ON DELETE CASCADE;

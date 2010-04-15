@@ -160,7 +160,7 @@ abstract class BaseUsuario extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'usuario_id'));
 
-        $this->hasMany('UsuarioListaComunicado as UsuarioListasComunicado', array(
+        $this->hasMany('UsuarioListaComunicado', array(
              'local' => 'id',
              'foreign' => 'usuario_id'));
 
