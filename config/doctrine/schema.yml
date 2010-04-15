@@ -823,8 +823,8 @@ UsuarioListaComunicado:
     usuario_id:              { type: integer, primary: true }
     lista_comunicado_id:     { type: integer, primary: true }
   relations:
-    Usuario:                 { foreignAlias: UsuarioListasComunicado }
-    ListaComunicado:         { foreignAlias: UsuarioListasComunicado }
+    ListaComunicado:         { local: lista_comunicado_id, foreign: id, onDelete: CASCADE }
+    Usuario:                 { local: usuario_id, foreign: id }
 
 Notificacion:
   actAs:

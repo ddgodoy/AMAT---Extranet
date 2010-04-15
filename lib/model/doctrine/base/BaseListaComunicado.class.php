@@ -24,7 +24,7 @@ abstract class BaseListaComunicado extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'lista_comunicado_id'));
 
-        $this->hasMany('UsuarioListaComunicado as UsuarioListasComunicado', array(
+        $this->hasMany('UsuarioListaComunicado', array(
              'local' => 'id',
              'foreign' => 'lista_comunicado_id'));
 

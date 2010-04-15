@@ -20,12 +20,13 @@ abstract class BaseUsuarioListaComunicado extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasOne('Usuario', array(
-             'local' => 'usuario_id',
-             'foreign' => 'id'));
-
         $this->hasOne('ListaComunicado', array(
              'local' => 'lista_comunicado_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('Usuario', array(
+             'local' => 'usuario_id',
              'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
