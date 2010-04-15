@@ -60,15 +60,17 @@ class OrganismoTable extends Doctrine_Table
    	 
    	 return $respuesat;
    }
-    public static function getOrganismoBysuer($idUser)
+    public static function getOrganismoBysuer($idUser='')
    {
    	 $r = Doctrine_Query::create()
    	 ->from('Organismo o')
    	 ->leftJoin('o.UsuarioOrganismo uo')
-   	 ->where('uo.usuario_id = '.$idUser)
-   	 ->addwhere('o.deleted = 0')
+   	 ->where('o.deleted = 0 AND uo.deleted = 0')
    	 ->orderBy('o.nombre');
-   	 
+   	 if($idUser)
+         {
+             $r->andWhere('uo.usuario_id = '.$idUser);
+         }
    	 $respuesat = $r->execute();
    	 
    	 return $respuesat;
