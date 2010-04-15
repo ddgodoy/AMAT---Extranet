@@ -49,6 +49,7 @@ class actaActions extends sfActions
                 
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
+
                 
 
                 
