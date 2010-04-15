@@ -8,7 +8,7 @@ class EnvioComunicado extends BaseEnvioComunicado
   	
 	public function enviarMails()
 	{
-		$usuarios = Doctrine::getTable('EnvioComunicado')->getUsuariosDeListas($this->getId());	
+		$usuarios = Doctrine::getTable('EnvioComunicado')->getUsuariosDeListasArray($this->getId());
 		$contUsu = 0;
 		$ListEmails="";	
 
