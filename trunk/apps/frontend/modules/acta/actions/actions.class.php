@@ -317,7 +317,14 @@ protected function setFiltroBusqueda()
 			$arraDAtos['campo']= 'Organismo' ;
 			$arraDAtos['valor']= '4' ;
 			$arraDAtos['where']= "entidad LIKE '%Organismo%'" ;
-			$arraDAtos['grupousuario']= Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId')) ;
+                        $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+                        if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
+			$arraDAtos['grupousuario']= '';
+                        }
+                        else{
+                        $arraDAtos['grupousuario']= Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId')) ;
+                        }
+
 			if($this->getRequestParameter('id'))
 			{  
 			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->asambleaId,$arraDAtos['where'])->getEntidad());
