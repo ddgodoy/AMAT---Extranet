@@ -51,7 +51,7 @@
 						<?php echo date("d/m/Y [H:i]", strtotime($valor->getCreatedAt())) ?>
 					</td>
 					<td valign="top">
-					<?php if(validate_action('publicar')):?>
+					<?php if(validate_action('listar')):?>
 						<a href="<?php echo url_for('acta/ver?id=' . $valor->getId().'&'.$DAtos['get']) ?>">
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
