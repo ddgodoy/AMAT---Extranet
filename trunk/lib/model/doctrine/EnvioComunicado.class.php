@@ -8,7 +8,7 @@ class EnvioComunicado extends BaseEnvioComunicado
   	
 	public function enviarMails()
 	{
-		$usuarios = Doctrine::getTable('EnvioComunicado')->getUsuariosDeListasArray($this->getId());
+		$usuarios = EnvioComunicadoTable::getUsuariosDeListasArray($this->getId());
 		$contUsu = 0;
 		$ListEmails="";	
 
@@ -55,14 +55,14 @@ class EnvioComunicado extends BaseEnvioComunicado
 		$message = new Swift_Message(sfConfig::get('app_default_name_project').' - '.$titulo);
 
 		$mailContext = array('imagen' => $cPh,
-												 'cuerpo' => $body,
-										 		 'head_image' => $iPh
+                                     'cuerpo' => $body,
+                                     'head_image' => $iPh
 		);
 		$message->attach(new Swift_Message_Part(get_partial('comunicados/mailHtmlBody', $mailContext), 'text/html'));
 		$message->attach(new Swift_Message_Part(get_partial('comunicados/mailTextBody', $mailContext), 'text/plain'));
 
 		if ($mailer->send($message, $to, sfConfig::get('app_default_from_email_comunicados'), $idenvio, $idusuario)) {	
-			$succes = true;
+	        $succes = true;
 		}
 		$mailer->disconnect();
 
