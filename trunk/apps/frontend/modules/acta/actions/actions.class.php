@@ -46,8 +46,7 @@ class actaActions extends sfActions
 				->from('Acta a')
 				->leftJoin('a.Asamblea am')
 				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$datoUsuario)->orderBy($this->setOrdenamiento());
-                echo $this->pager->getQuery()->getSql();
-                exit ();
+                
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
