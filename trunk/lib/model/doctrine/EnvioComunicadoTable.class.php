@@ -19,6 +19,25 @@ class EnvioComunicadoTable extends Doctrine_Table
 
 		return $usuarios;
 	}
+
+        public function getUsuariosDeListas($idEnvio)
+	{
+		$q = Doctrine_Query::create();
+                $q->select('u.id, u.email');
+		$q->from('Usuario u');
+		$q->leftJoin('u.UsuarioListaComunicado ulc');
+		$q->leftJoin('ulc.ListaComunicado lc');
+		$q->leftJoin('lc.ListaComunicadoEnvio lce');
+		$q->leftJoin('lce.EnvioComunicado ec');
+		$q->where('u.deleted = 0');
+		$q->andWhere('ec.id = '.$idEnvio);
+		$q->orderBy('u.nombre ASC');
+		$usuarios = $q->fetchArray();
+
+		return $usuarios;
+	}
+
+
 	
 	public static function getComunicadosTipos($id_tipo)
 	{
