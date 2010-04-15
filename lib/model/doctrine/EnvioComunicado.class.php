@@ -11,26 +11,19 @@ class EnvioComunicado extends BaseEnvioComunicado
 		$usuarios = EnvioComunicadoTable::getUsuariosDeListasArray($this->getId());
 		$contUsu = 0;
 		$ListEmails="";
-                $cantidad = 0;
 
 		foreach ($usuarios as $usuario)
 		{
 			if ($usuario['email'])
 			{ 				
 				if ($this->envioMail($usuario['email'], $this->getTipoComunicado()->getImagen(), $this->getComunicado()->getDetalle(), $this->getComunicado()->getNombre(),$this->getId(),$usuario['id'])) {
-				$cantidad++;	//echo "<br />email enviado a: ".$usuario;
+                            	//echo "<br />email enviado a: ".$usuario;
 				} else {
 					//echo "<br />ERROR email: ".$usuario;
 				}
 				$ListEmails ="";
 				$contUsu = 0;
 			}
-
-                    if($cantidad == 500)
-                    {
-                       sleep(2);
-                       $cantidad = 0;
-                    }
 		}
 	}
 	
