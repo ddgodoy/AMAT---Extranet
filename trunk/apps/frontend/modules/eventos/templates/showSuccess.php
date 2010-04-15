@@ -16,6 +16,7 @@
 	  <?php if($evento->getMasImagen() && $evento->getImagen()):?>
 	  <img src="<?php if ($evento->getimagen()): ?>/uploads/eventos/images/<?php echo $evento->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $evento->gettitulo() ?>" />
 	  <?php endif;?>
+          <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($evento->getFecha())) ?></span><br />
 	  <a  class="nottit"><?php echo  $evento->gettitulo() ?> </a><br />
 	  <p class="notentrada" align="justify"><?php echo $evento->getdescripcion() ?></p>
 	  <?php echo nl2br($evento->getmas_info()) ?>      
