@@ -41,6 +41,9 @@ class actaActions extends sfActions
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
+                echo $this->pager->getQuery()->getSql();
+                exit ();
+
 		$this->acta_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
 		$busqueda = explode('_',$this->grupodetrabajoBsq);
