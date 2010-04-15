@@ -5,4 +5,26 @@
 class UsuarioListaComunicadoTable extends Doctrine_Table
 {
 
+    public static function getUsuarioByLista($id)
+    {
+        $q=Doctrine_Query::create()
+        ->from('UsuarioListaComunicado')
+        ->where('deleted = 0')
+        ->addWhere('lista_comunicado_id ='.$id);
+
+        return $q->fetchArray();
+
+    }
+
+    public static function getUsuarioByListaDeleted($id)
+    {
+        $q=Doctrine_Query::create()
+        ->delete()
+        ->from('UsuarioListaComunicado')
+        ->where('deleted = 0')
+        ->addWhere('lista_comunicado_id ='.$id);
+
+        return $q->execute();
+
+    }
 }

@@ -131,4 +131,17 @@ class Usuario extends BaseUsuario
             return $arrUsuarios;
         }
 
+        public static function getArrayUsuarioLista($id)
+        {
+            $usuariosActivos= UsuarioListaComunicadoTable::getUsuarioByLista($id);
+
+            $arrUsuarios = array();
+	    foreach ($usuariosActivos as $r) {
+	    $arrUsuarios[$r['usuario_id']] = $r['usuario_id'] ;
+	    }
+
+            return $arrUsuarios;
+ 
+        }
+
 }

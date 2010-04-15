@@ -34,7 +34,6 @@ class BaseUsuarioFormFilter extends BaseFormFilterDoctrine
       'organismos_list'             => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Organismo')),
       'eventos_list'                => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Evento')),
       'aplicacion_externas_list'    => new sfWidgetFormDoctrineChoiceMany(array('model' => 'AplicacionExterna')),
-      'listas_comunicado_list'      => new sfWidgetFormDoctrineChoiceMany(array('model' => 'ListaComunicado')),
     ));
 
     $this->setValidators(array(
@@ -58,7 +57,6 @@ class BaseUsuarioFormFilter extends BaseFormFilterDoctrine
       'organismos_list'             => new sfValidatorDoctrineChoiceMany(array('model' => 'Organismo', 'required' => false)),
       'eventos_list'                => new sfValidatorDoctrineChoiceMany(array('model' => 'Evento', 'required' => false)),
       'aplicacion_externas_list'    => new sfValidatorDoctrineChoiceMany(array('model' => 'AplicacionExterna', 'required' => false)),
-      'listas_comunicado_list'      => new sfValidatorDoctrineChoiceMany(array('model' => 'ListaComunicado', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuario_filters[%s]');
@@ -164,22 +162,6 @@ class BaseUsuarioFormFilter extends BaseFormFilterDoctrine
           ->andWhereIn('UsuarioAplicacionExterna.aplicacion_externa_id', $values);
   }
 
-  public function addListasComunicadoListColumnQuery(Doctrine_Query $query, $field, $values)
-  {
-    if (!is_array($values))
-    {
-      $values = array($values);
-    }
-
-    if (!count($values))
-    {
-      return;
-    }
-
-    $query->leftJoin('r.UsuarioListaComunicado UsuarioListaComunicado')
-          ->andWhereIn('UsuarioListaComunicado.lista_comunicado_id', $values);
-  }
-
   public function getModelName()
   {
     return 'Usuario';
@@ -209,7 +191,6 @@ class BaseUsuarioFormFilter extends BaseFormFilterDoctrine
       'organismos_list'             => 'ManyKey',
       'eventos_list'                => 'ManyKey',
       'aplicacion_externas_list'    => 'ManyKey',
-      'listas_comunicado_list'      => 'ManyKey',
     );
   }
 }

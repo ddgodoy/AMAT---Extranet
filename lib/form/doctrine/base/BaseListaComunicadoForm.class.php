@@ -17,7 +17,6 @@ class BaseListaComunicadoForm extends BaseFormDoctrine
       'created_at'             => new sfWidgetFormDateTime(),
       'updated_at'             => new sfWidgetFormDateTime(),
       'deleted'                => new sfWidgetFormInputCheckbox(),
-      'usuarios_list'          => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Usuario')),
       'envios_comunicado_list' => new sfWidgetFormDoctrineChoiceMany(array('model' => 'EnvioComunicado')),
     ));
 
@@ -27,7 +26,6 @@ class BaseListaComunicadoForm extends BaseFormDoctrine
       'created_at'             => new sfValidatorDateTime(array('required' => false)),
       'updated_at'             => new sfValidatorDateTime(array('required' => false)),
       'deleted'                => new sfValidatorBoolean(),
-      'usuarios_list'          => new sfValidatorDoctrineChoiceMany(array('model' => 'Usuario', 'required' => false)),
       'envios_comunicado_list' => new sfValidatorDoctrineChoiceMany(array('model' => 'EnvioComunicado', 'required' => false)),
     ));
 
@@ -47,11 +45,6 @@ class BaseListaComunicadoForm extends BaseFormDoctrine
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['usuarios_list']))
-    {
-      $this->setDefault('usuarios_list', $this->object->Usuarios->getPrimaryKeys());
-    }
-
     if (isset($this->widgetSchema['envios_comunicado_list']))
     {
       $this->setDefault('envios_comunicado_list', $this->object->EnviosComunicado->getPrimaryKeys());
@@ -63,46 +56,7 @@ class BaseListaComunicadoForm extends BaseFormDoctrine
   {
     parent::doSave($con);
 
-    $this->saveUsuariosList($con);
     $this->saveEnviosComunicadoList($con);
-  }
-
-  public function saveUsuariosList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['usuarios_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (is_null($con))
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->Usuarios->getPrimaryKeys();
-    $values = $this->getValue('usuarios_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('Usuarios', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('Usuarios', array_values($link));
-    }
   }
 
   public function saveEnviosComunicadoList($con = null)
