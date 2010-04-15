@@ -32,12 +32,20 @@ class actaActions extends sfActions
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
+                if($this->DAtos['grupousuario'] == '(0)')
+                {
+                   $datoUsuario =   '';
+                }
+                else
+                {
+                  $datoUsuario = $this->DAtos['grupousuario'];
+                }
 
 		$this->pager = new sfDoctrinePager('Acta', 10);
 		$this->pager->getQuery()
 				->from('Acta a')
 				->leftJoin('a.Asamblea am')
-				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$this->DAtos['grupousuario'])->orderBy($this->setOrdenamiento());
+				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$datoUsuario)->orderBy($this->setOrdenamiento());
                 echo $this->pager->getQuery()->getSql();
                 exit ();
 		$this->pager->setPage($this->paginaActual);
