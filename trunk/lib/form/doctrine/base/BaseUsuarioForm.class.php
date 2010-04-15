@@ -33,7 +33,6 @@ class BaseUsuarioForm extends BaseFormDoctrine
       'organismos_list'             => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Organismo')),
       'eventos_list'                => new sfWidgetFormDoctrineChoiceMany(array('model' => 'Evento')),
       'aplicacion_externas_list'    => new sfWidgetFormDoctrineChoiceMany(array('model' => 'AplicacionExterna')),
-      'listas_comunicado_list'      => new sfWidgetFormDoctrineChoiceMany(array('model' => 'ListaComunicado')),
     ));
 
     $this->setValidators(array(
@@ -58,7 +57,6 @@ class BaseUsuarioForm extends BaseFormDoctrine
       'organismos_list'             => new sfValidatorDoctrineChoiceMany(array('model' => 'Organismo', 'required' => false)),
       'eventos_list'                => new sfValidatorDoctrineChoiceMany(array('model' => 'Evento', 'required' => false)),
       'aplicacion_externas_list'    => new sfValidatorDoctrineChoiceMany(array('model' => 'AplicacionExterna', 'required' => false)),
-      'listas_comunicado_list'      => new sfValidatorDoctrineChoiceMany(array('model' => 'ListaComunicado', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('usuario[%s]');
@@ -107,11 +105,6 @@ class BaseUsuarioForm extends BaseFormDoctrine
       $this->setDefault('aplicacion_externas_list', $this->object->AplicacionExternas->getPrimaryKeys());
     }
 
-    if (isset($this->widgetSchema['listas_comunicado_list']))
-    {
-      $this->setDefault('listas_comunicado_list', $this->object->ListasComunicado->getPrimaryKeys());
-    }
-
   }
 
   protected function doSave($con = null)
@@ -124,7 +117,6 @@ class BaseUsuarioForm extends BaseFormDoctrine
     $this->saveOrganismosList($con);
     $this->saveEventosList($con);
     $this->saveAplicacionExternasList($con);
-    $this->saveListasComunicadoList($con);
   }
 
   public function saveRolesList($con = null)
@@ -352,44 +344,6 @@ class BaseUsuarioForm extends BaseFormDoctrine
     if (count($link))
     {
       $this->object->link('AplicacionExternas', array_values($link));
-    }
-  }
-
-  public function saveListasComunicadoList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['listas_comunicado_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (is_null($con))
-    {
-      $con = $this->getConnection();
-    }
-
-    $existing = $this->object->ListasComunicado->getPrimaryKeys();
-    $values = $this->getValue('listas_comunicado_list');
-    if (!is_array($values))
-    {
-      $values = array();
-    }
-
-    $unlink = array_diff($existing, $values);
-    if (count($unlink))
-    {
-      $this->object->unlink('ListasComunicado', array_values($unlink));
-    }
-
-    $link = array_diff($values, $existing);
-    if (count($link))
-    {
-      $this->object->link('ListasComunicado', array_values($link));
     }
   }
 

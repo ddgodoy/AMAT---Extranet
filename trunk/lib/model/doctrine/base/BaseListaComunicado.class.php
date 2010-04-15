@@ -15,11 +15,6 @@ abstract class BaseListaComunicado extends sfDoctrineRecord
 
     public function setUp()
     {
-        $this->hasMany('Usuario as Usuarios', array(
-             'refClass' => 'UsuarioListaComunicado',
-             'local' => 'lista_comunicado_id',
-             'foreign' => 'usuario_id'));
-
         $this->hasMany('EnvioComunicado as EnviosComunicado', array(
              'refClass' => 'ListaComunicadoEnvio',
              'local' => 'lista_comunicado_id',

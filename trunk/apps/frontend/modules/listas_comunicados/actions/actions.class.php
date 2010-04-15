@@ -80,11 +80,28 @@ class listas_comunicadosActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+    $UsuarioList = $request->getParameter($form->getName());
     $form->bind($request->getParameter($form->getName()));
     if ($form->isValid())
     {
       $lista_comunicado = $form->save();
 
+      if($UsuarioList['usuarios_list'])
+      {
+          if($this->getActionName() == 'update')
+          {
+              $usuarioListComunicado = UsuarioListaComunicadoTable::getUsuarioByListaDeleted($lista_comunicado->getId());
+          }
+          foreach ($UsuarioList['usuarios_list'] as $usuLis)
+          {
+              $usuarioList = new UsuarioListaComunicado();
+              $usuarioList->setUsuarioId($usuLis);
+              $usuarioList->setListaComunicadoId($lista_comunicado->getId());
+              $usuarioList->save();
+          }
+
+      }
+      
       $this->redirect('listas_comunicados/index');
     }
   }

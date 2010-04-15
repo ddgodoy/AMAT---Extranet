@@ -777,8 +777,8 @@ ListaComunicado:
     SoftDelete: ~
   columns:
     nombre:                  { type: clob }
-  relations:
-    Usuarios:                { foreignAlias: ListasComunicado, class: Usuario, refClass: UsuarioListaComunicado }
+  #relations:
+  #Usuarios:                { foreignAlias: ListasComunicado, class: Usuario, refClass: UsuarioListaComunicado }
 
 EnvioError:
   actAs:
@@ -804,16 +804,16 @@ Envios:
     Usuario:                 { local: usuario_id, foreign: id, onDelete: CASCADE }
     EnvioComunicado:         { local: envio_id, foreign: id, onDelete: CASCADE }   
 
-UsuarioListaComunicado:
-  actAs:
-    Timestampable: ~
-    SoftDelete: ~
-  columns:
-    usuario_id:              { type: integer, primary: true }
-    lista_comunicado_id:     { type: integer, primary: true }
-  relations:
-    Usuario:                 { foreignAlias: UsuarioListaComunicados }
-    ListaComunicado:         { foreignAlias: UsuarioListaComunicados }
+#UsuarioListaComunicado:
+#  actAs:
+#    Timestampable: ~
+#    SoftDelete: ~
+#  columns:
+#    usuario_id:              { type: integer, primary: true }
+#    lista_comunicado_id:     { type: integer, primary: true }
+#  relations:
+#    Usuario:                 { foreignAlias: UsuarioListaComunicados }
+#    ListaComunicado:         { foreignAlias: UsuarioListaComunicados }
     
 UsuarioListaComunicado:
   actAs:
