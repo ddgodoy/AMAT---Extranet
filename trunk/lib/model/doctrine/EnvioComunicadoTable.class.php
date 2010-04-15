@@ -29,7 +29,11 @@ class EnvioComunicadoTable extends Doctrine_Table
 		$q->leftJoin('ulc.ListaComunicado lc');
 		$q->leftJoin('lc.ListaComunicadoEnvio lce');
 		$q->leftJoin('lce.EnvioComunicado ec');
-		$q->where('u.deleted = 0');
+		$q->where('u.deleted = 0 
+                           AND ulc.deleted = 0
+                           AND lc.deleted = 0
+                           AND lce.deleted = 0
+                           AND ec.deleted = 0 ');
 		$q->andWhere('ec.id = '.$idEnvio);
 		$q->orderBy('u.nombre ASC');
 		$usuarios = $q->fetchArray();
