@@ -94,7 +94,8 @@ class envio_comunicadosActions extends sfActions
       	
 		if (!$comunicado->getEnviado()) 
 		{
-			$envio_comunicado->enviarMails();
+                        exec('php exeEnvioMail.php'." > /dev/null &");
+			//$envio_comunicado->enviarMails();
 			$comunicado->setEnviado(1);			
 			$comunicado->save();
 		}
