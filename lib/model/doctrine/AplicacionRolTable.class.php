@@ -66,7 +66,12 @@ class AplicacionRolTable extends Doctrine_Table
    	 ->leftJoin('r.AplicacionRol ar')
    	 ->where('ar.accion_publicar = 1')
    	 ->andWhere('ar.aplicacion_id = '.$IDaplic)
-   	 ->andWhere('u.deleted = 0');
+   	 ->andWhere('u.activo=1
+                     AND r.deleted=0
+                     AND u.deleted = 0
+                     AND ur.deleted = 0
+                     AND a.deleted = 0
+                    ');
 
    	  return $r->fetchArray(); 
    }
