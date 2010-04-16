@@ -184,7 +184,7 @@ class UsuarioTable extends Doctrine_Table
             	$id = '';
 		$d = count($arrayIDusuario);
 
-		if ($d > 1) {
+		if ($d >= 1) {
 			$d--;
                 $id .= '(';
 			foreach ($arrayIDusuario as $k =>$idUSE) {
