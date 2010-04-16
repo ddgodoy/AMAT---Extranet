@@ -18,14 +18,13 @@ class MenuTable extends Doctrine_Table
 	public static function getMenuPadre($idPadre, $habilitado = null)
 	{
 		$s = Doctrine_Query::create()
-		->from('Menu')
-		->where('deleted = 0')
-		->addWhere('padre_id = '.$idPadre)
-		->orderBy('posicion');
-		if ($habilitado == 1)
-		{
-			$s->addWhere('habilitado = 1');
-		}
+				->from('Menu')
+				->where('deleted = 0')
+				->addWhere('padre_id = '.$idPadre)
+				->orderBy('posicion');
+
+		if ($habilitado == 1) { $s->addWhere('habilitado = 1'); }
+
 		$menupadre = $s->execute();
 		
 		return $menupadre;
@@ -76,60 +75,46 @@ class MenuTable extends Doctrine_Table
 	
 	public static function getArrayMenuHijo($idPadre, $nivel)
 	{
-                sfLoader::loadHelpers('Security');
-		$items = MenuTable::getMenuPadre($idPadre,1);
+		$items = MenuTable::getMenuPadre($idPadre, 1);
 		$arrItems = array();
-		
-		//echo "<br /> nivel: ".$nivel;
-		
-		if (count($items)!=0 && $nivel <= 3)
-		{
-			foreach($items as $item)
-			{   
+
+		if (count($items) != 0 && $nivel <= 3) {
+			foreach($items as $item) {
 				$asambleas = '';
 				$aplicacion ='';
-				if($item->getAplicacion()->getId() == 4)
-			      {
-			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/index?DirectoresGerente=1';
-			      	$asambleas = 1;
-			      }
-			     if($item->getAplicacion()->getId() == 42)
-			      {
-			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/index?GrupodeTrabajo=2';
-			      	$asambleas = 2;
-			      } 
-			      if($item->getAplicacion()->getId() == 43)
-			      {
-			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/index?ConsejoTerritorial=3';
-			      	$asambleas = 3;
-			      }
-			      if($item->getAplicacion()->getId() != 4 && $item->getAplicacion()->getId() != 42 && $item->getAplicacion()->getId() != 43)
-			      {
-			      	if($item->getAplicacion()->getNombreModulo()){
-			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/index';
-			      	}
-			      	$asambleas = '';
-			      }
-			      if($item->getAplicacion()->getTitulo() != '' && $item->getAplicacion()->getDescripcion() != '')
-			      {
-			      	
-			      	$aplicacion = $item->getAplicacion()->getNombreModulo().'/show?id='.$item->getAplicacion()->getId();
-			      	
-			      }
-                              
-			      $arrItems [  ] = array (
-					'id' 		=> $item->getId(),
-					'nombre' 	=> $item->getNombre(),
-					'modulo' 	=> $item->getAplicacion()->getNombreModulo(),
-					'url' 		=> $item->getUrlExterna(),
+
+				if ($item->getAplicacion()->getId() == 4) {
+					$aplicacion = $item->getAplicacion()->getNombreModulo().'/index?DirectoresGerente=1';
+					$asambleas = 1;
+				}
+				if ($item->getAplicacion()->getId() == 42) {
+					$aplicacion = $item->getAplicacion()->getNombreModulo().'/index?GrupodeTrabajo=2';
+					$asambleas = 2;
+				} 
+				if ($item->getAplicacion()->getId() == 43) {
+					$aplicacion = $item->getAplicacion()->getNombreModulo().'/index?ConsejoTerritorial=3';
+					$asambleas = 3;
+				}
+				if ($item->getAplicacion()->getId() != 4 && $item->getAplicacion()->getId() != 42 && $item->getAplicacion()->getId() != 43) {
+					if ($item->getAplicacion()->getNombreModulo()) {
+						$aplicacion = $item->getAplicacion()->getNombreModulo().'/index';
+					}
+					$asambleas = '';
+				}
+				if ($item->getAplicacion()->getTitulo() != '' && $item->getAplicacion()->getDescripcion() != '') {
+					$aplicacion = $item->getAplicacion()->getNombreModulo().'/show?id='.$item->getAplicacion()->getId();
+				}
+				$arrItems[] = array (
+					'id' 		    => $item->getId(),
+					'nombre' 	  => $item->getNombre(),
+					'modulo' 	  => $item->getAplicacion()->getNombreModulo(),
+					'url' 		  => $item->getUrlExterna(),
 					'asambleas' => $asambleas,
 					'aplicacion'=> $aplicacion,
-					'hijos'	=> MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1),
-					);
-				
-			}						
+					'hijos'	    => MenuTable::getArrayMenuHijo($item->getId(), $nivel + 1),
+				);
+			}
 		}
-	 
 		return $arrItems;
 	}
 }

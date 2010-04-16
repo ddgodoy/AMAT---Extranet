@@ -11,14 +11,12 @@
 class menuActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
-  {
-  	
+  { 	
 	  $this->menu = Doctrine_Query::create();
 		$this->menu->from('Menu')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 		
 		$this->menu_list  = $this->menu->execute();
 		$this->cantidadRegistros = $this->menu_list->count();
-			
   }
 
   public function executeNueva(sfWebRequest $request)
@@ -29,9 +27,8 @@ class menuActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod('post'));
-
     $this->form = new MenuForm();
-    
+
     $this->processForm($request, $this->form);
 
     $this->setTemplate('nueva');
@@ -60,56 +57,45 @@ class menuActions extends sfActions
 
     $this->forward404Unless($menu = Doctrine::getTable('Menu')->find($request->getParameter('id')), sprintf('Object menu does not exist (%s).', $request->getParameter('id')));
     
-    if(Menu::SetPosicionAeliminar($menu->getPosicion(),$menu->getPadreId()))
-    {    
-		    $menu->delete();
-		
-		    $this->redirect('menu/index');
+    if (Menu::SetPosicionAeliminar($menu->getPosicion(),$menu->getPadreId())) {
+	    $menu->delete();
+	    $this->redirect('menu/index');
 		}
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-  	
     $form->bind($request->getParameter($form->getName()));
            
-    if ($form->isValid())
-    {   
-    	
-    	  $posicion = $request->getParameter($form->getName());
-        $idPadre = $posicion['padre_id'] ? $posicion['padre_id'] : 0;
-        
-        if(MenuTable::getMenuPadre('0')->count() == 6 && $idPadre == 0 && $request->getParameter('action') != 'update' )
-        {
-        	  $this->getUser()->setFlash('notice', 'No pueden registrarse mas de 6 grupos en el menu');
-			      $this->redirect('menu/index');
+    if ($form->isValid()) {
+  	  $posicion = $request->getParameter($form->getName());
+      $idPadre = $posicion['padre_id'] ? $posicion['padre_id'] : 0;
+      
+      if (MenuTable::getMenuPadre('0')->count() == 6 && $idPadre == 0 && $request->getParameter('action') != 'update') {
+    	  $this->getUser()->setFlash('notice', 'No pueden registrarse mas de 6 grupos en el menu');
+	      $this->redirect('menu/index');
+      }
 
-        }
-        
-    	  if ($request->getParameter('action') != 'update') 
-    	  {
-        if(Menu::SetPosicionactual($posicion['posicion'],$idPadre))
-        {
-		    	  $menu = $form->save();
-		       
-			      $this->getUser()->setFlash('notice', 'El Elemento del menu ha sido registrado correctamente');
-			      $this->redirect('menu/index');
-        } 
-    	  } 
-    	  if($request->getParameter('action') == 'update')
-    	  {
-    	  	if(Menu::EditarPosicion($posicion['posicion'],$idPadre,$posicion['id']))
-    	  	{
-						$menu = $form->save();
-		       
-			      $this->getUser()->setFlash('notice', 'El Elemento del menu ha sido registrado correctamente');
-			      $this->redirect('menu/index');    	  		
-    	  		
-    	  	}
-    	  }
+  	  if ($request->getParameter('action') != 'update') {
+	      if (Menu::SetPosicionactual($posicion['posicion'],$idPadre)) {
+	    	  $menu = $form->save();
+
+		      $this->getUser()->setFlash('notice', 'El Elemento del menu ha sido registrado correctamente');
+		      $this->redirect('menu/index');
+	      }
+  	  }
+
+  	  if($request->getParameter('action') == 'update') {
+  	  	if (Menu::EditarPosicion($posicion['posicion'],$idPadre,$posicion['id'])) {
+					$menu = $form->save();
+
+		      $this->getUser()->setFlash('notice', 'El Elemento del menu ha sido registrado correctamente');
+		      $this->redirect('menu/index');  	  		
+  	  	}
+  	  }
     }
-    
   }
+
   protected function setFiltroBusqueda()
   {
   	$parcial = '';
@@ -123,9 +109,9 @@ class menuActions extends sfActions
 			$parcial .= " AND id = $this->cajaBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajaelemento');
-				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajasubelemento');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajasubelemento');
 		}
-		
+
 		if (!empty($this->cajaBsq) && !empty($this->elementoBsq) && empty($this->subelementoBsq)) {
 			$parcial .= " AND id IN ($this->cajaBsq,$this->elementoBsq)";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
@@ -166,6 +152,7 @@ class menuActions extends sfActions
 		
 		return 'deleted = 0'.$parcial;
   }
+
   protected function setOrdenamiento()
   {
 		$this->orderBy = 'posicion';
@@ -177,18 +164,14 @@ class menuActions extends sfActions
 		}
 		return $this->orderBy . ' ' . $this->sortType;
   }
-  
+
   public function executeListElementos()
   {
   	return $this->renderComponent('menu','listarElementos');
   }
- 
-   public function executeSubElementos()
-  {
-  	
-  	return $this->renderComponent('menu','listarSubElementos');
-  }
 
-  
-  
+  public function executeSubElementos()
+  {
+  	return $this->renderComponent('menu','listarSubElementos');
+  }  
 }
