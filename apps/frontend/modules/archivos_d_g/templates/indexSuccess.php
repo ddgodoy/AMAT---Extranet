@@ -142,7 +142,8 @@
 		</div>
 		<?php endif; ?>
 		<?php if($documentacionBsq && validate_action('listar','documentacion_grupos')): ?>
-		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_grupos/index') ?>';"  value="Volver a la Documentacion" name="newNews" class="boton"/>
+                   <?php $redireccion = $documentacionBsq?'?grupo='.$documentacionBsq : ''; ?>
+		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_grupos/index'.$redireccion) ?>';"  value="Volver a la Documentacion" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
 <!-- * -->
