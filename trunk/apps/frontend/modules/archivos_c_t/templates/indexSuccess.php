@@ -138,7 +138,8 @@ else
 		</div>
 		<?php endif; ?>
 		<?php if($documentacionBsq && validate_action('listar','documentacion_consejos')): ?>
-		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/index') ?>';" value="Volver a la Documentacion" name="newNews" class="boton"/>
+                   <?php $redireccion = $documentacionBsq?'?consejo='.$documentacionBsq : ''; ?>
+		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/index'.$redireccion) ?>';" value="Volver a la Documentacion" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
 <!-- * -->
