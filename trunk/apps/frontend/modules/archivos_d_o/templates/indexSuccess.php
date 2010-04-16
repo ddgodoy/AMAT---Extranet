@@ -159,7 +159,8 @@
 		</div>
 		<?php endif; ?>
 		<?php if($documentacionBsq && validate_action('listar','documentacion_organismos')): ?>
-		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/index') ?>';"  value="Volver a la Documentacion" name="newNews" class="boton"/>
+                   <?php $redireccion = $documentacionBsq?'?documentacion_organismo[organismo_id]='.$documentacionBsq : ''; ?>
+		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/index'.$redireccion) ?>';"  value="Volver a la Documentacion" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
 <!-- * -->
