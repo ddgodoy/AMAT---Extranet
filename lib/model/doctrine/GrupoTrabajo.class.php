@@ -22,6 +22,7 @@ class GrupoTrabajo extends BaseGrupoTrabajo
 		$s->leftJoin('u.UsuarioGrupoTrabajo ugt');
 		$s->where('ugt.grupo_trabajo_id = '.$this->getId() );
 		$s->andWhere('u.id != '.$usuarioId);
+                $s->orderBy('u.apellido');
 		
 		$usuarios = $s->execute();
 		
