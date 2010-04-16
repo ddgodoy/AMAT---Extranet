@@ -18,8 +18,8 @@
 	  <?php endif;?>
           <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($evento->getFecha())) ?></span><br />
 	  <a  class="nottit"><?php echo  $evento->gettitulo() ?> </a><br />
-	  <p class="notentrada" align="justify"><?php echo $evento->getdescripcion() ?></p>
-	  <?php echo nl2br($evento->getmas_info()) ?>      
+	  <p class="notentrada" align="justify"><?php echo nl2br($evento->getdescripcion()) ?></p>
+	  <?php echo $evento->getmas_info() ?>      
 	  <br clear="all" />
 	   <?php if($evento->getdocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/eventos/docs/".$evento->getdocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
