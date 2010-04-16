@@ -24,9 +24,9 @@ class RolForm extends BaseRolForm
 
     $this->setValidators(array(
       'id'            => new sfValidatorDoctrineChoice(array('model' => 'Rol', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('required' => false)),
+      'nombre'        => new sfValidatorString(array('required' => true), array('required' => 'El campo nombre es obligatorio')),
       'detalle'       => new sfValidatorString(array('required' => false)),
-      'codigo'        => new sfValidatorString(array('max_length' => 32)),
+      'codigo'        => new sfValidatorString(array('max_length' => 32, 'required' => true), array('required' => 'El campo código es obligatorio')),
       'created_at'    => new sfValidatorDateTime(array('required' => false)),
       'updated_at'    => new sfValidatorDateTime(array('required' => false)),
       'deleted'       => new sfValidatorBoolean(),
