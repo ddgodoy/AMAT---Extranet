@@ -106,4 +106,110 @@
 			]]>
 		</Html>
 	</Template>
+        <Template title="Imagenes y texto " image="1.jpg">
+		<Description>Imagen (izq) - texto - imagen (der) - texto - imagen (izq).</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                <img src="imagen.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+                                <img src="imagen.jpg" align="right" nottit="" style="margin-left:10px;margin-bottom:10px;" alt="">
+                                <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+
+                                <img src="imagen.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+                                <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                <div class="clear"></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Sólo texto" image="3.jpg">
+		<Description>Texto.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                    <div class="clear"></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Texto a 2 columnas" image="4.jpg">
+		<Description>Texto a 2 columnas (sólo para la intranet).</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                  <table width="100%" cellspacing="10" cellpadding="0" border="0">
+                                    <tbody>
+                                      <tr>
+                                        <td width="50%" valign="top"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+                                        <td width="50%" valign="top"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div class="clear"></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Listados" image="5.jpg">
+		<Description>Listados para textos.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                 <ul>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</li>
+                                  <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</li>
+                                  <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</li>
+                                 </ul>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Listado para imagenes" image="6.jpg">
+		<Description>Imagenes.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                 <ul>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="imagen.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="imagen.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="imagen.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                  </ul>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Galería" image="7.jpg">
+		<Description>Galería de imágenes.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+
+                                 <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+
+
+                                </div>
+			]]>
+		</Html>
+	</Template>
 </Templates>
