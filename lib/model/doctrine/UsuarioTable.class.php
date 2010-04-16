@@ -186,7 +186,7 @@ class UsuarioTable extends Doctrine_Table
 
 		if ($d > 1) {
 			$d--;
-            $id .= '(';
+                $id .= '(';
 			foreach ($arrayIDusuario as $k =>$idUSE) {
 		    if ($d > $k) {
 			    $id .= $idUSE.',';
@@ -199,6 +199,8 @@ class UsuarioTable extends Doctrine_Table
 		$r = Doctrine_Query::create()->from('Usuario');
 
 		if ($d == 1) {
+                 echo $arrayIDusuario;
+                 exit ();
 		 $r->where('id ='.$arrayIDusuario);
 		} else {
 		  $r->where('id IN '.$id);
