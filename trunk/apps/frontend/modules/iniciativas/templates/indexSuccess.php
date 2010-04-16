@@ -53,7 +53,9 @@
 				</tr>
 				<?php $i=0; foreach ($iniciativa_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
+                                        <?php if(validate_action('baja')): ?>
 					<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
+                                        <?php endif; ?>
 					<td valign="top" align="center">
 						<?php echo date("d/m/Y", strtotime($valor->getfecha())) ?>
 					</td>
@@ -71,17 +73,19 @@
 					<?php endif;?>		
 						</a>
 					</td>
-          <td valign="top" align="center">
-          <?php if(validate_action('baja')): ?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'iniciativas/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          <?php endif; ?>	
-          </td>
+                                      <td valign="top" align="center">
+                                      <?php if(validate_action('baja')): ?>
+                                            <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'iniciativas/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                      <?php endif; ?>
+                                      </td>
 				</tr>
 				<?php endforeach; ?>
+                                <?php if (validate_action('baja')): ?>
 				<tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5"><input type="submit" class="boton" value="Borrar seleccionados" onclick="return confirm('Confirma la eliminaci&oacute;n de los registros seleccionados?');"/></td>
 				</tr>
+                                <?php endif; ?>
 			</tbody>
 		</table>
 		</form>
