@@ -18,7 +18,7 @@
 	  <span class="notfecha">Fecha: <?php echo date("d/m/Y", strtotime($noticia->getFecha())) ?></span><br />
 	  <a class="nottit"><?php echo  $noticia->getTitulo() ?></a><br />
           <p class="notentrada" align="justify"><?php echo nl2br($noticia->getEntradilla()) ?></p>
-	  <div class="ul_noticias"><?php echo nl2br($noticia->getContenido()) ?></div> 
+	  <div class="ul_noticias"><?php echo $noticia->getContenido()?></div> 
 	  <br clear="all" /> 
 	  <?php if($noticia->getDocumento()):?>   
 	  <a href="<?php echo url_for("/uploads/noticias/docs/".$noticia->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
