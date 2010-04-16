@@ -70,9 +70,14 @@ class aplicacionesActions extends sfActions
 
     $this->forward404Unless($aplicacion = Doctrine::getTable('Aplicacion')->find($request->getParameter('id')), sprintf('Object normativa does not exist (%s).', $request->getParameter('id')));
     
+    $menu = Doctrine::getTable('Menu')->findOneByAplicacionId($aplicacion->getId());
+
     sfLoader::loadHelpers('Security'); // para usar el helper
 	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    
+    if($menu->count()> 0)
+    {
+      $menu->delete();
+    }
     $aplicacion->delete();
 
     $this->getUser()->setFlash('notice', "El registro ha sido eliminado del sistema");
