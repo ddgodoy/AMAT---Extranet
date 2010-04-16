@@ -8,7 +8,6 @@
  * @author     Pablo Joel Peralta
  */
 
-
 /**
  * Parametros:
  * $accion: acciones a consultar ('alta', 'baja', 'modificar', 'listar', 'publicar')
@@ -22,27 +21,62 @@
 
 function validate_action($action, $module = null)
 {
-	$request  = sfContext::getInstance()->getRequest();
+	$request = sfContext::getInstance()->getRequest();
 	if ($module == null) $module = $request->getParameter('module');
 	$sfAction = $request->getParameter('action');
 
 	$arrPermisos = sfContext::getInstance()->getUser()->getAttribute('permisos');
 	$arrExcepciones = Doctrine::getTable('Aplicacion')->getExcepcionesSeguridad();
-	
-	if (!empty($arrPermisos[$module][$action]))
-	{
+
+	if (!empty($arrPermisos[$module][$action])) {
 		return true;
-	}
-	else
-	{
-		if ($sfAction=='editar' && $action=='alta' && !empty($arrPermisos[$module]['modificar']))
-		{
+	} else {
+		if ($sfAction=='editar' && $action=='alta' && !empty($arrPermisos[$module]['modificar'])) {
 			return true;
 		}
-		if (in_array($module.'_'.$sfAction, $arrExcepciones))
-		{
+		if (in_array($module.'_'.$sfAction, $arrExcepciones)) {
 			return true;
 		}
 		return false;
 	}
+}
+
+function validate_single_menu_element($val_list, $val_show, $link_destino)
+{
+	if ($val_list && $val_show) {
+		return true;
+	} elseif (($val_list || $val_show) && empty($link_destino)) {
+		return true;
+	} else {
+		if ($val_list) {
+			if (strpos($link_destino, '/index') !== false) { return true; }
+		} else {
+			if (strpos($link_destino, '/show') !== false) { return true; }
+		}
+	}
+	return false;
+}
+
+function getArrayMenuElementsByConditions($aItems)
+{
+	$c = 0;
+	$r = array();
+
+	foreach ($aItems as $v_item) {
+		$verList = validate_action('listar', $v_item['modulo']);
+		$verShow = validate_action('publicar', $v_item['modulo']);
+
+		if (validate_single_menu_element($verList, $verShow, $v_item['aplicacion'])) {
+			$r[$c]['id']        = $v_item['id'];
+			$r[$c]['nombre']    = $v_item['nombre'];
+			$r[$c]['modulo']    = $v_item['modulo'];
+			$r[$c]['url']       = $v_item['url'];
+			$r[$c]['asambleas'] = $v_item['asambleas'];
+			$r[$c]['aplicacion']= $v_item['aplicacion'];
+			$r[$c]['hijos']     = $v_item['hijos'];
+
+			$c++;
+		}
+	}
+	return $r;
 }

@@ -86,17 +86,15 @@ class UsuarioTable extends Doctrine_Table
 		$q->orderBy('ae.nombre ASC');
 		$aplicaciones = $q->execute();
 
-                
-		
 		return $aplicaciones;
 	}
 	
-	public function getPermisosByUsuario ($userId)
+	public function getPermisosByUsuario($userId)
 	{
 		$permisos = array();
 		
 		$q = Doctrine_Query::create();
-		$q->select('r.codigo, a.nombre_modulo, ar.accion_alta, ar.accion_baja, ar.accion_modificar, ar.accion_listar, ar.accion_publicar ');
+		$q->select('r.codigo, a.nombre_modulo, ar.accion_alta, ar.accion_baja, ar.accion_modificar, ar.accion_listar, ar.accion_publicar');
 		$q->from('AplicacionRol ar');
 		$q->leftJoin('ar.Aplicacion a');
 		$q->leftJoin('ar.Rol r');
@@ -106,38 +104,51 @@ class UsuarioTable extends Doctrine_Table
 		$q->addWhere('ar.deleted = 0');
 		
 		$aplicaciones_roles = $q->fetchArray();
+
+//		echo '<pre>';
+//		print_r($aplicaciones_roles);
+//		echo '</pre>';
+//		exit();
 		
-		foreach ($aplicaciones_roles as $ar)
-		{	
-			// si no existe el permiso lo cargo en el array
-			if (empty($permisos[$ar['Aplicacion']['nombre_modulo']]['alta']))
-				{	$permisos[$ar['Aplicacion']['nombre_modulo']]['alta'] 		= $ar['accion_alta']; }
-				else // si ya existe, no tiene permiso y en el perfil nuevo si tiene, lo modifico a true
-				{ 	if ($permisos[$ar['Aplicacion']['nombre_modulo']]['alta'] == false && $ar['accion_alta'] == true) $permisos[$ar['Aplicacion']['nombre_modulo']]['alta'] = $ar['accion_alta']; }
-			
-			if (empty($permisos[$ar['Aplicacion']['nombre_modulo']]['baja']))
-				{	$permisos[$ar['Aplicacion']['nombre_modulo']]['baja'] 		= $ar['accion_baja']; }
-				else // si ya existe, no tiene permiso y en el perfil nuevo si tiene, lo modifico a true
-				{ 	if ($permisos[$ar['Aplicacion']['nombre_modulo']]['baja'] == false && $ar['accion_baja'] == true) $permisos[$ar['Aplicacion']['nombre_modulo']]['baja'] = $ar['accion_baja']; }
-			
-			if (empty($permisos[$ar['Aplicacion']['nombre_modulo']]['modificar']))
-				{	$permisos[$ar['Aplicacion']['nombre_modulo']]['modificar'] 		= $ar['accion_modificar']; }
-				else // si ya existe, no tiene permiso y en el perfil nuevo si tiene, lo modifico a true
-				{ 	if ($permisos[$ar['Aplicacion']['nombre_modulo']]['modificar'] == false && $ar['accion_modificar'] == true) $permisos[$ar['Aplicacion']['nombre_modulo']]['modificar'] = $ar['accion_modificar']; }
-			
-			if (empty($permisos[$ar['Aplicacion']['nombre_modulo']]['listar']))
-				{	$permisos[$ar['Aplicacion']['nombre_modulo']]['listar'] 		= $ar['accion_listar']; }
-				else // si ya existe, no tiene permiso y en el perfil nuevo si tiene, lo modifico a true
-				{ 	if ($permisos[$ar['Aplicacion']['nombre_modulo']]['listar'] == false && $ar['accion_listar'] == true) $permisos[$ar['Aplicacion']['nombre_modulo']]['listar'] = $ar['accion_listar']; }
-			
-			if (empty($permisos[$ar['Aplicacion']['nombre_modulo']]['publicar']))
-				{	$permisos[$ar['Aplicacion']['nombre_modulo']]['publicar'] 		= $ar['accion_publicar']; }
-				else // si ya existe, no tiene permiso y en el perfil nuevo si tiene, lo modifico a true
-				{ 	if ($permisos[$ar['Aplicacion']['nombre_modulo']]['publicar'] == false && $ar['accion_publicar'] == true) $permisos[$ar['Aplicacion']['nombre_modulo']]['publicar'] = $ar['accion_publicar']; }
-				
 		
+		/**
+		 * si no existe el permiso lo cargo en el array
+		 * si ya existe pero no tiene permiso y en el perfil nuevo si tiene, lo modifico a true
+		 */
+		foreach ($aplicaciones_roles as $ar) {
+			$appModulo = $ar['Aplicacion']['nombre_modulo'];
+
+			// alta
+			if (!isset($permisos[$appModulo]['alta'])) {
+				$permisos[$appModulo]['alta']	= $ar['accion_alta'];
+			} else {
+				if ($ar['accion_alta'] == 1) { $permisos[$appModulo]['alta'] = 1; }
+			}
+			// baja
+			if (!isset($permisos[$appModulo]['baja'])) {
+				$permisos[$appModulo]['baja'] = $ar['accion_baja'];
+			} else {
+				if ($ar['accion_baja'] == 1) { $permisos[$appModulo]['baja'] = 1; }
+			}
+			// modificar
+			if (!isset($permisos[$appModulo]['modificar'])) {
+				$permisos[$appModulo]['modificar'] = $ar['accion_modificar'];
+			} else {
+				if ($ar['accion_modificar'] == 1) { $permisos[$appModulo]['modificar'] = 1; }
+			}
+			// listar
+			if (!isset($permisos[$appModulo]['listar'])) {
+				$permisos[$appModulo]['listar']	= $ar['accion_listar'];
+			} else {
+				if ($ar['accion_listar'] == 1) { $permisos[$appModulo]['listar'] = 1; }
+			}
+			// publicar
+			if (!isset($permisos[$appModulo]['publicar'])) {
+				$permisos[$appModulo]['publicar'] = $ar['accion_publicar'];
+			} else {
+				if ($ar['accion_publicar'] == 1) { $permisos[$appModulo]['publicar'] = 1; }
+			}
 		}
-				
 		return $permisos;
 	}
 	

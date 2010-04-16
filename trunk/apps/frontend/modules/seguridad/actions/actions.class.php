@@ -36,19 +36,15 @@ class seguridadActions extends sfActions
 	
 	public function executeLogout(sfWebRequest $request)
 	{
-
-                
-                //$this->getContext()->getViewCacheManager()->remove('inicio/index');
-                
 		$this->getUser()->setAuthenticated(false);
 		$this->getUser()->clearCredentials();
+
 		$this->getUser()->getAttributeHolder()->remove('userId');
 		$this->getUser()->getAttributeHolder()->remove('mutuaId');
 		$this->getUser()->getAttributeHolder()->remove('nombre');
 		$this->getUser()->getAttributeHolder()->remove('apellido');
 		$this->getUser()->getAttributeHolder()->remove('permisos');
 		$this->getUser()->getAttributeHolder()->remove('menu');
-
 
 		$this->redirect('seguridad/login');
 	}
@@ -92,8 +88,7 @@ class seguridadActions extends sfActions
 					$this->getUser()->setAttribute('nombre'  , $usuario->getNombre());
 					$this->getUser()->setAttribute('apellido', $usuario->getApellido());				
 					$this->getUser()->setAttribute('permisos', $usuario->getPermisos());
-					$this->getUser()->setAttribute('menu'    , $usuario->getMenuUsuario());	
-	
+					$this->getUser()->setAttribute('menu'    , $usuario->getMenuUsuario());
 
 					## Crear credenciales
 					foreach ($credenciales as $credencial) {
@@ -218,7 +213,7 @@ class seguridadActions extends sfActions
 	## Fin acciones recordar clave
 	
 	public function executeError(sfWebRequest $request)
-          {
-            $this->setLayout("layout");
-          }
+  {
+    $this->setLayout("layout");
+  }
 }
