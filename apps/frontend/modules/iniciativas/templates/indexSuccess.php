@@ -41,7 +41,9 @@
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
+                                        <?php if(validate_action('baja')): ?>
 					<th width="5%">&nbsp;</th>
+                                        <?php endif; ?>
 					<th width="15%" style="text-align:center;">
 						<a href="<?php echo url_for('iniciativas/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
