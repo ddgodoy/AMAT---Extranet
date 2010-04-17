@@ -41,7 +41,7 @@ class EnvioComunicadoTable extends Doctrine_Table
 		return $usuarios;
 	}
 
-  public function getUsuariosDeListasLimitArray($idEnvio,$start,$limit)
+  public static function getUsuariosDeListasLimitArray($idEnvio,$start,$limit)
   {
     $q = Doctrine_Query::create();
     $q->select('u.id, u.email');
