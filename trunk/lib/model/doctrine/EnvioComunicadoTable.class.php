@@ -59,6 +59,7 @@ class EnvioComunicadoTable extends Doctrine_Table
     $q->orderBy('u.nombre ASC');
     $q->limit($limit);
     $q->offset($start);
+    //echo $q->getSQL(); die();
 
     $usuarios = $q->fetchArray();
 
