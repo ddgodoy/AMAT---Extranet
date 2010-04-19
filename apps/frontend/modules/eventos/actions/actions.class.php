@@ -145,7 +145,7 @@ class eventosActions extends sfActions
 				} else {
 					sfLoader::loadHelpers('Security'); // para usar el helper
 
-					if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+					if (!validate_action('baja', 'eventos', $evento->getId())) $this->redirect('seguridad/restringuido');
 
 					$agenda = AgendaTable::getDeleteAgenda($evento->getId());
 					$aviso = NotificacionTable::getDeleteEntidad2($evento->getId(),$evento->getTitulo());
