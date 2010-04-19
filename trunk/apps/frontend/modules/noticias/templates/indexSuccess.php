@@ -91,7 +91,7 @@ use_helper('Text');?>
 				<?php endif; ?>
    		        <?php endif;?>
 			    <?php endforeach; ?>
-			   <?php if(validate_action('publicar') || validate_action('baja')):?>
+			   <?php if(validate_action('baja')):?>
 			   <tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5">
