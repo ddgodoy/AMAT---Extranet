@@ -1,7 +1,5 @@
 <tr class="<?php echo $odd ?>">
-	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?>
-	<td><input type="checkbox" name="id[]" value="<?php echo $evento->getId() ?>" /></td>
-	<?php endif;?>	
+	<td><?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?><input type="checkbox" name="id[]" value="<?php echo $evento->getId() ?>" /><?php endif;?></td>
 	<td  width="11%" align="center"><span style="color:#999"><?php	echo date("d/m/Y", strtotime($evento->getFecha()));?></span><br />
 				<?php		
 					if ($evento->getImagen()) {
