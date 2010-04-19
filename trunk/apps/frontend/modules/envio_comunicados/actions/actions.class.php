@@ -94,7 +94,9 @@ class envio_comunicadosActions extends sfActions
       	
 		if (!$comunicado->getEnviado()) 
 		{
-                        exec("php ../../../../../lib/task/envioComunicadosScript.php ".$comunicado->getId()." 0 1"." > /dev/null &");
+      $ruta = dirname(__FILE__)."/../../../../../lib/task/envioComunicadosScript.php";
+      //echo "$ruta";die();
+      exec("php ../../../../../lib/task/envioComunicadosScript.php ".$comunicado->getId()." 0 1"." > /dev/null &");
 			//$envio_comunicado->enviarMails();
 			$comunicado->setEnviado(1);			
 			$comunicado->save();
