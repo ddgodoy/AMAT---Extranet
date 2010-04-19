@@ -29,7 +29,7 @@
 	</head>
 	<body>
 		<table width="100%" border="0" cellpadding="0" cellspacing="5">
-			<tr><td><?php echo $imagen ?></td></tr>
+                    <tr><td><img src="<?php echo $imagen ?>" alt=""></td></tr>
 			<tr><td><?php echo $cuerpo ?></td></tr>
 		</table>
 	</body>
