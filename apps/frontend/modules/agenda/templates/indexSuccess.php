@@ -31,9 +31,9 @@
 			  <tbody>
 				<tr>
 					<th width="10%"><a href="<?php echo url_for('agenda/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Fecha</a></th>
-					<th width="50%"><a href="<?php echo url_for('agenda/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">T&iacute;tulo</a></th>
-					<th width="27%"><a href="<?php echo url_for('agenda/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Organizador</a></th>
-					<th width="13%"><a href="<?php echo url_for('agenda/index?sort=evento_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Tipo</a></th>
+					<th width="60%"><a href="<?php echo url_for('agenda/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">T&iacute;tulo</a></th>
+					<th width="20%"><a href="<?php echo url_for('agenda/index?sort=organizador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Organizador</a></th>
+					<th width="10%"><a href="<?php echo url_for('agenda/index?sort=evento_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="color:#ffffff;">Tipo</a></th>
 				</tr>
 				<?php $i=0; foreach ($agenda_list as $agenda): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 						<tr class="<?php echo $odd ?>">
