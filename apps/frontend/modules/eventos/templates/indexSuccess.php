@@ -30,7 +30,7 @@
 
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tbody>
-			<tr>
+                <tr>
 			<td width="70%"><h1>Eventos</h1></td>
 			<td width="5%" align="center"><?php $nombretabla = 'Evento'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 			<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
@@ -39,7 +39,6 @@
 				<a href="#"><?php echo image_tag('pregunta.gif', array('alt' => 'Ayuda', 'id' => 'sprytrigger1', 'width' => '29', 'height' => '30', 'border' => '0')) ?></a>
 			</td>
 			
-		</tr>
 		</tr>
 	</tbody>
 </table>
@@ -102,7 +101,7 @@
 	<?php endif; ?>
     <?php endif;?>
 	<?php endforeach; ?>
-	<?php if (validate_action('publicar') && $evento->getEstado() == 'pendiente' || validate_action('baja')): ?>
+	<?php if (validate_action('publicar') || validate_action('baja')): ?>
 	<tr>
 		<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 		<td colspan="5">
