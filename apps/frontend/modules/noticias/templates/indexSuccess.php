@@ -60,7 +60,7 @@ use_helper('Text');?>
 				<tr>
 					<?php if (validate_action('baja')): ?>
 					<th width="3%"></th>
-	      		    <?php endif;?>
+                                        <?php endif;?>
 					<th width="11%">
 						<a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
 							Fecha

@@ -91,7 +91,7 @@ class noticiasActions extends sfActions
 	  			    $this->forward404Unless($noticia = Doctrine::getTable('Noticia')->find($id), sprintf('Object documentacion_grupo does not exist (%s).', $id));
 	  			
 	  			    sfLoader::loadHelpers('Security');
-					if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+					if (!validate_action($accion, 'noticias', $noticia->getId())) $this->redirect('seguridad/restringuido');
 	
 					if ($accion == 'publicar') {
 //						$documentacion_grupo->setEstado('publicado');
