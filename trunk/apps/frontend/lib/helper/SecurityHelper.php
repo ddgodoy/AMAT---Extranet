@@ -19,8 +19,24 @@
  * return: false ( accion inválida )
  */
 
-function validate_action($action, $module = null)
+function validate_action($action, $module = null, $id = null)
 {
+
+        $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
+            if($id != '' && key_exists($module, $arraytablas))
+              {
+                $q = Doctrine_Query::create();
+                $q->from($arraytablas[$module]);
+                $q->where('id = '. $id );
+
+                $resultado = $q->fetchOne();
+
+                if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
+                {
+                    return true;
+                }
+
+              }
 	$request = sfContext::getInstance()->getRequest();
 	if ($module == null) $module = $request->getParameter('module');
 	$sfAction = $request->getParameter('action');
