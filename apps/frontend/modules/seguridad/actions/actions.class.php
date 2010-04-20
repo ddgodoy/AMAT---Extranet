@@ -220,13 +220,15 @@ class seguridadActions extends sfActions
                   $url = "https://". $_SERVER['SERVER_NAME'] . "/". $_SERVER['REQUEST_URI'];
                   $mensaje = date("F j, Y, g:i a").' - {sfError404Exception} Action "'.$url.'" does not exist.';
 
-                  $this->logEnvios($mensaje);
+                  $this->logError404($mensaje);
                 }
                 $this->setLayout("layout");
           }
-         function logEnvios($text)
+         function logError404($text)
           {
-                  exec("echo $text >> ".dirname(__FILE__)."/../../../log/error_404.txt");
+                  $fp = fopen(dirname(__FILE__)."/../../../../../log/error_404.txt","a");
+                  fwrite($fp, $text.PHP_EOL);
+                  fclose($fp);
                   return true;
           }
 }
