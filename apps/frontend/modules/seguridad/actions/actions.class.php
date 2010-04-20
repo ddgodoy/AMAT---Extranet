@@ -219,10 +219,14 @@ class seguridadActions extends sfActions
 
                   $url = "https://". $_SERVER['SERVER_NAME'] . "/". $_SERVER['REQUEST_URI'];
                   $mensaje = date("F j, Y, g:i a").' - {sfError404Exception} Action "'.$url.'" does not exist.';
-                  sfLogger::getInstance()->registerLogger($mensaje);
-                  //$this->logMessage($mensaje, 'err');
-                  //sfContext::getInstance()->getLogger()->info($mensaje);
+
+                  $this->logEnvios($mensaje);
                 }
                 $this->setLayout("layout");
+          }
+         function logEnvios($text)
+          {
+                  exec("echo $text >> ".dirname(__FILE__)."/../../../log/error_404.txt");
+                  return true;
           }
 }
