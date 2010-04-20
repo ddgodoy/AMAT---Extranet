@@ -214,6 +214,13 @@ class seguridadActions extends sfActions
 	
 	public function executeError(sfWebRequest $request)
           {
+              if (sfConfig::get('sf_logging_enabled'))
+                {
+                  $mensaje = date("F j, Y, g:i a").'symfony [err] {sfError404Exception} Empty module and/or action after parsing the URL "/'.$this->getModuleName().'/'.$this->getActionName().'" (/).';
+                  echo $mensaje;
+                  exit ();
+                  sfContext::getInstance()->getLogger()->info($mensaje);
+                }
                 $this->setLayout("layout");
           }
 }
