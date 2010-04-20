@@ -218,7 +218,8 @@ class seguridadActions extends sfActions
                 {
                   $url = "https://". $_SERVER['SERVER_NAME'] . "/". $_SERVER['REQUEST_URI'];
                   $mensaje = date("F j, Y, g:i a").' - symfony [err] {sfError404Exception} Empty module and/or action after parsing the URL "'.$url.'" (/).';
-                  sfContext::getInstance()->getLogger()->info($mensaje);
+                  $this->logMessage($mensaje);
+                  //sfContext::getInstance()->getLogger()->info($mensaje);
                 }
                 $this->setLayout("layout");
           }
