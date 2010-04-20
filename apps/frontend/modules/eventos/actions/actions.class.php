@@ -121,7 +121,7 @@ class eventosActions extends sfActions
 						$organizador  = $evento->getOrganizador();
 						$descripcion  = $evento->getDescripcion();
 
-                                                $coneccion = new Swift_Connection_SMTP('217.116.20.132', '110',Swift_Connection_SMTP::ENC_SSL);
+                                                $coneccion = new Swift_Connection_SMTP('217.116.20.132', '110');
                                                 $coneccion->setUsername('alertas.extranet.amat.es');
                                                 $coneccion->setPassword('4oddF=dohm(F');
 
