@@ -216,9 +216,11 @@ class seguridadActions extends sfActions
           {
               if (sfConfig::get('sf_logging_enabled'))
                 {
+
                   $url = "https://". $_SERVER['SERVER_NAME'] . "/". $_SERVER['REQUEST_URI'];
                   $mensaje = date("F j, Y, g:i a").' - {sfError404Exception} Action "'.$url.'" does not exist.';
-                  $this->logMessage($mensaje, 'err');
+                  sfLogger::getInstance()->registerLogger($mensaje);
+                  //$this->logMessage($mensaje, 'err');
                   //sfContext::getInstance()->getLogger()->info($mensaje);
                 }
                 $this->setLayout("layout");
