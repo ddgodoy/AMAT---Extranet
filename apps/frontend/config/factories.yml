@@ -40,11 +40,11 @@ all:
     transport:
       class: Swift_SmtpTransport
       param:
-        host:       localhost
-        port:       25
+        host:       217.116.20.132
+        port:       110
         encryption: ~
-        username:   ~
-        password:   ~
+        username:   alertas.extranet.amat.es
+        password:   4oddF=dohm(F
 #all:
 #  controller:
 #    class: sfFrontWebController
