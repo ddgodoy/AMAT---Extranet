@@ -25,13 +25,14 @@ function validate_action($action, $module = null, $id = null)
         $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
             if($id != '' && key_exists($module, $arraytablas))
               {
+                $request = sfContext::getInstance();
                 $q = Doctrine_Query::create();
                 $q->from($arraytablas[$module]);
                 $q->where('id = '. $id );
 
                 $resultado = $q->fetchOne();
 
-                if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
+                if($resultado->getOwnerId() == $request->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
                 {
                     return true;
                 }
