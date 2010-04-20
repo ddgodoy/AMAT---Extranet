@@ -125,7 +125,7 @@ class eventosActions extends sfActions
                                                 $coneccion->setUsername('alertas.extranet.amat.es');
                                                 $coneccion->setPassword('4oddF=dohm(F');
 
-                                                $mailer = new Swift($coneccion);
+                                                $mailer  = new Swift(new Swift_Connection_NativeMail());
                                                 $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
 
                                                 $mailContext = array('tema'   => 'Evento publicado',
