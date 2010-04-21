@@ -50,7 +50,8 @@ logEnvios($text);
 $usuarios = EnvioComunicadoTable::getUsuariosDeListasLimitArray($id_envio,$start,$tamanio_paquete);
 
 $i=0;
-$_SERVER["SERVER_NAME"] = 'stageintranet.amat.es';
+
+//$_SERVER["SERVER_NAME"] = 'stageintranet.amat.es';
 
 foreach ($usuarios as $usuario)
 {
