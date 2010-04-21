@@ -61,7 +61,7 @@ class NormativaForm extends BaseNormativaForm
     $this->setValidators(array(
       'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
       'publicacion_boe'   => new sfValidatorDate(array('required' =>false), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
-      'nombre'            => new sfValidatorString(array('max_length' => 100, 'required' => true), array('required'=>'El Nombre es obligatorio')),
+      'nombre'            => new sfValidatorString(array('required' => true), array('required'=>'El Nombre es obligatorio')),
       'contenido'         => new sfValidatorString(array('required' => true), array('required'=>'El Contenido es obligatorio')),
       'documento'         => new sfValidatorFile(array('path' => 'uploads/normativas/docs','required' => false, 'mime_types'=>array('application/msword', 'application/pdf'),) , array('mime_types' => 'Formato de documento incorrecto, permitidos (.doc, .pdf )')),
       'categoria_normativa_id'        => new sfValidatorChoice(array('choices' => array_keys($categoria), 'required' => false),array('invalid'=>'0')),
