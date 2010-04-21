@@ -48,7 +48,7 @@ class agendaActions extends sfActions
 		$xDia = $this->getRequestParameter('d');
 
 		if (!empty($xYear) && !empty($xMes) && !empty($xDia)) {
-			$xFiltro .= " AND fecha >= '"."$xYear-$xMes-$xDia"."'";
+			//$xFiltro .= " AND fecha >= '"."$xYear-$xMes-$xDia"."'";
 			$this->fechaSeleccionada = "$xDia/$xMes/$xYear";
 		}
 		
@@ -58,7 +58,7 @@ class agendaActions extends sfActions
 	  	$modulo = $this->getModuleName();
 	
 			$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
-			$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
+			$this->desdeBsq = $this->fechaSeleccionada?$this->fechaSeleccionada:$this->getRequestParameter('desde_busqueda');
 			$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 			$this->ambitoBQ = $this->getRequestParameter('ambito');
 			$this->estadoBq = $this->getRequestParameter('estado');
@@ -124,23 +124,23 @@ class agendaActions extends sfActions
 			return 'deleted=0'.$parcial;
 	  }
 	protected function setOrdenamiento()
-  {
-		$this->orderBy = 'fecha';
-		$this->sortType = 'desc';
+          {
+                        $this->orderBy = 'fecha';
+                        $this->sortType = 'desc';
 
-		if ($this->hasRequestParameter('orden')) {
-			$this->orderBy = $this->getRequestParameter('sort');
-			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-		}
-		return $this->orderBy . ' ' . $this->sortType;
-  }
+                        if ($this->hasRequestParameter('orden')) {
+                                $this->orderBy = $this->getRequestParameter('sort');
+                                $this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
+                        }
+                        return $this->orderBy . ' ' . $this->sortType;
+          }
   
-  protected function FormatData($date)
-  {
-  	$Formadate = explode('/',$date);
-  	
-  	return $Formadate[2].'-'.$Formadate[1].'-'.$Formadate[0];
+        protected function FormatData($date)
+          {
+                $Formadate = explode('/',$date);
 
-  }
+                return $Formadate[2].'-'.$Formadate[1].'-'.$Formadate[0];
+
+          }
 	
 }
