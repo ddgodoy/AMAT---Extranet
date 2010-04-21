@@ -328,8 +328,6 @@ class Swift
    */
   public function send(Swift_Message $message, $recipients, $from, $idenvio='',$idusuario='')
   {
-  	if($_SERVER["SERVER_NAME"] == 'stageintranet.amat.es') 
-  	{
 	  	$arrayError = array();
 	  	$bandera = 0;
 	    Swift_ClassLoader::load("Swift_Message_Encoder");
@@ -526,10 +524,7 @@ class Swift
 		    
 		    return $sent;
 	    }
-	    
-  	}    
-   
-   return true;   
+	       
   }
   /**
    * Send a message to a batch of recipients.
