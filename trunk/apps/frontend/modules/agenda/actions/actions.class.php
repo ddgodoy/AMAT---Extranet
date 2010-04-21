@@ -126,7 +126,7 @@ class agendaActions extends sfActions
 	protected function setOrdenamiento()
   {
 		$this->orderBy = 'fecha';
-		$this->sortType = 'asc';
+		$this->sortType = 'desc';
 
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
