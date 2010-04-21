@@ -121,13 +121,12 @@ class eventosActions extends sfActions
 						$organizador  = $evento->getOrganizador();
 						$descripcion  = $evento->getDescripcion();
 
-                                                $coneccion = new Swift_Connection_SMTP("smtp.extranet.amat.es", 25);
+                                               /* $coneccion = new Swift_Connection_SMTP("smtp.extranet.amat.es", 25);
                                                 $coneccion->setUsername("alertas.extranet.amat.es");
                                                 $coneccion->setPassword("4oddF=dohm(F");
 
-                                                
-                                                $mailer  = new Swift($coneccion);
-
+                                                $mailer  = new Swift($coneccion);*/
+                                                $mailer  = new Swift(new Swift_Connection_NativeMail());
                                                 $message = new Swift_Message('Contacto desde Extranet Sectorial AMAT');
 
                                                 $mailContext = array('tema'   => 'Evento publicado',
