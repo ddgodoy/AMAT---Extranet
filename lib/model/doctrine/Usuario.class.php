@@ -113,7 +113,7 @@ class Usuario extends BaseUsuario
 		$arrayDirector = array();
 		foreach ($directore AS $dir)
 		{
-			$arrayDirector[$dir->Usuario->getId()] = $dir->Usuario->getNombre().','.$dir->Usuario->getApellido();
+			$arrayDirector[$dir->getUsuario()->getId()] = $dir->getUsuario()->getNombre().','.$dir->getUsuario()->getApellido();
 		}
 		
 		return $arrayDirector;
