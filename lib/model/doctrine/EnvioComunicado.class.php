@@ -48,7 +48,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 	{
 		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 		//$iPh = image_path('/images/logo_email.jpg', true);
-		$cPh = 'https://'. $_SERVER['SERVER_NAME'] .'/uploads/tipo_comunicado/images/'.$header_image;
+		$cPh = 'https://'. $_SERVER['SERVER_NAME'] .'/web/uploads/tipo_comunicado/images/'.$header_image;
 
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
