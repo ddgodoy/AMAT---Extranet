@@ -137,8 +137,8 @@ else
 			<?php endif;?>
 		</div>
 		<?php endif; ?>
-		<?php if($documentacionBsq && validate_action('listar','documentacion_consejos')): ?>
-                   <?php $redireccion = $documentacionBsq?'?consejo='.$documentacionBsq : ''; ?>
+		<?php if($documentacionBsq && validate_action('listar','documentacion_consejos' && $grupoBsq)): ?>
+                   <?php $redireccion = $documentacionBsq?'?consejo='.$grupoBsq : ''; ?>
 		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/index'.$redireccion) ?>';" value="Volver a la Documentacion" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
