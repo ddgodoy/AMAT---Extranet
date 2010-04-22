@@ -29,7 +29,7 @@
 	</head>
 	<body>
 		<table width="100%" border="0" cellpadding="0" cellspacing="5">
-                    <tr><td><img src="<?php echo 'https://'. $_SERVER['SERVER_NAME'] .'/uploads/tipo_comunicado/images/'.$imagen ?>" alt=""></td></tr>
+                    <tr><td><img src="<?php echo $imagen ?>" alt=""></td></tr>
 	           <tr><td><?php echo $cuerpo ?></td></tr>
 		</table>
 	</body>
