@@ -254,8 +254,6 @@ class UsuarioTable extends Doctrine_Table
 		$q->where('ur.rol_id = 3 OR ur.rol_id = 1');
                 $q->andWhere('u.deleted = 0');
 
-                echo $q->getQuery();
-                exit ();
 		
 		return $q->execute();
 
