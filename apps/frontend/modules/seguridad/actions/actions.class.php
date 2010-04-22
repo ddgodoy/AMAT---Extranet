@@ -45,6 +45,7 @@ class seguridadActions extends sfActions
 		$this->getUser()->getAttributeHolder()->remove('apellido');
 		$this->getUser()->getAttributeHolder()->remove('permisos');
 		$this->getUser()->getAttributeHolder()->remove('menu');
+                $this->getUser()->getAttributeHolder()->clear();
 
 		$this->redirect('seguridad/login');
 	}
