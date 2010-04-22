@@ -31,18 +31,18 @@ class EnvioComunicadoForm extends BaseEnvioComunicadoForm
 	}
   	
   	$this->setWidgets(array(
-      'id'            			=> new sfWidgetFormInputHidden(),
-      'comunicado_id'       	=> new sfWidgetFormChoice(array('choices' => $arrComunicados)),
-      'tipo_comunicado_id' 		=> new sfWidgetFormDoctrineChoice(array('model' => 'TipoComunicado', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
-      'lista_comunicados_list' 	=> new sfWidgetFormSelectDoubleList(array('choices' => $arrListas, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	)
-    ));
+          'id'            		=> new sfWidgetFormInputHidden(),
+          'comunicado_id'       	=> new sfWidgetFormChoice(array('choices' => $arrComunicados)),
+          'tipo_comunicado_id' 		=> new sfWidgetFormDoctrineChoice(array('model' => 'TipoComunicado', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
+          'lista_comunicados_list' 	=> new sfWidgetFormSelectDoubleList(array('choices' => $arrListas, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	)
+        ));
 
     $this->setValidators(array(
-      'id'            			=> new sfValidatorDoctrineChoice(array('model' => 'EnvioComunicado', 'column' => 'id', 'required' => false)),
-      'comunicado_id'       	=> new sfValidatorChoice(array('choices' => array_keys($arrComunicados), 'required' => true), array('required' => 'Debe seleccionar un comunicado', 'invalid' => 'Comunicado - Acción inválida')),
-      'tipo_comunicado_id'  	=> new sfValidatorDoctrineChoice(array('model' => 'TipoComunicado', 'required' => true), array('required' => 'Debe seleccionar un tipo de comunicado', 'invalid' => 'Tipo de Comunicado - Acción inválida')),
-      'lista_comunicados_list' 	=> new sfValidatorDoctrineChoiceMany(array('model' => 'ListaComunicado', 'required' => true), array('required' => 'Debe seleccionar una lista', 'invalid' => 'Acción inválida')),
-    ));
+          'id'                          => new sfValidatorDoctrineChoice(array('model' => 'EnvioComunicado', 'column' => 'id', 'required' => false)),
+          'comunicado_id'       	=> new sfValidatorDoctrineChoice(array('model' => 'Comunicado', 'required' => true), array('required' => 'Debe seleccionar un comunicado', 'invalid' => 'Comunicado - Acción inválida')),
+          'tipo_comunicado_id'  	=> new sfValidatorDoctrineChoice(array('model' => 'TipoComunicado', 'required' => true), array('required' => 'Debe seleccionar un tipo de comunicado', 'invalid' => 'Tipo de Comunicado - Acción inválida')),
+          'lista_comunicados_list' 	=> new sfValidatorDoctrineChoiceMany(array('model' => 'ListaComunicado', 'required' => true), array('required' => 'Debe seleccionar una lista', 'invalid' => 'Acción inválida')),
+        ));
     
     $this->widgetSchema->setLabels(array(
 			'comunicado_id'     		=> 'Comunicado',
