@@ -141,8 +141,8 @@
 			
 		</div>
 		<?php endif; ?>
-		<?php if($documentacionBsq && validate_action('listar','documentacion_grupos')): ?>
-                   <?php $redireccion = $documentacionBsq?'?grupo='.$documentacionBsq : ''; ?>
+		<?php if($documentacionBsq && validate_action('listar','documentacion_grupos' && $grupoBsq)): ?>
+                   <?php $redireccion = $documentacionBsq?'?grupo='.$grupoBsq: ''; ?>
 		  <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_grupos/index'.$redireccion) ?>';"  value="Volver a la Documentacion" name="newNews" class="boton"/>
 		<?php endif; ?>
 	</div>
