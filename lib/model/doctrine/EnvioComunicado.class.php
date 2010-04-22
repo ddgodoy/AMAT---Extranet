@@ -47,8 +47,9 @@ class EnvioComunicado extends BaseEnvioComunicado
 	public  static function envioMail($to, $header_image, $body, $titulo, $idenvio, $idusuario)
 	{
 		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
-		//$iPh = image_path('/images/logo_email.jpg', true);
-		$cPh = "https://". $_SERVER['SERVER_NAME'] ."/web/uploads/tipo_comunicado/images/".$header_image;
+
+//		$iPh = image_path('/images/logo_email.jpg', true);
+		$cPh = "https://extranet.amat.es/web/uploads/tipo_comunicado/images/".$header_image;
 
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
