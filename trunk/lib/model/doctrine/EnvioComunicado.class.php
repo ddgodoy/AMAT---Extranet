@@ -49,7 +49,7 @@ class EnvioComunicado extends BaseEnvioComunicado
 		sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
 
 //		$iPh = image_path('/images/logo_email.jpg', true);
-		$cPh = "http://extranet.amat.es/web/uploads/tipo_comunicado/images/".$header_image;
+		$cPh = "http://extranet.amat.es/uploads/tipo_comunicado/images/".$header_image;
 
 		$succes  = false;
 		$mailer  = new Swift(new Swift_Connection_NativeMail());
