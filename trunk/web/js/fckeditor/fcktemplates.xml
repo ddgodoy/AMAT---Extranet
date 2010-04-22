@@ -25,12 +25,12 @@
  * See FCKConfig.TemplatesXmlPath in the configuration file.
 -->
 <Templates imagesBasePath="fck_template/images/">
-     <Template title="Imaen y Titulo" image="template0.gif">
+     <Template title="Imagen y titulo" image="template0.gif">
 		<Description>Una imagen principal con un título, una introducción y una descripción.</Description>
 		<Html>
 			<![CDATA[
 				<div style="padding-top: 20px;" class="noticias nuevodetalle">
-				<img src="imagen.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+				<img src="/uploads/image/noimage.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
 				<h3 style="font-family:Verdana, Geneva, sans-serif;color:#367487;font-size:18px;margin:0px;">T&iacute;tulo</h3>
 				<p style="font-family:Verdana;font-size:11px;color:#999999;font-weight:bold;">Entradilla</p>
 				<p style="border-bottom: 1px dotted; margin: 10px 0px; color: rgb(204, 204, 204);">&nbsp;</p>
@@ -111,12 +111,12 @@
 		<Html>
 			<![CDATA[
 				<div style="padding-top: 20px;" class="noticias nuevodetalle">
-                                <img src="imagen.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
-                                <img src="imagen.jpg" align="right" nottit="" style="margin-left:10px;margin-bottom:10px;" alt="">
+                                <img src="/uploads/image/noimage.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+                                <img src="/uploads/image/noimage.jpg" align="right" nottit="" style="margin-left:10px;margin-bottom:10px;" alt="">
                                 <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
                                 <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
 
-                                <img src="imagen.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+                                <img src="/uploads/image/noimage.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
                                 <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
                                 <div class="clear"></div>
                                 </div>
@@ -174,36 +174,36 @@
 			<![CDATA[
 				<div style="padding-top: 20px;" class="noticias nuevodetalle">
                                  <ul>
-                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="imagen.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
-                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="imagen.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
-                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="imagen.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
                                   </ul>
                                 </div>
 			]]>
 		</Html>
 	</Template>
-        <Template title="Galería" image="7.jpg">
+        <Template title="Galería de imagenes" image="7.jpg">
 		<Description>Galería de imágenes.</Description>
 		<Html>
 			<![CDATA[
 				<div style="padding-top: 20px;" class="noticias nuevodetalle">
 
-                                 <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                 <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
                                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
 
-                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
                                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
 
-                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
                                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
 
-                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
                                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
 
-                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
                                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
 
-                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="imagen.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
                                 <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
 
 
