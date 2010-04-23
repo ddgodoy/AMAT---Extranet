@@ -29,7 +29,9 @@
 	</head>
 	<body>
 		<table width="100%" border="0" cellpadding="0" cellspacing="5">
-                    <tr><td><img src="<?php echo $imagen ?>" alt=""></td></tr>
+                    <?php if($imagen):?>
+                    <tr><td><img src="<?php echo "http://extranet.amat.es/uploads/tipo_comunicado/images/".$imagen ?>" alt=""></td></tr>
+                    <?php endif;?>
 	           <tr><td><?php echo $cuerpo ?></td></tr>
 		</table>
 	</body>
