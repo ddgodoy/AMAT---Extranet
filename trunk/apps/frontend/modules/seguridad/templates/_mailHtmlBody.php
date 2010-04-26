@@ -35,10 +35,10 @@
 			</tr>
 			<tr>
 				<td>
-					Alguien ha solicitado una nueva clave para el usuario <strong><?php echo $login ?></strong>.<br />
+					Se ha solicitado una nueva clave para el usuario: <strong><?php echo $login ?></strong>.<br />
 					Para completar la solicitud visite este enlace: <br /><br />
 					<a href="<?php echo $url ?>" style="color:#006699;font-weight:bold;" target="_blank">ACTIVAR NUEVA CLAVE</a><br /><br />
-					En caso contrario, simplemente ignore este email.
+					En caso contrario, ignore este mensaje.
 				</td>
 			</tr>
 		</table>
