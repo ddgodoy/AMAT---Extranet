@@ -5,6 +5,10 @@
  */
 class ArchivoDG extends BaseArchivoDG
 {
+        public function __toString()
+	{
+		return $this->nombre;
+	}
 	public static function getRepository()
 	{
 		return Doctrine::getTable(__CLASS__);
