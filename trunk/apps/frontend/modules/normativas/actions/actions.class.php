@@ -247,7 +247,7 @@ class normativasActions extends sfActions
    
     $witSub = new NormativaForm();
 	    
-	$witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>'width:150px;')));
+	$witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>'width:130px;')));
     	
     return $this->renderPartial('subcategorias',array('witSub' => $witSub));
     
