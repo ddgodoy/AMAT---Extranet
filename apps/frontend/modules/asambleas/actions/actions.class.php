@@ -417,9 +417,11 @@ class asambleasActions extends sfActions
 		$request->checkCSRFProtection();
 		
 		$this->forward404Unless($asamblea = Doctrine::getTable('Asamblea')->find($request->getParameter('id')), sprintf('Object asamblea does not exist (%s).', $request->getParameter('id')));
-		
+
+                $agenda = AgendaTable::getDeleteAgendaConvocatoria($asamblea->getId());
 		$aviso = NotificacionTable::getDeleteEntidad($asamblea->getId(),$asamblea->getTitulo());
-		
+
+                $agenda->delete();
 		$aviso->delete();
 		$asamblea->delete();
 		
