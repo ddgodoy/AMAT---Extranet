@@ -36,6 +36,9 @@ abstract class BaseMenu extends sfDoctrineRecord
         $this->hasColumn('habilitado', 'boolean', null, array(
              'type' => 'boolean',
              ));
+        $this->hasColumn('habilitado_sa', 'boolean', null, array(
+             'type' => 'boolean',
+             ));
     }
 
     public function setUp()

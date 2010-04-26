@@ -68,6 +68,12 @@
           <?php echo $form['habilitado'] ?>
         </td>
       </tr>
+       <tr>
+      <td><?php echo $form['habilitado_sa']->renderLabel('Habilitado por SA') ?> </td>
+        <td>
+          <?php echo $form['habilitado_sa'] ?>
+        </td>
+      </tr>
     </tbody>
      <?php echo $form->renderHiddenFields() ?>
   </table>

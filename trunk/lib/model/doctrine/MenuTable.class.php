@@ -15,7 +15,7 @@ class MenuTable extends Doctrine_Table
 		return $menugrupo;
 	}
 	
-	public static function getMenuPadre($idPadre, $habilitado = null)
+	public static function getMenuPadre($idPadre, $habilitado = null, $rolSA = null)
 	{
 		$s = Doctrine_Query::create()
 				->from('Menu')
@@ -24,8 +24,11 @@ class MenuTable extends Doctrine_Table
 				->orderBy('posicion');
 
 		if ($habilitado == 1) { $s->addWhere('habilitado = 1'); }
+                if($rolSA == 2 ){$s->addWhere('habilitado_sa = 1');}
+
 
 		$menupadre = $s->execute();
+
 		
 		return $menupadre;
 	}
@@ -75,7 +78,8 @@ class MenuTable extends Doctrine_Table
 	
 	public static function getArrayMenuHijo($idPadre, $nivel)
 	{
-		$items = MenuTable::getMenuPadre($idPadre, 1);
+                $rolSA = sfContext::getInstance()->getUser()->getAttribute('rolSA')?1:2;
+		$items = MenuTable::getMenuPadre($idPadre, 1, $rolSA);
 		$arrItems = array();
 
 		if (count($items) != 0 && $nivel <= 3) {
