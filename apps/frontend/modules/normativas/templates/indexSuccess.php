@@ -169,7 +169,7 @@
 				    <tr>
 					<td valign="top"><label>Categor&iacute;a</label></td>
 					<td valign="middle">
-						<?php echo select_tag('select_cat_tem',
+						<?php echo select_tag('select_cat_tema',
 							options_for_select(CategoriaNormativa::getArrayCategoria(), $CatNormBsq),
 							array('style'=>'width:120px;','class'=>'form_input'));
 							echo observe_field('select_cat_tem', array('update'=>'content_sub_tema','url'=>'normativas/subcategoriasn1','with'=>"'id_categoria='+value",'script'=> true)) ?>
