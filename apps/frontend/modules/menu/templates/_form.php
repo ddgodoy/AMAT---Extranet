@@ -33,7 +33,7 @@
      <tbody>
      <?php echo $form['padre_id'] ?>
       <tr>
-        <td><?php echo $form['nombre']->renderLabel('* Nombre') ?></td>
+          <td  width="10%"><?php echo $form['nombre']->renderLabel('* Nombre') ?></td>
         <td>
           <?php echo $form['nombre'] ?>
         </td>
@@ -62,15 +62,17 @@
           <?php echo $form['posicion'] ?>
         </td>
       </tr>
+     </tbody>
+   </table>
+      <table width="100%" cellspacing="5" cellpadding="0" border="0">
+     <tbody>
       <tr>
-      <td><?php echo $form['habilitado']->renderLabel() ?> </td>
-        <td>
+          <td width="10%"><?php echo $form['habilitado']->renderLabel('Habilitado para Administrador') ?>&nbsp;&nbsp;
           <?php echo $form['habilitado'] ?>
         </td>
       </tr>
        <tr>
-      <td><?php echo $form['habilitado_sa']->renderLabel('Habilitado por SA') ?> </td>
-        <td>
+           <td><?php echo $form['habilitado_sa']->renderLabel('Habilitado para usuarios con permisos') ?> &nbsp;&nbsp;
           <?php echo $form['habilitado_sa'] ?>
         </td>
       </tr>
