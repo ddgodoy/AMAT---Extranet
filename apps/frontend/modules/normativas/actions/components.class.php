@@ -18,7 +18,7 @@ class normativasComponents extends sfComponents
    
      	$this->witSub = new NormativaForm();
 	    
-	   $this->witSub->setWidget('subcategoria_normativa_uno_id', new sfWidgetFormChoice(array('choices' => $subcategoria)));   
+	   $this->witSub->setWidget('subcategoria_normativa_uno_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>'width:150px;')));
 	   
 	   if($this->id_subcategoria1)
 	   {
