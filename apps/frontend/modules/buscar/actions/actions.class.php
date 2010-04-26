@@ -384,7 +384,7 @@ class buscarActions extends sfActions
 			$this->resArchivoCT = $ArchivoCT; 
 			$this->resCategoria =$ArchivoCT;
 			$this->path='archivos_c_t/show?id=';
-			$this->labelCategoria='<span>Archivos Consejo Territorial</span>';
+			$this->labelCategoria='Archivos Consejo Territorial';
 		}
 		
 		/*ArchivoDG*/
@@ -398,7 +398,7 @@ class buscarActions extends sfActions
 			$this->resArchivoDG = $ArchivoDG;
 			$this->resCategoria = $ArchivoDG;
 			$this->path='archivos_d_g/show?id=';
-			$this->labelCategoria='<span>Archivos Grupo de Trabajo</span>';
+			$this->labelCategoria='Archivos Grupo de Trabajo';
 		}
 		
 		/*ArchivoDO*/
@@ -412,7 +412,7 @@ class buscarActions extends sfActions
 			$this->resArchivoDO = $ArchivoDO;
 			$this->resCategoria = $ArchivoDO;
 			$this->path='archivos_d_o/show?id=';
-			$this->labelCategoria='<span>Archivos de Organismos</span>';
+			$this->labelCategoria='Archivos de Organismos';
 		}
 		
 		
