@@ -577,7 +577,7 @@
 			      	<?php endif;?>
 			      	<?php endforeach; ?>
 		      </div>
-      <?php else: ?>
+      <?php elseif(empty ($resultadoBusqueda)): ?>
        		<div style="float: left; z-index:10;"" class="cat_de_busqueda">
 		      		<h2>0 Resultados de Esta Búsqueda</h2>
 		      </div>
