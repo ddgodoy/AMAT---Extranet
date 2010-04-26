@@ -26,7 +26,7 @@
 								<ul class="tema">
 									<h4><span><?php echo count($resCategoria)?> resultados encontrados</span><?php echo $labelCategoria ?></h4>	
 									<?php foreach ($resCategoria as $obj): ?>
-										<li><a href="<?php echo url_for( $path . $obj->getId() ) ?>"><?php echo $obj ?></a></li>		
+										<li><a href="<?php echo url_for($path.$obj->getId()) ?>"><?php echo $obj ?></a></li>		
 									<?php endforeach;?>
 								</ul>
 								<?php endif; ?> 
