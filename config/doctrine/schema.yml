@@ -901,7 +901,8 @@ Menu:
     aplicacion_id:           { type: integer }
     url_externa:             { type: string(255) } 
     posicion:                { type: integer, values: 0}
-    habilitado:              { type: boolean }     
+    habilitado:              { type: boolean }
+    habilitado_sa:           { type: boolean }
   relations:
     Aplicacion:              { local: aplicacion_id, foreign: id, onDelete: CASCADE }
 

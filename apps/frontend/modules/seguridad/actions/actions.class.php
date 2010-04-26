@@ -78,6 +78,12 @@ class seguridadActions extends sfActions
 				{
 					foreach ($usuarioRoles as $rol) {
 						$credenciales[] = $rol->getRol()->getCodigo();
+
+                                                if($rol->getRol()->getId()== 1)
+                                                {
+                                                   $this->getUser()->setAttribute('rolSA', $rol->getRol()->getId());
+                                                }
+                                                
 					}
 					## Autenticado
 					$this->getUser()->setAuthenticated(true);
@@ -85,7 +91,7 @@ class seguridadActions extends sfActions
 					## Datos del usuario
 					$this->getUser()->setAttribute('userId'  , $usuario->getId());
 					$this->getUser()->setAttribute('mutuaId' , $usuario->getMutuaId());
-					$this->getUser()->setAttribute('mutua'   , $usuario->Mutua->getNombre());
+					$this->getUser()->setAttribute('mutua'   , $usuario->getMutua()->getNombre());
 					$this->getUser()->setAttribute('nombre'  , $usuario->getNombre());
 					$this->getUser()->setAttribute('apellido', $usuario->getApellido());				
 					$this->getUser()->setAttribute('permisos', $usuario->getPermisos());
