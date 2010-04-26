@@ -21,8 +21,8 @@
 		<div class="logbox" style="background-image:none;">
 		<div class="mensajeSistema ok" style="margin-bottom:15px;">
 			Su nueva clave ha sido registrada exitosamente.<br /><br />
-			Ya puede ingresar sus datos en la<br />
-			pantalla inicial y comenzar su sesi&oacute;n.
+			Ya puede introducir sus datos en la<br>
+                        pantalla inicial y comenzar su sesión
 		</div>
 		<input name="btn_volver" value="Volver al Inicio" class="boton" onclick="document.location='<?php echo url_for('inicio/index') ?>';" type="button">
 		<br clear="all" />
