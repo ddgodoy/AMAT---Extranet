@@ -568,7 +568,7 @@
 						<?php endif; //cierro el if de categoria ?> 	
 						
       <!--////////////////////////////////////////////////////////////////-->
-      <?php if(count($resultadoBusqueda) >= 1):?>
+      <?php if(!empty ($resultadoBusqueda) && count($resultadoBusqueda) >= 1):?>
 		      <div style="float: left; z-index:10;"" class="cat_de_busqueda">
 		      		<h2>Categorías de Esta Búsqueda</h2>
 		      		<?php foreach ($resultadoBusqueda AS $K=>$ResBU):?>
