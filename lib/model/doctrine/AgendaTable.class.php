@@ -31,6 +31,16 @@ class AgendaTable extends Doctrine_Table
 		     
 		 return $q->execute();    	
 	}
+
+        public static function getDeleteAgendaConvocatoria($idEntidad)
+	{
+		$q = Doctrine_Query::create()
+		     ->from('Agenda')
+		     ->where('convocatoria_id = '.$idEntidad);
+
+		 return $q->execute();
+	}
+        
 	
 	public static function getDeleteAgenda2($idEntidad)
 	{
