@@ -1,7 +1,7 @@
 <?php
 
 $dir_script=dirname(__FILE__).'/../../lib/task/envioComunicadosScript.php';
-$tamanio_paquete=1;
+$tamanio_paquete=25;
 
 require_once(dirname(__FILE__).'/../../config/ProjectConfiguration.class.php');
 $configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'dev', true);
