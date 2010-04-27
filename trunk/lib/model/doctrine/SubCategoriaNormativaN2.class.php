@@ -18,6 +18,7 @@ class SubCategoriaNormativaN2 extends BaseSubCategoriaNormativaN2
 
 	public static function getArraySubCategoria($id = '')
 	{
+                sfLoader::loadHelpers('Text');
 		if($id != '')
 		{
 		   $subcategoria = SubCategoriaNormativaN2Table::getSubcategiriaBycategoria($id);
@@ -32,7 +33,7 @@ class SubCategoriaNormativaN2 extends BaseSubCategoriaNormativaN2
 		foreach ($subcategoria as $c)
 		{
 			
-			$arraysubcategoria[$c->getId()] = $c->getNombre();
+			$arraysubcategoria[$c->getId()] = truncate_text($c->getNombre(), 30);
 			
 		}
 		
