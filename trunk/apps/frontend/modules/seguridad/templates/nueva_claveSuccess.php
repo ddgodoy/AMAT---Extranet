@@ -28,8 +28,8 @@
 	<?php else: ?>
 <!--*-->
 	<h2>Solicitud de Nueva Clave</h2>
-	<div class="logbox">
-		<h1>Ingrese su cuenta de correo de registro y los caracteres de la imagen</h1>
+        <div class="logbox" >
+		<h1 style="padding-right:20px;text-align:left;line-height:normal">Ingrese su cuenta de correo de registro y los caracteres de la imagen</h1>
 		<form action="<?php echo url_for('seguridad/enviar_solicitud') ?>" method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="0" cellspacing="5">
 				<tbody>
