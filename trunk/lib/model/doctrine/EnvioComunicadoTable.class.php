@@ -56,7 +56,9 @@ class EnvioComunicadoTable extends Doctrine_Table
                            AND lce.deleted = 0
                            AND ec.deleted = 0 ');
     $q->andWhere('ec.id = '.$idEnvio);
-    $q->orderBy('u.nombre ASC');
+    //$q->orderBy('u.nombre ASC');
+    $q->groupBy('u.email');
+    $q->orderBy('u.email ASC');
     $q->limit($limit);
     $q->offset($start);
     //echo $q->getSQL(); die();
