@@ -33,7 +33,7 @@ class SubCategoriaNormativaN2 extends BaseSubCategoriaNormativaN2
 		foreach ($subcategoria as $c)
 		{
 			
-			$arraysubcategoria[$c->getId()] = truncate_text($c->getNombre(), 30);
+			$arraysubcategoria[$c->getId()] = truncate_text($c->getNombre(), 20);
 			
 		}
 		
