@@ -135,7 +135,7 @@ class seguridadActions extends sfActions
 			$email = $this->form->getValue('email');
 			$usuario = Doctrine::getTable('Usuario')->findOneByEmail($email);
 
-			if (!empty($usuario)) {
+			if (!empty($usuario) && $usuario->getDeleted()==0) {
 				$userId = $usuario->getId();
 				$userLogin = $usuario->getLogin();
 				$userUniqKey = uniqid('');
