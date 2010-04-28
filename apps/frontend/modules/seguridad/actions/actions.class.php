@@ -191,7 +191,7 @@ class seguridadActions extends sfActions
 		$solicitud = Doctrine::getTable('SolicitudClave')->findOneByCodigo($this->auxCodigo);
 		if (empty($solicitud)) {
                         $this->getUser()->setFlash('error', '"El código de cambio de contraseña ya ha sido utilizado. Si desea pedir una nueva pulse en  "He olvidado mi Contraseña"');
-			$this->redirect('inicio/login');
+			$this->redirect('seguridad/login');
 		}
 
 		$this->form = new EstablecerClaveForm();
