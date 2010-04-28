@@ -29,7 +29,8 @@ class notificacionesActions extends sfActions
 		->leftJoin('n.ContenidoNotificacion cn')
 		->where($this->setFiltroBusqueda())
 		->andWhere('n.usuario_id ='.$this->getUser()->getAttribute('userId'))
-		->orderBy($this->setOrdenamiento());
+		->orderBy($this->setOrdenamiento())
+                ->groupBy('entidad_id');
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
