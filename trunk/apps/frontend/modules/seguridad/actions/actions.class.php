@@ -120,8 +120,7 @@ class seguridadActions extends sfActions
 	public function executeNueva_clave(sfWebRequest $request)
 	{
 		if ($this->getUser()->getAttribute('userId')) {
-                        $this->getUser()->setFlash('error', '"El código de cambio de contraseña ya ha sido utilizado. Si desea pedir una nueva pulse en  "He olvidado mi Contraseña"');
-			$this->redirect('inicio/login');
+			$this->redirect('inicio/index');
 		}
 		$this->form = new NuevaClaveForm();
 	}
@@ -191,8 +190,8 @@ class seguridadActions extends sfActions
 		}
 		$solicitud = Doctrine::getTable('SolicitudClave')->findOneByCodigo($this->auxCodigo);
 		if (empty($solicitud)) {
-
-			$this->redirect('inicio/index');
+                        $this->getUser()->setFlash('error', '"El código de cambio de contraseña ya ha sido utilizado. Si desea pedir una nueva pulse en  "He olvidado mi Contraseña"');
+			$this->redirect('inicio/login');
 		}
 
 		$this->form = new EstablecerClaveForm();
