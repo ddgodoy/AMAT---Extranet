@@ -45,8 +45,7 @@
        <br clear="all" />
       <br clear="all" />
       <br clear="all" />
-     </div>
-    <br clear="all" />
+      <br clear="all" />
     <ul class="especial">
         <h4>Otros Links</h4>
        <li><a href="<?php echo url_for('inicio/index') ?>" class="a">INICIO</a></li>
@@ -54,4 +53,5 @@
 		<li><a href="<?php echo url_for('usuarios/perfil') ?>" class="b">MIS DATOS</a></li>
         <li><a href="<?php echo url_for('contacto/index') ?>">CONTACTO</a></li>
       </ul> 
+     </div>
 </div>  
