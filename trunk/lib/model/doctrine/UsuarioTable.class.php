@@ -62,7 +62,7 @@ class UsuarioTable extends Doctrine_Table
 
                 if($email != '')
                 {
-                    $q->andWhere('u.email = '.$email);
+                    $q->andWhere("u.email = '".$email."'");
                 }
   
 		$usuarios = $q->execute();
