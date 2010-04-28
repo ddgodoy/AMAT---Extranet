@@ -28,7 +28,7 @@ class notificacionesActions extends sfActions
 		->from('Notificacion n')
 		->leftJoin('n.ContenidoNotificacion cn')
 		->where($this->setFiltroBusqueda())
-		->andWhere('n.usuario_id ='.$this->getUser()->getAttribute('userId'))
+		->andWhere('n.usuario_id ='.$this->getUser()->getAttribute('userId').' OR  n.publico = 1')
 		->orderBy($this->setOrdenamiento())
                 ->groupBy('entidad_id');
 		$this->pager->setPage($this->paginaActual);
