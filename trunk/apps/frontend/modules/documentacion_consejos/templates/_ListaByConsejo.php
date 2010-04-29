@@ -31,11 +31,17 @@
 					 ?>
 					</td>
 					<td valign="center" align="center">
-						<?php if ( validate_action('publicar') && $valor->getEstado() != 'publicado') { 
+						<?php if ( validate_action('publicar') ){
+                                                    if($valor->getEstado() != 'publicado') {
 								echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_consejos/publicar?id=' . $valor->getId(), array('method' => 'post', 'confirm' => 'Est&aacute;s seguro que deseas publicar el documento ' . $valor->getNombre() . '?'));
-							}	
+							}
+                                                    else
+                                                        {
+                                                        
+                                                        echo image_tag('aceptada.png');
+                                                    }
+                                                }
 						?>
-					</td>
 					</td>
 					<td valign="center" align="center">
 					<?php if(validate_action('modificar')):?> 
