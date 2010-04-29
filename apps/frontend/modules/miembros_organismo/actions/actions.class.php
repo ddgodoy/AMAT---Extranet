@@ -52,14 +52,14 @@ class miembros_organismoActions extends sfActions
 			$this->cantidadRegistros = $this->pager->getNbResults();
        
         
-        if($this->organismosBsq )
+        /*if($this->organismosBsq )
 			{
 			  $this->Organismos = OrganismoTable::getOrganismo($this->organismosBsq);
 			}
 			else 
 			{
 			  $this->Organismos = '';
-			}
+			}*/
          }
          else 
          {

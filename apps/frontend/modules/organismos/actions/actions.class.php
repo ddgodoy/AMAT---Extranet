@@ -12,15 +12,17 @@ class organismosActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->paginaActual = $this->getRequestParameter('page', 1);
+        $this->paginaActual = $this->getRequestParameter('page', 1);
 
-		if (is_numeric($this->paginaActual)) {
-			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
-		}
+        if (is_numeric($this->paginaActual)) {
+                $this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
+        }
   	$this->pager = new sfDoctrinePager('Organismo', 10);  	    
 	$this->pager->getQuery()
 	->from('Organismo o')
 	->leftJoin('o.UsuarioOrganismo uo')
+        ->leftJoin('o.CategoriaOrganismo co')
+        ->leftJoin('o.SubCategoriaOrganismo sco')
 	->where($this->setFiltroBusqueda());
 	if($this->getUser()->getAttribute('userId')!= 1 && !key_exists(1,UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1)))
 	    {

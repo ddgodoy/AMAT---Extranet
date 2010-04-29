@@ -66,6 +66,7 @@ class actaActions extends sfActions
 		}
 		elseif($busqueda[0] == 'Organismo') {
 			$this->Organismos = OrganismoTable::getOrganismo($busqueda[1]);
+                        $this->organismomenu = $busqueda[1];
 		}
 	}
 	
