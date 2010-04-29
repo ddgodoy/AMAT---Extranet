@@ -53,9 +53,9 @@
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
-				</tr>
-				<?php $i=0; foreach ($usuario_list as $value): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<tr class="<?php echo $odd ?>">
+                                        </tr>
+                                        <?php $i=0; foreach ($usuario_list as $value): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
+                                        <tr class="<?php echo $odd ?>">
 					<td><input type="checkbox" name="id[]" value="<?php echo $value->getId() ?>" /></td>
 					<td>
 						<a href="<?php echo url_for('usuarios/editar?id='.$value->getId()) ?>">
@@ -123,53 +123,58 @@
 					<tr>
 					<td width="20%">Nombre</td>
 					<td width="80%">
-							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda_nombre" class="form_input" value="<?php echo $cajaNomBsq ?>"/>
-						</td>
+					<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda_nombre" class="form_input" value="<?php echo $cajaNomBsq ?>"/>
+					</td>
 					</tr>
 					<tr>
 					<td width="20%">Apellido</td>
 					<td width="80%">
-							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda_apellido" class="form_input" value="<?php echo $cajaApeBsq ?>"/>
-						</td>
+					<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda_apellido" class="form_input" value="<?php echo $cajaApeBsq ?>"/>
+					</td>
 					</tr>
-         		    <tr>
-         		    <tr>
-						<td width="20%">Activo</td>
-						<td width="80%"><?php echo checkbox_tag('activoBsq', '1', $activoBsq) ?></td>
+                                        <tr>
+					<td width="20%">Usuario</td>
+					<td width="80%">
+					<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda_usuario" class="form_input" value="<?php echo $cajaUsuBsq ?>"/>
+					</td>
 					</tr>
-					 <tr>
+                                        <tr>
+					<td width="20%">Activo</td>
+					<td width="80%"><?php echo checkbox_tag('activoBsq', '1', $activoBsq) ?></td>
+					</tr>
+					<tr>
 					<td width="20%">Perfil</td>
 					<td width="80%">
-						 <?php echo select_tag('cajaRolBsq',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(Rol::getRepository()->getAllRol()),$cajaRolBsq),array('style'=>'width:200px'));?>	
-						</td>
+					 <?php echo select_tag('cajaRolBsq',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(Rol::getRepository()->getAllRol()),$cajaRolBsq),array('style'=>'width:200px'));?>	
+					</td>
 					</tr>
-         		    <tr>
+         		                <tr>
 					<td width="20%">Mutua</td>
 					<td width="80%">
-						 <?php echo select_tag('mutuas',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(MutuaTable::getAllMutuas()),$cajaMuBsq),array('style'=>'width:200px'));?>	
-						</td>
+					 <?php echo select_tag('mutuas',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(MutuaTable::getAllMutuas()),$cajaMuBsq),array('style'=>'width:200px'));?>	
+					</td>
 					</tr>
 					<tr>
 					<td width="20%">Grupo de trabajo</td>
-						<td width="80%">
-						 <?php echo select_tag('grupo',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(GrupoTrabajoTable::getAllGrupoTrabajo()),$cajaGruBsq),array('style'=>'width:200px'));?>	
-						</td>
+					<td width="80%">
+					 <?php echo select_tag('grupo',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(GrupoTrabajoTable::getAllGrupoTrabajo()),$cajaGruBsq),array('style'=>'width:200px'));?>	
+					</td>
 					</tr>
 					<tr>
 					<td width="20%">Consejo territorial</td>
-						<td width="80%">
-						 <?php echo select_tag('consejo',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()),$cajaConBsq),array('style'=>'width:200px'));?>	
-						</td>
+					<td width="80%">
+					<?php echo select_tag('consejo',options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()),$cajaConBsq),array('style'=>'width:200px'));?>	
+					</td>
 					</tr>
 					<tr>
-						<td style="padding-top:5px;">
-							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
-						</td>
-						<td style="padding-top:5px;">
-						<?php if ($cajaNomBsq || $cajaApeBsq || $cajaMuBsq || $cajaGruBsq || $cajaConBsq || $activoBsq || $cajaRolBsq ): ?>
-							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
-							<?php endif;  ?>
-						</td>
+					<td style="padding-top:5px;">
+					<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
+					</td>
+					<td style="padding-top:5px;">
+					<?php if ($cajaNomBsq || $cajaApeBsq || $cajaMuBsq || $cajaGruBsq || $cajaConBsq || $activoBsq || $cajaRolBsq || $cajaUsuBsq ): ?>
+					<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
+					<?php endif;  ?>
+					</td>
 					</tr>
 				</tbody>
 			</table>
