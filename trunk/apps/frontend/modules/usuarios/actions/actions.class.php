@@ -185,6 +185,7 @@ class usuariosActions extends sfActions
 	
 		$this->cajaNomBsq = $this->getRequestParameter('caja_busqueda_nombre');
 		$this->cajaApeBsq = $this->getRequestParameter('caja_busqueda_apellido');
+                $this->cajaUsuBsq = $this->getRequestParameter('caja_busqueda_usuario');
 		$this->cajaMuBsq  = $this->getRequestParameter('mutuas');
 		$this->cajaRolBsq = $this->getRequestParameter('cajaRolBsq');
 		$this->cajaGruBsq = $this->getRequestParameter('grupo');
@@ -199,6 +200,10 @@ class usuariosActions extends sfActions
 			$parcial .= " AND u.apellido LIKE '%$this->cajaApeBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja_ape', $this->cajaApeBsq);
 		}
+                if(!empty ($this->cajaUsuBsq)){
+                    $parcial .= " AND u.login LIKE '%$this->cajaUsuBsq%'";
+		    $this->getUser()->setAttribute($modulo.'_nowcaja_login', $this->cajaUsuBsq);
+                }
 		if (!empty($this->cajaMuBsq)) {
 			$parcial .= " AND u.mutua_id = $this->cajaMuBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcaja_mu', $this->cajaMuBsq);
@@ -238,6 +243,7 @@ class usuariosActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_nom');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_ape');
+                                $this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_login');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowactivoBsq');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_mu');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajaRolBsq');
@@ -250,6 +256,7 @@ class usuariosActions extends sfActions
 					$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
 					$this->cajaNomBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_nom');
 					$this->cajaApeBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_ape');
+                                        $this->cajaUsuBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_login');
 					$this->activoBsq = $this->getUser()->getAttribute($modulo.'_nowactivoBsq');
 					$this->cajaMuBsq = $this->getUser()->getAttribute($modulo.'_nowcaja_mu');
 					$this->cajaRolBsq = $this->getUser()->getAttribute($modulo.'_nowcajaRolBsq');
@@ -267,6 +274,7 @@ class usuariosActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowfilter');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_nom');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_ape');
+                        $this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_login');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowactivoBsq');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja_mu');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcajaRolBsq');
@@ -275,6 +283,7 @@ class usuariosActions extends sfActions
 			$parcial="";
 			$this->cajaNomBsq = "";
 			$this->cajaApeBsq = "";
+                        $this->cajaUsuBsq = "";
 			$this->activoBsq = "";
 			$this->cajaMuBsq = "";
 			$this->cajaRolBsq = "";
