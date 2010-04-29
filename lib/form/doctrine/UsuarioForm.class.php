@@ -53,8 +53,23 @@ class UsuarioForm extends BaseUsuarioForm
 		foreach ($mutuas as $m) {
 			$arraMutuas[$m->getId()] = $m->getNombre();
 		}
-		
-		
+
+              
+              
+               if($request->getRequest()->getParameter('usuario'))
+                {
+                  $objRq = $request->getRequest()->getParameter('usuario');
+                  if($objRq['email']!='')
+                   {
+                      $email = $objRq['email'];
+                      $emailActivo = UsuarioTable::getUsuariosActivos($email,1);
+                      if(!empty($emailActivo))
+                      {
+                        $emailusu = $emailActivo->getEmail();
+                      }
+                   }
+                }
+
 
 		$this->setWidgets(array(
 			'id'                          => new sfWidgetFormInputHidden(),
@@ -76,14 +91,17 @@ class UsuarioForm extends BaseUsuarioForm
 			'apellido'                    => new sfValidatorString(array('max_length' => 150, 'required' => true), array('required' => 'El apellido es obligatorio')),
 			'mutua_id'                    => new sfValidatorChoice(array('choices' => array_keys($arraMutuas))),
 			'telefono'                    => new sfValidatorString(array('max_length' => 150, 'required' => false), array()),
-			'email'                       => new sfValidatorEmail(array('required' => true),array('required'=>'La cuenta de correo es obligatoria', 'invalid'=>'Ingrese un cuenta de correo v&aacute;lido')),
+			'email'                       => new sfValidatorAnd(array(new sfValidatorEmail(array(),array('invalid'=>'Ingrese un cuenta de correo v&aacute;lido'))),array(),array('required' => 'El email es obligatorio',)),
 			'activo'                      => new sfValidatorBoolean(),
 			'roles_list'                  => new sfValidatorDoctrineChoiceMany(array('model' => 'Rol', 'required' => false)),
 			'consejos_territoriales_list' => new sfValidatorDoctrineChoiceMany(array('model' => 'ConsejoTerritorial', 'required' => false)),
 			'grupos_trabajo_list'         => new sfValidatorDoctrineChoiceMany(array('model' => 'GrupoTrabajo', 'required' => false), array('invalid' => 'Acción inválida')),
-		    'aplicacion_externas_list'    => new sfValidatorDoctrineChoiceMany(array('model' => 'AplicacionExterna', 'required' => false), array('invalid' => 'Acción inválida')),
+		        'aplicacion_externas_list'    => new sfValidatorDoctrineChoiceMany(array('model' => 'AplicacionExterna', 'required' => false), array('invalid' => 'Acción inválida')),
+
 		));
-		
+
+                
+
 		if($action == 'editar' || $action == 'update' )
 		{
 			$this->setWidget('password',new sfWidgetFormInputHidden(array(), array('class' => 'form_input', 'style' => 'width: 200px;')));
@@ -106,7 +124,10 @@ class UsuarioForm extends BaseUsuarioForm
 			
 			$this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'repassword', array(), array('invalid' => 'Las claves no son iguales')));
 		}
-		
+		if(!empty ($emailusu))
+                {
+                        $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, $emailusu, array(), array('invalid' => 'El email ya existe en un usuario activo')));
+                }
 		
 		
 		$this->widgetSchema->setLabels(array(
