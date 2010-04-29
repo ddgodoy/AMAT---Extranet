@@ -52,18 +52,20 @@ class UsuarioTable extends Doctrine_Table
 		return $usuarios;
 	}
 	
-	public static function getUsuariosActivos($email = '')
+	public static function getUsuariosActivos($email = '', $form='')
 	{
 		$q = Doctrine_Query::create();
 		$q->from('Usuario u');
 		$q->where('u.deleted = 0');
-                $q->andWhere('u.activo = 1');
+                if($form == '')
+                {
+                 $q->andWhere('u.activo = 1');
+                }
 		$q->orderBy('u.apellido ASC, u.nombre ASC');
 
                 if($email != '')
                 {
                     $q->andWhere("u.email = '".$email."'");
-
                     return $q->fetchOne();
                 }
   
