@@ -29,6 +29,12 @@ class archivos_d_gActions extends sfActions
 
 		$this->archivo_dg_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
+
+		if ($this->grupoBsq) {
+		  $this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($this->grupoBsq);
+		} else {
+			$this->Grupo = '';
+		}
   }
 
   public function executeShow(sfWebRequest $request)
@@ -121,6 +127,7 @@ class archivos_d_gActions extends sfActions
   	sfLoader::loadHelpers('Date');
   	$parcial = '';
   	$modulo  = $this->getModuleName();
+        $this->modulo = $modulo;
 
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->grupoBsq = $this->getRequestParameter('grupo_trabajo_id');

@@ -32,7 +32,7 @@ else
 			</tr>
 		</tbody>
 	</table>
-
+        <?php  include_partial('miembros_consejo/MenuConsejo',array('Consejo' => $Consejo, 'modulo'=>$modulo))?>
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 
 	<div class="leftside">

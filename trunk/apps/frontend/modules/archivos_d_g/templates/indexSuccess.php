@@ -33,7 +33,7 @@
 			</tr>
 		</tbody>
 	</table>
-
+        <?php  include_partial('miembros_grupo/MenuGrupo',array('Grupo' => $Grupo, 'modulo'=>$modulo))?>
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 
 	<div class="leftside">

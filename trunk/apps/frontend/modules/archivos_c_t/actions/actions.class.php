@@ -34,6 +34,13 @@ class archivos_c_tActions extends sfActions
 
 	$this->archivo_ct_list = $this->pager->getResults();
 	$this->cantidadRegistros = $this->pager->getNbResults();
+        
+        if ($this->grupoBsq) {
+	 $this->Consejo = ConsejoTerritorialTable::getConsejo($this->grupoBsq);
+        }
+        else {
+         $this->Consejo = '';
+        }
   }
 
   public function executeShow(sfWebRequest $request)
@@ -132,6 +139,7 @@ class archivos_c_tActions extends sfActions
   	sfLoader::loadHelpers('Date');
   	$parcial = '';
   	$modulo  = $this->getModuleName();
+        $this->modulo = $modulo;
   	
 		$this->cajaBsq = $this->getRequestParameter('caja_busqueda');
 		$this->grupoBsq = $this->getRequestParameter('consejo_territorial_id');

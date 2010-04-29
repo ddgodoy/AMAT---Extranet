@@ -54,7 +54,7 @@
 		</tbody>
 	</table>
 	
-	<?php  include_partial('miembros_organismo/MenuOrganismos',array('Organismos' => $Organismos, 'modulo'=>$modulo))?>
+	<?php if($organismoBsq): include_component('miembros_organismo','MenuOrganismos',array('id' => $organismoBsq,'modulo'=>$modulo)); endif;    ?>
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 
 	<div class="leftside">

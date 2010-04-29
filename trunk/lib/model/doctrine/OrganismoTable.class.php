@@ -93,5 +93,18 @@ class OrganismoTable extends Doctrine_Table
 		 
 		return $usuarios;
 	}
-	
+
+   public static function getOrganismosByid($id)
+       {
+          $q = Doctrine_Query::create()
+          ->select('o.id, o.nombre, co.nombre, sco.nombre')
+          ->from('Organismo o')
+	  ->leftJoin('o.UsuarioOrganismo uo')
+          ->leftJoin('o.CategoriaOrganismo co')
+          ->leftJoin('o.SubCategoriaOrganismo sco')
+          ->where('id = '.$id);
+
+          return $q->fetchOne();
+
+       } 
 }
