@@ -1,4 +1,4 @@
-<h2 class="grupo"><?php if($organismo!=''): echo $organismo->getCategoriaOrganismo()->getNombre().' '.$organismo->getSubCategoriaOrganismo()->getNombre() .' '.$organismo->getNombre(); $get = '?organismo='.$organismo->getId(); else: $get= ''; echo strtoupper('Organismos'); endif; ?> </h2>
+<h2 class="grupo"><?php if($organismo!=''): echo $organismo->getCategoriaOrganismo()->getNombre().' '.$organismo->getSubCategoriaOrganismo()->getNombre() .' '.$organismo->getNombre(); $get = '?organismo='.$organismo->getId(); else: $get= ''; echo 'Organismos'; endif; ?> </h2>
        <div class="navegacion-grupos">
        <!--<a <?php //if($modulo != 'normas_de_funcionamientos'):?> href="<?php //echo url_for('normas_de_funcionamientos/index'.$get) ?>" <?php // else: ?> class="seleccionado" <?php //endif; ?>>Normas de Funcionamiento</a> | -->
        <?php if ( validate_action('listar','miembros_organismo')): ?><a <?php if($modulo != 'miembros_organismo'):?> href="<?php echo url_for('miembros_organismo/index'.$get) ?>" <?php else: ?> class="seleccionado" <?php endif; ?>>Miembros del Grupo de Trabajo</a> | <?php endif;?>
