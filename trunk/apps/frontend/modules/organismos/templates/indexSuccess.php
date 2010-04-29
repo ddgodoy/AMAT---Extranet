@@ -45,7 +45,7 @@ if ($sf_user->getAttribute('organismos_nowcategoria'))
 		<br />
 		<?php if ($cantidadRegistros > 0) : ?>
 				<?php $i=0; foreach ($organismo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<a href="<?php echo url_for('miembros_organismo/index?organismo='.$valor->getId()) ?>" class="grupo-titulo"> <strong><?php echo strtoupper($valor->getCategoriaOrganismo()->getNombre().' '.$valor->getSubCategoriaOrganismo()->getNombre().' '.$valor->getNombre())?></strong><span>Creado el: <?php echo date('d/m/Y',strtotime($valor->getCreatedAt()))?></span> </a><br />
+				<a href="<?php echo url_for('miembros_organismo/index?organismo='.$valor->getId()) ?>" class="grupo-titulo"> <strong><?php echo $valor->getCategoriaOrganismo()->getNombre().' '.$valor->getSubCategoriaOrganismo()->getNombre().' '.$valor->getNombre()?></strong><span>Creado el: <?php echo date('d/m/Y',strtotime($valor->getCreatedAt()))?></span> </a><br />
 			      <table width="100%"  cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo">      
 			        <tr class="gris">
 			        <?php if($valor->getDetalle()):?>
