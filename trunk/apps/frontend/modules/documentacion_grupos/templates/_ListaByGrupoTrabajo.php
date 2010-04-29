@@ -33,9 +33,15 @@
 					</td>
 					<td valign="center" align="center">
 						<?php
-							if (validate_action('publicar') && $valor->getEstado() != 'publicado') { 
-								echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_grupos/publicar?id=' . $valor->getId(), array('method' => 'post', 'confirm' => 'Confirma la publicación del registro?'));
-							}	
+                                                        if(validate_action('publicar'))
+                                                        {
+                                                            if ($valor->getEstado() != 'publicado') {
+                                                                    echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_grupos/publicar?id=' . $valor->getId(), array('method' => 'post', 'confirm' => 'Confirma la publicación del registro?'));
+                                                            }
+                                                            else {
+                                                                   echo image_tag('aceptada.png');
+                                                            }
+                                                        }
 						?>
 					</td>
 					<td valign="center" align="center">
