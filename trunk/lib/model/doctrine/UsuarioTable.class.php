@@ -52,7 +52,7 @@ class UsuarioTable extends Doctrine_Table
 		return $usuarios;
 	}
 	
-	public static function getUsuariosActivos($email = '', $form='')
+	public static function getUsuariosActivos($email = '', $form='', $id = '')
 	{
 		$q = Doctrine_Query::create();
 		$q->from('Usuario u');
@@ -66,6 +66,10 @@ class UsuarioTable extends Doctrine_Table
                 if($email != '')
                 {
                     $q->andWhere("u.email = '".$email."'");
+                    if($id != '')
+                    {
+                      $q->andWhere("u.id != '".$id."'");
+                    }
                     return $q->fetchOne();
                 }
   
