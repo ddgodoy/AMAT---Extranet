@@ -61,8 +61,10 @@ class UsuarioForm extends BaseUsuarioForm
                   $objRq = $request->getRequest()->getParameter('usuario');
                   if($objRq['email']!='')
                    {
+                      $id = '';
                       $email = $objRq['email'];
-                      $emailActivo = UsuarioTable::getUsuariosActivos($email,1);
+                      $id = $objRq['id'];
+                      $emailActivo = UsuarioTable::getUsuariosActivos($email,1, $id);
                       if(!empty($emailActivo))
                       {
                         $emailusu = $emailActivo->getEmail();
@@ -126,7 +128,7 @@ class UsuarioForm extends BaseUsuarioForm
 		}
 		if(!empty ($emailusu))
                 {
-                       // $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, $emailusu, array(), array('invalid' => 'El email ya pertenece a un usuario registrado')));
+                        $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, $emailusu, array(), array('invalid' => 'El email ya pertenece a un usuario registrado')));
                 }
 		
 		
