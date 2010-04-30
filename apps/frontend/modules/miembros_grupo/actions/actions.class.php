@@ -21,12 +21,12 @@ class miembros_grupoActions extends sfActions
 
 		$this->pager = new sfDoctrinePager('Usuario', 10);
 		$this->pager->getQuery()
-								->from('UsuarioGrupoTrabajo ug')
-								->leftJoin('ug.Usuario u')
-								->leftJoin('ug.GrupoTrabajo g')
-								->leftJoin('u.UsuarioRol ur')
-								->where($this->setFiltroBusqueda())
-								->andWhere('ur.rol_id IN (4,6)');
+                ->from('UsuarioGrupoTrabajo ug')
+                ->leftJoin('ug.Usuario u')
+                ->leftJoin('ug.GrupoTrabajo g')
+                ->leftJoin('u.UsuarioRol ur')
+                ->where($this->setFiltroBusqueda())
+                ->andWhere('ur.rol_id IN (4,6)');
  
 		$this->pager->getQuery()->orderBy($this->setOrdenamiento());
 		$this->pager->getQuery()->groupBy('ug.usuario_id');
@@ -82,11 +82,11 @@ class miembros_grupoActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'deleted=0'.$parcial;
+			return 'g.deleted=0 AND u.deleted=0'.$parcial;
 		}
 		else
 		{
-			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
+			return 'g.deleted=0 AND u.deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
 		}
 	}
 	
