@@ -126,7 +126,7 @@ class UsuarioForm extends BaseUsuarioForm
 		}
 		if(!empty ($emailusu))
                 {
-                        $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, $emailusu, array(), array('invalid' => 'El email ya pertenece a un usuario registrado')));
+                       // $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, $emailusu, array(), array('invalid' => 'El email ya pertenece a un usuario registrado')));
                 }
 		
 		
