@@ -26,7 +26,7 @@
     <div class="botonera" style="padding-top:10px;">
     </div>
     <fieldset>
-      <legend>Lista de envio de comunicados</legend>
+      <legend>Tipo de envio de comunicados</legend>
       	
       <table width="100%" cellspacing="4" cellpadding="0" border="0">
 			<tbody>
@@ -34,10 +34,10 @@
 					<td width="7%"><label> Título *</label></td>
 					<td width="93%" valign="middle"><?php echo $form['nombre'] ?></td>
 				</tr>
-				<tr>
+				<?php /*<tr>
 					<td width="7%"><label> Imagen Cabecera *</label></td>
 					<td width="93%" valign="middle"><?php echo $form['imagen'] ?></td>
-				</tr>
+				</tr> */?>
 			</tbody>
 		</table>
 		
