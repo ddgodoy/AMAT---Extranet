@@ -21,12 +21,12 @@ class miembros_consejoActions extends sfActions
 
 		$this->pager = new sfDoctrinePager('Usuario', 10);
 		$this->pager->getQuery()
-				 ->from('UsuarioConsejoTerritorial uc')
-				 ->leftJoin('uc.Usuario u')
-				 ->leftJoin('uc.ConsejoTerritorial c')
-				 ->leftJoin('u.UsuarioRol ur')
-				->where($this->setFiltroBusqueda())
-				->andWhere('ur.rol_id IN (5,7)');
+                 ->from('UsuarioConsejoTerritorial uc')
+                 ->leftJoin('uc.Usuario u')
+                 ->leftJoin('uc.ConsejoTerritorial c')
+                 ->leftJoin('u.UsuarioRol ur')
+                ->where($this->setFiltroBusqueda())
+                ->andWhere('ur.rol_id IN (5,7)');
 
 		
 		$this->pager->getQuery()->andWhere($this->setFiltroBusqueda())
@@ -82,11 +82,11 @@ class miembros_consejoActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'deleted=0'.$parcial;
+			return 'c.deleted=0 AND u.deleted = 0'.$parcial;
 		}
 		else
         { 
-		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+		  return 'c.deleted=0 AND u.deleted = 0 '.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
         }  
 	}
 	
