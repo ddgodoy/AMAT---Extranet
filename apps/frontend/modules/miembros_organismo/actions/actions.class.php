@@ -116,11 +116,11 @@ class miembros_organismoActions extends sfActions
 	
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'o.deleted=0'.$parcial;
+			return 'o.deleted=0 AND u.deleted = 0'.$parcial;
 		}
 		else
 		{
-		   return 'o.deleted=0'.$parcial.' AND uo.organismo_id IN '.$organismos;
+		   return 'o.deleted=0 AND u.deleted = 0 '.$parcial.' AND uo.organismo_id IN '.$organismos;
 		} 
 	}
 	
