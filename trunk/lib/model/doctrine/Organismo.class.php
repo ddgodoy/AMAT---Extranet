@@ -20,6 +20,7 @@ class Organismo extends BaseOrganismo
 		$s->from('Usuario u');
 		$s->leftJoin('u.UsuarioOrganismo uo');
 		$s->where('uo.organismo_id = '.$this->getId() );
+                $s->andWhere('u.deleted = 0 AND u.activo = 1');
 		$s->andWhere('u.id != '.$usuarioId);
 		
 		$usuarios = $s->execute();
