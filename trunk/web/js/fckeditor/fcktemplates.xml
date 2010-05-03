@@ -267,8 +267,8 @@
 			]]>
 		</Html>
 	</Template>
-        <Template title="Banner y texto para comunicados de Amat" image="9.jpg">
-		<Description>Banner, texto y enlace para comunicados de Amat.</Description>
+        <Template title="Banner y texto alineados para comunicados de Amat" image="9.jpg">
+		<Description>Banner y texto alineados para comunicados de Amat.</Description>
 		<Html>
 			<![CDATA[
                               <table cellspacing="10" cellpadding="0" width="614" border="0" XSSCleaned="width: 614px; height: 119px">
@@ -279,6 +279,33 @@
                                         <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" XSSCleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.gif" /></p>
                                         </td>
                                         <td width="10">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table cellspacing="10" cellpadding="0" border="0" XSSCleaned="width: 616px; height: 136px">
+                                <tbody>
+                                    <tr>
+                                        <td width="1">&nbsp;</td>
+                                        <td width="562">
+                                        <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                        </td>
+                                        <td width="1">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Banner y texto para comunicados de Amat" image="9.jpg">
+		<Description>Banner y texto para comunicados de Amat.</Description>
+		<Html>
+			<![CDATA[
+                              <table cellspacing="10" cellpadding="0" width="614" border="0" XSSCleaned="width: 614px; height: 119px">
+                                <tbody>
+                                    <tr>
+                                        <td width="362">
+                                        <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" XSSCleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.gif" /></p>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
