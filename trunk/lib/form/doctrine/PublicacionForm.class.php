@@ -75,6 +75,8 @@ class PublicacionForm extends BasePublicacionForm
 			'owner_id'          => $userId,
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => $estado,
+                        'fecha_publicacion' =>'2007-01-01',
+                        'fecha_caducidad'   =>'2015-12-31',
 			'ambito'            => 'web',
 			));
 
