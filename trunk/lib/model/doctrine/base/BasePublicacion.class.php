@@ -33,11 +33,9 @@ abstract class BasePublicacion extends sfDoctrineRecord
              ));
         $this->hasColumn('fecha_publicacion', 'date', null, array(
              'type' => 'date',
-             'notnull' => true,
              ));
         $this->hasColumn('fecha_caducidad', 'date', null, array(
              'type' => 'date',
-             'notnull' => true,
              ));
         $this->hasColumn('ambito', 'enum', null, array(
              'type' => 'enum',
