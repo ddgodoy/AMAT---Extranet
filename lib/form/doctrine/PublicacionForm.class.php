@@ -38,8 +38,8 @@ class PublicacionForm extends BasePublicacionForm
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => false), array('required' => 'El autor es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
-			'fecha_publicacion' => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')),
-			'fecha_caducidad'   => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
+			'fecha_publicacion' => new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de publicación', 'invalid' => 'La fecha de publicación ingresada es incorrecta')),
+			'fecha_caducidad'   => new sfValidatorDate(array('required' => false), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
 			'ambito'            => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'), 'required' => false)),
 			'destacada'         => new sfValidatorBoolean(array('required' => false)),
 			'mutua_id'          => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true)),
@@ -75,8 +75,6 @@ class PublicacionForm extends BasePublicacionForm
 			'owner_id'          => $userId,
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => $estado,
-			'fecha_publicacion' => '2007-01-01',
-			'fecha_caducidad'   => '2015-01-01',
 			'ambito'            => 'web',
 			));
 
