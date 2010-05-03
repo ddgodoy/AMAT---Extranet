@@ -23,6 +23,7 @@ class UsuarioTable extends Doctrine_Table
 		$q->from('Usuario u');
 		$q->leftJoin('u.UsuarioGrupoTrabajo ugt');
 		$q->where('ugt.grupo_trabajo_id = ' . $grupoTrabajoId);
+                $q->andWhere('u.deleted = 0 AND u.activo = 1');
 		if ($exceptUserId != null) $q->addWhere('u.id != ' . $exceptUserId);
 		$q->orderBy('u.apellido ASC, u.nombre ASC');
 		if($UserEX != '')
@@ -191,6 +192,8 @@ class UsuarioTable extends Doctrine_Table
 		} else {
 		  $r->where('id IN '.$id);	
 		}
+                $r->andWhere('deleted = 0 AND activo = 1');
+                
 		return $r->execute();	
 	}
 
@@ -218,6 +221,7 @@ class UsuarioTable extends Doctrine_Table
 		} else {
 		  $r->where('id IN '.$id);
 		}
+                $r->andWhere('deleted = 0 AND activo = 1');
 		return $r->fetchArray();
 
         }
@@ -228,7 +232,8 @@ class UsuarioTable extends Doctrine_Table
 		$e=Doctrine_Query::create()
 		->from('Usuario u')
 		->leftJoin('u.UsuarioEvento ue')
-		->where('ue.evento_id = '.$idEvento);
+		->where('ue.evento_id = '.$idEvento)
+                ->andWhere('u.deleted = 0 AND u.activo = 1');
 		
 		return $e->execute();
 	}
