@@ -148,25 +148,26 @@ class documentacion_gruposActions extends sfActions
 				$url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
 				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
 
+                                $mailer = new Swift(new Swift_Connection_NativeMail());
+                                $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+
+                                $mailContext = array('tema'   => $tema,
+                                                     'evento' => $documentacion_grupo->getNombre(),
+                                                     'url'    => $url,
+                                                     'head_image'  => $iPh,
+                                                     'organizador' => $organizador,
+                                                                                                                 'descripcio'  => $documentacion_grupo->getContenido()
+                                );
+                                $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                                $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
+
 				foreach ($email AS $emailPublic) {
 					if ($emailPublic->getEmail()) {
-						$mailer = new Swift(new Swift_Connection_NativeMail());
-						$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-
-						$mailContext = array('tema'   => $tema,
-						                     'evento' => $documentacion_grupo->getNombre(),
-						                     'url'    => $url,
-						                     'head_image'  => $iPh,
-						                     'organizador' => $organizador,    
-																 'descripcio'  => $documentacion_grupo->getContenido()
-						);
-						$message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-						$message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
-
 						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
-						$mailer->disconnect();
+						
 					}
 				}
+                                $mailer->disconnect();
 			}
 			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
 		}

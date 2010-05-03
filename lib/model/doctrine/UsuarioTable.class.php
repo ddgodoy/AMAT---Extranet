@@ -28,7 +28,7 @@ class UsuarioTable extends Doctrine_Table
 		$q->orderBy('u.apellido ASC, u.nombre ASC');
 		if($UserEX != '')
 		{
-         $q->addWhere('u.id NOT IN ('.$UserEX.')');  			
+                $q->addWhere('u.id NOT IN ('.$UserEX.')');
 		}
 		
 		$usuarios = $q->execute();
@@ -42,11 +42,12 @@ class UsuarioTable extends Doctrine_Table
 		$q->from('Usuario u');
 		$q->leftJoin('u.UsuarioConsejoTerritorial uct');
 		$q->where('uct.consejo_territorial_id = ' . $consejoTerritorialId);
+                $q->andWhere('u.deleted = 0 AND u.activo = 1');
 		if ($exceptUserId != null) $q->addWhere('u.id != ' . $exceptUserId);
 		$q->orderBy('u.apellido ASC, u.nombre ASC');
 		if($UserEX != '')
 		{
-         $q->addWhere('u.id NOT IN ('.$UserEX.')');  			
+                $q->addWhere('u.id NOT IN ('.$UserEX.')');
 		}
 		$usuarios = $q->execute();
 		
@@ -250,7 +251,8 @@ class UsuarioTable extends Doctrine_Table
 		$r = Doctrine_Query::create()
 		->from('Usuario u')
 		->leftJoin('u.UsuarioOrganismo uo')
-		->where('uo.organismo_id ='.$idOrag);
+		->where('uo.organismo_id ='.$idOrag)
+                ->andWhere('u.deleted = 0 AND u.activo = 1');
 		
 		return $r->execute();
 	
@@ -272,7 +274,7 @@ class UsuarioTable extends Doctrine_Table
 		$q->from('UsuarioRol ur');
 		$q->leftJoin('ur.Usuario u');
 		$q->where('ur.rol_id = 3 OR ur.rol_id = 1');
-                $q->andWhere('u.deleted = 0');
+                $q->andWhere('u.deleted = 0 AND u.activo = 1');
 
 		
 		return $q->execute();

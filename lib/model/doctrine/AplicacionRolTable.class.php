@@ -51,7 +51,7 @@ class AplicacionRolTable extends Doctrine_Table
 	   	 {   
 	   	   $r->andWhere('uo.organismo_id = '.$org);
 	   	 }  
-   	    $r->andWhere('u.deleted = 0 AND u.activo=1');
+   	    $r->andWhere('u.deleted = 0 AND u.activo= 1');
 
    	  return $r->execute();   
    }

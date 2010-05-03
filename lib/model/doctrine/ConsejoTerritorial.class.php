@@ -23,6 +23,7 @@ class ConsejoTerritorial extends BaseConsejoTerritorial
 		$s->leftJoin('u.UsuarioConsejoTerritorial uct');
 		$s->where('uct.consejo_territorial_id = '.$this->getId() );
 		$s->andWhere('u.id != '.$usuarioId);
+                $s->andWhere('u.deleted = 0 AND u.activo=1');
 		
 		$usuarios = $s->execute();
 		
