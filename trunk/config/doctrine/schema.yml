@@ -521,8 +521,8 @@ Publicacion:
     imagen:                  { type: string(255), notnull: false }
     documento:               { type: string(255), notnull: false }
     fecha:                   { type: date, notnull: true }
-    fecha_publicacion:       { type: date, notnull: true }
-    fecha_caducidad:         { type: date, notnull: true }
+    fecha_publicacion:       { type: date, notnull: false }
+    fecha_caducidad:         { type: date, notnull: false }
     ambito:                  { type: enum, values: ['intranet', 'web', 'todos'] }
     estado:                  { type: enum, values: ['pendiente', 'publicado'] }
     destacada:               { type: boolean }
