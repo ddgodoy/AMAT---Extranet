@@ -26,6 +26,9 @@
   			    <?php echo nl2br($noticia->getEntradilla())?>
 				<?php endif; ?>
 				</td>
+                                <td>
+                                  <?php echo   $noticia->getMutua()->getNombre(); ?>
+                                </td>
 				<td valign="center" align="center">
 				<?php
 					if ( validate_action('publicar') && $noticia->getEstado() != 'publicado' && $noticia->getEstado() != 'guardado') { 

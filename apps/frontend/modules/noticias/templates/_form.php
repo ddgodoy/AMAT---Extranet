@@ -60,6 +60,10 @@
           <td><?php echo $form['ambito'] ?></td>
         </tr>
         <tr>
+          <td valign="top"><label>Mutua</label></td>
+          <td><?php echo $form['mutua_id'] ?></td>
+        </tr>
+        <tr>
           <td valign="top"><label>Entradilla</label></td>
           <td><?php echo $form['entradilla'] ?></td>
         </tr>
