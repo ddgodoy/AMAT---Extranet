@@ -11,6 +11,9 @@ class NoticiaForm extends BaseNoticiaForm
 	public function configure()
 	{
 		sfLoader::loadHelpers('Security');
+                sfLoader::loadHelpers('Object');
+
+                $mutuas = MutuaTable::getAllMutuas();
 		
 		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
 		$this->setWidgets(array(
@@ -24,7 +27,7 @@ class NoticiaForm extends BaseNoticiaForm
 			'destacada'         => new sfWidgetFormInputCheckbox(),
 			'novedad'           => new sfWidgetFormInputCheckbox(),
 			'mas_imagen'        => new sfWidgetFormInputCheckbox(),
-			'mutua_id'          => new sfWidgetFormInputHidden(),
+			'mutua_id'          => new sfWidgetFormChoice(array('choices'=>_get_options_from_objects($mutuas)),array( 'class'=>'form_input','style'=>'width: 200px;')),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));

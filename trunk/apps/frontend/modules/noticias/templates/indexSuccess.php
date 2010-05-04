@@ -1,6 +1,5 @@
 <?php use_helper('TestPager') ?>
-<?php use_helper('Security');
-use_helper('Text');?>
+<?php use_helper('Security','Text','Object');?>
 <script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
 <script language="javascript" type="text/javascript">
 	function setActionFormList(accion)
@@ -62,11 +61,12 @@ use_helper('Text');?>
 					<th width="3%"></th>
                                         <?php endif;?>
 					<th width="11%">
-						<a href="<?php echo url_for('noticias/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
+						<a href="<?php echo url_for('noticias/index?sort=n,fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
 							Fecha
 						</a>
 					</th>
-					<th width="60%"><a href="<?php echo url_for('noticias/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
+					<th width="50%"><a href="<?php echo url_for('noticias/index?sort=n.titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
+                                        <th width="10%"><a href="<?php echo url_for('noticias/index?sort=n.mutua_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Mutua</a></th>
 					<th width="3%"><a href="#"/></th>
 					<th width="3%"><a href="#"/></th>
 					<th width="3%"></th>
@@ -189,6 +189,11 @@ use_helper('Text');?>
 				  </td>
 				</tr>
 				<?php endif; ?>
+                                <tr>
+				    <td style="padding-top: 5px;"><label>Mutua:</label></td>
+                                    <td style="padding-top: 5px;"><?php echo select_tag('mutua',options_for_select(Mutua::getArrayMutuasNoiticias(),$mutuaBsq),array('class'=>'form_input','style'=>'width: 200px;'))?></td>
+				  </td>
+				</tr>
 				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Estado:</label></td>
@@ -206,7 +211,7 @@ use_helper('Text');?>
 						<span class="botonera"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></span>
 					</td>
 					<td>
-							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $destacadaBsq || $ambitoBsq || $estadoBsq || $novedadBsq): ?>
+							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $destacadaBsq || $ambitoBsq || $estadoBsq || $novedadBsq || $mutuaBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
 							<?php endif; ?>								
 						

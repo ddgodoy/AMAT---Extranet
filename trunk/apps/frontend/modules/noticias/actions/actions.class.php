@@ -12,14 +12,16 @@ class noticiasActions extends sfActions
 	public function executeIndex(sfWebRequest $request)
 	{
 		$modulo  = $this->getModuleName();
-		$guardados = Common::getCantidaDEguardados('Noticia',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
+		$guardados = Common::getCantidaDEguardados('Noticia n',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   		$this->pager = new sfDoctrinePager('Noticia', 10);  	    
-		$this->pager->getQuery()->from('Noticia')
+		$this->pager->getQuery()
+                ->from('Noticia n')
+                ->leftJoin('n.Mutua m')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
@@ -246,36 +248,41 @@ class noticiasActions extends sfActions
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		$this->destacadaBsq = $this->getRequestParameter('destacadas_busqueda');
 		$this->novedadBsq = $this->getRequestParameter('novedad_busqueda');
-    	$this->ambitoBsq = $this->getRequestParameter('ambito_busqueda');
-    	$this->estadoBsq = $this->getRequestParameter('estado_busqueda');
+                $this->ambitoBsq = $this->getRequestParameter('ambito_busqueda');
+                $this->mutuaBsq = $this->getRequestParameter('mutua');
+                $this->estadoBsq = $this->getRequestParameter('estado_busqueda');
 
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND titulo LIKE '%$this->cajaBsq%'";
+			$parcial .= " AND n.titulo LIKE '%$this->cajaBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >= '".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND n.fecha >= '".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowdesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND n.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
 		if (!empty($this->destacadaBsq)) {
-			$parcial .= " AND destacada = 1 ";
+			$parcial .= " AND n.destacada = 1 ";
 			$this->getUser()->setAttribute($modulo.'_nowdestacada', $this->destacadaBsq);
 		}
-	    if (!empty($this->novedadBsq)) {
-			$parcial .= " AND novedad = 1 ";
-			$this->getUser()->setAttribute($modulo.'_nownovedad', $this->novedadBsq);
-		}
+                if (!empty($this->novedadBsq)) {
+                            $parcial .= " AND n.novedad = 1 ";
+                            $this->getUser()->setAttribute($modulo.'_nownovedad', $this->novedadBsq);
+                    }
 
 		if (!empty($this->ambitoBsq)) {
-			$parcial .= " AND ambito = '$this->ambitoBsq'";
+			$parcial .= " AND n.ambito = '$this->ambitoBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBsq);
 		}
+                if (!empty($this->mutuaBsq)) {
+			$parcial .= " AND n.mutua_id = '$this->mutuaBsq'";
+			$this->getUser()->setAttribute($modulo.'_nowmutua', $this->mutuaBsq);
+		}
 		if (!empty($this->estadoBsq)) {
-			$parcial .= " AND estado = '$this->estadoBsq'";
+			$parcial .= " AND n.estado = '$this->estadoBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
 		}
 
@@ -291,6 +298,7 @@ class noticiasActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdestacada');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nownovedad');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
+                                $this->getUser()->getAttributeHolder()->remove($modulo.'_nowmutua');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
@@ -300,6 +308,7 @@ class noticiasActions extends sfActions
 				$this->destacadaBsq = $this->getUser()->getAttribute($modulo.'_nowdestacada');
 				$this->novedadBsq = $this->getUser()->getAttribute($modulo.'destacada');
 				$this->ambitoBsq = $this->getUser()->getAttribute($modulo.'_nowambito');
+                                $this->mutuaBsq = $this->getUser()->getAttribute($modulo.'_nowmutua');
 				$this->estadoBsq = $this->getUser()->getAttribute($modulo.'_nowestado');
 			}
 		}
@@ -311,6 +320,7 @@ class noticiasActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdestacada');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'destacada');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
+                        $this->getUser()->getAttributeHolder()->remove($modulo.'_nowmutua');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			$parcial="";
 			$this->cajaBsq = "";
@@ -319,6 +329,7 @@ class noticiasActions extends sfActions
 			$this->destacadaBsq = '';
 			$this->novedadBsq = '';
 			$this->ambitoBsq = '';
+                        $this->mutuaBsq = '';
 			$this->estadoBsq = '';
 		}
 		

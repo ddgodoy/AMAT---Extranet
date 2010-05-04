@@ -16,7 +16,7 @@ class Mutua extends BaseMutua
 	
 	public static function getArrayMutuas()
 	{
-		$ArrayMutuas = array('0'=>'Sin Mutua');
+		$ArrayMutuas = array(''=>'--seleccionar--','0'=>'Sin Mutua');
 		$ModelosMutuas = MutuaTable::getAllMutuas();
 		
 		foreach ($ModelosMutuas AS $m)
@@ -26,4 +26,21 @@ class Mutua extends BaseMutua
 		
 		return $ArrayMutuas;
 	}
+
+        public static function getArrayMutuasNoiticias()
+	{
+                sfLoader::loadHelpers('Text');
+		$ArrayMutuas = array(''=>'--seleccionar--','0'=>'Sin Mutua');
+		$ModelosMutuas = MutuaTable::getAllMutuas();
+
+		foreach ($ModelosMutuas AS $m)
+		{
+			$ArrayMutuas[$m->getId()] = truncate_text($m->getNombre(),30);
+		}
+
+		return $ArrayMutuas;
+	}
+
+
+
 }
