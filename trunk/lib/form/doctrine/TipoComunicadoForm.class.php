@@ -12,15 +12,15 @@ class TipoComunicadoForm extends BaseTipoComunicadoForm
   public function configure()
   {
   	 $this->setWidgets(array(
-      'id'            => new sfWidgetFormInputHidden(),
-      'nombre'        => new sfWidgetFormInput()
-    ));
+              'id'            => new sfWidgetFormInputHidden(),
+              'nombre'        => new sfWidgetFormInput()
+            ));
 
-    $this->setValidators(array(
-      'id'            => new sfValidatorDoctrineChoice(array('model' => 'TipoComunicado', 'column' => 'id', 'required' => false)),
-      'nombre'        => new sfValidatorString(array('required' => false))
-      
-    ));
+        $this->setValidators(array(
+          'id'            => new sfValidatorDoctrineChoice(array('model' => 'TipoComunicado', 'column' => 'id', 'required' => false)),
+          'nombre'        => new sfValidatorString(array('required' => false))
+
+        ));
     
     if($this->getObject()->getImagen())
   	{

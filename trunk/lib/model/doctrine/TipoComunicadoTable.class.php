@@ -6,7 +6,8 @@ class TipoComunicadoTable extends Doctrine_Table
 {
 	public static function AllTiposComunicados()
 	{
-		$s = Doctrine_Query::create()->from('TipoComunicado')->where('deleted = 0');
+		$s = Doctrine_Query::create()->from('TipoComunicado')
+                ->where('deleted = 0');
 		$consulta = $s->execute();
 		return $consulta;
 	}

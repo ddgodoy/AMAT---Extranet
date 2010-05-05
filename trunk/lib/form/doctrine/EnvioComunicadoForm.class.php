@@ -11,6 +11,7 @@ class EnvioComunicadoForm extends BaseEnvioComunicadoForm
 {
   public function configure()
   {
+        sfLoader::loadHelpers('Object');
   	$idGrupoTrabajo = 0;
 	## Obtengo todos los usuarios del grupo de trabajo
 
@@ -20,7 +21,8 @@ class EnvioComunicadoForm extends BaseEnvioComunicadoForm
 	foreach ($listasActivas as $r) {
 		$arrListas[$r->getId()] = $r->getNombre();
 	}
-	
+
+        $tipo = TipoComunicadoTable::AllTiposComunicados();
 	
 	$comunicadosNoEnviados = Doctrine::getTable('Comunicado')->getNoEnviados();
 	
@@ -33,7 +35,7 @@ class EnvioComunicadoForm extends BaseEnvioComunicadoForm
   	$this->setWidgets(array(
           'id'            		=> new sfWidgetFormInputHidden(),
           'comunicado_id'       	=> new sfWidgetFormChoice(array('choices' => $arrComunicados)),
-          'tipo_comunicado_id' 		=> new sfWidgetFormDoctrineChoice(array('model' => 'TipoComunicado', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
+          'tipo_comunicado_id' 		=> new sfWidgetFormChoice(array('choices' =>array('0'=>'-- Seleccionar --')+_get_options_from_objects($tipo)), array('class' => 'form_input', 'style' => 'width: 200px;')),
           'lista_comunicados_list' 	=> new sfWidgetFormSelectDoubleList(array('choices' => $arrListas, 'label_associated' => 'Seleccionados', 'label_unassociated' => 'Opciones')	)
         ));
 
