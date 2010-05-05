@@ -20,10 +20,10 @@ class ActividadForm extends BaseActividadForm
 		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
 			'titulo'            => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
-			'autor'             => new sfWidgetFormInputHidden(),
+			'autor'             => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
 			'contenido'         => new fckFormWidget(),
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-		  'fecha_publicacion' => new sfWidgetFormInputHidden(),
+                        'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'ambito'            => new sfWidgetFormChoice(array('choices' => array('intranet' => 'extranet', 'web' => 'web', 'todos' => 'Extranet y Web'))),
 			'destacada'         => new sfWidgetFormInputCheckbox(),
 			'mutua_id'          => new sfWidgetFormChoice(array('choices' => $mutuas), array('class' => 'form_input', 'style' => 'width: 200px;')),
@@ -37,7 +37,7 @@ class ActividadForm extends BaseActividadForm
 			'autor'             => new sfValidatorString(array('max_length' => 100, 'required' => false), array('required' => '')),
 			'contenido'         => new sfValidatorString(array('required' => false)),
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
-		  'fecha_publicacion' => new sfValidatorDate(array(), array('required' => '', 'invalid' => '')),
+                        'fecha_publicacion' => new sfValidatorDate(array(), array('required' => '', 'invalid' => '')),
 			'ambito'            => new sfValidatorChoice(array('choices' => array('intranet' => 'intranet', 'web' => 'web', 'todos' => 'todos'), 'required' => false)),
 			'destacada'         => new sfValidatorBoolean(array('required' => false)),
 			'mutua_id'          => new sfValidatorDoctrineChoice(array('model' => 'Mutua', 'required' => true)),
@@ -71,9 +71,8 @@ class ActividadForm extends BaseActividadForm
 
 		$this->setDefaults(array(
 			'owner_id'          => $userId,
-			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
+			'mutua_id'          => 1,
 			'estado'            => $estado,
-			'autor'             => sfContext::getInstance()->getUser()->getAttribute('apellido').','.sfContext::getInstance()->getUser()->getAttribute('nombre'),
 			'fecha_publicacion' => '2007/01/01',
 			'ambito'            => 'web',
 		));

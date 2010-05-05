@@ -47,9 +47,9 @@
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle"><?php echo $form['titulo'] ?>
-          <!--<label style="margin-left: 4px;">Autor / Medio*: </label>
-          <?php // echo $form['autor'] ?>
-          </td>-->
+          <label style="margin-left: 4px;">Autor / Medio* </label>
+          <?php echo $form['autor'] ?>
+          </td>
         </tr>
         <tr>
           <td><label>Mutua*</label></td>
