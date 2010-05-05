@@ -89,7 +89,7 @@ class NoticiaForm extends BaseNoticiaForm
 
 		$this->setDefaults(array(
 			'owner_id'          => sfContext::getInstance()->getUser()->getAttribute('userId'),
-			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
+			'mutua_id'          => 1,
 			'estado'            => 'pendiente',
 			'mas_imagen'        => 1,
                         'ambito'            => 'todos'
