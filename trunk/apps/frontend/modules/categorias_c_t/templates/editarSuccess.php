@@ -3,7 +3,7 @@
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
-				<td width="95%"><h1>Tipos de Documentación de Consejos Terriroriales</h1></td>
+				<td width="95%"><h1>Tipos de Documentación de Consejos Territoriales</h1></td>
 				<td width="5%" align="right">
 					<a href="#">
 						<?php echo image_tag('pregunta.gif', array('alt' => 'Ayuda', 'id' => 'sprytrigger1', 'width' => '29', 'height' => '30', 'border' => '0')) ?>
