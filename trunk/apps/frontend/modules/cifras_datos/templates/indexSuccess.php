@@ -65,12 +65,12 @@
 			<tbody>
 				<tr>
 					<?php if (validate_action('publicar') || validate_action('baja')): ?>
-					<th width="3%"></th>
+					<th width="1%"></th>
 	      		    <?php endif;?>
-					<th width="10%" style="text-align:left;">
+					<th width="5%" style="text-align:left;">
 						<a href="<?php echo url_for('cifras_datos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="35%">
+					<th width="47%">
 						<a href="<?php echo url_for('cifras_datos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					

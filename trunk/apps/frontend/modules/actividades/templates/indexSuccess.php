@@ -62,12 +62,12 @@
 			<tbody>
 				<tr>
 					<?php if (validate_action('publicar') || validate_action('baja')): ?>
-					<th width="3%"></th>
-	      		    <?php endif;?>
-					<th width="15%" style="text-align:center;">
+					<th width="1%"></th>
+                                        <?php endif;?>
+					<th width="5%" style="text-align:center;">
 						<a href="<?php echo url_for('actividades/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="35%">
+					<th width="47%">
 						<a href="<?php echo url_for('actividades/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					
@@ -94,11 +94,11 @@
 						</a>
 					<?php endif;?>	
 					</td>
-          <td valign="center" align="center">
-           <?php if (validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'actividades/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          	<?php endif; ?>
-          </td>
+                                      <td valign="center" align="center">
+                                       <?php if (validate_action('baja')):?>
+                                            <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'actividades/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                            <?php endif; ?>
+                                      </td>
 				</tr>
 				<?php endforeach; ?>
 				<?php if(validate_action('publicar') || validate_action('baja')):?>

@@ -33,13 +33,13 @@
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
-				    <th width="15%" style="text-align:center;">
+				    <th width="10%" style="text-align:center;">
 						<a href="<?php echo url_for('circulares/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
 					<th width="5%" style="text-align:center;">
 					    <a href="<?php echo url_for('circulares/index?sort=numero&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nº</a>
 					</th>
-					<th width="85%">
+					<th width="75%">
 						<a href="<?php echo url_for('circulares/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="5%">&nbsp;</th>
