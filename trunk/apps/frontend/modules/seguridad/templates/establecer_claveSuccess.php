@@ -17,12 +17,12 @@
 	</div>
 
 	<?php if (!empty($cambioClaveExitoso)): ?>
-		<h2>Registro exitoso de Nueva Clave</h2>
+		<h2>La nueva clave se ha registrado con éxito</h2>
 		<div class="logbox" style="background-image:none;">
 		<div class="mensajeSistema ok" style="margin-bottom:15px;">
-			Su nueva clave ha sido registrada exitosamente.<br /><br />
+			Su nueva clave ha sido registrada.<br /><br />
 			Ya puede introducir sus datos en la<br>
-                        pantalla inicial y comenzar su sesión
+      pantalla inicial y comenzar su sesión
 		</div>
 		<input name="btn_volver" value="Volver al Inicio" class="boton" onclick="document.location='<?php echo url_for('inicio/index') ?>';" type="button">
 		<br clear="all" />

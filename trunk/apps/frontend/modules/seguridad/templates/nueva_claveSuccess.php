@@ -18,7 +18,7 @@
 	</div>
 <!--*-->
 	<?php if (!empty($solicitudEnviada)): ?>
-	<h2>Solicitud enviada exitosamente</h2>
+	<h2>La solicitud ha sido enviada</h2>
 	<div class="logbox" style="background-image:none;">
 		<div class="mensajeSistema ok" style="margin-bottom:15px;">
 			Un mensaje ha sido enviado a su cuenta de correo con<br />detalles sobre c&oacute;mo obtener una nueva clave.<br /><br />Por favor, revise su buzón de correo para continuar con el proceso.
