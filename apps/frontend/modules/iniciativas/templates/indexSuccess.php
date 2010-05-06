@@ -42,12 +42,12 @@
 			<tbody>
 				<tr>
                                         <?php if(validate_action('baja')): ?>
-					<th width="5%">&nbsp;</th>
+					<th width="3%">&nbsp;</th>
                                         <?php endif; ?>
-					<th width="15%" style="text-align:center;">
+					<th width="10%" style="text-align:center;">
 						<a href="<?php echo url_for('iniciativas/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="70%">
+					<th width="77%">
 						<a href="<?php echo url_for('iniciativas/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="5%">&nbsp;</th>
