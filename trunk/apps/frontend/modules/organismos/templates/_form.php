@@ -75,7 +75,7 @@
 	<div class="clear"></div>
 	<br/>
 	<?php if ($form->getObject()->isNew()): ?>
-	<div class="mensajeSistema ok">Los usuarios del Organismo podrán seleccionarse luego de guardarlo </div>
+	<div class="mensajeSistema ok">Los usuarios del Organismo podrán seleccionarse después de guardarlos</div>
 	<?php endif; ?>
 	<?php if (!$form->getObject()->isNew()): ?>
 	<fieldset style="float:left; margin-right:10px;width:445px; ">
