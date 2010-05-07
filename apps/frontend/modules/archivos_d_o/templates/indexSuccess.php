@@ -59,7 +59,7 @@
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s <?php if ($cajaBsq) echo " con la palabra '".$cajaBsq."'" ?> </span> 
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva') ?>';" style="float: right;" value="Nuevo Archivos" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva') ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
@@ -152,7 +152,7 @@
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva') ?>';" style="float: right;" value="Nuevo Archivos" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva') ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 
 			
