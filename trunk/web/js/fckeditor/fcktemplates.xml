@@ -216,7 +216,7 @@
 		<Description>Banner para comunicados de Amat.</Description>
 		<Html>
 			<![CDATA[
-				<img src="http://extranet.amat.es/uploads/image/3_logo.gif" width="562" height="95" alt="Amat" />
+				<img src="http://extranet.amat.es/uploads/image/3_logo.jpg" width="562" height="95" alt="Amat" />
 			]]>
 		</Html>
 	</Template>
@@ -229,7 +229,7 @@
                                         <tr>
                                             <td width="10">&nbsp;</td>
                                             <td width="362">
-                                            <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img src="http://extranet.amat.es/uploads/image/3_logo.gif" xsscleaned="width: 560px; height: 95px" alt="Amat" /></p>
+                                            <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img src="http://extranet.amat.es/uploads/image/3_logo.jpg" xsscleaned="width: 560px; height: 95px" alt="Amat" /></p>
                                             </td>
                                             <td width="10">&nbsp;</td>
                                         </tr>
@@ -276,7 +276,7 @@
                                     <tr>
                                         <td width="10">&nbsp;</td>
                                         <td width="362">
-                                        <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" XSSCleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.gif" /></p>
+                                        <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" XSSCleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.jpg" /></p>
                                         </td>
                                         <td width="10">&nbsp;</td>
                                     </tr>
@@ -304,7 +304,7 @@
                                 <tbody>
                                     <tr>
                                         <td width="362">
-                                        <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" xsscleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.gif" /></p>
+                                        <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" xsscleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.jpg" /></p>
                                         </td>
                                     </tr>
                                 </tbody>
