@@ -86,7 +86,8 @@ class EventoForm extends BaseEventoForm
 		}
 
 		$this->setDefaults(array( 'usuarios_list' => $userId,
-		                          'owner_id' => $userId, 
+		                          'owner_id' => $userId,
+                                          'mutua_id'=>1,
 		                          'mas_imagen' => 1,
 		                          'ambito'=>'ambos'));
 
