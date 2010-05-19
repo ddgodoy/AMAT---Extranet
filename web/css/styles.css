@@ -819,13 +819,17 @@ ul.ok_list li { margin-left:10px; }
 ul.error_list { padding:10px; margin-bottom:5px; border: solid 1px #CC0033; color:#CC0033; background:#FFCCCC; font-size:12px; }
 ul.error_list li { margin-left:10px; }
 /**/
-noticias {
+.noticias {
+
  border-bottom-width: 1px;
  border-bottom-style: dotted;
  border-bottom-color: #CCC;
  position: relative;
  padding-bottom: 10px;
  padding-top: 10px;
+}
+.noticias ul, .noticias ol, .noticias dl{
+ padding-left: 30px;
 }
 .noticias .notfecha {
  font-size: 11px;
