@@ -84,7 +84,7 @@
 						<?php echo date("d/m/Y", strtotime($valor->getCreatedAt())) ?>
 					</td>
 					<td valign="center">					
-							<strong><?php echo $valor->EnvioComunicado->Comunicado->getNombre() ?></strong>
+							<strong><?php echo $valor->getEnvioComunicado()->getComunicado()->getNombre() ?></strong>
 					</td>
 					<td valign="center">					
 						<a href="<?php echo url_for('usuarios/editar?id='.$valor->getUsuarioId()) ?>"><?php echo $valor->Usuario->getEmail() ?></a>					
