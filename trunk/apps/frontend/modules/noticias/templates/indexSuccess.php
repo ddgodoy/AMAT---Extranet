@@ -61,7 +61,7 @@
 					<th width="3%"></th>
                                         <?php endif;?>
 					<th width="11%">
-						<a href="<?php echo url_for('noticias/index?sort=n,fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
+						<a href="<?php echo url_for('noticias/index?sort=n.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
 							Fecha
 						</a>
 					</th>
