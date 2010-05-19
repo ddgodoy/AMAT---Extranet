@@ -53,7 +53,7 @@ class contactoActions extends sfActions
 				$mailer->send($message, $mailTema, sfConfig::get('app_default_from_email'));
 				$mailer->disconnect();
 
-				$this->getUser()->setFlash('notice', "El email ha sido enviado correctamente.<br />Nos comunicaremos con Ud. a la brevedad.");
+				$this->getUser()->setFlash('notice', "El correo ha sido enviado correctamente.<br />Nos pondremos en contacto con usted lo antes posible.");
 
 				$this->redirect('contacto/index');
 			} catch (Exception $e) {
