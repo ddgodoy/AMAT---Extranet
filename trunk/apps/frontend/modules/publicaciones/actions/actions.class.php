@@ -193,7 +193,7 @@ class publicacionesActions extends sfActions
   
   protected function setOrdenamiento()
   {
-		$this->orderBy = 'titulo';
+		$this->orderBy = 'fecha';
 		$this->sortType = 'asc';
 
 		if ($this->hasRequestParameter('orden')) {
