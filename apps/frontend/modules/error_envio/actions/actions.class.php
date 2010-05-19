@@ -121,7 +121,7 @@ class error_envioActions extends sfActions
   protected function setOrdenamiento()
   {
 		$this->orderBy = 'er.created_at';
-		$this->sortType = 'asc';
+		$this->sortType = 'desc';
 
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
