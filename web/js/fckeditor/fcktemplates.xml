@@ -213,6 +213,72 @@
 			]]>
 		</Html>
 	</Template>
+        <Template title="Circular, banner, enlaces y textos" image="circulares.jpg">
+		<Description>Circular, banner, enlaces y textos.</Description>
+		<Html>
+			<![CDATA[
+		          <table border="0" cellspacing="10" cellpadding="0">
+                              <tr>
+                                <td valign="top">&nbsp;</td>
+                                <td width="562"><img src="http://extranet.amat.es/uploads/image/3_logo.jpg" width="562" height="95" alt="Amat" /></td>
+                                <td valign="top">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top">&nbsp;</td>
+                                <td><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:right;">Madrid, XX de XXXXXXX de 2010</p></td>
+                                <td valign="top">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top">&nbsp;</td>
+                                <td><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">CIRCULAR N&ordm;&nbsp; XX/2010</p>
+                                <h3 style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">A LA ATENCI&Oacute;N DEL SR.  DIRECTOR</h3>
+                                <a href="#" style="font-size:14px; font-family:Arial, Helvetica, sans-serif; color:#09F; font-weight:bold; text-decoration:none;">Ref&ordf;.: Xxxxxxx xxxx x x&nbsp; xxxxxx xxxxxxx x xxxxxx xx xxxxxx xxx xxxxxxx  xx xx xxx xxxxx x xxxxxx xxx xxxx x xxxxx.</a>    <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+                                <td valign="top">&nbsp;</td>
+                              </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td align="center" valign="top"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td align="center"><img src="http://amat.es/images/logo_amat_as.gif" alt="AMAT" /></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td align="center" valign="top"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td valign="top"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">Atentamente,</p></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td valign="top"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; text-align:center;">Firmado por Enrique Valenzuela de  Quinta<br />
+                                Director Gerente</p></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td valign="top"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;">R/P.P. Sanz</p></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;</td>
+                                <td valign="top"><p style="font-size:14px; font-family: 'Times New Roman', Times, serif; font-size:10px; text-align:center;">Asociaci&oacute;n  profesional de la Ley  19/1977, N&ordm; de Dep&oacute;sito 3.604 &ndash; C.I.F. G-78/383767</p></td>
+                                <td>&nbsp;</td>
+                              </tr>
+                         </table>
+			]]>
+		</Html>
+	</Template>
          <Template title="Banner para comunicados de Amat" image="9.jpg">
 		<Description>Banner para comunicados de Amat.</Description>
 		<Html>
