@@ -14,7 +14,7 @@
 	
 	<div class="noticias">	  
 	  <span class="notfecha">Fecha de publicacion: <?php echo date("d/m/Y", strtotime($documentacion_organismo->getfecha_publicacion())) ?></span><br />     
-	  <a href="#" class="nottit"><?php echo  $documentacion_organismo->getNombre() ?></a><br />
+	  <a  class="nottit"><?php echo  $documentacion_organismo->getNombre() ?></a><br />
 	  <?php echo nl2br($documentacion_organismo->getcontenido()) ?>      
 	  <span class="notfecha">
 	  <?php
