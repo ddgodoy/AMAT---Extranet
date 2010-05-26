@@ -11,7 +11,7 @@ class circularesActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-  	
+  	$this->circularCoun = CircularTable::getAll()->count();
   	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
