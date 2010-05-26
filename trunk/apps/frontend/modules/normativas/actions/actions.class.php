@@ -12,6 +12,7 @@ class normativasActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+        $this->normativaCoun = NormativaTable::getAll()->count();
   	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
