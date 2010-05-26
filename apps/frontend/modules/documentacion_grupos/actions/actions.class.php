@@ -173,8 +173,6 @@ public function executeDelete(sfWebRequest $request)
 			}
 			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
 		}
-                echo 'chau';
-                exit ();
   }
   
 	/* Metodos para busqueda y ordenamiento */
