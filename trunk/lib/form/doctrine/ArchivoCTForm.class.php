@@ -50,7 +50,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
 		{
 			
 		$this->setWidget('archivo', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/archivos_c_t/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
-		$this->setValidator('archivo', new sfValidatorFile(array('path' => 'uploads/archivos_c_t/docs', 'required' => true),array('required'=>'El archivo es obligatorio')));
+		$this->setValidator('archivo', new sfValidatorFile(array('path' => 'uploads/archivos_c_t/docs', 'required' => false),array('required'=>'El archivo es obligatorio')));
 
 		}
 		
