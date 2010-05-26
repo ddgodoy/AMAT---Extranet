@@ -13,7 +13,8 @@ class ArchivoCTForm extends BaseArchivoCTForm
   {
   	    sfLoader::loadHelpers('Object');
   	    $userId = sfContext::getInstance()->getUser()->getAttribute('userId');
-  	    $arrayGruposTrabajo = ArchivoCTTable::doSelectAllCategorias('ConsejoTerritorial');
+            $arrayGruposTrabajo = ConsejoTerritorial::ArrayDeMiconsejo($userId,1);
+  	    //$arrayGruposTrabajo = ArchivoCTTable::doSelectAllCategorias('ConsejoTerritorial');
   	    
   		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
@@ -23,7 +24,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
 			'fecha_caducidad'   => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'disponibilidad'    => new sfWidgetFormChoice(array('choices' => array('Solo Grupo' => 'solo grupo', 'Todos' => 'todos'))),
 			'owner_id'          => new sfWidgetFormInputHidden(),
-			'consejo_territorial_id'   => new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') + _get_options_from_objects($arrayGruposTrabajo)))),
+			'consejo_territorial_id'   => new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') + $arrayGruposTrabajo))),
                         'documentacion_consejo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionConsejo', 'add_empty' => true)),
 		));
 
