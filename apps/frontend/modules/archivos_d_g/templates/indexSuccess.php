@@ -164,7 +164,7 @@
 						<td>
 						<?php 
 							echo select_tag('grupo_trabajo_id',
-															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(GrupoTrabajoTable::getAllGrupoTrabajo()), $sf_user->getAttribute('archivos_d_g_nowgrupo')),
+															options_for_select(array('0'=>'-- seleccionar --') + _get_options_from_objects(GrupoTrabajoTable::getGruposTrabajoByUsuario($sf_user->getAttribute('userId'))), $sf_user->getAttribute('archivos_d_g_nowgrupo')),
 															array('style'=>'width:200px;','class'=>'form_input')
 														 );
 							echo observe_field('grupo_trabajo_id', array('update'=>'content_documentacion','url'=>'documentacion_grupos/listByGrupoTrabajo','with'=>"'id_grupo_trabajo='+value"));
