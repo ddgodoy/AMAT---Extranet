@@ -29,6 +29,16 @@ class CircularTable extends DocumentacionTable
 //		die();
 		return $r->fetchOne();
 	}
+
+         public static function getAll()
+       {
+            $q=Doctrine_Query::create()
+           ->from('Circular')
+           ->where('deleted = 0');
+
+           return $q->execute();
+
+       }
 	
 	
 }
