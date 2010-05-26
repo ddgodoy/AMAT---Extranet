@@ -26,7 +26,7 @@
 		$arrayDocumentacion = DocumentacionGrupoTable::doSelectByGrupoTrabajo($grupos_trabajo_selected);
 	}
 	
-	
+	$userId = $sf_user->getAttribute('userId');
 	include_partial
 	(
 		'form',
@@ -34,7 +34,7 @@
 		(
 			'form' => $form,
 			'pageActual' => $axInstance->getUser()->getAttribute($axInstance->getModuleName().'_nowpage'),
-			'arrayGruposTrabajo'   => ArchivoDGTable::doSelectAllCategorias('GrupoTrabajo'),			
+			'arrayGruposTrabajo'   => GrupoTrabajo::ArrayDeMigrupo($userId, 1),
 			'arrayDocumentacion'=> $arrayDocumentacion,
 			'grupos_trabajo_selected' => $grupos_trabajo_selected,
 			'documentacion_selected'  => $documentacion_selected
