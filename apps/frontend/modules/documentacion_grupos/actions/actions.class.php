@@ -130,21 +130,17 @@ public function executeDelete(sfWebRequest $request)
 			if ($documentacion_grupo->getEstado()=='publicado') {
 				if ($documentacion_grupo->getGrupoTrabajoId()) {
 					$enviar= true;
-					$grupo = GrupoTrabajoTable::getGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
-					$email = UsuarioTable::getUsuariosByGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
-					$tema  = 'Documento registrado para Grupo de Trabajo: '.$grupo->getNombre();
+					$email = UsuarioTable::getUsuariosByGrupoTrabajoArray($documentacion_grupo->getGrupoTrabajoId());
+					$tema  = 'Documento registrado para Grupo de Trabajo: '.$documentacion_grupo->getNombre();
 				}
 				if($documentacion_grupo->getEstado()=='publicado') {
 					ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
 				}
 			}
 			if ($documentacion_grupo->getEstado() == 'pendiente') {
-                                echo 'publicado';
-                                exit ();
 				$enviar= true;
-				$grupo = GrupoTrabajoTable::getGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
-				$email = AplicacionRolTable::getEmailPublicar('24',$grupo->getId());
-				$tema  = 'Documento pendiente de publicar para Grupo de Trabajo: '.$grupo->getNombre();
+				$email = AplicacionRolTable::getEmailPublicar('24',$documentacion_grupo->getGrupoTrabajoId());
+				$tema  = 'Documento pendiente de publicar para Grupo de Trabajo: '.$documentacion_grupo->getNombre();
 			}				
 			## envia el email  	
 			if (!empty($enviar)) {
@@ -162,14 +158,14 @@ public function executeDelete(sfWebRequest $request)
                                                      'url'    => $url,
                                                      'head_image'  => $iPh,
                                                      'organizador' => $organizador,
-                                                                                                                 'descripcio'  => $documentacion_grupo->getContenido()
+                                                     'descripcio'  => $documentacion_grupo->getContenido()
                                 );
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
 
 				foreach ($email AS $emailPublic) {
-					if ($emailPublic->getEmail()) {
-						$mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+					if ($emailPublic['email']) {
+						$mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
 						
 					}
 				}
