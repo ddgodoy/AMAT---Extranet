@@ -140,6 +140,8 @@ public function executeDelete(sfWebRequest $request)
 			if ($documentacion_grupo->getEstado() == 'pendiente') {
 				$enviar= true;
 				$email = AplicacionRolTable::getEmailPublicarArray('24',$documentacion_grupo->getGrupoTrabajoId());
+                                echo 'hola';
+                                exit ();
 				$tema  = 'Documento pendiente de publicar para Grupo de Trabajo: '.$documentacion_grupo->getNombre();
 			}				
 			## envia el email  	
