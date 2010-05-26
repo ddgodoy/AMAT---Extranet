@@ -145,7 +145,8 @@ public function executeDelete(sfWebRequest $request)
 			## envia el email  	
 			if (!empty($enviar)) {
 				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
-
+                                echo 'hola esto por eniar';
+                                exit();
 				$iPh = image_path('/images/logo_email.jpg', true);
 				$url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
 				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
@@ -162,8 +163,7 @@ public function executeDelete(sfWebRequest $request)
                                 );
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
-                                echo 'hola esto por eniar';
-                                exit();
+                                
 				foreach ($email AS $emailPublic) {
 					if ($emailPublic['email']) {
 						$mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
