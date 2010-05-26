@@ -124,8 +124,6 @@ public function executeDelete(sfWebRequest $request)
   {
 		$form->bind($request->getParameter($form->getName()));
 		if ($form->isValid()) {
-                    echo 'hola';
-                    exit ();
 			$documentacion_grupo = $form->save();
 
 			## Notificar y enviar email a los destinatarios 
@@ -141,6 +139,8 @@ public function executeDelete(sfWebRequest $request)
 				}
 			}
 			if ($documentacion_grupo->getEstado() == 'pendiente') {
+                                echo 'publicado';
+                                exit ();
 				$enviar= true;
 				$grupo = GrupoTrabajoTable::getGrupoTrabajo($documentacion_grupo->getGrupoTrabajoId());
 				$email = AplicacionRolTable::getEmailPublicar('24',$grupo->getId());
