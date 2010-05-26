@@ -145,17 +145,17 @@ public function executeDelete(sfWebRequest $request)
 			## envia el email  	
 			if (!empty($enviar)) {
 				sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
-                                echo 'hola esto por eniar';
+                                
 				$iPh = image_path('/images/logo_email.jpg', true);
-                                echo '2';
+                             
 				$url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
-                                echo '3';
+                             
 				$organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
-                                echo '4';
+                              
                                 $mailer = new Swift(new Swift_Connection_NativeMail());
-                                echo '5';
+                              
                                 $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
-                                echo '6';
+                           
                                 $mailContext = array('tema'   => $tema,
                                                      'evento' => $documentacion_grupo->getNombre(),
                                                      'url'    => $url,
@@ -163,15 +163,9 @@ public function executeDelete(sfWebRequest $request)
                                                      'organizador' => $organizador,
                                                      'descripcio'  => $documentacion_grupo->getContenido()?$documentacion_grupo->getContenido():'',
                                 );
-                                echo '7';
-                                echo '<pre>';
-                                print_r($mailContext);
-                                echo '</pre>';
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
-                                echo '8';
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
-                                echo '9';
-                                exit ();
+                                
 				foreach ($email AS $emailPublic) {
 					if ($emailPublic['email']) {
 						$mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
