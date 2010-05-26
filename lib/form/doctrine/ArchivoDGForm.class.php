@@ -15,6 +15,7 @@ class ArchivoDGForm extends BaseArchivoDGForm
   	$msArchivo = array();
   	$ctxAction = sfContext::getInstance()->getActionName();
   	$userId    = sfContext::getInstance()->getUser()->getAttribute('userId');
+        $GruposUsuario = GrupoTrabajo::ArrayDeMigrupo($userId, 1);
 
   	if ($ctxAction == 'create') {
   		$rqArchivo = true;
@@ -23,7 +24,7 @@ class ArchivoDGForm extends BaseArchivoDGForm
   	$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
 			'nombre'            => new sfWidgetFormInput(array(), array('style' => 'width: 430px;', 'class' => 'form_input')),			
-			'grupo_trabajo_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'GrupoTrabajo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
+			'grupo_trabajo_id'  => new sfWidgetFormChoice(array('choices' => array('0'=>'--seleccionar--')+$GruposUsuario), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'documentacion_grupo_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionGrupo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'contenido'         => new fckFormWidget(),			
 			'archivo'           => new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/archivos_d_g/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')),
