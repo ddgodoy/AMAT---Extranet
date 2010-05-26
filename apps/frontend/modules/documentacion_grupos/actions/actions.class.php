@@ -123,9 +123,9 @@ public function executeDelete(sfWebRequest $request)
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
 		$form->bind($request->getParameter($form->getName()));
-                 echo 'hola';
-                 exit ();
 		if ($form->isValid()) {
+                    echo 'hola';
+                    exit ();
 			$documentacion_grupo = $form->save();
 
 			## Notificar y enviar email a los destinatarios 
@@ -177,6 +177,8 @@ public function executeDelete(sfWebRequest $request)
 			}
 			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
 		}
+                echo 'chau';
+                exit ();
   }
   
 	/* Metodos para busqueda y ordenamiento */
