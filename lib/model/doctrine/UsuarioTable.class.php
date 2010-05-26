@@ -35,6 +35,28 @@ class UsuarioTable extends Doctrine_Table
 		
 		return $usuarios;
 	}
+
+        public static function getUsuariosByGrupoTrabajoArray($grupoTrabajoId, $exceptUserId=null, $UserEX='')
+	{
+		$q = Doctrine_Query::create();
+                $q->select('u.id, u.email');
+		$q->from('Usuario u');
+		$q->leftJoin('u.UsuarioGrupoTrabajo ugt');
+		$q->where('ugt.grupo_trabajo_id = ' . $grupoTrabajoId);
+                $q->andWhere('u.deleted = 0 AND u.activo = 1');
+		if ($exceptUserId != null) $q->addWhere('u.id != ' . $exceptUserId);
+		$q->orderBy('u.apellido ASC, u.nombre ASC');
+		if($UserEX != '')
+		{
+                $q->addWhere('u.id NOT IN ('.$UserEX.')');
+		}
+
+		$usuarios = $q->fetchArray();
+
+		return $usuarios;
+	}
+
+
 	
 	public static function getUsuariosByConsejoTerritorial($consejoTerritorialId, $exceptUserId=null, $UserEX='' )
 	{
