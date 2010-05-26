@@ -79,11 +79,11 @@
           </td>
         </tr>
         <tr>
-          <td style="padding-top: 5px;"><label>Archivo *</label></td>
+          <td style="padding-top: 5px;"><label>Archivo </label></td>
           <td style="padding-top: 5px;"><label><?php echo $form['archivo'] ?></label></td>
         </tr>
         <tr>
-          <td valign="top" style="padding-top: 5px;"><label>Descripci&oacute;n *</label></td>
+          <td valign="top" style="padding-top: 5px;"><label>Descripci&oacute;n </label></td>
           <td style="padding-top: 5px;"><?php echo $form['contenido'] ?></td>
         </tr>
       </tbody>
