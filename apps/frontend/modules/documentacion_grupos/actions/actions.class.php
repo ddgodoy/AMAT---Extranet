@@ -65,12 +65,12 @@ class documentacion_gruposActions extends sfActions
     $this->setTemplate('nueva');
   }
 
-  public function executePublicar(sfWebRequest $request)
-	{
-		$this->processSelectedRecords($request, 'publicar');
-	}
+public function executePublicar(sfWebRequest $request)
+  {
+    $this->processSelectedRecords($request, 'publicar');
+  }
 
-	public function executeDelete(sfWebRequest $request)
+public function executeDelete(sfWebRequest $request)
   {
     $this->processSelectedRecords($request, 'baja');
   }
@@ -114,7 +114,8 @@ class documentacion_gruposActions extends sfActions
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($request->getParameter('id')), sprintf('Object documentacion_grupo does not exist (%s).', $request->getParameter('id')));
     $this->form = new DocumentacionGrupoForm($documentacion_grupo);
-	
+    echo 'hola';
+    exit ();
     $this->processForm($request, $this->form);
 
     $this->setTemplate('editar');
