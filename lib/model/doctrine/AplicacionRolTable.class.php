@@ -56,6 +56,49 @@ class AplicacionRolTable extends Doctrine_Table
    	  return $r->execute();   
    }
 
+    public static function getEmailPublicarArray($IDaplic = '', $gru = '', $cons= '', $org = '')
+   {
+   	 $r=Doctrine_Query::create()
+         ->select('u.id AS id, u.email AS email')
+   	 ->from('Usuario u');
+   	 if($gru !='')
+   	 {
+   	    $r->leftJoin('u.UsuarioGrupoTrabajo ugr');
+   	 }
+   	 if($cons !='')
+   	 {
+   	   $r->leftJoin('u.UsuarioConsejoTerritorial uct');
+   	 }
+   	 if($org !='')
+   	 {
+   	   $r->leftJoin('u.UsuarioOrganismo uo');
+   	 }
+   	   $r->leftJoin('u.UsuarioRol ur')
+   	    ->leftJoin('ur.Rol r')
+   	    ->leftJoin('r.AplicacionRol ar')
+   	    ->where('ar.accion_publicar = 1');
+   	    if($IDaplic!='')
+   	    {
+   	     	$r->andWhere('ar.aplicacion_id = '.$IDaplic);
+   	    }
+   	    if($gru !='')
+	   	 {
+	   	    $r->andWhere('ugr.grupo_trabajo_id = '.$gru);
+	   	 }
+	   	 if($cons !='')
+	   	 {
+	   	   $r->andWhere('uct.consejo_territorial_id = '.$cons);
+	   	 }
+	   	 if($org !='')
+	   	 {
+	   	   $r->andWhere('uo.organismo_id = '.$org);
+	   	 }
+   	    $r->andWhere('u.deleted = 0 AND u.activo= 1');
+
+   	  return $r->execute();
+   }
+
+
    public static function getEmailEventoPublicar($IDaplic)
    {
    	 $r=Doctrine_Query::create()
