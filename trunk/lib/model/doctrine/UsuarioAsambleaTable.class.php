@@ -12,11 +12,6 @@ class UsuarioAsambleaTable extends Doctrine_Table
    	  ->where('ua.asamblea_id = '.$id)
           ->andWhere('u.deleted = 0 AND u.activo = 1');
 
-          echo $q->getQuery();
-          exit ();
-
-
-
    	  return $q->execute();
    }
    	
