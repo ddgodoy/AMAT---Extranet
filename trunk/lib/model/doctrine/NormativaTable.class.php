@@ -17,4 +17,14 @@ class NormativaTable extends DocumentacionTable
 //		die();
 		return $r->fetchOne();
 	}
+
+         public static function getAll()
+       {
+            $q=Doctrine_Query::create()
+           ->from('Normativa')
+           ->where('deleted = 0');
+
+           return $q->execute();
+
+       }
 }
