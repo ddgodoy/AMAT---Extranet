@@ -46,14 +46,17 @@ class ConsejoTerritorial extends BaseConsejoTerritorial
 	
 	public static  function ArrayDeMiconsejo($id_usuario)
 	{
-		$consejos = ConsejoTerritorialTable::getConsejosTerritorialesByUsuario($id_usuario);
+		$consejos = ConsejoTerritorialTable::getConsejosTerritorialesByUsuario($id_usuario,$choices='');
 		$base = 'ConsejoTerritorial_';
 		$presentacion = array();
 		foreach ( $consejos AS $consejosid )
 		{
-			$armado = $base.$consejosid['id'];
+                        if ($choices == '') {
+			  $armado = $base.$consejosid['id'];
+			} else {
+			  $armado = $consejosid['id'];
+			}
 			$presentacion[$armado] = $consejosid['nombre'];
-			
 		}
 		
 		return $presentacion; 
