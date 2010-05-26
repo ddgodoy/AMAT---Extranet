@@ -14,6 +14,15 @@ class IniciativaTable extends DocumentacionTable
 
 		return $r->fetchOne();
 	}
-	
+
+        public static function getAll()
+       {
+            $q=Doctrine_Query::create()
+           ->from('Iniciativa')
+           ->where('deleted = 0');
+
+           return $q->execute();
+
+       }
 	
 }
