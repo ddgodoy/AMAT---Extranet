@@ -382,7 +382,7 @@ class eventosActions extends sfActions
         $orden = $this->hasRequestParameter('orden');
         $orderBy = $this->getUser()->getAttribute($modulo.'_noworderBY');
 
-        Common::setOderBYAction($modulo, 'desc', 'fecha', $orden, $orderBy);
+       return Common::setOderBYAction($modulo, 'desc', 'fecha', $orden, $orderBy);
 		
   }
   
