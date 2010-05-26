@@ -164,6 +164,9 @@ public function executeDelete(sfWebRequest $request)
                                                      'descripcio'  => $documentacion_grupo->getContenido()?$documentacion_grupo->getContenido():'',
                                 );
                                 echo '7';
+                                echo '<pre>';
+                                print_r($mailContext);
+                                echo '</pre>';
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                 echo '8';
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
