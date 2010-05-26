@@ -13,7 +13,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
   {
   	    sfLoader::loadHelpers('Object');
   	    $userId = sfContext::getInstance()->getUser()->getAttribute('userId');
-            $arrayGruposTrabajo = ConsejoTerritorial::ArrayDeMiconsejo($userId,1);
+            $arrayGruposTrabajo = ConsejoTerritorial::ArrayDeMiconsejo($userId, 1);
   	    //$arrayGruposTrabajo = ArchivoCTTable::doSelectAllCategorias('ConsejoTerritorial');
   	    
   		$this->setWidgets(array(
