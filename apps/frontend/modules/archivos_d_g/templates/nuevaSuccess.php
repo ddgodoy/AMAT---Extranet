@@ -15,6 +15,7 @@
 
 
 <?php
+        $userId = $sf_user->getAttribute('userId');
 	include_partial
 	(
 		'form',
@@ -22,7 +23,7 @@
 		(
 			'form' => $form,
 			'pageActual' => 1,
-			'arrayGruposTrabajo'   => ArchivoDGTable::doSelectAllCategorias('GrupoTrabajo'),			
+			'arrayGruposTrabajo'   => GrupoTrabajo::ArrayDeMigrupo($userId, 1),
 			'arrayDocumentacion'=> array(),
 			'grupos_trabajo_selected' => 0,
 			'documentacion_selected'  => 0,
