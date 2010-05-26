@@ -8,7 +8,7 @@ class UsuarioAsambleaTable extends Doctrine_Table
    {
    	  $q = Doctrine_Query::create()
    	  ->from('UsuarioAsamblea ua')
-          ->leftJoin('ua.usuario u')
+          ->leftJoin('ua.Usuario u')
    	  ->where('ua.asamblea_id = '.$id)
           ->andWhere('u.deleted = 0 AND u.activo = 1');
 
