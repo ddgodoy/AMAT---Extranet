@@ -7,11 +7,11 @@ class GrupoTrabajoTable extends Doctrine_Table
 	public static function getGruposTrabajoByUsuario($usuarioId)
 	{
 		$q = Doctrine_Query::create()
-				->from('GrupoTrabajo gt')
-				->leftJoin('gt.UsuarioGrupoTrabajo ugt')
-				->where('ugt.usuario_id ='. $usuarioId)
-				->addWhere('gt.deleted = 0')
-				->orderBy('gt.nombre ASC');
+                ->from('GrupoTrabajo gt')
+                ->leftJoin('gt.UsuarioGrupoTrabajo ugt')
+                ->where('ugt.usuario_id ='. $usuarioId)
+                ->addWhere('gt.deleted = 0')
+                ->orderBy('gt.nombre ASC');
 
 		$gruposTrabajo = $q->execute();
 
