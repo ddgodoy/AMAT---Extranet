@@ -14,7 +14,7 @@ class documentacion_consejosActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	$modulo  = $this->getModuleName();
-  	$guardados = Common::getCantidaDEguardados('DocumentacionConsejo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
+  	//$guardados = Common::getCantidaDEguardados('DocumentacionConsejo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
   	$this->Consejo = '';
     $this->paginaActual = $this->getRequestParameter('page', 1);
 
@@ -29,7 +29,8 @@ class documentacion_consejosActions extends sfActions
 		$this->pager->init();
 
 		$this->documentacion_consejo_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
+                $this->cantidadRegistros = $this->pager->getNbResults();
+	//	$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
 
 		if ($this->consejoBsq) {
 			$this->Consejo = ConsejoTerritorialTable::getConsejo($this->consejoBsq);
@@ -246,11 +247,11 @@ class documentacion_consejosActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'deleted=0'.$parcial;
+			return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		}
 		else
         { 
-		  return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+		  return "deleted=0".$parcial." AND consejo_territorial_id IN ".$consejosterritoriales." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
         }  
 		
   }
