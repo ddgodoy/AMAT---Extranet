@@ -253,7 +253,7 @@ class documentacion_gruposActions extends sfActions
 		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
 			return "deleted=0 ".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		} else {
-			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
+			return "deleted=0".$parcial." AND grupo_trabajo_id IN ".$gruposdetrabajo." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		}
   }
   
