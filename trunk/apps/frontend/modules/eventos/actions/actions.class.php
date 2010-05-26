@@ -378,11 +378,13 @@ class eventosActions extends sfActions
 
   protected function setOrdenamiento()
   {
+
+        sfLoader::loadHelpers('OrderBy');
         $modulo = $this->getModuleName();
         $orden = $this->hasRequestParameter('orden');
         $orderBy = $this->getUser()->getAttribute($modulo.'_noworderBY');
 
-       return Common::setOderBYAction($modulo, 'desc', 'fecha', $orden, $orderBy);
+       return setOderBYAction($modulo, 'desc', 'fecha', $orden, $orderBy);
 		
   }
   
