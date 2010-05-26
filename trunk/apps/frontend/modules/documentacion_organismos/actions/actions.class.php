@@ -13,7 +13,7 @@ class documentacion_organismosActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	$modulo  = $this->getModuleName();
-  	$guardados = Common::getCantidaDEguardados('DocumentacionOrganismo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
+  	//$guardados = Common::getCantidaDEguardados('DocumentacionOrganismo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
 
   	$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
   	
@@ -25,7 +25,7 @@ class documentacion_organismosActions extends sfActions
 		
 	if($organismos)	
 	{
-		$this->pager = new sfDoctrinePager('DocumentacionOrganismo', 20);
+		$this->pager = new sfDoctrinePager('DocumentacionOrganismo', 10);
 		$this->pager->getQuery()->from('DocumentacionOrganismo')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
@@ -33,7 +33,8 @@ class documentacion_organismosActions extends sfActions
 		$this->pager->init();
 
 		$this->documentacion_organismo_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
+                $this->cantidadRegistros = $this->pager->getNbResults();
+		//$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
 	
 	 	if ($this->organismoBsq ) {
 			$this->Organismos = OrganismoTable::getOrganismo($this->organismoBsq);
@@ -312,9 +313,9 @@ class documentacion_organismosActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
 		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
-			return 'deleted=0'.$parcial;
+			return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		} else {
-		  return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
+		  return "deleted=0".$parcial." AND organismo_id IN ".$organismos." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		}
   }
   
