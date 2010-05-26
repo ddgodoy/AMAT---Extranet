@@ -379,30 +379,10 @@ class eventosActions extends sfActions
   protected function setOrdenamiento()
   {
         $modulo = $this->getModuleName();
-        if ($this->hasRequestParameter('orden')) {
-                $this->orderBy = $this->getRequestParameter('sort');
-                $this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-                $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
-                $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
-        }else {
-            if($this->getUser()->getAttribute($modulo.'_noworderBY'))
-            {
-               $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
-               $ordenacion = explode(' ', $this->orderBYSql);
-               $this->orderBy = $ordenacion[0];
-               $this->sortType = $ordenacion[1];
-            }
-            else
-            {
-                $this->orderBy = 'fecha';
-                $this->sortType = 'desc';
-                $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
-                $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
-            }
+        $orden = $this->hasRequestParameter('orden');
+        $orderBy = $this->getUser()->getAttribute($modulo.'_noworderBY');
 
-        }
-
-        return $this->orderBYSql;
+        Common::setOderBYAction($modulo, 'desc', 'fecha', $orden, $orderBy);
 		
   }
   
