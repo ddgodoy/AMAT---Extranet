@@ -37,8 +37,8 @@ class ArchivoDGForm extends BaseArchivoDGForm
 		$this->setValidators(array(
 			'id'                => new sfValidatorDoctrineChoice(array('model' => 'ArchivoDG', 'column' => 'id', 'required' => false), array('required' => 'id req', 'invalid' => 'id inval' )),
 			'nombre'            => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
-			'contenido'         => new sfValidatorString(array('required' => true), array('required' => 'La descripción es obligatoria')),
-			'archivo'           => new sfValidatorFile(array('path' => 'uploads/archivos_d_g/docs', 'required' => $rqArchivo), $msArchivo),
+			'contenido'         => new sfValidatorString(array('required' => false), array('required' => 'La descripción es obligatoria')),
+			'archivo'           => new sfValidatorFile(array('path' => 'uploads/archivos_d_g/docs', 'required' => false), $msArchivo),
 			'archivo_delete'    => new sfValidatorBoolean(),
 			'fecha'             => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
 			'fecha_caducidad'   => new sfValidatorDate(array('required' => true), array('required' => 'Debes seleccionar una fecha de caducidad', 'invalid' => 'La fecha de caducidad ingresada es incorrecta')),
