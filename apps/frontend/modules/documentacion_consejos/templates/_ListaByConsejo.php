@@ -21,14 +21,9 @@
 						<?php echo $usuario->getApellido().', '.$usuario->getNombre() ?>
 					</td>
 					<td valign="center" align="center">
-					<?php
-						if(ArchivoCT::getRepository()->getAllByDocumentacion($valor->getId())->count() >= 1){ 
-					
-							if (validate_action('listar','archivos_c_t')) { 
+					<?php if (validate_action('listar','archivos_c_t')) {
 								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $valor->getId().'&consejo_territorial_id='.$valor->getConsejoTerritorialId(), array('method' => 'post'));
-							}
-						}		
-					 ?>
+							} ?>
 					</td>
 					<td valign="center" align="center">
 						<?php if ( validate_action('publicar') ){
