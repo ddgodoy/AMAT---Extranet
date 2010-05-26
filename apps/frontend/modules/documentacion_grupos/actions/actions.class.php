@@ -13,25 +13,30 @@ class documentacion_gruposActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
   	$modulo  = $this->getModuleName();
-  	$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
-  	
+  	//$guardados = Common::getCantidaDEguardados('DocumentacionGrupo',$this->getUser()->getAttribute('userId'),$this->setFiltroBusqueda(),$modulo);
+
   	  	$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-	  $this->pager = new sfDoctrinePager('DocumentacionGrupo', 10);
+	        $this->pager = new sfDoctrinePager('DocumentacionGrupo', 10);
 
 		$this->pager->getQuery()
 		->from('DocumentacionGrupo')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
-		
+
+         //       echo $this->pager->getQuery()->getSql();
+         //       exit();
+
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
 		$this->documentacion_grupo_list = $this->pager->getResults();
-		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
+	//	$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count();
+                $this->cantidadRegistros = $this->pager->getNbResults();
+
 
 		if ($this->grupoBsq) {
 		  $this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($this->grupoBsq);
@@ -246,7 +251,7 @@ class documentacion_gruposActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
 		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
-			return 'deleted=0'.$parcial;
+			return "deleted=0 ".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		} else {
 			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
 		}
