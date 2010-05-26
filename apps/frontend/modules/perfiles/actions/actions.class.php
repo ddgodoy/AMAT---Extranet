@@ -126,14 +126,31 @@ class perfilesActions extends sfActions
   }
   protected function setOrdenamiento()
   {
-		$this->orderBy = 'created_at';
-		$this->sortType = 'desc';
-
+		$modulo = $this->getModuleName();
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-		}
-		return $this->orderBy . ' ' . $this->sortType;
+                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+		}else {
+                    if($this->getUser()->getAttribute($modulo.'_noworderBY'))
+                    {
+                       $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
+                       $ordenacion = explode(' ', $this->orderBYSql);
+                       $this->orderBy = $ordenacion[0];
+                       $this->sortType = $ordenacion[1];
+                    }
+                    else
+                    {
+                        $this->orderBy = 'created_at';
+                        $this->sortType = 'desc';
+                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+                    }
+
+                }
+
+		return $this->orderBYSql;
   }
 
   

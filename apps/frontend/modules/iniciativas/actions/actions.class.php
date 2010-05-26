@@ -208,26 +208,31 @@ class iniciativasActions extends sfActions
   
   protected function setOrdenamiento()
   {
-  	if($this->getRequestParameter('sort'))
-  	{
+  	$modulo = $this->getModuleName();
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-		}
-		else 
-		{
-			$this->orderBy = $this->getRequestParameter('sort');
-			$this->sortType = $this->getRequestParameter('type');
-		}
-		return $this->orderBy . ' ' . $this->sortType;
-  	}
-  	else 
-  	{
-  		$this->orderBy = '';
-		$this->sortType = 'asc';
-  		
-  		return 'fecha desc, nombre asc ';
-  	}
+                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+		}else {
+                    if($this->getUser()->getAttribute($modulo.'_noworderBY'))
+                    {
+                       $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
+                       $ordenacion = explode(' ', $this->orderBYSql);
+                       $this->orderBy = $ordenacion[0];
+                       $this->sortType = $ordenacion[1];
+                    }
+                    else
+                    {
+                        $this->orderBy = 'nombre';
+                        $this->sortType = 'asc';
+                        $this->orderBYSql ='fecha desc,'.$this->orderBy . ' ' . $this->sortType;
+                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+                    }
+
+                }
+
+		return $this->orderBYSql;
   		
   }
   
