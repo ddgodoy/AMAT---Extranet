@@ -114,8 +114,7 @@ public function executeDelete(sfWebRequest $request)
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($request->getParameter('id')), sprintf('Object documentacion_grupo does not exist (%s).', $request->getParameter('id')));
     $this->form = new DocumentacionGrupoForm($documentacion_grupo);
-    echo 'hola';
-    exit ();
+   
     $this->processForm($request, $this->form);
 
     $this->setTemplate('editar');
@@ -124,7 +123,8 @@ public function executeDelete(sfWebRequest $request)
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
 		$form->bind($request->getParameter($form->getName()));
-
+                 echo 'hola';
+                 exit ();
 		if ($form->isValid()) {
 			$documentacion_grupo = $form->save();
 
