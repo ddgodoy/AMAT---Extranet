@@ -140,8 +140,6 @@ public function executeDelete(sfWebRequest $request)
 			if ($documentacion_grupo->getEstado() == 'pendiente') {
 				$enviar= true;
 				$email = AplicacionRolTable::getEmailPublicarArray('24',$documentacion_grupo->getGrupoTrabajoId());
-                                echo 'hola';
-                                exit ();
 				$tema  = 'Documento pendiente de publicar para Grupo de Trabajo: '.$documentacion_grupo->getNombre();
 			}				
 			## envia el email  	
@@ -164,7 +162,8 @@ public function executeDelete(sfWebRequest $request)
                                 );
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
                                 $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
-
+                                echo 'hola esto por eniar';
+                                exit();
 				foreach ($email AS $emailPublic) {
 					if ($emailPublic['email']) {
 						$mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
