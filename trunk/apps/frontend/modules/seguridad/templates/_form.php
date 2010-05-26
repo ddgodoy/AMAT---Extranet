@@ -19,7 +19,7 @@
 		<h1>
 			Introduzca su Usuario y Contrase&ntilde;a
 		</h1>
-		<form action="<?php echo 'https://'.$_SERVER['name'].'/seguridad/process' ?>" method="post" enctype="multipart/form-data">
+		<form action="<?php echo 'https://'.$_SERVER['SERVER_NAME'].'/seguridad/process' ?>" method="post" enctype="multipart/form-data">
 			<table border="0" cellpadding="0" cellspacing="5">
 				<tbody>
 					<tr>
