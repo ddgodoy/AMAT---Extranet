@@ -121,9 +121,6 @@ class error_envioActions extends sfActions
   protected function setOrdenamiento()
   {
                 $modulo = $this->getModuleName();
-		$this->orderBy = 'er.created_at';
-		$this->sortType = 'desc';
-
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
@@ -144,7 +141,7 @@ class error_envioActions extends sfActions
                     
                 }
 
-		return $this->orderBy . ' ' . $this->sortType;
+		return $this->orderBYSql;
   }
 }
 
