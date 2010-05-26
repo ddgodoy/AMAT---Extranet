@@ -21,7 +21,7 @@ class documentacion_consejosActions extends sfActions
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-		$this->pager = new sfDoctrinePager('DocumentacionConsejo', 20);
+		$this->pager = new sfDoctrinePager('DocumentacionConsejo', 10);
 		$this->pager->getQuery()->from('DocumentacionConsejo')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
