@@ -161,7 +161,7 @@ public function executeDelete(sfWebRequest $request)
                                                      'url'    => $url,
                                                      'head_image'  => $iPh,
                                                      'organizador' => $organizador,
-                                                     'descripcio'  => $documentacion_grupo->getContenido()
+                                                     'descripcio'  => $documentacion_grupo->getContenido()?$documentacion_grupo->getContenido():'',
                                 );
                                 echo '7';
                                 echo '<pre>';
