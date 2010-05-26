@@ -130,6 +130,9 @@ class error_envioActions extends sfActions
                     if($this->getUser()->getAttribute($modulo.'_noworderBY'))
                     {
                        $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
+                       $ordenacion = explode(' ', $this->orderBYSql);
+                       $this->orderBy = $ordenacion[0];
+                       $this->sortType = $ordenacion[1];
                     }   
                     else
                     {
