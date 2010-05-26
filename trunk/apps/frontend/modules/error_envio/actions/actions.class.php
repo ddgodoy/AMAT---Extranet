@@ -120,13 +120,30 @@ class error_envioActions extends sfActions
   
   protected function setOrdenamiento()
   {
+                $modulo = $this->getModuleName();
 		$this->orderBy = 'er.created_at';
 		$this->sortType = 'desc';
 
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-		}
+                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+		}else {
+                    if($this->getUser()->getAttribute($modulo.'_noworderBY'))
+                    {
+                       $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
+                    }   
+                    else
+                    {
+                        $this->orderBy = 'er.created_at';
+                        $this->sortType = 'desc';
+                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql); 
+                    }    
+                    
+                }
+
 		return $this->orderBy . ' ' . $this->sortType;
   }
 }
