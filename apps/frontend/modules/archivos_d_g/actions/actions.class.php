@@ -19,7 +19,9 @@ class archivos_d_gActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
 		$this->pager = new sfDoctrinePager('ArchivoDG', 10);
-		$this->pager->getQuery()->from('ArchivoDG')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+		$this->pager->getQuery()->from('ArchivoDG')
+                ->where($this->setFiltroBusqueda())
+                ->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 		
