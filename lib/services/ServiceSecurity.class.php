@@ -50,10 +50,10 @@ class ServiceSecurity
 	}
 	*/
 	
-	public static function modifyCredentials($login, $password)
+	public static function modifyCredentials($login, $password,$id)
 	{
                 echo $login.'<br>'.$password;
-		$usuario = Usuario::getRepository()->findOneByLogin($login);
+		$usuario = Usuario::getRepository()->findOneById($id);
                 echo '<pre>';
                 print_r($usuario);
                 echo '</pre>';
