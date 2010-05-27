@@ -290,7 +290,7 @@ public function executeDelete(sfWebRequest $request)
   public function executeListByGrupoTrabajo()
 	{
 		$this->documentacion_selected = 0;
-		$this->arrayDocumentacion = DocumentacionGrupoTable::doSelectByGrupoTrabajo($this->getRequestParameter('id_grupo_trabajo'));
+		$this->arrayDocumentacion = DocumentacionGrupoTable::doSelectByGrupoTrabajo($this->getRequestParameter('id_grupo_trabajo'),1);
 
 		return $this->renderPartial('documentacion_grupos/selectByGrupoTrabajo');
 	}
