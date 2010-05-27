@@ -114,7 +114,8 @@ class archivos_d_oActions extends sfActions
   			$this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDO')->find($id), sprintf('Object archivo_dg does not exist (%s).', $id));
 
 		    sfLoader::loadHelpers('Security');
-				if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+				if (!validate_action('baja')&& $this->getUser()->setAttribute('usuId') != $archivo_dg->getOwnerId())
+                                { $this->redirect('seguridad/restringuido'); }
 
 		    $archivo_dg->delete();
   		}
