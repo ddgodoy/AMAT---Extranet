@@ -4,7 +4,7 @@
  */
 class DocumentacionGrupoTable extends DocumentacionTable
 {
-	public static function doSelectByGrupoTrabajo($grupo_trabajo)
+	public static function doSelectByGrupoTrabajo($grupo_trabajo, $combo='')
 	{
 		if (empty($grupo_trabajo)) {return false;}
     
@@ -13,6 +13,10 @@ class DocumentacionGrupoTable extends DocumentacionTable
 		$q->from('DocumentacionGrupo');
 		$q->where('deleted = 0');
 		$q->addWhere('grupo_trabajo_id = ' . $grupo_trabajo);
+                if($combo!='')
+                {
+                    $q->andWhere("estado = 'publicado'");
+                }
 		$q->orderBy('nombre ASC');
 
 		$documentacion = $q->execute();
