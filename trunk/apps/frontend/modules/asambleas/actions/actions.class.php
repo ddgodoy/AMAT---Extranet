@@ -892,7 +892,7 @@ class asambleasActions extends sfActions
 			   	
 			}
 		   $IDcon = ''; 
-		   if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
+		   if($this->getRequestParameter('id')){$IDcon = $this->getRequestParameter('id');}
 	    
 		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
 		   
@@ -900,7 +900,7 @@ class asambleasActions extends sfActions
 		   $this->asamblea->save();
 		   
 		 
-		 $this->redirect('asambleas/ver?idCon='.$IDcon.'&'.$this->DAtos['get']);
+		 $this->redirect('asambleas/ver?id='.$IDcon.'&'.$this->DAtos['get']);
 	}
 	
 	 protected function setFiltroBusqueda()
