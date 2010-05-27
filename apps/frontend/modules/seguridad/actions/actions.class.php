@@ -211,7 +211,7 @@ class seguridadActions extends sfActions
 			if (empty($solicitud)) {
 				$this->redirect('inicio/index');
 			}
-			$usuario = ServiceSecurity::modifyCredentials($solicitud->getUsuario()->getLogin(), $this->form->getValue('password'));
+			$usuario = ServiceSecurity::modifyCredentials($solicitud->getUsuario()->getLogin(), $this->form->getValue('password'),$solicitud->getUsuario()->getid());
 			$solicitud->delete();
 
 			$this->cambioClaveExitoso = 1;
