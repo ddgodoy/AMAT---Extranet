@@ -5,9 +5,10 @@ class ServiceSecurity
 	public static function authenticate($identifier, $password, $remember_me)
 	{	
 		if ($identifier != null) {
-			$usuario = Usuario::getRepository()->findOneByLogin($identifier);
+			//$usuario = Usuario::getRepository()->findOneByLogin($identifier);
+                        $usuario = Doctrine_Query::create()->from('usuario')->where("login = '".$identifier."' AND deleted = 0 AND activo = 1");
 			if ($usuario == null) {
-				$usuario = Usuario::getRepository()->findOneByEmail($identifier);
+				$usuario = Doctrine_Query::create()->from('usuario')->where("email = '".$identifier."' AND deleted = 0 AND activo = 1");
 			}
 		} else {
 			return 'Ingresa tu nombre de usuario o tu email';
