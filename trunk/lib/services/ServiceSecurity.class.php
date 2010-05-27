@@ -19,8 +19,9 @@ class ServiceSecurity
 			return 'Usuario no encontrado';
 			//throw new Exception('Usuario no encontrado');
 		}
-		
-		if (!Usuario::checkCredentials($password)) {
+                //si el login del usuario existe y no esat eliminado inicializo la clase usuario
+		$usuario = Usuario::getRepository()->findOneById($usuario->getId());
+		if (!$usuario->checkCredentials($password)) {
 			return 'Tus datos de Usuario son incorrectos';
 			//throw new Exception('Tus datos de logueo son incorrectos');
 		}
