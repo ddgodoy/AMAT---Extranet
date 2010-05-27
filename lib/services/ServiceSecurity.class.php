@@ -6,9 +6,9 @@ class ServiceSecurity
 	{	
 		if ($identifier != null) {
 			//$usuario = Usuario::getRepository()->findOneByLogin($identifier);
-                        $usuario = Doctrine_Query::create()->from('usuario')->where("login = '".$identifier."' AND deleted = 0 AND activo = 1");
+                        $usuario = Usuario::getRepository()->getUsuarioByLogin($identifier);
 			if ($usuario == null) {
-				$usuario = Doctrine_Query::create()->from('usuario')->where("email = '".$identifier."' AND deleted = 0 AND activo = 1");
+				$usuario = Usuario::getRepository()->getUsuarioByEmail($identifier);
 			}
 		} else {
 			return 'Ingresa tu nombre de usuario o tu email';
