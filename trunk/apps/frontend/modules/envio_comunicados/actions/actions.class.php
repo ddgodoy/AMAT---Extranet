@@ -20,7 +20,9 @@ class envio_comunicadosActions extends sfActions
 	}
 	
   	$this->pager = new sfDoctrinePager('EnvioComunicado', 20);
-	$this->pager->getQuery()->from('EnvioComunicado ec')->leftJoin('ec.Comunicado c')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('EnvioComunicado ec')
+        ->leftJoin('ec.Comunicado c')
+        ->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
@@ -168,7 +170,7 @@ class envio_comunicadosActions extends sfActions
                     }
                     else
                     {
-                        $this->orderBy = 'nombre';
+                        $this->orderBy = 'c.nombre';
                         $this->sortType = 'asc';
                         $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
                         $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
