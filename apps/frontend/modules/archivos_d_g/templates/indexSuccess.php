@@ -104,15 +104,15 @@
 						</a>
 						<?php endif;?>
 					</td>
-          <td valign="center" align="center">
-          <?php if(validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_g/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          <?php endif; ?>	
-          </td>
-				</tr>
-				<?php endforeach; ?>
-				<?php if(validate_action('baja')):?>
-				<tr>
+                                          <td valign="center" align="center">
+                                          <?php if(validate_action('baja')  || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
+                                                <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_g/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                          <?php endif; ?>
+                                          </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        <?php if(validate_action('baja')):?>
+                                        <tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5"><input type="submit" class="boton" value="Borrar seleccionados" onclick="return confirm('Confirma la eliminaci&oacute;n de los registros seleccionados?');"/></td>
 				</tr>
