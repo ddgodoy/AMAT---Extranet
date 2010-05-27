@@ -46,7 +46,7 @@ class NuevaClaveForm extends sfForm
 
                 if(!empty ($emailusu))
                 {
-                  $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::EQUAL, $emailusu, array(), array('invalid' => 'Ingrese un cuenta de correo v&aacute;lido')));
+                  $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('email', sfValidatorSchemaCompare::NOT_EQUAL, $emailusu, array(), array('invalid' => 'Ingrese un cuenta de correo v&aacute;lido')));
                 }
 
 		$this->widgetSchema->setNameFormat('nueva_clave[%s]');
