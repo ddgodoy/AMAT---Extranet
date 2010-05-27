@@ -299,7 +299,7 @@ class archivos_d_oActions extends sfActions
   {
   
   	$this->documentacion_selected = 0;
-  	$this->arrayDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->getRequestParameter('documentacion_organismos'));
+  	$this->arrayDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->getRequestParameter('documentacion_organismos'),1);
   	
   	$this->name = $request->getParameter('name');
   	
