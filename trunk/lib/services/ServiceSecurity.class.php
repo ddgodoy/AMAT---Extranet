@@ -20,7 +20,7 @@ class ServiceSecurity
 			//throw new Exception('Usuario no encontrado');
 		}
 		
-		if (!$usuario->checkCredentials($password)) {
+		if (!Usuario::checkCredentials($password)) {
 			return 'Tus datos de Usuario son incorrectos';
 			//throw new Exception('Tus datos de logueo son incorrectos');
 		}
