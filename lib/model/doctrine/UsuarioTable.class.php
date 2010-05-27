@@ -302,6 +302,20 @@ class UsuarioTable extends Doctrine_Table
 		return $q->execute();
 
 	}
-	
+	public static function getUsuarioByLogin($login)
+        {
+            $r= Doctrine_Query::create()
+            ->from('usuario')
+            ->where("login = '".$identifier."' AND deleted = 0 AND activo = 1");
+            return $r->execute();
+        }
+
+        public static function getUsuarioByEmail($login)
+        {
+            $r= Doctrine_Query::create()
+            ->from('usuario')
+            ->where("email = '".$identifier."' AND deleted = 0 AND activo = 1");
+            return $r->execute();
+        }
 	
 }
