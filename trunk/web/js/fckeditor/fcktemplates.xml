@@ -220,7 +220,7 @@
 		          <table border="0" cellspacing="10" cellpadding="0">
                               <tr>
                                 <td valign="top">&nbsp;</td>
-                                <td width="562"><img src="http://extranet.amat.es/uploads/image/3_logo.jpg" width="562" height="95" alt="Amat" /></td>
+                                <td width="562"><img src="3_logo.gif" width="562" height="95" alt="Amat" /></td>
                                 <td valign="top">&nbsp;</td>
                               </tr>
                               <tr>
@@ -275,7 +275,7 @@
                                 <td valign="top"><p style="font-size:14px; font-family: 'Times New Roman', Times, serif; font-size:10px; text-align:center;">Asociaci&oacute;n  profesional de la Ley  19/1977, N&ordm; de Dep&oacute;sito 3.604 &ndash; C.I.F. G-78/383767</p></td>
                                 <td>&nbsp;</td>
                               </tr>
-                         </table>
+                           </table>
 			]]>
 		</Html>
 	</Template>
