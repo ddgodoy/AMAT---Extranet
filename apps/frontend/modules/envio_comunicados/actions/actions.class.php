@@ -20,7 +20,8 @@ class envio_comunicadosActions extends sfActions
 	}
 	
   	$this->pager = new sfDoctrinePager('EnvioComunicado', 20);
-	$this->pager->getQuery()->from('EnvioComunicado ec')
+	$this->pager->getQuery()
+         ->from('EnvioComunicado ec')
         ->leftJoin('ec.Comunicado c')
         ->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
