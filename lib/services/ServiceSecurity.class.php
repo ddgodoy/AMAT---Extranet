@@ -53,8 +53,11 @@ class ServiceSecurity
 	public static function modifyCredentials($login, $password)
 	{
                 echo $login.'<br>'.$password;
-                exit ();
 		$usuario = Usuario::getRepository()->findOneByLogin($login);
+                echo '<pre>';
+                print_r($usuario);
+                echo '</pre>';
+                exit ();
 		$usuario->modifyCredentials($login, $password);
 		$usuario->save();
 		
