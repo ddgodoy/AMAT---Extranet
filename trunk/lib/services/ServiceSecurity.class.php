@@ -26,11 +26,11 @@ class ServiceSecurity
 		}
 		if($usuario->getActivo() == 0)
 		{
-            return 'Usuario no activo';			
+                    return 'Usuario no activo';
 		}
 		if($usuario->getDeleted() != 0)
 		{
-            return 'Usuario no encontrado';			
+                    return 'Usuario no encontrado';
 		}
 		if ($remember_me) {
 			$usuario->rememberCredentials();
