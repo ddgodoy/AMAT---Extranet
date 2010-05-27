@@ -101,12 +101,12 @@ class seguridadActions extends sfActions
 					foreach ($credenciales as $credencial) {
 						$this->getUser()->addCredential($credencial);
 					}
-					$this->redirect('inicio/index');
+					$this->redirect('http://'.$_SERVER['SERVER_NAME'].'/inicio/index');
 				}
 				else 
 				{
 					$this->getUser()->setFlash('error', 'Usuario sin perfiles');
-					$this->redirect('seguridad/login');
+					$this->redirect('http://'.$_SERVER['SERVER_NAME'].'/seguridad/login');
 				}
 			} else if ($message = $usuario) {
 				$this->getUser()->setFlash('error', $message);
