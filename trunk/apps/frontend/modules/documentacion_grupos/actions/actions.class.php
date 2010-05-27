@@ -93,6 +93,47 @@ public function executeDelete(sfWebRequest $request)
 				if ($accion == 'publicar') {
 					$documentacion_grupo->setEstado('publicado');
 					$documentacion_grupo->save();
+                                        if ($documentacion_grupo->getEstado()=='publicado') {
+                                                if ($documentacion_grupo->getGrupoTrabajoId()) {
+                                                        $enviar= true;
+                                                        $email = UsuarioTable::getUsuariosByGrupoTrabajoArray($documentacion_grupo->getGrupoTrabajoId());
+                                                        $tema  = 'Documento registrado para Grupo de Trabajo: '.$documentacion_grupo->getNombre();
+                                                }
+                                                if($documentacion_grupo->getEstado()=='publicado') {
+                                                        ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
+                                                }
+                                        }
+                                        if (!empty($enviar)) {
+                                                sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
+
+                                                $iPh = image_path('/images/logo_email.jpg', true);
+
+                                                $url = url_for('documentacion_grupos/show?id='.$documentacion_grupo->getId(), true);
+
+                                                $organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre');
+
+                                                $mailer = new Swift(new Swift_Connection_NativeMail());
+
+                                                $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+
+                                                $mailContext = array('tema'   => $tema,
+                                                                     'evento' => $documentacion_grupo->getNombre(),
+                                                                     'url'    => $url,
+                                                                     'head_image'  => $iPh,
+                                                                     'organizador' => $organizador,
+                                                                     'descripcio'  => $documentacion_grupo->getContenido()?$documentacion_grupo->getContenido():'',
+                                                );
+                                                $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                                                $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
+
+                                                foreach ($email AS $emailPublic) {
+                                                        if ($emailPublic['email']) {
+                                                                $mailer->send($message, $emailPublic['email'], sfConfig::get('app_default_from_email'));
+
+                                                        }
+                                                }
+                                                $mailer->disconnect();
+                                        }
 		
 					ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());	
 				} else {
