@@ -891,16 +891,17 @@ class asambleasActions extends sfActions
 		   		$this->DAtos = $this->setOtros(); 
 			   	
 			}
-		   $IDcon = ''; 
+		   $IDcon = '';
+                   $id = '';
 		   if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
-	    
+                   if($this->getRequestParameter('id')){$id = $this->getRequestParameter('id');}
 		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
 		   $this->asamblea->save();
 		   
 		 
-		 $this->redirect('asambleas/ver?idCon='.$IDcon.'&'.$this->DAtos['get']);
+		 $this->redirect('asambleas/ver?id='.$id.'&idCon='.$IDcon.'&'.$this->DAtos['get']);
 	}
 	
 	 protected function setFiltroBusqueda()
