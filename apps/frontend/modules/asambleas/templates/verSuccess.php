@@ -4,7 +4,7 @@
     </div>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="95%"><h1><?php echo $asamblea->Asamblea->getTitulo() ?></h1></td>
+        <td width="95%"><h1><?php echo $asamblea->getAsamblea()->getTitulo() ?></h1></td>
         <td width="5%" align="right"><a href="#"><a href="#"><?php echo image_tag('pregunta.gif', array('alt' => 'Ayuda', 'id' => 'sprytrigger1', 'width' => '29', 'height' => '30', 'border' => '0')) ?></a></a></td>
       </tr>
     </table><br />
@@ -30,7 +30,8 @@
     <strong class="subtitulo">Comentario:</strong><br />
     <form action="<?php echo url_for('asambleas/comentar') ?>" method="post" enctype="multipart/form-data" > 
     <input type="hidden" name="<?php echo $DAtos['campo'];?>" value="<?php echo $DAtos['valor'];?>" />
-    <?php echo input_hidden_tag('idCon',$asamblea->getId())?>    
+    <?php echo input_hidden_tag('idCon',$asamblea->getId())?>
+    <?php echo input_hidden_tag('id',$asamblea->getAsamblea()->getId())?>
     <?php $options = array('rich' => 'fck','height' => 200,'width' => 800,'config'=>'fckeditor/myfckconfig.js');
     echo textarea_tag('comentario',$asamblea->getDetalle(), $options ); ?>
     <br>
