@@ -306,7 +306,7 @@ class UsuarioTable extends Doctrine_Table
         {
             $r= Doctrine_Query::create()
             ->from('usuario')
-            ->where("login = '".$identifier."' AND deleted = 0 AND activo = 1");
+            ->where("login = '".$login."' AND deleted = 0 AND activo = 1");
             return $r->execute();
         }
 
@@ -314,7 +314,7 @@ class UsuarioTable extends Doctrine_Table
         {
             $r= Doctrine_Query::create()
             ->from('usuario')
-            ->where("email = '".$identifier."' AND deleted = 0 AND activo = 1");
+            ->where("email = '".$login."' AND deleted = 0 AND activo = 1");
             return $r->execute();
         }
 	
