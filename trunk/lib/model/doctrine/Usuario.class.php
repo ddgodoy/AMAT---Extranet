@@ -19,8 +19,6 @@ class Usuario extends BaseUsuario
 	{
 		$salt = $this->getSalt();
 
-                echo  $this->encrypt("--$salt--$password--");
-                exit();
 		return ($this->getCryptedPassword() == $this->encrypt("--$salt--$password--"));
 	}
 
