@@ -13,7 +13,7 @@
 	</div>	
 	
 	<div class="noticias">	  
-	  <a  class="nottit"><?php echo  $documentacion_grupo->getNombre() ?></a>
+	  <a  class="nottit"><?php echo  $documentacion_grupo->getNombre() ?></a><br>
 	  <?php echo $documentacion_grupo->getcontenido() ?> 
 	  <span class="notfecha">
 	  <?php
