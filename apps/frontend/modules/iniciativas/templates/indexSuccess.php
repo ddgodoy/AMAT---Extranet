@@ -115,18 +115,23 @@
 	</div>
 <!-- * -->
 	<div class="rightside">
-	<?php echo include_partial('inicio/NavegacionGuiada',
-        array('FEcha_circulares'=>$FEcha_circulares,
-	   'modulo'=>$modulo,
-	   'year'=>$year,
-	   'months'=>$months,
-	   'arrayCategoriasTema'=>CircularTable::doSelectAllCategorias('CategoriaIniciativa'), 
-	   'SelectCatTemaBsq'=>$CatInicBsq, 
-	   'SelectSubTemaBsq'=>$SubIniBsq, 
-	   'SelectSubTemaBsq2'=>'', 
-	   'arrayCategoria'=>'', 
-	   'SelectCatOrganismoBsq'=>'', 
-	   'SelectSubOrganismoBsq'=>''))?>    
+	<?php
+        if($inicitivaCoun >= 1)
+        {
+            echo include_partial('inicio/NavegacionGuiada',
+            array('FEcha_circulares'=>$FEcha_circulares,
+               'modulo'=>$modulo,
+               'year'=>$year,
+               'months'=>$months,
+               'arrayCategoriasTema'=>CircularTable::doSelectAllCategorias('CategoriaIniciativa'),
+               'SelectCatTemaBsq'=>$CatInicBsq,
+               'SelectSubTemaBsq'=>$SubIniBsq,
+               'SelectSubTemaBsq2'=>'',
+               'arrayCategoria'=>'',
+               'SelectCatOrganismoBsq'=>'',
+               'SelectSubOrganismoBsq'=>''));
+        }
+        ?>
 		<div class="paneles">
 			<h1>Buscar por Titulo</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('iniciativas/index') ?>">

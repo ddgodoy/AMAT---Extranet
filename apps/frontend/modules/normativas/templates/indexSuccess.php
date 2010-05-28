@@ -102,7 +102,9 @@
 	</div>
 <!-- * -->
 	<div class="rightside">
-	<?php echo  include_partial('inicio/NavegacionGuiada',
+	<?php
+        if($normativaCoun>=1){
+        echo  include_partial('inicio/NavegacionGuiada',
         array('FEcha_circulares'=>$FEcha_circulares,
 	   'modulo'=>$modulo,
 	   'year'=>$year,
@@ -113,7 +115,7 @@
 	   'SelectSubTemaBsqDos'=>$SubNormBsq2, 
 	   'arrayCategoria'=>'', 
 	   'SelectCatOrganismoBsq'=>'', 
-	   'SelectSubOrganismoBsq'=>''))?>  
+	   'SelectSubOrganismoBsq'=>''));}?>
 		<div class="paneles">
 			<h1>Buscar por Titulo</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('normativas/index') ?>">

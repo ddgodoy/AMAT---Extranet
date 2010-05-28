@@ -907,7 +907,39 @@ Menu:
     Aplicacion:              { local: aplicacion_id, foreign: id, onDelete: CASCADE }
 
 
+Acuerdo:
+  inheritance:
+    extends: Documentacion
+    type: concrete
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    categoria_acuerdo_id:       { type:integer }
+    subcategoria_acuerdo_id:    { type: integer }
+    documento:                  { type: string(255), notnull: false }
+  relations:
+    CategoriaAcuerdo:        { local: categoria_acuerdo_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaAcuerdo:     { local: subcategoria_acuerdo_id, foreign: id, onDelete: CASCADE }
 
+CategoriaAcuerdo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob }
+    contenido:               { type: clob, notnull: false }
+
+SubCategoriaAcuerdo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: clob }
+    contenido:               { type: clob, notnull: false }
+    categoria_acuerdo_id:    { type:integer }
+  relations:
+    CategoriaAcuerdo:        { local: categoria_acuerdo_id, foreign: id, onDelete: CASCADE }
     
 
 

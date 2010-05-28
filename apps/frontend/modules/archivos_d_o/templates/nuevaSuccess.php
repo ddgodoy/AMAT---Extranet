@@ -22,7 +22,18 @@ $verDocumentacion = '';
 $idSubcategoria = '';
 $idOrganismos = '';
 $idDocumentacion = '';
+$categoria ='';
 
+if($sf_context->getActionName() == 'nueva' && $sf_request->getParameter('archivo_d_o[organismo_id]')){
+    $organismo = Doctrine::getTable('Organismo')->findOneById($sf_request->getParameter('archivo_d_o[organismo_id]'));
+    $categoria = $organismo->getCategoriaOrganismoId();
+    $verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);
+    $idSubcategoria = $organismo->getSubcategoriaOrganismoId();
+    $verOrganisamos = OrganismoTable::doSelectByOrganismoa($organismo->getSubcategoriaOrganismoId());
+    $idOrganismos = $organismo->getId();
+    $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($organismo->getId());
+    $idDocumentacion = $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]')?$sf_request->getParameter('archivo_d_o[documentacion_organismo_id]'):'';
+}
 
 if($sf_context->getActionName() == 'create'){
     $verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($form['categoria_organismo_id']->getValue());
@@ -38,7 +49,8 @@ include_partial(
 		array
 		(
 			'form' => $form,
-			'pageActual' => 1,		
+			'pageActual' => 1,
+                        'categoria'=>$categoria,
 			'arraySubcategoria'=> $verSubcategoria?$verSubcategoria:array(),
 			'arrayOrganismo'=> $verOrganisamos?$verOrganisamos:array(),
 			'arrayDocumentacion'=> $verDocumentacion?$verDocumentacion:array(),
