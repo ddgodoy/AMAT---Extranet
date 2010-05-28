@@ -13,9 +13,9 @@
       </tr>
     </table>
     
-     <?php if(!empty($Grupo)): include_partial('miembros_grupo/MenuGrupo',array('Grupo' => $Grupo, 'modulo'=>$modulo)); endif;?>
-     <?php if(!empty($Consejo)): include_partial('miembros_consejo/MenuConsejo',array('Consejo' => $Consejo, 'modulo'=>$modulo)); endif;?>
-     <?php if(!empty($Organismos)): include_component('miembros_organismo','MenuOrganismos',array('id' => $organismomenu,'modulo'=>$modulo)); endif;?>
+     <?php if(!empty($Grupo) || $DAtos['get']== 'GrupodeTrabajo=2'): include_partial('miembros_grupo/MenuGrupo',array('Grupo' => $Grupo, 'modulo'=>$modulo)); endif;?>
+     <?php if(!empty($Consejo) || $DAtos['get']== 'ConsejoTerritorial=3'): include_partial('miembros_consejo/MenuConsejo',array('Consejo' => $Consejo, 'modulo'=>$modulo)); endif;?>
+     <?php if(!empty($Organismos) || $DAtos['get']== 'Organismo=4'): include_component('miembros_organismo','MenuOrganismos',array('id' => $organismomenu,'modulo'=>$modulo)); endif;?>
      
     <?php if ($sf_user->hasFlash('notice')): ?>
 	<ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
