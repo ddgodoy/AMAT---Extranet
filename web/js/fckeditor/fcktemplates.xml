@@ -219,9 +219,9 @@
 			<![CDATA[
 		          <table border="0" cellspacing="10" cellpadding="0">
                               <tr>
-                                <td valign="top">&nbsp;</td>
+                                <td valign="top" width="10px">&nbsp;</td>
                                 <td width="562"><img src="http://extranet.amat.es/uploads/image/3_logo.gif" width="562" height="95" alt="Amat" /></td>
-                                <td valign="top">&nbsp;</td>
+                                <td valign="top" width="10px">&nbsp;</td>
                               </tr>
                               <tr>
                                 <td valign="top">&nbsp;</td>
