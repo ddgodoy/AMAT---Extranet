@@ -167,7 +167,7 @@ class usuariosActions extends sfActions
 			$oUsuario->save();
 
 			if (!empty($auxiClave)) {
-				ServiceSecurity::modifyCredentials($oUsuario->getLogin(), $auxiClave);
+				ServiceSecurity::modifyCredentials($oUsuario->getLogin(), $auxiClave, $this->getUser()->getAttribute('userId'));
 			}
 			$this->getUser()->setFlash('updatePerfil', "Sus datos fueron actualizados correctamente");
 		}
