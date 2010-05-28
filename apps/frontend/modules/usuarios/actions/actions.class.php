@@ -112,7 +112,7 @@ class usuariosActions extends sfActions
 
 				## Si insertó un password...
 				if ($form['password']->getValue()) {
-					$usuario = ServiceSecurity::modifyCredentials($usuarioForm->getLogin(), $form['password']->getValue());
+					$usuario = ServiceSecurity::modifyCredentials($usuarioForm->getLogin(), $form['password']->getValue(),$usuarioForm->getId());
 				} else {
 					$usuario->save();
 				}
