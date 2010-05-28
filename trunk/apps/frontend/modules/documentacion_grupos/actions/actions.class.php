@@ -172,7 +172,7 @@ public function executeDelete(sfWebRequest $request)
 			if ($documentacion_grupo->getEstado()=='publicado') {
 				if ($documentacion_grupo->getGrupoTrabajoId()) {
 					$enviar= true;
-                                        $grupo = Doctrine::getTable('GrupoTrbajo')->findOneById($documentacion_grupo->getGrupoTrabajoId());
+                                        $grupo = Doctrine::getTable('GrupoTrabajo')->findOneById($documentacion_grupo->getGrupoTrabajoId());
 					$email = UsuarioTable::getUsuariosByGrupoTrabajoArray($documentacion_grupo->getGrupoTrabajoId());
 					$tema  = 'Documento registrado para Grupo de Trabajo: '.$grupo->getNombre();
 				}
@@ -182,7 +182,7 @@ public function executeDelete(sfWebRequest $request)
 			}
 			if ($documentacion_grupo->getEstado() == 'pendiente') {
 				$enviar= true;
-                                $grupo = Doctrine::getTable('GrupoTrbajo')->findOneById($documentacion_grupo->getGrupoTrabajoId());
+                                $grupo = Doctrine::getTable('GrupoTrabajo')->findOneById($documentacion_grupo->getGrupoTrabajoId());
 				$email = AplicacionRolTable::getEmailPublicarArray('24',$documentacion_grupo->getGrupoTrabajoId());
 				$tema  = 'Documentacón pendiente de publicar para Grupo de Trabajo: '.$grupo->getNombre();
 			}				
