@@ -12,7 +12,10 @@ class ArchivoCTForm extends BaseArchivoCTForm
   public function configure()
   {
   	    sfLoader::loadHelpers('Object');
-  	    $userId = sfContext::getInstance()->getUser()->getAttribute('userId');
+            $request = sfContext::getInstance() ;
+  	    $userId = $request->getUser()->getAttribute('userId');
+            $consejo = $request->getRequest()->getParameter('consejo_territorial_id')?$request->getRequest()->getParameter('consejo_territorial_id'):'';
+            $documentacionGet = $request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]')?$request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]'):'';
             $arrayGruposTrabajo = ConsejoTerritorial::ArrayDeMiconsejo($userId, 1);
   	    //$arrayGruposTrabajo = ArchivoCTTable::doSelectAllCategorias('ConsejoTerritorial');
   	    
@@ -25,7 +28,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
 			'disponibilidad'    => new sfWidgetFormChoice(array('choices' => array('Solo Grupo' => 'solo grupo', 'Todos' => 'todos'))),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'consejo_territorial_id'   => new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') + $arrayGruposTrabajo))),
-                        'documentacion_consejo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionConsejo', 'add_empty' => true)),
+                        
 		));
 
 		$this->setValidators(array(
@@ -44,7 +47,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
 		{
 			$this->setWidget('archivo', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/archivos_c_t/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
 			$this->setValidator('archivo', new sfValidatorFile(array('path' => 'uploads/archivos_c_t/docs', 'required' => false)));
-		    $this->setValidator('archivo_delete', new sfValidatorBoolean());
+		        $this->setValidator('archivo_delete', new sfValidatorBoolean());
 		}
 		else 
 		{
@@ -53,10 +56,21 @@ class ArchivoCTForm extends BaseArchivoCTForm
 		$this->setValidator('archivo', new sfValidatorFile(array('path' => 'uploads/archivos_c_t/docs', 'required' => false),array('required'=>'El archivo es obligatorio')));
 
 		}
-		
+		if($consejo != ''){
+                    $documentacio = DocumentacionConsejo::getRepository()->DocumentacionByConsejo($consejo,1);
+                    $this->setWidget('documentacion_consejo_id', new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') +_get_options_from_objects( $documentacio)))));
+
+                }else{
+
+                    $this->setWidget('documentacion_consejo_id', new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionConsejo', 'add_empty' => true)));
+
+                }
 
 		$this->setDefaults(array(
-			'owner_id'          => $userId,					
+			'owner_id'          => $userId,
+                        'consejo_territorial_id' =>$consejo,
+                        'documentacion_consejo_id' => $documentacionGet,
+
 		));
 		$this->widgetSchema->setNameFormat('archivo_c_t[%s]');
   }

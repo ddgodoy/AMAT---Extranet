@@ -86,6 +86,15 @@ class archivos_c_tActions extends sfActions
   {
     
     $toDelete = $request->getParameter('id');
+    if($request->getParameter('archivo_c_t[documentacion_consejo_id]') && $request->getParameter('consejo_territorial_id'))
+    {
+       $redirecion = '?archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
+    }
+    else
+    {
+        $redirecion = '';
+    }
+
 
   	if (!empty($toDelete)) {
   		$request->checkCSRFProtection();
@@ -102,12 +111,19 @@ class archivos_c_tActions extends sfActions
 		    $archivo_dg->delete();
   		}
   	}
-    $this->redirect('archivos_c_t/index');
+    $this->redirect('archivos_c_t/index'.$redirecion);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-  	
+    if($request->getParameter('archivo_c_t[documentacion_consejo_id]') && $request->getParameter('consejo_territorial_id'))
+    {
+       $redirecion = '&archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
+    }
+    else
+    {
+        $redirecion = '';
+    }
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
@@ -129,7 +145,7 @@ class archivos_c_tActions extends sfActions
       	$archivo_ct->save();
       }	
 
-      $this->redirect('archivos_c_t/show?id='.$archivo_ct->getId());
+      $this->redirect('archivos_c_t/show?id='.$archivo_ct->getId().$redirecion);
     }
   }
   

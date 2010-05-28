@@ -10,7 +10,7 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-
+<?php if($sf_request->getParameter('archivo_c_t[documentacion_consejo_id]') && $sf_request->getParameter('consejo_territorial_id')): $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id'); else : $redireccionGrupo = ''; endif; ?>
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['disponibilidad']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
@@ -20,7 +20,7 @@
 <?php if (!DocumentacionConsejoTable::getAlldocumentacionC()->count()):?>
 <div class="mensajeSistema ok">Debe ingresar un documento para poder cargar un archivo de documentacion de Consejos Territoriales. <a href="<?php echo url_for('documentacion_consejos/nueva') ?>">click aquí</a></div>
 <?php endif;?>
-<form action="<?php echo url_for('archivos_c_t/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action="<?php echo url_for('archivos_c_t/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
@@ -95,8 +95,9 @@
     <div class="botonera">
     <?php if(validate_action('alta') || validate_action('modificar')):?>
       <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
-    <?php endif;?>  
-      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_c_t/index') ?>';"/>
+    <?php endif;?>
+    
+      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_c_t/index?'.$redireccionGrupo) ?>';"/>
     </div> 
  </form>
     

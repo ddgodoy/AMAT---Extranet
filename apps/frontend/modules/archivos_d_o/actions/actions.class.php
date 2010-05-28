@@ -74,6 +74,7 @@ class archivos_d_oActions extends sfActions
   {
     $this->forward404Unless($archivo_do = Doctrine::getTable('ArchivoDO')->find($request->getParameter('id')), sprintf('Object archivo_do does not exist (%s).', $request->getParameter('id')));
     $this->form = new ArchivoDOForm($archivo_do);
+    $this->categoria =  $archivo_do->getCategoriaOrganismoId();
     $this->verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($archivo_do->getCategoriaOrganismoID());
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
@@ -88,6 +89,7 @@ class archivos_d_oActions extends sfActions
     $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
     $this->forward404Unless($archivo_do = Doctrine::getTable('ArchivoDO')->find($request->getParameter('id')), sprintf('Object archivo_do does not exist (%s).', $request->getParameter('id')));
     $this->form = new ArchivoDOForm($archivo_do);
+    $this->categoria =  $archivo_do->getCategoriaOrganismoId();
     $this->verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($archivo_do->getCategoriaOrganismoID());
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
@@ -102,7 +104,14 @@ class archivos_d_oActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    
+    if($request->getParameter('archivo_d_o[documentacion_organismo_id]') && $request->getParameter('archivo_d_o[organismo_id]'))
+    {
+       $redirecion = '?archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o[organismo_id]');
+    }
+    else
+    {
+        $redirecion = '';
+    }
     $toDelete = $request->getParameter('id');
 
   	if (!empty($toDelete)) {
@@ -120,12 +129,20 @@ class archivos_d_oActions extends sfActions
 		    $archivo_dg->delete();
   		}
   	}
-    $this->redirect('archivos_d_o/index'); 
+    $this->redirect('archivos_d_o/index'.$redirecion);
     
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+            if($request->getParameter('archivo_d_o[documentacion_organismo_id]') && $request->getParameter('archivo_d_o[organismo_id]'))
+            {
+               $redirecion = '&archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o[organismo_id]');
+            }
+            else
+            {
+                $redirecion = '';
+            }
 	    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
 	    if ($form->isValid())
 	    {	    	
@@ -157,7 +174,7 @@ class archivos_d_oActions extends sfActions
 	       }	
 	       
 	       $this->getUser()->setFlash('notice', 'El Archivo ha sido actualizado correctamente');
-	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId());
+	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId().$redirecion);
 		    	
 		 }
 	       

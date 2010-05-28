@@ -3,7 +3,7 @@
 <?php use_helper('Object') ?>
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
-
+<?php if($sf_request->getParameter('archivo_d_o[documentacion_organismo_id]') && $sf_request->getParameter('archivo_d_o[organismo_id]')): $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.$sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); else : $redireccionGrupo = ''; endif; ?>
 <?php echo $form->renderGlobalErrors() ?>
 
 <?php if ($sf_user->hasFlash('notice')): ?>
@@ -17,7 +17,7 @@
 <?php if ($verLadocumentacion == 0):?>
 <div class="mensajeSistema ok">Debe ingresar un documento para poder cargar un archivo de documentacion del Organismo. <a href="<?php echo url_for('documentacion_organismos/nueva') ?>">click aquí</a></div>
 <?php endif;?>
-<form action="<?php echo url_for('archivos_d_o/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action="<?php echo url_for('archivos_d_o/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
@@ -55,8 +55,9 @@
 		<td><label> Categoría *</label></td>
 		<td valign="middle">
 		<?php
+                   $categorias = $form['categoria_organismo_id']->getValue()?$form['categoria_organismo_id']->getValue():$categoria;
 		// llamo al componente del modulo  categoria _ organismos
-		   echo include_component('categoria_organismos','listacategoria',array('categoria'=>$form['categoria_organismo_id']->getValue() ,'name'=>'archivo_d_o'));
+		   echo include_component('categoria_organismos','listacategoria',array('categoria'=>$categorias ,'name'=>'archivo_d_o'));
 		?>
 		</td>
 		</tr>
@@ -112,7 +113,7 @@
     <?php if(validate_action('alta') || validate_action('modificar')):?>
       <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
     <?php endif;?>  
-      <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_o/index') ?>';"/>
+      <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_o/index?'.$redireccionGrupo) ?>';"/>
     </div>
 
 </form>
