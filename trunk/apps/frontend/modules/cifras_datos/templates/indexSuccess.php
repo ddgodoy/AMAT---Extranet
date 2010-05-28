@@ -107,7 +107,7 @@
 				<?php if(validate_action('publicar') || validate_action('baja')):?>
 				   <tr>
 						<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
-						<td colspan="5">
+						<td colspan="4">
 <!--							<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
 							<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
 						</td>
