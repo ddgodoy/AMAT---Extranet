@@ -87,7 +87,7 @@ class documentacion_consejosActions extends sfActions
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
   	$toProcess = $request->getParameter('id');
-  	
+  	$tema = 'Documentacón ';
   	if (!empty($toProcess)) {
   		$request->checkCSRFProtection();
   		
@@ -102,6 +102,51 @@ class documentacion_consejosActions extends sfActions
 				if ($accion == 'publicar') {
 					$documentacion_consejo->setEstado('publicado');
 					$documentacion_consejo->save();
+                                        if ($documentacion_consejo->getEstado() == 'publicado') {
+                                                if ($documentacion_consejo->getConsejoTerritorialId()) {
+                                                        $enviar = true;
+                                                        $grupo  = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
+                                                        $email  = UsuarioTable::getUsuariosByConsejoTerritorial($documentacion_consejo->getConsejoTerritorialId());
+                                                        $tema  .= 'publicada ';
+                                                }
+                                                if ($documentacion_consejo->getEstado()=='publicado') {
+                                                  ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());
+                                                }
+                                        }
+                                        $tema .= 'para el Consejo Territorial: '.$grupo->getNombre();
+
+                                            ## envia el email
+                                            if ($enviar) {
+                                                    sfLoader::loadHelpers(array('Url', 'Tag', 'Asset', 'Partial'));
+
+                                                    $url = url_for('documentacion_consejos/show?id='.$documentacion_consejo->getId(), true);
+                                                    $iPh = image_path('/images/logo_email.jpg', true);
+
+                                                    $nombreDocCj = $documentacion_consejo->getNombre();
+                                                    $descripcion = $documentacion_consejo->getContenido();
+                                                    $organizador = $this->getUser()->getAttribute('apellido').', '.$this->getUser()->getAttribute('nombre') ;
+                                                    $mailer = new Swift(new Swift_Connection_NativeMail());
+                                                    $message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
+                                                    $mailContext = array('tema'   => $tema,
+                                                                         'evento' => $nombreDocCj,
+                                                                         'url'    => $url,
+                                                                         'head_image'  => $iPh,
+                                                                         'organizador' => $organizador,
+                                                                         'descripcio'  => $descripcion,
+                                                                        );
+                                                    $message->attach(new Swift_Message_Part(get_partial('eventos/mailHtmlBody', $mailContext), 'text/html'));
+                                                    $message->attach(new Swift_Message_Part(get_partial('eventos/mailTextBody', $mailContext), 'text/plain'));
+
+                                                    foreach ($email AS $emailPublic)
+                                                    {
+                                                            if ($emailPublic->getEmail())
+                                                            {
+                                                                    $mailer->send($message, $emailPublic->getEmail(), sfConfig::get('app_default_from_email'));
+
+                                                            }
+                                                    }
+                                                    $mailer->disconnect();
+                                            }
 		
 					ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());	
 				} else {
@@ -117,7 +162,7 @@ class documentacion_consejosActions extends sfActions
     $form->bind($request->getParameter($form->getName()));
 
     if ($form->isValid()) {
-    	$tema = 'Documento ';
+    	$tema = 'Documentacón ';
       $documentacion_consejo = $form->save();
 
 			## Notificar y enviar email a los destinatarios 
@@ -126,7 +171,7 @@ class documentacion_consejosActions extends sfActions
 					$enviar = true;
 					$grupo  = ConsejoTerritorialTable::getConsejo($documentacion_consejo->getConsejoTerritorialId());
 					$email  = UsuarioTable::getUsuariosByConsejoTerritorial($documentacion_consejo->getConsejoTerritorialId());
-					$tema  .= 'registrado ';
+					$tema  .= 'publicada ';
 				}
 				if ($documentacion_consejo->getEstado()=='publicado') {
 				  ServiceNotificacion::send('creacion', 'Consejo', $documentacion_consejo->getId(), $documentacion_consejo->getNombre(),'',$documentacion_consejo->getConsejoTerritorialId());
