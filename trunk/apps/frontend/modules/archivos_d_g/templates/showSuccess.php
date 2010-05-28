@@ -2,6 +2,7 @@
 	use_helper('Security');
 	use_helper('Date');
 ?>
+<?php if($sf_request->getParameter('archivo_d_g[documentacion_grupo_id]') && $sf_request->getParameter('grupo_trabajo_id')): $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id'); else : $redireccionGrupo = ''; endif; ?>
 <div class="mapa">
 	  <strong>Grupos de Trabajo</strong> &gt; <a href="<?php echo url_for('archivos_d_g/index') ?>">Archivos</a> &gt; <?php echo  $archivo_dg->getNombre() ?>
 	</div>
@@ -35,7 +36,7 @@
 	
 	<div class="botonera">
 	<?php if(validate_action('modificar')):?>
-	  <input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_g/editar?id='.$archivo_dg->getId()) ?>';"/>
+	  <input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_g/editar?id='.$archivo_dg->getId().'&'.$redireccionGrupo) ?>';"/>
 	 <?php endif ;?> 
-	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_g/index') ?>';"/>
+	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_g/index?'.$redireccionGrupo) ?>';"/>
 	</div>
