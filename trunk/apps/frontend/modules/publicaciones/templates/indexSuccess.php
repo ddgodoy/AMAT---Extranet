@@ -94,21 +94,21 @@
 						</a>
 					<?php endif; ?>		
 					</td>
-		          <td valign="center" align="center">
-		          <?php if (validate_action('baja')):?>
-		          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'publicaciones/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-		          <?php endif; ?>	
-		          </td>
+                                          <td valign="center" align="center">
+                                          <?php if (validate_action('baja')):?>
+                                                <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'publicaciones/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                          <?php endif; ?>
+                                          </td>
 				</tr>
 				<?php endforeach; ?>
 				<?php if(validate_action('publicar') || validate_action('baja')):?>
 				   <tr>
-						<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
-						<td colspan="5">
+                                    <td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+                                    <td colspan="4">
 <!--							<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
-							<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
-						</td>
-					</tr>
+                                            <input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+                                    </td>
+				 </tr>
 			   <?php endif; ?>
 			</tbody>
 		</table>
