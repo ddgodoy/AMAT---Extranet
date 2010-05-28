@@ -42,8 +42,9 @@ else
 			<?php endif; ?>
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s <?php if ($cajaBsq) echo " con la palabra '".$cajaBsq."'" ?> </span> 
-			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_c_t/nueva') ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
+			<?php if(validate_action('alta')): ?>
+                        <?php if($grupoBsq && $documentacionBsq):$redireccionGrupo = '?archivo_d_g[documentacion_grupo_id]='.$documentacionBsq.'&grupo_trabajo_id='.$grupoBsq; else : $redireccionGrupo = ''; endif; ?>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_c_t/nueva'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
@@ -133,7 +134,7 @@ else
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_c_t/nueva') ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_c_t/nueva'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php endif; ?>
