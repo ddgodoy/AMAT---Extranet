@@ -11,10 +11,14 @@ class ArchivoDGForm extends BaseArchivoDGForm
 {
   public function configure()
   {
+        sfLoader::loadHelpers('Object');
   	$rqArchivo = false;
   	$msArchivo = array();
-  	$ctxAction = sfContext::getInstance()->getActionName();
-  	$userId    = sfContext::getInstance()->getUser()->getAttribute('userId');
+        $request = sfContext::getInstance() ;
+  	$ctxAction = $request->getActionName();
+  	$userId    = $request->getUser()->getAttribute('userId');
+        $grupo = $request->getRequest()->getParameter('grupo_trabajo_id')?$request->getRequest()->getParameter('grupo_trabajo_id'):'';
+        $documentacionGet = $request->getRequest()->getParameter('archivo_d_g[documentacion_grupo_id]')?$request->getRequest()->getParameter('archivo_d_g[documentacion_grupo_id]'):'';
         $GruposUsuario = GrupoTrabajo::ArrayDeMigrupo($userId, 1);
 
   	if ($ctxAction == 'create') {
@@ -25,7 +29,6 @@ class ArchivoDGForm extends BaseArchivoDGForm
 			'id'                => new sfWidgetFormInputHidden(),
 			'nombre'            => new sfWidgetFormInput(array(), array('style' => 'width: 430px;', 'class' => 'form_input')),			
 			'grupo_trabajo_id'  => new sfWidgetFormChoice(array('choices' => array('0'=>'--seleccionar--')+$GruposUsuario), array('class' => 'form_input', 'style' => 'width: 200px;')),
-			'documentacion_grupo_id'  => new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionGrupo', 'add_empty' => false), array('class' => 'form_input', 'style' => 'width: 200px;')),
 			'contenido'         => new fckFormWidget(),			
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_caducidad'   => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
@@ -60,8 +63,21 @@ class ArchivoDGForm extends BaseArchivoDGForm
 
 		}
 
+                if($grupo != ''){
+
+                    $documentacio = DocumentacionGrupo::getRepository()->doSelectByGrupoTrabajo($grupo,1);
+                    $this->setWidget('documentacion_grupo_id', new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') +_get_options_from_objects( $documentacio)))));
+
+                }else{
+
+                    $this->setWidget('documentacion_grupo_id', new sfWidgetFormDoctrineChoice(array('model' => 'DocumentacionGrupo', 'add_empty' => true)));
+
+                }
+
 		$this->setDefaults(array(
-			'owner_id' => $userId,					
+			'owner_id' => $userId,
+                        'grupo_trabajo_id'=> $grupo,
+                        'documentacion_grupo_id'=> $documentacionGet,
 		));
 
 		$this->widgetSchema->setNameFormat('archivo_d_g[%s]');

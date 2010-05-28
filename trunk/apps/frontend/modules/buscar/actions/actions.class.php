@@ -414,6 +414,20 @@ class buscarActions extends sfActions
 			$this->path='archivos_d_o/show?id=';
 			$this->labelCategoria='Archivos de Organismos';
 		}
+
+                /* Acuerdos */
+		if (!$request->getParameter('categoria') || $request->getParameter('categoria') == "acuerdo") {
+			$q->from('Acuerdo');
+			$q->where('deleted = 0');
+			$q->andWhere("nombre like '%".$word."%' OR contenido like '%".$word."%'");
+			$q->orderBy('nombre ASC');
+			$resAcuerdo = $q->execute();
+
+			$this->resAcuerdo = $resAcuerdo;
+			$this->resCategoria = $resAcuerdo;
+			$this->path='acuerdo/show?id=';
+			$this->labelCategoria='Acuerdos';
+		}
 		
 		
 		

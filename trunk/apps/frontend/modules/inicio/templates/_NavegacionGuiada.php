@@ -82,6 +82,10 @@
 							{
 								$subCAtTem = SubCategoriaNormativaN1Table::getSubcategiriaBycategoria($cat->getId());
 							}
+                                                        if($modulo == 'acuerdo')
+							{
+								$subCAtTem = SubCategoriaAcuerdoTable::getSubcategiriaBycategoria($cat->getId());
+							}
 						 ?>	
 						 <li><a><?php if($subCAtTem->count()>=1):?><span id="<?php echo 'massub'.$cat->getId()?>" style="cursor:pointer;<?php if($SelectSubTemaBsq && $SelectCatTemaBsq == $cat->getId()) echo 'display:none;'?>"> + </span> <span id="<?php echo 'menossub'.$cat->getId() ?>" style="<?php if(!$SelectSubTemaBsq || $SelectCatTemaBsq != $cat->getId()) echo 'display:none;'?>cursor:pointer;"> - </span><?php endif;?> <?php echo link_to($cat->getNombre(),$modulo."/index?select_cat_tema=".$cat->getId()) ?></a> </li>
 						 <div id="<?php echo 'tem'.$cat->getId()?>" style="<?php if(!$SelectSubTemaBsq || $SelectCatTemaBsq != $cat->getId()) echo 'display:none;'?>">
@@ -94,7 +98,10 @@
 						     <?php endif;?> 
 						     <?php if($modulo == 'iniciativas'):?>
 						      <li> <a href="<?php echo url_for($modulo.'/index?select_cat_tema='.$cat->getId().'&iniciativa[subcategoria_iniciativa_id]='.$sub->getId())?>"><?php echo $sub->getNombre();?> </a> </li>
-						     <?php endif;?> 
+						     <?php endif;?>
+                                                      <?php if($modulo == 'acuerdo'):?>
+						      <li> <a href="<?php echo url_for($modulo.'/index?select_cat_tema='.$cat->getId().'&acuerdo[subcategoria_acuerdo_id]='.$sub->getId())?>"><?php echo $sub->getNombre();?> </a> </li>
+						     <?php endif;?>
 						     <?php if($modulo == 'normativas'):?>
 						     <?php $subCAtTem2 = SubCategoriaNormativaN2Table::getSubcategiriaBycategoria($sub->getId());?>
 						     <li><a><?php if($subCAtTem2->count()>=1):?><span id="<?php echo 'massub2'.$sub->getId()?>" style="cursor:pointer;<?php if($SelectSubTemaBsqDos && $SelectSubTemaBsq == $sub->getId()) echo 'display:none;'?>"> + </span> <span id="<?php echo 'menossub2'.$sub->getId() ?>" style="<?php if(!$SelectSubTemaBsqDos || $SelectSubTemaBsq != $sub->getId()) echo 'display:none;'?>cursor:pointer;"> - </span><?php endif;?> <?php echo link_to($sub->getNombre(),$modulo."/index?select_cat_tema=".$cat->getId()."&normativa[subcategoria_normativa_uno_id]=".$sub->getId()) ?></a> </li>
