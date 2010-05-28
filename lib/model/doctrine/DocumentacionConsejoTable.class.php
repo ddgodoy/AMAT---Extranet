@@ -4,12 +4,16 @@
  */
 class DocumentacionConsejoTable extends DocumentacionTable
 {
-  public static function DocumentacionByConsejo($id_consejo)
+  public static function DocumentacionByConsejo($id_consejo,$combo = '')
   {
   	$q = Doctrine_Query::create();
   	$q ->select('*');
   	$q ->from('DocumentacionConsejo');
   	$q->where('consejo_territorial_id='.$id_consejo);
+        if($combo!='')
+                {
+                    $q->andWhere("estado = 'publicado'");
+                }
   	$q->andWhere('deleted = 0');
   	$consulta = $q->execute();
   	return $consulta;

@@ -16,7 +16,7 @@ class categoria_organismosComponents extends sfComponents
 
 		if (!$this->getUser()->getAttribute($modulo.'_nowcategoria') || $this->getContext()->getActionName() == 'nueva')
 		{
-		  $this->categoria_organismos_selected = 0;
+		  $this->categoria_organismos_selected = $this->categoria;
 		}
 
 		if($this->getContext()->getActionName() == 'editar' || $this->getContext()->getActionName() == 'create' || $this->getContext()->getActionName() == 'update' ) 

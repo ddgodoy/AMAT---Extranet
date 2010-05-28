@@ -20,7 +20,8 @@ include_partial(
 		array
 		(
 			'form' => $form,
-			'pageActual' => 1,		
+			'pageActual' => 1,
+                        'categoria'=>$categoria,
 			'arraySubcategoria'=> $verSubcategoria,
 			'arrayOrganismo'=> $verOrganisamos,
 			'arrayDocumentacion'=> $verDocumentacion,
