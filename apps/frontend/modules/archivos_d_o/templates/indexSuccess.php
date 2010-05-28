@@ -2,7 +2,11 @@
 <?php use_helper('Security') ?>
 <?php use_helper('Javascript') ?>
 <?php use_helper('Object') ?>
-
+ <?php if($organismoBsq && $documentacionBsq):
+$redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.$documentacionBsq.'&archivo_d_o[organismo_id]='.$organismoBsq;
+else :
+$redireccionGrupo = '';
+endif; ?>
 <?php 
 // datos  utiles para los partial
 
@@ -54,22 +58,15 @@
 	<div class="leftside">
 		<div class="lineaListados">
 			<?php if($pager->haveToPaginate()): ?>
-				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $redireccionGrupo) ?></div>
 			<?php endif; ?>
-                        <?php if($organismoBsq && $documentacionBsq):
-                              $redireccionGrupo = '?archivo_d_o[documentacion_organismo_id]='.$documentacionBsq.'&archivo_d_o[organismo_id]='.$organismoBsq;
-                              $redireccionGrupoEdit = '&archivo_d_o[documentacion_organismo_id]='.$documentacionBsq.'&archivo_d_o[organismo_id]='.$organismoBsq;
-                              else :
-                              $redireccionGrupo = '';
-                              $redireccionGrupoEdit ='';
-                              endif; ?>
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s <?php if ($cajaBsq) echo " con la palabra '".$cajaBsq."'" ?> </span> 
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
-		<form method="post" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/delete'.$redireccionGrupo) ?>">
+		<form method="post" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/delete?'.$redireccionGrupo) ?>">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
@@ -77,16 +74,16 @@
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
-						<a href="<?php echo url_for('archivos_d_o/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('archivos_d_o/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Fecha</a>
 					</th>
 					<th width="35%">
-						<a href="<?php echo url_for('archivos_d_o/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('archivos_d_o/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_d_o/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organismo</a>
+						<a href="<?php echo url_for('archivos_d_o/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Organismo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_d_o/index?sort=owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
+						<a href="<?php echo url_for('archivos_d_o/index?sort=owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
@@ -101,7 +98,7 @@
 					</td>
 					<td valign="center">
 					<?php if(validate_action('listar')):?>
-						<a href="<?php echo url_for('archivos_d_o/show?id='.$valor->getId().$redireccionGrupoEdit) ?>">
+						<a href="<?php echo url_for('archivos_d_o/show?id='.$valor->getId().'&'.$redireccionGrupo) ?>">
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
 					<?php endif;?>	
@@ -120,14 +117,14 @@
 					</td>
 					<td valign="center" align="center">
 					<?php if(validate_action('modificar') || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
-						<a href="<?php echo url_for('archivos_d_o/editar?id='.$valor->getId().$redireccionGrupoEdit) ?>">
+						<a href="<?php echo url_for('archivos_d_o/editar?id='.$valor->getId().'&'.$redireccionGrupo) ?>">
 							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?>
 						</a>
 						<?php endif;?>
 					</td>
 		          <td valign="center" align="center">
 		          <?php if(validate_action('baja') || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
-		          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_o/delete?id='.$valor->getId().$redireccionGrupoEdit, array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+		          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_o/delete?id='.$valor->getId().'&'.$redireccionGrupoEdit, array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
 		          <?php endif;?>	
 		          </td>
 				</tr>
@@ -152,13 +149,13 @@
 		<?php if ($cantidadRegistros > 0) : ?>
 		<div class="lineaListados">
 			<?php if($pager->haveToPaginate()): ?>
-				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $redireccionGrupo) ?></div>
 			<?php endif; ?>
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 
 			
@@ -173,7 +170,7 @@
 	<div class="rightside">
 		<div class="paneles">
 			<h1>Buscar</h1>
-			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/index') ?>">
+			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/index?'.$redireccionGrupo) ?>">
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>
