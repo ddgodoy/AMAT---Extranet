@@ -81,6 +81,7 @@
                  <span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Acta/s </span>
 		    </div>
 		<?php endif; ?>
+                                <span class="botonera"><input type="button" class="boton" value="Volver" name="btn_quitar" onclick="javascript:history.back(1)"/></span>
 	</div>
 <!-- * -->
 	<div class="rightside">
