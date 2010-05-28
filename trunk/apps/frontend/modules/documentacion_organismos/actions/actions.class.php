@@ -130,7 +130,7 @@ class documentacion_organismosActions extends sfActions
 							$enviar = true;
 							$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
 							$email  = UsuarioTable::getUsuarioByOrganismo($documentacion_organismo->getOrganismoId());
-							$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
+							$tema   = 'Documentación publicada para el Organismos: '.$grupo->getNombre();
 						}
 						if ($documentacion_organismo->getEstado()=='publicado') {
 							ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
@@ -182,7 +182,7 @@ class documentacion_organismosActions extends sfActions
 					$enviar = true;
 					$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
 					$email  = UsuarioTable::getUsuarioByOrganismo($documentacion_organismo->getOrganismoId());
-					$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
+					$tema   = 'Documentación publicada para el Organismos: '.$grupo->getNombre();
 				}
 				if ($documentacion_organismo->getEstado()=='publicado') {
 					ServiceNotificacion::send('creacion', 'Organismo', $documentacion_organismo->getId(), $documentacion_organismo->getNombre(),'',$documentacion_organismo->getOrganismoId());
@@ -192,7 +192,7 @@ class documentacion_organismosActions extends sfActions
 				$enviar = true;
 				$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
 				$email  = AplicacionRolTable::getEmailPublicar('33','','',$grupo->getId());
-				$tema   = 'Documento registrado para el Organismos: '.$grupo->getNombre();
+				$tema   = 'Documentación pendiente de publicada para el Organismos: '.$grupo->getNombre();
 			}
 			## envia el email
 			if ($enviar) {
