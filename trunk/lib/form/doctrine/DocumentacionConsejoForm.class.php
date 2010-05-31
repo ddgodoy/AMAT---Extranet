@@ -11,8 +11,10 @@ class DocumentacionConsejoForm extends BaseDocumentacionConsejoForm
 {
   public function configure()
   {
+                $requets = sfContext::getInstance();
   		sfLoader::loadHelpers('Object');
-  		$userId = sfContext::getInstance()->getUser()->getAttribute('userId');
+  		$userId = $requets->getUser()->getAttribute('userId');
+                $ConsejoTerritorial = $requets->getUser()->getAttribute('documentacion_consejos_nowconsejo')?$requets->getUser()->getAttribute('documentacion_consejos_nowconsejo'):'';
   		
   		$this->roles = UsuarioRol::getRepository()->getRolesByUser($userId,1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
@@ -50,7 +52,8 @@ class DocumentacionConsejoForm extends BaseDocumentacionConsejoForm
 
 		$this->setDefaults(array(
 			'owner_id'          => $userId,			
-			'estado'            => 'pendiente',			
+			'estado'            => 'pendiente',
+                        'consejo_territorial_id' => $ConsejoTerritorial
 		));
 
 		$this->widgetSchema->setNameFormat('documentacion_consejo[%s]');
