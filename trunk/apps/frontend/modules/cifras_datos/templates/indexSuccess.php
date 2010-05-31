@@ -115,7 +115,7 @@
 			   <?php endif; ?>
 			</tbody>
 		</table>
-		
+                </form>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
