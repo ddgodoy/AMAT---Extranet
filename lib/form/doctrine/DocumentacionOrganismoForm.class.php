@@ -11,7 +11,9 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
 {
   public function configure()
   {
-  		$userId = sfContext::getInstance()->getUser()->getAttribute('userId');
+                $requets = sfContext::getInstance();
+  		$userId = $requets->getUser()->getAttribute('userId');
+                
 		
   		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
@@ -21,8 +23,8 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'categoria_organismo_id'    => new sfWidgetFormDoctrineChoice(array('model' => 'CategoriaOrganismo', 'add_empty' => true)),
-      		'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
-      		'organismo_id'              => new sfWidgetFormDoctrineChoice(array('model' => 'Organismo', 'add_empty' => true)),
+                        'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
+                        'organismo_id'              => new sfWidgetFormDoctrineChoice(array('model' => 'Organismo', 'add_empty' => true)),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));
 
@@ -34,8 +36,8 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
 			'fecha_publicacion' => new sfValidatorDate(array('required' => false ), array('invalid' => 'La fecha de publicacion es incorrecta')),						
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 			'categoria_organismo_id'     => new sfValidatorDoctrineChoice(array('model' => 'CategoriaOrganismo', 'required' => true),array('invalid'=>'La Categoria es obligatoria')),
-	      	'subcategoria_organismo_id'  => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true),array('invalid'=>'La SubCategoria es obligatoria')),
-	      	'organismo_id'               => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'required' => true),array('invalid'=>'El Organismo es obligatorio')),
+                        'subcategoria_organismo_id'  => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true),array('invalid'=>'La SubCategoria es obligatoria')),
+                        'organismo_id'               => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'required' => true),array('invalid'=>'El Organismo es obligatorio')),
 			'estado'            => new sfValidatorString(),
 		));
 
