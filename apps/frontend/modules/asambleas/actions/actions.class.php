@@ -646,8 +646,8 @@ class asambleasActions extends sfActions
 			
 			if($usuario->getUsuario()->getEmail())	
 			{	
-    		$nombreEvento =  $asamblea->getTitulo() ;
-    		$descripcion = $asamblea->getContenido();
+                                $nombreEvento =  $asamblea->getTitulo() ;
+                                $descripcion = $asamblea->getContenido();
 
 				$mailer = new Swift(new Swift_Connection_NativeMail());
 				$message = new Swift_Message('Contacto desde Extranet de Asociados AMAT');
