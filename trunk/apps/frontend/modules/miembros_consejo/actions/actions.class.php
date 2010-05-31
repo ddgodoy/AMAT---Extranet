@@ -25,13 +25,10 @@ class miembros_consejoActions extends sfActions
                  ->leftJoin('uc.Usuario u')
                  ->leftJoin('uc.ConsejoTerritorial c')
                  ->leftJoin('u.UsuarioRol ur')
-                ->where($this->setFiltroBusqueda())
-                ->andWhere('ur.rol_id IN (5,7)');
-
-		
-		$this->pager->getQuery()->andWhere($this->setFiltroBusqueda())
-		 		 ->orderBy($this->setOrdenamiento())
-			 	 ->groupBy('uc.usuario_id');
+                 ->where($this->setFiltroBusqueda())
+                 ->andWhere('ur.rol_id IN (5,7)')
+                 ->orderBy($this->setOrdenamiento())
+		 ->groupBy('uc.usuario_id');
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 		
