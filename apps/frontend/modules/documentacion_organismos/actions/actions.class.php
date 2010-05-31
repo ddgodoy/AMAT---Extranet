@@ -192,7 +192,7 @@ class documentacion_organismosActions extends sfActions
 				$enviar = true;
 				$grupo  = OrganismoTable::getOrganismo($documentacion_organismo->getOrganismoId());
 				$email  = AplicacionRolTable::getEmailPublicar('33','','',$grupo->getId());
-				$tema   = 'Documentación pendiente de publicada para el Organismos: '.$grupo->getNombre();
+				$tema   = 'Documentación pendiente de publicar para el Organismos: '.$grupo->getNombre();
 			}
 			## envia el email
 			if ($enviar) {
