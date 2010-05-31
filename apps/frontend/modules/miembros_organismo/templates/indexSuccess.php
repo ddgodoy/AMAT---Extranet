@@ -49,7 +49,7 @@
 					</th>
 
 					<th width="30%">
-						<a href="<?php echo url_for('miembros_organismo/index?sort=o.grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Grupo de trabajo</a>
+						<a href="<?php echo url_for('miembros_organismo/index?sort=o.grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organismo</a>
 					</th>
 				</tr>
 				
