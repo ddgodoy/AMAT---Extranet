@@ -24,29 +24,55 @@ class inicioActions extends sfActions
 			
 			if($tabla == 'UsuarioGrupo')
 			{
-			  $usuario = Doctrine::getTable('Usuario')->find(sfContext::getInstance()->getUser()->getAttribute('userId'));
-			  $resultadoObj = $usuario->UsuariosdeMisGrupos();
+                            $usuario = Doctrine_Query::create()
+                            ->from('Usuario u')
+                            ->leftJoin('u.UsuarioGrupoTrabajo ug')
+                            ->leftJoin('ug.GrupoTrabajo g')
+                            ->leftJoin('u.UsuarioRol ur')
+                            ->where($this->setFiltroBusqueda())
+                            ->andWhere('ur.rol_id IN (4,6)');
+
+
+			  $resultadoObj = $usuario->execute();
 			  
 			}
 			if($tabla == 'UsuarioConsejoTerritorial')
 			{
+
+                          $usuario = Doctrine_query::create()
+                             ->from('Usuario u')
+                             ->leftJoin('u.UsuarioConsejoTerritorial uc')
+                             ->leftJoin('uc.ConsejoTerritorial c')
+                             ->leftJoin('u.UsuarioRol ur')
+                             ->where($this->setFiltroBusqueda())
+                             ->andWhere('ur.rol_id IN (5,7)')
+                             ->groupBy('uc.usuario_id');
 			  
-			  $usuario = Doctrine::getTable('Usuario')->find(sfContext::getInstance()->getUser()->getAttribute('userId'));
-			  $resultadoObj = $usuario->UsuariosdeMisConsejos();
+	
+			  $resultadoObj = $usuario->execute();
 			  
 			}
 			if($tabla == 'UsuarioOrganismo')
 			{
-			  
-			  $usuario = Doctrine::getTable('Usuario')->find(sfContext::getInstance()->getUser()->getAttribute('userId'));
-			  $resultadoObj = $usuario->UsuariosdeMisOrganismos();
+			  $usuario = Doctrine_Query::create()
+                            ->from('Usuario u')
+                            ->leftJoin('u.UsuarioOrganismo uo')
+                            ->leftJoin('u.UsuarioRol ur')
+                            ->leftJoin('uo.Organismo o')
+                            ->where($filtro)
+                            ->andWhere('ur.rol_id IN (4,6)')
+                            ->groupBy('uo.usuario_id');
+
+                          
+
+			  $resultadoObj = $usuario->execute() ;
 			  
 			}
 			if($tabla == 'Organismo')
 			{
 			  $organismos = Doctrine_Query::create()
 			  ->from('Organismo o')
-     	      ->leftJoin('o.UsuarioOrganismo uo')
+                          ->leftJoin('o.UsuarioOrganismo uo')
 			  ->addWhere($filtro);
 
 			  $resultadoObj = $organismos->execute();
@@ -55,14 +81,14 @@ class inicioActions extends sfActions
 			if($tabla == 'Usuario')
 			{
 			  $usuarios = Doctrine_Query::create()
-			  ->from('Usuario u')
-     	      ->leftJoin('u.UsuarioGrupoTrabajo ug') 
-		      ->leftJoin('u.UsuarioConsejoTerritorial uc') 
-		      ->leftJoin('u.UsuarioRol ur') 
-		      ->leftJoin('u.Mutua m') 
-			  ->where('u.id>1')
-			  ->addWhere($filtro)
-			  ->groupBy('u.id');
+			    ->from('Usuario u')
+                            ->leftJoin('u.UsuarioGrupoTrabajo ug')
+		            ->leftJoin('u.UsuarioConsejoTerritorial uc')
+		            ->leftJoin('u.UsuarioRol ur')
+		            ->leftJoin('u.Mutua m')
+                            ->where('u.id>1')
+                            ->addWhere($filtro)
+                            ->groupBy('u.id');
 			 
 			  
 			  $resultadoObj = $usuarios->execute();
