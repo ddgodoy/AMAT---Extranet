@@ -10,6 +10,28 @@ if ($sf_user->getAttribute('organismos_nowcategoria'))
 	$modulo = $sf_context->getModuleName();
 	$subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
 ?>
+<script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
+<script language="javascript" type="text/javascript">
+	function setActionFormList(accion)
+	{
+		var parcialMensaje = '';
+		var rutaToPub = '<?php echo url_for('organismos/publicar') ?>';
+		var rutaToDel = '<?php echo url_for('organismos/delete') ?>';
+		var objectFrm = $('frmListDocOrganismos');
+
+		if (accion == 'publicar') {
+			objectFrm.action = rutaToPub;
+			parcialMensaje = 'publicación';
+		} else {
+			objectFrm.action = rutaToDel;
+			parcialMensaje = 'eliminación';
+		}
+		if (confirm('Confirma la '+ parcialMensaje +' de los registros seleccionados?')) {
+			return true;
+		}
+		return false;
+	}
+</script>
 <div class="mapa"><strong>Organismos</strong> > Gestión de Organismos</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
@@ -44,10 +66,18 @@ if ($sf_user->getAttribute('organismos_nowcategoria'))
 		</div>
 		<br />
 		<?php if ($cantidadRegistros > 0) : ?>
+                <form method="post" enctype="multipart/form-data" action="" id="frmListDocOrganismos">
 				<?php $i=0; foreach ($organismo_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<a href="<?php echo url_for('miembros_organismo/index?organismo='.$valor->getId()) ?>" class="grupo-titulo"> <strong><?php echo $valor->getCategoriaOrganismo()->getNombre().' '.$valor->getSubCategoriaOrganismo()->getNombre().' '.$valor->getNombre()?></strong><span>Creado el: <?php echo date('d/m/Y',strtotime($valor->getCreatedAt()))?></span> </a><br />
 			      <table width="100%"  cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo">      
 			        <tr class="gris">
+                                 <td width="5%">
+                                    <?php if(validate_action('baja')): ?>
+                                            <input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" />
+                                    <?php else: ?>
+                                            &nbsp;
+                                    <?php endif;?>
+                                 </td>
 			        <?php if($valor->getDetalle()):?>
 			          <td><?php echo $valor->getDetalle()?></td>
 			        <?php else: ?>
@@ -69,6 +99,19 @@ if ($sf_user->getAttribute('organismos_nowcategoria'))
 			        </tr>
 			    </table><br />
 				<?php endforeach; ?>
+                            <?php if(validate_action('baja')):?>
+                              <div class="lineaListados">
+                                  <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados descrip-grupo">
+                                   <tr class="gris">
+                                    <td width="3%"><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+                                    <td>
+                                    <input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+                                    </td>
+                                   </tr>
+                                 </table>
+                             </div>
+                            <?php endif;?>
+                    </form>
 		<?php else : ?>
 			<?php if ($cajaBsq != '') : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
