@@ -1,5 +1,0 @@
-all:
-  has_layout: off
-  
-restringuidoSuccess:
-  has_layout: on

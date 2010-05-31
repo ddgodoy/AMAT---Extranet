@@ -1,7 +1,0 @@
-all:
-  doctrine:
-    class: sfDoctrineDatabase
-    param:
-      dsn: 'mysql:host=localhost;dbname=intranet'
-      username: intranet
-      password: 'DxAh9vErFAdDU8Km'
