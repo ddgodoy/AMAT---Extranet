@@ -17,7 +17,7 @@ class organismosActions extends sfActions
         if (is_numeric($this->paginaActual)) {
                 $this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
         }
-  	$this->pager = new sfDoctrinePager('Organismo', 10);  	    
+  	$this->pager = new sfDoctrinePager('Organismo', 4);
 	$this->pager->getQuery()
 	->from('Organismo o')
 	->leftJoin('o.UsuarioOrganismo uo')
@@ -77,21 +77,44 @@ class organismosActions extends sfActions
 
     $this->setTemplate('editar');
   }
-
-  public function executeDelete(sfWebRequest $request)
+   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+  	$this->processSelectedRecords($request, 'baja');
 
-    $this->forward404Unless($organismo = Doctrine::getTable('Organismo')->find($request->getParameter('id')), sprintf('Object organismo does not exist (%s).', $request->getParameter('id')));
-    
-    
-    sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    
-    $organismo->delete();
-
-    $this->redirect('organismos/index');
   }
+   protected function processSelectedRecords(sfWebRequest $request, $accion)
+  {
+  	$toProcess = $request->getParameter('id');
+
+  	if (!empty($toProcess)) {
+  		$request->checkCSRFProtection();
+
+  		$IDs = is_array($toProcess) ? $toProcess : array($toProcess);
+
+  		foreach ($IDs as $id) {
+
+                         $this->forward404Unless($organismo = Doctrine::getTable('Organismo')->find($id), sprintf('Object organismo does not exist (%s).', $id));
+                         sfLoader::loadHelpers('Security');
+				if (!validate_action($accion)) $this->redirect('seguridad/restringuido');
+
+				if ($accion == 'publicar') {
+//						$documentacion_grupo->setEstado('publicado');
+//						$documentacion_grupo->save();
+//
+//						ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
+				} else {
+
+				      $organismo->delete();
+
+					$this->getUser()->setFlash('notice', "El registro ha sido eliminado del sistema");
+				}
+  		}
+    
+    
+    
+          }
+     $this->redirect('organismos/index');
+   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
