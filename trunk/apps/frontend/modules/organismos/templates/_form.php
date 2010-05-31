@@ -32,7 +32,7 @@
     <div class="botonera" style="padding-top:10px;">
     </div>
     <fieldset>
-      <legend>Nuevo Organismo</legend>
+      <legend>Organismo</legend>
       	
       <table width="100%" cellspacing="4" cellpadding="0" border="0">
 			<tbody>
