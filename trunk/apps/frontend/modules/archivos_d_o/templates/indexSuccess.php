@@ -122,11 +122,11 @@ endif; ?>
 						</a>
 						<?php endif;?>
 					</td>
-		          <td valign="center" align="center">
-		          <?php if(validate_action('baja') || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
-		          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_o/delete?id='.$valor->getId().'&'.$redireccionGrupoEdit, array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-		          <?php endif;?>	
-		          </td>
+                                          <td valign="center" align="center">
+                                          <?php if(validate_action('baja') || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
+                                                <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_o/delete?id='.$valor->getId().'&'.$redireccionGrupo, array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                          <?php endif;?>
+                                          </td>
 				</tr>
 				<?php endforeach; ?>
 				<?php if(validate_action('baja')):?>
