@@ -87,7 +87,7 @@ class documentacion_consejosActions extends sfActions
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
   	$toProcess = $request->getParameter('id');
-  	$tema = 'Documentacón ';
+  	$tema = 'Documentación ';
   	if (!empty($toProcess)) {
   		$request->checkCSRFProtection();
   		
@@ -162,7 +162,7 @@ class documentacion_consejosActions extends sfActions
     $form->bind($request->getParameter($form->getName()));
 
     if ($form->isValid()) {
-    	$tema = 'Documentacón ';
+    	$tema = 'Documentación ';
       $documentacion_consejo = $form->save();
 
 			## Notificar y enviar email a los destinatarios 
