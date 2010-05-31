@@ -240,7 +240,7 @@ public function executeDelete(sfWebRequest $request)
 			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
-    if (!empty($this->grupoBsq)) {
+                if (!empty($this->grupoBsq)) {
 			$parcial .= " AND grupo_trabajo_id = $this->grupoBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowgrupo', $this->grupoBsq);
 		}
