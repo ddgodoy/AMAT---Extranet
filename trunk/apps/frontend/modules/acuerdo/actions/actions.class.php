@@ -133,7 +133,7 @@ class acuerdoActions extends sfActions
 		$this->desdeBsq = $this->getRequestParameter('desde_busqueda')?$this->getRequestParameter('desde_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechadesde');
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda')?$this->getRequestParameter('hasta_busqueda'):$this->getUser()->getAttribute($modulo.'_nowfechahasta');
 		$this->CatInicBsq = $this->getRequestParameter('select_cat_tema')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowcatiniciativa');
-		$this->SubIniBsq = $this->getRequestParameter('acuerdo[subcategoria_acuerdo_id]')?$this->getRequestParameter('select_cat_tema'):$this->getUser()->getAttribute($modulo.'_nowsubcatiniciativa');
+		$this->SubIniBsq = $this->getRequestParameter('acuerdo[subcategoria_acuerdo_id]')?$this->getRequestParameter('acuerdo[subcategoria_acuerdo_id]'):$this->getUser()->getAttribute($modulo.'_nowsubcatiniciativa');
 		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 
 		if (!empty($this->cajaBsq)) {
