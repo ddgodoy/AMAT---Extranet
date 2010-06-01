@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td valign="top"><strong>Descripci&oacute;n:</strong>&nbsp;</td>
-				<td><?php echo nl2br($descripcio) ?></td>
+				<td><?php echo $descripcio ?></td>
 			</tr>
 		</table>
 	</body>
