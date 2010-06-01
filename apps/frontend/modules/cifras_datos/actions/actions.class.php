@@ -205,7 +205,7 @@ class cifras_datosActions extends sfActions
                     }
                     else
                     {
-                        $this->orderBy = 'titulo';
+                        $this->orderBy = 'fecha';
                         $this->sortType = 'asc';
                         $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
                         $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
