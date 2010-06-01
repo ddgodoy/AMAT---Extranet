@@ -13,13 +13,18 @@
   $subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
   $organismos_selected = $sf_user->getAttribute($modulo.'_noworganismos');
 ?>
+<?php if($organismoBsq):
+$redireccionGrupo = Organismo::getUrlOrganismos($organismoBsq);
+else :
+$redireccionGrupo = '';
+endif; ?>
 <script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
 <script language="javascript" type="text/javascript">
 	function setActionFormList(accion)
 	{
 		var parcialMensaje = '';
-		var rutaToPub = '<?php echo url_for('documentacion_organismos/publicar') ?>';
-		var rutaToDel = '<?php echo url_for('documentacion_organismos/delete') ?>';
+		var rutaToPub = '<?php echo url_for('documentacion_organismos/publicar?'.$redireccionGrupo) ?>';
+		var rutaToDel = '<?php echo url_for('documentacion_organismos/delete?'.$redireccionGrupo) ?>';
 		var objectFrm = $('frmListDocOrganismos');
 
 		if (accion == 'publicar') {
@@ -64,7 +69,7 @@
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
      			<?php endif; ?>
                 <?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/nueva') ?>';" style="float: right;" value="Nueva Documentación" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Nueva Documentación" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
@@ -76,16 +81,16 @@
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
-						<a href="<?php echo url_for('documentacion_organismos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('documentacion_organismos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Fecha</a>
 					</th>
 					<th width="35%">
-						<a href="<?php echo url_for('documentacion_organismos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('documentacion_organismos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Organismo</a>
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Organismo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%"><?php if ( validate_action('publicar')): ?>Publicar<?php endif;?></th>
@@ -96,18 +101,18 @@
 					<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				    <?php if($valor->getEstado() == 'guardado'):?>
 					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd, 'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 					<?php else: ?>
-					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd, 'redireccionGrupo'=>$redireccionGrupo ));?>
 					<?php endif; ?>
 					<?php else: ?>
 					<?php if($valor->getEstado() == 'guardado' || $valor->getEstado() == 'pendiente'):?>
 					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd, 'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 					<?php else: ?>
-					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByOrganismo', array('valor'=>$valor,'odd'=>$odd, 'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 				    <?php endif;?>
 					<?php endforeach; ?>
@@ -145,7 +150,7 @@
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/nueva') ?>';" style="float: right;" value="Nueva Documentación" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Nueva Documentación" name="newNews" class="boton"/>
 			<?php endif;?>
 			
 		</div>
@@ -155,7 +160,7 @@
 	<div class="rightside">
 		<div class="paneles">
 			<h1>Buscar</h1>
-			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('documentacion_organismos/index') ?>">
+			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('documentacion_organismos/index?'.$redireccionGrupo) ?>">
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>

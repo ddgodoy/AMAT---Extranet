@@ -1,5 +1,6 @@
 <?php use_helper('Security');?>
 <?php use_helper('Date');?>
+<?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):$redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]')); else: $redireccionGrupo = '';  endif; ?>
 <div class="mapa">
 	  <strong>Organismos</strong> > <a href="<?php echo url_for('documentacion_organismos/index') ?>">Documentación</a> > <?php echo  $documentacion_organismo->getNombre() ?>
 	</div>
@@ -41,7 +42,7 @@
 	
 	<div class="botonera">
 <?php if(validate_action('modificar')):?>
-	<input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/editar?id='.$documentacion_organismo->getId()) ?>';"/>
+	<input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/editar?id='.$documentacion_organismo->getId().'&'.$redireccionGrupo) ?>';"/>
 <?php endif;?>	
-	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/index') ?>';"/>
+	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/index?'.$redireccionGrupo) ?>';"/>
 	</div>

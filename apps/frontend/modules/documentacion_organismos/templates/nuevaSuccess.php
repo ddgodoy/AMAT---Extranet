@@ -14,16 +14,20 @@
 	</table>
 <?php 
 // datos que son utiles para los partial
+$organismosArray = array();
+if($sf_request->getParameter('documentacion_organismo[organismo_id]')){
+$organismosArray = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'),1);
+}
 include_partial(
 		'form',
 		array
 		(
 			'form' => $form,
 			'pageActual' => 1,	
-			'arraySubcategoria'=> array(),
-			'arrayOrganismo'=> array(),
+			'arraySubcategoria'=> $organismosArray['1'],
+			'arrayOrganismo'=> $organismosArray['0'],
 			'verSubcategoria'=> 0,
-			'subcategoria_organismos_selected'  => 0,
-			'organismos_selected'  => 0,
+			'subcategoria_organismos_selected'  => $sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]')?$sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]'):0,
+			'organismos_selected'  => $sf_request->getParameter('documentacion_organismo[organismo_id]')?$sf_request->getParameter('documentacion_organismo[organismo_id]'):0,
 			'verLosOrganismos' => $verLosOrganismos
 		)); ?>
