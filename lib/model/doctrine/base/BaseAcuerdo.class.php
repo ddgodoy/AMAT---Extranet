@@ -19,6 +19,10 @@ abstract class BaseAcuerdo extends Documentacion
              'type' => 'string',
              'length' => '255',
              ));
+        $this->hasColumn('imagen', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
     }
 
     public function setUp()
