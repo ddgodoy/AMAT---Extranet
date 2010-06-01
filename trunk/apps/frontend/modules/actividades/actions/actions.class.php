@@ -18,7 +18,9 @@ class actividadesActions extends sfActions
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	$this->pager = new sfDoctrinePager('Actividad', 10);
-	$this->pager->getQuery()->from('Actividad')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('Actividad')
+        ->where($this->setFiltroBusqueda())
+        ->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
@@ -205,7 +207,7 @@ class actividadesActions extends sfActions
             }
             else
             {
-                $this->orderBy = 'titulo';
+                $this->orderBy = 'fecha';
                 $this->sortType = 'asc';
                 $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
                 $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
