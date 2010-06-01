@@ -1,6 +1,11 @@
 <?php use_helper('Security');?>
 <?php use_helper('Date');?>
 <?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):$redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]')); else: $redireccionGrupo = '';  endif; ?>
+<?php
+$getArchivo = explode('&',$redireccionGrupo );
+$getCategoria = explode('=', $getArchivo['0']);
+$getSubCategoria = explode('=', $getArchivo['1']);
+?>
 <div class="mapa">
 	  <strong>Organismos</strong> > <a href="<?php echo url_for('documentacion_organismos/index') ?>">Documentación</a> > <?php echo  $documentacion_organismo->getNombre() ?>
 	</div>
@@ -21,7 +26,7 @@
 	  <?php
 		 if(ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count() >= 1){ 
 			if (validate_action('listar','archivos_d_o')) { 
-				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[documentacion_organismo_id]=' . $documentacion_organismo->getId(), array('method' => 'post'));
+				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'].'&archivo_d_o[documentacion_organismo_id]='.$documentacion_organismo->getId().'&archivo_d_o[organismo_id]='.$documentacion_organismo->getOrganismoId(), array('method' => 'post'));
 			}	
 		 }	
 	  ?>
