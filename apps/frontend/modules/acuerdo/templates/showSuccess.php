@@ -13,6 +13,7 @@
 	
 	<div class="noticias">	  
 	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($acuerdo->getFecha())) ?></span> <br />
+          <img src="<?php if ($acuerdo->getimagen()): ?>/uploads/acuerdos/images/<?php echo $acuerdo->getimagen() ?> <?php else: ?> /images/noimage.jpg <?php endif; ?>" class="notimg" alt="<?php echo  $acuerdo->getNombre() ?>" />
 	  <a href="#" class="nottit"><?php echo  $acuerdo->getnombre() ?></a><br />
 	  <?php if($acuerdo->getCategoriaAcuerdoId()):?>
           <span class="notfecha">Categor&iacute;a: <?php echo CategoriaAcuerdo::getRepository()->findOneById($acuerdo->getCategoriaAcuerdoId())->getNombre()?></span> <br />
@@ -20,7 +21,7 @@
 	  <?php if($acuerdo->getSubcategoriaAcuerdoId()):?>
           <span class="notfecha">Sub-categor&iacute;a: <?php echo SubCategoriaAcuerdo::getRepository()->findOneById($acuerdo->getSubcategoriaAcuerdoId())->getNombre()?></span> <br />
 	  <?php endif;?>
-	  <?php echo nl2br($acuerdo->getcontenido()) ?>
+	  <?php echo $acuerdo->getcontenido() ?>
 	 <br clear="all" />
 	  <?php if ($acuerdo->getDocumento()): ?>
 	   <a href="<?php echo url_for("/uploads/acuerdo/docs/".$acuerdo->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
