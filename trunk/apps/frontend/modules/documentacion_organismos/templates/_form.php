@@ -9,7 +9,7 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-
+<?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):$redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]')); else: $redireccionGrupo = '';  endif; ?>
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
 <?php echo $form['categoria_organismo_id']->renderError() ?>
@@ -18,7 +18,7 @@
 <?php if ($verLosOrganismos == 0):?>
 <div class="mensajeSistema ok">Debe ingresar un organismo para poder cargar documentacion del organismos. <a href="<?php echo url_for('organismos/nueva') ?>">click aquí</a></div>
 <?php endif;?>
-<form action="<?php echo url_for('documentacion_organismos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action="<?php echo url_for('documentacion_organismos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
@@ -51,7 +51,8 @@
 		<td valign="middle">
 		<?php
 		// llamo al componente del modulo  categoria _ organismos
-		   echo include_component('categoria_organismos','listacategoria',array('name'=>'documentacion_organismo'));
+                   $categoria = $sf_request->getParameter('documentacion_organismo[categoria_organismo_id]')?$sf_request->getParameter('documentacion_organismo[categoria_organismo_id]'):'';
+		   echo include_component('categoria_organismos','listacategoria',array('name'=>'documentacion_organismo','categoria'=>$categoria));
 		?>
 		</td>
 		</tr>
@@ -98,7 +99,7 @@
     ?>  
       <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
      <?php endif; ?> 
-      <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/index') ?>';"/>
+      <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_organismos/index?'.$redireccionGrupo) ?>';"/>
     </div>
  </form> 
 <?php if(validate_action('alta')):?>

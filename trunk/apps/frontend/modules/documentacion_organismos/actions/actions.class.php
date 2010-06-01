@@ -106,6 +106,11 @@ class documentacion_organismosActions extends sfActions
   
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
+                if($request->getParameter('documentacion_organismo[organismo_id]')){
+                $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
+                }else {
+                $redireccionGrupo = '';
+                }
 		$toProcess = $request->getParameter('id');
 
 		if (!empty($toProcess)) {
@@ -166,11 +171,16 @@ class documentacion_organismosActions extends sfActions
 				} else { $documentacion_organismo->delete(); }
 			}
 		}
-		$this->redirect('documentacion_organismos/index');
+		$this->redirect('documentacion_organismos/index?'.$redireccionGrupo);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+                if($request->getParameter('documentacion_organismo[organismo_id]')){
+                $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
+                }else {
+                $redireccionGrupo = '';
+                }
 		$form->bind($request->getParameter($form->getName()));
 		
 		if ($form->isValid()) {
@@ -220,7 +230,7 @@ class documentacion_organismosActions extends sfActions
 				}
                                 $mailer->disconnect();
 			}
-			$this->redirect('documentacion_organismos/show?id='.$documentacion_organismo->getId());	
+			$this->redirect('documentacion_organismos/show?id='.$documentacion_organismo->getId().'&'.$redireccionGrupo);
 		}
   }
   
@@ -353,4 +363,5 @@ class documentacion_organismosActions extends sfActions
   {
     return $this->renderComponent('subcategoria_organismos','listasubcategoria',array('name'=>$request->getParameter('name')));
   }
+
 }

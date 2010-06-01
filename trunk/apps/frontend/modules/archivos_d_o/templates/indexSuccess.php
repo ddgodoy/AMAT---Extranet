@@ -2,7 +2,7 @@
 <?php use_helper('Security') ?>
 <?php use_helper('Javascript') ?>
 <?php use_helper('Object') ?>
- <?php if($organismoBsq && $documentacionBsq):
+<?php if($organismoBsq && $documentacionBsq):
 $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.$documentacionBsq.'&archivo_d_o[organismo_id]='.$organismoBsq;
 else :
 $redireccionGrupo = '';
