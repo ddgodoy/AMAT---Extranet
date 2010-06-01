@@ -48,12 +48,14 @@
 					<td valign="top"><label><?php echo $form['contenido']->renderLabel() ?></label></td>
 					<td valign="middle"><?php echo $form['contenido'] ?></td>
 				</tr>
+                                <tr>
+                                  <td style="padding-top: 5px;"><label>Imagen</label></td>
+                                  <td style="padding-top: 5px;"><label><?php echo $form['imagen'] ?></label></td>
+                                </tr>
 				<tr>
 			          <td style="padding-top: 5px;"><label>Documento</label></td>
-			          <td><label>
-			            <?php echo $form['documento'] ?>
-			          </label></td>
-		        </tr>
+			          <td><label><?php echo $form['documento'] ?></label></td>
+                                </tr>
 			</tbody>
 		</table>
 		<?php echo $form->renderHiddenFields() ?>
