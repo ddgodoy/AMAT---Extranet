@@ -9,7 +9,10 @@ class UsuarioGrupoTrabajoTable extends Doctrine_Table
 		$q=Doctrine_Query::create()
 		->from('UsuarioGrupoTrabajo ug')
 		->leftJoin('ug.Usuario u')
-		->where('ug.grupo_trabajo_id ='.$id);
+		->where('ug.grupo_trabajo_id ='.$id)
+                ->andWhere('ug.deleted = 0')
+                ->andWhere('u.deleted = 0 AND u.activo = 1');
+
 		
 		return $q->execute();
 	}

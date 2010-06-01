@@ -284,7 +284,9 @@ class UsuarioTable extends Doctrine_Table
 		$r = Doctrine_Query::create()
 		->from('UsuarioOrganismo uo')
 		->leftJoin('uo.Usuario u')
-		->where('uo.organismo_id ='.$idOrag);
+		->where('uo.organismo_id ='.$idOrag)
+                ->andWhere('uo.deleted = 0')
+                ->andWhere('u.deleted = 0 AND u.activo = 1')        ;
 		
 		return $r->execute();
 	

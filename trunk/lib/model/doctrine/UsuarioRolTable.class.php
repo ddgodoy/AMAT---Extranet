@@ -45,7 +45,8 @@ class UsuarioRolTable extends Doctrine_Table
 		$q = Doctrine_Query::create()
 		->from('UsuarioRol ur')
 		->leftJoin('ur.Usuario u')
-		->where('ur.rol_id = '.$idRol);
+		->where('ur.rol_id = '.$idRol)
+                ->andWhere('u.deleted = 0 AND u.activo = 1');
 		if($userEx!='')
 		{
 			$q->addWhere('u.id NOT IN ('.$userEx.')');
