@@ -918,9 +918,10 @@ Acuerdo:
     categoria_acuerdo_id:       { type:integer }
     subcategoria_acuerdo_id:    { type: integer }
     documento:                  { type: string(255), notnull: false }
+    imagen:                     { type: string(255), notnull: false }
   relations:
-    CategoriaAcuerdo:        { local: categoria_acuerdo_id, foreign: id, onDelete: CASCADE }
-    SubCategoriaAcuerdo:     { local: subcategoria_acuerdo_id, foreign: id, onDelete: CASCADE }
+    CategoriaAcuerdo:           { local: categoria_acuerdo_id, foreign: id, onDelete: CASCADE }
+    SubCategoriaAcuerdo:        { local: subcategoria_acuerdo_id, foreign: id, onDelete: CASCADE }
 
 CategoriaAcuerdo:
   actAs:
