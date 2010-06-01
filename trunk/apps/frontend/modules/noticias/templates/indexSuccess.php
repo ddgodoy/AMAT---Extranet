@@ -25,11 +25,11 @@
 <link type="text/css" rel="stylesheet" href="/js/calendario/dhtml_calendar.css" media="screen"></link>
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
 
-<div class="mapa"><strong>Canal Corporativo</strong> > Noticia</div>
+<div class="mapa"><strong>Canal Corporativo</strong> > Noticias</div>
 <table width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tbody>
 		<tr>
-			<td width="70%"><h1>Noticia</h1></td>
+			<td width="70%"><h1>Noticias</h1></td>
 			<!--<td width="5%" align="center"><?php // echo link_to(image_tag('cerrar_sesion_over.jpg', array('title' => 'limpiar', 'alt' => 'limpiar', 'border' => '0')), 'noticias/limpiar'); ?></td>			-->
 			<td width="5%" align="center"><?php $nombretabla = 'Noticia'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 			<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
