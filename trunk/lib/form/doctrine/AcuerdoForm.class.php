@@ -11,6 +11,7 @@ class AcuerdoForm extends BaseAcuerdoForm
 {
   public function configure()
   {
+        $img_valids = array('image/jpeg','image/pjpeg','image/gif');
         sfLoader::loadHelpers('Object');
         $categoria = CategoriaAcuerdoTable::getAll();
   	if($this->getObject()->getCategoriaAcuerdoId())
@@ -48,6 +49,20 @@ class AcuerdoForm extends BaseAcuerdoForm
           'categoria_acuerdo_id'    => new sfValidatorChoice(array('choices' => array_keys(_get_options_from_objects($categoria)) , 'required' => true),array('required'=>'La Categoria es obligatoria')),
           'subcategoria_acuerdo_id' => new sfValidatorChoice(array('choices' => array_keys($subvalidcat), 'required' => false)),
         ));
+
+    if($this->getObject()->getImagen())
+    {
+            $this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/acuerdos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
+            $this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/acuerdos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids, 'max_size'=>2048000),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)', 'max_size'=>'Máximo tamaño de imagen: 2 MB')));
+            $this->setValidator('imagen_delete',new sfValidatorBoolean());
+    }
+    else
+    {
+            $this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/acuerdos/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
+            $this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/acuerdos/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids, 'max_size'=>2048000),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)', 'max_size'=>'Máximo tamaño de imagen: 2 MB')));
+    }
+
+
 
     $this->widgetSchema->setLabels(array(
                         'fecha'     => 'Fecha *',
