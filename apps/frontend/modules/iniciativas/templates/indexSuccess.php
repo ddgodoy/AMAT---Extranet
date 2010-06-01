@@ -6,11 +6,11 @@
 <script language="javascript" type="text/javascript" src="/js/calendario/dhtml_calendar.js"></script>
 <script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
 
-<div class="mapa"><strong>Administraci&oacute;n</strong> > Iniciativas </div>
+<div class="mapa"><strong>Administraci&oacute;n</strong> > Actividad Parlamentaria </div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
-				<td width="70%"><h1>Iniciativas</h1></td>
+				<td width="70%"><h1>Actividad Parlamentaria</h1></td>
 				<td width="5%" align="center"><?php $nombretabla = 'Iniciativa'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
@@ -33,7 +33,7 @@
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Iniciativa/s</span>
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('iniciativas/nueva') ?>';" style="float: right;" value="Crear Nueva Iniciativa" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('iniciativas/nueva') ?>';" style="float: right;" value="Crear Nueva Actividad Parlamentaria" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
@@ -108,7 +108,7 @@
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Iniciativa/s</span>
 		   
 		<?php if(validate_action('alta')):?>
-		<input type="button" onclick="javascript:location.href='<?php echo url_for('iniciativas/nueva') ?>';" style="float:right;margin-top:10px;" value="Crear Nueva Iniciativa" name="newNews" class="boton"/>
+		<input type="button" onclick="javascript:location.href='<?php echo url_for('iniciativas/nueva') ?>';" style="float:right;margin-top:10px;" value="Crear Nueva Actividad Parlamentaria" name="newNews" class="boton"/>
 		<?php endif; ?>	
 		</div>
 		<?php endif; ?>
