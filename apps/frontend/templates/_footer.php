@@ -2,7 +2,7 @@
 </div>
 
 <div class="foot">
-  <p class="copy">&copy; Copyright AMAT  2009</p>
+  <p class="copy">&copy; Copyright AMAT  2010</p>
   <div class="right">
   	Contacto / Sugerencias&nbsp;
     <a href="<?php echo url_for('contacto/index') ?>" class="sobre">
