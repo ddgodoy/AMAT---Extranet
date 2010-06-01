@@ -4,7 +4,7 @@
 	</div>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	  <tr>
-	    <td width="95%"><h1>Acuerdo</h1></td>
+	    <td width="95%"><h1>Acuerdos</h1></td>
 	    <td width="5%" align="right">&nbsp;</td>
 	  </tr>
 	</table>
