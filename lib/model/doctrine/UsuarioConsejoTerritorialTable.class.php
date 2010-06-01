@@ -10,7 +10,10 @@ class UsuarioConsejoTerritorialTable extends Doctrine_Table
 		->from('UsuarioConsejoTerritorial uc')
 		->leftJoin('uc.Usuario u')
 		->leftJoin('uc.ConsejoTerritorial ct')
-		->where('uc.consejo_territorial_id  ='.$id);
+		->where('uc.consejo_territorial_id  ='.$id)
+                ->andWhere('uc.deleted = 0')
+                ->andWhere('u.deleted = 0')
+                ->andWhere('ct.deleted = 0');
 		
 		return $q->execute();
 	}
