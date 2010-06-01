@@ -16,7 +16,8 @@
 	<div class="noticias">
 	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($archivo_ct->getFecha())) ?></span> <span class="notfecha">- Fecha de caducidad: <?php echo date("d/m/Y", strtotime($archivo_ct->getfecha_caducidad())) ?></span><br />     
 	  <a  class="nottit"><?php echo  $archivo_ct->getNombre() ?></a><br />
-	  <?php echo nl2br($archivo_ct->getcontenido()) ?> 
+	  <?php echo nl2br($archivo_ct->getcontenido()) ?>
+          <br>
 	  <?php if($archivo_ct->getArchivo()): ?>
           <span class="notfecha"><a href="<?php echo url_for('/uploads/archivos_c_t/docs/'.$archivo_ct->getArchivo());?>" class="descargar-documento" target="_blank">Documento +</a></span><br />
 	  <?php endif; ?>
