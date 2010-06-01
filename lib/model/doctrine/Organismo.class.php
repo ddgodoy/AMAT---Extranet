@@ -73,4 +73,22 @@ class Organismo extends BaseOrganismo
 		
 	   return 	$armado;
 	}
+        public static function getUrlOrganismos($organismo,$type = '')
+        {
+            $request =sfContext::getInstance();
+            $user = $request->getUser()->getAttribute('userId');
+            $organismosArray= array('0'=>'','1'=>'');
+            $organismos = OrganismoTable::getOrganismosByid($organismo);
+            $categoriaId = $organismos->getCategoriaOrganismoId();
+            $organismosArray['1'] = SubCategoriaOrganismoTable::doSelectByCategoria($categoriaId);
+            $subcategoriaID = $organismos->getSubcategoriaOrganismoId();
+            $organismosArray['0'] = OrganismoTable::doSelectByOrganismoa($subcategoriaID,$user);
+            if($type == ''){
+                return 'documentacion_organismo[categoria_organismo_id]='.$categoriaId.'&documentacion_organismo[subcategoria_organismo_id]='.$organismos->getSubcategoriaOrganismoId().'&documentacion_organismo[organismo_id]='.$organismo;
+            }else{
+                return $organismosArray;
+            }
+
+        }
+
 }
