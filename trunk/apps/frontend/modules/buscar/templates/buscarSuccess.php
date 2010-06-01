@@ -562,6 +562,26 @@
 							$resultadoBusqueda['archivos_d_g']['url']='buscar/buscar?categoria=archivos_d_o&q='.$word; 
 							$resultadoBusqueda['archivos_d_g']['cantidad']=count($resArchivoDO); 
 							endif; ?>
+
+                                                        <?php // Acuerdo   ************************************************************ ?>
+							<?php if (count($resAcuerdo) && validate_action('listar','acuerdo')): ?>
+							<ul class="tema">
+								<h4><span><?php if (count($resAcuerdo) > 5): ?> 5 <?php else : echo count($resAcuerdo); endif;?> de <?php echo count($resAcuerdo)?> resultados</span>Acuerdos</h4>
+								<?php $count = 0 ?>
+								<?php foreach ($resAcuerdo as $obj): ?>
+									<li><a href="<?php echo url_for('acuerdo/show?id=' . $obj->getId()) ?>"><?php echo $obj->getNombre() ?></a></li>
+									<?php $count ++ ?>
+									<?php if ($count == 5): ?> <?php break ?> <?php endif;?>
+								<?php endforeach;?>
+								<?php if (count($resAcuerdo) > 5): ?>
+								<a class="vermas" href="<?php echo url_for('buscar/buscar?categoria=acuerdo&q='.$word) ?>">+ Ver Mas Resultados</a>
+								<?php endif;?>
+							</ul>
+							<?php
+							$resultadoBusqueda['acuerdo']['Nombre']='Acuerdos';
+							$resultadoBusqueda['acuerdo']['url']='buscar/buscar?categoria=acuerdo&q='.$word;
+							$resultadoBusqueda['acuerdo']['cantidad']=count($resAcuerdo);
+							endif; ?>
 							
 							
 						   </div>
