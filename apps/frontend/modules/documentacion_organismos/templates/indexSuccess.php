@@ -8,10 +8,10 @@
   $modulo = $sf_context->getModuleName();
   $categoria = $sf_user->getAttribute($modulo.'_nowcategoria')? $sf_user->getAttribute($modulo.'_nowcategoria') : '' ;
   $subcategoria = $sf_user->getAttribute($modulo.'_nowsubcategoria')? $sf_user->getAttribute($modulo.'_nowsubcategoria') : '' ;
-	$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);;
-	$arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria) : '';
-	$subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
-	$organismos_selected = $sf_user->getAttribute($modulo.'_noworganismos');
+  $arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);
+  $arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria) : '';
+  $subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
+  $organismos_selected = $sf_user->getAttribute($modulo.'_noworganismos');
 ?>
 <script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
 <script language="javascript" type="text/javascript">

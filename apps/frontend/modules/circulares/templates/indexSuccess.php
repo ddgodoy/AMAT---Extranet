@@ -97,7 +97,9 @@
 	</div>
 <!-- * -->
 <div class="rightside">
-        <?php echo include_partial('inicio/NavegacionGuiada',
+        <?php
+        if($circularCoun >= 1){
+        echo include_partial('inicio/NavegacionGuiada',
         array('FEcha_circulares'=>$FEcha_circulares,
 	   'modulo'=>$modulo,
 	   'year'=>$year,
@@ -108,7 +110,8 @@
 	   'SelectSubTemaBsq2'=>'', 
 	   'arrayCategoria'=>'',
 	   'SelectCatOrganismoBsq'=>'',
-	   'SelectSubOrganismoBsq'=>''))?>
+	   'SelectSubOrganismoBsq'=>''));
+        }   ?>
 		<div class="paneles">
 			<h1>Buscador de circulares</h1>
 			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('circulares/index') ?>">
