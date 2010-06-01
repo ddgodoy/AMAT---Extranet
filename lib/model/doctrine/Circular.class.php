@@ -23,6 +23,10 @@ class Circular extends BaseCircular
 		{
 		  $RangodeA = NormativaTable::getFechasCategorias();
 		}
+                if($modulo == 'acuerdo')
+		{
+		  $RangodeA = AcuerdoTable::getFechasCategorias();
+		}
 		
         $min = $RangodeA->getMinYear();
         $max = $RangodeA->getMaxYear();
@@ -39,7 +43,10 @@ class Circular extends BaseCircular
 			
 		}
 		
-		
+		/*echo '<pre>';
+                print_r($arrayfecha);
+                echo '<pre>';
+                exit ();*/
 		return $arrayfecha;
 		
 	}
