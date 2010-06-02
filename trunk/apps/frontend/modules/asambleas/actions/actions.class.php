@@ -1080,7 +1080,7 @@ class asambleasActions extends sfActions
 			{  
 			    $idGrupo =explode('_', AsambleaTable::getAsambleaId($this->getRequestParameter('id'))->getEntidad());
 			    
-				$arraDAtos['usuarios'] =  UsuarioTable::getUsuarioByOrganismoAsn($idGrupo[1]);	
+				$arraDAtos['usuarios'] =  UsuarioTable::getUsuarioByOrganismoAsn($idGrupo[1],1);
 				
 
 				$arraDAtos['Entidad'] = OrganismoTable::getOrganismo($idGrupo[1])->getNombre();	
