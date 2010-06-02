@@ -4,7 +4,7 @@
  */
 class UsuarioGrupoTrabajoTable extends Doctrine_Table
 {
-	public static function getUsreByGrupo($id)
+	public static function getUsreByGrupo($id,$conbocatoria = '')
 	{
 		$q=Doctrine_Query::create()
 		->from('UsuarioGrupoTrabajo ug')
@@ -12,8 +12,12 @@ class UsuarioGrupoTrabajoTable extends Doctrine_Table
 		->where('ug.grupo_trabajo_id ='.$id)
                 ->andWhere('ug.deleted = 0')
                 ->andWhere('u.deleted = 0 AND u.activo = 1');
-
-		
+               if($conbocatoria!=''){
+                $q->leftJoin('ug.GrupoTrabajo g')
+                  ->leftJoin('u.UsuarioRol ur')
+                  ->andWhere('ur.rol_id IN (4,6)')
+                  ->groupBy('u.id');
+               }
 		return $q->execute();
 	}
 	
