@@ -87,7 +87,7 @@
 	<div class="rightside">
 		<div class="paneles">
 			<h1>Buscar por Nombre</h1>
-			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('acta/index') ?>">
+			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('acta/index?'.$DAtos['get']) ?>">
 			<input type="hidden" name="<?php echo $DAtos['campo'];?>" value="<?php echo $DAtos['valor'];?>" />
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
