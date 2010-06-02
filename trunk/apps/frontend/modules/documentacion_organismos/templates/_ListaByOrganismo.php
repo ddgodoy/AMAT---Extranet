@@ -1,6 +1,13 @@
-<?php $getArchivo = explode('&',$redireccionGrupo );
+<?php if($redireccionGrupo!=''){
+      $getArchivo = explode('&',$redireccionGrupo );
       $getCategoria = explode('=', $getArchivo['0']);
       $getSubCategoria = explode('=', $getArchivo['1']);
+
+      $redireccionArchivo = '&archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'];
+
+      }else{
+       $redireccionArchivo ='';
+      }
 ?>
 <tr class="<?php echo $odd ?>">
 				    <?php if(validate_action('baja')):?>
@@ -26,7 +33,7 @@
 					</td>
 					<td valign="center" align="center">
 						<?php if (validate_action('listar','archivos_d_o')) {
-								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_o/index?archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'].'&archivo_d_o[documentacion_organismo_id]='.$valor->getId().'&archivo_d_o[organismo_id]='.$valor->getOrganismoId(), array('method' => 'post'));
+								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_d_o/index?archivo_d_o[documentacion_organismo_id]='.$valor->getId().'&archivo_d_o[organismo_id]='.$valor->getOrganismoId().$redireccionArchivo, array('method' => 'post'));
 							}?>
 					</td>
 					<td valign="center" align="center">
