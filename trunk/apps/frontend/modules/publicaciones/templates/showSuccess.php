@@ -34,6 +34,7 @@ function confirmation(link) {
           <?php if($publicacion->getdocumento()):?>
 	  <a href="<?php echo url_for("/uploads/publicaciones/docs/".$publicacion->getDocumento())?>" class="descargar-documento" target="_blank">Documento +</a>
 	  <?php endif;?>
+            <br>
 	   <?php if($publicacion->getUserIdCreador()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($publicacion->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($publicacion->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
