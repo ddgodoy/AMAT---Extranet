@@ -87,10 +87,10 @@ endif; ?>
 						<a href="<?php echo url_for('documentacion_organismos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Organismo</a>
+						<a href="<?php echo url_for('documentacion_organismos/index?sort=organismo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Organismo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
+						<a href="<?php echo url_for('documentacion_organismos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%"><?php if ( validate_action('publicar')): ?>Publicar<?php endif;?></th>
