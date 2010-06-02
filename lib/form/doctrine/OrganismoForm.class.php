@@ -16,9 +16,14 @@ class OrganismoForm extends BaseOrganismoForm
   		
   		$action =sfContext::getInstance()->getActionName();
   	
-  	    $userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
-  	
-  	    $gruposTrbajo = GrupoTrabajoTable::getGruposTrabajoByUsuario($userId);
+                $userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
+
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($userId,1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)){
+                $gruposTrbajo = GrupoTrabajoTable::getAllGrupoTrabajo();
+                }else{
+                $gruposTrbajo = GrupoTrabajoTable::getGruposTrabajoByUsuario($userId);
+                }
   	
   		$idGrupoTrabajo = 0;
   		## Obtengo todos los usuarios del grupo de trabajo
