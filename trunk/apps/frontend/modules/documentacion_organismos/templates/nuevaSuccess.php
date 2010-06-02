@@ -14,7 +14,7 @@
 	</table>
 <?php 
 // datos que son utiles para los partial
-$organismosArray = array();
+$organismosArray = array('0'=>'','1'=>'');
 if($sf_request->getParameter('documentacion_organismo[organismo_id]')){
 $organismosArray = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'),1);
 }
