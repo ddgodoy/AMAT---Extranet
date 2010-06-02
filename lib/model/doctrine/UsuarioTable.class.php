@@ -279,15 +279,20 @@ class UsuarioTable extends Doctrine_Table
 		return $r->execute();
 	
 	}
-	public static function getUsuarioByOrganismoAsn($idOrag)
+	public static function getUsuarioByOrganismoAsn($idOrag, $conbocatoria = '')
 	{
 		$r = Doctrine_Query::create()
 		->from('UsuarioOrganismo uo')
 		->leftJoin('uo.Usuario u')
 		->where('uo.organismo_id ='.$idOrag)
                 ->andWhere('uo.deleted = 0')
-                ->andWhere('u.deleted = 0 AND u.activo = 1')        ;
-		
+                ->andWhere('u.deleted = 0 AND u.activo = 1');
+
+                if($conbocatoria!=''){
+                $r->leftJoin('u.UsuarioRol ur')
+                  ->andWhere('ur.rol_id IN (4,6)')
+                  ->groupBy('u.id');
+               }
 		return $r->execute();
 	
 	}

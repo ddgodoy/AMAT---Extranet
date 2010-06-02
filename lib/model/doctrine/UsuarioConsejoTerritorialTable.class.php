@@ -4,7 +4,7 @@
  */
 class UsuarioConsejoTerritorialTable extends Doctrine_Table
 {
-   public static function getUsreByConse($id)
+   public static function getUsreByConse($id, $conbocatoria = '')
 	{
 		$q=Doctrine_Query::create()
 		->from('UsuarioConsejoTerritorial uc')
@@ -14,7 +14,12 @@ class UsuarioConsejoTerritorialTable extends Doctrine_Table
                 ->andWhere('uc.deleted = 0')
                 ->andWhere('u.deleted = 0 AND u.activo = 1')
                 ->andWhere('ct.deleted = 0');
-		
+		if($conbocatoria!=''){
+                $q->leftJoin('u.UsuarioRol ur')
+                  ->andWhere('ur.rol_id IN (5,7)')
+                  ->groupBy('u.id');
+               }
+
 		return $q->execute();
 	}
 	
