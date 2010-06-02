@@ -45,7 +45,8 @@ class actaActions extends sfActions
 		$this->pager->getQuery()
 				->from('Acta a')
 				->leftJoin('a.Asamblea am')
-				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$datoUsuario)->orderBy($this->setOrdenamiento());
+				->where($this->setFiltroBusqueda().' AND  am.'.$this->DAtos['where'].' '.$datoUsuario)
+                                 ->orderBy($this->setOrdenamiento());
                 
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
@@ -57,14 +58,14 @@ class actaActions extends sfActions
 		$this->acta_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
 		$busqueda = explode('_',$this->grupodetrabajoBsq);
-		
-		if ($busqueda[0] == 'GrupoTrabajo') {
+
+		if ($busqueda[0] == 'GrupoTrabajo'&& $this->getRequestParameter('GrupodeTrabajo')==2) {
 			$this->Grupo = GrupoTrabajoTable::getGrupoTrabajo($busqueda[1]);
 		}
-		elseif($busqueda[0] == 'ConsejoTerritorial') {
+		elseif($busqueda[0] == 'ConsejoTerritorial' && $this->getRequestParameter('ConsejoTerritorial')==3) {
 			$this->Consejo = ConsejoTerritorialTable::getConsejo($busqueda[1]);
 		}
-		elseif($busqueda[0] == 'Organismo') {
+		elseif($busqueda[0] == 'Organismo' && $this->getRequestParameter('Organismo')==4) {
 			$this->Organismos = OrganismoTable::getOrganismo($busqueda[1]);
                         $this->organismomenu = $busqueda[1];
 		}
