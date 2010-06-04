@@ -86,6 +86,14 @@ class documentacion_consejosActions extends sfActions
   
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
+       if($request->getParameter('consejo'))
+            {
+               $redirecion = '?consejo='.$request->getParameter('consejo');
+            }
+            else
+            {
+                $redirecion = '';
+            }
   	$toProcess = $request->getParameter('id');
   	$tema = 'Documentación ';
   	if (!empty($toProcess)) {
@@ -154,11 +162,20 @@ class documentacion_consejosActions extends sfActions
 				}
   		}
   	}
-  	$this->redirect('documentacion_consejos/index');
+  	$this->redirect('documentacion_consejos/index?'.$redirecion);
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+
+    if($request->getParameter('consejo'))
+    {
+       $redirecion = 'consejo='.$request->getParameter('consejo');
+    }
+    else
+    {
+        $redirecion = '';
+    }
     $form->bind($request->getParameter($form->getName()));
 
     if ($form->isValid()) {
@@ -217,7 +234,7 @@ class documentacion_consejosActions extends sfActions
 				}
                                 $mailer->disconnect();
 			}
-      $this->redirect('documentacion_consejos/show?id='.$documentacion_consejo->getId());
+      $this->redirect('documentacion_consejos/show?id='.$documentacion_consejo->getId().'&'.$redirecion);
     }
   }
 

@@ -3,13 +3,18 @@
 	use_helper('Security');
 	use_helper('Object');
 ?>
+<?php if($consejoBsq){
+$redireccionGrupo = 'consejo='.$grupoBsq;
+}else{
+$redireccionGrupo = '';
+} ?>
 <script language="javascript" type="text/javascript" src="/js/common_functions.js"></script>
 <script language="javascript" type="text/javascript">
 	function setActionFormList(accion)
 	{
 		var parcialMensaje = '';
-		var rutaToPub = '<?php echo url_for('documentacion_consejos/publicar') ?>';
-		var rutaToDel = '<?php echo url_for('documentacion_consejos/delete') ?>';
+		var rutaToPub = '<?php echo url_for('documentacion_consejos/publicar?'.$redireccionGrupo) ?>';
+		var rutaToDel = '<?php echo url_for('documentacion_consejos/delete?'.$redireccionGrupo) ?>';
 		var objectFrm = $('frmListDocConsejos');
 
 		if (accion == 'publicar') {
@@ -53,7 +58,7 @@
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
      			<?php endif; ?>
                 <?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/nueva') ?>';" style="float: right;" value="Crear nueva documentaci&oacute;n" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Crear nueva documentaci&oacute;n" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
@@ -65,16 +70,16 @@
 					<th width="5%">&nbsp;</th>
 					<?php endif; ?>
 					<th width="10%" style="text-align:left;">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'orden=1&'.$redireccionGrupo) ?>">Fecha</a>
 					</th>
 					<th width="35%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Consejo Territorial</a>
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Consejo Territorial</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Creado por</a>
+						<a href="<?php echo url_for('documentacion_consejos/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					
@@ -87,18 +92,18 @@
 					<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				    <?php if($valor->getEstado() == 'guardado'):?>
 					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd,'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 					<?php else: ?>
-					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd,'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 					<?php else: ?>
 					<?php if($valor->getEstado() == 'guardado' || $valor->getEstado() == 'pendiente'):?>
 					<?php if($valor->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd,'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 					<?php else: ?>
-					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd));?>
+					<?php include_partial('ListaByConsejo', array('valor'=>$valor,'odd'=>$odd,'redireccionGrupo'=>$redireccionGrupo));?>
 					<?php endif; ?>
 				    <?php endif;?>	
 					
@@ -137,7 +142,7 @@
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			<?php if(validate_action('alta')):?>
-			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/nueva') ?>';" style="float: right;" value="Crear nueva documentaci&oacute;n" name="newNews" class="boton"/>
+			<input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_consejos/nueva?',$redireccionGrupo) ?>';" style="float: right;" value="Crear nueva documentaci&oacute;n" name="newNews" class="boton"/>
 			<?php endif;?>
 			
 		</div>
@@ -147,7 +152,7 @@
 	<div class="rightside">
 		<div class="paneles">
 			<h1>Buscar</h1>
-			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('documentacion_consejos/index') ?>">
+			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('documentacion_consejos/index?'.$redireccionGrupo) ?>">
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>

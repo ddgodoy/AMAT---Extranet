@@ -1,5 +1,10 @@
 <?php use_helper('Security'); ?>	
 <?php use_helper('Date');?>
+<?php if($sf_request->getParameter('consejo')){
+$redireccionGrupo = 'consejo='.$sf_request->getParameter('consejo');
+}else{
+$redireccionGrupo = '';
+} ?>
 <div class="mapa">
 	  <strong>Consejos Territoriales</strong> > <a href="<?php echo url_for('documentacion_consejos/index') ?>">Documentación</a> > <?php echo  $documentacion_consejo->getNombre() ?>
 	</div>
@@ -42,7 +47,7 @@
 	
 	<div class="botonera">
 	<?php if(validate_action('modificar')):?>
-	  <input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_consejos/editar?id='.$documentacion_consejo->getId()) ?>';"/>
+	  <input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_consejos/editar?id='.$documentacion_consejo->getId().'&'.$redireccionGrupo) ?>';"/>
 	 <?php endif;?> 
-	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_consejos/index') ?>';"/>
+	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_consejos/index?'.$redireccionGrupo) ?>';"/>
 	</div>
