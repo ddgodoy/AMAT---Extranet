@@ -9,6 +9,11 @@
 	
 	$docGT_NowGrupo = $sf_user->getAttribute('documentacion_grupos_nowgrupo') ? $sf_user->getAttribute('documentacion_grupos_nowgrupo') : 0;
 ?>
+<?php if($sf_request->getParameter('grupo')){
+$redireccionGrupo = 'grupo='.$sf_request->getParameter('grupo');
+}else{
+$redireccionGrupo = '';
+} ?>
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
@@ -22,7 +27,7 @@
 <div class="mensajeSistema ok">Debe ingresar una categoría para poder cargar un documento del grupo de trabajo. <a href="<?php echo url_for('categorias_d_g/index') ?>">click aquí</a></div>
 <?php endif;?>
 
-<form action ="<?php echo url_for('documentacion_grupos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action ="<?php echo url_for('documentacion_grupos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
@@ -83,7 +88,7 @@
     ?>  
       <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
      <?php endif; ?> 
-      <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_grupos/index') ?>';"/>
+      <input type="button"  id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_grupos/index?'.$redireccionGrupo) ?>';"/>
     </div>
  </form> 
 <?php if(validate_action('alta')):?>
