@@ -77,6 +77,14 @@ public function executeDelete(sfWebRequest $request)
   
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
+        if($request->getParameter('grupo'))
+            {
+               $redirecion = '?grupo='.$request->getParameter('grupo');
+            }
+            else
+            {
+                $redirecion = '';
+            }
   	$toProcess = $request->getParameter('id');
   	
   	if (!empty($toProcess)) {
@@ -142,7 +150,7 @@ public function executeDelete(sfWebRequest $request)
 				}		
   		}
   	}
-  	$this->redirect('documentacion_grupos/index');
+  	$this->redirect('documentacion_grupos/index'.$redirecion);
   }
 	
   public function executeEditar(sfWebRequest $request)
@@ -164,6 +172,14 @@ public function executeDelete(sfWebRequest $request)
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+                if($request->getParameter('grupo'))
+                    {
+                       $redirecion = 'grupo='.$request->getParameter('grupo');
+                    }
+                    else
+                    {
+                        $redirecion = '';
+                    }
 		$form->bind($request->getParameter($form->getName()));
 		if ($form->isValid()) {
 			$documentacion_grupo = $form->save();
@@ -218,7 +234,7 @@ public function executeDelete(sfWebRequest $request)
 				}
                                 $mailer->disconnect();
 			}
-			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId());
+			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId().'&'.$redirecion);
 		}
   }
   
