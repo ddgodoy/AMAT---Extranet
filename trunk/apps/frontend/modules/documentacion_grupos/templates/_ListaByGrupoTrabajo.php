@@ -7,7 +7,7 @@
 					</td>
 					<td valign="center">
 					<?php if(validate_action('listar')):?>
-						<a href="<?php echo url_for('documentacion_grupos/show?id=' . $valor->getId()) ?>">
+						<a href="<?php echo url_for('documentacion_grupos/show?id='.$valor->getId().'&'.$redireccionGrupo) ?>">
 							<strong><?php echo $valor->getNombre() ?></strong>
 						</a>
 					<?php endif;?>	
@@ -32,7 +32,7 @@
                                                         if(validate_action('publicar'))
                                                         {
                                                             if ($valor->getEstado() != 'publicado') {
-                                                                    echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_grupos/publicar?id=' . $valor->getId(), array('method' => 'post', 'confirm' => 'Confirma la publicación del registro?'));
+                                                                    echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_grupos/publicar?id='.$valor->getId().'&'.$redireccionGrupo, array('method' => 'post', 'confirm' => 'Confirma la publicación del registro?'));
                                                             }
                                                             else {
                                                                    echo image_tag('aceptada.png');
@@ -42,14 +42,14 @@
 					</td>
 					<td valign="center" align="center">
 					<?php if(validate_action('modificar')):?>
-						<a href="<?php echo url_for('documentacion_grupos/editar?id=' . $valor->getId()) ?>">
+						<a href="<?php echo url_for('documentacion_grupos/editar?id='.$valor->getId().'&'.$redireccionGrupo) ?>">
 							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?>
 						</a>
 					<?php endif; ?>	
 					</td>
-          <td valign="center" align="center">
-          <?php if(validate_action('baja')):?>
-          	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'documentacion_grupos/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-          <?php endif;?>	
-          </td>
+                                      <td valign="center" align="center">
+                                      <?php if(validate_action('baja')):?>
+                                            <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'documentacion_grupos/delete?id='.$valor->getId().'&'.$redireccionGrupo, array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
+                                      <?php endif;?>
+                                      </td>
 </tr>
