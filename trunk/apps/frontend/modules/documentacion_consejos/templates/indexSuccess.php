@@ -4,7 +4,7 @@
 	use_helper('Object');
 ?>
 <?php if($consejoBsq){
-$redireccionGrupo = 'consejo='.$grupoBsq;
+$redireccionGrupo = 'consejo='.$consejoBsq;
 }else{
 $redireccionGrupo = '';
 } ?>
