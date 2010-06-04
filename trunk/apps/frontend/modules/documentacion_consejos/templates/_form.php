@@ -2,7 +2,11 @@
 <?php use_helper('Security') ?>
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
-
+<?php if($sf_request->getParameter('consejo')){
+$redireccionGrupo = 'consejo='.$sf_request->getParameter('consejo');
+}else{
+$redireccionGrupo = '';
+} ?>
 <?php echo $form->renderGlobalErrors() ?>
 
 <?php if ($sf_user->hasFlash('notice')): ?>
@@ -15,7 +19,7 @@
 <?php echo $form['fecha']->renderError() ?>
 
 
-<form action="<?php echo url_for('documentacion_consejos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action="<?php echo url_for('documentacion_consejos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
@@ -71,7 +75,7 @@
     if(validate_action('publicar')):?>  
       <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
      <?php endif;?> 
-      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_consejos/index') ?>';"/>
+      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('documentacion_consejos/index?'.$redireccionGrupo) ?>';"/>
     </div>
 </form>
 <?php if(validate_action('alta')):?>
