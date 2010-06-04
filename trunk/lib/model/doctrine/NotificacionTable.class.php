@@ -86,7 +86,8 @@ class NotificacionTable extends Doctrine_Table
 				  ->andWhere('entidad_id = '.$idEntidad);
 				   if($nombre != '') 
 					 {   
-					     $deleted->andWhere("nombre = '$nombre'");
+					     $deleted->andWhere("nombre = '".addslashes($nombre)."'");
+                                             //$deleted->andWhere("nombre = ?", $nombre);
 					 }   
 				  $deleted->execute();	
 		return true;		  
