@@ -16,7 +16,12 @@ class ArchivoCTForm extends BaseArchivoCTForm
   	    $userId = $request->getUser()->getAttribute('userId');
             $consejo = $request->getRequest()->getParameter('consejo_territorial_id')?$request->getRequest()->getParameter('consejo_territorial_id'):'';
             $documentacionGet = $request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]')?$request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]'):'';
+            $this->roles = UsuarioRol::getRepository()->getRolesByUser($userId,1);
+            if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)){
+             $arrayGruposTrabajo = ConsejoTerritorialTable::getAllconsejo();
+            }else{
             $arrayGruposTrabajo = ConsejoTerritorial::ArrayDeMiconsejo($userId, 1);
+            }
   	    //$arrayGruposTrabajo = ArchivoCTTable::doSelectAllCategorias('ConsejoTerritorial');
   	    
   		$this->setWidgets(array(
