@@ -37,7 +37,8 @@ class GrupoTrabajoTable extends Doctrine_Table
 	 {
 		 	$s = Doctrine_Query::create()
 		 	->from('GrupoTrabajo')
-		 	->where('deleted = 0');
+		 	->where('deleted = 0')
+                        ->groupBy('nombre ASC');
 		 	$retorno = $s->execute();
 		 	
 		 	return $retorno;
