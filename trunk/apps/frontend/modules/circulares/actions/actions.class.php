@@ -13,7 +13,6 @@ class circularesActions extends sfActions
   {
   	$this->circularCoun = CircularTable::getAll()->count();
   	$this->paginaActual = $this->getRequestParameter('page', 1);
-        $this->modulo  = $this->getModuleName();
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
@@ -269,7 +268,7 @@ class circularesActions extends sfActions
 		
 		
 		
-		return 'deleted=0'.$parcial;
+		return 'c.deleted=0'.$parcial;
   }
   
   protected function setOrdenamiento()
