@@ -23,7 +23,19 @@ class SubCategoriaNormativaN1Table extends Doctrine_Table
 	   
 	   return $q->execute();
 	   
-	}  
+	}
+
+        public static function getSubcategoriaById()
+	{
+	   $q = Doctrine_Query::create()
+	   ->from('SubCategoriaNormativaN1')
+	   ->where('deleted = 0')
+           ->andWhere('id = '.$id)        ;
+
+
+	   return $q->fetchOne();
+
+	}
 	
 	
 }
