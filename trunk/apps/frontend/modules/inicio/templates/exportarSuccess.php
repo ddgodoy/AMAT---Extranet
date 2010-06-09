@@ -43,8 +43,9 @@ $f = 0;
 		 	   	  	if($r>= 1)
 		 	   	  	{
 		 	   	  	 echo '<td>'.utf8_decode(htmlspecialchars_decode($reS->Mutua->getNombre())).'</td>';
-		 	   	  	}
+		 	   	  	}else{
 		 	   	  	echo '<td></td>';
+                                        }
 		 	   	  	 
 		 	   	  }
 		 	   	  if($hy == 'seccion_id')
@@ -105,7 +106,11 @@ $f = 0;
 		 	   	  }
 		 	   	  if($hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy!='salt' && $hy!='login' && $hy!='crypted_password' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy != 'circular_cat_tema_id' )
 		 	   	  {
-		 	        echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($r))).'</td>';
+                                     if($r){
+		 	             echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($r))).'</td>';
+                                     }else{
+                                     echo '<td></td>';
+                                     }
 		 	   	  }  
 		 	   	  
 		 	   }
@@ -140,7 +145,12 @@ $f = 0;
 		 	   {
 		 	   	  if ($hy == 'owner_id' || $hy == 'user_id_creador'|| $hy =='user_id_modificado' || $hy =='user_id_publicado' )
 		 	   	  {
-		 	   	  echo '"'.Usuario::datosUsuario($r).'",';
+		 	   	  if($r){
+                                        echo '"'.utf8_decode(htmlspecialchars_decode(trim(Usuario::datosUsuario($r)))).'",';
+                                    }
+                                    else {
+                                        echo '"",';
+                                    }
 		 	   	  }
 		 	   	 if($hy == 'mutua_id')
 		 	   	  {
