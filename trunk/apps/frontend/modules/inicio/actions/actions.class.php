@@ -176,8 +176,8 @@ class inicioActions extends sfActions
 			
 			
 			
-			$this->getResponse()->setContentType('application/msexcel');
-	                $this->getResponse()->setHttpHeader('Content-Disposition','attachment; filename=lista'.$extencion, TRUE);
+			//$this->getResponse()->setContentType('application/msexcel');
+	                //$this->getResponse()->setHttpHeader('Content-Disposition','attachment; filename=lista'.$extencion, TRUE);
 
 
 
