@@ -123,7 +123,7 @@ class inicioActions extends sfActions
 				$AplicacionRol = Doctrine_Query::create()
 				->from('Evento e')
 				->leftJoin('e.UsuarioEvento ue')
-			    ->where($filtro);
+			        ->where($filtro);
 			    
 			     $resultadoObj = $AplicacionRol->execute();
 			}
@@ -131,6 +131,17 @@ class inicioActions extends sfActions
 			if($tabla == 'Avisos')
 			{
 				$resultadoObj = Doctrine::getTable('Notificacion')->getUltimasNotificaciones(sfContext::getInstance()->getUser()->getAttribute('userId'));
+			}
+                        if($tabla == 'Normativa')
+			{
+                                $Normativa = Doctrine_Query::create()
+				->from('Normativa n')
+				->leftJoin('n.CategoriaNormativa cn')
+                                ->leftJoin('n.SubCategoriaNormativaN1 scn1')
+                                ->leftJoin('n.SubCategoriaNormativaN2 scn2')
+			        ->where($filtro);
+
+			     $resultadoObj = $Normativa->execute();
 			}
 			if( $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
