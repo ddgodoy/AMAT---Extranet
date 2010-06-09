@@ -21,10 +21,6 @@
     <div><?php echo $asamblea->Asamblea->getContenido()?>
     <br /><br />
     <span class="notfecha">Convocado por: <?php echo $user->getNombre().','.$user->getApellido()?></span><br />
-    <span class="notfecha">Fecha de asamblea: <?php echo date("d/m/Y", strtotime($asamblea->Asamblea->getFecha())) ?></span><br />
-    <span class="notfecha">Horario de asamblea: <?php echo $asamblea->Asamblea->getHorario() ?></span><br />
-    <span class="notfecha">Dirección de asamblea: <?php echo $asamblea->Asamblea->getDireccion() ?></span><br />
-    <span class="notfecha">Fecha de caducidad: <?php echo date("d/m/Y", strtotime($asamblea->Asamblea->getFechaCaducidad())) ?></span><br />
     <br>
     <div class="mapa"> 
     <strong class="subtitulo">Comentario:</strong><br />
