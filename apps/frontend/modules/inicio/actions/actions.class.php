@@ -153,8 +153,8 @@ class inicioActions extends sfActions
 
 			     $resultadoObj = $Normativa->execute();
 			}
-                        
-			if( $tabla != 'Normativa'  && $tabla != 'Iniciativa' && $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+                       
+			if( $tabla != 'Normativa'  && $tabla != 'Iniciativa' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
 				$c->from($tabla)->where($filtro);
@@ -167,8 +167,8 @@ class inicioActions extends sfActions
 			
 			
 			
-			//$this->getResponse()->setContentType('application/msexcel');
-	                //$this->getResponse()->setHttpHeader('Content-Disposition','attachment; filename=lista'.$extencion, TRUE);
+			$this->getResponse()->setContentType('application/msexcel');
+	                $this->getResponse()->setHttpHeader('Content-Disposition','attachment; filename=lista'.$extencion, TRUE);
 
 
 
