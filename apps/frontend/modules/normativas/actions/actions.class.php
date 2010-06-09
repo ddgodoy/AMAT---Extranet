@@ -19,7 +19,7 @@ class normativasActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   	$this->pager = new sfDoctrinePager('Normativa', 15);
-	$this->pager->getQuery()->from('Normativa')
+	$this->pager->getQuery()->from('Normativa n')
         ->where($this->setFiltroBusqueda())
         ->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
