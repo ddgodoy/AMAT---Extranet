@@ -100,6 +100,22 @@ $f = 0;
                                         echo '<td></td>';
                                        }
 		 	   	  }
+                                  if($hy == 'categoria_iniciativa_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getCategoriaIniciativa()->getNombre()))).'</td>';
+                                       }else{
+                                        echo '<td></td>';
+                                       }
+		 	   	  }
+                                  if($hy == 'subcategoria_iniciativa_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getSubCategoriaIniciativa()->getNombre()))).'</td>';
+                                       }else{
+                                        echo '<td></td>';
+                                       }
+		 	   	  }
 		 	   	   if($hy == 'documentacion_consejo_id')
 		 	   	  {
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(DocumentacionConsejoTable::getDocumentacionConsejo($r)))).'</td>';
@@ -176,6 +192,30 @@ $f = 0;
                                         echo '"",';
                                     }
 		 	   	  }
+                                  if($hy == 'categoria_normativa_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '"'.utf8_decode(htmlspecialchars_decode(trim($reS->getCategoriaNormativa()->getNombre()))).'",';
+                                       }else{
+                                        echo '"",';
+                                       }
+		 	   	  }
+                                   if($hy == 'subcategoria_normativa_uno_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '"'.utf8_decode(htmlspecialchars_decode(trim($reS->getSubCategoriaNormativaN1()->getNombre()))).'",';
+                                       }else{
+                                        echo '"",';
+                                       }
+		 	   	  }
+                                   if($hy == 'subcategoria_normativa_dos_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '"'.utf8_decode(htmlspecialchars_decode(trim($reS->getSubCategoriaNormativaN2()->getNombre()))).'",';
+                                       }else{
+                                        echo '"",';
+                                       }
+		 	   	  }
 		 	   	 if($hy == 'mutua_id')
 		 	   	  {
 		 	   	  	echo '"'.$reS->Mutua->getNombre().'",';
@@ -237,7 +277,7 @@ $f = 0;
 		 	   	  {
 		 	   	  	echo '"'.DocumentacionOrganismoTable::getDocumentacionOrganismo($r).'",';
 		 	   	  }
-		 	   	  if($hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
+		 	   	  if($hy != 'subcategoria_normativa_dos_id' && $hy != 'subcategoria_normativa_uno_id' && $hy != 'categoria_normativa_id' &&$hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
 		 	   	  {
 		 	        echo '"'.$r.'",';
 		 	   	  }  
