@@ -18,7 +18,7 @@ class circularesActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   	$this->pager = new sfDoctrinePager('Circular', 15);
-		$this->pager->getQuery()->from('Circular')
+		$this->pager->getQuery()->from('Circular c')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
@@ -171,39 +171,39 @@ class circularesActions extends sfActions
 		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 		
 		if ($this->nBsq!='') {
-			$parcial .= " AND numero = $this->nBsq";
+			$parcial .= " AND c.numero = $this->nBsq";
 			$this->getUser()->setAttribute($modulo.'_nownumero', $this->nBsq);
 		}
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
+			$parcial .= " AND c.nombre LIKE '%$this->cajaBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >='".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND c.fecha >='".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechadesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND c.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechahasta', $this->hastaBsq);
 		}
 		if (!empty($this->SelectCatTemaBsq)) {
-			$parcial .= " AND circular_tema_id = $this->SelectCatTemaBsq";
+			$parcial .= " AND c.circular_tema_id = $this->SelectCatTemaBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcattema', $this->SelectCatTemaBsq);
 		}
 		if (!empty($this->SelectSubTemaBsq)) {
-			$parcial .= " AND circular_sub_tema_id = $this->SelectSubTemaBsq";
+			$parcial .= " AND c.circular_sub_tema_id = $this->SelectSubTemaBsq";
 			$this->getUser()->setAttribute($modulo.'_nowsubtema', $this->SelectSubTemaBsq);
 		}
 		if (!empty($this->SelectCatOrganismoBsq)) {
-			$parcial .= " AND categoria_organismo_id = $this->SelectCatOrganismoBsq";
+			$parcial .= " AND c.categoria_organismo_id = $this->SelectCatOrganismoBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcatorganismo', $this->SelectCatOrganismoBsq);
 		}
 		if (!empty($this->SelectSubOrganismoBsq)) {
-			$parcial .= " AND subcategoria_organismo_id = $this->SelectSubOrganismoBsq";
+			$parcial .= " AND c.subcategoria_organismo_id = $this->SelectSubOrganismoBsq";
 			$this->getUser()->setAttribute($modulo.'_nowsuborganismo', $this->SelectSubOrganismoBsq);
 		}
 		if (!empty($this->contenidoBsq)) {
-			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$parcial .= " AND c.contenido LIKE '%$this->contenidoBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
 		}
 
@@ -295,7 +295,7 @@ class circularesActions extends sfActions
   		$this->orderBy = '';
 		$this->sortType = 'asc';
   		
-  		return 'fecha desc, numero desc';
+  		return 'c.fecha desc, c.numero desc';
   	}	
   } 
   
