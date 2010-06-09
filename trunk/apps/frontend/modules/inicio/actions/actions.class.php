@@ -143,6 +143,16 @@ class inicioActions extends sfActions
 
 			     $resultadoObj = $Normativa->execute();
 			}
+                        if($tabla == 'Iniciativa')
+			{
+                                $Normativa = Doctrine_Query::create()
+				->from('Iniciativa i')
+				->leftJoin('i.CategoriaIniciativa ci')
+                                ->leftJoin('i.SubCategoriaIniciativa sci')
+			        ->where($filtro);
+
+			     $resultadoObj = $Normativa->execute();
+			}
 			if( $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
