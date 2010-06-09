@@ -19,7 +19,9 @@ class normativasActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   	$this->pager = new sfDoctrinePager('Normativa', 15);
-	$this->pager->getQuery()->from('Normativa')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('Normativa')
+        ->where($this->setFiltroBusqueda())
+        ->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
@@ -135,39 +137,39 @@ class normativasActions extends sfActions
 		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');
 		
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
+			$parcial .= " AND n.nombre LIKE '%$this->cajaBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >='".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND n.fecha >='".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechadesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND n.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechahasta', $this->hastaBsq);
 		}
 		if (!empty($this->publicacionDesdeBsq)) {
-			$parcial .= " AND publicacion_boe >= '".format_date($this->publicacionDesdeBsq,'d')."'";
+			$parcial .= " AND n.publicacion_boe >= '".format_date($this->publicacionDesdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowpublicacion_desde', $this->publicacionDesdeBsq);
 		}
 		if (!empty($this->publicacionHastaBsq)) {
-			$parcial .= " AND publicacion_boe <= '".format_date($this->publicacionHastaBsq,'d')."'";
+			$parcial .= " AND n.publicacion_boe <= '".format_date($this->publicacionHastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowpublicacion_hasta', $this->publicacionHastaBsq);
 		}
 		if (!empty($this->CatNormBsq)) {
-			$parcial .= " AND categoria_normativa_id  = $this->CatNormBsq";
+			$parcial .= " AND n.categoria_normativa_id  = $this->CatNormBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcatnormativa', $this->CatNormBsq);
 		}
 		if (!empty($this->SubNormBsq1)) {
-			$parcial .= " AND subcategoria_normativa_uno_id = $this->SubNormBsq1";
+			$parcial .= " AND n.subcategoria_normativa_uno_id = $this->SubNormBsq1";
 			$this->getUser()->setAttribute($modulo.'_nowsubcatnormativa1', $this->SubNormBsq1);
 		}
 		if (!empty($this->SubNormBsq2)) {
-			$parcial .= " AND subcategoria_normativa_dos_id = $this->SubNormBsq2";
+			$parcial .= " AND n.subcategoria_normativa_dos_id = $this->SubNormBsq2";
 			$this->getUser()->setAttribute($modulo.'_nowsubcatnormativa2', $this->SubNormBsq2);
 		}
 		if (!empty($this->contenidoBsq)) {
-			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$parcial .= " AND n.contenido LIKE '%$this->contenidoBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
 		}
 
@@ -242,7 +244,7 @@ class normativasActions extends sfActions
                     }
                     else
                     {
-                        $this->orderBy = 'fecha';
+                        $this->orderBy = 'n.fecha';
                         $this->sortType = 'desc';
                         $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
                         $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
