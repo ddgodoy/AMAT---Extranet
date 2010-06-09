@@ -153,17 +153,8 @@ class inicioActions extends sfActions
 
 			     $resultadoObj = $Normativa->execute();
 			}
-                        if($tabla == 'Circular')
-			{
-                                $Normativa = Doctrine_Query::create()
-				->from('Circular c')
-				->leftJoin('c.CircularCatTema cct')
-                                ->leftJoin('c.CircularSubTema cst')
-			        ->where($filtro);
-
-			     $resultadoObj = $Normativa->execute();
-			}
-			if( $tabla != 'Normativa'  && $tabla != 'Iniciativa' && $tabla != 'Circular' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+                        
+			if( $tabla != 'Normativa'  && $tabla != 'Iniciativa' && $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
 				$c->from($tabla)->where($filtro);
