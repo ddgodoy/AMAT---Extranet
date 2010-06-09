@@ -58,6 +58,10 @@ $f = 0;
 		 	   	  {
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(CategoriaDGTable::getCategoriaDG($r)))).'</td>';
 		 	   	  }
+                                   if($hy == 'categoria_normativa_id')
+		 	   	  {
+		 	   	  	echo '<td>'.CategoriaNormativaTable::getCategoriaNombre($r).'</td>';
+		 	   	  }
 		 	   	   if($hy == 'documentacion_grupo_id')
 		 	   	  {
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(DocumentacionGrupoTable::getDocumentacionGrupoTrabajo($r)))).'</td>';
@@ -98,7 +102,7 @@ $f = 0;
 		 	   	  {
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(DocumentacionOrganismoTable::getDocumentacionOrganismo($r)))).'</td>';
 		 	   	  }
-		 	   	  if($hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy!='salt' && $hy!='login' && $hy!='crypted_password' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy != 'circular_cat_tema_id' )
+		 	   	  if($hy != 'categoria_normativa_id' && $hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy!='salt' && $hy!='login' && $hy!='crypted_password' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy != 'circular_cat_tema_id' )
 		 	   	  {
 		 	        echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($r))).'</td>';
 		 	   	  }  
@@ -133,7 +137,7 @@ $f = 0;
 		 {
 		 	  foreach ($reS AS $hy=>$r)
 		 	   {
-		 	   	  if ($hy == 'owner_id' || $hy == 'user_id_creador' ) 
+		 	   	  if ($hy == 'owner_id' || $hy == 'user_id_creador'|| $hy =='user_id_modificado' || $hy =='user_id_publicado' )
 		 	   	  {
 		 	   	  echo '"'.Usuario::datosUsuario($r).'",';
 		 	   	  }
@@ -156,6 +160,10 @@ $f = 0;
 		 	   	   if($hy == 'categoria_d_g_id')
 		 	   	  {
 		 	   	  	echo '"'.CategoriaDGTable::getCategoriaDG($r).'",';
+		 	   	  }
+                                   if($hy == 'categoria_normativa_id')
+		 	   	  {
+		 	   	  	echo '"'.CategoriaNormativaTable::getCategoriaNombre($r).'",';
 		 	   	  }
                                    if($hy == 'documentacion_grupo_id')
 		 	   	  {
@@ -197,7 +205,7 @@ $f = 0;
 		 	   	  {
 		 	   	  	echo '"'.DocumentacionOrganismoTable::getDocumentacionOrganismo($r).'",';
 		 	   	  }
-		 	   	  if($hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
+		 	   	  if($hy != 'categoria_normativa_id' && $hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
 		 	   	  {
 		 	        echo '"'.$r.'",';
 		 	   	  }  
