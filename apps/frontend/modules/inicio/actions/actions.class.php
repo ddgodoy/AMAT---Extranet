@@ -29,7 +29,7 @@ class inicioActions extends sfActions
                             ->leftJoin('u.UsuarioGrupoTrabajo ug')
                             ->leftJoin('ug.GrupoTrabajo g')
                             ->leftJoin('u.UsuarioRol ur')
-                            ->where($this->setFiltroBusqueda())
+                            ->where($filtro)
                             ->andWhere('ur.rol_id IN (4,6)');
 
 
