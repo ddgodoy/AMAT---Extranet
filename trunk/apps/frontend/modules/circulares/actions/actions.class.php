@@ -13,11 +13,12 @@ class circularesActions extends sfActions
   {
   	$this->circularCoun = CircularTable::getAll()->count();
   	$this->paginaActual = $this->getRequestParameter('page', 1);
+        $this->modulo  = $this->getModuleName();
 
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
-  	$this->pager = new sfDoctrinePager('Circular', 15);
+  	        $this->pager = new sfDoctrinePager('Circular', 15);
 		$this->pager->getQuery()->from('Circular c')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
