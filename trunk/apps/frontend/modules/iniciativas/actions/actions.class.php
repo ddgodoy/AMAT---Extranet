@@ -18,7 +18,8 @@ class iniciativasActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
   	$this->pager = new sfDoctrinePager('Iniciativa', 15);
-		$this->pager->getQuery()->from('Iniciativa')
+		$this->pager->getQuery()
+                ->from('Iniciativa i')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
@@ -141,27 +142,27 @@ class iniciativasActions extends sfActions
 		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
+			$parcial .= " AND i.nombre LIKE '%$this->cajaBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >='".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND i.fecha >='".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechadesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND i.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechahasta', $this->hastaBsq);
 		}
 		if (!empty($this->CatInicBsq)) {
-			$parcial .= " AND categoria_iniciativa_id = $this->CatInicBsq";
+			$parcial .= " AND i.categoria_iniciativa_id = $this->CatInicBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcatiniciativa', $this->CatInicBsq);
 		}
 		if (!empty($this->SubIniBsq)) {
-			$parcial .= " AND subcategoria_iniciativa_id = $this->SubIniBsq";
+			$parcial .= " AND i.subcategoria_iniciativa_id = $this->SubIniBsq";
 			$this->getUser()->setAttribute($modulo.'_nowsubcatiniciativa', $this->SubIniBsq);
 		}	
 		if (!empty($this->contenidoBsq)) {
-			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$parcial .= " AND i.contenido LIKE '%$this->contenidoBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
 		}
 
@@ -203,7 +204,7 @@ class iniciativasActions extends sfActions
 			$this->SubIniBsq = '';
 			$this->contenidoBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+		return 'i.deleted=0'.$parcial;
   }
   
   protected function setOrdenamiento()
@@ -224,9 +225,9 @@ class iniciativasActions extends sfActions
                     }
                     else
                     {
-                        $this->orderBy = 'nombre';
+                        $this->orderBy = 'i.nombre';
                         $this->sortType = 'asc';
-                        $this->orderBYSql ='fecha desc,'.$this->orderBy . ' ' . $this->sortType;
+                        $this->orderBYSql ='i.fecha desc,'.$this->orderBy . ' ' . $this->sortType;
                         $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
                     }
 
