@@ -44,7 +44,7 @@ class inicioActions extends sfActions
                              ->leftJoin('u.UsuarioConsejoTerritorial uc')
                              ->leftJoin('uc.ConsejoTerritorial c')
                              ->leftJoin('u.UsuarioRol ur')
-                             ->where($this->setFiltroBusqueda())
+                             ->where($filtro)
                              ->andWhere('ur.rol_id IN (5,7)')
                              ->groupBy('uc.usuario_id');
 			  
