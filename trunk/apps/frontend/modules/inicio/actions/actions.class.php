@@ -163,7 +163,7 @@ class inicioActions extends sfActions
 
 			     $resultadoObj = $Normativa->execute();
 			}
-			if( $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+			if( $tabla != 'Normativa'  && $tabla != 'Iniciativa' && $tabla != 'Circular' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
 				$c->from($tabla)->where($filtro);
