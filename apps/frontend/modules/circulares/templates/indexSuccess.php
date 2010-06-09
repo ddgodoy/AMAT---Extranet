@@ -6,7 +6,10 @@
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
-				<td width="95%"><h1>Circulares</h1></td>
+				<td width="65%"><h1>Circulares</h1></td>
+				<td width="5%" align="center"><?php $nombretabla = 'Circular'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
+				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
+				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
 				<td width="5%" align="right">
 					<a href="#">
 						<?php echo image_tag('pregunta.gif', array('alt' => 'Ayuda', 'id' => 'sprytrigger1', 'width' => '29', 'height' => '30', 'border' => '0')) ?>
@@ -34,13 +37,13 @@
 			<tbody>
 				<tr>
 				    <th width="10%" style="text-align:center;">
-						<a href="<?php echo url_for('circulares/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('circulares/index?sort=c.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
 					<th width="5%" style="text-align:center;">
-					    <a href="<?php echo url_for('circulares/index?sort=numero&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nº</a>
+					    <a href="<?php echo url_for('circulares/index?sort=c.numero&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nº</a>
 					</th>
 					<th width="75%">
-						<a href="<?php echo url_for('circulares/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('circulares/index?sort=c.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
