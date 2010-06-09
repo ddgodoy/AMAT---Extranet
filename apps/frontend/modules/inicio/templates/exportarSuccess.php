@@ -79,7 +79,7 @@ $f = 0;
                                    if($hy == 'categoria_normativa_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(CategoriaNormativaTable::getCategoriaNombre($r)))).'</td>';
+		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getCategoriaNormativa()->getNombre()))).'</td>';
                                        }else{
                                         echo '<td></td>';
                                        }
@@ -87,7 +87,15 @@ $f = 0;
                                    if($hy == 'subcategoria_normativa_uno_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(SubCategoriaNormativaN1Table::getSubcategoriaById($r)))).'</td>';
+		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getSubCategoriaNormativaN1()->getNombre()))).'</td>';
+                                       }else{
+                                        echo '<td></td>';
+                                       }
+		 	   	  }
+                                   if($hy == 'subcategoria_normativa_dos_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getSubCategoriaNormativaN2()->getNombre()))).'</td>';
                                        }else{
                                         echo '<td></td>';
                                        }
@@ -120,7 +128,7 @@ $f = 0;
 		 	   	  {
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(DocumentacionOrganismoTable::getDocumentacionOrganismo($r)))).'</td>';
 		 	   	  }
-		 	   	  if($hy != 'subcategoria_normativa_uno_id' && $hy != 'categoria_normativa_id' && $hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy!='salt' && $hy!='login' && $hy!='crypted_password' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy != 'circular_cat_tema_id' )
+		 	   	  if($hy != 'subcategoria_normativa_dos_id' && $hy != 'subcategoria_normativa_uno_id' && $hy != 'categoria_normativa_id' && $hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy!='salt' && $hy!='login' && $hy!='crypted_password' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy != 'circular_cat_tema_id' )
 		 	   	  {
                                      if($r){
 		 	             echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($r))).'</td>';
