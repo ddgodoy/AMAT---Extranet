@@ -153,8 +153,18 @@ class inicioActions extends sfActions
 
 			     $resultadoObj = $Normativa->execute();
 			}
-                       
-			if( $tabla != 'Normativa'  && $tabla != 'Iniciativa' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+
+                        if($tabla == 'Acuerdo')
+			{
+                                $Normativa = Doctrine_Query::create()
+				->from('Acuerdo A')
+				->leftJoin('A.CategoriaAcuerdo ca')
+                                ->leftJoin('A.SubCategoriaAcuerdo sca')
+			        ->where($filtro);
+
+			     $resultadoObj = $Normativa->execute();
+			}
+			if($tabla != 'Acuerdo'&& $tabla != 'Normativa'  && $tabla != 'Iniciativa' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
 				$c->from($tabla)->where($filtro);
