@@ -116,22 +116,7 @@ $f = 0;
                                         echo '<td></td>';
                                        }
 		 	   	  }
-                                  if($hy == 'circular_tema_id')
-		 	   	  {
-                                       if($r >=1  ){
-		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getCircularCatTema()->getNombre()))).'</td>';
-                                       }else{
-                                        echo '<td>&nbsp;</td>';
-                                       }
-		 	   	  }
-                                  if($hy == 'circular_sub_tema_id')
-		 	   	  {
-                                       if($r >=1 ){
-		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getCircularSubTema()->getNombre()))).'</td>';
-                                       }else{
-                                        echo '<td>&nbsp;</td>';
-                                       }
-		 	   	  }
+                                  
 		 	   	   if($hy == 'documentacion_consejo_id')
 		 	   	  {
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(DocumentacionConsejoTable::getDocumentacionConsejo($r)))).'</td>';
