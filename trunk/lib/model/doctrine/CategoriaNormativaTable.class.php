@@ -13,4 +13,14 @@ class CategoriaNormativaTable extends Doctrine_Table
 		return $q->execute();
 	}
 
+        public static  function getCategoriaNombre($id)
+	{
+		$q = Doctrine_Query::create()
+		->from('CategoriaNormativa')
+		->where('deleted = 0 ')
+                ->andWhere('id = '.$id);
+
+		return $q->fetchOne();
+	}
+
 }
