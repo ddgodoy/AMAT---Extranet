@@ -32,7 +32,7 @@ $f = 0;
 		 	   	  if ($hy == 'owner_id' || $hy == 'user_id_creador' || $hy =='user_id_modificado' || $hy =='user_id_publicado')
 		 	   	  {
                                     if($r){
-                                        echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(Usuario::datosUsuario($r,1)))).'</td>';
+                                        echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(Usuario::datosUsuario($r)))).'</td>';
                                     }
                                     else {
                                         echo '<td></td>';
