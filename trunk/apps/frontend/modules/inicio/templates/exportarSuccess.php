@@ -118,18 +118,18 @@ $f = 0;
 		 	   	  }
                                   if($hy == 'circular_tema_id')
 		 	   	  {
-                                       if($r){
+                                       if($r >=1  ){
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getCircularCatTema()->getNombre()))).'</td>';
                                        }else{
-                                        echo '<td></td>';
+                                        echo '<td>&nbsp;</td>';
                                        }
 		 	   	  }
                                   if($hy == 'circular_sub_tema_id')
 		 	   	  {
-                                       if($r){
+                                       if($r >=1 ){
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($reS->getCircularSubTema()->getNombre()))).'</td>';
                                        }else{
-                                        echo '<td></td>';
+                                        echo '<td>&nbsp;</td>';
                                        }
 		 	   	  }
 		 	   	   if($hy == 'documentacion_consejo_id')
@@ -165,7 +165,7 @@ $f = 0;
                                      if($r){
 		 	             echo '<td>'.utf8_decode(htmlspecialchars_decode(trim($r))).'</td>';
                                      }else{
-                                     echo '<td></td>';
+                                     echo '<td>&nbsp;</td>';
                                      }
 		 	   	  }  
 		 	   	  
