@@ -20,7 +20,7 @@ class acuerdoActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
                 $this->pager = new sfDoctrinePager('Acuerdo', 15);
-		$this->pager->getQuery()->from('Acuerdo')
+		$this->pager->getQuery()->from('Acuerdo A')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 
@@ -137,27 +137,27 @@ class acuerdoActions extends sfActions
 		$this->contenidoBsq = $this->getRequestParameter('contenido_busqueda')?$this->getRequestParameter('contenido_busqueda'):$this->getUser()->getAttribute($modulo.'_nowcontenido');;
 
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND nombre LIKE '%$this->cajaBsq%'";
+			$parcial .= " AND A.nombre LIKE '%$this->cajaBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >='".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND A.fecha >='".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechadesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND A.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowfechahasta', $this->hastaBsq);
 		}
 		if (!empty($this->CatInicBsq)) {
-			$parcial .= " AND categoria_acuerdo_id = $this->CatInicBsq";
+			$parcial .= " AND A.categoria_acuerdo_id = $this->CatInicBsq";
 			$this->getUser()->setAttribute($modulo.'_nowcatiniciativa', $this->CatInicBsq);
 		}
 		if (!empty($this->SubIniBsq)) {
-			$parcial .= " AND subcategoria_acuerdo_id = $this->SubIniBsq";
+			$parcial .= " AND A.subcategoria_acuerdo_id = $this->SubIniBsq";
 			$this->getUser()->setAttribute($modulo.'_nowsubcatiniciativa', $this->SubIniBsq);
 		}
 		if (!empty($this->contenidoBsq)) {
-			$parcial .= " AND contenido LIKE '%$this->contenidoBsq%'";
+			$parcial .= " AND A.contenido LIKE '%$this->contenidoBsq%'";
 			$this->getUser()->setAttribute($modulo.'_nowcontenido', $this->contenidoBsq);
 		}
 
@@ -199,7 +199,7 @@ class acuerdoActions extends sfActions
 			$this->SubIniBsq = '';
 			$this->contenidoBsq = '';
 		}
-		return 'deleted=0'.$parcial;
+		return 'A.deleted=0'.$parcial;
   }
 
   protected function setOrdenamiento()
@@ -222,7 +222,7 @@ class acuerdoActions extends sfActions
   		$this->orderBy = '';
 		$this->sortType = 'asc';
 
-  		return 'fecha desc, nombre asc ';
+  		return 'A.fecha desc, A.nombre asc ';
   	}
 
   }

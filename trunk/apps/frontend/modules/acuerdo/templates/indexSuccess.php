@@ -44,10 +44,10 @@
 					<th width="3%">&nbsp;</th>
                                         <?php endif; ?>
 					<th width="10%" style="text-align:center;">
-						<a href="<?php echo url_for('acuerdo/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('acuerdo/index?sort=A.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
 					<th width="77%">
-						<a href="<?php echo url_for('acuerdo/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('acuerdo/index?sort=A.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
