@@ -78,11 +78,19 @@ $f = 0;
 		 	   	  }
                                    if($hy == 'categoria_normativa_id')
 		 	   	  {
+                                       if($r){
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(CategoriaNormativaTable::getCategoriaNombre($r)))).'</td>';
+                                       }else{
+                                        echo '<td></td>';
+                                       }
 		 	   	  }
                                    if($hy == 'subcategoria_normativa_uno_id')
 		 	   	  {
+                                       if($r){
 		 	   	  	echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(SubCategoriaNormativaN1Table::getSubcategoriaById($r)))).'</td>';
+                                       }else{
+                                        echo '<td></td>';
+                                       }
 		 	   	  }
 		 	   	   if($hy == 'documentacion_consejo_id')
 		 	   	  {
