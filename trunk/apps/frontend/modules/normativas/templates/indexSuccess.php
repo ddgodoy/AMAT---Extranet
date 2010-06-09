@@ -37,13 +37,13 @@
 			<tbody>
 				<tr>
 					<th width="15%" style="text-align:center;">
-						<a href="<?php echo url_for('normativas/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+						<a href="<?php echo url_for('normativas/index?sort=n.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
 					<th width="60%">
-						<a href="<?php echo url_for('normativas/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+						<a href="<?php echo url_for('normativas/index?sort=n.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
 					<th width="15%" style="text-align:center;">
-						<a href="<?php echo url_for('normativas/index?sort=publicacion_boe&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Publicacion BOE</a>
+						<a href="<?php echo url_for('normativas/index?sort=n.publicacion_boe&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Publicacion BOE</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
