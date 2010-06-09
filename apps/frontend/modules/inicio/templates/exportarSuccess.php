@@ -265,6 +265,22 @@ $f = 0;
                                         echo '"",';
                                        }
 		 	   	  }
+                                  if($hy == 'categoria_acuerdo_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '"'.utf8_decode(htmlspecialchars_decode(trim($reS->getCategoriaAcuerdo()->getNombre()))).'",';
+                                       }else{
+                                        echo '"",';
+                                       }
+		 	   	  }
+                                  if($hy == 'subcategoria_acuerdo_id')
+		 	   	  {
+                                       if($r){
+		 	   	  	echo '"'.utf8_decode(htmlspecialchars_decode(trim($reS->getSubCategoriaAcuerdo()->getNombre()))).'",';
+                                       }else{
+                                        echo '"",';
+                                       }
+		 	   	  }
 		 	   	 if($hy == 'mutua_id')
 		 	   	  {
 		 	   	  	echo '"'.$reS->Mutua->getNombre().'",';
@@ -326,7 +342,7 @@ $f = 0;
 		 	   	  {
 		 	   	  	echo '"'.DocumentacionOrganismoTable::getDocumentacionOrganismo($r).'",';
 		 	   	  }
-		 	   	  if($hy != 'circular_sub_tema_id' && $hy != 'circular_tema_id' && $hy != 'subcategoria_iniciativa_id' &&  $hy != 'categoria_iniciativa_id' && $hy != 'subcategoria_normativa_dos_id' && $hy != 'subcategoria_normativa_uno_id' && $hy != 'categoria_normativa_id' &&$hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
+		 	   	  if($hy != 'subcategoria_acuerdo_id' && $hy != 'categoria_acuerdo_id' &&  $hy != 'subcategoria_iniciativa_id' &&  $hy != 'categoria_iniciativa_id' && $hy != 'subcategoria_normativa_dos_id' && $hy != 'subcategoria_normativa_uno_id' && $hy != 'categoria_normativa_id' &&$hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
 		 	   	  {
 		 	              echo '"'.$r.'",';
 		 	   	  }  
