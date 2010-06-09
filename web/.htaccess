@@ -24,3 +24,9 @@
 
 php_value magic_quotes_gpc 0
 php_value register_globals 0
+
+php_value upload_max_filesize 200M
+php_value post_max_size 200M
+php_value memory_limit 200M
+php_value max_execution_time 10800
+php_value max_input_time 10800
