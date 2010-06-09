@@ -29,7 +29,7 @@ class AcuerdoForm extends BaseAcuerdoForm
   	{
   		$subvalidcat[$s->getId()] = '';
   	}
-         for($i = 2000; $i<2015; $i++)
+         for($i = 1990; $i<2015; $i++)
         {
           $years[$i] = $i;
         }
