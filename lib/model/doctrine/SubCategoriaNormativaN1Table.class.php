@@ -25,7 +25,7 @@ class SubCategoriaNormativaN1Table extends Doctrine_Table
 	   
 	}
 
-        public static function getSubcategoriaById()
+        public static function getSubcategoriaById($id)
 	{
 	   $q = Doctrine_Query::create()
 	   ->from('SubCategoriaNormativaN1')
