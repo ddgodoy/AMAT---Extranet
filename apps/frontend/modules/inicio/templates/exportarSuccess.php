@@ -31,7 +31,7 @@ $f = 0;
 		 	   	  $r = utf8_decode($di);
 		 	   	  if ($hy == 'owner_id' || $hy == 'user_id_creador' || $hy =='user_id_modificado' || $hy =='user_id_publicado')
 		 	   	  {
-		 	   	    echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(Usuario::datosUsuario($r)))).'</td>';
+		 	   	    echo '<td>'.utf8_decode(htmlspecialchars_decode(trim(Usuario::datosUsuario($r,1)))).'</td>';
 		 	   	  }
 		 	   	  if($hy == 'mutua_id')
 		 	   	  {
