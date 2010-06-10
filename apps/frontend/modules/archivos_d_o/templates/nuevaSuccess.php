@@ -31,7 +31,7 @@ if($sf_context->getActionName() == 'nueva' && $sf_request->getParameter('archivo
     $idSubcategoria = $organismo->getSubcategoriaOrganismoId();
     $verOrganisamos = OrganismoTable::doSelectByOrganismoa($organismo->getSubcategoriaOrganismoId());
     $idOrganismos = $organismo->getId();
-    $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($organismo->getId());
+    $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($organismo->getId(),1);
     $idDocumentacion = $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]')?$sf_request->getParameter('archivo_d_o[documentacion_organismo_id]'):'';
 }
 
@@ -40,7 +40,7 @@ if($sf_context->getActionName() == 'create'){
     $idSubcategoria = $form['subcategoria_organismo_id']->getValue();
     $verOrganisamos = OrganismoTable::doSelectByOrganismoa($form['subcategoria_organismo_id']->getValue());
     $idOrganismos = $form['organismo_id']->getValue();
-    $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($form['organismo_id']->getValue());
+    $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($form['organismo_id']->getValue(),1);
     $idDocumentacion = $form['documentacion_organismo_id']->getValue(); 
 }    
 
