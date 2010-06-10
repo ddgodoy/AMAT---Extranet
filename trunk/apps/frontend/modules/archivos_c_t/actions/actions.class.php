@@ -21,7 +21,7 @@ class archivos_c_tActions extends sfActions
 		
 	$this->pager = new sfDoctrinePager('ArchivoCT', 20);
 	$this->pager->getQuery()->from('ArchivoCT ac')
-        ->lefgtjoin('ac.DocumentacionConsejo dc')
+        ->leftjoin('ac.DocumentacionConsejo dc')
 	->where($this->setFiltroBusqueda())
 	->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
