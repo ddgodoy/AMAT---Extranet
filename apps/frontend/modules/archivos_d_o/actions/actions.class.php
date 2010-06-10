@@ -23,7 +23,9 @@ class archivos_d_oActions extends sfActions
 	if($organismos)
 	{ 
 		$this->pager = new sfDoctrinePager('ArchivoDO', 20);
-		$this->pager->getQuery()->from('ArchivoDO')
+		$this->pager->getQuery()
+                ->from('ArchivoDO ao')
+                ->leftjoin('ao.DocumentacionOrganismo do')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
@@ -198,31 +200,31 @@ class archivos_d_oActions extends sfActions
 		
 
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
+			$parcial .= " AND (ao.nombre LIKE '%$this->cajaBsq%')";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->categoriaBsq)) {
-			$parcial .= " AND categoria_organismo_id =".$this->categoriaBsq ;
+			$parcial .= " AND ao.categoria_organismo_id =".$this->categoriaBsq ;
 			$this->getUser()->setAttribute($modulo.'_nowcategoria', $this->categoriaBsq);
 		}
 		if (!empty($this->subcategoriaBsq)) {
-			$parcial .= " AND subcategoria_organismo_id =".$this->subcategoriaBsq ;
+			$parcial .= " AND ao.subcategoria_organismo_id =".$this->subcategoriaBsq ;
 			$this->getUser()->setAttribute($modulo.'_nowsubcategoria', $this->subcategoriaBsq);
 		}
 		if (!empty($this->organismoBsq)) {
-			$parcial .= " AND organismo_id =".$this->organismoBsq ;
+			$parcial .= " AND ao.organismo_id =".$this->organismoBsq ;
 			$this->getUser()->setAttribute($modulo.'_noworganismos', $this->organismoBsq);
 		}
 		if (!empty($this->documentacionBsq)) {
-			$parcial .= " AND documentacion_organismo_id =".$this->documentacionBsq ;
+			$parcial .= " AND ao.documentacion_organismo_id =".$this->documentacionBsq ;
 			$this->getUser()->setAttribute($modulo.'_nowdocumentacion', $this->documentacionBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >= '".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND ao.fecha >= '".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowdesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND ao.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
 
@@ -278,7 +280,7 @@ class archivos_d_oActions extends sfActions
 		}
 		else
 		{
-		   return 'deleted=0'.$parcial.' AND organismo_id IN '.$organismos;
+		   return 'ao.deleted=0'.$parcial.' AND ao.organismo_id IN '.$organismos.' AND do.estado = '.publicado;
 		} 
 
   }
@@ -316,6 +318,7 @@ class archivos_d_oActions extends sfActions
   {
   
   	$this->documentacion_selected = 0;
+        echo
   	$this->arrayDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->getRequestParameter('documentacion_organismos'),1);
   	
   	$this->name = $request->getParameter('name');
