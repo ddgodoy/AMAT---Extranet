@@ -13,7 +13,7 @@
 	
 	<div class="noticias">	  
 	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($iniciativa->getFecha())) ?></span> <br />     
-	  <a href="#" class="nottit"><?php echo  $iniciativa->getnombre() ?></a><br />
+	  <a class="nottit"><?php echo  $iniciativa->getnombre() ?></a><br />
 	  <?php if($iniciativa->getCategoriaIniciativaId()):?>
 	  <span class="notfecha">Categor&iacute;a: <?php echo CategoriaIniciativa::getRepository()->findOneById($iniciativa->getCategoriaIniciativaId())->getNombre()?></span> <br />   
 	  <?php endif;?>
