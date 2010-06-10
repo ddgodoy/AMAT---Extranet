@@ -166,11 +166,11 @@ $f = 0;
 		 	   	  }
 		 	   	  if($hy == 'categoria_organismo_id')
 		 	   	  {
-		 	   	  	echo '<td>'.slugify(CategoriaOrganismoTable::getCategoriaOrganismo($r)).'</td>';
+		 	   	  	echo '<td>'.slugify(utf8_decode(CategoriaOrganismoTable::getCategoriaOrganismo($r))).'</td>';
 		 	   	  }
 		 	   	  if($hy == 'subcategoria_organismo_id')
 		 	   	  {
-		 	   	  	echo '<td>'.slugify(SubCategoriaOrganismoTable::getSubcategoria($r)).'</td>';
+		 	   	  	echo '<td>'.slugify(utf8_decode(SubCategoriaOrganismoTable::getSubcategoria($r))).'</td>';
 		 	   	  }
 		 	   	  if($hy == 'organismo_id')
 		 	   	  {
