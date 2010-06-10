@@ -18,8 +18,10 @@
 	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($archivo_do->getFecha())) ?></span> <span class="notfecha">- Fecha de caducidad: <?php echo date("d/m/Y", strtotime($archivo_do->getfecha_caducidad())) ?></span><br />     
 	  <a  class="nottit"><?php echo  $archivo_do->getNombre() ?></a><br />
           <br clear="all" /> 
-	  <?php echo nl2br($archivo_do->getcontenido()) ?>      
+	  <?php echo nl2br($archivo_do->getcontenido()) ?>
+          <?php if($archivo_do->getArchivo()): ?>
 	  <span class="notfecha"><a href="<?php echo url_for('/uploads/archivos_d_o/docs/'.$archivo_do->getArchivo());?>" class="descargar-documento" target="_blank">Documento +</a></span><br />
+          <?php endif; ?>
 	  <?php if($archivo_do->getOwnerId()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($archivo_do->getOwnerId()) ?> el d&iacute;a: <?php echo format_date($archivo_do->getCreatedAt())?></span><br /> 
 	  <?php endif;?>
