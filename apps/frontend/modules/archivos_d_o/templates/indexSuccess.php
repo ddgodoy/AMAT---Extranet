@@ -27,7 +27,7 @@ endif; ?>
           	$arrayOrganismo = $subcategoria? OrganismoTable::doSelectByOrganismoa($subcategoria, $user) : '';
           }
 			$arraySubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);
-			$arrayDocumentacion = $organismo ?DocumentacionOrganismoTable::doSelectByOrganismo($organismo) : '';
+			$arrayDocumentacion = $organismo ?DocumentacionOrganismoTable::doSelectByOrganismo($organismo,1) : '';
 			$subcategoria_organismos_selected = $sf_user->getAttribute($modulo.'_nowsubcategoria');
 			$organismos_selected = $sf_user->getAttribute($modulo.'_noworganismos');
 			$documentacion_selected = $sf_user->getAttribute($modulo.'_nowdocumentacion');
