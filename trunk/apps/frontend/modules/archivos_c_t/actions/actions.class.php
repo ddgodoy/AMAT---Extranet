@@ -266,7 +266,7 @@ class archivos_c_tActions extends sfActions
    {
    	/**/
    	$this->documentacion_selected = 0;
-   	$this->arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($this->getRequestParameter('id_consejo'));
+   	$this->arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($this->getRequestParameter('id_consejo'),1);
    	
    	return $this->renderPartial('archivos_c_t/listDocumentacion');
    	
