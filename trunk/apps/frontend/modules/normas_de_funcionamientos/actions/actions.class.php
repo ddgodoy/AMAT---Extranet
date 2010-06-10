@@ -159,7 +159,7 @@ class normas_de_funcionamientosActions extends sfActions
 			$this->cajaBsq = "";
 			$this->grupo = '';
 		}
-		return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN ('.GrupoTrabajoTable::getGruposTrabajoByUsuario($this ->getUser()->getAttribute('userId')).')';
+		return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.GrupoTrabajo::iddegrupos($this ->getUser()->getAttribute('userId'),1);
   }
   
   protected function setOrdenamiento()
