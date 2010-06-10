@@ -171,7 +171,7 @@ endif; ?>
 	<div class="rightside">
 		<div class="paneles">
 			<h1>Buscar</h1>
-			<form method="get" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/index?'.$redireccionGrupo) ?>">
+			<form method="get" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_o/index?') ?>">
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>
