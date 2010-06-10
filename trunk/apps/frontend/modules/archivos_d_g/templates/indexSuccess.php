@@ -27,7 +27,7 @@ endif; ?>
 		<tbody>
 			<tr>
 				<td width="70%"><h1>Archivos de <?php if ($documentacionBsq !='' && !empty($documentacion)): ?>Documentaci&oacute;n: <?php echo $documentacion->getNombre(); else: ?> Grupos de Trabajo <?php endif;?></h1></td>
-				<td width="5%" align="center"><?php $nombretabla = 'ArchivoDG'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
+				<td width="5%" align="center"><?php $nombretabla = 'ArchivoDG ag'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
 				<td width="5%" align="right">
@@ -60,16 +60,16 @@ endif; ?>
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
-						<a href="<?php echo url_for('archivos_d_g/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Fecha</a>
+						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Fecha</a>
 					</th>
 					<th width="35%">
-						<a href="<?php echo url_for('archivos_d_g/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
+						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_d_g/index?sort=grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Grupo de trabajo</a>
+						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Grupo de trabajo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_d_g/index?sort=owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
+						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>

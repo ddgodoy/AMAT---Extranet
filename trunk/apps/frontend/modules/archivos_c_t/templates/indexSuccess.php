@@ -26,7 +26,7 @@ endif; ?>
 		<tbody>
 			<tr>
 				<td width="70%"><h1>Archivos de <?php if($documentacion !=''):?>Documentacion: <?php echo $documentacion->getNombre(); else: ?>Consejos Territoriales<?php endif; ?></h1></td>
-				<td width="5%" align="center"><?php $nombretabla = 'ArchivoCT'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
+				<td width="5%" align="center"><?php $nombretabla = 'ArchivoCT ac'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
 				<td width="5%" align="right">
@@ -59,16 +59,16 @@ endif; ?>
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
-						<a href="<?php echo url_for('archivos_c_t/index?sort=fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Fecha</a>
+						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Fecha</a>
 					</th>
 					<th width="35%">
-						<a href="<?php echo url_for('archivos_c_t/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
+						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_c_t/index?sort=consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Consejo territorial</a>
+						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Consejo territorial</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_c_t/index?sort=owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
+						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
 					</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>

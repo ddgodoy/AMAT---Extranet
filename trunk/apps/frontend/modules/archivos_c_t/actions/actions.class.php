@@ -20,7 +20,8 @@ class archivos_c_tActions extends sfActions
 	}
 		
 	$this->pager = new sfDoctrinePager('ArchivoCT', 20);
-	$this->pager->getQuery()->from('ArchivoCT')
+	$this->pager->getQuery()->from('ArchivoCT ac')
+        ->lefgtjoin('ac.DocumentacionConsejo dc')
 	->where($this->setFiltroBusqueda())
 	->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
@@ -165,23 +166,23 @@ class archivos_c_tActions extends sfActions
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%')";
+			$parcial .= " AND (ac.nombre LIKE '%$this->cajaBsq%')";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->grupoBsq)) {
-			$parcial .= " AND consejo_territorial_id = $this->grupoBsq ";
+			$parcial .= " AND ac.consejo_territorial_id = $this->grupoBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowconsejo', $this->grupoBsq);
 		}
 		if (!empty($this->documentacionBsq)) {
-			$parcial .= " AND documentacion_consejo_id = $this->documentacionBsq ";
+			$parcial .= " AND ac.documentacion_consejo_id = $this->documentacionBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowdocumentacion', $this->documentacionBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >= '".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND ac.fecha >= '".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowdesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND ac.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
 
@@ -223,11 +224,11 @@ class archivos_c_tActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'deleted=0'.$parcial;
+			return "ac.deleted=0".$parcial." AND dc.estado = 'publicado' ";
 		}
 		else
 		{ 
-		   return 'deleted=0'.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+		   return "ac.deleted=0 ".$parcial." AND ac.consejo_territorial_id IN ".$consejosterritoriales." AND dc.estado = 'publicado' ";
         }  
 		
  }
