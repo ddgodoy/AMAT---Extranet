@@ -29,4 +29,15 @@ class CircularSubTemaTable extends Doctrine_Table
 		
 		return $subcategorias;
 	}
+
+        public static function getSubcategoria($id)
+	{
+	   $q=Doctrine_Query::create()
+	   ->from('CircularSubTema')
+	   ->where('deleted = 0')
+           ->andWhere('id = '.$id);
+
+           return $q->fetchOne();
+
+	}
 }
