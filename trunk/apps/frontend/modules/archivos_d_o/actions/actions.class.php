@@ -277,15 +277,9 @@ class archivos_d_oActions extends sfActions
 			$this->hastaBsq = '';
 		}
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
-		{
-			return 'deleted=0'.$parcial;
-		}
-		else
-		{
-		   return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND do.estado = 'publicado'";
-		} 
+		
+	 return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND do.estado = 'publicado'";
+		 
 
   }
   
