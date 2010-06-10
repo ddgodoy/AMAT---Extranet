@@ -315,15 +315,14 @@ class archivos_d_oActions extends sfActions
   {
   
   	$this->documentacion_selected = 0;
-        echo
+       
   	$this->arrayDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->getRequestParameter('documentacion_organismos'),1);
 
-        if($this->arrayDocumentacion->count()> 0)
-        {
+       
   	  $this->name = $request->getParameter('name');
   	
 	  return $this->renderPartial('documentacion_organismos/selectByOrganismo');
-        }
+       
   	
   }
 }
