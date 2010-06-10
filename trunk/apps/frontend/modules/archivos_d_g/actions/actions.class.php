@@ -213,11 +213,11 @@ class archivos_d_gActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return "ag.deleted=0".$parcial." dg.estado = 'publicado'";
+			return "ag.deleted=0".$parcial." AND  dg.estado = 'publicado'";
 		}
 		else
 		{
-			return "ag.deleted=0 ".$parcial." AND ag.grupo_trabajo_id IN ".$gruposdetrabajo." dg.estado = 'publicado'";
+			return "ag.deleted=0 ".$parcial." AND ag.grupo_trabajo_id IN ".$gruposdetrabajo." AND  dg.estado = 'publicado'";
 		}
 		
   }
