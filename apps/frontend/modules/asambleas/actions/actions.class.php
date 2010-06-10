@@ -466,7 +466,8 @@ class asambleasActions extends sfActions
 		$this->forward404Unless($asamblea = Doctrine::getTable('Asamblea')->find($request->getParameter('id')), sprintf('Object asamblea does not exist (%s).', $request->getParameter('id')));
 		$asamblea->setEstado('anulada');
 		$asamblea->save();
-		
+
+                $this->getUser()->setFlash('notice', 'La asamblea ha sido anulada correctamente');
 		$this->redirect('asambleas/lista?'.$this->DAtos['get']);
 	}
 
