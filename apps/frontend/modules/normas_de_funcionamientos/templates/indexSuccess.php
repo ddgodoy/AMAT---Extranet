@@ -39,20 +39,16 @@
     <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 	<tbody>
 		<tr>
-			<th width="10%" style="text-align:center;">
-				<a href="<?php echo url_for('normas_de_funcionamientos/index?sort=created_at&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
-			</th>
-			<th width="40%">
+			<th width="50%">
 				<a href="<?php echo url_for('normas_de_funcionamientos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 			</th>
 			<th width="5%">&nbsp;</th>
 			<th width="5%">&nbsp;</th>
 		</tr>
     <?php $i=0; foreach ($normas_de_funcionamiento_list as $normas_de_funcionamientos): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-	    <tr class="<?php echo $odd ?>">
-		  <td  align="center"><?php echo date("d/m/Y", strtotime($normas_de_funcionamientos->getCreatedAt())) ?></td>  
-	      <td><a href="<?php echo url_for('normas_de_funcionamientos/show?id='.$normas_de_funcionamientos->getId()) ?>"><?php echo $normas_de_funcionamientos->getTitulo() ?></a></td>
-	      <td  align="center">
+	    <tr class="<?php echo $odd ?>"
+                  <td><a href="<?php echo url_for('normas_de_funcionamientos/show?id='.$normas_de_funcionamientos->getId()) ?>"><?php echo $normas_de_funcionamientos->getTitulo() ?></a></td>
+                  <td  align="center">
 		  <?php if(validate_action('modificar')):?>
 		  <a href="<?php echo url_for('normas_de_funcionamientos/editar?id='.$normas_de_funcionamientos->getId()) ?>">
 		  <?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Editar')) ?>
