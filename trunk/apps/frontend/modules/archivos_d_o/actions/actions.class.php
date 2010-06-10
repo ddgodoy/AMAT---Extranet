@@ -28,6 +28,10 @@ class archivos_d_oActions extends sfActions
                 ->leftjoin('ao.DocumentacionOrganismo do')
 		->where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
+
+                echo $this->pager->getQuery()->getSql();
+                exit ();
+
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 		
