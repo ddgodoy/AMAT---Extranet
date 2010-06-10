@@ -280,7 +280,7 @@ class archivos_d_oActions extends sfActions
 		}
 		else
 		{
-		   return 'ao.deleted=0'.$parcial.' AND ao.organismo_id IN '.$organismos.' AND do.estado = '.publicado;
+		   return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND do.estado = 'publicado'";
 		} 
 
   }
