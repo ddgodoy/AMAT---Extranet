@@ -97,7 +97,7 @@
       <input type="submit" id="boton_guardar" class="boton" value="Guardar" name="btn_action"/>
     <?php endif;?>
     
-      <input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_c_t/index?'.$redireccionGrupo) ?>';"/>
+      <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_c_t/index?'.$redireccionGrupo) ?>';"/>
     </div> 
  </form>
     
