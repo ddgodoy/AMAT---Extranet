@@ -106,7 +106,7 @@ public function executeDelete(sfWebRequest $request)
                                                         $enviar= true;
                                                         $grupo = Doctrine::getTable('GrupoTrbajo')->findOneById($documentacion_grupo->getGrupoTrabajoId());
                                                         $email = UsuarioTable::getUsuariosByGrupoTrabajoArray($documentacion_grupo->getGrupoTrabajoId());
-                                                        $tema  = 'Documentación publicada para el Grupo de Trabajo: '.$grupo->getNombre();
+                                                        $tema  = 'Documentación publicada para el Grupo de Trabajo: '.$documentacion_grupo->getNombre();
                                                 }
                                                 if($documentacion_grupo->getEstado()=='publicado') {
                                                         ServiceNotificacion::send('creacion', 'Grupo', $documentacion_grupo->getId(), $documentacion_grupo->getNombre(),'',$documentacion_grupo->getGrupoTrabajoId());
