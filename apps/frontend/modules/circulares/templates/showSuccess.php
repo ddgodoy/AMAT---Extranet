@@ -11,7 +11,8 @@
 	</table>
 
 	<div class="noticias">
-	  <p class="notentrada"><?php echo  $circular->getNombre() ?></p>
+          <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($circular->getFecha())) ?></span> <br />
+	  <a href="#" class="nottit"><?php echo  $circular->getNombre() ?></a><br />
           <br />
 	  <?php echo $circular->getContenido() ?>  
 	  <?php if($circular->getdocumento()):?>   
