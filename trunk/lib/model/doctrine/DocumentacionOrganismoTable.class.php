@@ -19,10 +19,6 @@ class DocumentacionOrganismoTable extends DocumentacionTable
                 }
 		$q->orderBy('nombre ASC');
 
-                echo $q->getQuery();
-                exit ();
-
-
 		$documentacion = $q->execute();
 		
 		return $documentacion;
