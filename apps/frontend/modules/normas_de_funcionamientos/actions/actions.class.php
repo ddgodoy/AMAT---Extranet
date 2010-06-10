@@ -17,7 +17,7 @@ class normas_de_funcionamientosActions extends sfActions
   	    $this->DAtos = $arraDAtos;
   	       
   	 
-     	$this->paginaActual = $this->getRequestParameter('page', 1);
+            $this->paginaActual = $this->getRequestParameter('page', 1);
  
 		if (is_numeric($this->paginaActual)) {
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
@@ -159,7 +159,7 @@ class normas_de_funcionamientosActions extends sfActions
 			$this->cajaBsq = "";
 			$this->grupo = '';
 		}
-		return 'deleted=0'.$parcial;
+		return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN ('.GrupoTrabajoTable::getGruposTrabajoByUsuario($this ->getUser()->getAttribute('userId')).')';
   }
   
   protected function setOrdenamiento()
