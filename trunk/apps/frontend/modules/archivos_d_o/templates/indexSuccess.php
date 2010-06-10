@@ -3,9 +3,7 @@
 <?php use_helper('Javascript') ?>
 <?php use_helper('Object') ?>
 <?php
-echo $organismoBsq;
-exit ();
-if($organismoBsq && $documentacionBsq):
+if($organismoBsq):
 $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.$documentacionBsq.'&archivo_d_o[organismo_id]='.$organismoBsq;
 else :
 $redireccionGrupo = '';
