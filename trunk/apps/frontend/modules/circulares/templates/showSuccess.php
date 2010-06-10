@@ -12,7 +12,7 @@
 
 	<div class="noticias">
           <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($circular->getFecha())) ?></span> <br />
-	  <a href="#" class="nottit"><?php echo  $circular->getNombre() ?></a><br />
+	  <a class="nottit"><?php echo  $circular->getNombre() ?></a><br />
           <br />
 	  <?php echo $circular->getContenido() ?>  
 	  <?php if($circular->getdocumento()):?>   
