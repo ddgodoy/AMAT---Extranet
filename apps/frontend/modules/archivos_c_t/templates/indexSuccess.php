@@ -43,7 +43,7 @@ endif; ?>
 	<div class="leftside">
 		<div class="lineaListados">
 			<?php if($pager->haveToPaginate()): ?>
-				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType,$redireccionGrupoEdit) ?></div>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType,$redireccionGrupo) ?></div>
 			<?php endif; ?>
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s <?php if ($cajaBsq) echo " con la palabra '".$cajaBsq."'" ?> </span> 
 			<?php if(validate_action('alta')): ?>
