@@ -20,7 +20,7 @@ class archivos_d_gActions extends sfActions
 		}
 		$this->pager = new sfDoctrinePager('ArchivoDG', 10);
 		$this->pager->getQuery()->from('ArchivoDG ag')
-                ->lefgjoint('ag.DocumentacionGrupo dg')
+                ->leftjoin('ag.DocumentacionGrupo dg')
                 ->where($this->setFiltroBusqueda())
                 ->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
