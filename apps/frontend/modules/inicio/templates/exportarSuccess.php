@@ -365,11 +365,11 @@ $f = 0;
 		 	   	  }
 		 	   	  if($hy == 'categoria_organismo_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(CategoriaOrganismoTable::getCategoriaOrganismo($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(CategoriaOrganismoTable::getCategoriaOrganismo($r))).'",';
 		 	   	  }
 		 	   	  if($hy == 'subcategoria_organismo_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(SubCategoriaOrganismoTable::getSubcategoria($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(SubCategoriaOrganismoTable::getSubcategoria($r))).'",';
 		 	   	  }
 		 	   	  if($hy == 'organismo_id')
 		 	   	  {
