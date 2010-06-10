@@ -19,6 +19,10 @@ class DocumentacionOrganismoTable extends DocumentacionTable
                 }
 		$q->orderBy('nombre ASC');
 
+                echo $q->getQuery();
+                exit ();
+
+
 		$documentacion = $q->execute();
 		
 		return $documentacion;
@@ -29,7 +33,7 @@ class DocumentacionOrganismoTable extends DocumentacionTable
 		
 		$s = Doctrine_Query::create();
 		$s ->from('DocumentacionOrganismo');
-		$s ->where('id = '.$Id_documentacion );
+		$s ->where('id = '.$Id_documentacion )->andWhere('deleted = 0');
 		$retornar = $s->fetchOne();
 		
 		return $retornar;
