@@ -10,7 +10,7 @@
 		$arrayDocumentacion = DocumentacionGrupoTable::getAlldocumentos();
 	}
 ?>
-<?php if($grupoBsq && $documentacionBsq):
+<?php if($grupoBsq ):
 $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$documentacionBsq.'&grupo_trabajo_id='.$grupoBsq;
 else :
 $redireccionGrupo = '';
@@ -154,7 +154,7 @@ endif; ?>
 	<div class="rightside">
 		<div class="paneles">
 			<h1>Buscar</h1>
-			<form method="post" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_g/index?'.$redireccionGrupo) ?>">
+			<form method="get" enctype="multipart/form-data" action="<?php echo url_for('archivos_d_g/index') ?>">
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>
