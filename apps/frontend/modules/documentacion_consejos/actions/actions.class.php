@@ -200,7 +200,7 @@ class documentacion_consejosActions extends sfActions
 				$email  = AplicacionRolTable::getEmailPublicar('28','',$grupo->getId());
 				$tema  .= 'pendiente de publicar ';
 			}
-			$tema .= 'para el Consejo Territorial: '.$grupo->getNombre();
+			$tema .= 'para el Consejo Territorial: '.$documentacion_consejo->getNombre();
 
 			## envia el email
 			if ($enviar) {
