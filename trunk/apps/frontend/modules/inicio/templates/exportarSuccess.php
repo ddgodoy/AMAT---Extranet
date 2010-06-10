@@ -63,7 +63,7 @@ $f = 0;
 		 	   	  }
 		 	   	   if($hy == 'categoria_d_g_id')
 		 	   	  {
-		 	   	  	echo '<td>'.slugify(CategoriaDGTable::getCategoriaDG($r)).'</td>';
+		 	   	  	echo '<td>'.slugify(utf8_decode(CategoriaDGTable::getCategoriaDG($r))).'</td>';
 		 	   	  }
 		 	   	   if($hy == 'documentacion_grupo_id')
 		 	   	  {
@@ -204,7 +204,7 @@ $f = 0;
 		 	   	  if ($hy == 'owner_id' || $hy == 'user_id_creador'|| $hy =='user_id_modificado' || $hy =='user_id_publicado' )
 		 	   	  {
 		 	   	  if($r){
-                                        echo '"'.slugify(Usuario::datosUsuario($r)).'",';
+                                        echo '"'.slugify(utf8_decode(Usuario::datosUsuario($r))).'",';
                                     }
                                     else {
                                         echo '"",';
@@ -213,7 +213,7 @@ $f = 0;
                                   if($hy == 'categoria_normativa_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getCategoriaNormativa()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getCategoriaNormativa()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -221,7 +221,7 @@ $f = 0;
                                    if($hy == 'subcategoria_normativa_uno_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getSubCategoriaNormativaN1()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getSubCategoriaNormativaN1()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -229,7 +229,7 @@ $f = 0;
                                    if($hy == 'subcategoria_normativa_dos_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getSubCategoriaNormativaN2()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getSubCategoriaNormativaN2()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -237,7 +237,7 @@ $f = 0;
                                    if($hy == 'categoria_iniciativa_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getCategoriaIniciativa()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getCategoriaIniciativa()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -245,7 +245,7 @@ $f = 0;
                                   if($hy == 'subcategoria_iniciativa_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getSubCategoriaIniciativa()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getSubCategoriaIniciativa()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -253,7 +253,7 @@ $f = 0;
                                   if($hy == 'circular_tema_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getCircularCatTema()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getCircularCatTema()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -261,7 +261,7 @@ $f = 0;
                                   if($hy == 'circular_sub_tema_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getCircularSubTema()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getCircularSubTema()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -269,7 +269,7 @@ $f = 0;
                                   if($hy == 'categoria_acuerdo_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getCategoriaAcuerdo()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getCategoriaAcuerdo()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -277,7 +277,7 @@ $f = 0;
                                   if($hy == 'subcategoria_acuerdo_id')
 		 	   	  {
                                        if($r){
-		 	   	  	echo '"'.slugify($reS->getSubCategoriaAcuerdo()->getNombre()).'",';
+		 	   	  	echo '"'.slugify(utf8_decode($reS->getSubCategoriaAcuerdo()->getNombre())).'",';
                                        }else{
                                         echo '"",';
                                        }
@@ -296,28 +296,28 @@ $f = 0;
 		 	   	  }
 		 	   	  if($hy == 'grupo_trabajo_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(GrupoTrabajoTable::getGrupoTrabajo($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(GrupoTrabajoTable::getGrupoTrabajo($r))).'",';
 		 	   	  }
 		 	   	   if($hy == 'categoria_d_g_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(CategoriaDGTable::getCategoriaDG($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(CategoriaDGTable::getCategoriaDG($r))).'",';
 		 	   	  }
                                   
                                    if($hy == 'documentacion_grupo_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(DocumentacionGrupoTable::getDocumentacionGrupoTrabajo($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(DocumentacionGrupoTable::getDocumentacionGrupoTrabajo($r))).'",';
 		 	   	  }
 		 	   	   if($hy == 'consejo_territorial_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(ConsejoTerritorialTable::getConsejo($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(ConsejoTerritorialTable::getConsejo($r))).'",';
 		 	   	  }
 		 	   	   if($hy == 'categoria_c_t_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(CategoriaCTTable::getCategoriasCT($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(CategoriaCTTable::getCategoriasCT($r))).'",';
 		 	   	  }
 		 	   	   if($hy == 'documentacion_consejo_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(DocumentacionConsejoTable::getDocumentacionConsejo($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(DocumentacionConsejoTable::getDocumentacionConsejo($r))).'",';
 		 	   	  }
 		 	   	  if($hy == 'aplicacion_id')
 		 	   	  {
@@ -341,7 +341,7 @@ $f = 0;
 		 	   	  }
 		 	   	  if($hy == 'documentacion_organismo_id')
 		 	   	  {
-		 	   	  	echo '"'.slugify(DocumentacionOrganismoTable::getDocumentacionOrganismo($r)).'",';
+		 	   	  	echo '"'.slugify(utf8_decode(DocumentacionOrganismoTable::getDocumentacionOrganismo($r))).'",';
 		 	   	  }
 		 	   	  if($hy != 'subcategoria_acuerdo_id' && $hy != 'categoria_acuerdo_id' &&  $hy != 'subcategoria_iniciativa_id' &&  $hy != 'categoria_iniciativa_id' && $hy != 'subcategoria_normativa_dos_id' && $hy != 'subcategoria_normativa_uno_id' && $hy != 'categoria_normativa_id' &&$hy != 'user_id_publicado' && $hy != 'user_id_modificado' && $hy != 'documentacion_organismo_id' && $hy != 'organismo_id' && $hy != 'subcategoria_organismo_id' && $hy != 'categoria_organismo_id' && $hy != 'rol_id' && $hy != 'aplicacion_id' && $hy != 'documentacion_consejo_id' && $hy != 'categoria_c_t_id'  &&  $hy != 'consejo_territorial_id' && $hy != 'documentacion_grupo_id' && $hy != 'categoria_d_g_id' &&  $hy != 'grupo_trabajo_id' && $hy != 'owner_id' && $hy != 'user_id_creador' && $hy != 'mutua_id' && $hy != 'seccion_id' && $hy!='login' && $hy!='crypted_password'&& $hy!='salt')
 		 	   	  {
