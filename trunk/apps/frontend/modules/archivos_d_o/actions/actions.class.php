@@ -85,7 +85,7 @@ class archivos_d_oActions extends sfActions
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
     $this->idOrganismos = $archivo_do->getOrganismoId();
-    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos);
+    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos,1);
     $this->idDocumentacion = $archivo_do->getDocumentacionOrganismoId();
    
   }
@@ -100,7 +100,7 @@ class archivos_d_oActions extends sfActions
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
     $this->idOrganismos = $archivo_do->getOrganismoId();
-    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos);
+    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos,1);
     $this->idDocumentacion = $archivo_do->getDocumentacionOrganismoId();
 
     $this->processForm($request, $this->form);
