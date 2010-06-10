@@ -16,24 +16,24 @@ class NormasDeFuncionamientoForm extends BaseNormasDeFuncionamientoForm
   		
   		$GruposUsuario = GrupoTrabajo::ArrayDeMigrupo($userId,1);
   	$this->setWidgets(array(
-      'id'               => new sfWidgetFormInputHidden(),
-      'titulo'           => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
-      'descripcion'      => new fckFormWidget(),
-      'grupo_trabajo_id' => new sfWidgetFormChoice(array('choices' => $GruposUsuario),array('class' => 'form_input', 'style' => 'width: 200px;')),
-      'created_at'       => new sfWidgetFormDateTime(),
-      'updated_at'       => new sfWidgetFormDateTime(),
-      'deleted'          => new sfWidgetFormInputCheckbox(),
-    ));
+          'id'               => new sfWidgetFormInputHidden(),
+          'titulo'           => new sfWidgetFormInput(array(), array('style' => 'width: 330px;', 'class' => 'form_input')),
+          'descripcion'      => new fckFormWidget(),
+          'grupo_trabajo_id' => new sfWidgetFormChoice(array('choices' => $GruposUsuario),array('class' => 'form_input', 'style' => 'width: 200px;')),
+          'created_at'       => new sfWidgetFormDateTime(),
+          'updated_at'       => new sfWidgetFormDateTime(),
+          'deleted'          => new sfWidgetFormInputCheckbox(),
+        ));
 
     $this->setValidators(array(
-      'id'               => new sfValidatorDoctrineChoice(array('model' => 'NormasDeFuncionamiento', 'column' => 'id', 'required' => false)),
-      'titulo'           => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
-      'descripcion'      => new sfValidatorString(array('required' => false)),
-      'grupo_trabajo_id' => new sfValidatorChoice(array('choices' => array_keys($GruposUsuario),'required' => true),array('required' => 'El Grupo de trabajo es obligatorio')),
-      'created_at'       => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'       => new sfValidatorDateTime(array('required' => false)),
-      'deleted'          => new sfValidatorBoolean(),
-    ));
+          'id'               => new sfValidatorDoctrineChoice(array('model' => 'NormasDeFuncionamiento', 'column' => 'id', 'required' => false)),
+          'titulo'           => new sfValidatorString(array('required' => true), array('required' => 'El título es obligatorio')),
+          'descripcion'      => new sfValidatorString(array('required' => false)),
+          'grupo_trabajo_id' => new sfValidatorChoice(array('choices' => array_keys($GruposUsuario),'required' => true),array('required' => 'El Grupo de trabajo es obligatorio')),
+          'created_at'       => new sfValidatorDateTime(array('required' => false)),
+          'updated_at'       => new sfValidatorDateTime(array('required' => false)),
+          'deleted'          => new sfValidatorBoolean(),
+        ));
 
     
     $this->setDefaults(array(
