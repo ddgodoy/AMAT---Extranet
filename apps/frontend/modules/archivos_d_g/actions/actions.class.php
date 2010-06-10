@@ -19,7 +19,8 @@ class archivos_d_gActions extends sfActions
 			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 		}
 		$this->pager = new sfDoctrinePager('ArchivoDG', 10);
-		$this->pager->getQuery()->from('ArchivoDG')
+		$this->pager->getQuery()->from('ArchivoDG ag')
+                ->lefgjoint('ag.DocumentacionGrupo dg')
                 ->where($this->setFiltroBusqueda())
                 ->orderBy($this->setOrdenamiento());
 		$this->pager->setPage($this->paginaActual);
@@ -155,23 +156,23 @@ class archivos_d_gActions extends sfActions
 		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
 		
 		if (!empty($this->cajaBsq)) {
-			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%' OR contenido LIKE '%$this->cajaBsq%')";
+			$parcial .= " AND (ag.nombre LIKE '%$this->cajaBsq%' OR contenido LIKE '%$this->cajaBsq%')";
 			$this->getUser()->setAttribute($modulo.'_nowcaja', $this->cajaBsq);
 		}
 		if (!empty($this->grupoBsq)) {
-			$parcial .= " AND grupo_trabajo_id = $this->grupoBsq ";
+			$parcial .= " AND ag.grupo_trabajo_id = $this->grupoBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowgrupo', $this->grupoBsq);
 		}
 		if (!empty($this->documentacionBsq)) {
-			$parcial .= " AND documentacion_grupo_id = $this->documentacionBsq ";
+			$parcial .= " AND ag.documentacion_grupo_id = $this->documentacionBsq ";
 			$this->getUser()->setAttribute($modulo.'_nowdocumentacion', $this->documentacionBsq);
 		}
 		if (!empty($this->desdeBsq)) {
-			$parcial .= " AND fecha >= '".format_date($this->desdeBsq,'d')."'";
+			$parcial .= " AND ag.fecha >= '".format_date($this->desdeBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowdesde', $this->desdeBsq);
 		}
 		if (!empty($this->hastaBsq)) {
-			$parcial .= " AND fecha <= '".format_date($this->hastaBsq,'d')."'";
+			$parcial .= " AND ag.fecha <= '".format_date($this->hastaBsq,'d')."'";
 			$this->getUser()->setAttribute($modulo.'_nowhasta', $this->hastaBsq);
 		}
 
@@ -212,11 +213,11 @@ class archivos_d_gActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return 'deleted=0'.$parcial;
+			return "ag.deleted=0".$parcial." dg.estado = 'publicado'";
 		}
 		else
 		{
-			return 'deleted=0'.$parcial.' AND grupo_trabajo_id IN '.$gruposdetrabajo;
+			return "ag.deleted=0 ".$parcial." AND ag.grupo_trabajo_id IN ".$gruposdetrabajo." dg.estado = 'publicado'";
 		}
 		
   }
