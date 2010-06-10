@@ -8,8 +8,6 @@
 	    <td width="5%" align="right">&nbsp;</td>
 	  </tr>
 	</table>
-	<div class="lineaListados">  
-	</div>	
 	
 	<div class="noticias">	  
 	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($acuerdo->getFecha())) ?></span> <br />
