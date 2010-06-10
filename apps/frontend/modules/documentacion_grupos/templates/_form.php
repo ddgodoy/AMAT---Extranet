@@ -27,7 +27,7 @@ $redireccionGrupo = '';
 <div class="mensajeSistema ok">Debe ingresar una categoría para poder cargar un documento del grupo de trabajo. <a href="<?php echo url_for('categorias_d_g/index') ?>">click aquí</a></div>
 <?php endif;?>
 
-<form action ="<?php echo url_for('documentacion_grupos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action ="<?php echo url_for('documentacion_grupos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '?'.$redireccionGrupo)) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
 <?php if (!$form->getObject()->isNew()): ?>
 <input type="hidden" name="sf_method" value="put" />
 <?php endif; ?>
