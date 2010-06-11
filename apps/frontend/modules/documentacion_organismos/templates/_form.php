@@ -12,12 +12,16 @@
 <?php endif; ?>
 <?php
  if(sfConfig::get('sf_environment') == 'dev'){
+     echo 'si pproduccion';
+  exit ();
     if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
     $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
     else: $redireccionGrupo = '';  endif;
  }else{
+  echo 'no pproduccion';
+  exit ();
   if($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D')):
-  $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D'));
+ $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D'));
   else: $redireccionGrupo = '';  endif;
  }
  ?>
