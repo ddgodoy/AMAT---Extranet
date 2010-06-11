@@ -1,4 +1,4 @@
-<?php
+<?php 
 	use_helper('Javascript');
 	use_helper('Security');
 	
