@@ -4,6 +4,7 @@
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
 
+
 <?php echo $form->renderGlobalErrors() ?>
 
 <?php if ($sf_user->hasFlash('notice')): ?>
