@@ -1,6 +1,20 @@
 <?php use_helper('Security'); ?>
 <?php use_helper('Date');?>
-<?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):$redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]')); else: $redireccionGrupo = '';  endif; ?>
+<?php
+ if(sfConfig::get('sf_environment') == 'dev'){
+    if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+    $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
+    else:
+    $redireccionGrupo = '';
+    endif;
+     }else{
+      if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
+      $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
+      else:
+      $redireccionGrupo = '';
+      endif;
+     }
+ ?>
 <?php
 $getArchivo = explode('&',$redireccionGrupo );
 $getCategoria = explode('=', $getArchivo['0']);
