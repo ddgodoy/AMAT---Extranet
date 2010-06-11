@@ -78,7 +78,6 @@ class Organismo extends BaseOrganismo
             $request =sfContext::getInstance();
             $user = $request->getUser()->getAttribute('userId');
             $organismosArray= array('0'=>'','1'=>'');
-            echo $organismo;
             $organismos = OrganismoTable::getOrganismosByid($organismo);
             $categoriaId = $organismos->getCategoriaOrganismoId();
             $organismosArray['1'] = SubCategoriaOrganismoTable::doSelectByCategoria($categoriaId);
