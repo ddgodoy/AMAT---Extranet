@@ -10,7 +10,7 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-<?php if($_GET['documentacion_organismo[organismo_id]']):
+<?php if($_GET):
  $redireccionGrupo = Organismo::getUrlOrganismos($_GET['documentacion_organismo[organismo_id]']);
  echo $redireccionGrupo;
  else: $redireccionGrupo = '';  endif; ?>
