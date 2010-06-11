@@ -217,7 +217,7 @@
 		<Description>Circular, banner, enlaces y textos.</Description>
 		<Html>
 			<![CDATA[
-		          <table border="0" cellspacing="10" cellpadding="0">
+		          <table border="0"  cellpadding="0">
                               <tr>
                                 <td valign="top" width="10">&nbsp;</td>
                                 <td width="562"><img src="http://extranet.amat.es/uploads/image/3_logo.gif" width="562" height="95" alt="Amat" /></td>
