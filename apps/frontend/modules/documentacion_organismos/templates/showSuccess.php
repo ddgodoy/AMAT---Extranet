@@ -1,4 +1,4 @@
-<?php use_helper('Security');?>
+<?php use_helper('Security'); ?>
 <?php use_helper('Date');?>
 <?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):$redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]')); else: $redireccionGrupo = '';  endif; ?>
 <?php
