@@ -12,16 +12,21 @@
 <?php endif; ?>
 <?php
  if(sfConfig::get('sf_environment') == 'dev'){
-     echo 'si pproduccion';
-  exit ();
     if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+    $categoria =  $sf_request->getParameter('documentacion_organismo[categoria_organismo_id]');
     $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
-    else: $redireccionGrupo = '';  endif;
+    else:
+    $categoria = '';
+    $redireccionGrupo = '';
+    endif;
  }else{
   if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
-  echo $sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D');
+  $categoria =  $sf_request->getParameter('documentacion_organismo%5Bcategoria_organismo_id%5D');
   $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
-  else: $redireccionGrupo = '';  endif;
+  else:
+  $categoria = '';
+  $redireccionGrupo = '';
+  endif;
  }
  ?>
 <?php echo $form['nombre']->renderError() ?>
