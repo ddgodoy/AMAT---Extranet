@@ -70,7 +70,7 @@ endif; ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
      			<?php endif; ?>
                 <?php if(validate_action('alta')):?>
-                                <input type="button" onclick="javascript:location.href='<?php echo url_for(urlencode('documentacion_organismos/nueva?hola[chau]=30')) ?>';" style="float: right;" value="Nueva Documentación" name="newNews" class="boton"/>
+                                <input type="button" onclick="javascript:location.href='<?php echo url_for('documentacion_organismos/nueva?hola[chau]=30') ?>';" style="float: right;" value="Nueva Documentación" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
 		<?php if ($cantidadRegistros > 0) : ?>
