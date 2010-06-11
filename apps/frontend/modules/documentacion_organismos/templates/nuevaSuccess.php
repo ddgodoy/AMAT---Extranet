@@ -20,14 +20,14 @@
     $organismos =  $sf_request->getParameter('documentacion_organismo[organismo_id]');
     endif;
     if($sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]')):
-    $organismos =  $sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]');
+    $subcategoria =  $sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]');
     endif;
  }else{
   if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
   $organismos =  $sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D');
   endif;
   if($sf_request->getParameter('documentacion_organismo%5Bsubcategoria_organismo_id%5D')):
-    $organismos =  $sf_request->getParameter('documentacion_organismo%5Bsubcategoria_organismo_id%5D');
+    $subcategoria =  $sf_request->getParameter('documentacion_organismo%5Bsubcategoria_organismo_id%5D');
     endif;
  }
 
