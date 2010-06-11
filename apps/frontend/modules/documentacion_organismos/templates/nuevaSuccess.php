@@ -12,11 +12,22 @@
 			</tr>
 		</tbody>
 	</table>
-<?php 
+<?php
+ $organismos = '' ;
+ if(sfConfig::get('sf_environment') == 'dev'){
+    if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+    $organismos =  $sf_request->getParameter('documentacion_organismo[organismo_id]');
+    endif;
+ }else{
+  if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
+  $organismos =  $sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D');
+  endif;
+ }
+
 // datos que son utiles para los partial
 $organismosArray = array('0'=>'','1'=>'');
-if($sf_request->getParameter('documentacion_organismo[organismo_id]')){
-$organismosArray = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'),1);
+if($organismos != ''){
+$organismosArray = Organismo::getUrlOrganismos($organismos,1);
 }
 include_partial(
 		'form',
