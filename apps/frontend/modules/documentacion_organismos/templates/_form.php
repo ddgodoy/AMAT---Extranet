@@ -10,12 +10,9 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-<?php if(sfContext::getInstance()->getRequest()->getParameter('documentacion_organismo[organismo_id]')):
- $redireccionGrupo = Organismo::getUrlOrganismos(sfContext::getInstance()->getRequest()->getParameter('documentacion_organismo[organismo_id]'));
- echo $redireccionGrupo ;
- else: $redireccionGrupo = '';
- echo $redireccionGrupo.'hola estoy aca ' ;
- endif; ?>
+<?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+ $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
+ else: $redireccionGrupo = '';  endif; ?>
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
 <?php echo $form['categoria_organismo_id']->renderError() ?>
