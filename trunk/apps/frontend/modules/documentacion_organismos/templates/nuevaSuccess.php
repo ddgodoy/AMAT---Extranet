@@ -13,20 +13,27 @@
 		</tbody>
 	</table>
 <?php
- $organismos = '' ;
+ $organismos = 0 ;
+ $subcategoria = 0;
  if(sfConfig::get('sf_environment') == 'dev'){
     if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
     $organismos =  $sf_request->getParameter('documentacion_organismo[organismo_id]');
+    endif;
+    if($sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]')):
+    $organismos =  $sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]');
     endif;
  }else{
   if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
   $organismos =  $sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D');
   endif;
+  if($sf_request->getParameter('documentacion_organismo%5Bsubcategoria_organismo_id%5D')):
+    $organismos =  $sf_request->getParameter('documentacion_organismo%5Bsubcategoria_organismo_id%5D');
+    endif;
  }
 
 // datos que son utiles para los partial
 $organismosArray = array('0'=>'','1'=>'');
-if($organismos != ''){
+if($organismos != 0){
 $organismosArray = Organismo::getUrlOrganismos($organismos,1);
 }
 include_partial(
@@ -39,6 +46,6 @@ include_partial(
 			'arrayOrganismo'=> $organismosArray['0'],
 			'verSubcategoria'=> 0,
 			'subcategoria_organismos_selected'  => $sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]')?$sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]'):0,
-			'organismos_selected'  => $sf_request->getParameter('documentacion_organismo[organismo_id]')?$sf_request->getParameter('documentacion_organismo[organismo_id]'):0,
+			'organismos_selected'  => $organismos,
 			'verLosOrganismos' => $verLosOrganismos
 		)); ?>
