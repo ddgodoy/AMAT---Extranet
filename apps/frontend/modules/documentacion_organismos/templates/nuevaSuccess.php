@@ -45,7 +45,7 @@ include_partial(
 			'arraySubcategoria'=> $organismosArray['1'],
 			'arrayOrganismo'=> $organismosArray['0'],
 			'verSubcategoria'=> 0,
-			'subcategoria_organismos_selected'  => $sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]')?$sf_request->getParameter('documentacion_organismo[subcategoria_organismo_id]'):0,
+			'subcategoria_organismos_selected'  => $subcategoria,
 			'organismos_selected'  => $organismos,
 			'verLosOrganismos' => $verLosOrganismos
 		)); ?>
