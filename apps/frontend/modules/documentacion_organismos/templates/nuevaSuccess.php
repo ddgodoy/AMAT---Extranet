@@ -18,14 +18,6 @@ $organismosArray = array('0'=>'','1'=>'');
 if($sf_request->getParameter('documentacion_organismo[organismo_id]')){
 $organismosArray = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'),1);
 }
-
-echo $sf_request->getParameter('documentacion_organismo[organismo_id]').'hola';
-exit ();
-
-if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
-$redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
-else: $redireccionGrupo = '';
-endif;
 include_partial(
 		'form',
 		array

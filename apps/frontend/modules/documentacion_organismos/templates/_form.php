@@ -11,8 +11,9 @@
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
 <?php
-echo $sf_request->getParameter('hola%5Bchau%5D');
+echo $sf_request->getParameter('documentacion_organismo[organismo_id]');
 exit ();
+
 
 if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
  $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
