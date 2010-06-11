@@ -19,6 +19,7 @@
     else: $redireccionGrupo = '';  endif;
  }else{
   if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
+  echo $sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D');
   $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
   else: $redireccionGrupo = '';  endif;
  }
