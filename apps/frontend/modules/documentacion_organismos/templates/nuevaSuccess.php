@@ -19,7 +19,7 @@ if($sf_request->getParameter('documentacion_organismo[organismo_id]')){
 $organismosArray = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'),1);
 }
 
-echo $sf_request->getGetParameter('documentacion_organismo[organismo_id]').'hola';
+echo $sf_request->getParameter('documentacion_organismo[organismo_id]').'hola';
 exit ();
 
 if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
