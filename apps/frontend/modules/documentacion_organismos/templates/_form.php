@@ -10,7 +10,7 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-<?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+<?php if(sfContext::getInstance()->getUser()->getParameter('documentacion_organismo[organismo_id]')):
  $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
  echo $redireccionGrupo ;
  else: $redireccionGrupo = '';
