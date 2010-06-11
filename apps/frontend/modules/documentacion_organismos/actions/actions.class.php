@@ -106,6 +106,21 @@ class documentacion_organismosActions extends sfActions
   
   protected function processSelectedRecords(sfWebRequest $request, $accion)
   {
+                 if(sfConfig::get('sf_environment') == 'dev'){
+                    if($request->getParameter('documentacion_organismo[organismo_id]')):
+                    $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
+                    else:
+                    $redireccionGrupo = '';
+                    endif;
+                    }else{
+                    if($request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
+                    $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
+                    else:
+                    $redireccionGrupo = '';
+                    endif;
+                 }
+
+
                 if($request->getParameter('documentacion_organismo[organismo_id]')){
                 $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
                 }else {
@@ -176,11 +191,19 @@ class documentacion_organismosActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-                if($request->getParameter('documentacion_organismo[organismo_id]')){
-                $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
-                }else {
-                $redireccionGrupo = '';
-                }
+                if(sfConfig::get('sf_environment') == 'dev'){
+                    if($request->getParameter('documentacion_organismo[organismo_id]')):
+                    $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
+                    else:
+                    $redireccionGrupo = '';
+                    endif;
+                    }else{
+                    if($request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
+                    $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
+                    else:
+                    $redireccionGrupo = '';
+                    endif;
+                 }
 		$form->bind($request->getParameter($form->getName()));
 		
 		if ($form->isValid()) {
