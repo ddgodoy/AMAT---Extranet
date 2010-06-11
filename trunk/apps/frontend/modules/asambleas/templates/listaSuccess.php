@@ -53,7 +53,7 @@
         <?php if ($asamblea->getEstado() == 'pendiente'): ?>
         <td><a href="<?php echo url_for('asambleas/editar?id='.$asamblea->getId().'&'.$DAtos['get']) ?>"><strong><?php echo $asamblea->getTitulo() ?></strong></a></td>
         <?php else: ?>
-        <td><a href="<?php echo url_for('asambleas/ver?id=' . $convocatoria->getAsambleaId().'&'.$DAtos['get']) ?>"><strong><?php echo $asamblea->getTitulo() ?></strong></a></td>
+        <td><a href="<?php echo url_for('asambleas/ver?id='.$asamblea->getId().'&'.$DAtos['get']) ?>"><strong><?php echo $asamblea->getTitulo() ?></strong></a></td>
         <?php endif; ?>
    <?php endif; ?>
         <td><?php echo $asamblea->getHorario() ?></td>
