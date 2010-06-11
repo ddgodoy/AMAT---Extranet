@@ -84,7 +84,11 @@ class Organismo extends BaseOrganismo
             $subcategoriaID = $organismos->getSubcategoriaOrganismoId();
             $organismosArray['0'] = OrganismoTable::doSelectByOrganismoa($subcategoriaID,$user);
             if($type == ''){
-                return 'documentacion_organismo[categoria_organismo_id]='.$categoriaId.'&documentacion_organismo[subcategoria_organismo_id]='.$organismos->getSubcategoriaOrganismoId().'&documentacion_organismo[organismo_id]='.$organismo;
+                if(sfConfig::get('sf_environment') == 'dev'){
+                 return 'documentacion_organismo[categoria_organismo_id]='.$categoriaId.'&documentacion_organismo[subcategoria_organismo_id]='.$organismos->getSubcategoriaOrganismoId().'&documentacion_organismo[organismo_id]='.$organismo;
+                }else{
+                 return urlencode('documentacion_organismo[categoria_organismo_id]='.$categoriaId.'&documentacion_organismo[subcategoria_organismo_id]='.$organismos->getSubcategoriaOrganismoId().'&documentacion_organismo[organismo_id]='.$organismo);
+                }
             }else{
                 return $organismosArray;
             }
