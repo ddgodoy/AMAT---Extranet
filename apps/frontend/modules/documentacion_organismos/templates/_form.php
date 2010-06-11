@@ -11,14 +11,16 @@
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
 <?php
-echo $sf_request->getParameter('documentacion_organismo[organismo_id]');
-exit ();
-
-
-if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
- $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
-
- else: $redireccionGrupo = '';  endif; ?>
+ if(sfConfig::get('sf_environment') == 'dev'){
+    if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+    $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
+    else: $redireccionGrupo = '';  endif;
+ }else{
+  if($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D')):
+  $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D'));
+  else: $redireccionGrupo = '';  endif;
+ }
+ ?>
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
 <?php echo $form['categoria_organismo_id']->renderError() ?>
