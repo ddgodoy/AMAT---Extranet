@@ -1,4 +1,4 @@
-<?php use_helper('Javascript') ?>
+<?php use_helper('Javascript')  ?>
 <?php use_helper('Security') ?>
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
