@@ -10,9 +10,8 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-<?php if($_GET):
- $redireccionGrupo = Organismo::getUrlOrganismos($_GET['documentacion_organismo[organismo_id]']);
- echo $redireccionGrupo;
+<?php if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
+ $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
  else: $redireccionGrupo = '';  endif; ?>
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
