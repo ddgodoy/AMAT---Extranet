@@ -18,7 +18,7 @@
     $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
     else: $redireccionGrupo = '';  endif;
  }else{
-  echo 'no pproduccion';
+  echo 'no pproduccion'.$sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D').$sf_request->getParameter('hola%5Bchau%5D');
   exit ();
   if($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D')):
  $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismoa%5Borganismo_id%5D'));
