@@ -1,4 +1,4 @@
-<?php use_helper('Security'); ?>	
+<?php use_helper('Security');  ?>	
 <?php use_helper('Date');?>
 <?php if($sf_request->getParameter('consejo')){
 $redireccionGrupo = 'consejo='.$sf_request->getParameter('consejo');
