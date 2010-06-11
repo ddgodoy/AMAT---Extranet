@@ -38,7 +38,7 @@
 					</td>
 					<td valign="center" align="center">
 						<?php
-							if (validate_action('publicar') && $valor->getEstado() != 'publicado') {
+							if (validate_action('publicar') && $valor->getEstado() != 'publicado') { 
 								echo link_to(image_tag('publicar.png', array('border' => 0, 'title' => 'Publicar')), 'documentacion_organismos/publicar?id=' . $valor->getId().'&'.$redireccionGrupo, array('method' => 'post', 'confirm' => 'Confirma la publicación del registro?'));
 							}	
 						?>
