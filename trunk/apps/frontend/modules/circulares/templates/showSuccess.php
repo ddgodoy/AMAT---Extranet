@@ -9,7 +9,8 @@
 	    <td width="5%" align="right">&nbsp;</td>
 	  </tr>
 	</table>
-
+        <div class="lineaListados">
+	</div>
 	<div class="noticias">
           <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($circular->getFecha())) ?></span> <br />
 	  <a class="nottit"><?php echo  $circular->getNombre() ?></a><br />
