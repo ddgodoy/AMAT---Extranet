@@ -11,7 +11,7 @@
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
 <?php
-echo $sf_params->get('hola');
+echo $sf_params->get('hola[chau]');
 exit ();
 
 if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
