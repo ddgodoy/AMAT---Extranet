@@ -70,7 +70,6 @@
 		<td valign="middle">
 		<?php
 		// llamo al componente del modulo  categoria _ organismos
-                   $categoria = $sf_request->getParameter('documentacion_organismo[categoria_organismo_id]')?$sf_request->getParameter('documentacion_organismo[categoria_organismo_id]'):'';
 		   echo include_component('categoria_organismos','listacategoria',array('name'=>'documentacion_organismo','categoria'=>$categoria));
 		?>
 		</td>
