@@ -1,0 +1,36 @@
+modulos
+
+actividades
+aplicaciones_externas
+circular_cat_org
+circular_cat_tema
+circulares
+circular_sub_tema
+eventos
+normativas
+noticias
+notificaciones
+publicaciones
+circular_sub_org
+grupo de trabajo
+documentacion grupos
+archivos_d_g
+categoria_d_g
+consejos_territoriales
+documentacion_consejo
+archivos_c_t
+categoria_c_t
+usuario
+aplicaciones_rol
+categoria_asunto
+mutuas
+organismos
+categoria_organismos
+subcategoria_organismos
+documentacion_organismos
+archivos_d_o
+
+
+
+ver 
+solapa directores gerentes 

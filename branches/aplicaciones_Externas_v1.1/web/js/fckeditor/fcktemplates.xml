@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This is the sample templates definitions file. It makes the "templates"
+ * command completely customizable.
+ *
+ * See FCKConfig.TemplatesXmlPath in the configuration file.
+-->
+<Templates imagesBasePath="fck_template/images/">
+     <Template title="Imagen y titulo" image="template0.gif">
+		<Description>Una imagen principal con un título, una introducción y una descripción.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+				<img src="http://extranet.amat.es/uploads/image/noimage.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+				<h3 style="font-family:Verdana, Geneva, sans-serif;color:#367487;font-size:18px;margin:0px;">T&iacute;tulo</h3>
+				<p style="font-family:Verdana;font-size:11px;color:#999999;font-weight:bold;">Entradilla</p>
+				<p style="border-bottom: 1px dotted; margin: 10px 0px; color: rgb(204, 204, 204);">&nbsp;</p>
+				<p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+				<div class="clear"></div>
+				</div>
+			]]>
+		</Html>
+	</Template>
+	<!--<Template title="Image and Title" image="template1.gif">
+		<Description>One main image with a title and text that surround the image.</Description>
+		<Html>
+			<![CDATA[
+				<img style="MARGIN-RIGHT: 10px" height="100" alt="" width="100" align="left"/>
+				<h3>Type the title here</h3>
+				Type the text here
+			]]>
+		</Html>
+	</Template>-->
+	<Template title="Dos columnas con texto" image="template2.gif">
+		<Description>Una plantilla que define dos columnas, cada una con un título y un texto.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+				  <table width="100%" cellspacing="10" cellpadding="0" border="0">
+				    <tbody>
+				      <tr>
+				        <td width="50%"><h3 style="font-family:Verdana, Geneva, sans-serif;color:#367487;font-size:18px;margin:0px;">T&iacute;tulo</h3></td>
+				        <td width="50%"><h3 style="font-family:Verdana, Geneva, sans-serif;color:#367487;font-size:18px;margin:0px;">T&iacute;tulo 2</h3></td>
+				      </tr>
+				      <tr>
+				        <td valign="top"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+				        <td valign="top"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+				      </tr>
+				    </tbody>
+				  </table>
+				  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; margin-top:0px; margin-left:10px;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+				  <div class="clear"></div>
+				</div>
+			]]>
+		</Html>
+	</Template>
+	<Template title="Texto y una tabla" image="template3.gif">
+		<Description>Un título con un texto y una tabla.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+				  <table width="150" cellspacing="0" cellpadding="0" border="0" style="float: right; border:solid 1px #50AEC8; margin-left:10px; margin-bottom:7px;">
+				    <tr>
+				      <th align="center" colspan="2" style="background-color:#50AEC8;color:#FFF; font-family:Arial, Helvetica, sans-serif;">Table title</th>
+				    </tr>
+				    <tr>
+				      <td width="77">&nbsp;</td>
+				      <td width="71">&nbsp;</td>
+				    </tr>
+				    <tr>
+				      <td>&nbsp;</td>
+				      <td>&nbsp;</td>
+				    </tr>
+				    <tr>
+				      <td>&nbsp;</td>
+				      <td>&nbsp;</td>
+				    </tr>
+				    <tr>
+				      <td>&nbsp;</td>
+				      <td>&nbsp;</td>
+				    </tr>
+				  </table>
+				  <h3 style="font-family:Verdana, Geneva, sans-serif;color:#367487;font-size:18px;margin:0px;">T&iacute;tulo</h3>
+				  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+				  <div class="clear"></div>
+				</div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Imagenes y texto " image="1.jpg">
+		<Description>Imagen (izq) - texto - imagen (der) - texto - imagen (izq).</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                <img src="http://extranet.amat.es/uploads/image/noimage.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+                                <img src="http://extranet.amat.es/uploads/image/noimage.jpg" align="right" nottit="" style="margin-left:10px;margin-bottom:10px;" alt="">
+                                <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+
+                                <img src="http://extranet.amat.es/uploads/image/noimage.jpg" align="left" nottit="" style="margin-right:10px;margin-bottom:10px;" alt="">
+                                <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                <div class="clear"></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Sólo texto" image="3.jpg">
+		<Description>Texto.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                  <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                    <div class="clear"></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Texto a 2 columnas" image="4.jpg">
+		<Description>Texto a 2 columnas (sólo para la intranet).</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                  <table width="100%" cellspacing="10" cellpadding="0" border="0">
+                                    <tbody>
+                                      <tr>
+                                        <td width="50%" valign="top"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+                                        <td width="50%" valign="top"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div class="clear"></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Listados" image="5.jpg">
+		<Description>Listados para textos.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                 <ul style=" padding-left:20px;">
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</li>
+                                  <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</li>
+                                  <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</li>
+                                 </ul>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Listado para imagenes" image="6.jpg">
+		<Description>Imagenes.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+                                 <ul style=" padding-left:20px;">
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                 <li style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222; text-align:justify;margin-bottom:10px;clear:both;list-style-type:disc;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" align="left" style="margin-right:10px;margin-bottom:10px;" nottit="" /></li>
+                                  </ul>
+                                 <div  style=clear:both;></div>
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Galería de imagenes" image="7.jpg">
+		<Description>Galería de imágenes.</Description>
+		<Html>
+			<![CDATA[
+				<div style="padding-top: 20px;" class="noticias nuevodetalle">
+
+                                 <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+                                <a href="#" style="margin:20px;padding:2px;border: solid 1px #09C;display:block;float:left;color:#666; text-decoration:none;"><img src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" width="100" height="100" border="0" style="margin-bottom:5px;" /><br />
+                                <span style="font-family:Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold;">Descripción</span></a>
+
+
+
+                                </div>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Circular, banner, enlaces y textos" image="circulares.jpg">
+		<Description>Circular, banner, enlaces y textos.</Description>
+		<Html>
+			<![CDATA[
+		          <table border="0"  cellpadding="0">
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td width="562"><img src="http://extranet.amat.es/uploads/image/3_logo.gif" width="562" height="95" alt="Amat" /></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td width="562"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:right;">Madrid, XX de XXXXXXX de 2010</p></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">CIRCULAR N&ordm;&nbsp; XX/2010</p>
+                                <h3 style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">A LA ATENCI&Oacute;N DEL SR.  DIRECTOR</h3>
+                                <a href="#" style="font-size:14px; font-family:Arial, Helvetica, sans-serif; color:#09F; font-weight:bold; text-decoration:none;">Ref&ordf;.: Xxxxxxx xxxx x x&nbsp; xxxxxx xxxxxxx x xxxxxx xx xxxxxx xxx xxxxxxx  xx xx xxx xxxxx x xxxxxx xxx xxxx x xxxxx.</a>    <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                            <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td align="center" valign="top" width="562"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td align="center" width="562"><img src="http://amat.es/images/logo_amat_as.gif" alt="AMAT" /></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td align="center" valign="top" width="562"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                            <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">Atentamente,</p></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; text-align:center;">Firmado por Enrique Valenzuela de  Quinta<br />
+                                Director Gerente</p></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;">R/P.P. Sanz</p></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="562"><p style="font-size:14px; font-family: 'Times New Roman', Times, serif; font-size:10px; text-align:center;">Asociaci&oacute;n  profesional de la Ley  19/1977, N&ordm; de Dep&oacute;sito 3.604 &ndash; C.I.F. G-78/383767</p></td>
+                                <td valign="top" width="10">&nbsp;</td>
+                              </tr>
+                           </table>
+			]]>
+		</Html>
+	</Template>
+         <Template title="Banner para comunicados de Amat" image="9.jpg">
+		<Description>Banner para comunicados de Amat.</Description>
+		<Html>
+			<![CDATA[
+				<img src="http://extranet.amat.es/uploads/image/3_logo.jpg" width="562" height="95" alt="Amat" />
+			]]>
+		</Html>
+	</Template>
+        <Template title="Banner, texto y enlace" image="8.jpg">
+		<Description>Banner, texto y enlace para comunicados de Amat.</Description>
+		<Html>
+			<![CDATA[
+                                  <table cellspacing="10" cellpadding="0" border="0" width="614" xsscleaned="width: 614px; height: 119px">
+                                    <tbody>
+                                        <tr>
+                                            <td width="10">&nbsp;</td>
+                                            <td width="362">
+                                            <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img src="http://extranet.amat.es/uploads/image/3_logo.jpg" xsscleaned="width: 560px; height: 95px" alt="Amat" /></p>
+                                            </td>
+                                            <td width="10">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table cellspacing="10" cellpadding="0" border="0" xsscleaned="width: 616px; height: 136px">
+                                    <tbody>
+                                        <tr>
+                                            <td width="1">&nbsp;</td>
+                                            <td width="562">
+                                            <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                            </td>
+                                            <td width="1">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table cellspacing="10" cellpadding="0" border="0" style="width: 617px; height: 220px;">
+                                    <tbody>
+                                        <tr>
+                                            <td width="10">&nbsp;</td>
+                                            <td width="562">
+                                            <p style="font-family: Verdana,Geneva,sans-serif; font-size: 12px; color: rgb(34, 34, 34); text-align: center;"><img height="100" border="0" width="362" src="http://extranet.amat.es/uploads/image/noimage.jpg" alt="" /></p>
+                                            </td>
+                                            <td width="10">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="10">&nbsp;</td>
+                                            <td valign="top" style="text-align: center;"><a style="font-family: Arial,Helvetica,sans-serif; color: rgb(0, 153, 204); font-size: 12px;" href="#">Enlace 1</a><br />
+                                            <a style="font-family: Arial,Helvetica,sans-serif; color: rgb(0, 153, 204); font-size: 12px;" href="#">Enlace 1</a><br />
+                                            <a style="font-family: Arial,Helvetica,sans-serif; color: rgb(0, 153, 204); font-size: 12px;" href="#">Enlace 1</a></td>
+                                            <td width="10">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Banner y texto alineados para comunicados de Amat" image="9.jpg">
+		<Description>Banner y texto alineados para comunicados de Amat.</Description>
+		<Html>
+			<![CDATA[
+                              <table cellspacing="10" cellpadding="0" width="614" border="0" XSSCleaned="width: 614px; height: 119px">
+                                <tbody>
+                                    <tr>
+                                        <td width="10">&nbsp;</td>
+                                        <td width="362">
+                                        <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" XSSCleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.jpg" /></p>
+                                        </td>
+                                        <td width="10">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table cellspacing="10" cellpadding="0" border="0" XSSCleaned="width: 614px; height: 119px">
+                                <tbody>
+                                    <tr>
+                                        <td width="1">&nbsp;</td>
+                                        <td width="562">
+                                        <p XSSCleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                        </td>
+                                        <td width="1">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+			]]>
+		</Html>
+	</Template>
+        <Template title="Banner y texto para comunicados de Amat" image="9.jpg">
+		<Description>Banner y texto para comunicados de Amat.</Description>
+		<Html>
+			<![CDATA[
+                              <table cellspacing="10" cellpadding="0" width="614" border="0" xsscleaned="width: 614px; height: 119px">
+                                <tbody>
+                                    <tr>
+                                        <td width="362">
+                                        <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify"><img alt="Amat" xsscleaned="width: 560px; height: 95px" src="http://extranet.amat.es/uploads/image/3_logo.jpg" /></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table cellspacing="10" cellpadding="0" border="0" xsscleaned="width: 616px; height: 136px" XSSCleaned="width: 614px; height: 114px">
+                                <tbody>
+                                    <tr>
+                                        <td width="1">&nbsp;</td>
+                                        <td width="562">
+                                        <p xsscleaned="font-size: 12px; color: rgb(34,34,34); font-family: Verdana,Geneva,sans-serif; text-align: justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+                                        </td>
+                                        <td width="1">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+			]]>
+		</Html>
+	</Template>
+</Templates>
