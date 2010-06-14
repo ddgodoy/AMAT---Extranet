@@ -1,6 +1,9 @@
 <div class="push"></div>
 </div>
-
+<form name="myAplicationFrom" id="myAplicationFrom" action="" method="post" target="_blank">
+<?php echo input_hidden_tag('userHidden', ''); ?>
+<?php echo input_hidden_tag('passHidden', ''); ?>
+</form>
 <div class="foot">
   <p class="copy">&copy; Copyright AMAT  2010</p>
   <div class="right">

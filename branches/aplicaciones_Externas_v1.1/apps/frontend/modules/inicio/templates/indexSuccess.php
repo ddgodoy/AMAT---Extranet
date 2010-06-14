@@ -11,8 +11,9 @@
 		<h1>Accesos a las aplicaciones Externas</h1>
 		<div class="enlaces">
 			<?php foreach ($aplicacionesExternas as $valor): ?>
-				<a href="<?php echo $valor->getUrl() ?>" target="_blank">
-					<img src="<?php echo '/uploads/aplicaciones_externas/'.$valor->getImagen() ?>" title="<?php echo $valor->getNombre() ?>" border="0"/>
+				<a <?php if($valor->getAplicacionExterna()->getRequiere()!=1):?> href="<?php echo $valor->getAplicacionExterna()->getUrl() ?>" target="_blank"<?php else: ?> style=" cursor: pointer;" onclick="<?php if($valor->getLogin() != '' && $valor->getPass() != ''):?> Confirmar_acceso('<?php echo $valor->getAplicacionExterna()->getUrl(); ?>','<?php echo $valor->getLogin(); ?>','<?php echo $valor->getPass(); ?>')
+                                <?php else: ?> alert ('Le recomendamos que introduzca el usuario y contraseña de la aplicación a través de la opción &ldquo;Mis datos&ldquo; para acceder a ella sin necesidad de logearse cada vez') <?php endif; ?>" <?php endif; ?>>
+			          <img align="middle" src="<?php echo '/uploads/aplicaciones_externas/'.$valor->getAplicacionExterna()->getImagen() ?>" title="<?php echo $valor->getAplicacionExterna()->getNombre() ?>" border="0"/>
 				</a>
 			<?php endforeach; ?>
 
