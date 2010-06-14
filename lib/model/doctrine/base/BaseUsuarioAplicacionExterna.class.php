@@ -20,7 +20,7 @@ abstract class BaseUsuarioAplicacionExterna extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('salt', 'string', 255, array(
+        $this->hasColumn('pass', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
              ));

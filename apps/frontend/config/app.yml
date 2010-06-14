@@ -4,6 +4,7 @@ all:
   default_name_project: Extranet Sectorial AMAT
   default_from_email: alertas@extranet.amat.es
   default_from_email_comunicados: comunicados@extranet.amat.es
+  key_aplication: 12345678901234567890123456789012
   
   # thumbnail default por si no se define el tamanio abajo
   thumbnail_normal_width_default:  250

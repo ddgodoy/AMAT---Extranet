@@ -286,7 +286,7 @@ UsuarioAplicacionExterna:
     usuario_id:              { type: integer, primary: true }
     aplicacion_externa_id:   { type: integer, primary: true }
     login:                   { type: string(255), values: null }
-    salt:                    { type: string(255), values: null }
+    pass:                    { type: string(255), values: null }
     number_access:           { type: integer, values: null }
   relations:
     Usuario:                 { foreignAlias: UsuarioAplicacionExternas }
@@ -545,6 +545,7 @@ AplicacionExterna:
     detalle:                 { type: clob }
     imagen:                  { type: string(100) }
     url:                     { type: string(255) }
+    Requiere:                { type: boolean, values: 0 }
   relations:
     Usuarios:                { foreignAlias: AplicacionExternas, class: Usuario, refClass: UsuarioAplicacionExterna }
 
