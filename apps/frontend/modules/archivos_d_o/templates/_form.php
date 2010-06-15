@@ -15,7 +15,8 @@ $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.
 if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')){
 $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.
                     $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').
-                    '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); }?>
+                    '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); }
+}?>
 
 <?php echo $form->renderGlobalErrors() ?>
 
