@@ -12,13 +12,21 @@ class ArchivoDGForm extends BaseArchivoDGForm
   public function configure()
   {
         sfLoader::loadHelpers('Object');
+        $getDocumentacion = '';
+        if(sfConfig::get('sf_environment') == 'dev'){
+        if($sf_request->getParameter('archivo_d_g[documentacion_grupo_id]')){
+        $getDocumentacion = $sf_request->getParameter('archivo_d_g[documentacion_grupo_id]');}
+        }else{
+        if($sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $sf_request->getParameter('grupo_trabajo_id')){
+        $getDocumentacion =$sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D');}
+        }
   	$rqArchivo = false;
   	$msArchivo = array();
         $request = sfContext::getInstance() ;
   	$ctxAction = $request->getActionName();
   	$userId    = $request->getUser()->getAttribute('userId');
         $grupo = $request->getRequest()->getParameter('grupo_trabajo_id')?$request->getRequest()->getParameter('grupo_trabajo_id'):'';
-        $documentacionGet = $request->getRequest()->getParameter('archivo_d_g[documentacion_grupo_id]')?$request->getRequest()->getParameter('archivo_d_g[documentacion_grupo_id]'):'';
+        $documentacionGet = $getDocumentacion;
         $GruposUsuario = GrupoTrabajo::ArrayDeMigrupo($userId, 1);
 
   	if ($ctxAction == 'create') {
