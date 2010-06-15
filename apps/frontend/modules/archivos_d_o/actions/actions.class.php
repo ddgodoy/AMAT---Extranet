@@ -188,6 +188,8 @@ class archivos_d_oActions extends sfActions
 	       }	
 	       
 	       $this->getUser()->setFlash('notice', 'El Archivo ha sido actualizado correctamente');
+               echo 'archivos_d_o/show?id='.$archivo_do->getId().$redirecion;
+               exit ();
 	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId().$redirecion);
 		    	
 		 }
