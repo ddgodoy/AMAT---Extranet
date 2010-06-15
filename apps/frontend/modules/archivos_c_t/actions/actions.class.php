@@ -99,17 +99,6 @@ class archivos_c_tActions extends sfActions
     }
     }
 
-    $toDelete = $request->getParameter('id');
-    if($request->getParameter('archivo_c_t[documentacion_consejo_id]') && $request->getParameter('consejo_territorial_id'))
-    {
-       $redirecion = '?archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
-    }
-    else
-    {
-        $redirecion = '';
-    }
-
-
   	if (!empty($toDelete)) {
   		$request->checkCSRFProtection();
 
