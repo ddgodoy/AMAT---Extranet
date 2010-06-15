@@ -24,7 +24,7 @@ $redireccionGrupo = '';
 	  <span class="notfecha">
 	  <?php
             if (validate_action('listar','archivos_c_t')) {
-                    echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($documentacion_consejo->getId())->count().' Archivo/s')).' Carpeta de Archivos', 'archivos_c_t/index?documentacion_consejo_id=' . $documentacion_consejo->getId().'&consejo_territorial_id='.$documentacion_consejo->getConsejoTerritorialId(), array('method' => 'post'));
+                    echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($documentacion_consejo->getId())->count().' Archivo/s')).' Carpeta de Archivos', 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $documentacion_consejo->getId().'&consejo_territorial_id='.$documentacion_consejo->getConsejoTerritorialId(), array('method' => 'post'));
             }
 	  ?>
 	  </span><br />  
