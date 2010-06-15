@@ -88,7 +88,7 @@ class documentacion_consejosActions extends sfActions
   {
        if($request->getParameter('consejo'))
             {
-               $redirecion = '?consejo='.$request->getParameter('consejo');
+               $redirecion = 'consejo='.$request->getParameter('consejo');
             }
             else
             {
