@@ -1,5 +1,17 @@
 <?php use_helper('Security');?>
 <?php use_helper('Date');?>
+<?php
+$redireccionGrupo = '';
+if(sfConfig::get('sf_environment') == 'dev'){
+if($sf_request->getParameter('archivo_c_t[documentacion_consejo_id]') && $sf_request->getParameter('consejo_territorial_id')){
+        $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t[documentacion_consejo_id]').
+        '&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id');}
+}else{
+if($sf_request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D') && $sf_request->getParameter('consejo_territorial_id')){
+        $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D').
+        '&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id');}
+}
+?>
  <?php if($sf_request->getParameter('archivo_c_t[documentacion_consejo_id]') && $sf_request->getParameter('consejo_territorial_id')): $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id'); else : $redireccionGrupo = ''; endif; ?>
 <div class="mapa">
 	  <strong>Consejos Territoriales</strong> &gt; <a href="<?php echo url_for('archivos_c_t/index') ?>">Archivos</a> &gt; <?php echo  $archivo_ct->getNombre() ?>

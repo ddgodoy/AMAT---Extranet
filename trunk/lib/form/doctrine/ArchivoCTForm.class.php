@@ -13,9 +13,17 @@ class ArchivoCTForm extends BaseArchivoCTForm
   {
   	    sfLoader::loadHelpers('Object');
             $request = sfContext::getInstance() ;
+            $getDocumentacion = '';
+            if(sfConfig::get('sf_environment') == 'dev'){
+            if($request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]')){
+            $getDocumentacion = $request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]');}
+            }else{
+            if($request->getRequest()->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D')){
+            $getDocumentacion =$request->getRequest()->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D');}
+            }
   	    $userId = $request->getUser()->getAttribute('userId');
             $consejo = $request->getRequest()->getParameter('consejo_territorial_id')?$request->getRequest()->getParameter('consejo_territorial_id'):'';
-            $documentacionGet = $request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]')?$request->getRequest()->getParameter('archivo_c_t[documentacion_consejo_id]'):'';
+            $documentacionGet = $getDocumentacion;
             $this->roles = UsuarioRol::getRepository()->getRolesByUser($userId,1);
             if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)){
              $arrayGruposTrabajo = _get_options_from_objects(ConsejoTerritorialTable::getAllconsejo());

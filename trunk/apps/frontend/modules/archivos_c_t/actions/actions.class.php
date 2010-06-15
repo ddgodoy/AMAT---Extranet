@@ -85,7 +85,20 @@ class archivos_c_tActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    
+    $toDelete = $request->getParameter('id');
+    $redirecion = '';
+    if(sfConfig::get('sf_environment') == 'dev'){
+    if($request->getParameter('archivo_c_t[documentacion_consejo_id]') && $request->getParameter('consejo_territorial_id'))
+    {
+       $redirecion = '?archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
+    }
+    }else{
+    if($request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D') && $request->getParameter('consejo_territorial_id'))
+    {
+       $redirecion = '?archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
+    }
+    }
+
     $toDelete = $request->getParameter('id');
     if($request->getParameter('archivo_c_t[documentacion_consejo_id]') && $request->getParameter('consejo_territorial_id'))
     {
@@ -117,13 +130,17 @@ class archivos_c_tActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+    $redirecion = '';
+    if(sfConfig::get('sf_environment') == 'dev'){
     if($request->getParameter('archivo_c_t[documentacion_consejo_id]') && $request->getParameter('consejo_territorial_id'))
     {
-       $redirecion = '&archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
+       $redirecion = 'archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
     }
-    else
+    }else{
+    if($request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D') && $request->getParameter('consejo_territorial_id'))
     {
-        $redirecion = '';
+       $redirecion = 'archivo_c_t[documentacion_consejo_id]='.$request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D').'&consejo_territorial_id='.$request->getParameter('consejo_territorial_id');
+    }
     }
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
@@ -146,7 +163,7 @@ class archivos_c_tActions extends sfActions
       	$archivo_ct->save();
       }	
 
-      $this->redirect('archivos_c_t/show?id='.$archivo_ct->getId().$redirecion);
+      $this->redirect('archivos_c_t/show?id='.$archivo_ct->getId().'&'.$redirecion);
     }
   }
   
