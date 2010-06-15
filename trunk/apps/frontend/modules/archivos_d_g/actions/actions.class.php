@@ -80,13 +80,17 @@ class archivos_d_gActions extends sfActions
   public function executeDelete(sfWebRequest $request)
   {
     $toDelete = $request->getParameter('id');
+    $redirecion = '';
+    if(sfConfig::get('sf_environment') == 'dev'){
     if($request->getParameter('archivo_d_g[documentacion_grupo_id]') && $request->getParameter('grupo_trabajo_id'))
     {
        $redirecion = '?archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
     }
-    else
+    }else{
+    if($request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $request->getParameter('grupo_trabajo_id'))
     {
-        $redirecion = '';
+       $redirecion = '?archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
+    }
     }
 
   	if (!empty($toDelete)) {
@@ -109,13 +113,17 @@ class archivos_d_gActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
+    $redirecion = '';
+    if(sfConfig::get('sf_environment') == 'dev'){
     if($request->getParameter('archivo_d_g[documentacion_grupo_id]') && $request->getParameter('grupo_trabajo_id'))
     {
        $redirecion = '&archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
     }
-    else
+    }else{
+    if($request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $request->getParameter('grupo_trabajo_id'))
     {
-        $redirecion = '';
+       $redirecion = '&archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
+    }
     }
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
 
