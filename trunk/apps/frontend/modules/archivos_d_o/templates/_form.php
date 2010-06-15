@@ -12,10 +12,10 @@ $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.
                     $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').
                     '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); }
 }else{
-if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')){
+if($sf_request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D')){
 $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.
-                    $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').
-                    '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); }
+                    $sf_request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D').
+                    '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o%5Borganismo_id%5D'); }
 }?>
 
 <?php echo $form->renderGlobalErrors() ?>
