@@ -3,7 +3,20 @@
 <?php use_helper('Object') ?>
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
-<?php if($sf_request->getParameter('archivo_d_o[documentacion_organismo_id]') && $sf_request->getParameter('archivo_d_o[organismo_id]')): $redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.$sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); else : $redireccionGrupo = ''; endif; ?>
+
+<?php
+$redireccionGrupo = '';
+if(sfConfig::get('sf_environment') == 'dev'){
+if($sf_request->getParameter('archivo_d_o[documentacion_organismo_id]')){
+$redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.
+                    $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').
+                    '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); }
+}else{
+if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')){
+$redireccionGrupo = 'archivo_d_o[documentacion_organismo_id]='.
+                    $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]').
+                    '&archivo_d_o[organismo_id]='.$sf_request->getParameter('archivo_d_o[organismo_id]'); }?>
+
 <?php echo $form->renderGlobalErrors() ?>
 
 <?php if ($sf_user->hasFlash('notice')): ?>
