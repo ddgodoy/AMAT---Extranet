@@ -47,7 +47,11 @@
 							</tr>
                                                         <tr>
 								<td valign="top"><label><?php echo $form['requiere']->renderLabel('Requiere usuarios y contraseña') ?></label></td>
-								<td valign="middle"><?php echo $form['requiere'] ?></td>
+								<td valign="middle">
+                                                                    <pre>
+                                                                        <?php echo print_r($form['Requiere']) ?>
+                                                                    </pre>
+                                                                </td>
 							</tr>
 						</tbody>
 					</table>
