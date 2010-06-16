@@ -4,5 +4,19 @@
  */
 class UsuarioAplicacionExternaTable extends Doctrine_Table
 {
+    public static function getAplicacionUsuario($id_usre, $id_aplica)
+    {
+        $q = Doctrine_Query::create();
+        $q->from('UsuarioAplicacionExterna');
+        $q->where('usuario_id='.$id_usre);
+        $q->addWhere('aplicacion_externa_id='.$id_aplica);
+        $q->addWhere('deleted = 0');
+
+        return  $q->fetchOne();
+
+    }
+
+
+
 
 }

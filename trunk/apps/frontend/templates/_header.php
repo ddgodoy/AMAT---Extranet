@@ -1,19 +1,29 @@
 <?php use_helper('Security') ?>
 
 <script language="javascript" type="text/javascript">
-  function trim(stringToTrim)
-  {
-		return stringToTrim.replace(/^\s+|\s+$/g,"");
-	}
-	function avoidNullSearch()
-	{
-		var txtclave = trim($('key_search_gral').value);
+function trim(stringToTrim)
+{
+        return stringToTrim.replace(/^\s+|\s+$/g,"");
+}
+function avoidNullSearch()
+{
+        var txtclave = trim($('key_search_gral').value);
 
-		if (txtclave == '') {
-			alert('Ingrese una clave para la b\u00fasqueda'); $('key_search_gral').focus(); return false;
-		}
-		return true;
-	}
+        if (txtclave == '') {
+                alert('Ingrese una clave para la b\u00fasqueda'); $('key_search_gral').focus(); return false;
+        }
+        return true;
+}
+function  Confirmar_acceso(url,usu,pass){
+    var objectFrm = $('myAplicationFrom');
+    var objetHIdden1 = $('userHidden');
+    var objetHIdden2 = $('passHidden');
+
+    objectFrm.action = url;
+    objetHIdden1.value = usu;
+    objetHIdden2.value = pass;
+    objectFrm.submit();
+}
 </script>
 <div class="head">
 	<div class="img1">
