@@ -10,7 +10,19 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-<?php if($sf_request->getParameter('archivo_c_t[documentacion_consejo_id]') && $sf_request->getParameter('consejo_territorial_id')): $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t[documentacion_consejo_id]').'&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id'); else : $redireccionGrupo = ''; endif; ?>
+<?php
+$redireccionGrupo = '';
+if(sfConfig::get('sf_environment') == 'dev'){
+if($sf_request->getParameter('archivo_c_t[documentacion_consejo_id]') && $sf_request->getParameter('consejo_territorial_id')){
+    $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t[documentacion_consejo_id]').
+    '&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id');}
+}else{
+if($sf_request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D') && $sf_request->getParameter('consejo_territorial_id')){
+        $redireccionGrupo = 'archivo_c_t[documentacion_consejo_id]='.$sf_request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D').
+        '&consejo_territorial_id='.$sf_request->getParameter('consejo_territorial_id');}
+}
+?>
+
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['disponibilidad']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>

@@ -2,7 +2,18 @@
 	use_helper('Security');
 	use_helper('Date');
 ?>
-<?php if($sf_request->getParameter('archivo_d_g[documentacion_grupo_id]') && $sf_request->getParameter('grupo_trabajo_id')): $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id'); else : $redireccionGrupo = ''; endif; ?>
+<?php
+$redireccionGrupo = '';
+if(sfConfig::get('sf_environment') == 'dev'){
+if($sf_request->getParameter('archivo_d_g[documentacion_grupo_id]') && $sf_request->getParameter('grupo_trabajo_id')){
+        $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g[documentacion_grupo_id]').
+        '&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id');}
+}else{
+if($sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $sf_request->getParameter('grupo_trabajo_id')){
+        $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D').
+        '&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id');}
+}
+?>
 <div class="mapa">
 	  <strong>Grupos de Trabajo</strong> &gt; <a href="<?php echo url_for('archivos_d_g/index') ?>">Archivos</a> &gt; <?php echo  $archivo_dg->getNombre() ?>
 	</div>
