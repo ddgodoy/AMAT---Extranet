@@ -117,13 +117,14 @@ class UsuarioTable extends Doctrine_Table
 	public static function getAplicacionesExternasByUsuario($userId)
 	{
 		$q = Doctrine_Query::create();
-		$q->from('AplicacionExterna ae');
-		$q->leftJoin('ae.UsuarioAplicacionExterna uae');
+		$q->from('UsuarioAplicacionExterna uae');
+		$q->leftJoin('uae.AplicacionExterna ae');
 		$q->leftJoin('uae.Usuario u');
 		$q->where('u.id = ' . $userId);
 		$q->andWhere('ae.deleted = 0');
 		$q->orderBy('ae.nombre ASC');
 		$aplicaciones = $q->execute();
+
 
 		return $aplicaciones;
 	}

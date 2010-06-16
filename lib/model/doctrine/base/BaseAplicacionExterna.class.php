@@ -22,6 +22,13 @@ abstract class BaseAplicacionExterna extends sfDoctrineRecord
              'type' => 'string',
              'length' => '255',
              ));
+        $this->hasColumn('Requiere', 'boolean', null, array(
+             'type' => 'boolean',
+             'values' => 
+             array(
+              0 => 0,
+             ),
+             ));
     }
 
     public function setUp()

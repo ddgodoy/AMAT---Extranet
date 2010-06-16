@@ -150,8 +150,9 @@ class usuariosActions extends sfActions
 	public function executePerfil(sfWebRequest $request)
 	{
 	$oUsuario = Doctrine::getTable('Usuario')->find($this->getUser()->getAttribute('userId'));
-    $this->grupos = GrupoTrabajo::ArrayDeMigrupo($this->getUser()->getAttribute('userId')); 
-    $this->consejo = ConsejoTerritorial::ArrayDeMiconsejo($this->getUser()->getAttribute('userId')); 
+        $this->grupos = GrupoTrabajo::ArrayDeMigrupo($this->getUser()->getAttribute('userId'));
+        $this->consejo = ConsejoTerritorial::ArrayDeMiconsejo($this->getUser()->getAttribute('userId'));
+        $this->aplicacion = UsuarioTable::getAplicacionesExternasByUsuario($this->getUser()->getAttribute('userId'));
 		if ($this->getRequestParameter('btn_action')) {
 			$this->usuNombre  = $this->getRequestParameter('usu_nombre');
 			$this->usuApellido= $this->getRequestParameter('usu_apellido');
@@ -169,6 +170,23 @@ class usuariosActions extends sfActions
 			if (!empty($auxiClave)) {
 				ServiceSecurity::modifyCredentials($oUsuario->getLogin(), $auxiClave, $this->getUser()->getAttribute('userId'));
 			}
+                        if($this->getRequestParameter('aplicacion_externa')){
+                            sfLoader::loadHelpers('CifradoSimetrico');
+                            $toAplication = $this->getRequestParameter('aplicacion_externa');
+
+                            $IDs = is_array($toAplication) ? $toAplication : array($toAplication);
+
+		         	foreach ($IDs as $id) {
+                                         $usu = $this->getRequestParameter('usu_clave_apli_'.$id)!=''?cifrado($this->getRequestParameter('usu_clave_apli_'.$id)):'';
+                                         $pass= $this->getRequestParameter('pass_clave_apli_'.$id)!=''?cifrado($this->getRequestParameter('pass_clave_apli_'.$id)):'';
+                                         $aplicacion_usuario = UsuarioAplicacionExternaTable::getAplicacionUsuario($this->getUser()->getAttribute('userId'),$id);
+                                         $aplicacion_usuario->setLogin($usu);
+                                         $aplicacion_usuario->setPass($pass);
+                                         $aplicacion_usuario->save();
+                                    
+                                }
+
+                        }
 			$this->getUser()->setFlash('updatePerfil', "Sus datos fueron actualizados correctamente");
 		}
 		$this->usuNombre  = $oUsuario->getNombre();
