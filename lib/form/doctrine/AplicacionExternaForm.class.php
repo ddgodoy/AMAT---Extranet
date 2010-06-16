@@ -18,7 +18,7 @@ class AplicacionExternaForm extends BaseAplicacionExternaForm
           'detalle' => new sfWidgetFormTextarea(array('label'=>'Detalle'), array('style'=>'width:400px;height:150px;','class'=>'form_input')),
           'imagen'  => new sfWidgetFormInputFile(array('label'=>'Imagen'), array('class'=>'form_input')),
           'url'     => new sfWidgetFormInput(array('label'=>'Url *'), array('style'=>'width:400px;','class'=>'form_input')),
-          'requiere'=> new sfWidgetFormInputCheckbox(),
+          'Requiere'=> new sfWidgetFormInputCheckbox(),
         ));
 
         $this->setValidators(array(
@@ -27,7 +27,7 @@ class AplicacionExternaForm extends BaseAplicacionExternaForm
           'detalle' => new sfValidatorString(array('required' => false)),
           'imagen'  => new sfValidatorFile(array('required'=>false, 'path'=>$dir_upload, 'mime_types'=>$img_valids),
                                            array('mime_types' => 'Debe ingresar un tipo de imagen v&aacute;lido (JPG, PNG, GIF)')),
-          'requiere'=> new sfValidatorBoolean(array('required' => false)),
+          'Requiere'=> new sfValidatorBoolean(array('required' => false)),
 
         ));
 
