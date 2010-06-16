@@ -46,7 +46,7 @@
 			<th width="5%">&nbsp;</th>
 		</tr>
     <?php $i=0; foreach ($normas_de_funcionamiento_list as $normas_de_funcionamientos): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-	    <tr class="<?php echo $odd ?>"
+	    <tr class="<?php echo $odd ?>">
                   <td><a href="<?php echo url_for('normas_de_funcionamientos/show?id='.$normas_de_funcionamientos->getId()) ?>"><?php echo $normas_de_funcionamientos->getTitulo() ?></a></td>
                   <td  align="center">
 		  <?php if(validate_action('modificar')):?>
