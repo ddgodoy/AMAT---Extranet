@@ -109,14 +109,19 @@ class archivos_d_oActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
+    $redirecion = '';
+    if(sfConfig::get('sf_environment') == 'dev'){
     if($request->getParameter('archivo_d_o[documentacion_organismo_id]') && $request->getParameter('archivo_d_o[organismo_id]'))
     {
        $redirecion = '?archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o[organismo_id]');
     }
-    else
+    }else{
+    if($request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D') && $request->getParameter('archivo_d_o%5Borganismo_id%5D'))
     {
-        $redirecion = '';
+       $redirecion = '?archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o%5Borganismo_id%5D');
     }
+    }
+   
     $toDelete = $request->getParameter('id');
 
   	if (!empty($toDelete)) {
@@ -140,14 +145,18 @@ class archivos_d_oActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-            if($request->getParameter('archivo_d_o[documentacion_organismo_id]') && $request->getParameter('archivo_d_o[organismo_id]'))
-            {
-               $redirecion = '&archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o[organismo_id]');
-            }
-            else
-            {
-                $redirecion = '';
-            }
+             $redirecion = '';
+                if(sfConfig::get('sf_environment') == 'dev'){
+                if($request->getParameter('archivo_d_o[documentacion_organismo_id]') && $request->getParameter('archivo_d_o[organismo_id]'))
+                {
+                   $redirecion = 'archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o[documentacion_organismo_id]').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o[organismo_id]');
+                }
+                }else{
+                if($request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D') && $request->getParameter('archivo_d_o%5Borganismo_id%5D'))
+                {
+                   $redirecion = 'archivo_d_o[documentacion_organismo_id]='.$request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D').'&archivo_d_o[organismo_id]='.$request->getParameter('archivo_d_o%5Borganismo_id%5D');
+                }
+                }
 	    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
 	    if ($form->isValid())
 	    {	    	
@@ -179,7 +188,7 @@ class archivos_d_oActions extends sfActions
 	       }	
 	       
 	       $this->getUser()->setFlash('notice', 'El Archivo ha sido actualizado correctamente');
-	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId().$redirecion);
+	       $this->redirect('archivos_d_o/show?id='.$archivo_do->getId().'&'.$redirecion);
 		    	
 		 }
 	       

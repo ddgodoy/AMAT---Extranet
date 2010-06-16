@@ -11,7 +11,18 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 <ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-<?php if($sf_request->getParameter('archivo_d_g[documentacion_grupo_id]') && $sf_request->getParameter('grupo_trabajo_id')): $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id'); else : $redireccionGrupo = ''; endif; ?>
+<?php 
+$redireccionGrupo = '';
+if(sfConfig::get('sf_environment') == 'dev'){
+if($sf_request->getParameter('archivo_d_g[documentacion_grupo_id]') && $sf_request->getParameter('grupo_trabajo_id')){
+        $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g[documentacion_grupo_id]').
+        '&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id');}
+}else{
+if($sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $sf_request->getParameter('grupo_trabajo_id')){
+        $redireccionGrupo = 'archivo_d_g[documentacion_grupo_id]='.$sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D').
+        '&grupo_trabajo_id='.$sf_request->getParameter('grupo_trabajo_id');}
+}
+?>
 <?php
 	echo $form['fecha']->renderError();
 	echo $form['fecha_caducidad']->renderError();

@@ -24,15 +24,29 @@ $idOrganismos = '';
 $idDocumentacion = '';
 $categoria ='';
 
-if($sf_context->getActionName() == 'nueva' && $sf_request->getParameter('archivo_d_o[organismo_id]')){
-    $organismo = Doctrine::getTable('Organismo')->findOneById($sf_request->getParameter('archivo_d_o[organismo_id]'));
+$getDocumentacion = '';
+$getOrganismo = '';
+if(sfConfig::get('sf_environment') == 'dev'){
+if($sf_request->getParameter('archivo_d_o[documentacion_organismo_id]')){
+$getDocumentacion = $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]');
+$getOrganismo = $sf_request->getParameter('archivo_d_o[organismo_id]');
+}
+}else{
+if($sf_request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D')){
+$getDocumentacion = $sf_request->getParameter('archivo_d_o%5Bdocumentacion_organismo_id%5D');
+$getOrganismo = $sf_request->getParameter('archivo_d_o%5Borganismo_id%5D');
+}
+}
+
+if($sf_context->getActionName() == 'nueva' && $getOrganismo != ''){
+    $organismo = Doctrine::getTable('Organismo')->findOneById($getOrganismo);
     $categoria = $organismo->getCategoriaOrganismoId();
     $verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($categoria);
     $idSubcategoria = $organismo->getSubcategoriaOrganismoId();
     $verOrganisamos = OrganismoTable::doSelectByOrganismoa($organismo->getSubcategoriaOrganismoId());
     $idOrganismos = $organismo->getId();
     $verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($organismo->getId(),1);
-    $idDocumentacion = $sf_request->getParameter('archivo_d_o[documentacion_organismo_id]')?$sf_request->getParameter('archivo_d_o[documentacion_organismo_id]'):'';
+    $idDocumentacion = $getDocumentacion?$getDocumentacion:'';
 }
 
 if($sf_context->getActionName() == 'create'){

@@ -120,12 +120,6 @@ class documentacion_organismosActions extends sfActions
                     endif;
                  }
 
-
-                if($request->getParameter('documentacion_organismo[organismo_id]')){
-                $redireccionGrupo = Organismo::getUrlOrganismos($request->getParameter('documentacion_organismo[organismo_id]'));
-                }else {
-                $redireccionGrupo = '';
-                }
 		$toProcess = $request->getParameter('id');
 
 		if (!empty($toProcess)) {
