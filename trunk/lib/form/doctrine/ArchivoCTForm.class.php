@@ -70,7 +70,7 @@ class ArchivoCTForm extends BaseArchivoCTForm
 
 		}
 		if($consejo != ''){
-                    $documentacio = DocumentacionConsejo::getRepository()->DocumentacionByConsejo($consejo,1);
+                    $documentacio = DocumentacionConsejo::getRepository()->DocumentacionByConsejo($consejo,1,$userId);
                     $this->setWidget('documentacion_consejo_id', new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') +_get_options_from_objects( $documentacio)))));
 
                 }else{
