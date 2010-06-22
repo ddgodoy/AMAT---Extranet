@@ -4,7 +4,7 @@
  */
 class DocumentacionOrganismoTable extends DocumentacionTable
 {
-	public static function doSelectByOrganismo($organismo, $combo = '')
+	public static function doSelectByOrganismo($organismo, $combo = '', $user = '')
 	{
 		if (empty($organismo)) {return false;}
 
@@ -13,9 +13,8 @@ class DocumentacionOrganismoTable extends DocumentacionTable
 		$q->from('DocumentacionOrganismo');
 		$q->where('deleted = 0');
 		$q->addWhere('organismo_id = ' . $organismo);
-                if($combo!='')
-                {
-                  $q->addWhere("estado = 'publicado'");
+                if($user!= ''){
+                $q->addWhere("owner_id = ".$user." OR estado != 'guardado'");
                 }
 		$q->orderBy('nombre ASC');
 

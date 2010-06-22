@@ -73,7 +73,7 @@ class ArchivoDGForm extends BaseArchivoDGForm
 
                 if($grupo != ''){
 
-                    $documentacio = DocumentacionGrupo::getRepository()->doSelectByGrupoTrabajo($grupo,1);
+                    $documentacio = DocumentacionGrupo::getRepository()->doSelectByGrupoTrabajo($grupo,1,$userId);
                     $this->setWidget('documentacion_grupo_id', new sfWidgetFormChoice(array('choices' => (array('0'=>'-- seleccionar --') +_get_options_from_objects( $documentacio)))));
 
                 }else{

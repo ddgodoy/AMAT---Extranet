@@ -4,7 +4,7 @@
  */
 class DocumentacionGrupoTable extends DocumentacionTable
 {
-	public static function doSelectByGrupoTrabajo($grupo_trabajo, $combo='')
+	public static function doSelectByGrupoTrabajo($grupo_trabajo, $combo='', $user= '')
 	{
 		if (empty($grupo_trabajo)) {return false;}
     
@@ -13,22 +13,24 @@ class DocumentacionGrupoTable extends DocumentacionTable
 		$q->from('DocumentacionGrupo');
 		$q->where('deleted = 0');
 		$q->addWhere('grupo_trabajo_id = ' . $grupo_trabajo);
-                if($combo!='')
-                {
-                    $q->andWhere("estado = 'publicado'");
+                if($user!= ''){
+                $q->addWhere("owner_id = ".$user." OR estado != 'guardado'");
                 }
 		$q->orderBy('nombre ASC');
-
 		$documentacion = $q->execute();
     
 		return $documentacion;
 	}
 	
-	public static function getAlldocumentos()
+	public static function getAlldocumentos($user= '')
 	{
 		$s = Doctrine_Query::create();
 		$s->from('DocumentacionGrupo');
 		$s->where('deleted = 0');
+                if($user!= ''){
+                $s->addWhere("owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado'");
+                }
+
 		$retorno = $s->execute();
 		
 		return $retorno;
