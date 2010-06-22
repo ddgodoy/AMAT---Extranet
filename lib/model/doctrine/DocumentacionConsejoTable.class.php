@@ -4,26 +4,28 @@
  */
 class DocumentacionConsejoTable extends DocumentacionTable
 {
-  public static function DocumentacionByConsejo($id_consejo,$combo = '')
+  public static function DocumentacionByConsejo($id_consejo,$combo = '', $user= '')
   {
   	$q = Doctrine_Query::create();
   	$q ->select('*');
   	$q ->from('DocumentacionConsejo');
   	$q->where('consejo_territorial_id='.$id_consejo);
-        if($combo!='')
-                {
-                    $q->andWhere("estado = 'publicado'");
-                }
+        if($user!= ''){
+        $q->addWhere("owner_id = ".$user." OR estado != 'guardado'");
+        }
   	$q->andWhere('deleted = 0');
   	$consulta = $q->execute();
   	return $consulta;
   }
   
-  public static function getAlldocumentacionC()
+  public static function getAlldocumentacionC($user= '')
   {
   	$s=Doctrine_Query::create();
   	$s->from('DocumentacionConsejo');
   	$s->where('deleted = 0');
+         if($user!= ''){
+        $q->addWhere("owner_id = ".$user." OR estado != 'guardado'");
+        }
   	$respuesta = $s->execute();
   	return $respuesta; 
   }
