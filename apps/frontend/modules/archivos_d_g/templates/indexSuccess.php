@@ -5,9 +5,9 @@
 	use_helper('Javascript');
 
 	if ($sf_user->getAttribute('archivos_d_g_nowgrupo')) {
-		$arrayDocumentacion = DocumentacionGrupoTable::doSelectByGrupoTrabajo($sf_user->getAttribute('archivos_d_g_nowgrupo'));
+		$arrayDocumentacion = DocumentacionGrupoTable::doSelectByGrupoTrabajo($sf_user->getAttribute('archivos_d_g_nowgrupo'),'',$sf_user->getAttribute('userId'));
 	} else {
-		$arrayDocumentacion = DocumentacionGrupoTable::getAlldocumentos();
+		$arrayDocumentacion = DocumentacionGrupoTable::getAlldocumentos($sf_user->getAttribute('userId'));
 	}
 ?>
 <?php if($grupoBsq ):

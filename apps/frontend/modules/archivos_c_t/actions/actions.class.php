@@ -230,11 +230,11 @@ class archivos_c_tActions extends sfActions
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
 		{
-			return "ac.deleted=0".$parcial." AND dc.estado = 'publicado' ";
+			return "ac.deleted=0".$parcial." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')";
 		}
 		else
 		{ 
-		   return "ac.deleted=0 ".$parcial." AND ac.consejo_territorial_id IN ".$consejosterritoriales." AND dc.estado = 'publicado' ";
+		   return "ac.deleted=0 ".$parcial." AND ac.consejo_territorial_id IN ".$consejosterritoriales." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')";
         }  
 		
  }

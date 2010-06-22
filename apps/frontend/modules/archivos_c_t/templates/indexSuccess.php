@@ -5,11 +5,11 @@
 $arrayDocumentacion = array();
 if ($sf_user->getAttribute('archivos_c_t_nowconsejo'))
 	{
-		$arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($sf_user->getAttribute('archivos_c_t_nowconsejo'));
+		$arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($sf_user->getAttribute('archivos_c_t_nowconsejo'),'',$sf_user->getAttribute('userId'));
 	}
 else 
 	{
-		$arrayDocumentacion = DocumentacionConsejoTable::getAlldocumentacionC();
+		$arrayDocumentacion = DocumentacionConsejoTable::getAlldocumentacionC($sf_user->getAttribute('userId'));
 	}
 ?>
 <?php if($grupoBsq && $documentacionBsq):
