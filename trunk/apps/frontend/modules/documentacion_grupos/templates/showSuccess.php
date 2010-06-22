@@ -22,11 +22,12 @@ $redireccionGrupo = '';
 	  <?php echo $documentacion_grupo->getcontenido() ?> 
 	  <span class="notfecha">
 	  <?php
-		if(ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count() >= 1){ 
-			if (validate_action('listar','archivos_d_g')) { 
+			if (validate_action('listar','archivos_d_g')&& $documentacion_grupo->getEstado() == 'publicado') {
 				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count().' Archivo/s')), 'archivos_d_g/index?archivo_d_g[documentacion_grupo_id]='.$documentacion_grupo->getId().'&grupo_trabajo_id='.$documentacion_grupo->getGrupoTrabajoId(), array('method' => 'post'));
 			}
-		}		
+                        elseif($sf_user->getAttribute('userId')== $documentacion_grupo->getUserIdCreador()){
+                               echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count().' Archivo/s')), 'archivos_d_g/index?archivo_d_g[documentacion_grupo_id]='.$documentacion_grupo->getId().'&grupo_trabajo_id='.$documentacion_grupo->getGrupoTrabajoId(), array('method' => 'post'));
+                        }	
 	  ?>
 	  </span><br />  
 	   <?php if($documentacion_grupo->getUserIdCreador()):?>

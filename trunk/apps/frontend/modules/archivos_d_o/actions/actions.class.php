@@ -84,7 +84,7 @@ class archivos_d_oActions extends sfActions
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
     $this->idOrganismos = $archivo_do->getOrganismoId();
-    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos,1);
+    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos,1,$this->getUser()->getAttribute('userId'));
     $this->idDocumentacion = $archivo_do->getDocumentacionOrganismoId();
    
   }
@@ -99,7 +99,7 @@ class archivos_d_oActions extends sfActions
     $this->idSubcategoria = $archivo_do->getSubcategoriaOrganismoId();
     $this->verOrganisamos = OrganismoTable::doSelectByOrganismoa($this->idSubcategoria);
     $this->idOrganismos = $archivo_do->getOrganismoId();
-    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos,1);
+    $this->verDocumentacion = DocumentacionOrganismoTable::doSelectByOrganismo($this->idOrganismos,1,$this->getUser()->getAttribute('userId'));
     $this->idDocumentacion = $archivo_do->getDocumentacionOrganismoId();
 
     $this->processForm($request, $this->form);
@@ -286,7 +286,7 @@ class archivos_d_oActions extends sfActions
 		}
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
 		
-	 return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND do.estado = 'publicado'";
+	 return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND (do.owner_id = ".$this->getUser()->getAttribute('userId')." OR do.estado != 'guardado')";
 		 
 
   }

@@ -35,14 +35,15 @@ $getSubCategoria = explode('=', $getArchivo['1']);
 	<div class="noticias">	  
 	  <span class="notfecha">Fecha de publicacion: <?php echo date("d/m/Y", strtotime($documentacion_organismo->getfecha_publicacion())) ?></span><br />     
 	  <a  class="nottit"><?php echo  $documentacion_organismo->getNombre() ?></a><br />
-	  <?php echo $documentacion_organismo->getcontenido()?>      
+	  <?php echo $documentacion_organismo->getcontenido()?>
+          <br />
 	  <span class="notfecha">
 	  <?php
-		 if(ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count() >= 1){ 
-			if (validate_action('listar','archivos_d_o')) { 
+			if (validate_action('listar','archivos_d_o') && $documentacion_organismo->getEstado() == 'publicado') {
 				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'].'&archivo_d_o[documentacion_organismo_id]='.$documentacion_organismo->getId().'&archivo_d_o[organismo_id]='.$documentacion_organismo->getOrganismoId(), array('method' => 'post'));
-			}	
-		 }	
+			}elseif($sf_user->getAttribute('userId')== $documentacion_organismo->getUserIdCreador()){
+                          	echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'].'&archivo_d_o[documentacion_organismo_id]='.$documentacion_organismo->getId().'&archivo_d_o[organismo_id]='.$documentacion_organismo->getOrganismoId(), array('method' => 'post'));
+                        }
 	  ?>
 	  </span><br />  
 	  <?php if($documentacion_organismo->getUserIdCreador()):?>

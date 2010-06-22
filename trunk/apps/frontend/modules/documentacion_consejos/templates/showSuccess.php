@@ -23,9 +23,12 @@ $redireccionGrupo = '';
 	  <br />  
 	  <span class="notfecha">
 	  <?php
-            if (validate_action('listar','archivos_c_t')) {
+            if (validate_action('listar','archivos_c_t')&& $documentacion_consejo->getEstado() == 'publicado') {
                     echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($documentacion_consejo->getId())->count().' Archivo/s')).' Carpeta de Archivos', 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $documentacion_consejo->getId().'&consejo_territorial_id='.$documentacion_consejo->getConsejoTerritorialId(), array('method' => 'post'));
             }
+            elseif($sf_user->getAttribute('userId')== $documentacion_consejo->getUserIdCreador()){
+                    echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($documentacion_consejo->getId())->count().' Archivo/s')), 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $documentacion_consejo->getId().'&consejo_territorial_id='.$documentacion_consejo->getConsejoTerritorialId(), array('method' => 'post'));
+             }
 	  ?>
 	  </span><br />  
 	  <?php if($documentacion_consejo->getUserIdCreador()):?>

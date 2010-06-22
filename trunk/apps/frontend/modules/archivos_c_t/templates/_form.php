@@ -75,7 +75,7 @@ if($sf_request->getParameter('archivo_c_t%5Bdocumentacion_consejo_id%5D') && $sf
 			$arrayDocumentacion = array();
 			if ($form['consejo_territorial_id']->getValue())
 			{
-				$arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($form['consejo_territorial_id']->getValue());
+				$arrayDocumentacion = DocumentacionConsejoTable::DocumentacionByConsejo($form['consejo_territorial_id']->getValue(),'',$sf_user->getAttribute('userId'));
 			}
            ?>          
           </td>
