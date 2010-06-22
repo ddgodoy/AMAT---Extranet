@@ -18,7 +18,10 @@ class listas_comunicadosActions extends sfActions
 		$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
 	}
 	    $this->pager = new sfDoctrinePager('ListaComunicado', 20);
-	$this->pager->getQuery()->from('ListaComunicado')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()
+                ->from('ListaComunicado')
+                ->where($this->setFiltroBusqueda())
+                ->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 
@@ -200,13 +203,14 @@ class listas_comunicadosActions extends sfActions
 	}
 	
 	    $arrayUSer = Doctrine_Query::create()
-  		->from('Usuario u')
+  	    ->from('Usuario u')
 	    ->leftJoin('u.UsuarioGrupoTrabajo ug') 
 	    ->leftJoin('u.UsuarioConsejoTerritorial uc') 
 	    ->leftJoin('u.UsuarioRol ur') 
-		->where('u.id>1'.$filtro)
-		->groupBy('u.id')
-		->execute();
+            ->where('u.id>1'.$filtro)
+            ->andWhere('u.deleted = 0')
+            ->groupBy('u.id')
+            ->execute();
 		
 		
 	
