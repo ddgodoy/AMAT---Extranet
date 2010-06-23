@@ -20,8 +20,7 @@ function  Confirmar_acceso(url,usu,pass){
     var objetHIdden2 = $('passHidden');
 
     if(usu== '' || pass == '' ){
-     alert ('Le recomendamos que introduzca el usuario y contraseña de la aplicación a través de la opción\n\
-             "Mis datos" para acceder a ella sin necesidad de logearse cada vez');
+     alert ('Le recomendamos que introduzca el usuario y contraseña de la aplicación a través de la opción "Mis datos" para acceder a ella sin necesidad de logearse cada vez');
     }
     objectFrm.action = url;
     objetHIdden1.value = usu;
