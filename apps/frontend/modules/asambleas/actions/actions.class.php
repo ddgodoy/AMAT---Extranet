@@ -848,12 +848,12 @@ class asambleasActions extends sfActions
 		
 		 $IDcon = ''; 
 		 if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
-	     else 
-	     {
+                 else
+                 {
 			## Obtener asamblea
 			if(!$this->asambleaId = $this->getRequestParameter('id'))
 				$this->forward404('La asamblea solicitada no existe');
-	     }		
+                 }
 
                    $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
