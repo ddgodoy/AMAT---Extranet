@@ -907,9 +907,9 @@ class asambleasActions extends sfActions
                    $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
                    if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
-		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,'','');
+		   $this->asamblea = AsambleaTable::getConvocotatiaId($id,'','');
                    }else{
-                   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
+                   $this->asamblea = AsambleaTable::getConvocotatiaId($id,$this->getUser()->getAttribute('userId'),$IDcon);
                    }
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
