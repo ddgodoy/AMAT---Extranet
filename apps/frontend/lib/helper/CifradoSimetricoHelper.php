@@ -13,7 +13,7 @@ function cifrado($string){
       $char = chr(ord($char)+ord($keychar));
       $result.=$char;
    }
-   return utf8_decode($result);
+   return utf8_encode($result);
 }
 
 
