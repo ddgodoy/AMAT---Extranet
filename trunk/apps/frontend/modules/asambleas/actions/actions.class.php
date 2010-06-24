@@ -917,7 +917,7 @@ class asambleasActions extends sfActions
 
                    $redirecion = 'asambleas/ver?id='.$id;
                    if($IDcon != ''){ $redirecion .='&idCon='.$IDcon; }
-                   if($this->DAtos['get']){$redirecion .= '&'.$this->DAtos['get']}
+                   if($this->DAtos['get']){$redirecion .= '&'.$this->DAtos['get'];}
 		 
 		 $this->redirect($redirecion);
 	}
