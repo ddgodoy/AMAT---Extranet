@@ -26,7 +26,13 @@
     <strong class="subtitulo">Comentario:</strong><br />
     <form action="<?php echo url_for('asambleas/comentar') ?>" method="post" enctype="multipart/form-data" > 
     <input type="hidden" name="<?php echo $DAtos['campo'];?>" value="<?php echo $DAtos['valor'];?>" />
-    <?php echo input_hidden_tag('idCon',$asamblea->getId())?>
+    <?php 
+    if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)) {
+     echo input_hidden_tag('idCon','');
+     }else{
+     echo input_hidden_tag('idCon',$asamblea->getId());
+     }
+    ?>
     <?php echo input_hidden_tag('id',$asamblea->getAsamblea()->getId())?>
     <?php $options = array('rich' => 'fck','height' => 200,'width' => 800,'config'=>'fckeditor/myfckconfig.js');
     echo textarea_tag('comentario',$asamblea->getDetalle(), $options ); ?>
