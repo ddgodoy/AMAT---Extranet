@@ -45,8 +45,8 @@ class ConvocatoriaTable extends Doctrine_Table
 				 ->addWhere('c.usuario_id='.$id_user)
 				 ->orderBy('a.fecha ASC');
 
-    $retorno = $r->execute();
+                $retorno = $r->execute();
 
-    return $retorno; 
+                return $retorno;
 	}
 }
