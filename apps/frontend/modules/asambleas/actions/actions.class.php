@@ -903,7 +903,14 @@ class asambleasActions extends sfActions
                    $id = '';
 		   if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
                    if($this->getRequestParameter('id')){$id = $this->getRequestParameter('id');}
-		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
+
+                   $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+
+                   if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
+		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,'','');
+                   }else{
+                   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
+                   }
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
 		   $this->asamblea->save();
