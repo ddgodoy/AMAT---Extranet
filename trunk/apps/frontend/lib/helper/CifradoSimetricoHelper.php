@@ -17,7 +17,7 @@ function cifrado($string){
 }
 
 
-function decifrado($texto_cifrado){
+function decifrado($string){
 
     $key   = sfConfig::get('app_key_aplication');
 
