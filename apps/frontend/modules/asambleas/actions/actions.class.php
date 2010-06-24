@@ -856,7 +856,7 @@ class asambleasActions extends sfActions
 	     }		
 		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
 		   
-		   $this->user = UsuarioTable::getUsuarioByid($this->getasamblea()->getOwnerId());
+		   $this->user = UsuarioTable::getUsuarioByid($this->getAsamblea()->getOwnerId());
 		   
 		   
 		   
