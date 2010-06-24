@@ -4,22 +4,25 @@
  */
 class AsambleaTable extends Doctrine_Table
 {
-	public static function getConvocotatiaId($idAsamblea,$idusuario,$idConvocatoria = '')
+	public static function getConvocotatiaId($idAsamblea,$idusuario = '',$idConvocatoria = '')
 	{
 		$q = Doctrine_Query::create()
 		->from('Convocatoria c')
 		->leftJoin('c.Usuario u')
 		->leftJoin('c.Asamblea a');
-	  if($idConvocatoria == '')
-		 {
-			$q->where('a.id ='.$idAsamblea);
-			$q->andWhere('c.usuario_id ='.$idusuario);
-		 }		
-	  else 
-	     {
-	     	$q->where('c.id ='.$idConvocatoria);
-	     	
-	     }	
+                 if($idusuario == ''){
+                     $q->where('a.id ='.$idAsamblea);
+                 }
+                 elseif($idConvocatoria == '')
+                 {
+                        $q->where('a.id ='.$idAsamblea);
+                        $q->andWhere('c.usuario_id ='.$idusuario);
+                 }
+                 else
+                 {
+                    $q->where('c.id ='.$idConvocatoria);
+
+                 }
 		
 		return $q->fetchOne();
 	}
