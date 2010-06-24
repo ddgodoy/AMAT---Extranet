@@ -914,9 +914,12 @@ class asambleasActions extends sfActions
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
 		   $this->asamblea->save();
-		   
+
+                   $redirecion = 'asambleas/ver?id='.$id;
+                   if($IDcon != ''){ $redirecion .='&idCon='.$IDcon; }
+                   if($this->DAtos['get']){$redirecion .= '&'.$this->DAtos['get']}
 		 
-		 $this->redirect('asambleas/ver?id='.$id.'&idCon='.$IDcon.'&'.$this->DAtos['get']);
+		 $this->redirect($redirecion);
 	}
 	
 	 protected function setFiltroBusqueda()
