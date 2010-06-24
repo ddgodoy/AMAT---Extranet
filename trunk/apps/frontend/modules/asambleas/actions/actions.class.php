@@ -848,12 +848,12 @@ class asambleasActions extends sfActions
 		
 		 $IDcon = ''; 
 		 if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
-                 else
-                 {
+	     else 
+	     {
 			## Obtener asamblea
 			if(!$this->asambleaId = $this->getRequestParameter('id'))
 				$this->forward404('La asamblea solicitada no existe');
-                 }
+	     }		
 
                    $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
@@ -903,23 +903,13 @@ class asambleasActions extends sfActions
                    $id = '';
 		   if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
                    if($this->getRequestParameter('id')){$id = $this->getRequestParameter('id');}
-
-                   $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-
-                   if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
-		   $this->asamblea = AsambleaTable::getConvocotatiaId($id,'','');
-                   }else{
-                   $this->asamblea = AsambleaTable::getConvocotatiaId($id,$this->getUser()->getAttribute('userId'),$IDcon);
-                   }
+		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'),$IDcon);
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
 		   $this->asamblea->save();
-
-                   $redirecion = 'asambleas/ver?id='.$id;
-                   if($IDcon != ''){ $redirecion .='&idCon='.$IDcon; }
-                   if($this->DAtos['get']){$redirecion .= '&'.$this->DAtos['get'];}
+		   
 		 
-		 $this->redirect($redirecion);
+		 $this->redirect('asambleas/ver?id='.$id.'&idCon='.$IDcon.'&'.$this->DAtos['get']);
 	}
 	
 	 protected function setFiltroBusqueda()
