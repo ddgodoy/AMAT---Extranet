@@ -91,7 +91,13 @@ class actaActions extends sfActions
 		{  
 			$this->DAtos = $this->setOrganismo();
 		}
-		$ActasAsamblea = ActaTable::getActasByAsamblea($request->getParameter('asamblea'),$this->getUser()->getAttribute('userId'));
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		{
+		 $ActasAsamblea = ActaTable::getActasByAsamblea($request->getParameter('asamblea'));
+                }else{
+                 $ActasAsamblea = ActaTable::getActasByAsamblea($request->getParameter('asamblea'),$this->getUser()->getAttribute('userId'));
+                }
 		
 		$this->forward404Unless($acta = Doctrine::getTable('Acta')->find($ActasAsamblea->getId()), sprintf('Object asamblea does not exist (%s).', $ActasAsamblea->getId()));
 		$this->form = new ActaForm($acta);
