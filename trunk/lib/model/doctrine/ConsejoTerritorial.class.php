@@ -29,9 +29,14 @@ class ConsejoTerritorial extends BaseConsejoTerritorial
 		
 		return $usuarios;
 	}
-	public static  function ArrayDeconsejo($id_usuario)
+	public static  function ArrayDeconsejo($id_usuario = '')
 	{
+                if($id_usuario != ''){
 		$consejos = ConsejoTerritorialTable::getConsejosTerritorialesByUsuario($id_usuario);
+                }else{
+                $consejos = ConsejoTerritorialTable::getAllconsejo();
+                }
+
 		$base = 'ConsejoTerritorial_';
 		$presentacion = array();
 		foreach ( $consejos AS $consejosid )
