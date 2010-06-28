@@ -48,7 +48,7 @@ class ConvocatoriaTable extends Doctrine_Table
                 if($detalle==''){
                 $retorno = $r->execute();
                 }else{
-                $retorno = $r->fetchOne(); 
+                $retorno = $r->fetchArray();
                 }
 
                 return $retorno;
