@@ -31,7 +31,7 @@
     <?php echo input_hidden_tag('id',$asamblea->getAsamblea()->getId())?>
     <?php echo input_hidden_tag('convocado',$id_convocado)?>
     <?php $options = array('rich' => 'fck','height' => 200,'width' => 800,'config'=>'fckeditor/myfckconfig.js');
-    echo textarea_tag('comentario',$convocado['detalle'], $options ); ?>
+    echo textarea_tag('comentario',$convocado[0]['detalle'], $options ); ?>
     <br>
     <input style="margin-left:750px;" type="submit" class="boton" value="Enviar">
     </form>
