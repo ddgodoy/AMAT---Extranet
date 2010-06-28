@@ -36,7 +36,7 @@ function SetAllCheckBoxes(formName, className, checkValue)
         </td>        
         <td valign="top" >
          <?php if($convocado->getDetalle()):?>
-         <?php echo image_tag('aceptada.png').' '; echo link_to('ver comentario','asambleas/ver?id='.$asamblea->getId().'&idCon='.$convocado->getId().'&'.$DAtos['get'])?>
+         <?php echo image_tag('aceptada.png').' '; echo link_to('ver comentario','asambleas/ver?id='.$asamblea->getId().'&deatelle='.$convocado->getUsuario()->getId().'&'.$DAtos['get'])?>
          <?php endif;?>
         </td>        
       </tr>
