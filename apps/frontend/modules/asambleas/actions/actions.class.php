@@ -913,7 +913,7 @@ class asambleasActions extends sfActions
 		   $this->asamblea->save();
 		   
 		 
-		 $this->redirect('asambleas/ver?id='.$id.'&idCon='.$IDcon.'&'.$this->DAtos['get']);
+		 $this->redirect('asambleas/ver?id='.$id.'&'.$this->DAtos['get']);
 	}
 	
 	 protected function setFiltroBusqueda()
