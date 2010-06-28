@@ -35,7 +35,7 @@ class GrupoTrabajo extends BaseGrupoTrabajo
                 if($id_usuario !=''){
 		$grupos = GrupoTrabajoTable::getGruposTrabajoByUsuario($id_usuario);
                 }else{
-                $grupos = GrupoTrabajoTable::getGruposTrabajoByUsuario();
+                $grupos = GrupoTrabajoTable::getAllGrupoTrabajo();
                 }
 		$base = 'GrupoTrabajo_';
 		$presentacion = array();
