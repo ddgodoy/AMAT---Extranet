@@ -15,7 +15,7 @@
     
      <?php if(!empty($Grupo) && $sf_request->getParameter('GrupodeTrabajo')== 2): include_partial('miembros_grupo/MenuGrupo',array('Grupo' => $Grupo, 'modulo'=>$modulo)); endif;?>
      <?php if(!empty($Consejo) && $sf_request->getParameter('ConsejoTerritorial')== 3): include_partial('miembros_consejo/MenuConsejo',array('Consejo' => $Consejo, 'modulo'=>$modulo)); endif;?>
-     <?php echo $Organismos.'<br>'.$sf_request->getParameter; exit (); if(!empty($Organismos) && $sf_request->getParameter('Organismos')== 4): echo $id_organismos; exit(); $id_organismos = !empty ($organismomenu)?$organismomenu:''; include_component('miembros_organismo','MenuOrganismos',array('id' => $id_organismos,'modulo'=>$modulo)); endif;?>
+     <?php echo $Organismos.'<br>'.$sf_request->getParameter('Organismos'); exit (); if(!empty($Organismos) && $sf_request->getParameter('Organismos')== 4): echo $id_organismos; exit(); $id_organismos = !empty ($organismomenu)?$organismomenu:''; include_component('miembros_organismo','MenuOrganismos',array('id' => $id_organismos,'modulo'=>$modulo)); endif;?>
      
     <?php if ($sf_user->hasFlash('notice')): ?>
 	<ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
