@@ -907,7 +907,7 @@ class asambleasActions extends sfActions
                    $id = '';
 		   if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
                    if($this->getRequestParameter('id')){$id = $this->getRequestParameter('id');}
-		   $this->asamblea = AsambleaTable::getConvocotatiaId($this->asambleaId,$this->getUser()->getAttribute('userId'));
+		   $this->asamblea = AsambleaTable::getConvocotatiaId($id,$this->getUser()->getAttribute('userId'));
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
 		   $this->asamblea->save();
