@@ -30,9 +30,13 @@ class GrupoTrabajo extends BaseGrupoTrabajo
 		return $usuarios;
 	}
 	
-	public static  function ArrayDegrupo($id_usuario)
+	public static  function ArrayDegrupo($id_usuario='')
 	{
+                if($id_usuario !=''){
 		$grupos = GrupoTrabajoTable::getGruposTrabajoByUsuario($id_usuario);
+                }else{
+                $grupos = GrupoTrabajoTable::getGruposTrabajoByUsuario();
+                }
 		$base = 'GrupoTrabajo_';
 		$presentacion = array();
 
@@ -89,9 +93,13 @@ class GrupoTrabajo extends BaseGrupoTrabajo
 		return 	$armado;
 	}
 
-	public static  function ArrayDeOrganismo($id_usuario)
+	public static  function ArrayDeOrganismo($id_usuario='')
 	{
+                if($id_usuario!=''){
 		$grupos = OrganismoTable::getOrganismoBysuer($id_usuario);
+                }else{
+                $grupos = OrganismoTable::getAllOrganismos();
+                }
 		$base = 'Organismo_';
 		$presentacion = array();
 
