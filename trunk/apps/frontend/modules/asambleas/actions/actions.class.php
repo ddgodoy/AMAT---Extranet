@@ -854,8 +854,8 @@ class asambleasActions extends sfActions
                             if(!$this->asambleaId = $this->getRequestParameter('id'))
                                     $this->forward404('La asamblea solicitada no existe');
                  }
-                 $id = $request->getParameter('detalle')?$request->getParameter('detalle'):$this->getUser()->getAttribute('userId');
-                 $this->convocado = ConvocatoriaTable::getConvocatoria($id,"id = $this->asambleaId ",1);
+                 $this->id_convocado = $request->getParameter('detalle')?$request->getParameter('detalle'):$this->getUser()->getAttribute('userId');
+                 $this->convocado = ConvocatoriaTable::getConvocatoria($this->id_convocado,"id = $this->asambleaId ",1);
 
                  $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
                  if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
@@ -908,7 +908,9 @@ class asambleasActions extends sfActions
                    $id = '';
 		   if($this->getRequestParameter('idCon')){$IDcon = $this->getRequestParameter('idCon');}
                    if($this->getRequestParameter('id')){$id = $this->getRequestParameter('id');}
-		   $this->asamblea = AsambleaTable::getConvocotatiaId($id,$this->getUser()->getAttribute('userId'));
+                   if($this->getRequestParameter('convocado')){$convocado = $this->getRequestParameter('convocado');}
+
+		   $this->asamblea = AsambleaTable::getConvocotatiaId($id,$convocado);
 		   
 		   $this->asamblea->setDetalle($this->getRequestParameter('comentario'));
 		   $this->asamblea->save();
