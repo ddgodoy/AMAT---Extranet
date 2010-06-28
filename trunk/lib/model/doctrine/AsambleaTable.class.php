@@ -23,6 +23,9 @@ class AsambleaTable extends Doctrine_Table
                     $q->where('c.id ='.$idConvocatoria);
 
                  }
+
+                 echo  $q->getQuery();
+                 exit ();
 		
 		return $q->fetchOne();
 	}
