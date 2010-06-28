@@ -855,7 +855,7 @@ class asambleasActions extends sfActions
                                     $this->forward404('La asamblea solicitada no existe');
                  }
                  $id = $request->getParameter('detalle')?$request->getParameter('detalle'):$this->getUser()->getAttribute('userId');
-                 $this->convocado = ConvocatoriaTable::getConvocatoria($id,"id = $this->asambleaId ");
+                 $this->convocado = ConvocatoriaTable::getConvocatoria($id,"id = $this->asambleaId ",1);
 
                  $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
                  if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
