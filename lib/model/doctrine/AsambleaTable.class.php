@@ -24,8 +24,8 @@ class AsambleaTable extends Doctrine_Table
 
                  }
 
-                 /*echo  $q->getQuery();
-                 exit ();*/
+                 echo  $q->getQuery();
+                 exit ();
 		
 		return $q->fetchOne();
 	}
