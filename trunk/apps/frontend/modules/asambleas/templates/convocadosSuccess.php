@@ -42,5 +42,5 @@ function SetAllCheckBoxes(formName, className, checkValue)
       </tr>
       <?php endforeach; ?>
     </tbody></table>
-  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('asambleas/lista?'.$DAtos['get']) ?>';"/>
+  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('asambleas/index?'.$DAtos['get']) ?>';"/>
     
