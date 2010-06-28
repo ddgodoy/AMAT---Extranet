@@ -31,7 +31,7 @@ class ConvocatoriaTable extends Doctrine_Table
 		return $usuario;
 	}
 	
-	public static function getConvocatoria($id_user,$xFiltro = '')
+	public static function getConvocatoria($id_user,$xFiltro = '', $detalle= '')
 	{
 		if ($xFiltro != '') {
 			$where = 'a.deleted = 0 AND a.'.$xFiltro;
@@ -45,7 +45,11 @@ class ConvocatoriaTable extends Doctrine_Table
 				 ->addWhere('c.usuario_id='.$id_user)
 				 ->orderBy('a.fecha ASC');
 
+                if($detalle==''){
                 $retorno = $r->execute();
+                }else{
+                $retorno = $r->fetchOne(); 
+                }
 
                 return $retorno;
 	}
