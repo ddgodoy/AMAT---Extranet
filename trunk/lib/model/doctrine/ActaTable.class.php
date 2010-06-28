@@ -4,15 +4,16 @@
  */
 class ActaTable extends Doctrine_Table
 {
-   public static function getActasByAsamblea($idAsamblea,$idUsuer)
+   public static function getActasByAsamblea($idAsamblea,$idUsuer= '')
    {
    	  $q=Doctrine_Query::create()
    	  ->from('Acta')
-   	  ->where('asamblea_id ='.$idAsamblea)
-   	  ->andWhere('owner_id ='.$idUsuer);
+   	  ->where('asamblea_id ='.$idAsamblea);
+          if($idUsuer != ''){
+   	  $q->andWhere('owner_id ='.$idUsuer);
+          }
    	  
    	  return $q->fetchOne();
-   	
    }
 	
 }
