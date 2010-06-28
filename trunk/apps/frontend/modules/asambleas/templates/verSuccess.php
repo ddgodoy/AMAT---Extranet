@@ -22,7 +22,7 @@
     <br /><br />
     <span class="notfecha">Convocado por: <?php echo $user->getNombre().','.$user->getApellido()?></span><br />
     <br>
-    <?php if($convocado->count() > 0): ?>
+    <?php if(count($convocado) > 0): ?>
     <div class="mapa"> 
     <strong class="subtitulo">Comentario:</strong><br />
     <form action="<?php echo url_for('asambleas/comentar') ?>" method="post" enctype="multipart/form-data" > 
