@@ -121,7 +121,7 @@
 					<?php if($DAtos['busqueda'] != ''):?>
 					<tr>
 					 <td><?php echo $DAtos['busqueda'] ?></td>
-                                         <td><?php echo $grupodetrabajoBsq; exit ();  include_component('grupos_de_trabajo','listagrupodetrabajo',array('grupodetrabajoBsq' => $grupodetrabajoBsq));?></td>
+                                         <td><?php include_component('grupos_de_trabajo','listagrupodetrabajo',array('grupodetrabajoBsq' => $grupodetrabajoBsq));?></td>
 					</tr>
 					<?php endif;?>
 					<tr>
