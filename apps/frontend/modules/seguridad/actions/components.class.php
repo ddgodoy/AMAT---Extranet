@@ -12,7 +12,7 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
-            $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
+            $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento', 'archivos_d_o'=>'ArchivoDO', 'archivos_d_g'=>'ArchivoDG', 'archivos_c_t'=>'ArchivoCT', );
             if($this->id != '' && key_exists($this->module, $arraytablas))
               {
                 $q = Doctrine_Query::create();
