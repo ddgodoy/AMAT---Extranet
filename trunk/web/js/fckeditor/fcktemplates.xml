@@ -219,61 +219,61 @@
 			<![CDATA[
 		          <table border="0"  cellpadding="0" cellspacing="0">
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td width="562"><img src="http://extranet.amat.es/uploads/image/3_logo.gif" width="562" height="95" alt="Amat" /></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td width="562" style="border-top-width:0px;"><img src="http://extranet.amat.es/uploads/image/3_logo.gif" width="562" height="95" alt="Amat" /></td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td width="562"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:right;">Madrid, XX de XXXXXXX de 2010</p></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td width="562" style="border-top-width:0px;"><p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:right;">Madrid, XX de XXXXXXX de 2010</p></td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">CIRCULAR N&ordm;&nbsp; XX/2010</p>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td width="562" style="border-top-width:0px;"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">CIRCULAR N&ordm;&nbsp; XX/2010</p>
                                 <h3 style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">A LA ATENCI&Oacute;N DEL SR.  DIRECTOR</h3>
                                 <a href="#" style="font-size:14px; font-family:Arial, Helvetica, sans-serif; color:#09F; font-weight:bold; text-decoration:none;">Ref&ordf;.: Xxxxxxx xxxx x x&nbsp; xxxxxx xxxxxxx x xxxxxx xx xxxxxx xxx xxxxxxx  xx xx xxx xxxxx x xxxxxx xxx xxxx x xxxxx.</a>    <p style="font-family:Verdana, Geneva, sans-serif;font-size:12px;color:#222;text-align:justify;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                             <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td align="center" valign="top" width="562"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td align="center" valign="top" width="562" style="border-top-width:0px;"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
                             <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
                             <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td align="center" width="562"><img src="http://amat.es/images/logo_amat_as.gif" alt="AMAT" /></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td align="center" width="562" style="border-top-width:0px;"><img src="http://amat.es/images/logo_amat_as.gif" alt="AMAT" /></td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td align="center" valign="top" width="562"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td align="center" valign="top" width="562" style="border-top-width:0px;"><a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
                             <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a><br />
                             <a href="#" style="font-family:Arial, Helvetica, sans-serif; color:#09C;font-size:12px;">Enlace 1</a></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td valign="top" width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">Atentamente,</p></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td valign="top" width="562" style="border-top-width:0px;"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif;">Atentamente,</p></td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td valign="top" width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; text-align:center;">Firmado por Enrique Valenzuela de  Quinta<br />
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td valign="top" width="562" style="border-top-width:0px;"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; text-align:center;">Firmado por Enrique Valenzuela de  Quinta<br />
                                 Director Gerente</p></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td valign="top" width="562"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;">R/P.P. Sanz</p></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td valign="top" width="562" style="border-top-width:0px;"><p style="font-size:14px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;">R/P.P. Sanz</p></td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                               <tr>
-                                <td valign="top" width="10">&nbsp;</td>
-                                <td valign="top" width="562"><p style="font-size:14px; font-family: 'Times New Roman', Times, serif; font-size:10px; text-align:center;">Asociaci&oacute;n  profesional de la Ley  19/1977, N&ordm; de Dep&oacute;sito 3.604 &ndash; C.I.F. G-78/383767</p></td>
-                                <td valign="top" width="10">&nbsp;</td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
+                                <td valign="top" width="562" style="border-top-width:0px;"><p style="font-size:14px; font-family: 'Times New Roman', Times, serif; font-size:10px; text-align:center;">Asociaci&oacute;n  profesional de la Ley  19/1977, N&ordm; de Dep&oacute;sito 3.604 &ndash; C.I.F. G-78/383767</p></td>
+                                <td valign="top" width="10" style="border-top-width:0px;">&nbsp;</td>
                               </tr>
                            </table>
 			]]>
