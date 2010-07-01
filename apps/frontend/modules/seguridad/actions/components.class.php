@@ -12,7 +12,7 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
-            $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento');
+            $arraytablas = array('noticias'=>'Noticia', 'eventos'=>'Evento', 'archivos_d_o'=>'ArchivoDO', 'archivos_d_g'=>'ArchivoDG', 'archivos_c_t'=>'ArchivoCT', );
             if($this->id != '' && key_exists($this->module, $arraytablas))
               {
                 $q = Doctrine_Query::create();
@@ -21,7 +21,14 @@ class seguridadComponents extends sfComponents
 
                 $resultado = $q->fetchOne();
 
-                if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
+                if($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ){
+
+                    if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId'))
+                        {
+                            return true;
+                        }
+                }
+                elseif($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
                 {
                     return true;
                 }
