@@ -13,19 +13,19 @@ class normativasComponents extends sfComponents
 	{
 		$Idctegoria = '';
 		$Idctegoria = $request->getParameter('id_categoria')? $request->getParameter('id_categoria') : $this->id_categoria;
-		
+                $width = $this->width?"width:".$this->width."px;":"width:300px;";
 		$subcategoria = SubCategoriaNormativaN1::getArraySubCategoria($Idctegoria);
    
-     	$this->witSub = new NormativaForm();
+                $this->witSub = new NormativaForm();
 	    
-	   $this->witSub->setWidget('subcategoria_normativa_uno_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>'width:150px;')));
-	   
-	   if($this->id_subcategoria1)
-	   {
-	   	
-	   	$this->witSub->setDefault('subcategoria_normativa_uno_id',$this->id_subcategoria1);
-	   	
-	   }
+                   $this->witSub->setWidget('subcategoria_normativa_uno_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>$width)));
+
+                   if($this->id_subcategoria1)
+                   {
+
+                        $this->witSub->setDefault('subcategoria_normativa_uno_id',$this->id_subcategoria1);
+
+                   }
 	    	
     	
   	}
@@ -33,19 +33,20 @@ class normativasComponents extends sfComponents
 	{
 		$Idctegoria = '';
 		$Idctegoria = $request->getParameter('id_categoria')? $request->getParameter('id_categoria') : $this->id_categoria;
+                $width = $this->width?"width:".$this->width."px;":"width:300px;";
 		
-    	$subcategoria = SubCategoriaNormativaN2::getArraySubCategoria($Idctegoria);
+                $subcategoria = SubCategoriaNormativaN2::getArraySubCategoria($Idctegoria);
    
-  	    $this->witSub = new NormativaForm();
-	    
-	    $this->witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>'width:150px;')));   
-	    
-	    if($this->id_subcategoria2)
-	   {
-	   	
-	   	$this->witSub->setDefault('subcategoria_normativa_dos_id',$this->id_subcategoria2);
-	   	
-	   } 	
-    	
+                $this->witSub = new NormativaForm();
+
+                $this->witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>$width)));
+
+                if($this->id_subcategoria2)
+                   {
+
+                        $this->witSub->setDefault('subcategoria_normativa_dos_id',$this->id_subcategoria2);
+
+                   }
+
   	}
 }

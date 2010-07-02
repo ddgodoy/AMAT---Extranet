@@ -174,14 +174,14 @@
 						<?php echo select_tag('select_cat_tema',
 							options_for_select(CategoriaNormativa::getArrayCategoria(), $CatNormBsq),
 							array('style'=>'width:120px;','class'=>'form_input'));
-							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'normativas/subcategoriasn1','with'=>"'id_categoria='+value",'script'=> true)) ?>
+							echo observe_field('select_cat_tema', array('update'=>'content_sub_tema','url'=>'normativas/subcategoriasn1','with'=>"'id_categoria='+value+'&width=150'",'script'=> true)) ?>
 					</td>
 					</tr>
 				    <tr>
 					<td valign="top"><label>Subcategor&iacute;a (nivel 1)</label></td>
 					<td valign="middle">
 						<span id="content_sub_tema">
-							<?php include_component('normativas','subcategoriasn1',array('id_categoria'=>$CatNormBsq, 'id_subcategoria1'=>$SubNormBsq1));?>
+							<?php include_component('normativas','subcategoriasn1',array('id_categoria'=>$CatNormBsq, 'id_subcategoria1'=>$SubNormBsq1, 'width'=>'150'));?>
 						</span>
 					</td>
 					</tr>
@@ -189,7 +189,7 @@
 					<td valign="top"><label>Subcategor&iacute;a (nivel 2)</label></td>
 					<td valign="middle">
 						<span id="dos">
-							<?php include_component('normativas','subcategorias',array('id_categoria'=>$SubNormBsq1, 'id_subcategoria2'=>$SubNormBsq2));?>
+							<?php include_component('normativas','subcategorias',array('id_categoria'=>$SubNormBsq1, 'id_subcategoria2'=>$SubNormBsq2, 'width'=>'150'));?>
 						</span>
 					</td>
 					</tr>
