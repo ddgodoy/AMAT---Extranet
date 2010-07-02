@@ -16,7 +16,7 @@ class SubCategoriaNormativaN2 extends BaseSubCategoriaNormativaN2
 		return Doctrine::getTable(__CLASS__);
 	}
 
-	public static function getArraySubCategoria($id = '')
+	public static function getArraySubCategoria($id = '', $sintrunc = '')
 	{
                 sfLoader::loadHelpers('Text');
 		if($id != '')
@@ -32,9 +32,11 @@ class SubCategoriaNormativaN2 extends BaseSubCategoriaNormativaN2
 		
 		foreach ($subcategoria as $c)
 		{
-			
+			if($sintrunc == ''){
 			$arraysubcategoria[$c->getId()] = truncate_text($c->getNombre(), 25);
-			
+                        }else{
+                        $arraysubcategoria[$c->getId()] = $c->getNombre();
+                        }
 		}
 		
 		return $arraysubcategoria;
