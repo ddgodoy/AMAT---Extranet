@@ -257,19 +257,23 @@ class normativasActions extends sfActions
   
   public function executeSubcategoriasn1(sfWebRequest $request)
   {
-  	return $this->renderComponent('normativas','subcategoriasn1');
+        $width = $request->getParameter('width')? $request->getParameter('width'): '';
+  	return $this->renderComponent('normativas','subcategoriasn1',array('width'=>$width));
   }
   
   public function executeSubcategoriasn2(sfWebRequest $request)
   {
-  	
-    $subcategoria = SubCategoriaNormativaN2::getArraySubCategoria($request->getParameter('id_subcategoria'));
+    $width = $request->getParameter('width')? "width:".$request->getParameter('width')."px;": "width:300px;";
+
+    $trunc = !$request->getParameter('width')? 1 : '';
+
+    $subcategoria = SubCategoriaNormativaN2::getArraySubCategoria($request->getParameter('id_subcategoria'),$trunc);
    
     $witSub = new NormativaForm();
 	    
-	$witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>'width:150px;')));
+	$witSub->setWidget('subcategoria_normativa_dos_id', new sfWidgetFormChoice(array('choices' => $subcategoria),array('style'=>$width)));
     	
-    return $this->renderPartial('subcategorias',array('witSub' => $witSub));
+        return $this->renderPartial('subcategorias',array('witSub' => $witSub));
     
   } 
 }
