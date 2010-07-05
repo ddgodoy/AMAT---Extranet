@@ -46,7 +46,7 @@ if($sf_request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $sf_r
 	<br clear="all" />
 	
 	<div class="botonera">
-	<?php if(validate_action('modificar')):?>
+	<?php if(validate_action('modificar') && $sf_user->getAttribute('carga_'.$sf_context->getModuleName())):?>
 	  <input type="button" id="boton_cancel" class="boton" value="Editar" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_g/editar?id='.$archivo_dg->getId().'&'.$redireccionGrupo) ?>';"/>
 	 <?php endif ;?> 
 	  <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('archivos_d_g/index?'.$redireccionGrupo) ?>';"/>
