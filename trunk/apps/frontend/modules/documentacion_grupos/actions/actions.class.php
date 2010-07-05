@@ -43,12 +43,29 @@ class documentacion_gruposActions extends sfActions
 		} else {
 			$this->Grupo = '';
 		}
+
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+                
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles)) {
+                  $this->resposable = 1;
+                }else{
+                  $this->resposable = ''; 
+                }
+
+
+
   }
 
   public function executeShow(sfWebRequest $request)
   {
     $this->documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($request->getParameter('id'));
     $this->forward404Unless($this->documentacion_grupo);
+    $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+    if (Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles)) {
+      $this->resposable = 1;
+    }else{
+      $this->resposable = '';
+    }
   }
 
   public function executeNueva(sfWebRequest $request)
@@ -234,7 +251,8 @@ public function executeDelete(sfWebRequest $request)
 				}
                                 $mailer->disconnect();
 			}
-			$this->redirect('documentacion_grupos/show?id='.$documentacion_grupo->getId().'&'.$redirecion);
+                        if($redirecion == ''){$url = 'documentacion_grupos/show?id='.$documentacion_grupo->getId();}else{$url ='documentacion_grupos/show?id='.$documentacion_grupo->getId().'&'.$redirecion;}
+			$this->redirect($url);
 		}
   }
   

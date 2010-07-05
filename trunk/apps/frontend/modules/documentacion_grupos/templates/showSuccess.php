@@ -22,13 +22,14 @@ $redireccionGrupo = '';
 	  <?php echo $documentacion_grupo->getcontenido() ?> 
 	  <span class="notfecha">
 	  <?php
-			if (validate_action('listar','archivos_d_g')&& $documentacion_grupo->getEstado() == 'publicado') {
-				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count().' Archivo/s')), 'archivos_d_g/index?archivo_d_g[documentacion_grupo_id]='.$documentacion_grupo->getId().'&grupo_trabajo_id='.$documentacion_grupo->getGrupoTrabajoId(), array('method' => 'post'));
-			}
-                        elseif($sf_user->getAttribute('userId')== $documentacion_grupo->getUserIdCreador()){
-                               echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDG::getRepository()->getAllByDocumentacion($documentacion_grupo->getId())->count().' Archivo/s')), 'archivos_d_g/index?archivo_d_g[documentacion_grupo_id]='.$documentacion_grupo->getId().'&grupo_trabajo_id='.$documentacion_grupo->getGrupoTrabajoId(), array('method' => 'post'));
-                        }	
-	  ?>
+            if($resposable){
+            include_partial('CarpetaDocumentos', array('valor'=>$documentacion_grupo));
+            }elseif($documentacion_grupo->getConfidencial() != 1) {
+             include_partial('CarpetaDocumentos', array('valor'=>$documentacion_grupo));
+            }elseif($documentacion_grupo->getConfidencial() == 1){
+             include_partial('CarpetaDocumentosConfidencial', array('valor'=>$documentacion_grupo));
+            }
+          ?>
 	  </span><br />  
 	   <?php if($documentacion_grupo->getUserIdCreador()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($documentacion_grupo->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($documentacion_grupo->getCreatedAt())?></span><br /> 
