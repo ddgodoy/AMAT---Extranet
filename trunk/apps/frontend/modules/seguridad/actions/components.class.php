@@ -29,10 +29,13 @@ class seguridadComponents extends sfComponents
                 $resultado = $q->fetchOne();
 
                 if($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ){
-
                     if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId'))
                         {
+                           if($this->getUser()->getAttribute('carga_'.$this->module)){
                             return true;
+                           }else{
+                            $this->getController()->redirect('seguridad/restringuido');   
+                           }
                         }
                 }
                 elseif($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
@@ -84,5 +87,17 @@ class seguridadComponents extends sfComponents
 		 	$this->getUser()->setFlash('error', 'Sesión caducada');
 		 	$this->getController()->redirect('seguridad/Seguridad') ;
 		}
+                if($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ){
+                 if($this->action == 'nueva'){
+                     if($this->getUser()->getAttribute('carga_'.$this->module)){
+                         return true;
+                     }else{
+                      $this->getController()->redirect('seguridad/restringuido');
+                     }
+                 }
+                }
+
+
+
             }
 }
