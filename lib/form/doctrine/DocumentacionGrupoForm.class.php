@@ -26,6 +26,9 @@ class DocumentacionGrupoForm extends BaseDocumentacionGrupoForm
 			'contenido'         => new fckFormWidget(),			
 			'fecha'             => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
+                        'fecha_desde'        => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
+                        'fecha_hasta'        => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
+                        'confidencial'       => new sfWidgetFormChoice(array('choices' => array(1 => 'Confidencial', 0 => 'No confidencial') )),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));
@@ -37,10 +40,27 @@ class DocumentacionGrupoForm extends BaseDocumentacionGrupoForm
 			'categoria_d_g_id'  => new sfValidatorChoice(array('choices' => array_keys($CategodiaGruposUsuario),'required' => true),array('required' => 'La categoría es obligatorio')),
 			'contenido'         => new sfValidatorString(array('required' => false)),						
 			'fecha'             => new sfValidatorDate(array(), array('required' => 'Debes seleccionar una fecha', 'invalid' => 'La fecha ingresada es incorrecta')),
-			'fecha_publicacion' => new sfValidatorDate(array('required' => false ), array('invalid' => 'La fecha de publicacion es incorrecta')),						
+			'fecha_publicacion' => new sfValidatorDate(array('required' => false ), array('invalid' => 'La fecha de publicacion es incorrecta')),
+                        'fecha_desde'        => new sfValidatorDate(array('required' => false)),
+                        'fecha_hasta'        => new sfValidatorDate(array('required' => false)),
+                        'confidencial'       => new sfValidatorBoolean(),
 			'owner_id'          => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
 			'estado'            => new sfValidatorString(),
 		));
+
+
+                if($requets->getRequest()->getParameter('documentacion_grupo[fecha_desde][day]') && $requets->getRequest()->getParameter('documentacion_grupo[fecha_hasta][day]') ){
+                    $this->validatorSchema->setPostValidator(
+                      new sfValidatorSchemaCompare('fecha_desde', sfValidatorSchemaCompare::LESS_THAN_EQUAL, 'fecha_hasta',
+                        array(),
+                        array('invalid' => 'La fecha desde debe ser anterior a la fecha hasta')
+                      )
+                    );
+                }
+                
+
+
+
 
 		$this->setDefaults(array(
 			'owner_id'          => $userId,			
