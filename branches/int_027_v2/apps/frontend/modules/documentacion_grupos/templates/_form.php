@@ -22,6 +22,7 @@ $redireccionGrupo = '';
 	echo $form['grupo_trabajo_id']->renderError();
 	echo $form['categoria_d_g_id']->renderError();
 	echo $form['fecha']->renderError();
+        echo $form['fecha_desde']->renderError();
 ?>
 <?php if (!CategoriaDGTable::getAllcategoria()->count()):?>
 <div class="mensajeSistema ok">Debe ingresar una categoría para poder cargar un documento del grupo de trabajo. <a href="<?php echo url_for('categorias_d_g/index') ?>">click aquí</a></div>

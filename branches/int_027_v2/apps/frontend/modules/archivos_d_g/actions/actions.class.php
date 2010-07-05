@@ -38,6 +38,38 @@ class archivos_d_gActions extends sfActions
 		} else {
 			$this->Grupo = '';
 		}
+
+                $this->carga = '';
+                $this->getUser()->getAttributeHolder()->remove('carga_'.$this->getModuleName());
+                if($this->documentacion){
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles))
+		{
+                  $this->carga = '1';
+                  $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                }else{
+
+                if($this->documentacion->getFechaDesde() && $this->documentacion->getFechaHasta()){
+                if($this->documentacion->getFechaDesde()<= date('Y-m-d') && $this->documentacion->getFechaHasta() >= date('Y-m-d')){
+                 $this->carga = '1';
+                 $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                 }
+                }elseif($this->documentacion->getFechaDesde() && $this->documentacion->getFechaHasta() == ''){
+                 if($this->documentacion->getFechaDesde()<= date('Y-m-d')){
+                 $this->carga = '1';
+                 $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                 }
+                }elseif($this->documentacion->getFechaDesde()=='' && $this->documentacion->getFechaHasta()){
+                 if($this->documentacion->getFechaHasta()>= date('Y-m-d')){
+                 $this->carga = '1';
+                 $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                 }
+                }elseif($this->documentacion->getFechaDesde()=='' && $this->documentacion->getFechaHasta()==''){
+                $this->carga = '1';
+                $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                }
+                }
+                }
   }
 
   public function executeShow(sfWebRequest $request)
@@ -219,13 +251,14 @@ class archivos_d_gActions extends sfActions
    	}
 		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles))
 		{
 			return "ag.deleted=0".$parcial." AND  (dg.owner_id = ".$this->getUser()->getAttribute('userId')." OR dg.estado != 'guardado')";
 		}
 		else
+                        $responsables = ArchivoDG::getUSerREsponsables();
 		{
-			return "ag.deleted=0 ".$parcial." AND ag.grupo_trabajo_id IN ".$gruposdetrabajo." AND  (dg.owner_id = ".$this->getUser()->getAttribute('userId')." OR dg.estado != 'guardado')";
+			return "ag.deleted=0 ".$parcial." AND ag.grupo_trabajo_id IN ".$gruposdetrabajo." AND  (dg.owner_id = ".$this->getUser()->getAttribute('userId')." OR dg.estado != 'guardado') AND (ag.owner_id ".$responsables." OR  dg.confidencial != 1  OR  ag.owner_id = ".$this->getUser()->getAttribute('userId').")";
 		}
 		
   }
