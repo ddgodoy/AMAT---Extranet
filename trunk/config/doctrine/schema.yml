@@ -455,6 +455,9 @@ DocumentacionGrupo:
     user_id_modificado:      { type: integer }
     user_id_publicado:       { type: integer }   
     fecha_publicado:         { type: timestamp }
+    fecha_desde:             { type: date, notnull: false }
+    fecha_hasta:             { type: date, notnull: false }
+    confidencial:            { type: boolean, notnull: true, default: 1 }
 
   relations:
     GrupoTrabajo:            { local: grupo_trabajo_id, foreign: id, onDelete: CASCADE }
