@@ -76,7 +76,7 @@
         <tr>
           <td><label>Tipo *</label></td>
           <td valign="middle">
-              <div style="width: 200px; margin-left: -40px;"><?php echo $form['confidencial'] ?></div>
+              <div style="width: 200px;"><?php echo $form['confidencial'] ?></div>
           </td>
         </tr>
        <tr>
