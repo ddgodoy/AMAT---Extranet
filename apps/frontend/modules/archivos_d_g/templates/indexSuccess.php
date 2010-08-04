@@ -66,7 +66,7 @@ endif; ?>
 						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Grupo de trabajo</a>
+						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Grupo de Trabajo</a>
 					</th>
 					<th width="15%">
 						<a href="<?php echo url_for('archivos_d_g/index?sort=ag.owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
