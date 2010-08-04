@@ -14,5 +14,32 @@ class ArchivoCT extends BaseArchivoCT
 	{
 		return Doctrine::getTable(__CLASS__);
 	}
-	
+
+         public static function getUSerREsponsables(){
+            $usuarioResponsables = UsuarioRolTable::getUserByRol('7');
+            $cantidad = $usuarioResponsables->count();
+            $can = 0;
+            $FormaSql = 'IN (';
+            foreach ($usuarioResponsables AS $userID){
+            $can++;
+            if($can == $cantidad){
+             $FormaSql.= $userID->getUsuarioId().')';
+            }else{
+             $FormaSql.= $userID->getUsuarioId().',';
+            }
+            }
+           return $FormaSql;
+        }
+
+        public static function getCountArchivosConfidenciales($id, $user){
+
+            $FormaSql = self::getUSerREsponsables();
+            $respusta = ArchivoCTTable::getAllByDocumentacionConfidencial($id, $FormaSql, $user);
+
+            return $respusta->count();
+        }
+
+
+
+
 }
