@@ -71,7 +71,7 @@ endif; ?>
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
-					<?php if(validate_action('baja')):?>
+					<?php if(validate_action('baja') && $carga == 1):?>
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
