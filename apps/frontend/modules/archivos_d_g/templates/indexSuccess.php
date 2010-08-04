@@ -56,7 +56,7 @@ endif; ?>
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
 				<tr>
-					<?php if(validate_action('baja')):?>
+					<?php if(validate_action('baja') && $carga == 1):?>
 					<th width="5%">&nbsp;</th>
 					<?php endif;?>
 					<th width="10%" style="text-align:left;">
@@ -76,7 +76,7 @@ endif; ?>
 				</tr>
 				<?php $i=0; foreach ($archivo_dg_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
-					<?php if(validate_action('baja')):?>
+					<?php if(validate_action('baja') && $carga == 1):?>
 					<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
 					<?php endif;?>
 					<td valign="center" align="left">
