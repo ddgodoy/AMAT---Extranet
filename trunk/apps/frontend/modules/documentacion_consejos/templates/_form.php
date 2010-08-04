@@ -17,6 +17,7 @@ $redireccionGrupo = '';
 <?php echo $form['consejo_territorial_id']->renderError() ?>
 <?php echo $form['categoria_c_t_id']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
+<?php echo $form['fecha_desde']->renderError(); ?>
 
 
 <form action="<?php echo url_for('documentacion_consejos/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId().'&'.$redireccionGrupo : '?'.$redireccionGrupo)) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
@@ -45,6 +46,19 @@ $redireccionGrupo = '';
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle"><?php echo $form['nombre'] ?>         
+          </td>
+        </tr>
+         <tr>
+          <td width="7%"><label>Fecha desde: </label></td>
+          <td width="93%" valign="middle">
+           <?php echo $form['fecha_desde'] ?>
+            <label style="margin-left: 30px;">Fecha hasta: </label><?php echo $form['fecha_hasta'] ?>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Tipo *</label></td>
+          <td>
+              <div style="width: 200px; margin-left: -40px;"><?php echo $form['confidencial'] ?></div>
           </td>
         </tr>
         <tr>

@@ -31,6 +31,7 @@
  ?>
 <?php echo $form['nombre']->renderError() ?>
 <?php echo $form['fecha']->renderError() ?>
+<?php echo $form['fecha_desde']->renderError(); ?>
 <?php echo $form['categoria_organismo_id']->renderError() ?>
 <?php echo $form['subcategoria_organismo_id']->renderError() ?>
 <?php echo $form['organismo_id']->renderError() ?>
@@ -63,6 +64,19 @@
         <tr>
           <td><label>Título*</label></td>
           <td valign="middle"><?php echo $form['nombre'] ?>         
+          </td>
+        </tr>
+         <tr>
+          <td width="7%"><label>Fecha desde: </label></td>
+          <td width="93%" valign="middle">
+           <?php echo $form['fecha_desde'] ?>
+            <label style="margin-left: 30px;">Fecha hasta: </label><?php echo $form['fecha_hasta'] ?>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Tipo *</label></td>
+          <td valign="middle">
+              <div style="width: 200px; margin-left: -40px;"><?php echo $form['confidencial'] ?></div>
           </td>
         </tr>
        <tr>
