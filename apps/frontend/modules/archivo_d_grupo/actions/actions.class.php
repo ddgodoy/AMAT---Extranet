@@ -1,14 +1,14 @@
 <?php
 
 /**
- * archivos_d_g actions.
+ * archivo_d_grupo actions.
  *
  * @package    extranet
- * @subpackage archivos_d_g
+ * @subpackage archivo_d_grupo
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 12474 2008-10-31 10:41:27Z fabien $
  */
-class archivos_d_gActions extends sfActions
+class archivo_d_grupoActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
@@ -76,108 +76,6 @@ class archivos_d_gActions extends sfActions
   {
     $this->archivo_dg = Doctrine::getTable('ArchivoDG')->find($request->getParameter('id'));
     $this->forward404Unless($this->archivo_dg);
-  }
-
-  public function executeNueva(sfWebRequest $request)
-  {
-    $this->form = new ArchivoDGForm();
-  }
-
-  public function executeCreate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod('post'));
-    $this->form = new ArchivoDGForm();
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('nueva');
-  }
-
-  public function executeEditar(sfWebRequest $request)
-  {
-    $this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDG')->find($request->getParameter('id')), sprintf('Object archivo_dg does not exist (%s).', $request->getParameter('id')));
-    $this->form = new ArchivoDGForm($archivo_dg);
-  }
-
-  public function executeUpdate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod('post') || $request->isMethod('put'));
-    $this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDG')->find($request->getParameter('id')), sprintf('Object archivo_dg does not exist (%s).', $request->getParameter('id')));
-    $this->form = new ArchivoDGForm($archivo_dg);
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('editar');
-  }
-
-  public function executeDelete(sfWebRequest $request)
-  {
-    $toDelete = $request->getParameter('id');
-    $redirecion = '';
-    if(sfConfig::get('sf_environment') == 'dev'){
-    if($request->getParameter('archivo_d_g[documentacion_grupo_id]') && $request->getParameter('grupo_trabajo_id'))
-    {
-       $redirecion = '?archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
-    }
-    }else{
-    if($request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $request->getParameter('grupo_trabajo_id'))
-    {
-       $redirecion = '?archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
-    }
-    }
-
-  	if (!empty($toDelete)) {
-  		$request->checkCSRFProtection();
-
-  		$IDs = is_array($toDelete) ? $toDelete : array($toDelete);
-
-  		foreach ($IDs as $id) {
-  			$this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDG')->find($id), sprintf('Object archivo_dg does not exist (%s).', $id));
-
-		    sfLoader::loadHelpers('Security');
-	            if (!validate_action('baja') && $this->getUser()->getAttribute('userId') != $archivo_dg->getOwnerId())
-                    { $this->redirect('seguridad/restringuido'); }
-
-		    $archivo_dg->delete();
-  		}
-  	}
-    $this->redirect('archivos_d_g/index'.$redirecion);
-  }
-
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $redirecion = '';
-    if(sfConfig::get('sf_environment') == 'dev'){
-    if($request->getParameter('archivo_d_g[documentacion_grupo_id]') && $request->getParameter('grupo_trabajo_id'))
-    {
-       $redirecion = '&archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g[documentacion_grupo_id]').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
-    }
-    }else{
-    if($request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D') && $request->getParameter('grupo_trabajo_id'))
-    {
-       $redirecion = '&archivo_d_g[documentacion_grupo_id]='.$request->getParameter('archivo_d_g%5Bdocumentacion_grupo_id%5D').'&grupo_trabajo_id='.$request->getParameter('grupo_trabajo_id');
-    }
-    }
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-
-    if ($form->isValid()) {
-      $dato = Doctrine::getTable('ArchivoDG')->find($request->getParameter('id'));
-		
-			if ($form->getValue('archivo_delete') && $dato->getArchivo()) {
-	    	$dato->eliminarDocumento();
-	    }
-      $archivo_dg = $form->save();
-      
-      $bandera     = 0;
-      $xSelectDocum = $this->getRequestParameter('documentacion_grupo_id');
-      $xSelectGrupo = $this->getRequestParameter('grupo_trabajo_id');
-      if (!empty($xSelectDocum)){ $archivo_dg->setDocumentacionGrupoId($xSelectDocum); $bandera = 1; }
-      if (!empty($xSelectGrupo)){ $archivo_dg->setGrupoTrabajoId($xSelectGrupo); $bandera = 1; }
-
-      if ($bandera == 1) {
-      	$archivo_dg->save();
-      }	
-      $this->redirect('archivos_d_g/show?id='.$archivo_dg->getId().$redirecion);
-    }
   }
   
   /* Metodos para busqueda y ordenamiento */
@@ -250,17 +148,8 @@ class archivos_d_gActions extends sfActions
 			$this->hastaBsq = '';
    	}
 		$gruposdetrabajo = GrupoTrabajo::iddegrupos($this->getUser()->getAttribute('userId'),1); 
-		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles))
-		{
-			return "ag.deleted=0".$parcial." AND  (dg.owner_id = ".$this->getUser()->getAttribute('userId')." OR dg.estado != 'guardado')";
-		}
-		else
-		{
-                        $responsables = ArchivoDG::getUSerREsponsables();
-			return "ag.deleted=0 ".$parcial." AND ag.grupo_trabajo_id IN ".$gruposdetrabajo." AND  (dg.owner_id = ".$this->getUser()->getAttribute('userId')." OR dg.estado != 'guardado') AND (ag.owner_id ".$responsables." OR  dg.confidencial != 1  OR  ag.owner_id = ".$this->getUser()->getAttribute('userId').")";
-		}
 		
+		return "ag.deleted=0".$parcial." AND  (dg.owner_id = ".$this->getUser()->getAttribute('userId')." OR dg.estado != 'guardado')";
   }
   
   protected function setOrdenamiento()

@@ -23,13 +23,14 @@ $redireccionGrupo = '';
 	  <br />  
 	  <span class="notfecha">
 	  <?php
-            if (validate_action('listar','archivos_c_t')&& $documentacion_consejo->getEstado() == 'publicado') {
-                    echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($documentacion_consejo->getId())->count().' Archivo/s')).' Carpeta de Archivos', 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $documentacion_consejo->getId().'&consejo_territorial_id='.$documentacion_consejo->getConsejoTerritorialId(), array('method' => 'post'));
+            if($resposable){
+            include_partial('CarpetaDocumentos', array('valor'=>$documentacion_consejo));
+            }elseif($documentacion_consejo->getConfidencial() != 1) {
+             include_partial('CarpetaDocumentos', array('valor'=>$documentacion_consejo));
+            }elseif($documentacion_consejo->getConfidencial() == 1){
+             include_partial('CarpetaDocumentosConfidencial', array('valor'=>$documentacion_consejo));
             }
-            elseif($sf_user->getAttribute('userId')== $documentacion_consejo->getUserIdCreador()){
-                    echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($documentacion_consejo->getId())->count().' Archivo/s')), 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $documentacion_consejo->getId().'&consejo_territorial_id='.$documentacion_consejo->getConsejoTerritorialId(), array('method' => 'post'));
-             }
-	  ?>
+          ?>
 	  </span><br />  
 	  <?php if($documentacion_consejo->getUserIdCreador()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($documentacion_consejo->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($documentacion_consejo->getCreatedAt())?></span><br /> 
