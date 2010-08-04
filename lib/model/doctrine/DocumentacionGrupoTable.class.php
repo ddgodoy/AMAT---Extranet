@@ -28,7 +28,7 @@ class DocumentacionGrupoTable extends DocumentacionTable
 		$s->from('DocumentacionGrupo');
 		$s->where('deleted = 0');
                 if($user!= ''){
-                $s->addWhere("owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado'");
+                $s->addWhere("owner_id = ".$user." OR estado != 'guardado'");
                 }
 
 		$retorno = $s->execute();
