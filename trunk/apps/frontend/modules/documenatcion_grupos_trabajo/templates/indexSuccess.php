@@ -47,7 +47,7 @@ $redireccionGrupo = '';
 						<a href="<?php echo url_for('documenatcion_grupos_trabajo/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('documenatcion_grupos_trabajo/index?sort=grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Grupo de trabajo</a>
+						<a href="<?php echo url_for('documenatcion_grupos_trabajo/index?sort=grupo_trabajo_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Grupo de Trabajo</a>
 					</th>
 					<th width="15%">
 						<a href="<?php echo url_for('documenatcion_grupos_trabajo/index?sort=user_id_creador&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
