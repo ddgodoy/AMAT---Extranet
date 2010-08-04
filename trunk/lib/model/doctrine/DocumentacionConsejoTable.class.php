@@ -24,7 +24,7 @@ class DocumentacionConsejoTable extends DocumentacionTable
   	$s->from('DocumentacionConsejo');
   	$s->where('deleted = 0');
          if($user!= ''){
-        $q->addWhere("owner_id = ".$user." OR estado != 'guardado'");
+        $s->addWhere("owner_id = ".$user." OR estado != 'guardado'");
         }
   	$respuesta = $s->execute();
   	return $respuesta; 
