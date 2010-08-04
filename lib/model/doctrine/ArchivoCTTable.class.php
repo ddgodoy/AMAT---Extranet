@@ -26,5 +26,17 @@ class ArchivoCTTable extends Doctrine_Table
 		
 		return $q->execute();
 	}
+
+         public static function getAllByDocumentacionConfidencial($id, $userREs, $user)
+	{
+		$q = Doctrine_Query::create()
+		->from('ArchivoCT')
+		->where('documentacion_consejo_id  = '.$id)
+                ->andWhere('owner_id '.$userREs.' OR owner_id = '.$user)
+		->addWhere('deleted = 0');
+
+
+		return $q->execute();
+	}
 	
 }
