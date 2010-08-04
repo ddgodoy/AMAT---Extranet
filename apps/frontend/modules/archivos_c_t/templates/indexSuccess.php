@@ -65,7 +65,7 @@ endif; ?>
 						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Titulo</a>
 					</th>
 					<th width="15%">
-						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Consejo territorial</a>
+						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.consejo_territorial_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Consejo Territorial</a>
 					</th>
 					<th width="15%">
 						<a href="<?php echo url_for('archivos_c_t/index?sort=ac.owner_id&type='.$sortType.'&page='.$paginaActual.'&orden=1&'.$redireccionGrupo) ?>">Creado por</a>
