@@ -41,6 +41,17 @@ class documentacion_organismosActions extends sfActions
 		} else {
 			$this->Organismos = '';
 		}
+
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles)) {
+                  $this->resposable = 1;
+                }else{
+                  $this->resposable = '';
+                }
+
+
+
 	}
 	else 	
 	{
@@ -53,6 +64,12 @@ class documentacion_organismosActions extends sfActions
   {
     $this->documentacion_organismo = Doctrine::getTable('DocumentacionOrganismo')->find($request->getParameter('id'));
     $this->forward404Unless($this->documentacion_organismo);
+    $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+    if (Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles)) {
+      $this->resposable = 1;
+    }else{
+      $this->resposable = '';
+    }
   }
 
   public function executeNueva(sfWebRequest $request)

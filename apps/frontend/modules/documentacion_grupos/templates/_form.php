@@ -67,7 +67,7 @@ $redireccionGrupo = '';
         <tr>
           <td><label>Tipo *</label></td>
           <td valign="middle">
-            <?php echo $form['confidencial'] ?>            
+              <div style="width: 200px; margin-left: -40px;"><?php echo $form['confidencial'] ?></div>
           </td>
         </tr>
         

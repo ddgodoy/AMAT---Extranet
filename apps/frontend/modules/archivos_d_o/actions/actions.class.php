@@ -42,6 +42,39 @@ class archivos_d_oActions extends sfActions
 	
 		$this->archivo_do_list = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
+
+                $this->carga = '';
+                $this->getUser()->getAttributeHolder()->remove('carga_'.$this->getModuleName());
+                if($this->documentacion){
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles))
+		{
+                  $this->carga = '1';
+                  $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                }else{
+
+                if($this->documentacion->getFechaDesde() && $this->documentacion->getFechaHasta()){
+                if($this->documentacion->getFechaDesde()<= date('Y-m-d') && $this->documentacion->getFechaHasta() >= date('Y-m-d')){
+                 $this->carga = '1';
+                 $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                 }
+                }elseif($this->documentacion->getFechaDesde() && $this->documentacion->getFechaHasta() == ''){
+                 if($this->documentacion->getFechaDesde()<= date('Y-m-d')){
+                 $this->carga = '1';
+                 $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                 }
+                }elseif($this->documentacion->getFechaDesde()=='' && $this->documentacion->getFechaHasta()){
+                 if($this->documentacion->getFechaHasta()>= date('Y-m-d')){
+                 $this->carga = '1';
+                 $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                 }
+                }elseif($this->documentacion->getFechaDesde()=='' && $this->documentacion->getFechaHasta()==''){
+                $this->carga = '1';
+                $this->getUser()->setAttribute('carga_'.$this->getModuleName(), '1');
+                }
+                }
+                }
+                      
 	}
 	else 
 	{
@@ -285,8 +318,16 @@ class archivos_d_oActions extends sfActions
 			$this->hastaBsq = '';
 		}
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
-		
-	 return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND (do.owner_id = ".$this->getUser()->getAttribute('userId')." OR do.estado != 'guardado')";
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+		if(Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles))
+		{
+			return "ao.deleted=0".$parcial." AND  (do.owner_id = ".$this->getUser()->getAttribute('userId')." OR do.estado != 'guardado')";
+		}
+		else
+		{
+                         $responsables = ArchivoDO::getUSerREsponsables();
+                         return "ao.deleted=0".$parcial." AND ao.organismo_id IN ".$organismos." AND (do.owner_id = ".$this->getUser()->getAttribute('userId')." OR do.estado != 'guardado') AND (ao.owner_id ".$responsables." OR  do.confidencial != 1  OR  ao.owner_id = ".$this->getUser()->getAttribute('userId').")";
+                }
 		 
 
   }
