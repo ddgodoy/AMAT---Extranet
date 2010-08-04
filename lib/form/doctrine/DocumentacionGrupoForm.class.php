@@ -28,7 +28,7 @@ class DocumentacionGrupoForm extends BaseDocumentacionGrupoForm
 			'fecha_publicacion' => new sfWidgetFormInputHidden(),
                         'fecha_desde'        => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
                         'fecha_hasta'        => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
-                        'confidencial'       => new sfWidgetFormChoice(array('choices' => array(1 => 'Confidencial', 0 => 'No confidencial') )),
+                        'confidencial'       => new sfWidgetFormChoice(array('expanded' => true,'choices' => array(1 => 'Confidencial', 0 => 'No confidencial')),array('style' => 'list-style-type: none;')),
 			'owner_id'          => new sfWidgetFormInputHidden(),
 			'estado'            => new sfWidgetFormInputHidden(),
 		));
