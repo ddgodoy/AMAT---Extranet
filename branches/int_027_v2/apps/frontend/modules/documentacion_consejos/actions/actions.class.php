@@ -34,13 +34,30 @@ class documentacion_consejosActions extends sfActions
 
 		if ($this->consejoBsq) {
 			$this->Consejo = ConsejoTerritorialTable::getConsejo($this->consejoBsq);
-		}
+		}else{
+                  $this->Consejo = '';
+                }
+
+                $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2', '7'=>'7'), $this->roles)) {
+                  $this->resposable = 1;
+                }else{
+                  $this->resposable = '';
+                }
+                
   }
 
   public function executeShow(sfWebRequest $request)
   {
     $this->documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($request->getParameter('id'));
     $this->forward404Unless($this->documentacion_consejo);
+    $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
+    if (Common::array_in_array(array('1'=>'1', '2'=>'2', '7'=>'7'), $this->roles)) {
+      $this->resposable = 1;
+    }else{
+      $this->resposable = '';
+    }
   }
 
   public function executeNueva(sfWebRequest $request)

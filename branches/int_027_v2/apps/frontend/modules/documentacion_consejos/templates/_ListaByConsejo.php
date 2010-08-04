@@ -21,12 +21,22 @@
 						<?php echo $usuario->getApellido().', '.$usuario->getNombre() ?>
 					</td>
 					<td valign="center" align="center">
-					<?php if (validate_action('listar','archivos_c_t') && $valor->getEstado() == 'publicado' ) {
+                                            <?php
+                                            if($responsable){
+                                            include_partial('CarpetaDocumentos', array('valor'=>$valor));
+                                            }elseif($valor->getConfidencial() != 1) {
+                                             include_partial('CarpetaDocumentos', array('valor'=>$valor));
+                                            }elseif($valor->getConfidencial() == 1){
+                                             include_partial('CarpetaDocumentosConfidencial', array('valor'=>$valor));
+                                            }
+                                            ?>
+
+					<?php /* if (validate_action('listar','archivos_c_t') && $valor->getEstado() == 'publicado' ) {
 								echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $valor->getId().'&consejo_territorial_id='.$valor->getConsejoTerritorialId(), array('method' => 'post'));
 							}
                                          elseif($sf_user->getAttribute('userId')== $valor->getUserIdCreador()){
                                                             		echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoCT::getRepository()->getAllByDocumentacion($valor->getId())->count().' Archivo/s')), 'archivos_c_t/index?archivo_c_t[documentacion_consejo_id]=' . $valor->getId().'&consejo_territorial_id='.$valor->getConsejoTerritorialId(), array('method' => 'post'));
-                                         }
+                                         }*/
                                          ?>
 					</td>
 					<td valign="center" align="center">

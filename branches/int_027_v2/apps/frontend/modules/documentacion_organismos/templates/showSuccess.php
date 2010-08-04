@@ -1,24 +1,31 @@
 <?php use_helper('Security'); ?>
 <?php use_helper('Date');?>
 <?php
- if(sfConfig::get('sf_environment') == 'dev'){
+    if(sfConfig::get('sf_environment') == 'dev'){
     if($sf_request->getParameter('documentacion_organismo[organismo_id]')):
     $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo[organismo_id]'));
     else:
     $redireccionGrupo = '';
     endif;
-     }else{
-      if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
-      $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
-      else:
-      $redireccionGrupo = '';
-      endif;
-     }
+    }else{
+    if($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D')):
+    $redireccionGrupo = Organismo::getUrlOrganismos($sf_request->getParameter('documentacion_organismo%5Borganismo_id%5D'));
+    else:
+    $redireccionGrupo = '';
+    endif;
+    }
  ?>
 <?php
-$getArchivo = explode('&',$redireccionGrupo );
-$getCategoria = explode('=', $getArchivo['0']);
-$getSubCategoria = explode('=', $getArchivo['1']);
+    if($redireccionGrupo!=''){
+    $getArchivo = explode('&',$redireccionGrupo );
+    $getCategoria = explode('=', $getArchivo['0']);
+    $getSubCategoria = explode('=', $getArchivo['1']);
+
+    $redireccionArchivo = '&archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'];
+
+    }else{
+    $redireccionArchivo ='';
+    }
 ?>
 <div class="mapa">
 	  <strong>Organismos</strong> > <a href="<?php echo url_for('documentacion_organismos/index') ?>">Documentación</a> > <?php echo  $documentacion_organismo->getNombre() ?>
@@ -39,12 +46,14 @@ $getSubCategoria = explode('=', $getArchivo['1']);
           <br />
 	  <span class="notfecha">
 	  <?php
-			if (validate_action('listar','archivos_d_o') && $documentacion_organismo->getEstado() == 'publicado') {
-				echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'].'&archivo_d_o[documentacion_organismo_id]='.$documentacion_organismo->getId().'&archivo_d_o[organismo_id]='.$documentacion_organismo->getOrganismoId(), array('method' => 'post'));
-			}elseif($sf_user->getAttribute('userId')== $documentacion_organismo->getUserIdCreador()){
-                          	echo link_to(image_tag('archivos.png', array('border' => 0, 'title' => ArchivoDO::getRepository()->getAllByDocumentacion($documentacion_organismo->getId())->count().' Archivo/s')).' Carpeta de archivo/s', 'archivos_d_o/index?archivo_d_o[categoria_organismo_id]='.$getCategoria['1'].'&archivo_d_o[subcategoria_organismo_id]='.$getSubCategoria['1'].'&archivo_d_o[documentacion_organismo_id]='.$documentacion_organismo->getId().'&archivo_d_o[organismo_id]='.$documentacion_organismo->getOrganismoId(), array('method' => 'post'));
-                        }
-	  ?>
+            if($resposable){
+            include_partial('CarpetaDocumentos', array('valor'=>$documentacion_organismo, 'redireccionArchivo'=>$redireccionArchivo));
+            }elseif($documentacion_organismo->getConfidencial() != 1) {
+             include_partial('CarpetaDocumentos', array('valor'=>$documentacion_organismo, 'redireccionArchivo'=>$redireccionArchivo));
+            }elseif($documentacion_organismo->getConfidencial() == 1){
+             include_partial('CarpetaDocumentosConfidencial', array('valor'=>$documentacion_organismo, 'redireccionArchivo'=>$redireccionArchivo));
+            }
+          ?>
 	  </span><br />  
 	  <?php if($documentacion_organismo->getUserIdCreador()):?>
 	   <br><span class="notfecha">Creado por: <?php echo Usuario::datosUsuario($documentacion_organismo->getUserIdCreador()) ?> el d&iacute;a: <?php echo format_date($documentacion_organismo->getCreatedAt())?></span><br /> 

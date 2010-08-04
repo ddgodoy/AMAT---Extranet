@@ -62,7 +62,7 @@ endif; ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType, $redireccionGrupo) ?></div>
 			<?php endif; ?>
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s <?php if ($cajaBsq) echo " con la palabra '".$cajaBsq."'" ?> </span> 
-			<?php if(validate_action('alta')):?>
+			<?php if(validate_action('alta') && $carga == 1):?>
 			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 		</div>
@@ -91,7 +91,7 @@ endif; ?>
 				</tr>
 				<?php $i=0; foreach ($archivo_do_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
 				<tr class="<?php echo $odd ?>">
-					<?php if(validate_action('baja')):?>
+					<?php if(validate_action('baja') && $carga == 1):?>
 					<td><input type="checkbox" name="id[]" value="<?php echo $valor->getId() ?>" /></td>
 					<?php endif;?>
 					<td valign="center" align="left">
@@ -117,20 +117,20 @@ endif; ?>
 						<?php endif;?>
 					</td>
 					<td valign="center" align="center">
-					<?php if(validate_action('modificar') || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
+					<?php if(validate_action('modificar') || $valor->getOwnerId() == $sf_user->getAttribute('userId') && $carga == 1):?>
 						<a href="<?php echo url_for('archivos_d_o/editar?id='.$valor->getId().'&'.$redireccionGrupo) ?>">
 							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Ver')) ?>
 						</a>
 						<?php endif;?>
 					</td>
                                           <td valign="center" align="center">
-                                          <?php if(validate_action('baja') || $valor->getOwnerId() == $sf_user->getAttribute('userId')):?>
+                                          <?php if(validate_action('baja') || $valor->getOwnerId() == $sf_user->getAttribute('userId') && $carga == 1):?>
                                                 <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'archivos_d_o/delete?id='.$valor->getId().'&'.$redireccionGrupo, array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
                                           <?php endif;?>
                                           </td>
 				</tr>
 				<?php endforeach; ?>
-				<?php if(validate_action('baja')):?>
+				<?php if(validate_action('baja') && $carga == 1):?>
 				<tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
 					<td colspan="5"><input type="submit" class="boton" value="Borrar seleccionados" onclick="return confirm('Confirma la eliminaci&oacute;n de los registros seleccionados?');"/></td>
@@ -155,7 +155,7 @@ endif; ?>
 
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			
-			<?php if(validate_action('alta')):?>
+			<?php if(validate_action('alta') && $carga == 1):?>
 			<input type="button" onclick="javascript:location.href='<?php echo url_for('archivos_d_o/nueva?'.$redireccionGrupo) ?>';" style="float: right;" value="Nuevo Archivo" name="newNews" class="boton"/>
 			<?php endif;?>
 
