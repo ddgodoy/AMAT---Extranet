@@ -26,6 +26,9 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
                         'subcategoria_organismo_id' => new sfWidgetFormDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'add_empty' => true)),
                         'organismo_id'              => new sfWidgetFormDoctrineChoice(array('model' => 'Organismo', 'add_empty' => true)),
 			'estado'            => new sfWidgetFormInputHidden(),
+                        'fecha_desde'        => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
+                        'fecha_hasta'        => new sfWidgetFormJQueryDate(array('image'=>'/images/calendario.gif', 'format' => '%day%/%month%/%year%')),
+                        'confidencial'       => new sfWidgetFormChoice(array('expanded' => true,'choices' => array(1 => 'Confidencial', 0 => 'No confidencial')),array('style' => 'list-style-type: none;')),
 		));
 
 		$this->setValidators(array(
@@ -39,8 +42,20 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
                         'subcategoria_organismo_id'  => new sfValidatorDoctrineChoice(array('model' => 'SubCategoriaOrganismo', 'required' => true),array('invalid'=>'La SubCategoria es obligatoria')),
                         'organismo_id'               => new sfValidatorDoctrineChoice(array('model' => 'Organismo', 'required' => true),array('invalid'=>'El Organismo es obligatorio')),
 			'estado'            => new sfValidatorString(),
+                        'fecha_desde'        => new sfValidatorDate(array('required' => false)),
+                        'fecha_hasta'        => new sfValidatorDate(array('required' => false)),
+                        'confidencial'       => new sfValidatorBoolean(),
 		));
 
+
+                if($requets->getRequest()->getParameter('documentacion_organismo[fecha_desde][day]') && $requets->getRequest()->getParameter('documentacion_organismo[fecha_hasta][day]') ){
+                    $this->validatorSchema->setPostValidator(
+                      new sfValidatorSchemaCompare('fecha_desde', sfValidatorSchemaCompare::LESS_THAN_EQUAL, 'fecha_hasta',
+                        array(),
+                        array('invalid' => 'La fecha desde debe ser anterior a la fecha hasta')
+                      )
+                    );
+                }
 		$this->setDefaults(array(
 			'owner_id'          => $userId,			
 			'estado'            => 'pendiente',			
