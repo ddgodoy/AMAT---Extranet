@@ -4,11 +4,11 @@
 ?>
 <script type="text/javascript" src="/js/common_functions.js"></script>
 
-<div class="mapa"><strong>Administraci&oacute;n</strong> &gt Gesti&oacute;n de Usuarios</div>
+<div class="mapa"><strong>Administraci&oacute;n</strong> &gt Usuarios Mutua: <?php echo $sf_user->getAttribute('mutua'); ?></div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
-				<td width="70%"><h1>Gesti&oacute;n de Usuarios</h1></td>
+				<td width="70%"><h1>Usuarios Mutua: <?php echo $sf_user->getAttribute('mutua'); ?></h1></td>
 				<td width="5%" align="center"><?php $nombretabla = 'Usuario_mutuas'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
