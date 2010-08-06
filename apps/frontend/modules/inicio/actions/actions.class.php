@@ -21,7 +21,7 @@ class inicioActions extends sfActions
 			$extencion = $this->getRequestParameter('tipo');
 			$resultadoObj = '';
 			$filtro = 'deleted = 0'.$this->getUser()->getAttribute($request->getParameter('filtro'));
-			
+
 			if($tabla == 'UsuarioGrupo')
 			{
                             $usuario = Doctrine_Query::create()
@@ -78,7 +78,7 @@ class inicioActions extends sfActions
 			  $resultadoObj = $organismos->execute();
 			} 
 			
-			if($tabla == 'Usuario')
+			if($tabla == 'Usuario' || $tabla == 'Usuario_mutuas')
 			{
 			  $usuarios = Doctrine_Query::create()
 			    ->from('Usuario u')
@@ -86,9 +86,14 @@ class inicioActions extends sfActions
 		            ->leftJoin('u.UsuarioConsejoTerritorial uc')
 		            ->leftJoin('u.UsuarioRol ur')
 		            ->leftJoin('u.Mutua m')
-                            ->where('u.id>1')
-                            ->addWhere($filtro)
-                            ->groupBy('u.id');
+                            ->where('u.id>1');
+                           if($tabla == 'Usuario'){
+                            $usuarios->addWhere($filtro);
+                           }else{
+                             $this->tabla = 'Usuario_mutuas';
+                             $usuarios->addWhere($filtro." AND ug.usuario_id != '' AND uc.usuario_id != '' AND u.mutua_id = '".$this->getUser()->getAttribute('mutuaId')."'");
+                           }
+                             $usuarios->groupBy('u.id');
 			 
 			  
 			  $resultadoObj = $usuarios->execute();
@@ -164,7 +169,7 @@ class inicioActions extends sfActions
 
 			     $resultadoObj = $Normativa->execute();
 			}
-			if($tabla != 'Acuerdo'&& $tabla != 'Normativa'  && $tabla != 'Iniciativa' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
+			if($tabla != 'Usuario_mutuas' && $tabla != 'Acuerdo'&& $tabla != 'Normativa'  && $tabla != 'Iniciativa' &&  $tabla != 'Evento' && $tabla != 'AplicacionRol' && $tabla != 'Organismo' && $tabla != 'Usuario' && $tabla != 'UsuarioOrganismo' && $tabla != 'UsuarioConsejoTerritorial' && $tabla != 'UsuarioGrupo' && $tabla != 'AsambleCombocadas' && $tabla != 'Avisos' )
 			{
 				$c = Doctrine_Query::create();
 				$c->from($tabla)->where($filtro);
@@ -179,16 +184,6 @@ class inicioActions extends sfActions
 			
 			$this->getResponse()->setContentType('application/msexcel');
 	                $this->getResponse()->setHttpHeader('Content-Disposition','attachment; filename=lista'.$extencion, TRUE);
-
-
-
-//			$this->getResponse()->setHttpHeader('Cache-Control', 'public, must-revalidate', true);
-//            $this->getResponse()->setHttpHeader('Pragma', 'hack', true);
-//            $this->getResponse()->setHttpHeader('Content-Type', 'application/octet-stream', true);
-//            $this->getResponse()->setHttpHeader('Content-Transfer-Encoding', 'binary', true);
-//            $this->getResponse()->setHttpHeader('Content-Disposition','attachment; filename=lista'.$extencion, TRUE);
-//            $this->getResponse()->setHttpHeader('Expires', '0', true);
-            
 
 	    
 		}

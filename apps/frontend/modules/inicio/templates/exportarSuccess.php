@@ -5,7 +5,8 @@
 <table>
 <tbody>
 <tr>
-<?php  
+<?php
+if(empty ($tabla)){
 $f = 0; 
 	foreach ($resultadoObj AS $tab => $reS)
 		 {
@@ -20,10 +21,17 @@ $f = 0;
 		 	   	  
 		 	   }
 		 	}  
-		 }		 
+		 }
+}elseif(!empty ($tabla) && $tabla = 'Usuario_mutuas' ){
+echo '<td style="background-color: #50aec8; color: #FFFFFF; text-align: left; padding: 3px;">Apellido, Nombre</td>';
+echo '<td style="background-color: #50aec8; color: #FFFFFF; text-align: left; padding: 3px;">Grupo de trabajo</td>';
+echo '<td style="background-color: #50aec8; color: #FFFFFF; text-align: left; padding: 3px;">Consejo Territorial</td>';
+}
+
 ?>
 </tr>
-<?php  
+<?php
+if(empty ($tabla)){
 	foreach ($resultadoObj AS $tab => $reS)
 		 {
 		 	 echo '<tr>';
@@ -191,13 +199,30 @@ $f = 0;
 		 	   	  
 		 	   }
 	     echo '</tr>';
-		 }		 
+		 }
+}elseif (!empty ($tabla) && $tabla = 'Usuario_mutuas') {
+foreach ($resultadoObj AS  $reS)
+		 {
+		 	 echo '<tr>
+                                  <td valign="middle">
+                                    <strong>'.slugify(utf8_decode($reS->getApellido())).','.slugify(utf8_decode($reS->getNombre())).'</strong>
+                                  </td>
+                                  <td>';
+                                        $arrayGrupo = GrupoTrabajo::ArrayDeMigrupo($reS->getId()); foreach ($arrayGrupo as $K=>$g){echo slugify(utf8_decode($g)).'<br>';}
+                                  echo '</td>
+                                  <td>';
+                                   $arrayConsejo = ConsejoTerritorial::ArrayDeMiconsejo($reS->getId()); foreach ($arrayConsejo as $L=>$c){echo slugify(utf8_decode($c)).'<br>';}
+                                   echo '</td>
+                             </tr>';
+                 }       
+}
 ?>
 
 </tbody>
 </table>
 <?php else: ?>
-<?php  
+<?php
+if(empty ($tabla)){
 $f = 0; 
 	foreach ($resultadoObj AS $tab => $reS)
 		 {
@@ -212,9 +237,16 @@ $f = 0;
 		 	   }
 		   }
 		 }	
-	echo '  ';	 	 
+	echo '  ';
+}elseif(!empty ($tabla) && $tabla = 'Usuario_mutuas' ){
+echo 'Apellido Nombre,';
+echo 'Grupo de trabajo,';
+echo 'Consejo Territorial,';
+echo '  ';
+}
 ?>
-<?php  
+<?php
+if(empty ($tabla)){
 	foreach ($resultadoObj AS $tab => $reS)
 		 {
 		 	  foreach ($reS AS $hy=>$r)
@@ -386,7 +418,17 @@ $f = 0;
 		 	   }
 	
 		 }
-	echo '   ';	 		 
+	echo '   ';
+}elseif(!empty ($tabla) && $tabla = 'Usuario_mutuas' ){
+    foreach ($resultadoObj AS  $reS)
+		 {
+		 	 echo ''.slugify(utf8_decode($reS->getApellido())).','.slugify(utf8_decode($reS->getNombre())).',';
+                                        $arrayGrupo = GrupoTrabajo::ArrayDeMigrupo($reS->getId()); foreach ($arrayGrupo as $K=>$g){echo slugify(utf8_decode($g)).'<br>';}
+                                  echo ',';
+                                   $arrayConsejo = ConsejoTerritorial::ArrayDeMiconsejo($reS->getId()); foreach ($arrayConsejo as $L=>$c){echo slugify(utf8_decode($c)).'<br>';}
+                                   echo ',';
+                 }
+}        
 ?>
 <?php endif;?>
 <?php else :?>
