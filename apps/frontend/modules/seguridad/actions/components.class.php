@@ -24,7 +24,7 @@ class seguridadComponents extends sfComponents
               {
                 $q = Doctrine_Query::create();
                 $q->from($arraytablas[$this->module]);
-                $q->where('id = '. $this->id );
+                $q->where('id = '. str_replace('&', '', $this->id));
 
                 $resultado = $q->fetchOne();
 
