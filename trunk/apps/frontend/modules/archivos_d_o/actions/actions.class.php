@@ -85,7 +85,8 @@ class archivos_d_oActions extends sfActions
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->archivo_do = Doctrine::getTable('ArchivoDO')->find($request->getParameter('id'));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->archivo_do = Doctrine::getTable('ArchivoDO')->find($id);
     $this->forward404Unless($this->archivo_do);
   }
 
