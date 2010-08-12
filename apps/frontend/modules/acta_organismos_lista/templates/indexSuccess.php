@@ -16,7 +16,7 @@
 		</tbody>
 	</table>
    
-       <?php if(!empty($Organismos)): $id_organismos = !empty ($organismomenu)?$organismomenu:''; include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $id_organismos,'modulo'=>$modulo)); endif;?>
+       <?php  $id_organismos = !empty ($organismomenu)?$organismomenu:''; include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $id_organismos,'modulo'=>$modulo)); ?>
 
 
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
