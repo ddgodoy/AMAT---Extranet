@@ -74,7 +74,8 @@ class archivos_d_gActions extends sfActions
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->archivo_dg = Doctrine::getTable('ArchivoDG')->find($request->getParameter('id'));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->archivo_dg = Doctrine::getTable('ArchivoDG')->find($id);
     $this->forward404Unless($this->archivo_dg);
   }
 
@@ -94,7 +95,8 @@ class archivos_d_gActions extends sfActions
 
   public function executeEditar(sfWebRequest $request)
   {
-    $this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDG')->find($request->getParameter('id')), sprintf('Object archivo_dg does not exist (%s).', $request->getParameter('id')));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->forward404Unless($archivo_dg = Doctrine::getTable('ArchivoDG')->find($id), sprintf('Object archivo_dg does not exist (%s).', $request->getParameter('id')));
     $this->form = new ArchivoDGForm($archivo_dg);
   }
 

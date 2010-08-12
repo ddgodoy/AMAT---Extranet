@@ -58,7 +58,8 @@ class documentacion_gruposActions extends sfActions
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($request->getParameter('id'));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($id);
     $this->forward404Unless($this->documentacion_grupo);
     $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
     if (Common::array_in_array(array('1'=>'1', '2'=>'2', '6'=>'6'), $this->roles)) {
@@ -172,7 +173,8 @@ public function executeDelete(sfWebRequest $request)
 	
   public function executeEditar(sfWebRequest $request)
   {
-    $this->forward404Unless($documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($request->getParameter('id')), sprintf('Object documentacion_grupo does not exist (%s).', $request->getParameter('id')));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->forward404Unless($documentacion_grupo = Doctrine::getTable('DocumentacionGrupo')->find($id), sprintf('Object documentacion_grupo does not exist (%s).', $request->getParameter('id')));
     $this->form = new DocumentacionGrupoForm($documentacion_grupo);
   }
 

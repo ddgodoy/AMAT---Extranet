@@ -111,7 +111,8 @@ class archivos_d_oActions extends sfActions
 
   public function executeEditar(sfWebRequest $request)
   {
-    $this->forward404Unless($archivo_do = Doctrine::getTable('ArchivoDO')->find($request->getParameter('id')), sprintf('Object archivo_do does not exist (%s).', $request->getParameter('id')));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->forward404Unless($archivo_do = Doctrine::getTable('ArchivoDO')->find($id), sprintf('Object archivo_do does not exist (%s).', $request->getParameter('id')));
     $this->form = new ArchivoDOForm($archivo_do);
     $this->categoria =  $archivo_do->getCategoriaOrganismoId();
     $this->verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($archivo_do->getCategoriaOrganismoID());
