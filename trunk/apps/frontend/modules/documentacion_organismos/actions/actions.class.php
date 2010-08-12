@@ -93,7 +93,7 @@ class documentacion_organismosActions extends sfActions
   public function executeEditar(sfWebRequest $request)
   {
     $id = str_replace('&', '',$request->getParameter('id'));
-    $this->forward404Unless($documentacion_organismo = Doctrine::getTable('DocumentacionOrganismo')->find($id), sprintf('Object documentacion_organismo does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($documentacion_organismo = Doctrine::getTable('DocumentacionOrganismo')->find($id), sprintf('Object documentacion_organismo does not exist (%s).', $id));
     $this->form = new DocumentacionOrganismoForm($documentacion_organismo);
 
     $this->verSubcategoria = SubCategoriaOrganismoTable::doSelectByCategoria($documentacion_organismo->getCategoriaOrganismoID());
