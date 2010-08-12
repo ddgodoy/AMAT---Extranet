@@ -38,7 +38,7 @@ endif; ?>
 		</tbody>
 	</table>
 	
-	<?php if($organismoBsq): include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $organismoBsq,'modulo'=>$modulo)); endif;    ?>
+	<?php include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $organismoBsq,'modulo'=>$modulo)); ?>
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 
 	<div class="leftside">
