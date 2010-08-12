@@ -50,7 +50,8 @@ class documentacion_consejosActions extends sfActions
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($request->getParameter('id'));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($id);
     $this->forward404Unless($this->documentacion_consejo);
     $this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
     if (Common::array_in_array(array('1'=>'1', '2'=>'2', '7'=>'7'), $this->roles)) {
@@ -76,7 +77,8 @@ class documentacion_consejosActions extends sfActions
 
   public function executeEditar(sfWebRequest $request)
   {
-    $this->forward404Unless($documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($request->getParameter('id')), sprintf('Object documentacion_consejo does not exist (%s).', $request->getParameter('id')));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->forward404Unless($documentacion_consejo = Doctrine::getTable('DocumentacionConsejo')->find($id), sprintf('Object documentacion_consejo does not exist (%s).', $request->getParameter('id')));
     $this->form = new DocumentacionConsejoForm($documentacion_consejo);
   }
 

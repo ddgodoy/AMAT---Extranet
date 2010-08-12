@@ -81,7 +81,8 @@ class archivos_c_tActions extends sfActions
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->archivo_ct = Doctrine::getTable('ArchivoCT')->find($request->getParameter('id'));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->archivo_ct = Doctrine::getTable('ArchivoCT')->find($id);
     $this->forward404Unless($this->archivo_ct);
   }
 
@@ -103,7 +104,8 @@ class archivos_c_tActions extends sfActions
 
   public function executeEditar(sfWebRequest $request)
   {
-    $this->forward404Unless($archivo_ct = Doctrine::getTable('ArchivoCT')->find($request->getParameter('id')), sprintf('Object archivo_ct does not exist (%s).', $request->getParameter('id')));
+    $id = str_replace('&', '',$request->getParameter('id'));
+    $this->forward404Unless($archivo_ct = Doctrine::getTable('ArchivoCT')->find($id), sprintf('Object archivo_ct does not exist (%s).', $request->getParameter('id')));
     $this->form = new ArchivoCTForm($archivo_ct);
   }
 
