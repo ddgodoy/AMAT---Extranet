@@ -12,7 +12,7 @@
         <td width="70%"><h1><?php echo $DAtos['titulo']?></h1></td>
       </tr>
     </table>
-    <?php if(!empty($Organismos)): $id_organismos = !empty ($organismomenu)?$organismomenu:''; include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $id_organismos,'modulo'=>$modulo)); endif;?>
+    <?php $id_organismos = !empty ($organismomenu)?$organismomenu:''; include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $id_organismos,'modulo'=>$modulo)); ?>
     <?php if ($sf_user->hasFlash('notice')): ?>
 	<ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 	<?php endif; ?>
