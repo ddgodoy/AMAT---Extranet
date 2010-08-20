@@ -57,14 +57,11 @@ class DocumentacionGrupoForm extends BaseDocumentacionGrupoForm
                       )
                     );
                 }
-                
-
-
-
 
 		$this->setDefaults(array(
 			'owner_id'          => $userId,			
-			'estado'            => 'pendiente',			
+			'estado'            => 'pendiente',
+                        'confidencial'      => $this->getObject()->getConfidencial()==0?0:1
 		));
 		
 		if ($GerupoDeTrabajoSelect) {

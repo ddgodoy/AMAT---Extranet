@@ -65,11 +65,12 @@ class DocumentacionConsejoForm extends BaseDocumentacionConsejoForm
                       )
                     );
                 }
-
+                
 		$this->setDefaults(array(
 			'owner_id'          => $userId,			
 			'estado'            => 'pendiente',
-                        'consejo_territorial_id' => $ConsejoTerritorial
+                        'consejo_territorial_id' => $ConsejoTerritorial,
+                        'confidencial'      => $this->getObject()->getConfidencial()==0?0:1
 		));
 
 		$this->widgetSchema->setNameFormat('documentacion_consejo[%s]');

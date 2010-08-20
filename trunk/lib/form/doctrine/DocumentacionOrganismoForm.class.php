@@ -58,7 +58,8 @@ class DocumentacionOrganismoForm extends BaseDocumentacionOrganismoForm
                 }
 		$this->setDefaults(array(
 			'owner_id'          => $userId,			
-			'estado'            => 'pendiente',			
+			'estado'            => 'pendiente',
+                        'confidencial'      => $this->getObject()->getConfidencial()==0?0:1
 		));
 
 		$this->widgetSchema->setNameFormat('documentacion_organismo[%s]');
