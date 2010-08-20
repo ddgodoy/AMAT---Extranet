@@ -101,7 +101,7 @@ class usuarios_mutuasActions extends sfActions
 			$this->cajaConBsq = '';
 		}
 			
-		return "u.deleted=0 AND ug.usuario_id != '' AND uc.usuario_id != '' AND u.mutua_id = '".$mutua."'".$parcial;
+		return "u.deleted=0 AND ( ug.usuario_id != '' OR uc.usuario_id != '' ) AND u.mutua_id = '".$mutua."'".$parcial;
 	}
 	
 	protected function setOrdenamiento()
