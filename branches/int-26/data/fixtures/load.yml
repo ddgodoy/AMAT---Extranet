@@ -1,0 +1,2414 @@
+Rol:
+  Rol_1:
+    nombre:   'Súper - administrador'
+    detalle:  ''
+    codigo:   'superadmin'
+  Rol_2:
+    nombre:   'Administrador'
+    detalle:  ''
+    codigo:   'admin'
+  Rol_3:
+    nombre:   'Director Gerente'
+    detalle:  ''
+    codigo:   'director'
+  Rol_4:
+    nombre:   'Miembro GT'
+    detalle:  ''
+    codigo:   'miembrogt'
+  Rol_5:
+    nombre:   'Miembro CT'
+    detalle:  ''
+    codigo:   'miembroct'
+  Rol_6:
+    nombre:   'Responsable Grupo de Trabajo'
+    detalle:  ''
+    codigo:   'grupotrabajo'
+  Rol_7:
+    nombre:   'Responsable Centro Territorial'
+    detalle:  ''
+    codigo:   'centroterritorial'
+  Rol_8:
+    nombre:   'DGOSS'
+    detalle:  ''
+    codigo:   'dgoss'
+
+Aplicacion:
+  Aplicacion_1:
+    nombre:                 Noticias
+    nombre_entidad:         Noticia
+    nombre_modulo:          noticias
+    tipo:                   "front"
+  Aplicacion_2:
+    nombre:                 Eventos
+    nombre_entidad:         Evento
+    nombre_modulo:          eventos
+    tipo:                   "front"
+  Aplicacion_3:
+    nombre:                 Agenda
+    nombre_entidad:         Agenda
+    nombre_modulo:          agenda
+    tipo:                   "front"
+  Aplicacion_4:
+    nombre:                 Asambleas Directores
+    nombre_entidad:         AsambleaDirectores
+    nombre_modulo:          asamblea_director
+    tipo:                   "front"
+  Aplicacion_5:
+    nombre:                 Usuarios
+    nombre_entidad:         Usuario
+    nombre_modulo:          usuarios
+    tipo:                   "front"
+  Aplicacion_6:
+    nombre:                 Aplicaciones por Rol
+    nombre_entidad:         AplicacionRol
+    nombre_modulo:          aplicaciones_rol
+    tipo:                   "front"
+  Aplicacion_7:
+    nombre:                 Home
+    nombre_entidad:         
+    nombre_modulo:          inicio
+    tipo:                   "front"
+  Aplicacion_8:
+    nombre:                 Contacto
+    nombre_entidad:         
+    nombre_modulo:          contacto
+    tipo:                   "front"
+  Aplicacion_9:
+    nombre:                 Emails de Contacto
+    nombre_entidad:         CategoriaAsunto
+    nombre_modulo:          categoria_asunto
+    tipo:                   "front"
+  Aplicacion_10:
+    nombre:                 Circulares - Categorias de Tema
+    nombre_entidad:         CircularCatTema
+    nombre_modulo:          circular_cat_tema
+    tipo:                   "front"
+
+  Aplicacion_11:
+    nombre:                 Circulares - Subcategorias de Tema
+    nombre_entidad:         CircularSubTema
+    nombre_modulo:          circular_sub_tema
+    tipo:                   "front"
+
+  Aplicacion_12:
+    nombre:                 Circulares
+    nombre_entidad:         Circular
+    nombre_modulo:          circulares
+    tipo:                   "front"
+  Aplicacion_13:
+    nombre:                 Normativas
+    nombre_entidad:         Normativa
+    nombre_modulo:          normativas
+    tipo:                   "front"
+  Aplicacion_14:
+    nombre:                 Iniciativas Formativas
+    nombre_entidad:         Iniciativa
+    nombre_modulo:          iniciativas
+    tipo:                   "front"
+  Aplicacion_15:
+    nombre:                 Mutuas
+    nombre_entidad:         Mutua
+    nombre_modulo:          mutuas
+    tipo:                   "front"
+  Aplicacion_16:
+    nombre:                 Actas Grupo
+    nombre_entidad:         Acta Grupo
+    nombre_modulo:          acta_grupo
+    tipo:                   "front"
+  Aplicacion_17:
+    nombre:                 Notificaciones
+    nombre_entidad:         Notificacion
+    nombre_modulo:          notificaciones
+    tipo:                   "front"
+  Aplicacion_18:
+    nombre:                 Cifras y Datos
+    nombre_entidad:         CifraDato
+    nombre_modulo:          cifras_datos
+    tipo:                   "front"
+  Aplicacion_19:
+    nombre:                 Actividades
+    nombre_entidad:         Actividad
+    nombre_modulo:          actividades
+    tipo:                   "front"
+  Aplicacion_20:
+    nombre:                 Publicaciones
+    nombre_entidad:         Publicacion
+    nombre_modulo:          publicaciones
+    tipo:                   "front"
+  Aplicacion_21:
+    nombre:                 Grupos de Trabajo
+    nombre_entidad:         GrupoTrabajo
+    nombre_modulo:          grupos_de_trabajo
+    tipo:                   "front"
+  Aplicacion_22:
+    nombre:                 Consejos Territoriales
+    nombre_entidad:         ConsejoTerritorial
+    nombre_modulo:          consejos_territoriales
+    tipo:                   "front"
+  Aplicacion_23:
+    nombre:                 Aplicaciones Externas
+    nombre_entidad:         AplicacionExterna
+    nombre_modulo:          aplicaciones_externas
+    tipo:                   "front"
+  Aplicacion_24:
+    nombre:                 Documentacion Grupos de Trabajo
+    nombre_entidad:         DocumentacionGrupo
+    nombre_modulo:          documentacion_grupos
+    tipo:                   "front"
+  Aplicacion_25:
+    nombre:                 Categorias de Documentacion Grupos de Trabajo
+    nombre_entidad:         CategoriaDG
+    nombre_modulo:          categorias_d_g
+    tipo:                   "front"
+  Aplicacion_26:
+    nombre:                 Archivos de Grupos de Trabajo
+    nombre_entidad:         ArchivoDG
+    nombre_modulo:          archivos_d_g
+    tipo:                   "front"
+  Aplicacion_27:
+    nombre:                 Categorias de Consejos Territoriales
+    nombre_entidad:         CategoriaCT
+    nombre_modulo:          categorias_c_t
+    tipo:                   "front"
+  Aplicacion_28:
+    nombre:                 Documentacion de Consejos Territoriales
+    nombre_entidad:         DocumentacionConsejo
+    nombre_modulo:          documentacion_consejos
+    tipo:                   "front"
+  Aplicacion_29:
+    nombre:                 Archivos de Consejos Territoriales
+    nombre_entidad:         ArchivoCT
+    nombre_modulo:          archivos_c_t
+    tipo:                   "front"
+  Aplicacion_30:
+    nombre:                 Categorias de Organismos
+    nombre_entidad:         CategoriaOrganismo
+    nombre_modulo:          categoria_organismos
+    tipo:                   "front"
+  Aplicacion_31:
+    nombre:                 Subcategorias de Organismos
+    nombre_entidad:         SubCategoriaOrganismo
+    nombre_modulo:          subcategoria_organismos
+    tipo:                   "front"
+  Aplicacion_32:
+    nombre:                 Gestión de Organismos
+    nombre_entidad:         Organismo
+    nombre_modulo:          organismos
+    tipo:                   "front"
+  Aplicacion_33:
+    nombre:                 Documentación de Organismos
+    nombre_entidad:         DocumentacionOrganismo
+    nombre_modulo:          documentacion_organismos
+    tipo:                   "front"
+  Aplicacion_34:
+    nombre:                 Archivos de Organismos
+    nombre_entidad:         ArchivoDO
+    nombre_modulo:          archivos_d_o
+    tipo:                   "front"
+  Aplicacion_35:
+    nombre:                 Listas de envios de Comunicados
+    nombre_entidad:         ListaComunicado
+    nombre_modulo:          listas_comunicados
+    tipo:                   "front"
+  Aplicacion_36:
+    nombre:                 Tipos de Comunicados
+    nombre_entidad:         TipoComunicado
+    nombre_modulo:          tipos_comunicado
+    tipo:                   "front"
+  Aplicacion_37:
+    nombre:                 Comunicados
+    nombre_entidad:         Comunicado
+    nombre_modulo:          comunicados
+    tipo:                   "front"
+  Aplicacion_38:
+    nombre:                 Envio de Comunicados
+    nombre_entidad:         EnvioComunicado
+    nombre_modulo:          envio_comunicados
+    tipo:                   "front"
+  Aplicacion_39:
+    nombre:                 Menu de navegacion
+    nombre_entidad:         Menu
+    nombre_modulo:          menu
+    tipo:                   "front"
+  Aplicacion_40:
+    nombre:                 Aplicaciones Externas de Usuario
+    nombre_entidad:         UsuarioAplicacionExterna
+    nombre_modulo:          aplicaciones_externas_usuario
+    tipo:                   "front"
+  Aplicacion_41:
+    nombre:                 Miembros Grupo
+    nombre_entidad:         
+    nombre_modulo:          miembros_grupo
+    tipo:                   "front"
+  Aplicacion_42:
+    nombre:                 Convocatoria Grupo de Trabajo
+    nombre_entidad:         Asamblea gRUPO
+    nombre_modulo:          asamblea_grupo
+    tipo:                   "front"
+  Aplicacion_43:
+    nombre:                 Convocatoria Consejo Territorial
+    nombre_entidad:         Asamblea Consejo
+    nombre_modulo:          asamblea_consejos
+    tipo:                   "front"  
+  Aplicacion_44:
+    nombre:                 Asamblea
+    nombre_entidad:         asamblea
+    nombre_modulo:          asambleas
+    tipo:                   "front"
+  Aplicacion_45:
+    nombre:                 Acta Consejo
+    nombre_entidad:         Acta Consejo
+    nombre_modulo:          acta_consejo
+    tipo:                   "front"
+  Aplicacion_46:
+    nombre:                 Acta 
+    nombre_entidad:         Acta 
+    nombre_modulo:          acta
+    tipo:                   "front"    
+  Aplicacion_47:
+    nombre:                 Miembros Consejos
+    nombre_entidad:         
+    nombre_modulo:          miembros_consejo
+    tipo:                   "front"
+  Aplicacion_48:
+    nombre:                Convocatoria Organismo
+    nombre_modulo:         asamblea_organismo
+    tipo:                  "front"
+  Aplicacion_ 49:
+    nombre:                Actas Organismos
+    nombre_modulo:         acta_organismos
+    tipo:                  "front"
+  Aplicacion_ 50:
+   nombre:                 Miembros de Organismos
+   nombre_modulo:          miembros_organismo
+   tipo:                   "front"
+  Aplicacion_ 51:
+   nombre:                 Gestion de Aplicaciones
+   nombre_modulo:          aplicaciones
+   tipo:                   "front"
+  Aplicacion_ 52:
+   nombre:                 Normas de funcionamiento
+   nombre_modulo:          normas_de_funcionamientos
+   tipo:                   "front"
+
+
+AplicacionRol:
+  AplicacionRol_1:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          1
+    rol_id:                 1
+  AplicacionRol_2:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          2
+    rol_id:                 1
+  AplicacionRol_3:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          3
+    rol_id:                 1
+  AplicacionRol_4:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          4
+    rol_id:                 1
+  AplicacionRol_5:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          5
+    rol_id:                 1
+  AplicacionRol_6:
+    accion_alta:            1
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          0
+    accion_publicar:        0
+    aplicacion_id:          1
+    rol_id:                 2
+  AplicacionRol_7:
+    accion_alta:            1
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          0
+    accion_publicar:        0
+    aplicacion_id:          2
+    rol_id:                 2
+  AplicacionRol_8:
+    accion_alta:            1
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          0
+    accion_publicar:        0
+    aplicacion_id:          3
+    rol_id:                 2
+  AplicacionRol_9:
+    accion_alta:            1
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          0
+    accion_publicar:        0
+    aplicacion_id:          4
+    rol_id:                 2
+  AplicacionRol_10:
+    accion_alta:            1
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          0
+    accion_publicar:        0
+    aplicacion_id:          5
+    rol_id:                 2
+  AplicacionRol_11:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          6
+    rol_id:                 1
+  AplicacionRol_12:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          6
+    rol_id:                 2
+  AplicacionRol_13:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          7
+    rol_id:                 1
+  AplicacionRol_14:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          7
+    rol_id:                 2
+  AplicacionRol_15:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          8
+    rol_id:                 1
+  AplicacionRol_16:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          8
+    rol_id:                 2
+  AplicacionRol_17:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          9
+    rol_id:                 1
+  AplicacionRol_18:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          10
+    rol_id:                 1
+
+  AplicacionRol_20:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          11
+    rol_id:                 1
+
+  AplicacionRol_22:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          12
+    rol_id:                 1
+  AplicacionRol_23:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          13
+    rol_id:                 1
+  AplicacionRol_24:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          14
+    rol_id:                 1
+  AplicacionRol_25:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          15
+    rol_id:                 1
+  AplicacionRol_26:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          16
+    rol_id:                 1
+  AplicacionRol_27:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          17
+    rol_id:                 1
+  AplicacionRol_28:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          18
+    rol_id:                 1
+  AplicacionRol_29:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          19
+    rol_id:                 1
+  AplicacionRol_30:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          20
+    rol_id:                 1
+  AplicacionRol_31:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          21
+    rol_id:                 1
+  AplicacionRol_32:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          22
+    rol_id:                 1
+  AplicacionRol_33:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          23
+    rol_id:                 1
+  AplicacionRol_34:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          24
+    rol_id:                 1
+  AplicacionRol_35:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          25
+    rol_id:                 1
+  AplicacionRol_36:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          26
+    rol_id:                 1
+  AplicacionRol_37:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          27
+    rol_id:                 1
+  AplicacionRol_38:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          28
+    rol_id:                 1
+  AplicacionRol_39:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          29
+    rol_id:                 1
+  AplicacionRol_40:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          30
+    rol_id:                 1
+  AplicacionRol_41:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          31
+    rol_id:                 1
+  AplicacionRol_42:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          32
+    rol_id:                 1
+  AplicacionRol_43:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          33
+    rol_id:                 1
+  AplicacionRol_44:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          34
+    rol_id:                 1
+  AplicacionRol_45:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          2
+    rol_id:                 4
+  AplicacionRol_46:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          1
+    rol_id:                 7
+  AplicacionRol_47:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          2
+    rol_id:                 4
+  AplicacionRol_48:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          3
+    rol_id:                 4
+  AplicacionRol_49:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          3
+    rol_id:                 7
+  AplicacionRol_50:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          3
+    rol_id:                 7
+  AplicacionRol_51:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          2
+    rol_id:                 6
+  AplicacionRol_52:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          3
+    rol_id:                 6
+  AplicacionRol_53:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          35
+    rol_id:                 1
+  AplicacionRol_54:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          36
+    rol_id:                 1
+  AplicacionRol_55:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          37
+    rol_id:                 1
+  AplicacionRol_56:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          38
+    rol_id:                 1
+  AplicacionRol_57:
+    accion_alta:            0
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          4
+    rol_id:                 3
+  AplicacionRol_58:
+    accion_alta:            1
+    accion_baja:            0
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          4
+    rol_id:                 6
+  AplicacionRol_59:
+    accion_alta:            0
+    accion_baja:            0
+    accion_modificar:       0
+    accion_listar:          1
+    accion_publicar:        0
+    aplicacion_id:          4
+    rol_id:                 4
+  AplicacionRol_60:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          39
+    rol_id:                 1
+  AplicacionRol_61:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          40
+    rol_id:                 1
+  AplicacionRol_62:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          51
+    rol_id:                 1
+  AplicacionRol_63:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          51
+    rol_id:                 2
+
+
+AplicacionAccion:
+  AplicacionAccion_1:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          1
+  AplicacionAccion_2:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          1
+  AplicacionAccion_3:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          1
+  AplicacionAccion_4:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          1
+  AplicacionAccion_5:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          1
+  AplicacionAccion_6:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          1
+  AplicacionAccion_7:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          1
+  AplicacionAccion_8:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          2
+  AplicacionAccion_9:
+    accion:                 alta
+    accion_del_modulo:      nuevo
+    aplicacion_id:          2
+  AplicacionAccion_10:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          2
+  AplicacionAccion_11:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          2
+  AplicacionAccion_12:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          2
+  AplicacionAccion_13:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          2
+  AplicacionAccion_14:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          2
+  AplicacionAccion_15:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          3
+  AplicacionAccion_16:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          44
+  AplicacionAccion_17:
+    accion:                 listar
+    accion_del_modulo:      lista
+    aplicacion_id:          44
+  AplicacionAccion_18:
+    accion:                 listar
+    accion_del_modulo:      acta
+    aplicacion_id:          44
+  AplicacionAccion_19:
+    accion:                 publicar
+    accion_del_modulo:      convocar
+    aplicacion_id:          44
+  AplicacionAccion_20:
+    accion:                 listar
+    accion_del_modulo:      aceptar
+    aplicacion_id:          44
+  AplicacionAccion_21:
+    accion:                 listar
+    accion_del_modulo:      rechazar
+    aplicacion_id:          44
+  AplicacionAccion_22:
+    accion:                 listar
+    accion_del_modulo:      ver
+    aplicacion_id:          44
+  AplicacionAccion_23:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          44
+  AplicacionAccion_24:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          4
+  AplicacionAccion_25:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          44
+  AplicacionAccion_26:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          44    
+  AplicacionAccion_27:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          44
+  AplicacionAccion_28:
+    accion:                 baja
+    accion_del_modulo:      anular
+    aplicacion_id:          44
+  AplicacionAccion_29:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          5
+  AplicacionAccion_30:
+    accion:                 alta
+    accion_del_modulo:      nuevo
+    aplicacion_id:          5
+  AplicacionAccion_31:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          5
+  AplicacionAccion_32:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          5
+  AplicacionAccion_33:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          5
+  AplicacionAccion_34:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          5
+  AplicacionAccion_35:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          6
+  AplicacionAccion_36:
+    accion:                 alta
+    accion_del_modulo:      nuevo
+    aplicacion_id:          6
+  AplicacionAccion_37:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          6
+  AplicacionAccion_38:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          6
+  AplicacionAccion_39:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          6
+  AplicacionAccion_40:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          6
+  AplicacionAccion_41:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          7    
+  AplicacionAccion_42:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          8
+  AplicacionAccion_43:
+    accion:                 alta
+    accion_del_modulo:      process
+    aplicacion_id:          8
+  AplicacionAccion_44:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          9
+  AplicacionAccion_45:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          9
+  AplicacionAccion_46:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          9
+  AplicacionAccion_47:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          9
+  AplicacionAccion_48:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          9
+  AplicacionAccion_49:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          9
+  AplicacionAccion_50:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          10
+  AplicacionAccion_51:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          10
+  AplicacionAccion_52:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          10
+  AplicacionAccion_53:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          10
+  AplicacionAccion_54:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          10
+  AplicacionAccion_55:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          10
+
+  AplicacionAccion_62:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          11
+  AplicacionAccion_63:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          11
+  AplicacionAccion_64:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          11
+  AplicacionAccion_65:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          11
+  AplicacionAccion_66:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          11
+  AplicacionAccion_67:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          11
+
+  AplicacionAccion_74:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          12
+  AplicacionAccion_75:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          12
+  AplicacionAccion_76:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          12
+  AplicacionAccion_77:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          12
+  AplicacionAccion_78:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          12
+  AplicacionAccion_79:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          12
+  AplicacionAccion_80:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          13
+  AplicacionAccion_81:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          13
+  AplicacionAccion_82:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          13
+  AplicacionAccion_83:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          13
+  AplicacionAccion_84:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          13
+  AplicacionAccion_85:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          13
+  AplicacionAccion_86:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          14
+  AplicacionAccion_87:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          14
+  AplicacionAccion_88:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          14
+  AplicacionAccion_89:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          14
+  AplicacionAccion_90:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          14
+  AplicacionAccion_91:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          14
+  AplicacionAccion_92:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          15
+  AplicacionAccion_93:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          15
+  AplicacionAccion_94:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          15
+  AplicacionAccion_95:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          15
+  AplicacionAccion_96:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          15
+  AplicacionAccion_97:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          15
+  AplicacionAccion_98:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          46
+  AplicacionAccion_99:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          46
+  AplicacionAccion_100:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          46
+  AplicacionAccion_101:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          46
+  AplicacionAccion_102:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          46
+  AplicacionAccion_103:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          46
+  AplicacionAccion_104:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          17
+  AplicacionAccion_105:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          17
+  AplicacionAccion_106:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          17
+  AplicacionAccion_107:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          17
+  AplicacionAccion_108:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          17
+  AplicacionAccion_109:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          17
+  AplicacionAccion_110:
+    accion:                 publicar
+    accion_del_modulo:      show
+    aplicacion_id:          15
+  AplicacionAccion_111:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          18
+  AplicacionAccion_112:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          18
+  AplicacionAccion_113:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          18
+  AplicacionAccion_114:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          18
+  AplicacionAccion_115:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          18
+  AplicacionAccion_116:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          19
+  AplicacionAccion_117:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          19
+  AplicacionAccion_118:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          19
+  AplicacionAccion_119:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          19
+  AplicacionAccion_120:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          19
+  AplicacionAccion_121:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          20
+  AplicacionAccion_122:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          20
+  AplicacionAccion_123:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          20
+  AplicacionAccion_124:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          20
+  AplicacionAccion_125:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          20
+  AplicacionAccion_126:
+    accion:                 modificar
+    accion_del_modulo:      perfil
+    aplicacion_id:          5
+  AplicacionAccion_127:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          18
+  AplicacionAccion_128:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          19
+  AplicacionAccion_129:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          20    
+  AplicacionAccion_130:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          21
+  AplicacionAccion_131:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          21
+  AplicacionAccion_132:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          21
+  AplicacionAccion_133:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          21
+  AplicacionAccion_134:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          21
+  AplicacionAccion_135:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          21
+  AplicacionAccion_136:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          21
+  AplicacionAccion_137:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          22
+  AplicacionAccion_138:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          22
+  AplicacionAccion_139:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          22
+  AplicacionAccion_140:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          22
+  AplicacionAccion_141:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          22
+  AplicacionAccion_142:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          22
+  AplicacionAccion_143:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          22
+  AplicacionAccion_144:
+    accion:                 listar
+    accion_del_modulo:      ver
+    aplicacion_id:          1    
+  AplicacionAccion_145:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          23
+  AplicacionAccion_146:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          23
+  AplicacionAccion_147:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          23
+  AplicacionAccion_148:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          23
+  AplicacionAccion_149:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          23
+  AplicacionAccion_150:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          23
+  AplicacionAccion_151:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          18
+  AplicacionAccion_152:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          19
+  AplicacionAccion_153:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          20
+  AplicacionAccion_154:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          1
+  AplicacionAccion_155:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          2
+  AplicacionAccion_156:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          13
+  AplicacionAccion_157:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          14
+  AplicacionAccion_158:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          12
+  AplicacionAccion_159:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          24
+  AplicacionAccion_160:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          24
+  AplicacionAccion_161:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          24
+  AplicacionAccion_162:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          24
+  AplicacionAccion_163:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          24
+  AplicacionAccion_164:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          24
+  AplicacionAccion_165:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          24
+  AplicacionAccion_166:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          24
+  AplicacionAccion_167:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          25
+  AplicacionAccion_168:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          25
+  AplicacionAccion_169:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          25
+  AplicacionAccion_170:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          25
+  AplicacionAccion_171:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          25
+  AplicacionAccion_172:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          25
+  AplicacionAccion_173:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          25
+
+  AplicacionAccion_174:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          26
+  AplicacionAccion_175:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          26
+  AplicacionAccion_176:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          26
+  AplicacionAccion_177:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          26
+  AplicacionAccion_178:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          26
+  AplicacionAccion_179:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          26
+  AplicacionAccion_180:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          26
+
+  AplicacionAccion_181:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          27
+  AplicacionAccion_182:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          27
+  AplicacionAccion_183:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          27
+  AplicacionAccion_184:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          27
+  AplicacionAccion_185:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          27
+  AplicacionAccion_186:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          27
+  AplicacionAccion_187:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          27
+
+  AplicacionAccion_188:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          28 
+  AplicacionAccion_189:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          28
+  AplicacionAccion_190:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          28
+  AplicacionAccion_191:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          28
+  AplicacionAccion_192:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          28
+  AplicacionAccion_193:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          28
+  AplicacionAccion_194:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          28
+  AplicacionAccion_195:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          28
+
+  AplicacionAccion_196:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          29 
+  AplicacionAccion_197:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          29
+  AplicacionAccion_198:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          29
+  AplicacionAccion_199:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          29
+  AplicacionAccion_200:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          29
+  AplicacionAccion_201:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          29
+  AplicacionAccion_202:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          29
+  AplicacionAccion_203:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          29
+
+  AplicacionAccion_204:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          30 
+  AplicacionAccion_205:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          30
+  AplicacionAccion_206:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          30
+  AplicacionAccion_207:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          30
+  AplicacionAccion_208:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          30
+  AplicacionAccion_209:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          30
+  AplicacionAccion_210:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          30
+  AplicacionAccion_211:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          30
+
+  AplicacionAccion_212:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          31
+  AplicacionAccion_213:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          31
+  AplicacionAccion_214:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          31
+  AplicacionAccion_215:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          31
+  AplicacionAccion_216:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          31
+  AplicacionAccion_217:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          31
+  AplicacionAccion_218:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          31
+  AplicacionAccion_219:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          31
+
+  AplicacionAccion_220:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          32
+  AplicacionAccion_221:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          32
+  AplicacionAccion_222:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          32
+  AplicacionAccion_223:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          32
+  AplicacionAccion_224:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          32
+  AplicacionAccion_225:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          32
+  AplicacionAccion_226:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          32
+  AplicacionAccion_227:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          32
+
+  AplicacionAccion_228:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          33
+  AplicacionAccion_230:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          33
+  AplicacionAccion_231:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          33
+  AplicacionAccion_232:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          33
+  AplicacionAccion_233:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          33
+  AplicacionAccion_234:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          33
+  AplicacionAccion_235:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          33
+  AplicacionAccion_236:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          33
+
+  AplicacionAccion_237:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          34
+  AplicacionAccion_238:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          34
+  AplicacionAccion_239:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          34
+  AplicacionAccion_240:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          34
+  AplicacionAccion_241:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          34
+  AplicacionAccion_242:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          34
+  AplicacionAccion_243:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          34
+  AplicacionAccion_244:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          34
+
+  AplicacionAccion_245:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          35
+  AplicacionAccion_246:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          35
+  AplicacionAccion_247:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          35
+  AplicacionAccion_248:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          35
+  AplicacionAccion_249:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          35
+  AplicacionAccion_250:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          35
+  AplicacionAccion_251:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          35
+  AplicacionAccion_252:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          35
+
+  AplicacionAccion_253:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          36
+  AplicacionAccion_254:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          36
+  AplicacionAccion_255:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          36
+  AplicacionAccion_256:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          36
+  AplicacionAccion_257:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          36
+  AplicacionAccion_258:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          36
+  AplicacionAccion_259:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          36
+  AplicacionAccion_260:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          36
+
+  AplicacionAccion_261:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          37
+  AplicacionAccion_262:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          37
+  AplicacionAccion_263:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          37
+  AplicacionAccion_264:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          37
+  AplicacionAccion_265:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          37
+  AplicacionAccion_266:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          37
+  AplicacionAccion_267:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          37
+  AplicacionAccion_268:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          37
+
+
+  AplicacionAccion_269:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          38
+  AplicacionAccion_270:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          38
+  AplicacionAccion_271:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          38
+  AplicacionAccion_272:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          38
+  AplicacionAccion_273:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          38
+  AplicacionAccion_274:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          38
+  AplicacionAccion_275:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          38
+  AplicacionAccion_276:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          38
+
+
+  AplicacionAccion_277:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          39
+  AplicacionAccion_278:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          39
+  AplicacionAccion_279:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          39
+  AplicacionAccion_280:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          39
+  AplicacionAccion_281:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          39
+  AplicacionAccion_282:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          39
+  AplicacionAccion_283:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          39
+  AplicacionAccion_284:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          39
+
+  AplicacionAccion_285:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          40
+  AplicacionAccion_286:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          40
+  AplicacionAccion_287:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          40
+  AplicacionAccion_288:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          40
+  AplicacionAccion_289:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          40
+  AplicacionAccion_290:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          40
+  AplicacionAccion_291:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          40
+  AplicacionAccion_292:
+    accion:                 listar
+    accion_del_modulo:      show
+    aplicacion_id:          40
+  AplicacionAccion_293:
+    accion:                 publicar
+    accion_del_modulo:      convocados
+    aplicacion_id:          44
+  AplicacionAccion_294:
+    accion:                 publicar
+    accion_del_modulo:      ver
+    aplicacion_id:          46
+  AplicacionAccion_295:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          50
+    deleted:                0
+  AplicacionAccion_296:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          51
+    deleted:                0
+  AplicacionAccion_297:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          51
+    deleted:                0
+  AplicacionAccion_298:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          51
+    deleted:                0
+  AplicacionAccion_299:
+    accion:                 publicar
+    accion_del_modulo:      show
+    aplicacion_id:          51
+    deleted:                0
+  AplicacionAccion_230:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          51
+    deleted:                0 
+  AplicacionAccion_231:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          51
+    deleted:                0 
+  AplicacionAccion_232:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          51
+    deleted:                0 
+
+UsuarioGrupoTrabajo:
+  UsuarioGrupoTrabajo_1:
+    usuario_id:             3
+    grupo_trabajo_id:       1
+  UsuarioGrupoTrabajo_2:
+    usuario_id:             4
+    grupo_trabajo_id:       1
+  UsuarioGrupoTrabajo_3:
+    usuario_id:             5
+    grupo_trabajo_id:       2
+  UsuarioGrupoTrabajo_4:
+    usuario_id:             6
+    grupo_trabajo_id:       2
+
+
+AplicacionExterna:
+  AplicacionExterna_1:
+    nombre:    'Web AMAT'
+    detalle:   ''
+    imagen:    'f401d04aa536ed798e88e104e2340f17d4f96e17.jpg'
+    url:       ''    
+  AplicacionExterna_2:
+    nombre:    'SAM - RESINA'
+    detalle:   ''
+    imagen:    '3a6d8c70635b55a12edb25e926d8e70e08b0e9be.jpg'
+    url:       ''
+  AplicacionExterna_3:
+    nombre:    'Estadisticas Qualitel'
+    detalle:   ''
+    imagen:    '01d3455fdd7b9b8b64eb37cc234e8116e5a06dff.jpg'
+    url:       ''
+
+
+Menu:
+  Menu_1:
+    padre_id:      0
+    nombre:        Canal Corporativo
+    descripcion:   
+    aplicacion_id: null
+    url_externa:   
+    posicion:      1  
+    habilitado:    1
+  Menu_2:
+    padre_id:      1
+    nombre:        Eventos
+    descripcion: 
+    aplicacion_id: 2
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_3:
+    padre_id:      1
+    nombre:        Novedades
+    descripcion: 
+    aplicacion_id: 1
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_4:
+    padre_id:      1
+    nombre:        Aplicaciones
+    descripcion: 
+    aplicacion_id: 23
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_5:
+    padre_id:      1
+    nombre:        Avisos
+    descripcion: 
+    aplicacion_id: 17
+    url_externa: 
+    posicion:      4
+    habilitado:    1
+  Menu_6:
+    padre_id:      1
+    nombre:        Web Amat
+    descripcion: 
+    aplicacion_id: NULL 
+    url_externa: 
+    posicion:      5
+    habilitado:    1
+  Menu_7:
+    padre_id:      6
+    nombre:        Cifras y Datos
+    descripcion: 
+    aplicacion_id: 18
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_8:
+    padre_id:      6
+    nombre:        Actividades
+    descripcion: 
+    aplicacion_id: 19
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_9:
+    padre_id:      6
+    nombre:        Publicaciones
+    descripcion: 
+    aplicacion_id: 20
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_10:
+    padre_id:      0
+    nombre:        Documentación
+    descripcion: 
+    aplicacion_id: NULL
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_11:
+    padre_id:      10
+    nombre:        Normativas
+    descripcion: 
+    aplicacion_id: 13
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_12:
+    padre_id:      10
+    nombre:        Iniciativas Formativas
+    descripcion: 
+    aplicacion_id: 14
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_13:
+    padre_id:      10
+    nombre:        Circulares
+    descripcion: 
+    aplicacion_id: 12
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_14:
+    padre_id:      13
+    nombre:        Categoria de tema
+    descripcion: 
+    aplicacion_id: 10
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_15:
+    padre_id:      13
+    nombre:        Subcategorías de temas 
+    descripcion: 
+    aplicacion_id: 11
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_16:
+    padre_id:      0
+    nombre:        Directores Gerente
+    descripcion:
+    aplicacion_id: NULL 
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_17:
+    padre_id:      16
+    nombre:        Convocatorias - Asamblea
+    descripcion: 
+    aplicacion_id: 4
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_18:
+    padre_id:      0
+    nombre:        Grupos de Trabajo
+    descripcion: 
+    aplicacion_id: NULL
+    url_externa: 
+    posicion:      4
+    habilitado:    1
+  Menu_19:
+    padre_id:      18
+    nombre:        Miembros del Grupo de Trabajo
+    descripcion: 
+    aplicacion_id: 40
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_20:
+    padre_id:      18
+    nombre:        Gestion de Grupos de Trabajo
+    descripcion: 
+    aplicacion_id: 21
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_21:
+    padre_id:      18
+    nombre:        Gestion de Tipos de Documentos
+    descripcion: 
+    aplicacion_id: 25
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_22:
+    padre_id:      18
+    nombre:        Gestion de Documentos
+    descripcion: 
+    aplicacion_id: 24
+    url_externa: 
+    posicion:      4
+    habilitado:    1
+  Menu_23:
+    padre_id:      18
+    nombre:        Gestion de Archivos
+    descripcion: 
+    aplicacion_id: 26
+    url_externa: 
+    posicion:      5
+    habilitado:    1
+  Menu_24:
+    padre_id:      0
+    nombre:        Consejos Territoriales
+    descripcion: 
+    aplicacion_id: NULL
+    url_externa: 
+    posicion:      5
+    habilitado:    1
+  Menu_25:
+    padre_id:      24
+    nombre:        Gestion de Consejos Territoriales
+    descripcion: 
+    aplicacion_id: 22
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_26:
+    padre_id:      24
+    nombre:        Gestion de Tipos de Documentos
+    descripcion: 
+    aplicacion_id: 27
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_27:
+    padre_id:      24
+    nombre:        Gestion de Documentos
+    descripcion: 
+    aplicacion_id: 28
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_28:
+    padre_id:      24
+    nombre:        Gestion de Archivos
+    descripcion: 
+    aplicacion_id: 29
+    url_externa: 
+    posicion:      4
+    habilitado:    1
+  Menu_29:
+    padre_id:      0
+    nombre:        Administración
+    descripcion:
+    aplicacion_id: NULL 
+    url_externa: 
+    posicion:      6
+    habilitado:    1
+  Menu_30:
+    padre_id:      29
+    nombre:        Gestión de Usuarios
+    descripcion: 
+    aplicacion_id: 5
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_31:
+    padre_id:      29
+    nombre:        Aplicaciones de Rol
+    descripcion: 
+    aplicacion_id: 6
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_32:
+    padre_id:      29
+    nombre:        Cuenta de Correo de Contacto
+    descripcion: 
+    aplicacion_id: 9
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_33:
+    padre_id:      29
+    nombre:        Gestión de Mutuas
+    descripcion: 
+    aplicacion_id: 15
+    url_externa: 
+    posicion:      4
+    habilitado:    1
+  Menu_34:
+    padre_id:      29
+    nombre:        Organismos
+    descripcion:
+    aplicacion_id: NULL 
+    url_externa: 
+    posicion:      5
+    habilitado:    1
+  Menu_35:
+    padre_id:      34
+    nombre:        Categoría Organismos
+    descripcion: 
+    aplicacion_id: 30
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_36:
+    padre_id:      34
+    nombre:        Subcategorías Organismos
+    descripcion: 
+    aplicacion_id: 31
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_37:
+    padre_id:      34
+    nombre:        Gestión de Organismos
+    descripcion: 
+    aplicacion_id: 32
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_38:
+    padre_id:      34
+    nombre:        Documentación de Organismos
+    descripcion: 
+    aplicacion_id: 33
+    url_externa: 
+    posicion:      4
+    habilitado:    1
+  Menu_39:
+    padre_id:      34
+    nombre:        Archivos de Organismos
+    descripcion: 
+    aplicacion_id: 34
+    url_externa: 
+    posicion:      5
+    habilitado:    1
+  Menu_40:
+    padre_id:      29
+    nombre:        Comunicados
+    descripcion: 
+    aplicacion_id: 37
+    url_externa: 
+    posicion:      6
+    habilitado:    1
+  Menu_41:
+    padre_id:      40
+    nombre:        Envio de Comunicados
+    descripcion: 
+    aplicacion_id: 38
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_42:
+    padre_id:      40
+    nombre:        Tipos de Comunicados
+    descripcion: 
+    aplicacion_id: 36
+    url_externa: 
+    posicion:      2
+    habilitado:    1
+  Menu_43:
+    padre_id:      40
+    nombre:        Lista de Comunicados
+    descripcion: 
+    aplicacion_id: 35
+    url_externa: 
+    posicion:      3
+    habilitado:    1
+  Menu_44:
+    padre_id:      29
+    nombre:        Aplicaciones Externas
+    descripcion: 
+    aplicacion_id: 23
+    url_externa: 
+    posicion:      7
+    habilitado:    1
+  Menu_45:
+    padre_id:      29
+    nombre:        Administarcion del Menu 
+    descripcion: 
+    aplicacion_id: 39
+    url_externa: 
+    posicion:      8
+    habilitado:    1
+  Menu_46:
+    padre_id:      18
+    nombre:        Convocatorias 
+    descripcion: 
+    aplicacion_id: 42
+    url_externa: 
+    posicion:      8
+    habilitado:    1
+  Menu_47:
+    padre_id:      24
+    nombre:        Convocatorias 
+    descripcion: 
+    aplicacion_id: 43
+    url_externa: 
+    posicion:      8
+    habilitado:    1
+  Menu_48:
+    padre_id:      24
+    nombre:        Miembros del Consejos Territoriales
+    descripcion: 
+    aplicacion_id: 47
+    url_externa: 
+    posicion:      1
+    habilitado:    1
+  Menu_49:
+    padre_id:      34
+    nombre:        Convocatoria Organismo
+    descripcion: 
+    aplicacion_id: 48
+    url_externa: 
+    posicion:      7
+    habilitado:    1
+  Menu_50:
+    padre_id:      34
+    nombre:        Actas
+    descripcion: 
+    aplicacion_id: 49
+    url_externa: 
+    posicion:      8
+    habilitado:    1
+  Menu_51:
+    padre_id:      34
+    nombre:        Miembros de Organismos 
+    descripcion: 
+    aplicacion_id: 50
+    url_externa: 
+    posicion:      1
+    habilitado:    1
