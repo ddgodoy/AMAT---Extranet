@@ -952,5 +952,13 @@ SubCategoriaAcuerdo:
   relations:
     CategoriaAcuerdo:        { local: categoria_acuerdo_id, foreign: id, onDelete: CASCADE }
     
-
+Usuario_externo:
+  actAs:
+    Timestampable: ~
+    SoftDelete: ~
+  columns:
+    nombre:                  { type: string(150), notnull: true }
+    apellido:                { type: string(150), notnull: true }
+    email:                   { type: string(150), notnull: false }
+    telefono:                { type: string(150) }    
 
