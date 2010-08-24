@@ -51,7 +51,7 @@ abstract class BaseDocumentacionOrganismo extends Documentacion
         $this->hasColumn('fecha_publicado', 'timestamp', null, array(
              'type' => 'timestamp',
              ));
-         $this->hasColumn('fecha_desde', 'date', null, array(
+        $this->hasColumn('fecha_desde', 'date', null, array(
              'type' => 'date',
              ));
         $this->hasColumn('fecha_hasta', 'date', null, array(
