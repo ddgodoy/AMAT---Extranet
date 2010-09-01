@@ -115,11 +115,6 @@ class usuarios_mutuasActions extends sfActions
 		}else {
 		                if($this->getUser()->getAttribute($modulo.'_noworderBY'))
                     {
-                       /*$this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
-                       $ordenacion = explode(' ', $this->orderBYSql);
-                       $this->orderBy = $ordenacion[0];
-                       $this->sortType = $ordenacion[1];*/
-                       
                        $this->orderBy = 'u.apellido, u.nombre';
                        $this->sortType = 'asc';
                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType; 
