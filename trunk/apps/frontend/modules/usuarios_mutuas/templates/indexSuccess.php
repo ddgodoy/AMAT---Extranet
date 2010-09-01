@@ -114,7 +114,7 @@
 					<td width="80%">
 					  <select style="width: 280px;" size="8" multiple="multiple" id="grupo" name="grupo[]">
               <?php foreach (GrupoTrabajoTable::getAllGrupoTrabajo() as $item) { ?>
-                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if (in_array($item->getId(), $cajaGruBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
+                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if ($cajaGruBsq && in_array($item->getId(), $cajaGruBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
               <?php } ?>
             </select>
 					</td>
@@ -124,7 +124,7 @@
 					<td width="80%">
 					  <select style="width: 280px;" size="8" multiple="multiple" id="consejo" name="consejo[]">
               <?php foreach (ConsejoTerritorialTable::getAllconsejo() as $item) { ?>
-                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if (in_array($item->getId(), $cajaConBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
+                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if ($cajaConBsq && in_array($item->getId(), $cajaConBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
               <?php } ?>
             </select>
 					</td>
