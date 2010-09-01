@@ -4,6 +4,31 @@
 ?>
 <script type="text/javascript" src="/js/common_functions.js"></script>
 
+
+<style>
+/* Tooltips */
+#tooltip {
+  position: absolute;
+  padding: 4px;
+  color: #FFF;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  display: none;
+  text-align: left;
+  background-color: #000;
+  opacity: 0.8;
+  -moz-opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+ 
+.tooltipTitle {
+  font-weight: bold;
+  color:#FF9900;
+}
+
+</style>
+
+
 <div class="mapa"><strong>Administraci&oacute;n</strong> &gt Usuarios Mutua: <?php echo $sf_user->getAttribute('mutua'); ?></div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
@@ -87,15 +112,21 @@
 					<tr>
 					<td width="20%">Grupo de trabajo</td>
 					<td width="80%">
-					 <?php echo select_tag('grupo',options_for_select( _get_options_from_objects(GrupoTrabajoTable::getAllGrupoTrabajo()),$cajaGruBsq),array('multiple' => 'true',
-'size' => 8,'style'=>'width:200px'));?>
+					  <select style="width: 280px;" size="8" multiple="multiple" id="grupo" name="grupo[]">
+              <?php foreach (GrupoTrabajoTable::getAllGrupoTrabajo() as $item) { ?>
+                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if (in_array($item->getId(), $cajaGruBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
+              <?php } ?>
+            </select>
 					</td>
 					</tr>
 					<tr>
 					<td width="20%">Consejo territorial</td>
 					<td width="80%">
-					<?php echo select_tag('consejo',options_for_select(_get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()),$cajaConBsq),array('multiple' => 'true',
-'size' => 8,'style'=>'width:200px'));?>
+					  <select style="width: 280px;" size="8" multiple="multiple" id="consejo" name="consejo[]">
+              <?php foreach (ConsejoTerritorialTable::getAllconsejo() as $item) { ?>
+                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if (in_array($item->getId(), $cajaConBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
+              <?php } ?>
+            </select>
 					</td>
 					</tr>
 					<tr>
