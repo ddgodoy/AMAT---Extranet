@@ -82,7 +82,7 @@ class inicioActions extends sfActions
 			{
 			  $usuarios = Doctrine_Query::create()
 			    ->from('Usuario u')
-                            ->leftJoin('u.UsuarioGrupoTrabajo ug')
+                ->leftJoin('u.UsuarioGrupoTrabajo ug')
 		            ->leftJoin('u.UsuarioConsejoTerritorial uc')
 		            ->leftJoin('u.UsuarioRol ur')
 		            ->leftJoin('u.Mutua m')
@@ -91,7 +91,7 @@ class inicioActions extends sfActions
                             $usuarios->addWhere($filtro);
                            }else{
                              $this->tabla = 'Usuario_mutuas';
-                             $usuarios->addWhere($filtro." AND ug.usuario_id != '' AND uc.usuario_id != '' AND u.mutua_id = '".$this->getUser()->getAttribute('mutuaId')."'");
+                             $usuarios->addWhere($filtro." AND (ug.usuario_id != '' OR uc.usuario_id != '') AND u.mutua_id = '".$this->getUser()->getAttribute('mutuaId')."'");
                            }
                              $usuarios->groupBy('u.id');
 			 

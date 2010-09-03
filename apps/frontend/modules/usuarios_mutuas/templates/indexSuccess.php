@@ -4,12 +4,37 @@
 ?>
 <script type="text/javascript" src="/js/common_functions.js"></script>
 
+
+<style>
+/* Tooltips */
+#tooltip {
+  position: absolute;
+  padding: 4px;
+  color: #FFF;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  display: none;
+  text-align: left;
+  background-color: #000;
+  opacity: 0.8;
+  -moz-opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+ 
+.tooltipTitle {
+  font-weight: bold;
+  color:#FF9900;
+}
+
+</style>
+
+
 <div class="mapa"><strong>Administraci&oacute;n</strong> &gt Usuarios Mutua: <?php echo $sf_user->getAttribute('mutua'); ?></div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
 			<tr>
 				<td width="70%"><h1>Usuarios Mutua: <?php echo $sf_user->getAttribute('mutua'); ?></h1></td>
-				<td width="5%" align="center"><?php $nombretabla = 'Usuario_mutuas'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar exel', 'alt' => 'Exportar exel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
+				<td width="5%" align="center"><?php $nombretabla = 'Usuario_mutuas'; echo link_to(image_tag('export_exel.jpg', array('title' => 'Exportar excel', 'alt' => 'Exportar excel', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xls'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_csv.jpg', array('title' => 'Exportar csv', 'alt' => 'Exportar csv', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.csv'); ?></td>
 				<td width="5%" align="center"><?php echo link_to(image_tag('export_xml.jpg', array('title' => 'Exportar xml', 'alt' => 'Exportar xml', 'border' => '0')), 'inicio/exportar?tabla='.$nombretabla.'&filtro='.$sf_context->getModuleName().'_nowfilter&tipo=.xml'); ?></td>
 				<td width="5%" align="right">
@@ -87,15 +112,21 @@
 					<tr>
 					<td width="20%">Grupo de trabajo</td>
 					<td width="80%">
-					 <?php echo select_tag('grupo',options_for_select( _get_options_from_objects(GrupoTrabajoTable::getAllGrupoTrabajo()),$cajaGruBsq),array('multiple' => 'true',
-'size' => 8,'style'=>'width:200px'));?>
+					  <select style="width: 280px;" size="8" multiple="multiple" id="grupo" name="grupo[]">
+              <?php foreach (GrupoTrabajoTable::getAllGrupoTrabajo() as $item) { ?>
+                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if ($cajaGruBsq && in_array($item->getId(), $cajaGruBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
+              <?php } ?>
+            </select>
 					</td>
 					</tr>
 					<tr>
 					<td width="20%">Consejo territorial</td>
 					<td width="80%">
-					<?php echo select_tag('consejo',options_for_select(_get_options_from_objects(ConsejoTerritorialTable::getAllconsejo()),$cajaConBsq),array('multiple' => 'true',
-'size' => 8,'style'=>'width:200px'));?>
+					  <select style="width: 280px;" size="8" multiple="multiple" id="consejo" name="consejo[]">
+              <?php foreach (ConsejoTerritorialTable::getAllconsejo() as $item) { ?>
+                <option value="<?php echo $item->getId() ?>" class="tooltip" title="[!]<?php echo $item->getNombre() ?>[/!]" <?php if ($cajaConBsq && in_array($item->getId(), $cajaConBsq)) {echo 'selected="selected"';} ?> ><?php echo $item->getNombre() ?></option>
+              <?php } ?>
+            </select>
 					</td>
 					</tr>
 					<tr>
