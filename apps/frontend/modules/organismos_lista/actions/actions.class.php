@@ -24,10 +24,7 @@ class organismos_listaActions extends sfActions
         ->leftJoin('o.CategoriaOrganismo co')
         ->leftJoin('o.SubCategoriaOrganismo sco')
 	->where($this->setFiltroBusqueda());
-	if($this->getUser()->getAttribute('userId')!= 1 && !key_exists(1,UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1)))
-	    {
-	     $this->pager->getQuery()->andWhere('uo.usuario_id ='. $this->getUser()->getAttribute('userId'));
-	    }   
+	   
 	$this->pager->getQuery()->orderBy($this->setOrdenamiento());
 	
 	
