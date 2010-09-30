@@ -181,9 +181,10 @@ class archivos_c_t_listaActions extends sfActions
 		}
 		else
 		{
-                   $responsables = ArchivoCT::getUSerREsponsables();
-		   return "ac.deleted=0 ".$parcial." AND ac.consejo_territorial_id IN ".$consejosterritoriales." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')AND (ac.owner_id ".$responsables." OR  dc.confidencial != 1  OR  ac.owner_id = ".$this->getUser()->getAttribute('userId').")";
-                }
+       $responsables = ArchivoCT::getUSerREsponsables();
+		   //return "ac.deleted=0 ".$parcial." AND ac.consejo_territorial_id IN ".$consejosterritoriales." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')AND (ac.owner_id ".$responsables." OR  dc.confidencial != 1  OR  ac.owner_id = ".$this->getUser()->getAttribute('userId').")";
+		   return "ac.deleted=0".$parcial." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')";
+    }
 		
  }
   

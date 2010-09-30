@@ -82,9 +82,10 @@ class miembros_consejo_listaActions extends sfActions
 			return 'c.deleted=0 AND u.deleted = 0'.$parcial;
 		}
 		else
-        { 
-		  return 'c.deleted=0 AND u.deleted = 0 '.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
-        }  
+    { 
+		  //return 'c.deleted=0 AND u.deleted = 0 '.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
+		  return 'c.deleted=0 AND u.deleted = 0'.$parcial;
+    }  
 	}
 	
 	protected function setOrdenamiento()

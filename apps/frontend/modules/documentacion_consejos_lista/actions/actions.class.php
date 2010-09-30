@@ -135,9 +135,10 @@ class documentacion_consejos_listaActions extends sfActions
 			return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
 		}
 		else
-        { 
-		  return "deleted=0".$parcial." AND consejo_territorial_id IN ".$consejosterritoriales." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
-        }  
+    { 
+		  //return "deleted=0".$parcial." AND consejo_territorial_id IN ".$consejosterritoriales." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
+		  return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
+    }  
 		
   }
   
