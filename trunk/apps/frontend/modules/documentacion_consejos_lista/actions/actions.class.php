@@ -130,16 +130,8 @@ class documentacion_consejos_listaActions extends sfActions
 	
 		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
-		{
-			return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
-		}
-		else
-    { 
-		  //return "deleted=0".$parcial." AND consejo_territorial_id IN ".$consejosterritoriales." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
-		  return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
-    }  
 		
+		return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
   }
   
   protected function setOrdenamiento()

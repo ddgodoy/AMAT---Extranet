@@ -175,17 +175,8 @@ class archivos_c_t_listaActions extends sfActions
 		}
 		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2','7'=>'7'), $this->roles))
-		{
-			return "ac.deleted=0".$parcial." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')";
-		}
-		else
-		{
-       $responsables = ArchivoCT::getUSerREsponsables();
-		   //return "ac.deleted=0 ".$parcial." AND ac.consejo_territorial_id IN ".$consejosterritoriales." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')AND (ac.owner_id ".$responsables." OR  dc.confidencial != 1  OR  ac.owner_id = ".$this->getUser()->getAttribute('userId').")";
-		   return "ac.deleted=0".$parcial." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')";
-    }
 		
+		return "ac.deleted=0".$parcial." AND (dc.owner_id = ".$this->getUser()->getAttribute('userId')." OR dc.estado != 'guardado')";
  }
   
   protected function setOrdenamiento()

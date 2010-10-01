@@ -77,15 +77,8 @@ class miembros_consejo_listaActions extends sfActions
 		}
 		$consejosterritoriales = ConsejoTerritorial::IdDeconsejo($this->getUser()->getAttribute('userId'),1);
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
-		if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles))
-		{
-			return 'c.deleted=0 AND u.deleted = 0'.$parcial;
-		}
-		else
-    { 
-		  //return 'c.deleted=0 AND u.deleted = 0 '.$parcial.' AND consejo_territorial_id IN '.$consejosterritoriales;
-		  return 'c.deleted=0 AND u.deleted = 0'.$parcial;
-    }  
+		
+		return 'c.deleted=0 AND u.deleted = 0'.$parcial;		  
 	}
 	
 	protected function setOrdenamiento()

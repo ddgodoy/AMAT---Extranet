@@ -53,7 +53,8 @@ endif; ?>
 			</tr>
 		</tbody>
 	</table>
-        <?php  include_component('miembros_organismo','MenuOrganismos',array('id' => $organismoBsq,'modulo'=>$modulo));    ?>
+	
+  <?php  include_component('miembros_organismo_lista','MenuOrganismos',array('id' => $organismoBsq,'modulo'=>$modulo));    ?>
 	<?php if ($sf_user->hasFlash('notice')): ?><div class="mensajeSistema ok"><?php echo $sf_user->getFlash('notice') ?></div><?php endif; ?>
 
 	<div class="leftside">
