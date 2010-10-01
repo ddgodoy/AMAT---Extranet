@@ -160,11 +160,7 @@ class documentacion_organismos_listaActions extends sfActions
 		$organismos = Organismo::IdDeOrganismo($this->getUser()->getAttribute('userId'),1);
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
-		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
-			return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
-		} else {
-		  return "deleted=0".$parcial." AND organismo_id IN ".$organismos." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";
-		}
+		return "deleted=0".$parcial." AND (owner_id = ".$this->getUser()->getAttribute('userId')." OR estado != 'guardado')";		
   }
   
   protected function setOrdenamiento()
