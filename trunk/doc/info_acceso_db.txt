@@ -1,0 +1,6 @@
+Acceso a BD de produccion de Extranet
+
+dbname=intranet_amat_es     
+username: intranet.amat.es
+password: Er45Bmf7
+url: https://extranet.amat.es/phpMyAdmin/index.php

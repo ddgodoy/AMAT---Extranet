@@ -1,5 +1,5 @@
 <h1>
-	Noticias Destacadas<span class="der"><a href="<?php echo url_for('noticias/index') ?>">Ver m&aacute;s Noticias</a></span>
+	Novedades sobre Mutuas<span class="der"><a href="<?php echo url_for('noticias/index') ?>">Ver m&aacute;s Novedades</a></span>
 </h1>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="listados herramientas" style="border:none;">
 	<?php $i=0; foreach ($ultimas_noticias as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
@@ -17,5 +17,5 @@
 			<p><?php echo nl2br($noticia->getEntradilla()) ?></p>
 		</td>
 	</tr>
-<?php endforeach; ?>
+	<?php endforeach; ?>
 </table>
