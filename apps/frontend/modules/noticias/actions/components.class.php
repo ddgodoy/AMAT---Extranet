@@ -9,19 +9,20 @@
  */
 class noticiasComponents extends sfComponents
 {
+	/**
+	 * Novedades sobre Mutuas
+	 *
+	 * @param sfWebRequest $request
+	 */
 	public function executeUltimas_noticias(sfWebRequest $request)
 	{
+		$rol = '';
 		$rolTrue = UsuarioRol::getRepository()->getRoAndUsurio($this->getUser()->getAttribute('userId'), '(1,2)');
-		if( count($rolTrue) >= 1)
-		{
+
+		if (count($rolTrue) >= 1) {
 			$rol = 1;
 		}
-		else 
-		{
-			$rol = '';
-		}
-		
-		$this->ultimas_noticias = NoticiaTable::getUltimasNoticias(5,$rol);
-		
+		$this->ultimas_noticias = NoticiaTable::getUltimasNovedades(5, $rol);
 	}
-}
+
+} // end class

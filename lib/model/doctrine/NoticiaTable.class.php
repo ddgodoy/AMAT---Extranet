@@ -13,32 +13,36 @@ class NoticiaTable extends Doctrine_Table
 		
 		return $pager;
 	}
-	
-	public static function getUltimasNoticias($limit=null,$rol='')
+
+	/**
+	 * Ultimas noticias
+	 *
+	 * @param integer $limit
+	 * @param integer $rol
+	 * @return mixed
+	 */
+	public static function getUltimasNovedades($limit = null, $rol = '')
 	{
 		$q = Doctrine_Query::create();
+
 		$q->from('Noticia n');
 		$q->Where("n.estado = 'publicado'");
-		if($rol !='')
-		{
+		if ($rol !='') {
 			$q->andWhere('n.deleted=0');
-		}
-		else 
-		{
+		} else {
 			$q->andWhere("n.deleted=0  AND n.ambito != 'web' AND n.fecha_publicacion <= NOW() AND (n.fecha_caducidad >= NOW() OR n.fecha_caducidad IS NULL ) ");
 		}	
-		$q->andWhere("n.destacada = 1");
-		$q->orderBy('n.id DESC');
-		if($limit) $q->limit($limit);
-		
+		$q->andWhere("n.novedad = 1");
+		$q->andWhere("n.mutua_id != 1");
+		$q->orderBy('n.fecha_publicacion DESC');
 
-		
-			
+		if($limit) $q->limit($limit);
+
 		$notificaciones = $q->execute();
 		
 		return $notificaciones;
 	}
-	
+
 	public static  function getNoticiasCaducas()
 	{
 		$q = Doctrine_Query::create()
