@@ -34,12 +34,12 @@ class NoticiaTable extends Doctrine_Table
 		}	
 		$q->andWhere("n.novedad = 1");
 		$q->andWhere("n.mutua_id != 1");
-		$q->orderBy('n.fecha_publicacion DESC');
+		$q->orderBy('n.fecha DESC');
 
 		if($limit) $q->limit($limit);
 
 		$notificaciones = $q->execute();
-		
+
 		return $notificaciones;
 	}
 
