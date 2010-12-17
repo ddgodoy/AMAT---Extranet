@@ -22,7 +22,7 @@ class ActaForm extends BaseActaForm
 		));
 		
 		$this->setValidators(array(
-			'id'              => new sfValidatorDoctrineChoice(array('model' => 'Asamblea', 'column' => 'id', 'required' => false)),
+			'id'              => new sfValidatorDoctrineChoice(array('model' => 'Acta', 'column' => 'id', 'required' => false)),
 			'nombre'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
 			'detalle'         => new sfValidatorString(array('required' => false)),
 			'owner_id'        => new sfValidatorDoctrineChoice(array('model' => 'Usuario', 'required' => true)),
