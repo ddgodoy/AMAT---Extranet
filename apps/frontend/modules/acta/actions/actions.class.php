@@ -132,7 +132,7 @@ class actaActions extends sfActions
 		
 		$this->processForm($request, $this->form);
 		
-		$this->setTemplate('edit');
+		$this->setTemplate('editar');
 	}
 
 	protected function processForm(sfWebRequest $request, sfForm $form)
