@@ -6,7 +6,7 @@
 	<?php if ($sf_user->hasFlash('notice')): ?>
 	<ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 	<?php endif; ?>
-	
+	<?php echo $form->renderGlobalErrors() ?>
 	<?php echo $form['detalle']->renderError() ?>
 	
 	<form action="<?php echo url_for('acta/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
