@@ -1,8 +1,7 @@
 <div class="mapa">
-	<!--<strong><?php //echo __('Administraci&oacute;n') ?> </strong>&gt;-->
 	<strong>Administraci&oacute;n </strong>&gt; 
-	<a href="<?php echo url_for('normativas/index') ?>">Aplicaciones</a> &gt; 
-	Actualizar Normativa
+	<a href="<?php echo url_for('aplicaciones/index') ?>">Aplicaciones</a> &gt; 
+	Actualizar Aplicaci&oacute;n
 </div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -14,8 +13,4 @@
 		</td>
 	</tr>
 </table>
-
-<?php
-
-	include_partial('form', array ('form'=>$form));
-?>
+<?php include_partial('form', array ('form'=>$form)); ?>

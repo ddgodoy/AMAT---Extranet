@@ -52,6 +52,36 @@ class aplicacionesActions extends sfActions
     $this->forward404Unless($aplicacion = Doctrine::getTable('Aplicacion')->find($request->getParameter('id')), sprintf('Object normativa does not exist (%s).', $request->getParameter('id')));
     $this->form = new AplicacionesForm($aplicacion);
   }
+  
+  public function executeEditar_internal(sfWebRequest $request)
+  {
+  	$this->error = '';
+  	$this->id = $this->getRequestParameter('id');
+  	$this->paginaActual = $this->getRequestParameter('page', 1);
+
+    $this->forward404Unless($this->aplicacion = Doctrine::getTable('Aplicacion')->find($this->id), sprintf('Object normativa does not exist (%s).', $this->id));
+		$this->field_nombre = $this->aplicacion->getNombre();
+
+    if ($request->getMethod() == 'POST') {
+    	$this->field_nombre = trim($this->getRequestParameter('field_nombre'));
+
+    	if (!empty($this->field_nombre)) {
+    		$this->aplicacion->setNombre($this->field_nombre);
+    		$this->aplicacion->save();
+
+    		$this->redirect('aplicaciones/index');
+    	} else {
+    		$this->error = 'Ingrese el nombre';
+    	}
+    }
+  }
+  
+  public function executeUsuarios(sfWebRequest $request)
+  {
+  	$this->id_aplicacion = $this->getRequestParameter('id');
+  	$this->aplicacion = Doctrine::getTable('Aplicacion')->find($this->id_aplicacion);
+  	
+  }
 
   public function executeUpdate(sfWebRequest $request)
   {
@@ -69,13 +99,18 @@ class aplicacionesActions extends sfActions
     $request->checkCSRFProtection();
 
     $this->forward404Unless($aplicacion = Doctrine::getTable('Aplicacion')->find($request->getParameter('id')), sprintf('Object normativa does not exist (%s).', $request->getParameter('id')));
-    
+
+    ## not delete internal application
+    if (!$aplicacion->getTitulo() && !$aplicacion->getDescripcion()) {
+    	$this->redirect('aplicaciones/index');
+    }
     $menu = Doctrine::getTable('Menu')->findOneByAplicacionId($aplicacion->getId());
 
     sfLoader::loadHelpers('Security'); // para usar el helper
-	if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
-    if($menu->count()> 0)
-    {
+
+		if (!validate_action('baja')) $this->redirect('seguridad/restringuido');
+
+    if ($menu->count()> 0) {
       $menu->delete();
     }
     $aplicacion->delete();
@@ -87,10 +122,8 @@ class aplicacionesActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form, $accion='')
   {      
     $form->bind($request->getParameter($form->getName()));
-  
+
     if ($form->isValid()) {
-    	
-						
       $aplicacion = $form->save();
      
       $this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
@@ -127,36 +160,36 @@ class aplicacionesActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 			$parcial="";
 			$this->cajaBsq = "";
-		}
-		return 'titulo != "" AND descripcion != ""  AND deleted = 0 '.$parcial;
+		}		
+//		return 'titulo != "" AND descripcion != ""  AND deleted = 0 '.$parcial;
+		return 'deleted = 0 '.$parcial;
   }
-  
+
   protected function setOrdenamiento()
   {
 		$modulo = $this->getModuleName();
+
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
-                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
-		}else {
-                    if($this->getUser()->getAttribute($modulo.'_noworderBY'))
-                    {
-                       $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
-                       $ordenacion = explode(' ', $this->orderBYSql);
-                       $this->orderBy = $ordenacion[0];
-                       $this->sortType = $ordenacion[1];
-                    }
-                    else
-                    {
-                        $this->orderBy = 'created_at';
-                        $this->sortType = 'desc';
-                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
-                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
-                    }
-
-                }
-
+      $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+      $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+		} else {
+      if ($this->getUser()->getAttribute($modulo.'_noworderBY')) {
+         $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
+         $ordenacion = explode(' ', $this->orderBYSql);
+         $this->orderBy = $ordenacion[0];
+         $this->sortType = $ordenacion[1];
+      } else {
+//        $this->orderBy = 'created_at';
+//				$this->sortType = 'desc';
+        $this->orderBy = 'titulo';
+        $this->sortType = 'desc';
+        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+      }
+    }
 		return $this->orderBYSql;
   }
-}
+
+} // end class

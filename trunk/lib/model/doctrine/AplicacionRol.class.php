@@ -26,4 +26,4 @@ class AplicacionRol extends BaseAplicacionRol
 		return $arrayRetorno;
 		
 	}
-}		
+}
