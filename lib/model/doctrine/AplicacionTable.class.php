@@ -9,7 +9,10 @@ class AplicacionTable extends Doctrine_Table
 	'usuarios_perfil',
 	'mapasitio_index', 
 	'buscar_index', 
-	'buscar_buscar');
+	'buscar_buscar',
+	'aplicaciones_editar_internal',
+	'aplicaciones_usuarios'
+	);
 
 	 public function getExcepcionesSeguridad()
    {

@@ -22,7 +22,7 @@
 	</table>
 	<br />
 	<fieldset>
-		<legend>Normativas</legend>
+		<legend>Aplicaciones</legend>
 		<table width="100%" cellspacing="4" cellpadding="0" border="0">
 			<tbody>
 				<tr>
@@ -33,10 +33,10 @@
 					<td valign="top"><label><?php echo $form['titulo']->renderLabel('* Titulo') ?></label></td>
 					<td valign="middle"><?php echo $form['titulo'] ?></td>
 				</tr>
-				 <tr>
-			          <td style="padding-top: 5px;"><label><?php echo $form['descripcion']->renderLabel('* Contenido') ?></label></td>
-			          <td valign="middle"><?php echo $form['descripcion'] ?></td>
-		        </tr>
+				<tr>
+					<td style="padding-top: 5px;"><label><?php echo $form['descripcion']->renderLabel('* Contenido') ?></label></td>
+					<td valign="middle"><?php echo $form['descripcion'] ?></td>
+				</tr>
 			</tbody>
 		</table>
 		<?php echo $form->renderHiddenFields() ?>

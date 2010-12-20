@@ -12,38 +12,34 @@ class seguridadComponents extends sfComponents
 {
 	public function executeVerificar(sfWebRequest $request)
 	{
-            $arraytablas = array('noticias'=>'Noticia',
-                                 'eventos'=>'Evento',
-                                 'archivos_d_o'=>'ArchivoDO',
-                                 'archivos_d_g'=>'ArchivoDG',
-                                 'archivos_c_t'=>'ArchivoCT',
-                                 'documentacion_consejos'=>'DocumentacionConsejo',
-                                 'documentacion_grupos'=>'DocumentacionGrupo',
-                                 'documentacion_organismos'=>'DocumentacionOrganismo',);
-            if($this->id != '' && key_exists($this->module, $arraytablas))
-              {
-                $q = Doctrine_Query::create();
-                $q->from($arraytablas[$this->module]);
-                $q->where('id = '. str_replace('&', '', $this->id));
+    $arraytablas = array('noticias'=>'Noticia',
+                         'eventos'=>'Evento',
+                         'archivos_d_o'=>'ArchivoDO',
+                         'archivos_d_g'=>'ArchivoDG',
+                         'archivos_c_t'=>'ArchivoCT',
+                         'documentacion_consejos'=>'DocumentacionConsejo',
+                         'documentacion_grupos'=>'DocumentacionGrupo',
+                         'documentacion_organismos'=>'DocumentacionOrganismo');
 
-                $resultado = $q->fetchOne();
+		if ($this->id != '' && key_exists($this->module, $arraytablas)) {
+      $q = Doctrine_Query::create();
+      $q->from($arraytablas[$this->module]);
+      $q->where('id = '. str_replace('&', '', $this->id));
 
-                if($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ){
-                    if($resultado->getOwnerId() == $this->getUser()->getAttribute('userId'))
-                        {
-                           if($this->getUser()->getAttribute('carga_'.$this->module)){
-                            return true;
-                           }else{
-                            $this->getController()->redirect('seguridad/restringuido');   
-                           }
-                        }
-                }
-                elseif($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado')
-                {
-                    return true;
-                }
-                
-              }
+      $resultado = $q->fetchOne();
+
+      if ($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ){
+        if ($resultado->getOwnerId() == $this->getUser()->getAttribute('userId')) {
+					if ($this->getUser()->getAttribute('carga_'.$this->module)){
+						return true;
+					} else {
+						$this->getController()->redirect('seguridad/restringuido');   
+					}
+				}
+      } elseif($resultado->getOwnerId() == $this->getUser()->getAttribute('userId') && $resultado->getEstado() == 'guardado') {
+				return true;
+      }
+		}
 		$credenciales_array = array();
 		$aplicacion_rol = Doctrine::getTable('AplicacionAccion');
 
@@ -76,8 +72,7 @@ class seguridadComponents extends sfComponents
 		$arrExcepciones = Doctrine::getTable('Aplicacion')->getExcepcionesSeguridad();
 		$nowModuleAction = $this->module.'_'.$this->action;
 
-		if ($this->getUser()->getAttribute('userId'))
-		{
+		if ($this->getUser()->getAttribute('userId')) {
 			if (!in_array($nowModuleAction, $arrExcepciones)) {
 				if ((empty($credenciales_array) || !$this->getUser()->hasCredential($credenciales_array, false)) && $this->module != 'seguridad') {
 					$this->getController()->redirect('seguridad/restringuido');
@@ -87,17 +82,14 @@ class seguridadComponents extends sfComponents
 		 	$this->getUser()->setFlash('error', 'Sesión caducada');
 		 	$this->getController()->redirect('seguridad/Seguridad') ;
 		}
-                if($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ){
-                 if($this->action == 'nueva'){
-                     if($this->getUser()->getAttribute('carga_'.$this->module)){
-                         return true;
-                     }else{
-                      $this->getController()->redirect('seguridad/restringuido');
-                     }
-                 }
-                }
-
-
-
-            }
-}
+		if ($this->module == 'archivos_d_o' || $this->module == 'archivos_d_g' || $this->module == 'archivos_c_t' ) {
+			if ($this->action == 'nueva') {
+				if ($this->getUser()->getAttribute('carga_'.$this->module)) {
+					return true;
+				} else {
+					$this->getController()->redirect('seguridad/restringuido');
+				}
+			}
+		}
+	}
+} // end class

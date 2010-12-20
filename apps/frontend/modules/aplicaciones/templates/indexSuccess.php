@@ -1,6 +1,7 @@
-<?php use_helper('TestPager') ?>
-<?php use_helper('Security') ?>
-
+<?php
+	use_helper('TestPager');
+	use_helper('Security');
+?>
 <div class="mapa"><strong>Administraci&oacute;n</strong> &gt Aplicaciones</div>
 	<table width="100%" cellspacing="0" cellpadding="0" border="0">
 		<tbody>
@@ -38,37 +39,46 @@
 					<th width="10%" style="text-align:center;">
 						<a href="<?php echo url_for('aplicaciones/index?sort=created_at&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 					</th>
-					<th width="40%">
+					<th width="35%">
 						<a href="<?php echo url_for('aplicaciones/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nombre</a>
 					</th>
 					<th width="40%">
 						<a href="<?php echo url_for('aplicaciones/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
+					<th width="5%">Tipo</th>
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
 				</tr>
-				<?php $i=0; foreach ($aplicaciones_list as $valor): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
+				<?php
+					$i = 0;
+					foreach ($aplicaciones_list as $valor):
+						$odd = fmod(++$i, 2) ? 'blanco' : 'gris';
+						$auxAccion = $valor->getTitulo() && $valor->getDescripcion() ? '' : '_internal';
+				?>
 				<tr class="<?php echo $odd ?>">
 					<td valign="top" align="center">
 						<?php echo date("d/m/Y", strtotime($valor->getCreatedAt())) ?>
 					</td>
 					<td valign="top">
-						<a href="<?php echo url_for('aplicaciones/show?id=' . $valor->getId()) ?>">
+						<?php if ($auxAccion == ''): ?>
+							<a href="<?php echo url_for('aplicaciones/show?id=' . $valor->getId()) ?>">
+								<strong><?php echo $valor->getNombre() ?></strong>
+							</a>
+						<?php else: ?>
 							<strong><?php echo $valor->getNombre() ?></strong>
-						</a>
+						<?php endif; ?>
 					</td>
-					<td valign="top">
-							<strong><?php echo $valor->getTitulo() ?></strong>
-					</td>
+					<td valign="top"><strong><?php echo $valor->getTitulo() ?></strong></td>
+					<td valign="top"><?php echo $auxAccion == '' ? 'Creada' : 'Interna' ?></td>
 					<td valign="top" align="center">
-					<?php if(validate_action('modificar')):?>
-						<a href="<?php echo url_for('aplicaciones/editar?id=' . $valor->getId()) ?>">
+					<?php if (validate_action('modificar')): ?>
+						<a href="<?php echo url_for('aplicaciones/editar'.$auxAccion.'?id=' . $valor->getId().'&page='.$paginaActual) ?>">
 							<?php echo image_tag('show.png', array('height' => 20, 'width' => 17, 'border' => 0, 'title' => 'Editar')) ?>
 						</a>
 					<?php endif; ?>	
 					</td>
           <td valign="top" align="center">
-          <?php if(validate_action('baja')):?>
+          <?php if (validate_action('baja') && $auxAccion == ''): ?>
           	<?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'aplicaciones/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
           <?php endif; ?>	
           </td>
