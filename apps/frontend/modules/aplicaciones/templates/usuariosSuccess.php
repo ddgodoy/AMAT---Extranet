@@ -1,6 +1,6 @@
 <?php
+	use_helper('TestPager');
 	use_helper('Javascript');
-	use_helper('Security');
 ?>
 <div class="mapa">
 	<strong>Administraci&oacute;n </strong>&gt; 
@@ -17,42 +17,60 @@
 		</td>
 	</tr>
 </table>
-<?php
+<div class="leftside">
+	<div class="lineaListados">
+		<?php if ($pager->haveToPaginate()): ?>
+			<div style="float:left;" class="paginado"><?php echo test_pager($pager, '', '', "id=$id_aplicacion", 'usuarios') ?></div>
+		<?php endif; ?>
+		<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Usuario/s</span>
+	</div>
+	<?php if ($cantidadRegistros > 0) : ?>
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
+			<tbody>
+				<tr>
+					<th width="25%">Apellido</th>
+					<th width="25%">Nombre</th>
+					<th width="25%">Perfil</th>
+					<th width="5%">Alta</th>
+					<th width="5%">Baja</th>
+					<th width="5%">Modificar</th>
+					<th width="5%">Listar</th>
+					<th width="5%">Publicar</th>
+				</tr>
+				<?php
+					foreach ($usuarios_list as $valor):
+						$userDetails = AplicacionRol::getArraPerfilAplicacionAccionBYusuario($valor->getId());
+					
+						foreach ($userDetails as $aplicacion_rol):
+							$i = 0; 
+							foreach ($aplicacion_rol['apliacio'] as $aplicacion):
+								$odd = fmod(++$i, 2) ? 'blanco' : 'gris';
+				?>
+						<tr class="<?php echo $odd ?>">
+							<td valign="top"><?php echo $valor->getApellido() ?></td>
+							<td valign="top"><?php echo $valor->getNombre() ?></td>
+							<td valign="top"><?php echo $aplicacion_rol['perfil']?></td>
+							<td align="center"><?php echo $aplicacion->getAccionAlta() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
+							<td align="center"><?php echo $aplicacion->getAccionBaja() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
+							<td align="center"><?php echo $aplicacion->getAccionModificar()?image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
+							<td align="center"><?php echo $aplicacion->getAccionListar() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
+							<td align="center"><?php echo $aplicacion->getAccionPublicar() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
+						</tr>
+						<?php endforeach; ?>
+					<?php endforeach; ?>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
 
-/*
-	$a = array();
-	$q = Doctrine_Query::create();
-	$q->select('rol_id')
-		->from('AplicacionRol')
-		->where('aplicacion_id = '.$id_aplicacion)
-		->addWhere('deleted = 0');
-	$roles = $q->execute();
+		<div class="lineaListados">
+			<?php if ($pager->haveToPaginate()): ?>
+				<div style="float:left;" class="paginado"><?php echo test_pager($pager, '', '', "id=$id_aplicacion", 'usuarios') ?></div>
+			<?php endif; ?>
+			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Usuario/s</span>
+		</div>
 
-//	foreach ($roles as $v_r) {
-//		$q2 = Doctrine_Query::create();
-//		$q2->select('usuario_id')
-//		 	 ->from('UsuarioRol')
-//		 	 ->where('rol_id = '.$v_r->getRolId())
-//		 	 ->addWhere('deleted = 0');
-//		$usuarios = $q2->execute();
-
-	foreach ($roles as $v_r) {
-		$q2 = Doctrine_Query::create();
-		$q2->select('usuario_id')
-		 	 ->from('UsuarioRol')
-		 	 ->where('rol_id = '.$v_r->getRolId())
-		 	 ->addWhere('deleted = 0');
-		$usuarios = $q2->execute();
-		
-		foreach ($usuarios as $v_u) {
-			$a[$v_u->getUsuarioId()] = $v_u->getUsuarioId();
-//			$a[] = $v_u->getUsuarioId();
-		}
-	}
-	echo '<pre>';
-	print_r($a);
-	echo '</pre>';
-	echo count($a);
-*/
-	
-?>
+	<?php else: ?>
+		<div class="mensajeSistema comun">No hay usuarios relacionados con la aplicaci&oacute;n</div>
+	<?php endif; ?>
+</div>
+<br clear="all" />
