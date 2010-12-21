@@ -79,8 +79,12 @@ class aplicacionesActions extends sfActions
   public function executeUsuarios(sfWebRequest $request)
   {
   	$this->id_aplicacion = $this->getRequestParameter('id');
-  	$this->aplicacion = Doctrine::getTable('Aplicacion')->find($this->id_aplicacion);
-  	
+  	$this->paginaActual  = $this->getRequestParameter('page', 1);
+  	$this->aplicacion    = Doctrine::getTable('Aplicacion')->find($this->id_aplicacion);
+
+  	$this->pager = Aplicacion::getRepository()->getUsuariosByAplicacion($this->id_aplicacion, $this->paginaActual, 15);
+  	$this->usuarios_list = $this->pager->getResults();
+		$this->cantidadRegistros = $this->pager->getNbResults();
   }
 
   public function executeUpdate(sfWebRequest $request)

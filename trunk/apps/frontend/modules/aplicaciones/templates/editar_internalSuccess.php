@@ -37,7 +37,7 @@
 					<td width="72%" valign="middle"><input type="text" name="field_nombre" value="<?php echo $field_nombre ?>"/></td>
 					<td width="30" align="right">
 						<a href="<?php echo url_for('aplicaciones_rol/index?caja_busqueda='.$field_nombre) ?>" style="margin-right:7px;"/>Perfiles</a>
-						<!--|<a href="<?php //echo url_for('aplicaciones/usuarios?id='.$id) ?>" style="margin-left:10px;"/>Usuarios</a>-->
+						|<a href="<?php echo url_for('aplicaciones/usuarios?id='.$id) ?>" style="margin-left:10px;"/>Usuarios</a>
 					</td>
 				</tr>
 			</tbody>

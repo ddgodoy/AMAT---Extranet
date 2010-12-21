@@ -5,28 +5,56 @@
 class AplicacionTable extends Doctrine_Table
 {
 	static public  $excepcionesSeguridad = array(
-	'inicio_index', 
-	'usuarios_perfil',
-	'mapasitio_index', 
-	'buscar_index', 
-	'buscar_buscar',
-	'aplicaciones_editar_internal',
-	'aplicaciones_usuarios'
+		'inicio_index', 
+		'usuarios_perfil',
+		'mapasitio_index', 
+		'buscar_index', 
+		'buscar_buscar',
+		'aplicaciones_editar_internal',
+		'aplicaciones_usuarios'
 	);
 
-	 public function getExcepcionesSeguridad()
-   {
-     return self::$excepcionesSeguridad;
-   }
+	public function getExcepcionesSeguridad()
+	{
+		return self::$excepcionesSeguridad;
+	}
 
 	public static function getAplicacion()
-  {
-	 	$r = Doctrine_Query::create()
-	   	 ->from('Aplicacion')
-	   	 ->where('id != 44 AND id != 46')
-	   	 ->orderBy('nombre');
-	   	 $respuesat = $r->execute();
+	{
+		$r = Doctrine_Query::create()->from('Aplicacion')->where('id != 44 AND id != 46')->orderBy('nombre');
 
-	   	 return $respuesat;
-   }
-}
+		return $r->execute();
+	}
+
+	/**
+	 * Get usuarios related to certain aplication
+	 *
+	 * @param integer $id_aplicacion
+	 * @param integer $actual_page
+	 * @param integer $per_page
+	 * @return mixed
+	 */
+	public function getUsuariosByAplicacion($id_aplicacion, $page, $per_page)
+	{
+		$a = array();
+		$q = Doctrine_Query::create()->select('rol_id')->from('AplicacionRol')->where("aplicacion_id = $id_aplicacion AND deleted = 0");
+		$roles = $q->execute();
+
+		if (count($roles) > 0) {
+			foreach ($roles as $rol) {
+				$q2 = Doctrine_Query::create()->select('usuario_id')->from('UsuarioRol')->where('rol_id = '.$rol->getRolId().' AND deleted = 0');
+				$usuarios = $q2->execute();
+
+				if (count($usuarios) > 0) {
+					foreach ($usuarios as $usuario) { $a[$usuario->getUsuarioId()] = $usuario->getUsuarioId(); }
+		}}}
+		// get personal info from users in array
+		$pager = new sfDoctrinePager('Usuario', $per_page);
+		$pager->getQuery()->from('Usuario')->whereIn('id', $a)->addWhere('deleted = 0')->orderBy('apellido');
+		$pager->setPage($page);
+		$pager->init();
+
+		return $pager;
+	}
+
+} // end class

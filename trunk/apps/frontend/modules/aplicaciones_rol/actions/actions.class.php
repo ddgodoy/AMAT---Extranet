@@ -180,10 +180,10 @@ class aplicaciones_rolActions extends sfActions
 	}
 	
 	public function executeListausuario(sfWebRequest $request)
-    {
-    	$this->usuario = Usuario::getRepository()->findOneById($request->getParameter('id'));
-  	    $this->arrayPeApliAcci = AplicacionRol::getArraPerfilAplicacionAccionBYusuario($request->getParameter('id')); 
-    }
+  {
+  	$this->usuario = Usuario::getRepository()->findOneById($request->getParameter('id'));
+		$this->arrayPeApliAcci = AplicacionRol::getArraPerfilAplicacionAccionBYusuario($request->getParameter('id')); 
+  }
 
 	protected function setFiltroBusqueda()
     {
