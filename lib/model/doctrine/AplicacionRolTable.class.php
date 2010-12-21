@@ -119,8 +119,6 @@ class AplicacionRolTable extends Doctrine_Table
    	  return $r->fetchArray(); 
    }
 
-
-   
    public static function getAplicacionByRol($idrol)
    {
    	 $r=Doctrine_Query::create()
@@ -133,7 +131,5 @@ class AplicacionRolTable extends Doctrine_Table
    	   
    	  return $r->execute();   
    }
-   
-   
-   
-}
+
+} // end class
