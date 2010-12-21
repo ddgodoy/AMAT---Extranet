@@ -1,6 +1,8 @@
 <?php
 	use_helper('TestPager');
 	use_helper('Javascript');
+	
+	$nombreAplicacion = $aplicacion->getNombre();
 ?>
 <div class="mapa">
 	<strong>Administraci&oacute;n </strong>&gt; 
@@ -9,7 +11,7 @@
 </div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<td width="95%"><h1>Usuarios en la aplicaci&oacute;n &quot;<?php echo $aplicacion->getNombre() ?>&quot;</h1></td>
+		<td width="95%"><h1>Usuarios en la aplicaci&oacute;n &quot;<?php echo $nombreAplicacion ?>&quot;</h1></td>
 		<td width="5%" align="right">
 			<a href="#">
 				<?php echo image_tag('pregunta.gif', array('alt' => 'Ayuda', 'id' => 'sprytrigger1', 'width' => '29', 'height' => '30', 'border' => '0')) ?>
@@ -38,25 +40,32 @@
 					<th width="5%">Publicar</th>
 				</tr>
 				<?php
+					$i = 0;
 					foreach ($usuarios_list as $valor):
-						$userDetails = AplicacionRol::getArraPerfilAplicacionAccionBYusuario($valor->getId());
+						$odd = fmod(++$i, 2) ? 'blanco' : 'gris';
 					
+						$userDetails = AplicacionRol::getArraPerfilAplicacionAccionBYusuario($valor->getId());
+
 						foreach ($userDetails as $aplicacion_rol):
-							$i = 0; 
+							
 							foreach ($aplicacion_rol['apliacio'] as $aplicacion):
-								$odd = fmod(++$i, 2) ? 'blanco' : 'gris';
+
+								if ($aplicacion->Aplicacion->getNombre() == $nombreAplicacion):
 				?>
 						<tr class="<?php echo $odd ?>">
 							<td valign="top"><?php echo $valor->getApellido() ?></td>
 							<td valign="top"><?php echo $valor->getNombre() ?></td>
-							<td valign="top"><?php echo $aplicacion_rol['perfil']?></td>
+							<td valign="top"><?php echo $aplicacion_rol['perfil'] ?></td>
 							<td align="center"><?php echo $aplicacion->getAccionAlta() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
 							<td align="center"><?php echo $aplicacion->getAccionBaja() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
 							<td align="center"><?php echo $aplicacion->getAccionModificar()?image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
 							<td align="center"><?php echo $aplicacion->getAccionListar() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
 							<td align="center"><?php echo $aplicacion->getAccionPublicar() ? image_tag('aceptada.png') : image_tag('rechazada.png') ?></td>
 						</tr>
-						<?php endforeach; ?>
+						<?php
+							endif;
+							endforeach;
+						?>
 					<?php endforeach; ?>
 				<?php endforeach; ?>
 			</tbody>
