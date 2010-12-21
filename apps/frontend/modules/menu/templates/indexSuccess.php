@@ -29,7 +29,7 @@
 		<?php if ($cantidadRegistros > 0): ?>
 		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
 			<tbody>
-					<tr>
+				<tr>
 					<th width="8%">Posici&oacute;n</th>
 					<th width="25%">Grupos</th>
 					<th width="25%">Elemento</th>
@@ -40,19 +40,19 @@
 					<th width="4%"></th>
 				</tr>
 		    <?php
+		    	$url_upd_posicion = url_for('menu/updatePosicion').'?id=';
+
 					foreach ($menu_list as $menu):
 		     		if (!$menu->getPadreId()):
 		    ?>
 						<tr style="background-color:#EEEEEE;">
-							<td><?php echo $menu->getPosicion()?></td>
+							<td><?php echo $menu->getPosicion() ?></td>
 							<td><span <?php if ($menu->getHabilitado() != 1): ?>style="text-decoration:line-through;color:#999;"<?php endif;?>><?php echo $menu->getNombre() ?></span></td>
 							<td></td>
 							<td></td>
 							<td>
-								&nbsp;
-								<!--<img src="/images/arriba.gif" border="0"/>-->
-								<!--<img src="/images/_nada.gif" width="13" height="11" border="0"/>-->
-								<!--<img src="/images/abajo.gif" border="0"/>-->
+								<a href="<?php echo $url_upd_posicion.$menu->getId().'&dir=up&dad='.$menu->getPadreId() ?>"><img src="/images/arriba.gif" border="0"/></a>
+								<a href="<?php echo $url_upd_posicion.$menu->getId().'&dir=down&dad='.$menu->getPadreId() ?>"><img src="/images/abajo.gif" border="0"/></a>
 							</td>
 							<td valign="top">
 							<?php if (validate_action('alta')): ?>
@@ -82,9 +82,8 @@
 							<td><span <?php if ($menu->getHabilitado()!=1 || $menuHijo->getHabilitado()!=1): ?>style="text-decoration:line-through;color:#999;"<?php endif;?>><?php echo $menuHijo->getNombre() ?></span></td>
 							<td></td>
 							<td>
-								&nbsp;
-								<!--<img src="/images/arriba.gif" border="0"/>-->
-								<!--<img src="/images/abajo.gif" border="0"/>-->
+								<a href="<?php echo $url_upd_posicion.$menuHijo->getId().'&dir=up&dad='.$menuHijo->getPadreId() ?>"><img src="/images/arriba.gif" border="0"/></a>
+								<a href="<?php echo $url_upd_posicion.$menuHijo->getId().'&dir=down&dad='.$menuHijo->getPadreId() ?>"><img src="/images/abajo.gif" border="0"/></a>
 							</td>
 							<td valign="top">
 						  <?php if (validate_action('alta')): ?>
@@ -114,9 +113,8 @@
 							<td></td>
 							<td><span <?php if ($menu->getHabilitado()!=1 || $menuHijo->getHabilitado()!=1 || $menuNieto->getHabilitado()!=1 ): ?>style="text-decoration:line-through;color:#999;"<?php endif;?>><?php echo $menuNieto->getNombre() ?></span></td>
 							<td>
-								&nbsp;
-								<!--<img src="/images/arriba.gif" border="0"/>-->
-								<!--<img src="/images/abajo.gif" border="0"/>-->
+								<a href="<?php echo $url_upd_posicion.$menuNieto->getId().'&dir=up&dad='.$menuNieto->getPadreId() ?>"><img src="/images/arriba.gif" border="0"/></a>
+								<a href="<?php echo $url_upd_posicion.$menuNieto->getId().'&dir=down&dad='.$menuNieto->getPadreId() ?>"><img src="/images/abajo.gif" border="0"/></a>
 							</td>
 							<td></td>
 							<td valign="top">
