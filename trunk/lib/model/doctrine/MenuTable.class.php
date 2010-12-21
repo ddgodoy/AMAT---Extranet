@@ -6,13 +6,9 @@ class MenuTable extends Doctrine_Table
 {
 	public static function getGrupo()
 	{
-		$e=Doctrine_Query::create()
-		->from('Menu')
-		->where('deleted = 0')
-	  	->addWhere('padre_id = 0');
-	  	$menugrupo = $e->execute();
+		$e = Doctrine_Query::create()->from('Menu')->where('deleted = 0')->addWhere('padre_id = 0');
 	
-		return $menugrupo;
+		return $e->execute();
 	}
 	
 	public static function getMenuPadre($idPadre, $habilitado = null, $rolSA = null)
@@ -24,61 +20,42 @@ class MenuTable extends Doctrine_Table
 				->orderBy('posicion');
 
 		if ($habilitado == 1) { $s->addWhere('habilitado = 1'); }
-                if($rolSA == 2 ){$s->addWhere('habilitado_sa = 1');}
+		if($rolSA == 2 ){$s->addWhere('habilitado_sa = 1');}
 
-
-		$menupadre = $s->execute();
-
-		
-		return $menupadre;
+		return $s->execute();
 	}
 	
 	public static function getIdpadre($id_menu)
 	{
-		$s=Doctrine_Query::create()
-		->from('Menu')
-		->where('id ='.$id_menu);
-		$IdPadre = $s->fetchOne();
-	
-		return $IdPadre; 
+		$s = Doctrine_Query::create()->from('Menu')->where('id ='.$id_menu);
+
+		return $s->fetchOne();
 	}
 	
 	public static function getExistPosicion($posicion,$id_padre)
 	{
-		$d = Doctrine_Query::create()
-		->from('Menu')
-		->where('padre_id ='.$id_padre)
-		->addwhere('posicion ='.$posicion);
-		$retorno = $d->fetchOne();
-				
-		return $retorno;  
+		$d = Doctrine_Query::create()->from('Menu')->where('padre_id ='.$id_padre)->addwhere('posicion ='.$posicion);
+
+		return $d->fetchOne();
 	}
-	
+
 	public static function getPosiscionIgualMayor($posicion,$id_padre)
 	{
-		$g = Doctrine_Query::create()
-		->from('Menu')
-		->where('padre_id ='.$id_padre)
-		->addwhere('posicion >='.$posicion);
-		$retornoPosiciones = $g->execute();
+		$g = Doctrine_Query::create()->from('Menu')->where('padre_id ='.$id_padre)->addwhere('posicion >='.$posicion);
 
-		return $retornoPosiciones;
+		return $g->execute();
 	}
 	
 	public static function getPosiscionIgual($posicion,$id_padre)
 	{
-		$g = Doctrine_Query::create()
-		->from('Menu')
-		->where('padre_id ='.$id_padre)
-		->addwhere('posicion ='.$posicion);
-		$retornoPosicion = $g->fetchOne();
+		$g = Doctrine_Query::create()->from('Menu')->where('padre_id ='.$id_padre)->addwhere('posicion ='.$posicion);
 
-		return $retornoPosicion;
+		return $g->fetchOne();
 	}
 	
 	public static function getArrayMenuHijo($idPadre, $nivel)
 	{
-                $rolSA = sfContext::getInstance()->getUser()->getAttribute('rolSA')?1:2;
+		$rolSA = sfContext::getInstance()->getUser()->getAttribute('rolSA')?1:2;
 		$items = MenuTable::getMenuPadre($idPadre, 1, $rolSA);
 		$arrItems = array();
 
@@ -121,4 +98,41 @@ class MenuTable extends Doctrine_Table
 		}
 		return $arrItems;
 	}
-}
+	
+	public function orderElementsBeforeContinue($padre_id, $menu_id)
+	{
+		$new_order = 0;
+		$r = Doctrine_Query::create()->from('Menu')->where("padre_id = $padre_id AND deleted = 0")->orderBy('posicion');
+		$d = $r->execute();
+
+		if (count($d) > 0) {
+			$i = 1;
+			foreach ($d as $value) {
+				$value->setPosicion($i); $value->save(); $i++;
+
+				if ($value->getId() == $menu_id) { $new_order = $value->getPosicion(); }
+			}
+		}
+		return $new_order;
+	}
+	
+	public function flipPositions($menu_id, $padre_id, $move_direction)
+	{
+		if ($oItem = Menu::getRepository()->find($menu_id)) {
+			$tmp_pos = $oItem->getPosicion();
+			$new_pos = $move_direction == 'up' ? $tmp_pos - 1 : $tmp_pos + 1;
+
+			$r = Doctrine_Query::create()->from('Menu')->where("padre_id = $padre_id AND posicion = $new_pos AND deleted = 0")->limit(1);
+			$d = $r->fetchOne();
+
+			if ($d) {
+				$d->setPosicion($oItem->getPosicion());
+				$d->save();
+
+				$oItem->setPosicion($new_pos);
+				$oItem->save();
+			}
+		}
+	}
+
+} // end class

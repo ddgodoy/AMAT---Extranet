@@ -173,5 +173,27 @@ class menuActions extends sfActions
   public function executeSubElementos()
   {
   	return $this->renderComponent('menu','listarSubElementos');
-  }  
-}
+  }
+  
+  public function executeUpdatePosicion(sfWebRequest $request)
+  {
+  	$menu_id = $request->getParameter('id');
+  	$to_move = $request->getParameter('dir');
+  	$dad_ref = $request->getParameter('dad');
+  	$now_pos = Menu::getRepository()->orderElementsBeforeContinue($dad_ref, $menu_id);
+
+  	if ($now_pos > 0) {
+  		if ($now_pos == 1 && $to_move == 'up') {
+  			$this->redirect('menu/index');
+  		}
+  		$cantItems = Menu::Cantidadelemetos($menu_id);
+
+	  	if ($now_pos == $cantItems && $to_move == 'down') {
+	  		$this->redirect('menu/index');
+	  	}
+	  	Menu::getRepository()->flipPositions($menu_id, $dad_ref, $to_move);
+  	}
+  	$this->redirect('menu/index');
+  }
+
+} // end class
