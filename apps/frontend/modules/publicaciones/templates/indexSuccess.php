@@ -70,7 +70,6 @@
 					<th width="47%">
 						<a href="<?php echo url_for('publicaciones/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 					</th>
-					
 					<th width="5%">&nbsp;</th>
 					<th width="5%">&nbsp;</th>
 				</tr>
@@ -94,44 +93,43 @@
 						</a>
 					<?php endif; ?>		
 					</td>
-                                          <td valign="center" align="center">
-                                          <?php if (validate_action('baja')):?>
-                                                <?php echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'publicaciones/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?')) ?>
-                                          <?php endif; ?>
-                                          </td>
+          <td valign="center" align="center">
+          <?php
+          	if (validate_action('baja')) {
+          		echo link_to(image_tag('borrar.png', array('title'=>'Borrar','alt'=>'Borrar','width'=>'20','height'=>'20','border'=>'0')), 'publicaciones/delete?id='.$valor->getId(), array('method'=>'delete','confirm'=>'Confirma la eliminaci&oacute;n del registro?'));
+          	}
+          ?>
+          </td>
 				</tr>
 				<?php endforeach; ?>
-				<?php if(validate_action('publicar') || validate_action('baja')):?>
-				   <tr>
-                                    <td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
-                                    <td colspan="4">
-<!--							<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
-                                            <input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
-                                    </td>
+				<?php if (validate_action('publicar') || validate_action('baja')): ?>
+			   <tr>
+	          <td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
+	          <td colspan="4">
+							<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
+	          </td>
 				 </tr>
 			   <?php endif; ?>
 			</tbody>
 		</table>
-                </form>
-		<?php else : ?>
-			<?php if ($cajaBsq != '' || $desdeBsq || $hastaBsq) : ?>
+		</form>
+		<?php else: ?>
+			<?php if ($cajaBsq != '' || $desdeBsq || $hastaBsq || $ambitoBsq) : ?>
 				<div class="mensajeSistema error">Su b&uacute;squeda no devolvi&oacute; resultados</div>
-			<?php else : ?>
+			<?php else: ?>
 				<div class="mensajeSistema comun">No hay registros cargados</div>
 			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php if ($cantidadRegistros > 0) : ?>
-		<div class="lineaListados">
+			<div class="lineaListados">
 			<?php if($pager->haveToPaginate()): ?>
 				<div style="float:left;" class="paginado"><?php echo test_pager($pager, $orderBy, $sortType) ?></div>
 			<?php endif; ?>
-
 			<span class="info" style="float: left;">Hay <?php echo $cantidadRegistros ?> Registro/s</span>
 			<?php if (validate_action('alta')):?>
 			<input type="button" onclick="javascript:location.href='<?php echo url_for('publicaciones/nueva') ?>';" style="float: right;" value="Nueva publicaci&oacute;n" name="newNews" class="boton"/>
 			<?php endif;?>
-			
 		</div>
 		<?php endif; ?>
 	</div>
@@ -143,12 +141,8 @@
 			<table width="100%" cellspacing="4" cellpadding="0" border="0">
 				<tbody>
 					<tr>
-					<td width="20%">
-					Titulo
-					</td>
-						<td width="80%">
-							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/>
-						</td>
+					<td width="20%">T&iacute;tulo</td>
+						<td width="80%"><input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/></td>
 					</tr>
 					<tr>
 					<td><label>Fecha Desde:</label></td>
@@ -164,14 +158,39 @@
 						<img border="0" style="margin-bottom: -3px;" src="/images/calendario.gif" class="clickeable" onclick="displayCalendar('hasta_busqueda', this);"/>
 					</td>
 				</tr>
-					<tr>
-						<td style="padding-top:5px;">
-							<span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span>							
-						</td>
+				<?php
+					if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)):
+						$todosa   = '';
+						$intranet = '';
+						$web      = '';
+						$ssUserFl = $sf_user->getAttribute('publicaciones_nowambito');
+	
+						if ($ssUserFl == 'todos') {
+							$todosa = 'selected';
+						} elseif ($ssUserFl == 'intranet') {
+							$intranet = 'selected';
+						} elseif ($ssUserFl == 'web') {
+							$web = 'selected';
+						}
+				?>
+				<tr>
+					<td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
+					<td style="padding-top: 5px;">
+						<select name="ambito_busqueda" id="ambito_ambito">
+							<option value="" >--seleccionar--</option>
+							<option value="todos" <?php echo $todosa ?> >Extranet y Web</option>
+							<option value="web" <?php echo $web ?> >web</option>
+							<option value="intranet" <?php echo $intranet ?> >Extranet</option>
+						</select>
+				  </td>
+				</tr>
+				<?php endif; ?>
+				<tr>
+						<td style="padding-top:5px;"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></td>
 						<td>
 						<?php if ($cajaBsq != '' || $desdeBsq || $hastaBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
-							<?php endif;  ?>
+						<?php endif;  ?>
 						</td>
 					</tr>
 				</tbody>

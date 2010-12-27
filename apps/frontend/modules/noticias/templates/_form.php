@@ -7,7 +7,6 @@
 <?php if ($sf_user->hasFlash('notice')): ?>
 	<ul class="ok_list"><li><?php echo $sf_user->getFlash('notice') ?></li></ul>
 <?php endif; ?>
-
 <?php
 	echo $form->renderGlobalErrors();
 	echo $form['titulo']->renderError();
@@ -45,15 +44,11 @@
         </tr>
         <tr>
           <td><label>Autor / Medio:</label></td>
-          <td valign="middle">
-          	<?php echo $form['autor'] ?>
-          </td>
+          <td valign="middle"><?php echo $form['autor'] ?></td>
         </tr>
         <tr>
           <td><label>Título*</label></td>
-          <td valign="middle">
-          	<?php echo $form['titulo'] ?> <label>Destacada</label> <?php echo $form['destacada'] ?>&nbsp;&nbsp;<label>Novedad</label> <?php echo $form['novedad'] ?>
-          </td>
+          <td valign="middle"><?php echo $form['titulo'] ?> <label>Destacada</label> <?php echo $form['destacada'] ?>&nbsp;&nbsp;<label>Novedad</label> <?php echo $form['novedad'] ?></td>
         </tr>
         <tr>
           <td valign="top"><label>Ambito</label></td>
@@ -78,9 +73,7 @@
         </tr>
         <tr>
           <td style="padding-top: 5px;"><label>Archivo</label></td>
-          <td style="padding-top: 5px;"><label>
-            <?php echo $form['documento'] ?>
-          </label></td>
+          <td style="padding-top: 5px;"><label><?php echo $form['documento'] ?></label></td>
         </tr>
         <tr>
           <td style="padding-top: 5px;" height="10%"></td>
@@ -90,19 +83,13 @@
       <?php echo $form->renderHiddenFields() ?>
     </fieldset>
     <div class="botonera">
-    <?php if(validate_action('alta')):?> 
+    <?php if(validate_action('alta')): ?>
       <input type="submit" id="boton_guardar_g" class="boton" value="Guardar" name="btn_action"/>
-    <?php
-     endif; if(validate_action('alta')):?> 
+    <?php endif; if(validate_action('alta')): ?>
       <input type="submit" id="boton_guardar" class="boton" value="Guardar Pendiente" name="btn_action"/>
-    <?php
-     endif;
-     if(validate_action('publicar')):
-    ?>
+    <?php endif; if(validate_action('publicar')): ?>
       <input type="submit" id="boton_publicar" class="boton" value="Guardar Publicado" name="btn_volver2"/>
-    <?php 
-    endif;
-    ?>
+    <?php endif; ?>
       <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('noticias/index') ?>';"/>
     </div>
 </form>   
@@ -110,19 +97,12 @@
 <script language="javascript" type="text/javascript">
 	$('boton_guardar_g').observe('click', setGuardar);  function setGuardar(event) {$('noticia_estado').value = 'guardado';}	
 </script>
-<?php 
-endif;
-if(validate_action('alta')):?>
+<?php endif; if(validate_action('alta')): ?>
 <script language="javascript" type="text/javascript">
 	$('boton_guardar').observe('click', setPendiente);  function setPendiente(event) {$('noticia_estado').value = 'pendiente';}	
 </script>
-<?php 
-endif;
-if(validate_action('publicar')):
-?>
-<script>	
+<?php endif; if(validate_action('publicar')): ?>
+<script language="javascript" type="text/javascript">
 	$('boton_publicar').observe('click', setPublicado); function setPublicado(event) {$('noticia_estado').value = 'publicado';}
 </script>
-<?php 
-endif;
-?>
+<?php endif; ?>

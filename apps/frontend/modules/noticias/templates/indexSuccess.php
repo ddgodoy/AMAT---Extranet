@@ -57,49 +57,46 @@
 			<tbody>
 			<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
 				<tr>
-					<?php if (validate_action('baja')): ?>
-					<th width="3%"></th>
-                                        <?php endif;?>
+					<?php if (validate_action('baja')): ?><th width="3%"></th><?php endif;?>
 					<th width="11%">
 						<a href="<?php echo url_for('noticias/index?sort=n.fecha&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>" style="padding-left:30px;">
 							Fecha
 						</a>
 					</th>
 					<th width="50%"><a href="<?php echo url_for('noticias/index?sort=n.titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">T&iacute;tulo</a></th>
-                                        <th width="10%"><a href="<?php echo url_for('noticias/index?sort=n.mutua_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Mutua</a></th>
+					<th width="10%"><a href="<?php echo url_for('noticias/index?sort=n.mutua_id&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Mutua</a></th>
 					<th width="3%"><a href="#"/></th>
 					<th width="3%"><a href="#"/></th>
 					<th width="3%"></th>
 				</tr>
-			<?php endif;?>	
-				<?php $i=0; foreach ($noticia_list as $noticia): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja') ):?>
-				<?php if($noticia->getEstado() == 'guardado'):?>
-				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>'1'));?>
-				<?php endif; ?>
-				<?php else: ?>
-				<?php include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>''));?>
-				<?php endif; ?>
-				<?php else: ?>
-				<?php if($noticia->getEstado() == 'guardado' || $noticia->getEstado() == 'pendiente'):?>
-				<?php if($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')):?>
-				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>'1'));?>
-				<?php endif; ?>
-				<?php else: ?>
-				<?php include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>''));?>
-				<?php endif; ?>
-   		        <?php endif;?>
-			    <?php endforeach; ?>
-			   <?php if(validate_action('baja')):?>
-			   <tr>
+			<?php endif; ?>
+			<?php
+				$i = 0; foreach ($noticia_list as $noticia) {
+					$odd = fmod(++$i, 2) ? 'blanco' : 'gris';
+					
+					if (validate_action('publicar') || validate_action('modificar') || validate_action('baja') ) {
+						if ($noticia->getEstado() == 'guardado') {
+							if ($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')) {
+								include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>'1'));
+							}
+						} else {
+							include_partial('ListadoNoticias', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>''));
+						}
+					} else {
+						if ($noticia->getEstado() == 'guardado' || $noticia->getEstado() == 'pendiente') {
+							if ($noticia->getUserIdCreador() == $sf_user->getAttribute('userId')) {
+								include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>'1'));
+							}
+						} else {
+							include_partial('ListadoNoticiaUsuarios', array('noticia'=>$noticia, 'odd'=>$odd, 'creador'=>''));
+				}}}
+			?>
+			<?php if (validate_action('baja')): ?>
+			  <tr>
 					<td><input type="checkbox" id="check_todos" name="check_todos" onclick="checkAll(document.getElementsByName('id[]'));"/></td>
-					<td colspan="5">
-						<!--<input type="submit" class="boton" value="Publicar seleccionados" name="btn_publish_selected" onclick="return setActionFormList('publicar');"/>-->
-						<input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" />
-					</td>
+					<td colspan="5"><input type="submit" class="boton" value="Borrar seleccionados" name="btn_delete_selected" onclick="return setActionFormList('eliminar');" /></td>
 				</tr>
-			   <?php endif; ?>
+			<?php endif; ?>
 			</tbody>
 		</table>
 		</form>
@@ -161,48 +158,58 @@
 					</td>
 				</tr>
 				<?php
-					$todose = '';
-					$guardao = '';
+					$todose    = '';
+					$guardao   = '';
 					$pendiente = '';
 					$publicado = ''; 
-					$intranet = '';
-					$web = '';
-					$todosa = '';
-					if($sf_user->getAttribute('noticias_nowestado') == '') { $todose = 'selected'; }
-					elseif($sf_user->getAttribute('noticias_nowestado') == 'guardado') { $guardao = 'selected';} 
-					elseif($sf_user->getAttribute('noticias_nowestado') == 'pendiente') { $pendiente = 'selected';} 
-					elseif ($sf_user->getAttribute('noticias_nowestado') == 'publicado'){ $publicado = 'selected';} 
-					if($sf_user->getAttribute('noticias_nowambito') == 'todos') { $todosa = 'selected'; }
-					elseif($sf_user->getAttribute('noticias_nowambito') == 'intranet') { $intranet = 'selected';} 
-					elseif ($sf_user->getAttribute('noticias_nowambito') == 'web'){ $web = 'selected';} 
-					?>  
+					$intranet  = '';
+					$web       = '';
+					$todosa    = '';
 
-				<?php if(Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)): ?>
+					if ($sf_user->getAttribute('noticias_nowestado') == '') {
+						$todose = 'selected';
+					} elseif ($sf_user->getAttribute('noticias_nowestado') == 'guardado') {
+						$guardao = 'selected';
+					} elseif ($sf_user->getAttribute('noticias_nowestado') == 'pendiente') {
+						$pendiente = 'selected';
+					} elseif ($sf_user->getAttribute('noticias_nowestado') == 'publicado') {
+						$publicado = 'selected';
+					}
+					if ($sf_user->getAttribute('noticias_nowambito') == 'todos') {
+						$todosa = 'selected';
+					} elseif ($sf_user->getAttribute('noticias_nowambito') == 'intranet') {
+						$intranet = 'selected';
+					} elseif ($sf_user->getAttribute('noticias_nowambito') == 'web') {
+						$web = 'selected';
+					}
+				?>
+				<?php if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $roles)): ?>
 				<tr>
-				    <td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
-					<td style="padding-top: 5px;"><select name="ambito_busqueda" id="ambito_ambito">
-																				<option value="" >--seleccionar--</option>
-																				<option value="todos" <?php echo $todosa ?> > Extranet y Web</option>
-																				<option value="web" <?php echo $web ?> >web</option>
-																				<option value="intranet" <?php echo $intranet ?> >Extranet</option>
-																				</select>	
+					<td style="padding-top: 5px;"><label>&Aacute;mbito:</label></td>
+					<td style="padding-top: 5px;">
+						<select name="ambito_busqueda" id="ambito_ambito">
+							<option value="" >--seleccionar--</option>
+							<option value="todos" <?php echo $todosa ?> > Extranet y Web</option>
+							<option value="web" <?php echo $web ?> >web</option>
+							<option value="intranet" <?php echo $intranet ?> >Extranet</option>
+						</select>
 				  </td>
 				</tr>
 				<?php endif; ?>
-                                <tr>
-				    <td style="padding-top: 5px;"><label>Mutua:</label></td>
-                                    <td style="padding-top: 5px;"><?php echo select_tag('mutua',options_for_select(Mutua::getArrayMutuasNoiticias(),$mutuaBsq),array('class'=>'form_input','style'=>'width: 200px;'))?></td>
-				  </td>
+				<tr>
+					<td style="padding-top: 5px;"><label>Mutua:</label></td>
+					<td style="padding-top: 5px;"><?php echo select_tag('mutua',options_for_select(Mutua::getArrayMutuasNoiticias(),$mutuaBsq),array('class'=>'form_input','style'=>'width: 200px;'))?></td>
 				</tr>
 				<?php if(validate_action('publicar') || validate_action('modificar') || validate_action('baja')):?>
 				<tr>
 					<td style="padding-top: 5px;"><label>Estado:</label></td>
-					<td style="padding-top: 5px;"><select name="estado_busqueda" id="estado_busqueda">
-																				<option value="" >--seleccionar--</option>
-																				<option value="guardado" <?php echo $guardao ?>>guardado</option>
-																				<option value="pendiente" <?php echo $pendiente ?>>pendiente</option>
-																				<option value="publicado" <?php echo $publicado ?>>publicado</option>
-																				</select>	
+					<td style="padding-top: 5px;">
+						<select name="estado_busqueda" id="estado_busqueda">
+							<option value="" >--seleccionar--</option>
+							<option value="guardado" <?php echo $guardao ?>>guardado</option>
+							<option value="pendiente" <?php echo $pendiente ?>>pendiente</option>
+							<option value="publicado" <?php echo $publicado ?>>publicado</option>
+						</select>
 				  </td>
 				</tr>
 				<?php endif; ?>
@@ -211,11 +218,10 @@
 						<span class="botonera"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></span>
 					</td>
 					<td>
-							<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $destacadaBsq || $ambitoBsq || $estadoBsq || $novedadBsq || $mutuaBsq): ?>
+						<?php if ($cajaBsq  || $desdeBsq || $hastaBsq || $destacadaBsq || $ambitoBsq || $estadoBsq || $novedadBsq || $mutuaBsq): ?>
 							<span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span>
-							<?php endif; ?>								
-						
-						</td>	
+						<?php endif; ?>
+					</td>
 				</tr>
 			</tbody>
 		</table>

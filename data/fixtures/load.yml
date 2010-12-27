@@ -83,13 +83,11 @@ Aplicacion:
     nombre_entidad:         CircularCatTema
     nombre_modulo:          circular_cat_tema
     tipo:                   "front"
-
   Aplicacion_11:
     nombre:                 Circulares - Subcategorias de Tema
     nombre_entidad:         CircularSubTema
     nombre_modulo:          circular_sub_tema
     tipo:                   "front"
-
   Aplicacion_12:
     nombre:                 Circulares
     nombre_entidad:         Circular
@@ -290,7 +288,10 @@ Aplicacion:
    nombre:                 Normas de funcionamiento
    nombre_modulo:          normas_de_funcionamientos
    tipo:                   "front"
-
+  Aplicacion_53:
+    nombre:                Contenidos
+    nombre_modulo:         contenidos
+    tipo:                  "front"
 
 AplicacionRol:
   AplicacionRol_1:
@@ -437,7 +438,6 @@ AplicacionRol:
     accion_publicar:        1
     aplicacion_id:          10
     rol_id:                 1
-
   AplicacionRol_20:
     accion_alta:            1
     accion_baja:            1
@@ -446,7 +446,6 @@ AplicacionRol:
     accion_publicar:        1
     aplicacion_id:          11
     rol_id:                 1
-
   AplicacionRol_22:
     accion_alta:            1
     accion_baja:            1
@@ -783,7 +782,14 @@ AplicacionRol:
     accion_publicar:        1
     aplicacion_id:          51
     rol_id:                 2
-
+  AplicacionRol_64:
+    accion_alta:            1
+    accion_baja:            1
+    accion_modificar:       1
+    accion_listar:          1
+    accion_publicar:        1
+    aplicacion_id:          53
+    rol_id:                 1
 
 AplicacionAccion:
   AplicacionAccion_1:
@@ -1006,7 +1012,6 @@ AplicacionAccion:
     accion:                 modificar
     accion_del_modulo:      update
     aplicacion_id:          10
-
   AplicacionAccion_62:
     accion:                 listar
     accion_del_modulo:      index
@@ -1031,7 +1036,6 @@ AplicacionAccion:
     accion:                 modificar
     accion_del_modulo:      update
     aplicacion_id:          11
-
   AplicacionAccion_74:
     accion:                 listar
     accion_del_modulo:      index
@@ -1432,7 +1436,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          25
-
   AplicacionAccion_174:
     accion:                 listar
     accion_del_modulo:      index
@@ -1461,7 +1464,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          26
-
   AplicacionAccion_181:
     accion:                 listar
     accion_del_modulo:      index
@@ -1490,7 +1492,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          27
-
   AplicacionAccion_188:
     accion:                 listar
     accion_del_modulo:      index
@@ -1523,7 +1524,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          28
-
   AplicacionAccion_196:
     accion:                 listar
     accion_del_modulo:      index
@@ -1556,7 +1556,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          29
-
   AplicacionAccion_204:
     accion:                 listar
     accion_del_modulo:      index
@@ -1589,7 +1588,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          30
-
   AplicacionAccion_212:
     accion:                 listar
     accion_del_modulo:      index
@@ -1622,7 +1620,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          31
-
   AplicacionAccion_220:
     accion:                 listar
     accion_del_modulo:      index
@@ -1655,7 +1652,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          32
-
   AplicacionAccion_228:
     accion:                 listar
     accion_del_modulo:      index
@@ -1688,7 +1684,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          33
-
   AplicacionAccion_237:
     accion:                 listar
     accion_del_modulo:      index
@@ -1721,7 +1716,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          34
-
   AplicacionAccion_245:
     accion:                 listar
     accion_del_modulo:      index
@@ -1754,7 +1748,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          35
-
   AplicacionAccion_253:
     accion:                 listar
     accion_del_modulo:      index
@@ -1787,7 +1780,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          36
-
   AplicacionAccion_261:
     accion:                 listar
     accion_del_modulo:      index
@@ -1820,8 +1812,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          37
-
-
   AplicacionAccion_269:
     accion:                 listar
     accion_del_modulo:      index
@@ -1854,8 +1844,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          38
-
-
   AplicacionAccion_277:
     accion:                 listar
     accion_del_modulo:      index
@@ -1888,7 +1876,6 @@ AplicacionAccion:
     accion:                 listar
     accion_del_modulo:      show
     aplicacion_id:          39
-
   AplicacionAccion_285:
     accion:                 listar
     accion_del_modulo:      index
@@ -1963,12 +1950,41 @@ AplicacionAccion:
     accion:                 modificar
     accion_del_modulo:      update
     aplicacion_id:          51
-    deleted:                0 
+    deleted:                0
   AplicacionAccion_232:
     accion:                 baja
     accion_del_modulo:      delete
     aplicacion_id:          51
-    deleted:                0 
+    deleted:                0
+  AplicacionAccion_233:
+    accion:                 listar
+    accion_del_modulo:      index
+    aplicacion_id:          53
+  AplicacionAccion_234:
+    accion:                 alta
+    accion_del_modulo:      nueva
+    aplicacion_id:          53
+  AplicacionAccion_235:
+    accion:                 alta
+    accion_del_modulo:      create
+    aplicacion_id:          53
+  AplicacionAccion_236:
+    accion:                 modificar
+    accion_del_modulo:      editar
+    aplicacion_id:          53
+  AplicacionAccion_237:
+    accion:                 modificar
+    accion_del_modulo:      update
+    aplicacion_id:          53
+  AplicacionAccion_238:
+    accion:                 baja
+    accion_del_modulo:      delete
+    aplicacion_id:          53
+  AplicacionAccion_239:
+    accion:                 publicar
+    accion_del_modulo:      publicar
+    aplicacion_id:          53
+
 
 UsuarioGrupoTrabajo:
   UsuarioGrupoTrabajo_1:
