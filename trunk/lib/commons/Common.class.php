@@ -32,16 +32,13 @@ class Common
 	
 	public static function array_in_array($needles, $haystack) 
 	{
-
-	    foreach ($needles as $needle) {
-	
-	        if ( key_exists($needle, $haystack) ) {
-	            return true;
-	        }
-	    }
-	
-	    return false;
-    }  
+    foreach ($needles as $needle) {
+      if ( key_exists($needle, $haystack) ) {
+         return true;
+      }
+    }
+		return false;
+   }  
 		
     public static function getListFechas($modulo)
 	  {    

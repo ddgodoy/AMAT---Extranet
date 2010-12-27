@@ -12,10 +12,10 @@ class PublicacionForm extends BasePublicacionForm
   public function configure()
   {
 		$img_valids = array('image/jpeg','image/pjpeg','image/gif');
-		$userId  = sfContext::getInstance()->getUser()->getAttribute('userId');
-		$mutuaId = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
-		$mutuas = Mutua::getArrayMutuas(); 
-		$estado  = 'publicado';
+		$userId     = sfContext::getInstance()->getUser()->getAttribute('userId');
+		$mutuaId    = sfContext::getInstance()->getUser()->getAttribute('mutuaId');
+		$mutuas     = Mutua::getArrayMutuas(); 
+		$estado     = 'publicado';
 
 		$this->setWidgets(array(
 			'id'                => new sfWidgetFormInputHidden(),
@@ -47,26 +47,20 @@ class PublicacionForm extends BasePublicacionForm
 			'estado'            => new sfValidatorString(),
 		));		
 		
-		if($this->getObject()->getImagen())
-		{
+		if ($this->getObject()->getImagen()) {
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/publicaciones/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div>%file%<br /><label></label>%input%<br /><label></label>%delete%<label> Eliminar imagen actual</label></div>', ), array('class' => 'form_input')));
 			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids, 'max_size'=>2048000),array('invalid' => 'Invalid file.','mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)', 'max_size'=>'Máximo tamaño de imagen: 2 MB')));
 			$this->setValidator('imagen_delete',new sfValidatorBoolean());	
-		}
-		else 
-		{
+		} else {
 			$this->setWidget('imagen',new sfWidgetFormInputFileEditable(array('file_src' => '/uploads/publicaciones/images/'.'s_'.$this->getObject()->getImagen(), 'is_image'  => true, 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
 			$this->setValidator('imagen',new sfValidatorFile(array( 'path' => 'uploads/publicaciones/images', 'required' => false, 'validated_file_class' => 'sfResizedFile', 'mime_types'=> $img_valids, 'max_size'=>2048000),array('invalid' => 'Invalid file.' ,'mime_types'=>'Formato de imagen incorrecto, permitidos (.jpg, .gif)', 'max_size'=>'Máximo tamaño de imagen: 2 MB')));
 		}
 
-		if($this->getObject()->getDocumento())
-		{
+		if ($this->getObject()->getDocumento()) {
 			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/publicaciones/docs', 'template'  => '<div><label></label>%input%<br /><label></label>%delete%<label> Eliminar documento actual</label></div>', ), array('class' => 'form_input')));
 			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/publicaciones/docs', 'required' => false)));
 			$this->setValidator('documento_delete', new sfValidatorBoolean());
-		}
-		else 
-		{
+		} else {
 			$this->setWidget('documento', new sfWidgetFormInputFileEditable(array('file_src' => 'uploads/publicaciones/docs', 'template'  => '<div><label></label>%input%<br /><label></label></div>', ), array('class' => 'form_input')));
 			$this->setValidator('documento', new sfValidatorFile(array('path' => 'uploads/publicaciones/docs', 'required' => false)));
 		}
@@ -75,8 +69,8 @@ class PublicacionForm extends BasePublicacionForm
 			'owner_id'          => $userId,
 			'mutua_id'          => sfContext::getInstance()->getUser()->getAttribute('mutuaId'),
 			'estado'            => $estado,
-                        'fecha_publicacion' =>'2007-01-01',
-                        'fecha_caducidad'   =>'2015-12-31',
+      'fecha_publicacion' =>'2007-01-01',
+      'fecha_caducidad'   =>'2015-12-31',
 			'ambito'            => 'web',
 			));
 

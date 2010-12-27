@@ -39,9 +39,9 @@ class AplicacionesForm extends BaseAplicacionForm
 
     $this->widgetSchema->setNameFormat('aplicaciones[%s]');
     
-    $this->setDefaults(array(     'nombre_entidad'=>'aplicacion',
+    $this->setDefaults(array( 'nombre_entidad' => 'aplicacion',
 		                          'nombre_modulo' => 'aplicaciones', 
 		                          'tipo' => 'front',));
-
   }
-}
+
+} // end class

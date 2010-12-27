@@ -66,7 +66,7 @@ class menuActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()));
-           
+    
     if ($form->isValid()) {
   	  $posicion = $request->getParameter($form->getName());
       $idPadre = $posicion['padre_id'] ? $posicion['padre_id'] : 0;

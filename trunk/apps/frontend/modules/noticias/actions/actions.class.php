@@ -16,25 +16,19 @@ class noticiasActions extends sfActions
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
-			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual);// recordar pagina actual
+			$this->getUser()->setAttribute($this->getModuleName().'_nowpage', $this->paginaActual); // recordar pagina actual
 		}
-  		$this->pager = new sfDoctrinePager('Noticia', 10);  	    
+		$this->pager = new sfDoctrinePager('Noticia', 10);  	    
 		$this->pager->getQuery()
                 ->from('Noticia n')
                 ->leftJoin('n.Mutua m')
-		->where($this->setFiltroBusqueda())
-		->orderBy($this->setOrdenamiento());
-		
-//		echo $this->pager->getQuery()->getSql();
-//		exit();
-		
-		
-		
+								->where($this->setFiltroBusqueda())
+								->orderBy($this->setOrdenamiento());
+
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
 
 		$this->noticia_list = $this->pager->getResults();
-		
 		$this->cantidadRegistros = $this->pager->getNbResults() - $guardados->count() ;
 	}
 	
@@ -243,14 +237,14 @@ class noticiasActions extends sfActions
   	$parcial = '';
   	$modulo  = $this->getModuleName();
 
-		$this->cajaBsq  = $this->getRequestParameter('caja_busqueda');
-		$this->desdeBsq = $this->getRequestParameter('desde_busqueda');
-		$this->hastaBsq = $this->getRequestParameter('hasta_busqueda');
-		$this->destacadaBsq = $this->getRequestParameter('destacadas_busqueda');
-		$this->novedadBsq = $this->getRequestParameter('novedad_busqueda');
-                $this->ambitoBsq = $this->getRequestParameter('ambito_busqueda');
-                $this->mutuaBsq = $this->getRequestParameter('mutua');
-                $this->estadoBsq = $this->getRequestParameter('estado_busqueda');
+		$this->cajaBsq     = $this->getRequestParameter('caja_busqueda');
+		$this->desdeBsq    = $this->getRequestParameter('desde_busqueda');
+		$this->hastaBsq    = $this->getRequestParameter('hasta_busqueda');
+		$this->destacadaBsq= $this->getRequestParameter('destacadas_busqueda');
+		$this->novedadBsq  = $this->getRequestParameter('novedad_busqueda');
+    $this->ambitoBsq   = $this->getRequestParameter('ambito_busqueda');
+    $this->mutuaBsq    = $this->getRequestParameter('mutua');
+    $this->estadoBsq   = $this->getRequestParameter('estado_busqueda');
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND n.titulo LIKE '%$this->cajaBsq%'";
@@ -268,16 +262,15 @@ class noticiasActions extends sfActions
 			$parcial .= " AND n.destacada = 1 ";
 			$this->getUser()->setAttribute($modulo.'_nowdestacada', $this->destacadaBsq);
 		}
-                if (!empty($this->novedadBsq)) {
-                            $parcial .= " AND n.novedad = 1 ";
-                            $this->getUser()->setAttribute($modulo.'_nownovedad', $this->novedadBsq);
-                    }
-
+    if (!empty($this->novedadBsq)) {
+	    $parcial .= " AND n.novedad = 1 ";
+	    $this->getUser()->setAttribute($modulo.'_nownovedad', $this->novedadBsq);
+    }
 		if (!empty($this->ambitoBsq)) {
 			$parcial .= " AND n.ambito = '$this->ambitoBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowambito', $this->ambitoBsq);
 		}
-                if (!empty($this->mutuaBsq)) {
+		if (!empty($this->mutuaBsq)) {
 			$parcial .= " AND n.mutua_id = '$this->mutuaBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowmutua', $this->mutuaBsq);
 		}
@@ -285,8 +278,6 @@ class noticiasActions extends sfActions
 			$parcial .= " AND n.estado = '$this->estadoBsq'";
 			$this->getUser()->setAttribute($modulo.'_nowestado', $this->estadoBsq);
 		}
-
-
 		if (!empty($parcial)) {
 			$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
 		} else {
@@ -298,7 +289,7 @@ class noticiasActions extends sfActions
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdestacada');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nownovedad');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
-                                $this->getUser()->getAttributeHolder()->remove($modulo.'_nowmutua');
+				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowmutua');
 				$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
 			} else {
 				$parcial = $this->getUser()->getAttribute($modulo.'_nowfilter');
@@ -307,9 +298,9 @@ class noticiasActions extends sfActions
 				$this->hastaBsq = $this->getUser()->getAttribute($modulo.'_nowhasta');
 				$this->destacadaBsq = $this->getUser()->getAttribute($modulo.'_nowdestacada');
 				$this->novedadBsq = $this->getUser()->getAttribute($modulo.'destacada');
-				$this->ambitoBsq = $this->getUser()->getAttribute($modulo.'_nowambito');
-                                $this->mutuaBsq = $this->getUser()->getAttribute($modulo.'_nowmutua');
-				$this->estadoBsq = $this->getUser()->getAttribute($modulo.'_nowestado');
+				$this->ambitoBsq  = $this->getUser()->getAttribute($modulo.'_nowambito');
+				$this->mutuaBsq   = $this->getUser()->getAttribute($modulo.'_nowmutua');
+				$this->estadoBsq  = $this->getUser()->getAttribute($modulo.'_nowestado');
 			}
 		}
 		if ($this->hasRequestParameter('btn_quitar')){
@@ -320,19 +311,18 @@ class noticiasActions extends sfActions
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowdestacada');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'destacada');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowambito');
-                        $this->getUser()->getAttributeHolder()->remove($modulo.'_nowmutua');
+			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowmutua');
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowestado');
-			$parcial="";
-			$this->cajaBsq = "";
+			$parcial = "";
+			$this->cajaBsq  = "";
 			$this->desdeBsq = '';
 			$this->hastaBsq = '';
 			$this->destacadaBsq = '';
 			$this->novedadBsq = '';
-			$this->ambitoBsq = '';
-                        $this->mutuaBsq = '';
-			$this->estadoBsq = '';
+			$this->ambitoBsq  = '';
+			$this->mutuaBsq   = '';
+			$this->estadoBsq  = '';
 		}
-		
 		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'),1);
 
 		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
