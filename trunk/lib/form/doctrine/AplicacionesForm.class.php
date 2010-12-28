@@ -19,9 +19,6 @@ class AplicacionesForm extends BaseAplicacionForm
       'tipo'           => new sfWidgetFormInputHidden(),
       'titulo'         => new sfWidgetFormInput(),
       'descripcion'    => new fckFormWidget(),
-      'created_at'     => new sfWidgetFormDateTime(),
-      'updated_at'     => new sfWidgetFormDateTime(),
-      'deleted'        => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -32,9 +29,6 @@ class AplicacionesForm extends BaseAplicacionForm
       'tipo'           => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'titulo'         => new sfValidatorString(array('max_length' => 150, 'required' => true), array('required' => 'Ingrese el Titulo')),
       'descripcion'    => new sfValidatorString(array('required' => true),array('required' => 'Ingrese la Descripcion')),
-      'created_at'     => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'     => new sfValidatorDateTime(array('required' => false)),
-      'deleted'        => new sfValidatorBoolean(),
     ));
 
     $this->widgetSchema->setNameFormat('aplicaciones[%s]');
