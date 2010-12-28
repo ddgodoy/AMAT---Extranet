@@ -34,6 +34,15 @@ abstract class BaseAplicacion extends sfDoctrineRecord
         $this->hasColumn('descripcion', 'clob', null, array(
              'type' => 'clob',
              ));
+        $this->hasColumn('estado', 'enum', null, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'guardado',
+              1 => 'pendiente',
+              2 => 'publicado',
+             ),
+             ));
     }
 
     public function setUp()

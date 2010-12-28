@@ -31,14 +31,15 @@
 		<tbody>
 			<tr>
 				<th width="10%" style="text-align:center;">
-				<a href="<?php echo url_for('contenidos/index?sort=created_at&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
+					<a href="<?php echo url_for('contenidos/index?sort=created_at&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Fecha</a>
 				</th>
-				<th width="40%">
-				<a href="<?php echo url_for('contenidos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nombre</a>
+				<th width="35%">
+					<a href="<?php echo url_for('contenidos/index?sort=nombre&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Nombre</a>
 				</th>
-				<th width="40%">
-				<a href="<?php echo url_for('contenidos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
+				<th width="38%">
+					<a href="<?php echo url_for('contenidos/index?sort=titulo&type='.$sortType.'&page='.$paginaActual.'&orden=1') ?>">Titulo</a>
 				</th>
+				<?php if ($viewE): ?><th width="7%">Estado</th><?php endif; ?>
 				<th width="5%">&nbsp;</th>
 				<th width="5%">&nbsp;</th>
 			</tr>
@@ -49,6 +50,7 @@
 					<a href="<?php echo url_for('contenidos/show?id=' . $valor->getId()) ?>"><strong><?php echo $valor->getNombre() ?></strong></a>
 				</td>
 				<td valign="top"><?php echo $valor->getTitulo() ?></td>
+				<?php if ($viewE): ?><td valign="top" align="center"><?php echo ucfirst($valor->getEstado()) ?></td><?php endif; ?>
 				<td valign="top" align="center">
 				<?php if (validate_action('modificar')): ?>
 					<a href="<?php echo url_for('contenidos/editar?id='.$valor->getId().'&page='.$paginaActual) ?>">
