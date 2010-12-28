@@ -10,7 +10,8 @@
 	</table>
 	<div class="lineaListados"></div>
 	<div class="noticias">	  
-	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($aplicacion->getCreatedAt())) ?></span> <br />     
+	  <span class="notfecha">Publicado el: <?php echo date("d/m/Y", strtotime($aplicacion->getCreatedAt())) ?></span><br />
+	  <span class="notfecha">Estado: <?php echo $aplicacion->getEstado() ?></span><br />
 	  <?php echo $aplicacion->getDescripcion() ?>      
 	  <div class="clear"></div>
 	 </div>

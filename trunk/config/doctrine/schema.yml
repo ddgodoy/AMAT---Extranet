@@ -94,6 +94,7 @@ Aplicacion:
     tipo:                    { type: enum, values: ['front', 'back'] }
     titulo:                  { type: string(100) }
     descripcion:             { type: clob }
+    estado:                  { type: enum, values: ['guardado', 'pendiente', 'publicado'] }
     
 AplicacionRol:
   actAs:

@@ -11,6 +11,12 @@ class contenidosActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
+		$this->viewE = false;
+		$this->roles = UsuarioRol::getRepository()->getRolesByUser($this->getUser()->getAttribute('userId'), 1);
+
+		if (Common::array_in_array(array('1'=>'1', '2'=>'2'), $this->roles)) {
+			$this->viewE = true;
+		}
 		$this->paginaActual = $this->getRequestParameter('page', 1);
 
 		if (is_numeric($this->paginaActual)) {
@@ -43,7 +49,8 @@ class contenidosActions extends sfActions
 			$this->cajaBsq = '';
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 		}
-  	$filter = " AND titulo IS NOT NULL $parcial";
+		$auxFlt = $this->viewE ? '' : "AND estado = 'publicado'";
+  	$filter = " AND titulo IS NOT NULL $auxFlt $parcial";
   	$this->getUser()->setAttribute($modulo.'_nowfilter', $filter);
 
   	return 'deleted = 0 '.$filter;
@@ -123,6 +130,8 @@ class contenidosActions extends sfActions
 
     if ($form->isValid()) {
       $aplicacion = $form->save();
+      $aplicacion->setEstado($request->getParameter('frm_valor_estado'));
+      $aplicacion->save();
      
       $this->getUser()->setFlash('notice', "El registro ha sido $accion correctamente");
       $this->redirect('contenidos/index');
