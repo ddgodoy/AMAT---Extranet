@@ -66,6 +66,12 @@ class usuariosActions extends sfActions
 		$this->setTemplate('editar');
 	}
 
+        public function executeExcepcion(sfWebRequest $request)
+	{
+          $idUsuario = $request->getParameter('usuario');
+
+        }
+
 	public function executeDelete(sfWebRequest $request)
 	{
 		$toDelete = $request->getParameter('id');
