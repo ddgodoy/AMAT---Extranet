@@ -93,15 +93,15 @@
       <input type="button" id="boton_cancel" class="boton" value="Volver" name="boton_cancel" onclick="document.location='<?php echo url_for('noticias/index') ?>';"/>
     </div>
 </form>   
-<?php if(validate_action('alta')):?>
+<?php if (validate_action('alta')): ?>
 <script language="javascript" type="text/javascript">
 	$('boton_guardar_g').observe('click', setGuardar);  function setGuardar(event) {$('noticia_estado').value = 'guardado';}	
 </script>
-<?php endif; if(validate_action('alta')): ?>
+<?php endif; if (validate_action('alta')): ?>
 <script language="javascript" type="text/javascript">
 	$('boton_guardar').observe('click', setPendiente);  function setPendiente(event) {$('noticia_estado').value = 'pendiente';}	
 </script>
-<?php endif; if(validate_action('publicar')): ?>
+<?php endif; if (validate_action('publicar')): ?>
 <script language="javascript" type="text/javascript">
 	$('boton_publicar').observe('click', setPublicado); function setPublicado(event) {$('noticia_estado').value = 'publicado';}
 </script>
