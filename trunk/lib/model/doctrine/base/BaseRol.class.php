@@ -19,6 +19,10 @@ abstract class BaseRol extends sfDoctrineRecord
              'notnull' => true,
              'length' => '32',
              ));
+        $this->hasColumn('excepcion', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => 0,
+             ));
     }
 
     public function setUp()
