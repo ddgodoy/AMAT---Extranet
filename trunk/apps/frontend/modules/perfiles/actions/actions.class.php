@@ -19,7 +19,10 @@ class perfilesActions extends sfActions
 	}
   	
 	$this->pager = new sfDoctrinePager('Rol', 10);  	    
-	$this->pager->getQuery()->from('Rol')->where($this->setFiltroBusqueda())->orderBy($this->setOrdenamiento());
+	$this->pager->getQuery()->from('Rol')
+                    ->where($this->setFiltroBusqueda())
+                    ->addWhere('excepcion = 0')
+                    ->orderBy($this->setOrdenamiento());
 	$this->pager->setPage($this->paginaActual);
 	$this->pager->init();
 

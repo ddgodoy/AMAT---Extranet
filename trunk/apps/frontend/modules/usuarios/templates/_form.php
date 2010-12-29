@@ -67,47 +67,59 @@
     </fieldset>
     <div class="clear"></div>
     <?php if(!empty ($editar)):?>
-    <?php $aplicacion_rol_list = AplicacionRol::getRepository()->getAplicacionByRol(8); ?>
+    <?php
+         $arrayData = array();
+         $urlExcepcion = 'usuarios/excepcion?usuario='.$form->getObject()->getId();
+         $ExcepcionByNAme = Rol::getRepository()->getAllRol('aplication_'.$form->getObject()->getId());
+         foreach ($ExcepcionByNAme AS $v){
+           $arrayData['id'] = $v->getId();
+         }
+        if(!empty ($arrayData['id'])){
+          $aplicacion_rol_list = AplicacionRol::getRepository()->getAplicacionByRol($arrayData['id']);
+          $urlExcepcion.= '&excepcion='.$arrayData['id'];
+        }
+
+    ?>
     <div>
-        <fieldset>
+        <fieldset style="width: 925px;">
             <legend>Excepci&oacute;n</legend>
-            <div style=" float: right;"><input type="button" id="btn_action" class="boton" value="Crear nueva Excepci&oacute;n" onclick="javascript:location.href='<?php echo url_for('usuarios/excepcion?usuario='.$form->getObject()->getId()) ?>';" name="btn_action"/></div>
-            <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
-		<tbody>
-			<tr>
-				<th width="24%">Rol/Perfil</th>
-				<th width="23%">Aplicaci&oacute;n</th>
-				<th width="7%" style="text-align:center;">Alta</th>
-				<th width="7%" style="text-align:center;">Baja</th>
-				<th width="7%" style="text-align:center;">Modificar</th>
-				<th width="7%" style="text-align:center;">Listar</th>
-				<th width="7%" style="text-align:center;">Publicar</th>
-				<th width="4%"></th>
-				<th width="4%"></th>
-			</tr>
-                 <?php $i=0; foreach ($aplicacion_rol_list as $aplicacion_rol): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
-			<tr class="<?php echo $odd ?>">
-				<td><?php echo $aplicacion_rol->getRol() ?></td>
-				<td><?php echo $aplicacion_rol->getAplicacion() ?></td>
-				<td align="center"><?php echo ($aplicacion_rol->getAccionAlta())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
-				<td align="center"><?php echo ($aplicacion_rol->getAccionBaja())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
-				<td align="center"><?php echo ($aplicacion_rol->getAccionModificar())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
-				<td align="center"><?php echo ($aplicacion_rol->getAccionListar())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
-				<td align="center"><?php echo ($aplicacion_rol->getAccionPublicar())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
-				<td align="center">
-				<?php if(validate_action('modificar')):?>
-					<a href="<?php echo url_for('aplicaciones_rol/editar?id=' . $aplicacion_rol->getId()) ?>"><?php echo image_tag('edit.png', array('border' => 0, 'alt' => 'Editar', 'title' => 'Editar')) ?></a>
-				<?php endif;?>
-				</td>
-				<td align="center">
-				<?php if(validate_action('baja')):?>
-					<?php echo link_to(image_tag('borrar.png', array('title' => 'Borrar', 'alt' => 'Borrar', 'width' => '20', 'height' => '20', 'border' => '0')), 'aplicaciones_rol/delete?id='.$aplicacion_rol->getId(), array('method' => 'delete', 'confirm' => 'Est&aacute;s seguro que deseas eliminar esta regla "' . $aplicacion_rol->getRol() . '"?')) ?>
-				<?php endif;?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
+            <div style=" float: right;"><input type="button" id="btn_action" class="boton" value="Crear nueva Excepci&oacute;n" onclick="javascript:location.href='<?php echo url_for($urlExcepcion) ?>';" name="btn_action"/></div>
+             <?php if(!empty ($aplicacion_rol_list) && count($aplicacion_rol_list)>0 ): ?>
+                <table width="100%" cellspacing="0" cellpadding="0" border="0" class="listados">
+                    <tbody>
+                            <tr>
+                                    <th width="23%">Aplicaci&oacute;n</th>
+                                    <th width="7%" style="text-align:center;">Alta</th>
+                                    <th width="7%" style="text-align:center;">Baja</th>
+                                    <th width="7%" style="text-align:center;">Modificar</th>
+                                    <th width="7%" style="text-align:center;">Listar</th>
+                                    <th width="7%" style="text-align:center;">Publicar</th>
+                                    <th width="4%"></th>
+                                    <th width="4%"></th>
+                            </tr>
+                     <?php $i=0; foreach ($aplicacion_rol_list as $aplicacion_rol): $odd = fmod(++$i, 2) ? 'blanco' : 'gris' ?>
+                            <tr class="<?php echo $odd ?>">
+                                    <td><?php echo $aplicacion_rol->getAplicacion() ?></td>
+                                    <td align="center"><?php echo ($aplicacion_rol->getAccionAlta())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
+                                    <td align="center"><?php echo ($aplicacion_rol->getAccionBaja())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
+                                    <td align="center"><?php echo ($aplicacion_rol->getAccionModificar())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
+                                    <td align="center"><?php echo ($aplicacion_rol->getAccionListar())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
+                                    <td align="center"><?php echo ($aplicacion_rol->getAccionPublicar())?image_tag('aceptada.png'):image_tag('rechazada.png') ?></td>
+                                    <td align="center">
+                                    <?php if(validate_action('modificar')):?>
+                                            <a href="<?php echo url_for('usuarios/excepcion?usuario='.$form->getObject()->getId().'&id='.$aplicacion_rol->getId()) ?>"><?php echo image_tag('edit.png', array('border' => 0, 'alt' => 'Editar', 'title' => 'Editar')) ?></a>
+                                    <?php endif;?>
+                                    </td>
+                                    <td align="center">
+                                    <?php if(validate_action('baja')):?>
+                                            <?php echo link_to(image_tag('borrar.png', array('title' => 'Borrar', 'alt' => 'Borrar', 'width' => '20', 'height' => '20', 'border' => '0')), 'usuarios/deletexc?id='.$aplicacion_rol->getId().'&usuario='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Est&aacute;s seguro que deseas eliminar esta regla "' . $aplicacion_rol->getRol() . '"?')) ?>
+                                    <?php endif;?>
+                                    </td>
+                            </tr>
+                            <?php endforeach; ?>
+                    </tbody>
+            </table>
+         <?php endif;?>
         </fieldset>
     </div>
     <?php endif; ?>

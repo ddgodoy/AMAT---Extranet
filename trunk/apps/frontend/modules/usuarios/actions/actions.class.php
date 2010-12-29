@@ -20,10 +20,10 @@ class usuariosActions extends sfActions
 		
 		$this->pager = new sfDoctrinePager('Usuario', 10);
 		$this->pager->getQuery()
-	    ->from('Usuario u')
-	    ->leftJoin('u.UsuarioGrupoTrabajo ug') 
-	    ->leftJoin('u.UsuarioConsejoTerritorial uc') 
-	    ->leftJoin('u.UsuarioRol ur') 
+                ->from('Usuario u')
+                ->leftJoin('u.UsuarioGrupoTrabajo ug')
+                ->leftJoin('u.UsuarioConsejoTerritorial uc')
+                ->leftJoin('u.UsuarioRol ur') 
 		->Where($this->setFiltroBusqueda())
 		->orderBy($this->setOrdenamiento());
 		
@@ -68,8 +68,81 @@ class usuariosActions extends sfActions
 
         public function executeExcepcion(sfWebRequest $request)
 	{
+          $this->aplication_error = '';
+          $Perfil = '';
           $idUsuario = $request->getParameter('usuario');
+          if($request->hasParameter('excepcion')){
+            $Perfil = $request->getParameter('excepcion');   
+          }
 
+          $excepcion = '';
+          if($request->hasParameter('id')){
+            $excepcion = AplicacionRol::getRepository()->findOneById($request->getParameter('id'));
+          }
+          $this->usuario = Usuario::getRepository()->findOneById($idUsuario);
+          
+          $this->form = new AplicacionRolForm($excepcion);
+
+          if($request->hasParameter('btn_action')){
+
+              $exce = $request->getParameter('aplicacion_rol');
+              
+                  if($exce['aplicacion_id'] != '0'){
+                         if($excepcion!=''){
+                           $aplication_rol = $excepcion;
+                         }else{
+                            if($Perfil==''){
+                                  $rol = new Rol();
+                                  if(!empty ($exce['name'])){$rol->setNombre($exce['name']);}
+                                  $rol->setCodigo(rand());
+                                  $rol->setExcepcion(1);
+
+                                  $rol->save();
+
+                                  $UsurioRol = new UsuarioRol();
+                                  $UsurioRol->setUsuarioId($this->usuario->getId());
+                                  $UsurioRol->setRolId($rol->getId());
+                                  $UsurioRol->save();
+                                  
+                                  $Perfil = $rol->getId();
+                            }
+                              $aplication_rol = new AplicacionRol();
+                              $aplication_rol->setRolId($Perfil);
+                         }
+                         
+                          $aplication_rol->setAplicacionId($exce['aplicacion_id']);
+                          $accion_alta = !empty ($exce['accion_alta'])&& $exce['accion_alta']=='on'?1:0;
+                          $accion_baja = !empty ($exce['accion_baja']) && $exce['accion_baja']=='on'?1:0;
+                          $accion_modificar = !empty ($exce['accion_modificar']) && $exce['accion_modificar']=='on'?1:0;
+                          $accion_listar = !empty ($exce['accion_listar']) && $exce['accion_listar']=='on'?1:0;
+                          $accion_publicar = !empty ($exce['accion_publicar']) && $exce['accion_publicar']=='on'?1:0;
+                          
+
+                          $aplication_rol->setAccionAlta($accion_alta);
+                          $aplication_rol->setAccionBaja($accion_baja);
+                          $aplication_rol->setAccionModificar($accion_modificar);
+                          $aplication_rol->setAccionListar($accion_listar);
+                          $aplication_rol->setAccionPublicar($accion_publicar);
+
+                          $aplication_rol->save();
+                          
+                $this->redirect('usuarios/editar?id='.$this->usuario->getId());
+              }else{
+                  $this->aplication_error = 'La Aplicaci&oacute;n es obligatoria';
+              }
+
+          }
+        }
+
+        public function executeDeletexc(sfWebRequest $request)
+	{
+            $request->checkCSRFProtection();
+            $idUsuario = $request->getParameter('usuario');
+            $usuario = Usuario::getRepository()->findOneById($idUsuario);
+	    $this->forward404Unless($aplicacion_rol = Doctrine::getTable('AplicacionRol')->find($request->getParameter('id')), sprintf('Object aplicacion_rol does not exist (%s).', $request->getParameter('id')));
+            $aplicacion_rol->delete();
+            $this->redirect('usuarios/editar?id='.$usuario->getId());
+		
         }
 
 	public function executeDelete(sfWebRequest $request)
@@ -152,6 +225,7 @@ class usuariosActions extends sfActions
 		}
 	}
 
+        
 	## perfil de usuario
 	public function executePerfil(sfWebRequest $request)
 	{

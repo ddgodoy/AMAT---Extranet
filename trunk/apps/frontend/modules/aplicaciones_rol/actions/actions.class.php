@@ -19,12 +19,13 @@ class aplicaciones_rolActions extends sfActions
 		}
 		$this->pager = new sfDoctrinePager('AplicacionRol', 20);
 		$this->pager->getQuery()
-							  ->from('AplicacionRol ar')
-							  ->leftJoin('ar.Rol r')
-							  ->leftJoin('ar.Aplicacion a')
-							  ->where($this->setFiltroBusqueda())
-							  ->andWhere('a.id != 46 AND a.id != 44')
-							  ->orderBy($this->setOrdenamiento());
+                          ->from('AplicacionRol ar')
+                          ->leftJoin('ar.Rol r')
+                          ->leftJoin('ar.Aplicacion a')
+                          ->where($this->setFiltroBusqueda())
+                          ->addWhere('r.excepcion = 0')
+                          ->andWhere('a.id != 46 AND a.id != 44')
+                          ->orderBy($this->setOrdenamiento());
 
 		$this->pager->setPage($this->paginaActual);
 		$this->pager->init();
