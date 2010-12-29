@@ -15,7 +15,7 @@ class UsuarioForm extends BaseUsuarioForm
 		
 		
 		## Obtengo todos los roles
-		$roles = Doctrine::getTable('Rol')->createQuery('r')->where('deleted=0')->orderBy('nombre')->execute();
+		$roles = Doctrine::getTable('Rol')->createQuery('r')->where('deleted=0')->addWhere('excepcion = 0')->orderBy('nombre')->execute();
 
 		$arrRoles = array();
 		foreach ($roles as $r) {

@@ -14,12 +14,19 @@ class RolTable extends Doctrine_Table
    	 return $respuesat;
    }
 	
-   public static function getAllRol()
+   public static function getAllRol($name = '')
    {
    	 $r=Doctrine_Query::create()
    	 ->from('Rol')
    	 ->where('deleted = 0')
    	 ->orderBy('nombre');
+
+         if($name!=''){
+           $r->addWhere("nombre = '$name'");
+           $r->addWhere("excepcion = 1");
+         }else{
+           $r->addWhere("excepcion = 0");
+         }
    	 
    	 return $r->execute();
    	    	 
