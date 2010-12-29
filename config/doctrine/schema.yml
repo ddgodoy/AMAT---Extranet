@@ -25,6 +25,7 @@ Rol:
     nombre:                  { type: clob, notnull: false }
     detalle:                 { type: clob }
     codigo:                  { type: string(32), notnull: true }
+    excepcion:               { type: boolean, default: 0 }
   relations:
     Usuarios:                { foreignAlias: Roles, class: Usuario, refClass: UsuarioRol }
     
