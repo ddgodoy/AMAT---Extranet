@@ -71,7 +71,7 @@ class PublicacionForm extends BasePublicacionForm
 			'estado'            => $estado,
       'fecha_publicacion' =>'2007-01-01',
       'fecha_caducidad'   =>'2015-12-31',
-			'ambito'            => 'web',
+			'ambito'            => 'todos',
 			));
 
 		$this->widgetSchema->setNameFormat('publicacion[%s]');
