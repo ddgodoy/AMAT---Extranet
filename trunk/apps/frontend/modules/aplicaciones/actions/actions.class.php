@@ -77,9 +77,10 @@ class aplicacionesActions extends sfActions
 			$this->cajaBsq = '';
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 		}
-  	$this->getUser()->setAttribute($modulo.'_nowfilter', $parcial);
+		$filter = " AND titulo IS NULL $parcial";
+  	$this->getUser()->setAttribute($modulo.'_nowfilter', $filter);
 
-  	return 'deleted = 0 '.$parcial;
+  	return 'deleted = 0 '.$filter;
   }
 
   protected function setOrdenamiento()
@@ -105,6 +106,12 @@ class aplicacionesActions extends sfActions
       }
     }
 		return $this->orderBYSql;
+  }
+//
+	public function executeShow(sfWebRequest $request)
+  {
+    $this->aplicacion = Doctrine::getTable('Aplicacion')->find($request->getParameter('id'));
+    $this->forward404Unless($this->aplicacion);
   }
 
 } // end class
