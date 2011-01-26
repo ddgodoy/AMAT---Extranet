@@ -14,6 +14,7 @@ Usuario:
     remember_token:          { type: string(150), notnull: false }
     remember_token_expires:  { type: string(150), notnull: false }
     mutua_id:                { type: integer, notnull: true }
+    active_at:               { type: timestamp, notnull: false }
   relations:
     Mutua:                   { local: mutua_id, foreign: id, onDelete: CASCADE }
     
