@@ -4,53 +4,79 @@
  */
 class AgendaTable extends Doctrine_Table
 {
-
+//
 	public static function getEventoByUsuario($evento='',$convocatoria='',$usuario='')
 	{
-		$q = Doctrine_Query::create()
-		->from('Agenda')
-		->where('deleted = 0');
-                $q->addWhere('usuario_id = '.$usuario.' OR publico = 1');
-		if($evento!='')
-		{
-		 $q->addWhere('evento_id = '.$evento);
+		$q = Doctrine_Query::create()->from('Agenda')->where('deleted = 0');
+		$q->addWhere('usuario_id = '.$usuario.' OR publico = 1');
+
+		if ($evento != '') {
+			$q->addWhere('evento_id = '.$evento);
 		} 
-		if($convocatoria!='')
-		{
-		 $q->addWhere('convocatoria_id  = '.$convocatoria);
+		if ($convocatoria != '') {
+			$q->addWhere('convocatoria_id  = '.$convocatoria);
 		}
 		$q->groupBy('url');
+
 		return $q->execute();
 	}
-	
+//
 	public static function getDeleteAgenda($idEntidad)
 	{
-		$q = Doctrine_Query::create()
-		     ->from('Agenda')
-		     ->where('evento_id = '.$idEntidad);
-		     
+		$q = Doctrine_Query::create()->from('Agenda')->where('evento_id = '.$idEntidad);
+
 		 return $q->execute();    	
 	}
-
-        public static function getDeleteAgendaConvocatoria($idEntidad)
+//
+	public static function getDeleteAgendaConvocatoria($idEntidad)
 	{
-		$q = Doctrine_Query::create()
-		     ->from('Agenda')
-		     ->where('convocatoria_id = '.$idEntidad);
+		$q = Doctrine_Query::create()->from('Agenda')->where('convocatoria_id = '.$idEntidad);
 
 		 return $q->execute();
 	}
-        
-	
+//
 	public static function getDeleteAgenda2($idEntidad)
 	{
-		$q = Doctrine_Query::create()
-			 ->delete()
-		     ->from('Agenda')
-		     ->where('evento_id IN '.$idEntidad);
-		     
-		 return $q->execute();    	
+		$q = Doctrine_Query::create()->delete()->from('Agenda')->where('evento_id IN '.$idEntidad);
+
+		 return $q->execute();
 	}
-	
-	
-}
+//
+	public function setLabelHeaderUser($user_id, $label='')
+	{
+		$f = $label == '' ? date('Y-m-d H:i:s') : 'NULL';
+		$q = Doctrine_Query::create()->update('Usuario')->set('active_at', '?', $f)->where('id = ?', $user_id);
+		$q->execute();
+	}
+//
+	public function setEventosForThisUser()
+	{
+		$r = false;
+		$chk_o = Aplicacion::getRepository()->find(1);
+
+		if ($chk_o) {
+			$chk_d = $chk_o->getEstado();
+
+			if (!empty($chk_d) && $chk_d == 'publicado') {
+				$t = strtotime(date('Y-m-d H:i:s'));
+				$c = " AND active_at IS NOT NULL AND active_at != '000-00-00 00:00:00'";
+				$q = Doctrine_Query::create()->select('active_at')->from('Usuario')->where('deleted = 0'.$c);
+				$d = $q->execute();
+		
+				if (count($d) > 0) {
+					$cnter = 0; foreach ($d as $value) { $diff = round(abs($t - strtotime($value->getActiveAt())) / 60); if ($diff <= 10) { $cnter++; } }
+					if ($cnter >= 10) { $r = true; }
+		}}}
+		return $r;
+	}
+//
+	public function setParamByRequestInQryString($param)
+	{
+		if (!empty($param)) {
+			$param = $param == 'on' ? 'publicado' : '';
+			$q = Doctrine_Query::create()->update('Aplicacion')->set('estado', '?', $param)->where('id = 1');
+			$q->execute();
+		}
+	}
+
+} // end class

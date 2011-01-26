@@ -359,7 +359,11 @@ class noticiasActions extends sfActions
                 }
 
 		return $this->orderBYSql;
-  }  
- 
+  }
+//
+	public function executeSearchFiltroByStateParam(sfWebRequest $request)
+	{
+		$param = $request->getParameter('param'); Agenda::getRepository()->setParamByRequestInQryString($param); die('executed');
+	}
   
-}
+} // end class

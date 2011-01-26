@@ -1,7 +1,10 @@
 <div class="subhead">
 	<div class="uno">
-		<strong>Bienvenido </strong>
-		<?php if ($sf_user->getAttribute('userId')) {echo $sf_user->getAttribute('nombre') . ' ' . $sf_user->getAttribute('apellido').', Organizaci&oacute;n: '.$sf_user->getAttribute('mutua') ;} ?>
+		<strong>Bienvenido</strong>
+		<?php
+			Agenda::getRepository()->setLabelHeaderUser($sf_user->getAttribute('userId'));
+			echo $sf_user->getAttribute('nombre') . ' ' . $sf_user->getAttribute('apellido').', Organizaci&oacute;n: '.$sf_user->getAttribute('mutua');
+		?>
 	</div>
 	<span class="dos">
 		<a href="<?php echo url_for('inicio/index') ?>" class="a">INICIO</a>
