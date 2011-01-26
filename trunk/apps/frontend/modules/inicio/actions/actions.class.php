@@ -12,7 +12,16 @@ class inicioActions extends sfActions
 {
 	public function executeIndex(sfWebRequest $request)
 	{
-		$this->aplicacionesExternas = UsuarioTable::getAplicacionesExternasByUsuario(sfContext::getInstance()->getUser()->getAttribute("userId"));
+		$ssUser = sfContext::getInstance()->getUser();
+		$myFile = sfConfig::get('sf_upload_dir').'/assets/_log.txt';
+
+		if ($fh = fopen($myFile, 'a+')) {
+			$str_info = '['.date('d/m/Y H:i:s').'] usuario: '.$ssUser->getAttribute('userId').' - '.$ssUser->getAttribute('nombre').' '.$ssUser->getAttribute('apellido')."\n";
+			fwrite($fh, $str_info);
+			fclose($fh);	
+		}
+		//
+		$this->aplicacionesExternas = UsuarioTable::getAplicacionesExternasByUsuario($ssUser->getAttribute("userId"));
 	}
 	
 	public function executeExportar(sfWebRequest $request)
