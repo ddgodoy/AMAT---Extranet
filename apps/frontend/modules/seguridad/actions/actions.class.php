@@ -36,6 +36,8 @@ class seguridadActions extends sfActions
 	
 	public function executeLogout(sfWebRequest $request)
 	{
+		Agenda::getRepository()->setLabelHeaderUser($this->getUser()->getAttribute('userId'), 'usr');
+
 		$this->getUser()->setAuthenticated(false);
 		$this->getUser()->clearCredentials();
 
@@ -45,7 +47,7 @@ class seguridadActions extends sfActions
 		$this->getUser()->getAttributeHolder()->remove('apellido');
 		$this->getUser()->getAttributeHolder()->remove('permisos');
 		$this->getUser()->getAttributeHolder()->remove('menu');
-                $this->getUser()->getAttributeHolder()->clear();
+		$this->getUser()->getAttributeHolder()->clear();
 
 		$this->redirect('seguridad/login');
 	}
@@ -65,29 +67,25 @@ class seguridadActions extends sfActions
 		$this->form->bind($request->getParameter($this->form->getName()));
 
 		if ($this->form->isValid()) {
-
 			$usuario = ServiceSecurity::authenticate($this->form->getValue('login'), $this->form->getValue('password'), false);
 
-			if(is_object($usuario)) {
-
+			if (is_object($usuario)) {
 				## Obtener perfiles (roles)
 				$credenciales = array();
 				$usuarioRoles = Doctrine::getTable('UsuarioRol')->findByUsuarioId($usuario->getId());
 
-				if (count($usuarioRoles)>0)
-				{
-					foreach ($usuarioRoles as $rol) {
+				if (count($usuarioRoles) > 0) {
+					foreach ($usuarioRoles as $rol)
+					{
 						$credenciales[] = $rol->getRol()->getCodigo();
 
-                                                if($rol->getRol()->getId()== 1)
-                                                {
-                                                   $this->getUser()->setAttribute('rolSA', $rol->getRol()->getId());
-                                                }
-                                                
+            if ($rol->getRol()->getId()== 1) {
+               $this->getUser()->setAttribute('rolSA', $rol->getRol()->getId());
+            }
 					}
 					## Autenticado
 					$this->getUser()->setAuthenticated(true);
-	
+
 					## Datos del usuario
 					$this->getUser()->setAttribute('userId'  , $usuario->getId());
 					$this->getUser()->setAttribute('mutuaId' , $usuario->getMutuaId());
@@ -102,9 +100,7 @@ class seguridadActions extends sfActions
 						$this->getUser()->addCredential($credencial);
 					}
 					$this->redirect('inicio/index');
-				}
-				else 
-				{
+				} else {
 					$this->getUser()->setFlash('error', 'Usuario sin perfiles');
 					$this->redirect('seguridad/login');
 				}

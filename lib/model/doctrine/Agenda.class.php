@@ -10,5 +10,5 @@ class Agenda extends BaseAgenda
 	{
 		return Doctrine::getTable(__CLASS__);
 	}
-	
-}
+
+} // end class
