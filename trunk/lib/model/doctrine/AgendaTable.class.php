@@ -62,10 +62,10 @@ class AgendaTable extends Doctrine_Table
 				$c = " AND active_at IS NOT NULL AND active_at != '000-00-00 00:00:00'";
 				$q = Doctrine_Query::create()->select('active_at')->from('Usuario')->where('deleted = 0'.$c);
 				$d = $q->execute();
-		
+
 				if (count($d) > 0) {
 					$cnter = 0; foreach ($d as $value) { $diff = round(abs($t - strtotime($value->getActiveAt())) / 60); if ($diff <= 10) { $cnter++; } }
-					if ($cnter >= 10) { $r = true; }
+					if ($cnter >= 5) { $r = true; }
 		}}}
 		return $r;
 	}

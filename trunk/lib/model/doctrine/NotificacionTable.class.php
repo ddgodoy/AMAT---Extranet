@@ -25,28 +25,28 @@ class NotificacionTable extends Doctrine_Table
 		
 		return $notificaciones;
 	}
-	
+//
 	public static function getUltimasNotificaciones($usuarioId, $limit=null)
 	{
 		$q = Doctrine_Query::create();
-                $q->select('n.id ,
-                            n.nombre,
-                            n.url ,
-                            n.contenido_notificacion_id ,
-                            n.usuario_id ,
-                            n.entidad_id ,
-                            n.tipo ,
-                            n.visto ,
-                            n.created_at ,
-                            n.updated_at ,
-                            n.deleted ,
-                            c.id ,
-                            c.mensaje ,
-                            c.accion ,
-                            c.entidad ,
-                            c.created_at ,
-                            c.updated_at ,
-                            c.deleted ');
+    $q->select('n.id ,
+                n.nombre,
+                n.url ,
+                n.contenido_notificacion_id ,
+                n.usuario_id ,
+                n.entidad_id ,
+                n.tipo ,
+                n.visto ,
+                n.created_at ,
+                n.updated_at ,
+                n.deleted ,
+                c.id ,
+                c.mensaje ,
+                c.accion ,
+                c.entidad ,
+                c.created_at ,
+                c.updated_at ,
+                c.deleted ');
 		$q->from('Notificacion n');
 		$q->leftJoin('n.ContenidoNotificacion cn');
 		$q->where('n.deleted = 0');
@@ -54,61 +54,50 @@ class NotificacionTable extends Doctrine_Table
 		$q->addWhere('n.visto != 1');
 		$q->orderBy('n.created_at DESC');
 		$q->groupBy('entidad_id');
-		if($limit) $q->limit($limit);
 
-               
-                
+		if ($limit) $q->limit($limit);
 
-		$notificaciones = $q->execute();
-		
-		return $notificaciones;
+		return $q->execute();
 	}
-	
+//
 	public static function getDeleteEntidad($idEntidad, $nombre='')
 	{
-		$q = Doctrine_Query::create()
-		     ->from('Notificacion')
-		     ->where('entidad_id = '.$idEntidad);
-		 if($nombre != '') 
-		 {   
-		     $q->andWhere("nombre = '$nombre'");
-		 }   
-		     
+		$q = Doctrine_Query::create()->from('Notificacion')->where('entidad_id = '.$idEntidad);
+
+		 if ($nombre != '') { $q->andWhere("nombre = '$nombre'"); }
+
 		 return $q->execute();    	
 	}
-	
+//
 	public static function getDeleteEntidad2($idEntidad,$nombre='')
 	{
+		$deleted = Doctrine_Query::create()->delete()->from('Notificacion')->andWhere('entidad_id = '.$idEntidad);
 
-		$deleted = Doctrine_Query::create()
-				  ->delete()
-				  ->from('Notificacion')
-				  ->andWhere('entidad_id = '.$idEntidad);
-				   if($nombre != '') 
-					 {   
-					     //$deleted->andWhere("nombre = '".addslashes($nombre)."'");
-                                             $deleted->andWhere("nombre = ?", $nombre);
-					 }   
-				  $deleted->execute();	
-		return true;		  
-	}	
-	
+		if ($nombre != '')  { $deleted->andWhere("nombre = ?", $nombre); }
+
+		$deleted->execute();
+
+		return true;
+	}
+//
 	public static function DeletedByEntidad($tipo, $tabla)
 	{
-		
-		$q=Doctrine_Query::create()
-		->delete()
-		->from('Notificacion') 
-		->where("tipo = '$tipo'")
-		->andWhere('entidad_id IN 
-		  ( SELECT id 
-	        FROM   '.$tabla.'
-	        where deleted = 0 
-	        AND fecha_caducidad <= NOW())') ;
-
+		$q = Doctrine_Query::create()->delete()->from('Notificacion')->where("tipo = '$tipo'")->andWhere('entidad_id IN (SELECT id FROM '.$tabla.' where deleted = 0 AND fecha_caducidad <= NOW())') ;
 		
 		return $q->execute();
 	}
-	
-	
-}
+//
+	public function setFlagByRequestInQryString($param)
+	{
+		if (!empty($param)) {
+			if ($param == 'on') {
+				Doctrine_Query::create()->update('AplicacionRol')->set('active_at', '?', date('Y-m-d H:i:s'))->where('accion_alta = 1')->execute();
+				Doctrine_Query::create()->update('AplicacionRol')->set('accion_alta', '?', 0)->where('active_at IS NOT NULL')->execute();
+			} else {
+				Doctrine_Query::create()->update('AplicacionRol')->set('accion_alta', '?', 1)->where('active_at IS NOT NULL')->execute();
+				Doctrine_Query::create()->update('AplicacionRol')->set('active_at', 'NULL')->execute();
+			}
+		}
+	}
+
+} // end class

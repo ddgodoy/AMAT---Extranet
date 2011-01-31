@@ -110,6 +110,7 @@ AplicacionRol:
     accion_publicar:         { type: boolean }
     aplicacion_id:           { type: integer }
     rol_id:                  { type: integer }
+    active_at:               { type: timestamp, notnull: false }
   relations:
     Aplicacion:              { local: aplicacion_id, foreign: id, onDelete: CASCADE }
     Rol:                     { local: rol_id, foreign: id, onDelete: CASCADE }
