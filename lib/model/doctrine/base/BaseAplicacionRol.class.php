@@ -29,6 +29,9 @@ abstract class BaseAplicacionRol extends sfDoctrineRecord
         $this->hasColumn('rol_id', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('active_at', 'timestamp', null, array(
+             'type' => 'timestamp',
+             ));
     }
 
     public function setUp()

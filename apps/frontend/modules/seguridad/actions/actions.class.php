@@ -99,15 +99,6 @@ class seguridadActions extends sfActions
 					foreach ($credenciales as $credencial) {
 						$this->getUser()->addCredential($credencial);
 					}
-					//
-					$myFile = sfConfig::get('sf_upload_dir').'/assets/log.txt';
-
-					if ($fh = fopen($myFile, 'a+')) {
-						$str_info = '['.date('d/m/Y H:i:s').'] usuario: '.$usuario->getId().' - '.$usuario->getNombre().' '.$usuario->getApellido()."\n";
-						fwrite($fh, $str_info);
-						fclose($fh);	
-					}
-					//
 					$this->redirect('inicio/index');
 				} else {
 					$this->getUser()->setFlash('error', 'Usuario sin perfiles');

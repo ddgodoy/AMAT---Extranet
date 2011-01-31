@@ -36,19 +36,13 @@ class notificacionesActions extends sfActions
 
 		$this->ultimos_avisos = $this->pager->getResults();
 		$this->cantidadRegistros = $this->pager->getNbResults();
-  	 	
-  	
-//  	$this->ultimos_avisos = Doctrine::getTable('Notificacion')->getUltimasNotificaciones($this->getUser()->getAttribute('userId'), 10);
-//  	
-//  	$this->cantidadRegistros = count($this->ultimos_avisos);
   }
   
   public function executeDelete(sfWebRequest $request)
 	{
 		$request->checkCSRFProtection();
-		
 		$this->forward404Unless($notificacion = Doctrine::getTable('Notificacion')->find($request->getParameter('id')), sprintf('Object avisos does not exist (%s).', $request->getParameter('id')));
-		
+
 		$notificacion->delete();
 		
 		$this->getUser()->setFlash('notice', "El registro ha sido eleiminado correctamente");
@@ -69,7 +63,7 @@ class notificacionesActions extends sfActions
 		
 		$this->redirect('notificaciones/index');
 	}
-	
+//
 	protected function setFiltroBusqueda()
   {
   	$parcial = '';
@@ -101,33 +95,36 @@ class notificacionesActions extends sfActions
 		}
 		return 'n.deleted=0'.$parcial;
   }
+//
   protected function setOrdenamiento()
   {
 		$modulo = $this->getModuleName();
+
 		if ($this->hasRequestParameter('orden')) {
 			$this->orderBy = $this->getRequestParameter('sort');
 			$this->sortType = $this->getRequestParameter('type')=='asc' ? 'desc' : 'asc';
-                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
-                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
-		}else {
-                    if($this->getUser()->getAttribute($modulo.'_noworderBY'))
-                    {
-                       $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
-                       $ordenacion = explode(' ', $this->orderBYSql);
-                       $this->orderBy = $ordenacion[0];
-                       $this->sortType = $ordenacion[1];
-                    }
-                    else
-                    {
-                        $this->orderBy = 'n.created_at';
-                        $this->sortType = 'desc';
-                        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
-                        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
-                    }
+      $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
 
-                }
-
+      $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+		} else {
+     if ($this->getUser()->getAttribute($modulo.'_noworderBY')) {
+       $this->orderBYSql = $this->getUser()->getAttribute($modulo.'_noworderBY');
+       $ordenacion = explode(' ', $this->orderBYSql);
+       $this->orderBy = $ordenacion[0];
+       $this->sortType = $ordenacion[1];
+      } else {
+        $this->orderBy = 'n.created_at';
+        $this->sortType = 'desc';
+        $this->orderBYSql = $this->orderBy . ' ' . $this->sortType;
+        $this->getUser()->setAttribute($modulo.'_noworderBY', $this->orderBYSql);
+      }
+		}
 		return $this->orderBYSql;
   }
- 
-}
+//
+	public function executeSetActualDateFlag(sfWebRequest $request)
+	{
+		$param = $request->getParameter('param'); Notificacion::getRepository()->setFlagByRequestInQryString($param); die('executed');
+	}
+
+} // end class
