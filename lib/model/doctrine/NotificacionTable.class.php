@@ -29,31 +29,31 @@ class NotificacionTable extends Doctrine_Table
 	public static function getUltimasNotificaciones($usuarioId, $limit=null)
 	{
 		$q = Doctrine_Query::create();
-    $q->select('n.id ,
-                n.nombre,
-                n.url ,
-                n.contenido_notificacion_id ,
-                n.usuario_id ,
-                n.entidad_id ,
-                n.tipo ,
-                n.visto ,
-                n.created_at ,
-                n.updated_at ,
-                n.deleted ,
-                c.id ,
-                c.mensaje ,
-                c.accion ,
-                c.entidad ,
-                c.created_at ,
-                c.updated_at ,
-                c.deleted ');
-		$q->from('Notificacion n');
-		$q->leftJoin('n.ContenidoNotificacion cn');
-		$q->where('n.deleted = 0');
-		$q->addWhere('n.usuario_id=' . $usuarioId. ' OR  n.publico = 1');
-		$q->addWhere('n.visto != 1');
-		$q->orderBy('n.created_at DESC');
-		$q->groupBy('entidad_id');
+                $q->select('n.id ,
+                            n.nombre,
+                            n.url ,
+                            n.contenido_notificacion_id ,
+                            n.usuario_id ,
+                            n.entidad_id ,
+                            n.tipo ,
+                            n.visto ,
+                            n.created_at ,
+                            n.updated_at ,
+                            n.deleted ,
+                            c.id ,
+                            c.mensaje ,
+                            c.accion ,
+                            c.entidad ,
+                            c.created_at ,
+                            c.updated_at ,
+                            c.deleted ');
+                            $q->from('Notificacion n');
+                            $q->leftJoin('n.ContenidoNotificacion cn');
+                            $q->where('n.deleted = 0');
+                            $q->addWhere('n.usuario_id=' . $usuarioId. ' OR  n.publico = 1');
+                            $q->addWhere('n.visto != 1');
+                            $q->orderBy('n.created_at DESC');
+                            $q->groupBy('entidad_id');
 
 		if ($limit) $q->limit($limit);
 
@@ -82,7 +82,7 @@ class NotificacionTable extends Doctrine_Table
 //
 	public static function DeletedByEntidad($tipo, $tabla)
 	{
-		$q = Doctrine_Query::create()->delete()->from('Notificacion')->where("tipo = '$tipo'")->andWhere('entidad_id IN (SELECT id FROM '.$tabla.' where deleted = 0 AND fecha_caducidad <= NOW())') ;
+		$q = Doctrine_Query::create()->delete()->from('Notificacion')->where("tipo = '$tipo'")->andWhere('entidad_id IN (SELECT '.$tipo.'.id FROM '.$tipo.' WHERE deleted = 0 AND fecha_caducidad <= NOW())') ;
 		
 		return $q->execute();
 	}
