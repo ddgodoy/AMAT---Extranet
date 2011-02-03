@@ -81,5 +81,7 @@
 	<?php else: ?>
 		<div class="mensajeSistema comun">No hay usuarios relacionados con la aplicaci&oacute;n</div>
 	<?php endif; ?>
+
+	<input type="button" value="Volver" onclick="document.location='<?php echo url_for('aplicaciones/editar_internal?id='.$id_aplicacion) ?>';"/>	
 </div>
 <br clear="all" />
