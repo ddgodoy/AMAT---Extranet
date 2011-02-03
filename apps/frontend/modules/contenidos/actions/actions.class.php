@@ -37,6 +37,7 @@ class contenidosActions extends sfActions
   	$modulo = $this->getModuleName();
 
 		$this->cajaBsq = trim($this->getRequestParameter('caja_busqueda'));
+		$this->selcBsq = trim($this->getRequestParameter('sel_estado'));
 
 		if (!empty($this->cajaBsq)) {
 			$parcial .= " AND (nombre LIKE '%$this->cajaBsq%' OR titulo LIKE '%$this->cajaBsq%')";
@@ -44,9 +45,13 @@ class contenidosActions extends sfActions
 		} else {
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 		}
+		if ($this->viewE) {
+			if (!empty($this->selcBsq)) { $parcial .= " AND estado = '$this->selcBsq'"; }
+		}
 		if ($this->hasRequestParameter('btn_quitar')) {
 			$parcial = '';
 			$this->cajaBsq = '';
+			$this->selcBsq = '';
 			$this->getUser()->getAttributeHolder()->remove($modulo.'_nowcaja');
 		}
 		$auxFlt = $this->viewE ? '' : "AND estado = 'publicado'";

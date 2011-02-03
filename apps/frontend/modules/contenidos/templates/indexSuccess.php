@@ -102,6 +102,19 @@
 							<input type="text" onblur="this.style.background='#E1F3F7'" onfocus="this.style.background='#D5F7FF'" style="width:97%;" name="caja_busqueda" class="form_input" value="<?php echo $cajaBsq ?>"/>
 						</td>
 					</tr>
+					<?php if ($viewE): ?>
+					<tr>
+					<td>Estado</td>
+						<td>
+							<select class="form_input" style="width:97%;" name="sel_estado">
+								<option value="" <?php if ($selcBsq=='') { echo 'selected'; } ?>>Todos</option>
+								<option value="guardado" <?php if ($selcBsq=='guardado') { echo 'selected'; } ?>>Guardado</option>
+								<option value="pendiente" <?php if ($selcBsq=='pendiente') { echo 'selected'; } ?>>Pendiente</option>
+								<option value="publicado" <?php if ($selcBsq=='publicado') { echo 'selected'; } ?>>Publicado</option>
+							</select>
+						</td>
+					</tr>
+					<?php endif; ?>
 					<tr>
 						<td style="padding-top:5px;"><span class="botonera"><input type="submit" class="boton" value="Buscar" name="btn_buscar"/></span></td>
 						<td><?php if ($cajaBsq): ?><span class="botonera"><input type="submit" class="boton" value="Limpiar" name="btn_quitar"/></span><?php endif; ?></td>
