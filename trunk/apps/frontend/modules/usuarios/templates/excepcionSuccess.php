@@ -82,7 +82,7 @@
 		<?php echo $form->renderHiddenFields() ?>
 	</fieldset>
 
-	<div class="botonera" style="padding-top:10px;"
+	<div class="botonera" style="padding-top:10px;">
 		<input type="submit" id="btn_action" class="boton" value="Guardar" name="btn_action"/>
 		<input type="button" id="boton_cancel" class="boton" value="Cancelar" name="boton_cancel" onclick="document.location='<?php echo url_for('usuarios/editar?id='.$usuario->getId()) ?>';"/>
 	</div>
